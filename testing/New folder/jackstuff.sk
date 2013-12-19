@@ -4,6 +4,3 @@ command /jackishere:
 			send "&aYay!" to player
 			stop
 		send "&cYou do not have permission D:" to player
-command /Deathiscool
-        trigger:
-                hi
