@@ -1,0 +1,87 @@
+command /spleef <text> [<text>]:
+	trigger:
+		world is "OrigamijoeBuild"
+		if arg 1 is "start":
+			set {spleef.%arg 2%.start} to true
+			clear {spleef.%arg 2%.broken.blocks::*}
+			clear {spleef.%arg 2%.broken.type::*}
+			message "The game has begun"
+		if arg 1 is "end":
+			set {spleef.%arg 2%.start} to false
+			loop {spleef.%arg 2%.broken.blocks::*}:
+				set block at loop-value to {spleef.%arg 2%.broken.type::%loop-index%}
+			clear {spleef.%arg 2%.broken.blocks::*}
+			message "The game has ended and board reset"
+		arg 1 is "tpstart":
+			player is op:
+				set {start.%arg 2%.tp} to location of player
+		arg 1 is "fall":
+			player is op:
+				set {end.%arg 2%.tp} to location of player
+		arg 1 is "death":
+			player is op:
+				set {dp.%arg 2%.tp} to location of player
+				
+command /spleeflobbyjoin <player> <text>:
+	executable by: console
+	trigger:
+		teleport player-argument to {lobby.%arg 2%.spleef}
+		set {lobby.%player-argument%.spleef} to arg 2
+		add player-argument to {lobby.%arg 2%::*}
+		{lobby.%arg 2%.count} is not set:
+			set {lobby.%arg 2%.count} to 0
+		add 1 to {lobby.%arg 2%.count}
+		{lobby.%arg 2%.count} is greater than or equal to 5:
+			loop all players:
+				{lobby.%loop-player%.spleef} is arg 2:
+					teleport loop-player to {start.%arg 2%.tp}
+					
+			execute console command "/spleef start %arg 2%"
+			
+every 1 second:
+	loop all players:
+		{lobby.%loop-player%.spleef} is set:
+			{spleef.%{lobby.%loop-player%.spleef}%.start} is true:
+				size of {lobby.%{lobby.%loop-player%.spleef}%::*} is 1:
+					send "&a%{lobby.%{lobby.%loop-player%.spleef}%::1t}% has won!" to all players in {lobby.%{lobby.%loop-player%.spleef}%::1}'s world
+					execute console command "/spleef end %{lobby.%loop-player%.spleef}%"
+				loop-player's head is below {end.%{lobby.%loop-player%.spleef}%.tp}:
+					teleport loop-player to {dp.%{lobby.%loop-player%.spleef}%.tp}
+					message "&cYou have fallen!" to loop-player
+					remove loop-player from {lobby.%{lobby.%loop-player%.spleef}%::*}
+					
+command /lobbyspleefset <text>:
+	trigger:
+		set {lobby.%arg%.spleef} to location of player
+		
+command /lobbyspleefreset <text>:
+	trigger:
+		set {lobby.%arg%.count} to 0
+		
+		
+on sign change:
+	player is op:
+		line 1 of block is "spleef"
+		add sign to {signs.spleef::*}
+		set line 1 to "&9&l[SPLEEF]"
+		set line 3 to "%{lobby.%line 2%.count}%"
+		
+every 1 second:
+	loop {signs.spleef::*}:
+		loop-value is sign:
+			set {dis} to line 2 of loop-value
+			set line 3 of loop-value to "%{lobby.%{dis}%.count}%"
+				
+			
+					
+			
+				
+		
+
+on break:
+	world is "OrigamijoeBuild"
+	if {spleef.test.start} is true:
+		add location of block to {spleef.test.broken.blocks::*}
+		add type of block to {spleef.test.broken.type::*}
+		
+		

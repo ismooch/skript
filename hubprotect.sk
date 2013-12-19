@@ -1,0 +1,4 @@
+on chat:
+	player is in world "Hub"
+	send "&6Hey there! Try joining a game instance - the hub isn't really the best place to chat!" to the player
+	send "&6&lRecommended Game: Skyblock" to the player

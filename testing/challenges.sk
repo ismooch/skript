@@ -1,0 +1,1768 @@
+options:
+	#startfold @chest
+		#subfold @teir1
+	tier1: i;iron block;n;&b&lSkyblock Tier 1 Challenges!;l;&a&lClick to open||&eTier 1&7 Challenges;c;sudo %player% challenge tier1
+	gettingstoned: i;cobblestone;n;&b&lGetting Stoned!;l; ||&a&lFirst Completion:||&aTrade 64 Cobblestone||&7&lThe Grind:||&7Trade &c2304&7 Cobblestone|| ||&a&lInitial Reward:||&a300 Tickets||&7&lGrind Reward:||&c5 &7Tickets|| ||%{chal.%player%.stoned.display}%;c;sudo %player% chal 1
+	sugarrush: i;sugar;n;&b&lSugar Rush!;l; ||&a&lFirst Completion:||&aTrade 128 Sugar||&7&lThe Grind:||&7Trade &c2304&7 Sugar|| ||&a&lInitial Reward:||&a300 Tickets||&7&lGrind Reward:||&c5 &7Tickets|| ||%{chal.%player%.rush.display}%;c;sudo %player% chal 2
+	johnnyappleseed: i;apple;n;&b&lJohnny Appleseed!;l; ||&a&lFirst Completion:||&aTrade 32 Apples||&7&lThe Grind:||&7Trade &c256&7 Apples|| ||&a&lInitial Reward:||&a300 Tickets||&7&lGrind Reward:||&c5 &7Tickets|| ||%{chal.%player%.apple.display}%;c;sudo %player% chal 3
+	demmelons: i;melon slice;n;&b&lDem Melons!;l; ||&a&lFirst Completion:||&aTrade 256 Melon Slices||&7&lThe Grind:||&7Trade &c2304&7 Melon Slices|| ||&a&lInitial Reward:||&a300 Tickets||&7&lGrind Reward:||&c5 &7Tickets|| ||%{chal.%player%.melon.display}%;c;sudo %player% chal 4
+	dospumpkins: i;pumpkin;n;&b&lDos Pumpkins!;l; ||&a&lFirst Completion:||&aTrade 128 Pumpkins||&7&lThe Grind:||&7Trade &c2304&7 Pumpkins|| ||&a&lInitial Reward:||&a300 Tickets||&7&lGrind Reward:||&c5 &7Tickets|| ||%{chal.%player%.pumpkin.display}%;c;sudo %player% chal 5
+	pricklyplant: i;cactus;n;&b&lPrickly Plant!;l; ||&a&lFirst Completion:||&aTrade 32 Cacti||&7&lThe Grind:||&7Trade &c2304&7 Cacti|| ||&a&lInitial Reward:||&a300 Tickets||&7&lGrind Reward:||&c5 &7Tickets|| ||%{chal.%player%.cacti.display}%;c;sudo %player% chal 6
+		#subfold @tier2
+	tier2: i;2 iron blocks;n;&b&lSkyblock Tier 2 Challenges!;l;&a&lClick to open||&eTier 2&7 Challenges;c;sudo %player% challenge tier2
+	jackobamtern: i;jack-o-lantern;n;&b&lJack-OBAMtern!;l; ||&a&lFirst Completion:||&aTrade 256 Jack O lanterns||&7&lThe Grind:||&7Trade &c2304&7 Jack O Lanterns|| ||&a&lInitial Reward:||&a600 Tickets||&7&lGrind Reward:||&c10 &7Tickets|| ||%{chal.%player%.jack.display}%;c;sudo %player% chal 7
+	whatsupdoc: i;carrot;n;&b&lWhats Up Doc?;l; ||&a&lFirst Completion:||&aTrade 256 Carrots||&7&lThe Grind:||&7Trade &c2304&7 Carrots|| ||&a&lInitial Reward:||&a600 Tickets||&7&lGrind Reward:||&c10 &7Tickets|| ||%{chal.%player%.doc.display}%;c;sudo %player% chal 8
+	potaytoes: i;potato;n;&b&lPo-Tay-Toes!;l; ||&a&lFirst Completion:||&aTrade 256 Potatoes||&7&lThe Grind:||&7Trade &c2304&7 Potatoes|| ||&a&lInitial Reward:||&a600 Tickets||&7&lGrind Reward:||&c10 &7Tickets|| ||%{chal.%player%.potato.display}%;c;sudo %player% chal 9
+	doctor: i;bone;n;&b&lDamnit Jim Im A Doctor!;l; ||&a&lFirst Completion:||&aTrade 256 Bones||&7&lThe Grind:||&7Trade &c2304&7 Bones|| ||&a&lInitial Reward:||&a600 Tickets||&7&lGrind Reward:||&c10 &7Tickets|| ||%{chal.%player%.bone.display}%;c;sudo %player% chal 10
+	brains: i;rotten flesh;n;&b&lBraaaaaiiiiins!;l; ||&a&lFirst Completion:||&aTrade 256 Rotten Flesh||&7&lThe Grind:||&7Trade &c2304&7 Rotten Flesh|| ||&a&lInitial Reward:||&a600 Tickets||&7&lGrind Reward:||&c10 &7Tickets|| ||%{chal.%player%.brains.display}%;c;sudo %player% chal 11
+	arrow: i;arrow;n;&b&lArrow to the Knee;l; ||&a&lFirst Completion:||&aTrade 256 Arrows||&7&lThe Grind:||&7Trade &c2304&7 Arrows|| ||&a&lInitial Reward:||&a600 Tickets||&7&lGrind Reward:||&c10 &7Tickets|| ||%{chal.%player%.arrow.display}%;c;sudo %player% chal 12
+		#subfold @tier3
+	tier3: i;3 iron blocks;n;&b&lSkyblock Tier 3 Challenges!;l;&a&lClick to open||&eTier 3&7 Challenges;c;sudo %player% challenge tier3
+	shiny: i;iron ingot;n;&b&lShiny!;l; ||&a&lFirst Completion:||&aTrade 256 Iron Ingots||&7&lThe Grind:||&7Trade &c2304&7 Iron Ingots|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.shiny.display}%;c;sudo %player% chal 14
+	fishon: i;cooked fish;n;&b&lFish On!;l; ||&a&lFirst Completion:||&aTrade 256 Cooked Fish||&7&lThe Grind:||&7Trade &c2304&7 Cooked Fish|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.cookedfish.display}%;c;sudo %player% chal 16
+	myeye: i;spider eye;n;&b&lMy Eye!;l; ||&a&lFirst Completion:||&aTrade 256 Spider Eyes||&7&lThe Grind:||&7Trade &c2304&7 Spider Eyes|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.spidereye.display}%;c;sudo %player% chal 20
+	boomboompow: i;gunpowder;n;&b&lBoom-Boom-Pow!;l; ||&a&lFirst Completion:||&aTrade 256 Gunpowder||&7&lThe Grind:||&7Trade &c2304&7 Gunpowder|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.gunpowder.display}%;c;sudo %player% chal 18
+	bakersdozen: i;bread;n;&b&lBakers Dozen!;l; ||&a&lFirst Completion:||&aTrade 256 Bread||&7&lThe Grind:||&7Trade &c2304&7 Bread|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.bread.display}%;c;sudo %player% chal 19
+	crushed: i;bonemeal;n;&b&lCrushed!;l; ||&a&lFirst Completion:||&aTrade 256 Bonemeal||&7&lThe Grind:||&7Trade &c2304&7 Bonemeal|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.bonemeal.display}%;c;sudo %player% chal 21
+		#subfold @supporter1
+	supporter1: i;diamond block;n;&b&lSkyblock Supporter Tier 1 Challenges!;l;&a&lClick to open||&eSupporter Tier 1&7 Challenges;c;sudo %player% challenge supporter1
+	egged: i;egg;n;&b&lEgged!;l; ||&a&lFirst Completion:||&aTrade 288 Eggs||&7&lThe Grind:||&7Trade &c576 &7Eggs|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.egged.display}%;c;sudo %player% chal 13 
+	gotmilk: i;milk bucket;n;&b&lGot Milk?;l; ||&a&lFirst Completion:||&aTrade 10 Milk Buckets||&7&lThe Grind:||&7Trade &c30&7 Milk Buckets|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.milk.display}%;c;sudo %player% chal 15
+	gotbeef: i;steak;n;&b&lGot Beef?;l; ||&a&lFirst Completion:||&aTrade 256 Steaks||&7&lThe Grind:||&7Trade &c2304&7 Steaks|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.steak.display}%;c;sudo %player% chal 17
+	cookies: i;cookie;n;&b&lCookies!;l; ||&a&lFirst Completion:||&aTrade 256 Cookies||&7&lThe Grind:||&7Trade &c2304&7 Cookies|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.cookie.display}%;c;sudo %player% chal 22
+	birthdaycake: i;cake item;n;&b&lBirthday Cake!;l; ||&a&lFirst Completion:||&aTrade 10 Cakes||&7&lThe Grind:||&7Trade &c36&7 Cakes|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.cake.display}%;c;sudo %player% chal 23
+	secretrecipe: i;cooked chicken;n;&b&lSecret Recipe!;l; ||&a&lFirst Completion:||&aTrade 256 Cooked Chicken||&7&lThe Grind:||&7Trade &c2304&7 Cooked Chicken|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.chicken.display}%;c;sudo %player% chal 24
+		#subfold @level1
+	level1: i;gold block;n;&b&lSkyblock Level 10 Challenges!;l;&a&lClick to open||&eLevel 10&7 Challenges;c;sudo %player% challenge level1
+	lumberjack: i;oak log;n;&b&lLumberjack!;l; ||&a&lFirst Completion:||&aTrade 256 Oak Log||&7&lThe Grind:||&7Trade &c2304&7 Oak Log|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.lumberjack.display}%;c;sudo %player% chal 25
+	theoven: i;furnace;n;&b&lThe Oven!;l; ||&a&lFirst Completion:||&aTrade 256 Furnaces||&7&lThe Grind:||&7Trade &c2304&7 Furnaces|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.theoven.display}%;c;sudo %player% chal 26
+	storagewars: i;chest;n;&b&lStorage Wars!;l; ||&a&lFirst Completion:||&aTrade 256 Chests||&7&lThe Grind:||&7Trade &c2304&7 Chests|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.storage.display}%;c;sudo %player% chal 27
+	withanapple: i;cooked porkchop;n;&b&lWith an Apple!;l; ||&a&lFirst Completion:||&aTrade 256 Cooked Porkchops||&7&lThe Grind:||&7Trade &c2304&7 Cooked Porkchops|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.porkchop.display}%;c;sudo %player% chal 28
+	cookeeminastew: i;poisonous potato;n;&b&lCook em in a Stew!;l; ||&a&lFirst Completion:||&aTrade 256 Poisonous Potatoes||&7&lThe Grind:||&7Trade &c2304&7 Poisonous Potatoes|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.poisonouspotato.display}%;c;sudo %player% chal 29
+	splititdownthemiddle: i;stone brick) slab item;n;&b&lSplit it Down the Middle!;l; ||&a&lFirst Completion:||&aTrade 256 Stone Brick Slabs||&7&lThe Grind:||&7Trade &c2304&7 Stone Brick Slabs|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.slabs.display}%;c;sudo %player% chal 30
+		#subfold @shop
+	sbtier2: i;2 iron blocks;n;&b&lSkyblock Tier 2 Challenges!;l;&7Click to purchase Skyblock||&eTier 2&7 Challenges!|| ||&7&lPrice: &e2000 tickets;c;sudo %player% purchase sbtier2
+	sbtier3: i;3 iron blocks;n;&b&lSkyblock Tier 3 Challenges!;l;&7Click to purchase Skyblock||&ETier 3&7 Challenges!|| ||&7&lPrice: &e5000 tickets;c;sudo %player% purchase sbtier3
+		
+		#subfold @otherstuff
+	menu: i;tnt;n;&b&lReturn to Menu;l;&7Click to return to &eChallenge &7Menu;c;sudo %player% challenge
+	shop: i;gold ingot;n;&b&lShop;l;&7Click to open the &eChallenge &7Shop;c;sudo %player% challenge shop
+	
+#endfold	
+
+
+variables:
+	{purchase.sb.tier2.%player%} = 0
+	{purchase.st.tier3.%player%} = 0
+	
+on script load:
+	loop all players:
+		{purchase.st.tier3.%loop-player%} is not set:
+			set {purchase.st.tier3.%loop-player%} to 0
+		
+
+command /challenge [<text>]:
+	description: opens the chestcommands for challenges
+	usage: /challenge
+	trigger:
+#startfold @menus
+	#subfold @mainmenu
+		argument is not set:
+			send "&aOpening Menu..." to player
+			wait 0.5 seconds
+			show "s;12;{@tier1};s;13;{@tier2};s;14;{@tier3};s;21;{@level1};s;30;{@supporter1};s;44;{@shop}" with 5 rows named "&9&lSkyblock&9 Challenges" to player
+	#subfold @tier1	
+		argument is "tier1":
+			send "&aOpening Menu..." to player
+			wait 0.5 seconds
+			show "s;10;{@gettingstoned};s;11;{@sugarrush};s;12;{@johnnyappleseed};s;13;{@demmelons};s;14;{@dospumpkins};s;15;{@pricklyplant};s;19;{@menu};s;27;{@shop}" with 4 rows named "&9&lSkyblock &9Challenges" to player
+	#subfold @tier2		
+		argument is "tier2":
+			{purchase.sb.tier2.%player%} is 0:
+				send "&cYou must purchase the Tier 2 Package to do this!" to player
+				stop		
+			{purchase.sb.tier2.%player%} is not set:
+				send "&cYou must purchase the Tier 2 Package to do this!" to player
+				set {purchase.sb.tier3.%player%} to 0
+				stop
+			{purchase.sb.tier2.%player%} is 1:
+
+				send "&aOpening Menu..." to player
+				wait 0.5 seconds
+				show "s;10;{@jackobamtern};s;11;{@whatsupdoc};s;12;{@potaytoes};s;13;{@doctor};s;14;{@brains};s;15;{@arrow};s;19;{@menu};s;27;{@shop}" with 4 rows named "&9&lSkyblock &9Challenges" to player
+	#subfold @tier3		
+		argument is "tier3":
+			{purchase.sb.tier3.%player%} is 0:
+				send "&cYou must purchase the Tier 3 Package to do this!" to player
+				stop		
+			{purchase.sb.tier3.%player%} is not set:
+				send "&cYou must purchase the Tier 3 Package to do this!" to player
+				set {purchase.sb.tier3.%player%} to 0
+				stop
+			{purchase.sb.tier3.%player%} is 1:
+
+				send "&aOpening Menu..." to player
+				wait 0.5 seconds
+				show "s;10;{@shiny};s;11;{@fishon};s;12;{@myeye};s;13;{@boomboompow};s;14;{@bakersdozen};s;15;{@crushed};s;19;{@menu};s;27;{@shop}" with 4 rows named "&9&lSkyblock &9Challenges" to player
+				
+	#subfold @level1			
+		argument is "level1":
+			{level.%player%.actual} is greater than or equal to 10:
+			
+			
+				send "&aOpening Menu..." to player
+				wait 0.5 seconds
+				show "s;10;{@lumberjack};s;11;{@theoven};s;12;{@storagewars};s;13;{@withanapple};s;14;{@cookeeminastew};s;15;{@splititdownthemiddle};s;19;{@menu};s;27;{@shop}" with 4 rows named "&9&lSkyblock &9Challenges" to player
+				stop
+			
+			send "&cYou need to be at least level 10 to do that!" to player
+
+	#subfold @supporter1
+		argument is "supporter1":
+			player has permission "obam.challenge.supporter":
+			
+			
+				send "&aOpening Menu..." to player
+				wait 0.5 seconds
+				show "s;10;{@egged};s;11;{@gotmilk};s;12;{@gotbeef};s;13;{@cookies};s;14;{@birthdaycake};s;15;{@secretrecipe};s;18;{@menu};s;27;{@shop}" with 3 rows named "&9&lSkyblock &9Challenges" to player
+				stop
+			
+			send "&cYou must be a supporter to do this!" to player
+	#subfold @shop
+		argument is "shop":
+			send "&aOpening Menu..." to player
+			wait 0.5 seconds
+			show "s;10;{@sbtier2};s;11;{@sbtier3};s;13;{@menu}" with 3 rows named "&9&lSkyblock &9Challenges" to player
+			
+
+
+			
+every 10 seconds:
+	loop all players:
+		#startfold @tier1
+		{chal.%loop-player%.stoned} is 1:
+			set {chal.%loop-player%.stoned.display} to "&aComplete!"
+		{chal.%loop-player%.stoned} is not set:
+			set {chal.%loop-player%.stoned.display} to "&cNot Complete!"
+		{chal.%loop-player%.rush} is 1:
+			set {chal.%loop-player%.rush.display} to "&aComplete!"
+		{chal.%loop-player%.rush} is not set:
+			set {chal.%loop-player%.rush.display} to "&cNot Complete!"
+		{chal.%loop-player%.apple} is 1:
+			set {chal.%loop-player%.apple.display} to "&aComplete!"
+		{chal.%loop-player%.apple} is not set:
+			set {chal.%loop-player%.apple.display} to "&cNot Complete!"
+		{chal.%loop-player%.melon} is 1:
+			set {chal.%loop-player%.melon.display} to "&aComplete!"
+		{chal.%loop-player%.melon} is not set:
+			set {chal.%loop-player%.melon.display} to "&cNot Complete!"
+		{chal.%loop-player%.pumpkin} is 1:
+			set {chal.%loop-player%.pumpkin.display} to "&aComplete!"
+		{chal.%loop-player%.pumpkin} is not set:
+			set {chal.%loop-player%.pumpkin.display} to "&cNot Complete!"
+		{chal.%loop-player%.cacti} is 1:
+			set {chal.%loop-player%.cacti.display} to "&aComplete!"
+		{chal.%loop-player%.cacti} is not set:
+			set {chal.%loop-player%.cacti.display} to "&cNot Complete!"
+		#endfold
+		#startfold @tier2
+		{chal.%loop-player%.jack} is 1:
+			set {chal.%loop-player%.jack.display} to "&aComplete!"
+		{chal.%loop-player%.jack} is not set:
+			set {chal.%loop-player%.jack.display} to "&cNot Complete"
+		{chal.%loop-player%.doc} is 1:
+			set {chal.%loop-player%.doc.display} to "&aComplete!"
+		{chal.%loop-player%.doc} is not set:
+			set {chal.%loop-player%.doc.display} to "&cNot Complete"
+		{chal.%loop-player%.potato} is 1:
+			set {chal.%loop-player%.potato.display} to "&aComplete!"
+		{chal.%loop-player%.potato} is not set:
+			set {chal.%loop-player%.potato.display} to "&cNot Complete"
+		{chal.%loop-player%.bone} is 1:
+			set {chal.%loop-player%.bone.display} to "&aComplete!"
+		{chal.%loop-player%.bone} is not set:
+			set {chal.%loop-player%.bone.display} to "&cNot Complete"
+		{chal.%loop-player%.brains} is 1:
+			set {chal.%loop-player%.brains.display} to "&aComplete!"
+		{chal.%loop-player%.brains} is not set:
+			set {chal.%loop-player%.brains.display} to "&cNot Complete"
+		{chal.%loop-player%.arrow} is 1:
+			set {chal.%loop-player%.arrow.display} to "&aComplete!"
+		{chal.%loop-player%.arrow} is not set:
+			set {chal.%loop-player%.arrow.display} to "&cNot Complete"
+		#endfold
+		#startfold @supporter
+		
+		{chal.%loop-player%.egged} is 1:
+			set {chal.%loop-player%.egged.display} to "&aComplete!"
+		{chal.%loop-player%.egged} is not set:
+			set {chal.%loop-player%.egged.display} to "&cNot Complete"
+		{chal.%loop-player%.shiny} is 1:
+			set {chal.%loop-player%.shiny.display} to "&aComplete!"
+		{chal.%loop-player%.shiny} is not set:
+			set {chal.%loop-player%.shiny.display} to "&cNot Complete"
+		{chal.%loop-player%.milk} is 1:
+			set {chal.%loop-player%.milk.display} to "&aComplete!"
+		{chal.%loop-player%.milk} is not set:
+			set {chal.%loop-player%.milk.display} to "&cNot Complete"
+		{chal.%loop-player%.cookedfish} is 1:
+			set {chal.%loop-player%.cookedfish.display} to "&aComplete!"
+		{chal.%loop-player%.cookedfish} is not set:
+			set {chal.%loop-player%.cookedfish.display} to "&cNot Complete"
+		{chal.%loop-player%.steak} is 1:
+			set {chal.%loop-player%.steak.display} to "&aComplete!"
+		{chal.%loop-player%.steak} is not set:
+			set {chal.%loop-player%.steak.display} to "&cNot Complete"
+		{chal.%loop-player%.gunpowder} is 1:
+			set {chal.%loop-player%.gunpowder.display} to "&aComplete!"
+		{chal.%loop-player%.gunpowder} is not set:
+			set {chal.%loop-player%.gunpowder.display} to "&cNot Complete"
+		{chal.%loop-player%.bread} is 1:
+			set {chal.%loop-player%.bread.display} to "&aComplete!"
+		{chal.%loop-player%.bread} is not set:
+			set {chal.%loop-player%.bread.display} to "&cNot Complete"
+		{chal.%loop-player%.spidereye} is 1:
+			set {chal.%loop-player%.spidereye.display} to "&aComplete!"
+		{chal.%loop-player%.spidereye} is not set:
+			set {chal.%loop-player%.spidereye.display} to "&cNot Complete"
+		{chal.%loop-player%.bonemeal} is 1:
+			set {chal.%loop-player%.bonemeal.display} to "&aComplete!"
+		{chal.%loop-player%.bonemeal} is not set:
+			set {chal.%loop-player%.bonemeal.display} to "&cNot Complete"
+		{chal.%loop-player%.cookie} is 1:
+			set {chal.%loop-player%.cookie.display} to "&aComplete!"
+		{chal.%loop-player%.cookie} is not set:
+			set {chal.%loop-player%.cookie.display} to "&cNot Complete"
+		{chal.%loop-player%.cake} is 1:
+			set {chal.%loop-player%.cake.display} to "&aComplete!"
+		{chal.%loop-player%.cake} is not set:
+			set {chal.%loop-player%.cake.display} to "&cNot Complete"
+		{chal.%loop-player%.chicken} is 1:
+			set {chal.%loop-player%.chicken.display} to "&aComplete!"
+		{chal.%loop-player%.chicken} is not set:
+			set {chal.%loop-player%.chicken.display} to "&cNot Complete"
+		#endfold
+		{chal.%loop-player%.lumberjack} is 1:
+			set {chal.%loop-player%.lumberjack.display} to "&aComplete!"
+		{chal.%loop-player%.lumberjack} is not set:
+			set {chal.%loop-player%.lumberjack.display} to "&cNot Complete"
+		{chal.%loop-player%.theoven} is 1:
+			set {chal.%loop-player%.theoven.display} to "&aComplete!"
+		{chal.%loop-player%.theoven} is not set:
+			set {chal.%loop-player%.theoven.display} to "&cNot Complete"
+		{chal.%loop-player%.storage} is 1:
+			set {chal.%loop-player%.storage.display} to "&aComplete!"
+		{chal.%loop-player%.storage} is not set:
+			set {chal.%loop-player%.storage.display} to "&cNot Complete"
+		{chal.%loop-player%.porkchop} is 1:
+			set {chal.%loop-player%.porkchop.display} to "&aComplete!"
+		{chal.%loop-player%.porkchop} is not set:
+			set {chal.%loop-player%.porkchop.display} to "&cNot Complete"
+		{chal.%loop-player%.poisonouspotato} is 1:
+			set {chal.%loop-player%.poisonouspotato.display} to "&aComplete!"
+		{chal.%loop-player%.poisonouspotato} is not set:
+			set {chal.%loop-player%.poisonouspotato.display} to "&cNot Complete"
+		{chal.%loop-player%.slabs} is 1:
+			set {chal.%loop-player%.slabs.display} to "&aComplete!"
+		{chal.%loop-player%.slabs} is not set:
+			set {chal.%loop-player%.slabs.display} to "&cNot Complete"
+
+
+
+		
+	
+
+#challenges tier1
+#legacy check command
+#startfold @challengelist
+command /challengelist <text>:
+	description: displays the skyblock challenges
+	usage: /challengelist <page number>                            'example: /challenge page 1'
+	trigger:
+	
+		world is "skyworld":
+			argument 1 is "page 1":
+		#subfold @legacy
+			#list of challenges
+				send "&e------------Page 1-----------" to player
+				message " " to player
+				message "&b&lCurrent List of Skyblock Challenges" to player
+				message " " to player
+			#be sure to include the variable change for each challenge
+		
+			#gettingstoned
+				if {chal.%player%.stoned} is 1:
+					message "&8&l1. Getting Stoned &e(Unlocked)" to player
+					message "&8Trade &c2304 &8Cobblestone" to player
+					message "&8Reward: &c5 Tickets" to player
+				else:
+					message "&2&l1. Getting Stoned" to player
+					message "&bTrade 64 Cobblestone" to player
+					message "&aReward: 300 Tickets" to player
+			
+				message " " to player
+		
+			#sugarrush
+				if {chal.%player%.rush} is 1:
+					message "&8&l2. Sugar Rush &e(Unlocked)" to player
+					message "&8Farm and create &c2304 &8Units of Sugar" to player
+					message "&8Reward: &c5 Tickets" to player
+			
+				else:
+					message "&2&l2. SugarRush" to player
+					message "&bFarm and create 128 Units of Sugar" to player
+					message "&aReward: 300 Tickets" to player
+		
+				message " " to player
+		
+			#johnnyappleseed
+				if {chal.%player%.apple} is 1:
+					message "&8&l3. Johnny Appleseed &e(Unlocked)" to player
+					message "&8Obtain and trade &c256 &8Apples" to player
+					message "&8Reward: &c5 Tickets" to player
+			
+				else:
+					message "&2&l3. Johnny Appleseed" to player
+					message "&bObtain and trade 32 Apples" to player
+					message "&aReward: 300 Tickets" to player
+
+				message " " to player
+				message "&eType &f/challenge page 2 &efor more!" to player
+				message "&eType &f/chal [Challenge number] &eto complete a challenge" to player
+				message " " to player
+				send "&e------------Page 1-----------" to player
+				stop
+			
+			
+			argument 1 is "page 2":
+		
+			#list of challenges
+				send "&e------------Page 2-----------" to player
+				message " " to player
+				message "&b&lCurrent List of Skyblock Challenges" to player
+				message " " to player
+			#be sure to include the variable change for each challenge
+		
+			#demmelons
+				if {chal.%player%.melon} is 1:
+					message "&8&l4. Dem Melons &e(Unlocked)" to player
+					message "&8Trade &c2304 &8Slices of Melon" to player
+					message "&8Reward: &c5 Tickets" to player
+				else:
+					message "&2&l4. Dem Melons" to player
+					message "&bTrade 256 Slices of Melon" to player
+					message "&aReward: 300 Tickets" to player
+			
+				message " " to player
+		
+			#dospumpkins
+				if {chal.%player%.pumpkin} is 1:
+					message "&8&l5. Dos Pumpkins &e(Unlocked)" to player
+					message "&8Trade &c2304 &8Pumpkins" to player
+					message "&8Reward: &c5 Tickets" to player
+			
+				else:
+					message "&2&l5. Dos Pumpkins" to player
+					message "&bTrade 128 Pumpkins" to player
+					message "&aReward: 300 Tickets" to player
+		
+				message " " to player
+		
+			#pricklyplant
+				if {chal.%player%.cacti} is 1:
+					message "&8&l6. Prickly Plant &e(Unlocked)" to player
+					message "&8Trade &c2304 &8Cacti" to player
+					message "&8Reward: &c5 Tickets" to player
+			
+				else:
+					message "&2&l6. Prickly Plant" to player
+					message "&bTrade 32 Cacti" to player
+					message "&aReward: 300 Tickets" to player
+
+				message " " to player
+				message "&eType &f/challenge page 3 &efor more!" to player
+				message "&eType &f/chal [Challenge number] &eto complete a challenge" to player
+				message " " to player
+				send "&e------------Page 2-----------" to player
+				stop
+			
+
+#challenges tier2 package			
+			argument 1 is "page 3":
+		
+			#list of challenges
+				send "&e------------Page 3-----------" to player
+				message " " to player
+				message "&b&lCurrent List of Skyblock Challenges" to player
+				message " " to player
+			#be sure to include the variable change for each challenge
+		
+			#jackobamterns
+				{purchase.sb.tier2.%player%} is 1:
+				
+					if {chal.%player%.jack} is 1:
+						message "&8&l7. JackOBAMtern &e(Unlocked)" to player
+						message "&8Trade &c2304 &8Jack O' Lanterns" to player
+						message "&8Reward: &c10 Tickets" to player
+					else:
+						message "&2&l7. JackOBAMtern" to player
+						message "&bTrade 256 Jack O' Lanterns" to player
+						message "&aReward: 600 Tickets" to player
+				
+				{purchase.sb.tier2.%player%} is 0:
+				
+					send "&c7. Purchase Tier 2 Challenge Package with /shop to see this challenge!" to player
+			
+				message " " to player
+		
+			#whatsupdoc
+				{purchase.sb.tier2.%player%} is 1:
+				
+					if {chal.%player%.doc} is 1:
+						message "&8&l8. What's Up Doc? &e(Unlocked)" to player
+						message "&8Trade &c2304 &8Carrots" to player
+						message "&8Reward: &c10 Tickets" to player
+					else:
+						message "&2&l8.. What's Up Doc?" to player
+						message "&bTrade 256 Carrots" to player
+						message "&aReward: 600 Tickets" to player
+				
+				{purchase.sb.tier2.%player%} is 0:
+				
+					send "&c8. Purchase Tier 2 Challenge Package with /shop to see this challenge!" to player
+		
+				message " " to player
+		
+			#potaytoes
+				{purchase.sb.tier2.%player%} is 1:
+				
+					if {chal.%player%.potato} is 1:
+						message "&8&l9. Po-Tay-Toes! &e(Unlocked)" to player
+						message "&8Trade &c2304 &8Potatos" to player
+						message "&8Reward: &c10 Tickets" to player
+					else:
+						message "&2&l9. Po-Tay-Toes!" to player
+						message "&bTrade 256 Potatos" to player
+						message "&aReward: 600 Tickets" to player
+				
+				{purchase.sb.tier2.%player%} is 0:
+				
+					send "&c7. Purchase Tier 2 Challenge Package with /shop to see this challenge!" to player
+
+				message " " to player
+				message "&eCheck back later for more!" to player
+				message "&eType &f/chal [Challenge number] &eto complete a challenge" to player
+				message " " to player
+				send "&e------------Page 3-----------" to player
+				stop
+				
+			#subfold @chestmenus	
+				#subfold @tier2
+			argument 1 is "tier2":
+				
+				{purchase.sb.tier2.%player%} is 1:
+					execute console command "/chc open sbtier2 %player%"
+					stop
+				{purchase.sb.tier2.%player%} is 0:
+					send "&cYou must purchase the Tier 2 Package from /shop to do this!" to player
+					stop
+				#subfold @tier3	
+			argument 1 is "tier3":
+				
+				{purchase.sb.tier3.%player%} is 1:
+					execute console command "/chc open sbtier3 %player%"
+					stop
+				{purchase.sb.tier3.%player%} is 0:
+					send "&cYou must purchase the Tier 3 Package from /shop to do this!" to player
+					stop
+					
+				{purchase.sb.tier3.%player%} is not set:
+					send "&cYou must purchase the Tier 3 Package from /shop to do this!" to player
+					set {purchase.sb.tier3.%player%} to 0
+					stop
+				#subfold @supporter1
+			argument 1 is "supporter1":
+			
+				player has permission "obam.challenge.supporter":
+					execute console command "/chc open supporter1chal %player%"
+					stop
+				
+				send "&cYou need to be supporter to do that!" to player
+				stop
+					
+				#subfold @level1
+			argument 1 is "level1":
+				
+				{level.%player%.actual} is greater than or equal to 10:
+					execute console command "/chc open level1chal %player%"
+					stop
+				
+
+				send "&cYou must be at least level 10 to do that!"
+				stop
+			
+		
+		world is "hub":
+			message "&aJoin an instance to see challenges! Try Skyworld!" to player
+			stop
+		
+		message "&cIt seems this world does not have challenges. Check back soon!" to player
+#endfold
+#startfold @challenge-complete		
+#challenge complete 
+command /chal <number>:
+	usage: /chal <number of challenge>
+	description: Displays and Completes Challenges
+	trigger:
+	
+		argument 1 is 0:
+		
+			make player execute command "/challenge"
+		
+		#argument 1 is the selection so 1 is "Getting Stoned"
+		#subfold @1'GettingStoned'
+		argument 1 is 1:
+		
+			#check for items
+			player does not have 64 cobblestone:
+				message "&c&lYou do not have enough cobblestone!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.stoned} is 1:
+				player does not have 2304 cobblestone:
+					message "&c&lYou Do not have enough Cobblestone!" to player
+					stop
+				
+				remove 2304 cobblestone from player
+				add 5 to player's balance
+				message "&a&lGetting Stoned Completed!" to player
+				message "&aYou have received &e5 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+				
+			#actual challenge
+			remove 64 cobblestone from player
+			add 300 to player's balance
+			set {chal.%player%.stoned} to 1
+			add 500 to {level.%player%}
+			message "&a&lGetting Stoned Completed!" to player
+			message "&aYou have received &e300 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lGetting Stoned &afor the first time!"
+			stop
+			
+		#subfold @2sugarrush	
+		argument 1 is 2:
+		
+			#check for items
+			player does not have 128 sugar:
+				message "&c&lYou do not have enough sugar!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.rush} is 1:
+				#check for amount of items
+				player does not have 2304 sugar:
+					message "&c&1You do not have enough sugar!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 sugar from player
+				add 5 to player's balance
+				message "&a&lSugar Rush Completed!"
+				message "&aYou have received &e5 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 128 sugar from player
+			add 300 to player's balance
+			set {chal.%player%.rush} to 1
+			add 500 to {level.%player%}
+			message "&a&lSugar Rush Completed!" to player
+			message "&aYou have received &e300 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lSugar Rush &afor the first time!"
+			stop
+			
+
+			
+
+			
+		#subfold @3johnnyappleseed	
+		argument 1 is 3:
+		
+			#check for items
+			player does not have 32 apple:
+				message "&c&lYou do not have enough apples!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.apple} is 1:
+				#check for amount of items
+				player does not have 256 apple:
+					message "&c&lYou do not have enough apples!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 256 apples from player
+				add 5 to player's balance
+				message "&a&lJohnny Appleseed Completed!"
+				message "&aYou have received &e5 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 32 apples from player
+			add 300 to player's balance
+			set {chal.%player%.apple} to 1
+			add 500 to {level.%player%}
+			message "&a&lJohnny Appleseed Completed!" to player
+			message "&aYou have received &e300 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lJohnny Appleseed &afor the first time!"
+			stop
+			
+		#subfold @4dememlons	
+		argument 1 is 4:
+		
+			#check for items
+			player does not have 256 melon slice:
+				message "&c&lYou do not have enough melons!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.melon} is 1:
+				#check for amount of items
+				player does not have 2304 melon slice:
+					message "&c&lYou do not have enough melons!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 melon slice from player
+				add 5 to player's balance
+				message "&a&lDem Melons Completed!"
+				message "&aYou have received &e5 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 melon slice from player
+			add 300 to player's balance
+			set {chal.%player%.melon} to 1
+			add 500 to {level.%player%}
+			message "&a&lDem Melons Completed!" to player
+			message "&aYou have received &e300 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lDem Melons &afor the first time!"
+			stop
+			
+		#subfold @5dospumpkins	
+		argument 1 is 5:
+		
+			#check for items
+			player does not have 128 pumpkin:
+				message "&c&lYou do not have enough pumpkins!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.pumpkin} is 1:
+				#check for amount of items
+				player does not have 2304 pumpkin:
+					message "&c&lYou do not have enough pumpkins!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 pumpkin from player
+				add 5 to player's balance
+				message "&a&lDos Pumpkins Completed!"
+				message "&aYou have received &e5 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 128 pumpkin from player
+			add 300 to player's balance
+			set {chal.%player%.pumpkin} to 1
+			add 500 to {level.%player%}
+			message "&a&lDos Pumpkins Completed!" to player
+			message "&aYou have received &e300 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lDos Pumpkins &afor the first time!"
+			stop
+			
+		#subfold @6pricklyplant	
+		argument 1 is 6:
+		
+			#check for items
+			player does not have 32 cactus:
+				message "&c&lYou do not have enough cactus!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.cacti} is 1:
+				#check for amount of items
+				player does not have 2304 cactus:
+					message "&c&lYou do not have enough cactus!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 cactus from player
+				add 5 to player's balance
+				message "&a&lPrickly Plant Completed!"
+				message "&aYou have received &e5 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 32 cactus from player
+			add 300 to player's balance
+			set {chal.%player%.cacti} to 1
+			add 500 to {level.%player%}
+			message "&a&lPrickly Plant Completed!" to player
+			message "&aYou have received &e300 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lPrickly Plant &afor the first time!"
+			stop
+			
+		#subfold @7-t2-jackobamtern
+		argument 1 is 7:
+		
+		
+			#check for purchase
+			{purchase.sb.tier2.%player%} is 0:
+				send "&c You must purchase Tier 2 Challenges from the shop to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 jack-o-lantern:
+				message "&c&lYou do not have enough Jack O' Lanterns!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.jack} is 1:
+				#check for amount of items
+				player does not have 2304 jack-o-lantern:
+					message "&c&lYou do not have enough Jack O' Lanterns!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 jack-o-lantern from player
+				add 10 to player's balance
+				message "&a&lJackOBAMterns Completed!"
+				message "&aYou have received &e10 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 jack-o-lantern from player
+			add 600 to player's balance
+			set {chal.%player%.jack} to 1
+			add 500 to {level.%player%}
+			message "&a&lJackOBAMtern Completed!" to player
+			message "&aYou have received &e600 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lJackOBAMtern &afor the first time!"
+			stop
+			
+		#subfold @8-t2-whatsupdoc
+		argument 1 is 8:
+		
+		
+			#check for purchase
+			{purchase.sb.tier2.%player%} is 0:
+				send "&c You must purchase Tier 2 Challenges from the shop to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 carrot:
+				message "&c&lYou do not have enough Carrots!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.doc} is 1:
+				#check for amount of items
+				player does not have 2304 carrot:
+					message "&c&lYou do not have enough Carrots!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 carrot from player
+				add 10 to player's balance
+				message "&a&lWhat's Up Doc? &aCompleted!"
+				message "&aYou have received &e10 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 carrot from player
+			add 600 to player's balance
+			set {chal.%player%.doc} to 1
+			add 500 to {level.%player%}
+			message "&a&lWhat's Up Doc&a Completed!" to player
+			message "&aYou have received &e600 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lWhat's Up Doc? &afor the first time!"
+			stop
+			
+		#subfold @9-t2-potaytoes
+		argument 1 is 9:
+		
+		
+			#check for purchase
+			{purchase.sb.tier2.%player%} is 0:
+				send "&c You must purchase Tier 2 Challenges from the shop to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 potato:
+				message "&c&lYou do not have enough Potatos!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.potato} is 1:
+				#check for amount of items
+				player does not have 2304 potato:
+					message "&c&lYou do not have enough Potatos!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 potato from player
+				add 10 to player's balance
+				message "&a&lPO-TAY-TOES! &aCompleted!"
+				message "&aYou have received &e10 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 potato from player
+			add 600 to player's balance
+			set {chal.%player%.potato} to 1
+			add 500 to {level.%player%}
+			message "&a&lPO-TAY-TOES!&a Completed!" to player
+			message "&aYou have received &e600 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lPO-TAY-TOES! &afor the first time!"
+			stop
+			
+			
+			
+		#subfold @10-t2-doctor
+		argument 1 is 10:
+		
+		
+			#check for purchase
+			{purchase.sb.tier2.%player%} is 0:
+				send "&c You must purchase Tier 2 Challenges from the shop to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 bone:
+				message "&c&lYou do not have enough Bones!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.bone} is 1:
+				#check for amount of items
+				player does not have 2304 bone:
+					message "&c&lYou do not have enough Bones!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 bone from player
+				add 10 to player's balance
+				message "&a&lDamnit Jim I'm A Doctor! &aCompleted!"
+				message "&aYou have received &e10 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 bone from player
+			add 600 to player's balance
+			set {chal.%player%.bone} to 1
+			add 500 to {level.%player%}
+			message "&a&lDamnit Jim I'm A Doctor!&a Completed!" to player
+			message "&aYou have received &e600 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lDamnit Jim I'm A Doctor! &afor the first time!"
+			stop
+			
+			
+		#subfold @11-t2-brains
+		argument 1 is 11:
+		
+		
+			#check for purchase
+			{purchase.sb.tier2.%player%} is 0:
+				send "&c You must purchase Tier 2 Challenges from the shop to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 rotten flesh:
+				message "&c&lYou do not have enough Rotten Flesh!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.brains} is 1:
+				#check for amount of items
+				player does not have 2304 rotten flesh:
+					message "&c&;You do not have enough Rotten Flesh!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 rotten flesh from player
+				add 10 to player's balance
+				message "&a&lBraaaaaains! &aCompleted!"
+				message "&aYou have received &e10 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 rotten flesh from player
+			add 600 to player's balance
+			set {chal.%player%.brains} to 1
+			add 500 to {level.%player%}
+			message "&a&lBraaaaaains!&a Completed!" to player
+			message "&aYou have received &e600 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lBraaaaaains! &afor the first time!"
+			stop
+			
+		#subfold @12-t2-arrow
+		argument 1 is 12:
+		
+		
+			#check for purchase
+			{purchase.sb.tier2.%player%} is 0:
+				send "&c You must purchase Tier 2 Challenges from the shop to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 arrow:
+				message "&c&lYou do not have enough Arrows!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.arrow} is 1:
+				#check for amount of items
+				player does not have 2304 arrow:
+					message "&c&lYou do not have enough Arrows!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 arrow from player
+				add 10 to player's balance
+				message "&a&lArrow To The Knee &aCompleted!"
+				message "&aYou have received &e10 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 arrow from player
+			add 600 to player's balance
+			set {chal.%player%.arrow} to 1
+			add 500 to {level.%player%}
+			message "&a&lArrow To The Knee&a Completed!" to player
+			message "&aYou have received &e600 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lArrow To The Knee &afor the first time!"
+			stop
+			
+			
+		#subfold @13-S1-egged
+		argument 1 is 13:
+		
+		
+			#check for purchase
+			player does not have permission "obam.challenge.supporter":
+				send "&c You must be a Supporter to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 288 egg:
+				message "&c&lYou do not have enough Eggs!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.egged} is 1:
+				#check for amount of items
+				player does not have 576 egg:
+					message "&c&lYou do not have enough Eggs!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 576 egg from player
+				add 15 to player's balance
+				message "&a&lEgged &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 288 egg from player
+			add 800 to player's balance
+			set {chal.%player%.egged} to 1
+			add 700 to {level.%player%}
+			message "&a&lEgged&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lEgged &afor the first time!"
+			stop
+			
+			
+			
+		#subfold @14-t3-Shiny!
+		argument 1 is 14:
+			
+			#check for purchase
+			{purchase.sb.tier3.%player%} is 0:
+				send "&c You must purchase Tier 3 Challenges from the shop to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 iron ingot:
+				message "&c&lYou do not have enough Iron!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.shiny} is 1:
+				#check for amount of items
+				player does not have 2304 iron ingot:
+					message "&c&lYou do not have enough Iron!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 iron ingot from player
+				add 15 to player's balance
+				message "&a&lShiny! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 288 iron ingot from player
+			add 800 to player's balance
+			set {chal.%player%.shiny} to 1
+			add 700 to {level.%player%}
+			message "&a&lShiny!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lShiny! &afor the first time!"
+			stop
+			
+		#subfold @15-s1-Got-Milk?
+		argument 1 is 15:
+			
+			#check for purchase
+			player does not have permission "obam.challenge.supporter":
+				send "&c You must be a Supporter to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 10 milk bucket:
+				message "&c&lYou do not have enough Milk!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.milk} is 1:
+				#check for amount of items
+				player does not have 30 milk bucket:
+					message "&c&lYou do not have enough Milk!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 30 milk bucket from player
+				add 15 to player's balance
+				message "&a&lGot Milk? &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 10 milk bucket from player
+			add 800 to player's balance
+			set {chal.%player%.milk} to 1
+			add 700 to {level.%player%}
+			message "&a&lGot Milk?&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lGot Milk? &afor the first time!"
+			stop
+			
+
+		#subfold @16-t3-Fish-On!
+		argument 1 is 16:
+			
+			#check for purchase
+			{purchase.sb.tier3.%player%} is 0:
+				send "&c You must purchase Tier 3 Challenges from the shop to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 cooked fish:
+				message "&c&lYou do not have enough Cooked Fish!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.cookedfish} is 1:
+				#check for amount of items
+				player does not have 2304 cooked fish:
+					message "&c&lYou do not have enough Cooked Fish!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 cooked fish from player
+				add 15 to player's balance
+				message "&a&lFish On! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 cooked fish from player
+			add 800 to player's balance
+			set {chal.%player%.cookedfish} to 1
+			add 700 to {level.%player%}
+			message "&a&lFish on!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lFish On! &afor the first time!"
+			stop
+			
+		#subfold @17-s1-Got-Beef?
+		argument 1 is 17:
+			
+			#check for purchase
+			player does not have permission "obam.challenge.supporter":
+				send "&c You must be a Supporter to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 steak:
+				message "&c&lYou do not have enough Steak!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.steak} is 1:
+				#check for amount of items
+				player does not have 2304 steak:
+					message "&c&lYou do not have enough Steak!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 steak from player
+				add 15 to player's balance
+				message "&a&lGot Beef? &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 steak from player
+			add 800 to player's balance
+			set {chal.%player%.steak} to 1
+			add 700 to {level.%player%}
+			message "&a&lGot Beef?&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lGot Beef? &afor the first time!"
+			stop
+			
+		#subfold @18-t3-boom-boom-pow
+		argument 1 is 18:
+			
+			#check for purchase
+			{purchase.sb.tier3.%player%} is 0:
+				send "&c You must purchase Tier 3 Challenges from the shop to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 gunpowder:
+				message "&c&lYou do not have enough Gunpowder!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.gunpowder} is 1:
+				#check for amount of items
+				player does not have 2304 gunpowder:
+					message "&c&lYou do not have enough Gunpowder!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 gunpowder from player
+				add 15 to player's balance
+				message "&a&lBoom Boom Pow! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 gunpowder from player
+			add 800 to player's balance
+			set {chal.%player%.gunpowder} to 1
+			add 700 to {level.%player%}
+			message "&a&lBoom Boom Pow!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lBoom Boom Pow! &afor the first time!"
+			stop
+			
+			
+		#subfold @19-t3-Bakers-Dozen
+		argument 1 is 19:
+			
+			#check for purchase
+			{purchase.sb.tier3.%player%} is 0:
+				send "&c You must purchase Tier 3 Challenges from the shop to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 bread:
+				message "&c&lYou do not have enough Bread!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.bread} is 1:
+				#check for amount of items
+				player does not have 2304 bread:
+					message "&c&lYou do not have enough Bread!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 bread from player
+				add 15 to player's balance
+				message "&a&lBakers Dozen! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 bread from player
+			add 800 to player's balance
+			set {chal.%player%.bread} to 1
+			add 700 to {level.%player%}
+			message "&a&lBakers Dozen!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lBakers Dozen! &afor the first time!"
+			stop
+			
+			
+		#subfold @20-t3-My-Eye!
+		argument 1 is 20:
+			
+			#check for purchase
+			{purchase.sb.tier3.%player%} is 0:
+				send "&c You must purchase Tier 3 Challenges from the shop to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 spider eye:
+				message "&c&lYou do not have enough Spider Eyes!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.spidereye} is 1:
+				#check for amount of items
+				player does not have 2304 spider eyes:
+					message "&c&lYou do not have enough Spider Eyes!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 spider eye from player
+				add 15 to player's balance
+				message "&a&lMy Eye! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 spider eye from player
+			add 800 to player's balance
+			set {chal.%player%.spidereye} to 1
+			add 700 to {level.%player%}
+			message "&a&lMy Eye!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lMy Eye! &afor the first time!"
+			stop
+			
+		#subfold @21-t3-Crushed!
+		argument 1 is 21:
+			
+			#check for purchase
+			{purchase.sb.tier3.%player%} is 0:
+				send "&c You must purchase Tier 3 Challenges from the shop to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 bonemeal:
+				message "&c&lYou do not have enough Bone meal!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.bonemeal} is 1:
+				#check for amount of items
+				player does not have 2304 bonemeal:
+					message "&c&lYou do not have enough Bone Meal!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 bonemeal from player
+				add 15 to player's balance
+				message "&a&lCrushed! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 bonemeal from player
+			add 800 to player's balance
+			set {chal.%player%.bonemeal} to 1
+			add 700 to {level.%player%}
+			message "&a&lCrushed!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lCrushed! &afor the first time!"
+			stop
+			
+		#subfold @22-s1-Coookies!
+		argument 1 is 22:
+			
+			#check for purchase
+			player does not have permission "obam.challenge.supporter":
+				send "&c You must be a Supporter to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 cookie:
+				message "&c&lYou do not have enough Cookies!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.cookie} is 1:
+				#check for amount of items
+				player does not have 2304 cookie:
+					message "&c&lYou do not have enough Cookies!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 cookie from player
+				add 15 to player's balance
+				message "&a&lCoookies! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 cookie from player
+			add 800 to player's balance
+			set {chal.%player%.cookie} to 1
+			add 700 to {level.%player%}
+			message "&a&lCoookies!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lCoookies! &afor the first time!"
+			stop
+			
+			
+		#subfold @23-s1-Birthday-Cake!
+		argument 1 is 23:
+			
+			#check for purchase
+			player does not have permission "obam.challenge.supporter":
+				send "&c You must be a Supporter to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 10 cake item:
+				message "&c&lYou do not have enough Cakes!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.cake} is 1:
+				#check for amount of items
+				player does not have 36 cake item:
+					message "&c&lYou do not have enough Cakes!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 36 cake from player
+				add 15 to player's balance
+				message "&a&lBirthday Cake! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 10 cake from player
+			add 800 to player's balance
+			set {chal.%player%.cake} to 1
+			add 700 to {level.%player%}
+			message "&a&lBirthday Cake!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lBirthday Cake! &afor the first time!"
+			stop
+			
+			
+		#subfold @24-s1-Secret-Recipe!
+		argument 1 is 24:
+			
+			#check for purchase
+			player does not have permission "obam.challenge.supporter":
+				send "&c You must be a Supporter to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 cooked chicken:
+				message "&c&lYou do not have enough Cooked Chicken!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.chicken} is 1:
+				#check for amount of items
+				player does not have 2304 Cooked Chicken:
+					message "&c&lYou do not have enough Cooked Chicken!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 cooked chicken from player
+				add 15 to player's balance
+				message "&a&lSecret Recipe! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 cooked chicken from player
+			add 800 to player's balance
+			set {chal.%player%.chicken} to 1
+			add 700 to {level.%player%}
+			message "&a&lSecret Recipe!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lSecret Recipe! &afor the first time!"
+			stop
+			
+		#subfold @25-l1-Lumberjack!
+		argument 1 is 25:
+			
+			#check for purchase
+			{level.%player%.actual} is less than 10:
+				send "&cYou must be at least level 10 to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 oak wood block:
+				message "&c&lYou do not have enough Oak Log!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.lumberjack} is 1:
+				#check for amount of items
+				player does not have 2304 oak wood block:
+					message "&c&lYou do not have enough Oak Log!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 oak wood block from player
+				add 15 to player's balance
+				message "&a&lLumberjack! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 oak wood block from player
+			add 800 to player's balance
+			set {chal.%player%.lumberjack} to 1
+			add 700 to {level.%player%}
+			message "&a&lLumberjack!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lLumberjack! &afor the first time!"
+			stop
+			
+		#subfold @26-l1-The-Oven!
+		argument 1 is 26:
+			
+			#check for purchase
+			{level.%player%.actual} is less than 10:
+				send "&cYou must be at least level 10 to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 non-burning furnace:
+				message "&c&lYou do not have enough Furnaces!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.theoven} is 1:
+				#check for amount of items
+				player does not have 2304 non-burning furnace:
+					message "&c&lYou do not have enough Furnaces!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 non-burning furnace from player
+				add 15 to player's balance
+				message "&a&lThe Oven! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 non-burning furnace from player
+			add 800 to player's balance
+			set {chal.%player%.theoven} to 1
+			add 700 to {level.%player%}
+			message "&a&lThe Oven!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lThe Oven! &afor the first time!"
+			stop
+			
+		#subfold @27-l1-Storage-Wars!
+		argument 1 is 27:
+			
+			#check for purchase
+			{level.%player%.actual} is less than 10:
+				send "&cYou must be at least level 10 to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 chest:
+				message "&c&lYou do not have enough Chests!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.storage} is 1:
+				#check for amount of items
+				player does not have 2304 chest:
+					message "&c&lYou do not have enough Chests!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 chest from player
+				add 15 to player's balance
+				message "&a&lStorage Wars! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 chest from player
+			add 800 to player's balance
+			set {chal.%player%.storage} to 1
+			add 700 to {level.%player%}
+			message "&a&lStorage Wars!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lStorage Wars! &afor the first time!"
+			stop
+			
+			
+		#subfold @28-l1-With-an-Apple!
+		argument 1 is 28:
+			
+			#check for purchase
+			{level.%player%.actual} is less than 10:
+				send "&cYou must be at least level 10 to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 cooked porkchop:
+				message "&c&lYou do not have enough Cooked Porkchop!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.porkchop} is 1:
+				#check for amount of items
+				player does not have 2304 cooked porkchop:
+					message "&c&lYou do not have enough Cooked Porkchop!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 cooked porkchop from player
+				add 15 to player's balance
+				message "&a&lWith an Apple! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 cooked porkchop from player
+			add 800 to player's balance
+			set {chal.%player%.porkchop} to 1
+			add 700 to {level.%player%}
+			message "&a&lWith an Apple!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lWith an Apple! &afor the first time!"
+			stop
+			
+			
+		#subfold @29-l1-Cook-'em-in-a-Stew!
+		argument 1 is 29:
+			
+			#check for purchase
+			{level.%player%.actual} is less than 10:
+				send "&cYou must be at least level 10 to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 poisonous potato:
+				message "&c&lYou do not have enough Poisonous Potato!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.poisonouspotato} is 1:
+				#check for amount of items
+				player does not have 2304 poisonous potato:
+					message "&c&lYou do not have enough Poisonous Potato!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 poisonous potato from player
+				add 15 to player's balance
+				message "&a&lCook 'em in a Stew! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 poisonous potato from player
+			add 800 to player's balance
+			set {chal.%player%.poisonouspotato} to 1
+			add 700 to {level.%player%}
+			message "&a&lCook 'em in a Stew!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lCook 'em in a Stew! &afor the first time!"
+			stop
+	
+	
+		#subfold @30-l1-Split-It-Down-The-Middle!
+		argument 1 is 30:
+			
+			#check for purchase
+			{level.%player%.actual} is less than 10:
+				send "&cYou must be at least level 10 to do this!" to player
+				stop
+				
+			#check for items
+			player does not have 256 stone brick) slab item:
+				message "&c&lYou do not have enough Stone Brick Slabs!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.slabs} is 1:
+				#check for amount of items
+				player does not have 2304 stone brick) slab item:
+					message "&c&lYou do not have enough Stone Brick Slabs!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 stone brick) slab item from player
+				add 15 to player's balance
+				message "&a&lSplit It Down The Middle! &aCompleted!"
+				message "&aYou have received &e15 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 stone brick) slab item from player
+			add 800 to player's balance
+			set {chal.%player%.slabs} to 1
+			add 700 to {level.%player%}
+			message "&a&lSplit It Down The Middle!&a Completed!" to player
+			message "&aYou have received &e800 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lSplit It Down The Middle! &afor the first time!"
+			stop
+#endfold						
+
+			
+			
+			
+			
+#startfold @challengereset			
+#challenge reset command
+command /chalr <player> <number>:
+	usage: /chalr <player> <number of challenge>
+	permission: obam.chal.admin
+	trigger:
+		
+		
+		#gettingstoned
+		argument 2 is 1:
+			set {chal.%player-argument%.stoned} to 0
+			message "&aYou have reset %player-argument%'s 'Getting Stoned' Completion Status" to player
+			message "&aYour 'Getting Stoned' Complteion status has been reset by %player%" to player-argument
+			stop
+				
+		#sugarrush
+		argument 2 is 2:
+			set {chal.%player-argument%.rush} to 0
+			message "&aYou have reset %player-argument%'s 'Sugar Rush' Completion Status" to player
+			message "&aYour 'Sugar Rush' Completion status has been reset by %player%" to player-argument
+			stop
+			
+		#johnnyappleseed	
+		argument 2 is 3:
+			set {chal.%player-argument%.apple} to 0
+			message "&aYou have reset %player-argument%'s 'Johnny Appleseed' Completion Status" to player
+			message "&aYour 'Johnny Appleseed' Completion status has been reset by %player%" to player-argument
+			stop
+			
+		#demmelons
+		argument 2 is 4:
+			set {chal.%player-argument%.melon} to 0
+			message "&aYou have reset %player-argument%'s 'Dem Melons' Completion Status" to player
+			message "&aYour 'Dem Melons' Completion status has been reset by %player%" to player-argument
+			stop
+			
+		#dospupmkins
+		argument 2 is 5:
+			set {chal.%player-argument%.pumpkin} to 0
+			message "&aYou have reset %player-argument%'s 'Dos Pumpkins' Completion Status" to player
+			message "&aYour 'Dos Pumpkin' Completion status has been reset by %player%" to player-argument
+			stop
+			
+			
+		#pricklyplant
+		argument 2 is 6:
+			set {chal.%player-argument%.cacti} to 0
+			message "&aYou have reset %player-argument%'s 'Prickly Plant' Completion Status" to player
+			message "&aYour 'Prickly Plant' Completion status has been reset by %player%" to player-argument
+			stop
+		
+		#jackobamtern
+		argument 2 is 7:
+			set {chal.%player-argument%.jack} to 0
+			message "&aYou have reset %player-argument%'s 'JackOBAMtern' Completion Status" to player
+			message "&aYour 'JackOBAMtern' Completion status has been reset by %player%" to player-argument
+			stop
+
+		#whatsupdoc
+		argument 2 is 8:
+			set {chal.%player-argument%.doc} to 0
+			message "&aYou have reset %player-argument%'s 'What's Up Doc?' Completion Status" to player
+			message "&aYour 'What's Up Doc?' Completion status has been reset by %player%" to player-argument
+			stop
+
+		#potaytoes
+		argument 2 is 9:
+			set {chal.%player-argument%.potato} to 0
+			message "&aYou have reset %player-argument%'s 'PO-TAY-TOES!' Completion Status" to player
+			message "&aYour 'PO-TAY-TOES!' Completion status has been reset by %player%" to player-argument
+			stop
+			
+			
+		#doctor
+		argument 2 is 10:
+			set {chal.%player-argument%.bone} to 0
+			message "&aYou have reset %player-argument%'s 'Damnit Jim I'm A Doctor' Completion Status" to player
+			message "&aYour 'Damnit Jim I'm A Doctor' Completion status has been reset by %player%" to player-argument
+			stop
+			
+			
+		#braiiins
+		argument 2 is 11:
+			set {chal.%player-argument%.brains} to 0
+			message "&aYou have reset %player-argument%'s 'Braaaaaaaains!' Completion Status" to player
+			message "&aYou 'Braaaaaaaains!' Completion status has been reset by %player%" to player-argument
+			stop
+			
+		#arrow
+		argument 2 is 12:
+			set {chal.%player-argument%.arrow} to 0
+			message "&aYou have reset %player-argument%'s 'Arrow To The Knee' Completion Status" to player
+			message "&aYour 'Arrow To The Knee' Completion status has been reset by %player%" to player-argument
+			stop
+#endfold
+
+			
+		
+			
+			
+command /fillme <item>:
+	trigger:
+		clear player's inventory
+		while player has space for argument:
+			give player 64 of argument
+		
+		send "&aYou have been filled" to player
+				
+						

@@ -1,0 +1,8 @@
+on spawn of a skeleton or a creeper or a zombie or spider or a witch or a enderman:
+	world is "skyworld":
+		loop blocks in radius 3 of event-location:
+			light level is greater than or equal to 7:
+				cancel event
+			loop-block is slab:
+				cancel event
+				

@@ -1,0 +1,44 @@
+command /giveblock:
+	trigger:
+		give player iron ingot named "Test Block"
+		
+		
+on right click with iron ingot:
+	world is "wildtest":
+		player's tool is iron ingot named "Test Block":
+			loop {places::*}:
+				
+				distance between location of player and {places::%loop-index%} is less than 150
+				set {deny.test.%player%} to true
+
+					
+					
+					
+			{deny.test.%player%} is true:
+				send "&cYou are too close" to player
+				clear {deny.test.%player%}
+				cancel event
+				stop
+			
+			send "&aYou are good to go"
+			set {_block1} to block 5 blocks west of player
+			set {_block1} to block 5 blocks north of {_block1}
+			set {_block1} to location of {_block1}
+			set {_block2} to block 5 blocks east of player
+			set {_block2} to block 5 blocks south of {_block2}
+			set {_block2} to location of {_block2}
+			execute console command "//pos1 %rounded x coordinate of {_block1}%,%rounded y coordinate of {_block1}%,%rounded z coordinate of {_block1}%"
+			execute console command "//pos2 %rounded x coordinate of {_block2}%,%rounded y coordinate of {_block2}%,%rounded z coordinate of {_block2}%"
+			execute console command "/rg define %player%town %player%"
+			execute console command "//walls ironfence"
+			add {_block1} to {places::*}
+			add {_block2} to {places::*}
+			
+			
+command /setarea:
+	trigger:
+		add location of player to {places::*}
+		
+
+		
+		

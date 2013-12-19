@@ -1,0 +1,415 @@
+#=====================================================================================
+#                                   Timer v0.9
+#                                    iSmooch
+#=====================================================================================
+
+#=====================================================================================
+#                                 Description:
+#                          	 Simple Timer Construct
+#                            With live virutal and
+#                            physical leaderboards.
+#======================================================================================
+
+variables:
+	{timer.global} = 0
+
+
+#timer
+command /starttimer <player> <text>:
+	executable by: console
+	trigger:
+		set {timerstart.parkour.%player-argument%.%argument 2%} to now
+		set {courseontime.%player%} to argument 2
+		add 1 to {timer.global}
+		message "&aYour timer has started" to player-argument
+		
+		
+		
+		
+		
+		
+command /stoptimer <player> <text>:
+	executable by: console
+	trigger:
+		set {time.%player-argument%.%argument 2%} to difference between now and {timerstart.parkour.%player-argument%.%argument 2%}
+		message "That time was %{time.%player-argument%.%argument 2%}%" to player-argument
+		
+		
+		
+		#local-detection
+		
+		
+		{besttime.%player-argument%.%argument 2%} is set:
+		
+		
+			if {besttime.%player-argument%.%argument 2%} is greater than {time.%player-argument%.%argument 2%}:
+			
+			
+				set {besttime.%player-argument%.%argument 2%} to {time.%player-argument%.%argument 2%}
+				message "&cYou have a new best time for the course %argument 2%! %{besttime.%player-argument%.%argument 2%}%!" to player-argument
+				
+			else:
+			
+			
+				message "&cYou did not beat your best time for %argument 2%!" to player-argument
+				
+				
+			#leaderboard2
+			
+			
+			{besttime.spot1.%argument 2%} is set:
+			
+			
+				{besttime.spot1.%argument 2%} is greater than {time.%player-argument%.%argument 2%}:
+
+					
+					set {besttime.spot3.%argument 2%.name} to {besttime.spot2.%argument 2%.name}
+					set {besttime.spot3.%argument 2%} to {besttime.spot2.%argument 2%}
+					wait a second
+					
+					set {besttime.spot2.%argument 2%.name} to {besttime.spot1.%argument 2%.name}
+					set {besttime.spot2.%argument 2%} to {besttime.spot1.%argument 2%}		
+					wait a second
+					
+					set {besttime.spot1.%argument 2%.name} to player-argument
+					set {besttime.spot1.%argument 2%} to {time.%player-argument%.%argument 2%}
+					message "&aYou have the best overall time for %argument 2% with &e%{besttime.spot1.%argument 2%}%!" to player-argument
+					stop
+					
+					
+				{besttime.spot2.%argument 2%} is set:
+				
+				
+					{besttime.spot2.%argument 2%} is greater than {time.%player-argument%.%argument 2%}:
+					
+					
+						set {besttime.spot3.%argument 2%.name} to {besttime.spot2.%argument 2%.name}
+						set {besttime.spot3.%argument 2%} to {besttime.spot2.%argument 2%}
+						set {besttime.spot2.%argument 2%.name} to player-argument
+						set {besttime.spot2.%argument 2%} to {time.%player-argument%.%argument 2%}
+						message "&aYou have the Second best overall time for %argument 2% with &e%{besttime.spot2.%argument 2%}%!" to player-argument
+						stop
+						
+						
+					{besttime.spot3.%argument 2%} is set:
+					
+					
+						{besttime.spot3.%argument 2%} is greater than {time.%player-argument%.%argument 2%}:
+						
+						
+							set {besttime.spot3.%argument 2%.name} to player-argument
+							set {besttime.spot3.%argument 2%} to {time.%player-argument%.%argument 2%}
+							message "&aYou have the Third best overall time for %argument 2% with &e%{besttime.spot3.%argument 2%}%!" to player-argument
+							stop
+							
+							
+					else:
+					
+					
+						set {besttime.spot3.%argument 2%.name} to player-argument
+						set {besttime.spot3.%argument 2%} to {time.%player-argument%.%argument 2%}
+						message "&aYou have the Third best overall time for %argument 2% with &e%{besttime.spot3.%argument 2%}%!" to player-argument
+						stop
+						
+						
+				else:
+				
+				
+					set {besttime.spot2.%argument 2%} to {time.%player-argument%.%argument 2%}
+					set {besttime.spot2.%argument 2%.name} to player-argument
+					message "&aYou have the Second best overall time for %argument 2% with &e%{besttime.spot2.%argument 2%}%!" to player-argument
+					stop
+					
+					
+				
+			else:
+			
+			
+				set {besttime.spot1.%argument 2%.name} to player-argument
+				set {besttime.spot1.%argument 2%} to {time.%player-argument%.%argument 2%}
+				message "&aYou are the first to set a time for %argument 2% with &e%{besttime.spot1.%argument 2%}%!" to player-argument
+				stop
+				
+				
+		else:
+		
+		
+			set {besttime.%player-argument%.%argument 2%} to {time.%player-argument%.%argument 2%}
+			message "&cYou have just clocked your first time for %argument 2%! %{besttime.%player-argument%.%argument 2%}%!" to player-argument
+			
+				
+			#leaderboard
+			
+			
+		{besttime.spot1.%argument 2%} is set:
+		
+		
+			{besttime.spot1.%argument 2%} is greater than {time.%player-argument%.%argument 2%}:
+			
+			
+				set {besttime.spot3.%argument 2%.name} to {besttime.spot2.%argument 2%.name}
+				set {besttime.spot2.%argument 2%.name} to {besttime.spot1.%argument 2%.name}
+				set {besttime.spot3.%argument 2%} to {besttime.spot2.%argument 2%}
+				set {besttime.spot2.%argument 2%} to {besttime.spot1.%argument 2%}
+				set {besttime.spot1.%argument 2%.name} to player-argument
+				set {besttime.spot1.%argument 2%} to {time.%player-argument%.%argument 2%}
+				message "&aYou have the best overall time for %argument 2% with &e%{besttime.spot1.%argument 2%}%!" to player-argument
+				stop				
+			
+			
+			{besttime.spot2.%argument 2%} is set:
+			
+			
+				{besttime.spot2.%argument 2%} is greater than {time.%player-argument%.%argument 2%}:
+				
+				
+					set {besttime.spot3.%argument 2%.name} to {besttime.spot2.%argument 2%.name}
+					set {besttime.spot3.%argument 2%} to {besttime.spot2.%argument 2%}
+					set {besttime.spot2.%argument 2%.name} to player-argument
+					set {besttime.spot2.%argument 2%} to {time.%player-argument%.%argument 2%}
+					message "&aYou have the Second best overall time for %argument 2% with &e%{besttime.spot2.%argument 2%}%!" to player-argument
+					stop
+				
+				
+				{besttime.spot3.%argument 2%} is set:
+				
+				
+					{besttime.spot3.%argument 2%} is greater than {time.%player-argument%.%argument 2%}:
+					
+					
+						set {besttime.spot3.%argument 2%.name} to player-argument
+						set {besttime.spot3.%argument 2%} to {time.%player-argument%.%argument 2%}
+						message "&aYou have the Third best overall time for %argument 2% with &e%{besttime.spot3.%argument 2%}%!" to player-argument
+						stop
+				
+				
+				else:
+				
+				
+					set {besttime.spot3.%argument 2%.name} to player-argument
+					set {besttime.spot3.%argument 2%} to {timer.%player-argument%.%argument 2%}
+					message "&aYou have the Third best overall time for %argument 2% with &e%{besttime.spot3.%argument 2%}%!" to player-argument
+					stop
+			
+			
+			else:
+			
+			
+				set {besttime.spot2.%argument 2%} to {time.%player-argument%.%argument 2%}
+				set {besttime.spot2.%argument 2%.name} to player-argument
+				message "&aYou have the Second best overall time for %argument 2% with &e%{besttime.spot2.%argument 2%}%!" to player-argument
+				stop
+				
+		
+		else:
+		
+		
+			set {besttime.spot1.%argument 2%.name} to player-argument
+			set {besttime.spot1.%argument 2%} to {time.%player-argument%.%argument 2%}
+			message "&aYou are the first to set a time for %argument 2% with &e%{besttime.spot1.%argument 2%}%!" to player-argument
+			stop
+				
+						
+						
+#leaderboard check
+command /ldr <text>:
+	trigger:
+		{besttime.spot1.%argument%} is set:
+		
+		
+			send "&a-----------%argument% Times!---------" to player
+			send " " to player
+			send "&a&l1. &a%{besttime.spot1.%argument%.name}% ------ %{besttime.spot1.%argument%}%" to player
+			
+			
+			{besttime.spot2.%argument%} is set:
+			
+			
+				send " " to player
+				send "&a&l2. &a%{besttime.spot2.%argument%.name}% ------ %{besttime.spot2.%argument%}%" to player
+				
+				
+				{besttime.spot3.%argument%} is set:
+				
+				
+					send " " to player
+					send "&a&l3. &a%{besttime.spot3.%argument%.name}% ------ %{besttime.spot3.%argument%}%" to player
+					
+					
+				else:
+				
+				
+					send " " to player
+					send "&a&l3. &aNone Currently ------ [None Currently]" to player
+			else:
+			
+			
+				send " " to player
+				send "&a&l2. &aNone Currently ------ [None Currently]" to player
+				send " " to player
+				send "&a&l3. &aNone Currently ------ [None Currently]" to player
+				
+				
+		else:
+		
+		
+			message "&cNo times for this course recorded!" to player
+			
+			
+#debuggingstuff
+
+command /sshift <text> <text>:
+	trigger:
+		set {time.test} to now
+		wait 3 seconds
+		set {time.test2} to difference between now and {time.test}
+		send "Original:%{time.test2}%" to player
+		set {shift.%arg 1%} to {time.test2}
+		send "1st shift: %arg 1%:%{shift.%arg 1%}%" to player
+		set {shift.%arg 2%} to {shift.%arg 1%}
+		send "2nd Shift: %arg 2%: %{shift.%arg 2%}%" to player
+		set {shift.%arg 1%} to {shift.%arg 2%}
+		send "Final Shift: %arg 1% after %arg 2%: %{shift.%arg 1%}%" to player
+		
+#physicalleaderboard
+#Write Best Time on the first line to make it to a sign leaderboard. You can use colors on signs that way.
+on sign change:
+	player is op #Player has to be op to make a sign leaderboard
+	if line 1 of block is "timeboard1":
+		add block to {BestTime.Signs::*}
+		set {_hold} to line 2
+		set line 1 of block to "&9%{_hold}%"
+		set line 3 of block to "%{besttime.spot1.%line 2%.parse}%"
+		set line 2 of block to "&1%{besttime.spot1.%line 2%.name}%"
+		set line 4 of block to "&3&l1st Place"
+	if line 1 of block is "timeboard2":
+		add block to {BestTime2.Signs::*}
+		set {_hold} to line 2
+		set line 1 of block to "&9%{_hold}%"	
+		set line 3 of block to "&a&l%{besttime.spot2.%line 2%.parse}%"	
+		set line 2 of block to "&1%{besttime.spot2.%line 2%.name}%"
+		set line 4 of block to "&e&l2nd Place"
+	if line 1 of block is "timeboard3":
+		add block to {BestTime3.Signs::*}
+		set {_hold} to line 2
+		set line 1 of block to "&9%{_hold}%"
+		set line 3 of block to "&a&l%{besttime.spot3.%line 2%.parse}%"
+		set line 2 of block to "&1%{besttime.spot3.%line 2%.name}%"
+		set line 4 of block to "&7&l3rd Place"
+	if line 1 of block is "remove":
+		loop {Besttime.Signs::*}:
+			loop-value is block:
+				delete {besttime.signs::%loop-index%}
+				message "&aBlock Removed from Leaderboards"
+		loop {besttime2.signs::*}:
+			loop-value is block:
+				delete {besttime2.signs::%loop-index%}
+				message "&aBlock Removed from Leaderboards"		
+		loop {besttime3.signs::*}:
+			loop-value is block:
+				delete {besttime3.signs::%loop-index%}
+				message "&aBlock Removed from Leaderboards"	
+#Updates Signs every 5 Min.
+every 30 seconds:
+	loop {BestTime.Signs::*}:
+		set {name} to uncolored line 1 of loop-value
+		{besttime.spot1.%{name}%} is not set:
+			set line 2 of loop-value to "&1OPEN!"
+			set line 3 of loop-value to "&a&nNo time Yet!"
+		{besttime.spot1.%{name}%} is set:
+			set line 2 of loop-value to "&1%{besttime.spot1.%{name}%.name}%"
+			clear {spot1.%{name}%::*}
+			if {besttime.spot1.%{name}%} is less than 1 minute:
+				set {%{name}%1} to "%{besttime.spot1.%{name}%}%"
+				set {spot1.%{name}%::*} to {%{name}%1} parsed as "%number% second[s]"
+				set {besttime.spot1.%{name}%.parse} to "&a&l%{spot1.%{name}%::1}% s"
+			else:
+				set {%{name}%1} to "%{besttime.spot1.%{name}%}%"
+				set {spot1.%{name}%::*} to {%{name}%1} parsed as "%number% minute[s] and %number% second[s]"
+				set {besttime.spot1.%{name}%.parse} to "&a&l%{spot1.%{name}%::1}% m %{spot1.%{name}%::2}% s"
+			set line 3 of loop-value to {besttime.spot1.%{name}%.parse}
+	loop {BestTime2.Signs::*}:
+		set {name} to uncolored line 1 of loop-value
+		{besttime.spot2.%{name}%} is not set:
+			set line 2 of loop-value to "&1OPEN!"
+			set line 3 of loop-value to "&a&nNo time Yet!"
+		{besttime.spot2.%{name}%} is set:
+			set line 2 of loop-value to "&1%{besttime.spot2.%{name}%.name}%"
+			clear {spot2.%{name}%::*}
+			if {besttime.spot2.%{name}%} is less than 1 minute:
+				set {%{name}%2} to "%{besttime.spot2.%{name}%}%"
+				set {spot2.%{name}%::*} to {%{name}%2} parsed as "%number% second[s]"
+				set {besttime.spot2.%{name}%.parse} to "&a&l%{spot2.%{name}%::1}% s"
+			else:
+				set {%{name}%2} to "%{besttime.spot2.%{name}%}%"
+				set {spot2.%{name}%::*} to {%{name}%2} parsed as "%number% minute[s] and %number% second[s]"
+				set {besttime.spot2.%{name}%.parse} to "&a&l%{spot2.%{name}%::1}% m %{spot2.%{name}%::2}% s"
+			set line 3 of loop-value to {besttime.spot2.%{name}%.parse}
+	loop {BestTime3.Signs::*}:
+		set {name} to uncolored line 1 of loop-value
+		{besttime.spot3.%{name}%} is not set:
+			set line 2 of loop-value to "&1OPEN!"
+			set line 3 of loop-value to "&a&nNo time Yet!"
+		{besttime.spot3.%{name}%} is set:
+			set line 2 of loop-value to "&1%{besttime.spot3.%{name}%.name}%"
+			clear {spot3.%{name}%::*}
+			if {besttime.spot3.%{name}%} is less than 1 minute:
+				set {%{name}%3} to "%{besttime.spot3.%{name}%}%"
+				set {spot3.%{name}%::*} to {%{name}%3} parsed as "%number% second[s]"
+				set {besttime.spot3.%{name}%.parse} to "&a&l%{spot3.%{name}%::1}% s"
+			else:
+				set {%{name}%3} to "%{besttime.spot3.%{name}%}%"
+				set {spot3.%{name}%::*} to {%{name}%3} parsed as "%number% minute[s] and %number% second[s]"
+				set {besttime.spot3.%{name}%.parse} to "&a&l%{spot3.%{name}%::1}% m %{spot3.%{name}%::2}% s"
+			set line 3 of loop-value to {besttime.spot3.%{name}%.parse}
+
+
+#clearlistcommand
+command /cllist <text>:
+	trigger:
+		clear {BestTime.%argument%.Signs::*}
+		clear {BestTime2.%argument%.Signs::*}
+		clear {BestTime3.%argument%.Signs::*}
+		
+command /clrvar <text>:
+	trigger:
+		clear {besttime.spot1.%argument%}
+		clear {besttime.spot1.%argument%.name}
+		clear {besttime.spot2.%argument%}
+		clear {besttime.spot2.%argument%.name}
+		clear {besttime.spot3.%argument%}
+		clear {besttime.spot3.%argument%.name}
+		
+command /clrsign:
+	trigger:
+		set {this.block} to location of targeted block
+		delete {BestTime.Signs::%{this.block}%}
+		delete {BestTime2.Signs::%{this.block}%}
+		delete {BestTime3.Signs::%{this.block}%}
+		message "&aBlock Removed successfully" to player
+		
+		
+command /shiftvar <text> <number>:
+	trigger:
+		argument 2 is 1:
+
+			set {besttime.spot1.%argument 1%} to {besttime.spot2.%argument 1%}
+			set {besttime.spot1.%argument 1%.name} to {besttime.spot2.%argument 1%.name}
+			set {besttime.spot2.%argument 1%} to {besttime.spot3.%argument 1%}
+			set {besttime.spot2.%argument 1%.name} to {besttime.spot3.%argument 1%.name}
+			clear {besttime.spot3.%argument 1%}
+			clear {besttime.spot3.%argument 1%.name}
+		argument 2 is 2:
+			set {besttime.spot2.%argument 1%} to {besttime.spot3.%argument 1%}
+			set {besttime.spot2.%argument 1%.name} to {besttime.spot3.%argument 1%.name}
+			clear {besttime.spot3.%argument 1%}
+			clear {besttime.spot3.%argument 1%.name}
+		argument 2 is 3:
+			clear {besttime.spot3.%argument 1%}
+			clear {besttime.spot3.%argument 1%.name}
+
+
+		
+		
+
+		

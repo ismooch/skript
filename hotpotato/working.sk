@@ -1,0 +1,5 @@
+command /clone <text> <text>:
+	trigger:
+		execute console command "/mv clone %arg 1% %arg 2%"
+		wait 1 second
+		execute console command "/mv confirm"

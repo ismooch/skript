@@ -1,0 +1,29 @@
+
+
+
+on join:
+	{time.join.%player%} is not set:
+		set {time.join.%player%} to now
+
+command /mytime:
+	trigger:
+		set {time.display.%player%} to difference between {time.join.%player%} and now
+		
+		
+		
+command /timestart:
+	trigger:
+		set {time.login.%player%} to now
+
+command /timeend:
+	trigger:
+		set {total.%player%.session} to difference between {time.login.%player%} and now
+		{total.%player%.life} is not set:
+			set {total.%player%.life} to difference between now and now
+		add {total.%player%.session} to {total.%player%.life}
+
+command /timeshow:
+	trigger:
+		send "&e%{total.%player%.life}% is your total" to player
+	
+		

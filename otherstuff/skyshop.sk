@@ -1,0 +1,94 @@
+options:
+	stainedglass: i;95:5;n;&3&lGlass!;l;&7Click to open the||&eGlass &7Shop!;c;sudo %player% skyshop glassshop
+	stainedclay: i;159:11;n;&3&lClay!;l;&7Click to open the||&eClay &7Shop!;c;sudo %player% skyshop clayshop
+	vanityitems: i;jukebox;n;&3&lVanity Items!;l;&7Click to open the||&eVanity &7Shop!;c;sudo %player% skyshop vanityshop
+	natureitems: i;38:1;n;&3&lNature Items!;l;&7Click to open the||&eNature&7 Shop!;c;sudo %player% skyshop natureshop
+	#startfold @natureitems
+	dandelion: i;37;n;&3&lDandelion;l;&7Click to purchase a||&eDandelion!|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 37 100
+	poppy: i;38;n;&3&lPoppy;l;&7Click to purchase a||&ePoppy!|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 38 100
+	blueorchid: i;38:1;n;&3&lBlue Orchid;l;&7Click to purchase a||&eBlue Orchid|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 38:1 100
+	allium: i;38:2;n;&3&lAllium;l;&7Click to purchase a||&eAllium|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 38:2 100
+	azurebluet: i;38:3;n;&3&lAzure Bluet;l;&7Click to purchase a||&eAzure Bluet|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 38:3 100
+	redtulip: i;38:4;n;&3&lRed Tulip;l;&7Click to purchase a||&eRed Tulip|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 38:4 100
+	orangetulip: i;38:5;n;&3&lOrange Tulip;l;&7Click to purchase a||&eOrange Tulip|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 38:5 100
+	whitetulip: i;38:6;n;&3&lWhite Tulip;l;&7Click to purchase a||&eWhite Tulip|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 38:6 100
+	pinktulip: i;38:7;n;&3&lPink Tulip;l;&7Click to purchase a||&ePink Tulip|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 38:7 100
+	oxeyedaisy: i;38:8;n;&3&lOxeye Daisy;l;&7Click to purchase a||&eOxeye Daisy|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 38:8 100
+	sunflower: i;175;n;&3&lSunflower;l;&7Click to purchase a||&eSunflower|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 175 100
+	lilac: i;175:1;n;&3&lLilac;l;&7Click to purchase a||&eLilac|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 175:1 100
+	largefern: i;175:3;n;&3&lLarge Fern;l;&7Click to purchase a||&eLarge Fern|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 175:3 100
+	rosebush: i;175:4;n;&3&lRose Bush;l;&7Click to purchase a||&eRose Bush|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 175:4 100
+	peony: i;175:5;n;&3&lPeony;l;&7Click to purchase a||&ePeony|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 175:5 100
+	#endfold
+	regularglass: i;glass;n;&3&lPlain Jane Glass Block;l;&7Click to purchase||&e32 Plane Jane Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 20 300
+	whitesg: i;95;n;&3&lWhite Stained Glass;l;&7Click to purchase||&e32 White Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95 300
+	orangesg: i;95:1;n;&3&lOrange Stained Glass;l;&7Click to purchase||&e32 Orange Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:1 300
+	magentasg: i;95:2;n;&3&lMagenta Stained Glass;l;&7Click to purchase||&e32 Magenta Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:2 300
+	lightbluesg: i;95:3;n;&3&lLight Blue Stained Glass;l;&7Click to purchase||&e32 Light Blue Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:3 300
+	yellowsg: i;95:4;n;&3&lYellow Stained Glass;l;&7Click to purchase||&e32 Yellow Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:4 300
+	limesg: i;95:5;n;&3&lLime Stained Glass;l;&7Click to purchase||&e32 Lime Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:5 300
+	pinksg: i;95:6;n;&3&lPink Stained Glass;l;&7Click to purchase||&e32 Pink Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:6 300
+	greysg: i;95:7;n;&3&lGrey Stained Glass;l;&7Click to purchase||&e32 Grey Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:7 300
+	lightgreysg: i;95:8;n;&3&lLight Grey Stained Glass;l;&7Click to purchase||&e32 Light Grey Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:8 300
+	cyansg: i;95:9;n;&3&lCyan Stained Glass;l;&7Click to purchase||&e32 Cyan Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:9 300
+	purplesg: i;95:10;n;&3&lPurple Stained Glass;l;&7Click to purchase||&e32 Purple Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:10 300
+	bluesg: i;95:11;n;&3&lBlue Stained Glass;l;&7Click to purchase||&e32 Blue Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:11 300
+	brownsg: i;95:12;n;&3&lBrown Stained Glass;l;&7Click to purchase||&e32 Brown Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:12 300
+	greensg: i;95:13;n;&3&lGreen Stained Glass;l;&7Click to purchase||&e32 Green Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:13 300
+	redsg: i;95:14;n;&3&lRed Stained Glass;l;&7Click to purchase||&e32 Red Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:14 300
+	blacksg: i;95:15;n;&3&lBlack Stained Glass;l;&7Click to purchase||&e32 Black Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:15 300
+	
+
+
+
+
+command /skyshop [<text>]:
+	trigger:
+		world is "skyworld"
+		argument is not set:
+			show "s;1;{@stainedglass};s;2;{@stainedclay};s;3;{@vanityitems};s;4;{@natureitems}" with 1 row named "&9&lOBAM &9SkyShop" to player
+			stop
+			
+		argument is "glassshop":
+			
+			send "&aOpening Menu..." to player
+			wait 0.5 seconds
+		
+			show "s;1;{@regularglass};s;2;{@whitesg};s;3;{@orangesg};s;4;{@magentasg};s;5;{@lightbluesg};s;6;{@yellowsg};s;7;{@limesg};s;8;{@pinksg};s;9;{@greysg};s;10;{@lightgreysg};s;11;{@cyansg};s;12;{@purplesg};s;13;{@bluesg};s;14;{@brownsg};s;15;{@greensg};s;16;{@redsg};s;17;{@blacksg}" with 2 rows named "&9&lOBAM&9 Glass Shop" to player
+		
+		argument is "clayshop":
+		
+			send "&aComing Soon!" to player
+		
+		argument is "vanityshop":
+		
+			send "&aComing Soon!" to player
+		
+		argument is "natureshop":
+			
+			send "&aOpening Menu..." to player
+			wait 0.5 seconds
+		
+			show "s;10;{@dandelion};s;11;{@poppy};s;12;{@blueorchid};s;13;{@allium};s;14;{@azurebluet};s;15;{@redtulip};s;16;{@orangetulip};s;17;{@pinktulip};s;18;{@whitetulip};s;19;{@oxeyedaisy};s;20;{@sunflower};s;21;{@lilac};s;22;{@largefern};s;23;{@rosebush};s;24;{@peony}" with 3 rows named "&9&lOBAM &9Nature Store" to player
+			stop
+command /skyshopbuy <player> <integer> <item> <integer>:
+	executable by: console
+	trigger:
+	#startfold @flowerbuying
+			
+		set {_amount.%player-argument%} to player-argument's balance
+		{_amount.%player-argument%} is less than argument 4:
+			send "&cYou do not have enough tickets for that!" to player-argument
+			stop
+		
+		give player-argument argument 2 of argument 3
+		subtract argument 4 from player-argument's balance
+		send "&aYou have made a purchase for &e%argument 4% Tickets!" to player-argument
+		argument 3 is 37 or 38:0-8 or 175:0-5:
+			give player-argument 1 flower pot named "&fFree Pot"
+		
+		
+	
+		
+		
+			

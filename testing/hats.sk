@@ -1,0 +1,90 @@
+#hats
+options:
+	betahat: i;iron pressure plate;n;&3&lBeta Supporter Hat;l;&7This Special hat is for all members who supported||&7during our beta period. This hat is a thank you from the &eOBAM||&7Staff for those that helped us when we were starting. THANK YOU!;c;hatreward betahat %player%
+
+
+	
+command /hat:
+	executable by: players
+	trigger:
+		show "s;1;{@betahat}" with 3 rows named "&9&lOBAM &9Hats" to player
+		
+command /hatreward <text> <player>:
+	executable by: console
+	trigger:
+		argument 1 is "betahat":
+			player-argument has permission "obam.beta.hat":
+				send "&aYou now have a hat :D" to player-argument
+				execute console command "hatgive iron pressure plate %player-argument%"
+
+				
+
+command /hatgive <item> [<player>]:
+	executable by: players and console
+	permission: obam.admin.hats
+	trigger:
+		set {item.exist.true} to false
+		loop {hat.items.list::*}:
+			arg 1 is loop-value:
+				set {item.exist.true} to true
+		{item.exist.true} is false:
+			send "&cThat hat does not exist. Do &e/showitemhats&c to see a list of hats." to player
+			stop
+		if name of player-argument's helmet is "hat":
+			set player-argument's helmet to arg 1
+			set name of player-argument's helmet to "hat"
+			stop
+		player-argument doesn't have space for player-argument's helmet:
+			send "&cYour inventory is full :(" to player-argument
+			stop
+		give player-argument's helmet to player-argument
+		set player-argument's helmet to arg 1
+		set name of player-argument's helmet to "hat"
+		
+command /hatadd <item>:
+	trigger:
+		add arg 1 to {hat.items.list::*}
+
+command /hatshow:
+	trigger:
+		loop {hat.items.list::*}:
+			send "%loop-value%" to player
+every 1 second:
+	loop {hat.items.list::*}:
+		set {current.item.check} to loop-value
+		loop all players:
+			loop-player has {current.item.check} named "hat":
+				remove {current.item.check} named "hat" from loop-player
+				send "&cWhy did you have a hat in your pocket?" to loop-player
+
+on drop:
+	loop {hat.items.list::*}:
+		item is loop-value named "hat":
+			cancel event
+	
+
+command /hattoggle:
+	trigger:
+		{hat.off.%player%} is not set:
+			set {hat.off.%player%} to true
+			send "&aYou have turned off your hat" to player
+			stop
+		{hat.off.%player%} is false:
+			set {hat.off.%player%} to true
+			send "&aYou have turned off your hat" to player
+			stop
+		{hat.off.%player%} is true:
+			set {hat.off.%player%} to false
+			send "&aYou have turned on your hat" to player
+			stop
+
+#staff hats constant
+every 1 second:
+	loop all players:
+		{hat.off.%loop-player%} is true:
+			stop
+		loop-player is "ISMOOCH":
+			set loop-player's helmet to command block named "&d&lSmooch's Sassy Hat"
+		loop-player is "Electric_Hamster":
+			set loop-player's helmet to sponge named "&b&lThe Hamster Hat"
+		

@@ -1,0 +1,8 @@
+#iamatest
+
+command /iamatest:
+	trigger:
+		{db_test.test.test.test} is not set:
+			set {db_test.test.test.test} to 0
+		add 1 to {db_test.test.test.test}
+		send "%{db_test.test.test.test}%" to player

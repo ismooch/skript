@@ -1,0 +1,46 @@
+#=======================================================================================================
+#													Hot Potato v1.3
+#                                                      By: iSmooch
+#=======================================================================================================
+
+
+
+#=======================================================================================================
+#                                                   Description:
+#                                             A game of tag, with a twist.
+#                                        ***********************************
+#                                         Players chase each other with Potatoes
+#                                         Attempting to be the last one standing
+#                                         when the timer goes down. Every 30 s
+#                                         A player with a potato, loses (dies).
+#										  Needs at least one correctly configured
+#										  Skript using the 'hpTemp.sk' document.
+#========================================================================================================
+
+
+command /setpoint <text>:
+	trigger:
+		set {hptp.%arg%} to location of player
+		
+command /setdeathpoint <text>:
+	trigger:
+		set {hpdtp.%arg%} to location of player
+		
+command /hotpotato:
+	aliases: /hp
+	permission: obam.hp.go
+	trigger:
+		world is "plan" or "parkourmaps" or "parkourlobby" or "skyworld":
+			execute console command "/mvtp %player% hotpotatolobby"
+
+			
+
+		
+
+
+
+
+		
+			
+			
+	

@@ -1,0 +1,42 @@
+command /tps:
+	executable by: players
+	trigger:
+		set {tps.%player%} to location of player
+		
+on sign change:
+	{tps.%player%} is set:
+		line 1 of block is "teleport":
+			set line 1 of block to "[TELEPORT]"
+			set line 2 of block to "%x coordinate of {tps.%player%}%"
+			set line 3 of block to "%y coordinate of {tps.%player%}%"
+			set line 4 of block to "%z coordinate of {tps.%player%}%"
+			
+on stepping on a pressure plate:
+	loop blocks in radius 2 of event-player:
+		loop-block is sign:
+			line 1 of loop-block is "[TELEPORT]":
+				set {_x.c} to "%line 2 of loop-block%" parsed as number
+				set {_y.c} to "%line 3 of loop-block%" parsed as number
+				set {_z.c} to "%line 4 of loop-block%" parsed as number
+				execute console command "/tp %event-player% %{_x.c}% %{_y.c}% %{_z.c}%"
+				stop
+				
+				
+on shoot:
+	projectile is ender pearl
+	set {_Player} to shooter
+	shooter can't build at location of shooter:
+		cancel event
+		wait 1 second
+		give ender pearl to shooter
+		send "&cYou can not do that here" to {_Player}
+		
+	shooter can't build at shooter's targeted block:
+		cancel event
+		wait 1 second
+		give ender pearl to shooter
+		send "&cYou can not do that here" to {_Player}
+
+
+	
+				

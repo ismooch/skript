@@ -1,0 +1,50 @@
+options:
+	general3: i;book;n;&9&lRules!;l;&7We don't have many rules on OBAM, but we ask that you pay attention to||&7the few that we have. This will ensure everyone, including yourself, has a||&7great time on OBAM.||||&6Please click to receive a book about the Rules!;c;sudo %player% helpgeneral rules
+	general4: i;book and quill;n;&9&lChat!;l;&7Learn about the various chat features and||&7commands available to you on OBAM.||||&6Please click to receive a book about Chat!;c;sudo %player% helpgeneral chat
+	back: i;tnt;n;&9&lMain Menu;l;&7Click to return to the main||&7help menu.;c;sudo %player% help
+	general1: i;bottle o' enchanting;n;&9&lPlayer Levels!;l;&7Learn about our universal Player Level system||&7which extends to every game and world on OBAM!||||&6Please click to receive a book about Player Levels!;c;sudo %player% helpgeneral levels
+	general2: i;paper;n;&9&lOBAM Tickets!;l;&7Learn about the universal currency used in every||&7game and world on OBAM known as Tickets!||||&6Please click to receive a book about Tickets!;c;sudo %player% helpgeneral tickets
+	general5: i;bookshelf;n;&9&lOBAM Stats!;l;&7Learn about the universal stat system used in every||&7game and world on OBAM known as OBAM Stats!||||&6Please click to receive a book about OBAM Stats!;c;sudo %player% helpgeneral stats
+	
+	
+	
+command /helpgeneral [<text>]:
+	executable by: players
+	trigger:
+		argument is not set:
+			send "&aBringing up menu..." to player
+			wait 1 second
+			show "s;3;{@general1};s;1;{@general3};s;2;{@general4};s;4;{@general2};s;5;{@general5};s;9;{@back}" with 1 row named "&9&lGeneral &9Help" to player	
+		argument is "rules":
+			player doesn't have space for a oak sapling:
+				send "&cYou do not have room in your inventory for this!" to player
+				stop
+			give player book from "&9&lGeneral Rules!;&eOBAM Minigames;&fThis book contains the General Rules of OBAM!;&cDo Not Hack!      <black>Please do not use hack clients or mods that will give you an unfair advantage over other players.||&cNo Abusing Exploits!   <black>If you find an exploit, please alert a staff member so it can be quickly fixed. Abusing an exploit will result in an immediate ban so please don't do it.||&cDo Not Grief!           <black>Do not grief or steal from other players. If you are caught doing so, you will be strictly punished. We have ways to find out, so don't do it.||&cKeep Chat Clean!      <black>We understand that some of these games can get exciting and occasional rage may slip. However, we ask that you keep it to a minimum! Also spamming and excessive use of CAPS are not allowed!||&cRespect EVERYONE!    <black>Whether someone is a staff member or another player, please show them respect. Disrespectful behavior will not be tolerated!"
+		argument is "chat":
+			player doesn't have space for a oak sapling:
+				send "&cYou do not have room in your inventory for this!" to player
+				stop
+			give player book from "&9&lChat!;&eOBAM Minigames;&fThis book contains Information about the Chat on OBAM!;§cChat Channels §r         §0As OBAM is a newer server, we currently have only one chat channel, which is known as the§r §2Global Channel§r. §0As we continue to grow and expand, we will add more to help separate the different games and worlds a bit more.§r||§cPrivate Chat§r            §0You can use the command §r§4/tell username §r§0to start a private chat with another player. To leave the private chat, you can use §r§4/tell §r§0without a username after it.§r"
+		argument is "levels":
+			player doesn't have space for a oak sapling:
+				send "&cYou do not have room in your inventory for this!" to player
+				stop
+			give player book from "&9&lPlayer Levels!;&eOBAM Minigames;&fThis book contains Information about Player Levels on OBAM!;§cPlayer Levels §r       §0Rather than having a separate 'level' for each game and world, we've created a§r §2Player Level§r §0system that is universal to everywhere you go on the OBAM servers! You can view your level with §r§4/level§r§0.§r||§cIncreasing Your Level §r§0Every game and world on OBAM gives various opportunities to earn experience, which in turn, upgrades your§r §2Player Level§r§0. Some games award you with experience whether you win or lose!§r||§cPlayer Level Rewards §r §0Certain things on OBAM will be awarded to players who reach high §r§2Player Levels§r,§0 such as th§re §4/enchantment§r§0 room on Skyblock. The more we grow, the more we'll add!§r"
+		argument is "tickets":
+			player doesn't have space for a oak sapling:
+				send "&cYou do not have room in your inventory for this!" to player
+				stop
+			give player book from "&9&lTickets!;&eOBAM Minigames;&fThis book contains Information about Tickets on OBAM;§cOBAM Tickets §r          §0The universal currency on OBAM are called §r§2T§ri§2ckets§r. §0They are obtained in every game and world on the OBAM server. Some games will award§r §2Tickets§r§0, simply for playing. V§riew your ticket balance with §4/tix<black>.||§cUsing Tickets §r            §0Each game and world will have some sort of use for §r§2Tickets§r§0. They can be used to purchase otherwise unobtainable items, or gain access to extra parts of a game or world!§r||§cPurchasing Tickets§r  §0While §r§2Tickets§r §0will always be obtainable by simply playing on OBAM, we've made it available to those interested, the ability to purchase more via §r§1http://OBAM.co/Upgrade§r§0!§r"
+		argument is "stats":
+			player doesn't have space for a oak sapling:
+				send "&cYou do not have room in your inventory for this!" to player
+				stop
+			give player book from "&9&lOBAM Stats!;&eOBAM Minigames;&fThis book contains Information about OBAM Stats on OBAM;§cOBAM Stats §r               §0In various games and worlds on OBAM, we show you relevant statistics in the scoreboard box on the right side of the screen. Achieving certain stat goals will award you with prizes. Use§r §4/togglestats§r §0to turn on and off.§r"
+
+
+
+
+
+
+				
+			

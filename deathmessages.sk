@@ -1,0 +1,12 @@
+on death:
+    damage cause is void
+    set the death message to "&7%player% fell into the void"
+on death:
+    damage cause is fall
+    set the death message to "&7%player% fell to their death"
+on death:
+    damage cause is void
+    set the death message to "&7%player% was burnt to death"
+on death:
+    damage cause is void
+    set the death message to "&7%player% fell into lava"

@@ -1,0 +1,11 @@
+#Configuration and settings file!
+#Help: PASS: change the password to one of your choice (set the same in the server php file).
+#Help: DEBUG_WEBSEND: shows debugging messages for easier tracking of bugs.
+#Help: SALT: adds a salt to the hashed password when sending over bukkit -> php connection.
+PASS=YourPassHere
+#Optional settings. Remove the '#' to use.
+#URL=yoururl.com/page.php
+#WEBLISTENER_ACTIVE=false/true
+#ALTPORT=1234
+#DEBUG_WEBSEND=false/true
+#GZIP_REQUESTS=false/true

@@ -1,0 +1,61 @@
+#shop stuff
+#add what you want, be sure to use variables for things that can not be repurchased
+command /shop:
+	description: activates the shop chest command per world
+	usage: /shop
+	executable by: players
+	trigger:
+		execute console command "/chestcommands open %world%shop %player%"
+		#when making the chestcommand menus please remember to use the full world name to avoid problems.
+		
+#purchase command
+#willbeused so to purchase separate packages. players will probably be able to execute this command
+#as well as use /shop. but the command will be complicated
+
+command /purchase <text>:
+	description: used to purchase packages
+	usage: /purchase <Package Name>
+	trigger:
+	
+		#skyblock tier2 purchase package
+		argument 1 is "sbtier2":
+			{purchase.sb.tier2.%player%} is 1:
+				message "&cYou have already purchased this package!" to player
+				stop
+		
+			player's balance is less than 2000:
+				message "&cYou do not have enough tickets!" to player
+				stop
+			
+			remove 2000 from player's balance
+			set {purchase.sb.tier2.%player%} to 1
+			message "&aYou have purchased &a&lSkyblock Tier 2 Challenge Package&a for &e2000 &aTickets!"
+			broadcast "&a%player% has purchased &a&lSkyblock Tier 2 Challenge Package!"
+			
+			
+		#skyblock tier2 purchase package
+		argument 1 is "sbtier3":
+			{purchase.sb.tier3.%player%} is 1:
+				message "&cYou have already purchased this package!" to player
+				stop
+		
+			player's balance is less than 5000:
+				message "&cYou do not have enough tickets!" to player
+				stop
+			
+			remove 4000 from player's balance
+			set {purchase.sb.tier3.%player%} to 1
+			message "&aYou have purchased &a&lSkyblock Tier 3 Challenge Package&a for &e5000 &aTickets!"
+			broadcast "&a%player% has purchased &a&lSkyblock Tier 3 Challenge Package!"
+
+#resetpurchase command because of testing
+command /purchaser <player> <text>:
+	description: reset the purchase of a player
+	permission: obam.shop.admin
+	trigger:
+		
+		argument 2 is "sbtier2":
+			set {purchase.sb.tier2.%player-argument%} to 0
+			message "Your purchase has been reset" to player-argument
+		
+		

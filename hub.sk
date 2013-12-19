@@ -1,0 +1,7 @@
+command /hub:
+	description: Go back to the hub
+	usage: /hub
+	trigger:
+		world is "hotpotatolobby" or "hotpotato1" or "hotpotato2":
+			make player execute command "/lobby"
+		make console execute command "/mvtp %player% plan"

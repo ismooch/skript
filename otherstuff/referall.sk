@@ -1,0 +1,38 @@
+on first join:
+	set {refer.chance.%player%} to true
+	set {join.time.%player%} to now
+	add 1 day to {join.time.%player%}
+	
+	
+command /refer <text>:
+	executable by: players
+	trigger:
+		{refer.chance.%player%} is true:
+			{join.time.%player%} is greater than or equal to now:
+				argument is "2daa6f95b4c9bcc027a7b6b668bed93b":
+					add 500 to player's balance
+					send "&aYou have received &e500 Tickets&a as thanks. If you like our stuff subscribe to us on on PMC! &ehttp://pmc.la/s0mF1" to player
+					set {refer.chance.%player%} to false
+					stop
+					
+				{played.%argument%} is not set:
+					send "&cThat Player is make believe!" to player
+					stop
+				
+				set {_player} to argument parsed as player
+				add 300 to player's balance
+				send "&aYou have received &e300 Tickets&a for using a referral!" to player
+				add 300 to {_player}'s balance
+				send "&aYou have received &e300 Tickets&a for referring &e%player%!" to {_player}
+				set {refer.chance.%player%} to false
+				stop
+			send "&cYour refer option has expired" to player
+		
+		send "&cYou can not do that!" to player
+		
+		
+command /imnew:
+	trigger:
+		set {refer.chance.%player%} to true
+		set {join.time.%player%} to now
+		add 1 day to {join.time.%player%}

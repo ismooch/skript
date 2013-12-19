@@ -1,0 +1,5 @@
+command /webstatstest:
+	trigger:
+		{webstats_.test.foo} is not set:
+			set {webstats_.test.foo} to 1
+		add 1 to {webstats_.test.foo}

@@ -1,0 +1,3 @@
+#logginips
+on join:
+	set {lastip.%player%} to player's IP

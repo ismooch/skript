@@ -1,0 +1,80 @@
+#==========================================================================================
+#                                           Parkour Stats v0.2
+#                                             iSmooch
+#==========================================================================================
+
+#==========================================================================================
+#                                         Description:
+#                                   Information Handling system
+#                                     for parkour stat usage
+#==========================================================================================
+
+#********
+#Important Variables!
+#********
+#{fallen.global} and {fallen.[difficulty]} will keep track of fallen players
+#               Please use these when making new maps
+#{completed.global} and {completed.[difficulty]} will keep track of completed maps
+#               These need to be included in completion code
+#{checkpoint.global} will keep track of checkpoint usage
+#               Included with "Checkpoints!" v0.2 or higher [working on including difficulty recognition]
+#{timer.global} will keep track of timer starts
+#				Included with "Timer!" v0.9 or higher [working on including difficulty recognition]
+
+
+on sign change:
+	player is op:
+		line 1 is "statboardglobal":
+			add block to {StatBoard.Parkour.%line 2%::*}
+			set line 1 to "&9&lTotal"
+			set line 3 to "&a&l%{%line 2%.global}%"
+			set line 4 to "&1And Counting"
+			set line 2 to "&9&l%line 2%"
+			
+on sign change:
+	player is op:
+		line 1 is "statboardeasy":
+			add block to {Statboard.Parkour.easy.%line 2%::*}
+			set line 1 to "&9&lTotal"
+			set line 3 to "&a&l%{%line 2%.easy}%"
+			set line 4 to "&1And Counting"
+			set line 2 to "&9&l%line 2%"
+			
+on sign change:
+	player is op:
+		line 1 is "statboardbeg":
+			add block to {Statboard.Parkour.beg.%line 2%::*}
+			set line 1 to "&9&lTotal"
+			set line 3 to "&a&l%{%line 2%.beginner}%"
+			set line 4 to "&1And Counting"
+			set line 2 to "&9&l%line 2%"
+			
+on sign change:
+	player is op:
+		line 1 is "statboardmed":
+			add block to {Statboard.Parkour.med.%line 2%::*}
+			set line 1 to "&9&lTotal"
+			set line 3 to "&a&l%{%line 2%.medium}%"
+			set line 4 to "&1And Counting"
+			set line 2 to "&9&l%line 2%"
+			
+on sign change:
+	player is op:
+		line 1 is "statboardhard":
+			add block to {Statboard.Parkour.hard.%line 2%::*}
+			set line 1 to "&9&lTotal"
+			set line 3 to "&a&l%{%line 2%.hard}%"
+			set line 4 to "&1And Counting"
+			set line 2 to "&9&l%line 2%"
+			
+every 5 seconds:
+	loop {StatBoard.Parkour.fallen::*}:
+		set line 3 of loop-variable to "&a&l%{fallen.global}%"
+	loop {StatBoard.Parkour.Completed::*}:
+		set line 3 of loop-variable to "&a&l%{completed.global}%"
+	loop {StatBoard.Parkour.checkpoints::*}:
+		set line 3 of loop-variable to "&a&l%{checkpoint.global}%"
+	loop {StatBoard.Parkour.timer::*}:
+		set line 2 of loop-variable to "&9&lTimerStarts"
+		set line 3 of loop-variable to "&a&l%{timer.global}%"
+		

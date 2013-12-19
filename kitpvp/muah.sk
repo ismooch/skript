@@ -1,0 +1,6 @@
+on projectile hit:
+	projectile is a thrown potion:
+		projectile's name is "&cMolotov"
+		loop blocks in radius 3:
+			if loop-block is air:
+				set loop-block to fire

@@ -1,0 +1,6 @@
+command /jackishere:
+	trigger:
+		player has permission "jack.is.here":
+			send "&aYay!" to player
+			stop
+		send "&cYou do not have permission D:" to player

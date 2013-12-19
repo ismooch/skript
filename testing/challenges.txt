@@ -1,0 +1,386 @@
+#challenges tier1
+#check command
+command /challenge <text>:
+	description: displays the skyblock challenges
+	usage: /challenge <page number>                            'example: /challenge page 1'
+	trigger:
+	
+		world is "skyworld":
+			argument 1 is "page 1":
+		
+			#list of challenges
+				send "&e------------Page 1-----------" to player
+				message " " to player
+				message "&b&lCurrent List of Skyblock Challenges" to player
+				message " " to player
+			#be sure to include the variable change for each challenge
+		
+			#gettingstoned
+				if {chal.%player%.stoned} is 1:
+					message "&8&l1. Getting Stoned &e(Unlocked)" to player
+					message "&8Trade &c2304 &8Cobblestone" to player
+					message "&8Reward: &c5 Tickets" to player
+				else:
+					message "&2&l1. Getting Stoned" to player
+					message "&bTrade 64 Cobblestone" to player
+					message "&aReward: 300 Tickets" to player
+			
+				message " " to player
+		
+			#sugarrush
+				if {chal.%player%.rush} is 1:
+					message "&8&l2. Sugar Rush &e(Unlocked)" to player
+					message "&8Farm and create &c2304 &8Units of Sugar" to player
+					message "&8Reward: &c5 Tickets" to player
+			
+				else:
+					message "&2&l2. SugarRush" to player
+					message "&bFarm and create 128 Units of Sugar" to player
+					message "&aReward: 300 Tickets" to player
+		
+				message " " to player
+		
+			#johnnyappleseed
+				if {chal.%player%.apple} is 1:
+					message "&8&l3. Johnny Appleseed &e(Unlocked)" to player
+					message "&8Obtain and trade &c256 &8Apples" to player
+					message "&8Reward: &c5 Tickets" to player
+			
+				else:
+					message "&2&l3. Johnny Appleseed" to player
+					message "&bObtain and trade 32 Apples" to player
+					message "&aReward: 300 Tickets" to player
+
+				message " " to player
+				message "&eType &f/challenge page 2 &efor more!" to player
+				message "&eType &f/chal [Challenge number] &eto complete a challenge" to player
+				message " " to player
+				send "&e------------Page 1-----------" to player
+				stop
+			
+			
+			argument 1 is "page 2":
+		
+			#list of challenges
+				send "&e------------Page 2-----------" to player
+				message " " to player
+				message "&b&lCurrent List of Skyblock Challenges" to player
+				message " " to player
+			#be sure to include the variable change for each challenge
+		
+			#demmelons
+				if {chal.%player%.melon} is 1:
+					message "&8&l4. Dem Melons &e(Unlocked)" to player
+					message "&8Trade &c2304 &8Slices of Melon" to player
+					message "&8Reward: &c5 Tickets" to player
+				else:
+					message "&2&l4. Dem Melons" to player
+					message "&bTrade 256 Slices of Melon" to player
+					message "&aReward: 300 Tickets" to player
+			
+				message " " to player
+		
+			#dospumpkins
+				if {chal.%player%.pumpkin} is 1:
+					message "&8&l5. Dos Pumpkins &e(Unlocked)" to player
+					message "&8Trade &c2304 &8Pumpkins" to player
+					message "&8Reward: &c5 Tickets" to player
+			
+				else:
+					message "&2&l5. Dos Pumpkins" to player
+					message "&bTrade 128 Pumpkins" to player
+					message "&aReward: 300 Tickets" to player
+		
+				message " " to player
+		
+			#pricklyplant
+				if {chal.%player%.cacti} is 1:
+					message "&8&l6. Prickly Plant &e(Unlocked)" to player
+					message "&8Trade &c2304 &8Cacti" to player
+					message "&8Reward: &c5 Tickets" to player
+			
+				else:
+					message "&2&l6. Prickly Plant" to player
+					message "&bTrade 32 Cacti" to player
+					message "&aReward: 300 Tickets" to player
+
+				message " " to player
+				message "&eCheck back later for more!" to player
+				message "&eType &f/chal [Challenge number] &eto complete a challenge" to player
+				message " " to player
+				send "&e------------Page 2-----------" to player
+				stop
+		
+		world is "hub":
+			message "&aJoin an instance to see challenges! Try Skyworld!" to player
+			stop
+		
+		message "&cIt seems this world does not have challenges. Check back soon!" to player
+		
+#challenge complete #levelcheck#
+command /chal <number>:
+	usage: /chal <number of challenge>
+	description: Displays and Completes Challenges
+	trigger:
+	
+		argument 1 is 0:
+		
+			make player execute command "/challenge"
+		
+		#argument 1 is the selection so 1 is "Getting Stoned"
+		#Challenge 'Getting Stoned'
+		argument 1 is 1:
+		
+			#check for items
+			player does not have 64 cobblestone:
+				message "&c&lYou do not have enough cobblestone!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.stoned} is 1:
+				player does not have 2304 cobblestone:
+					message "&c&lYou Do not have enough Cobblestone!" to player
+					stop
+				
+				remove 2304 cobblestone from player
+				add 5 to player's balance
+				message "&a&lGetting Stoned Completed!" to player
+				message "&aYou have received &e5 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+				
+			#actual challenge
+			remove 64 cobblestone from player
+			add 300 to player's balance
+			set {chal.%player%.stoned} to 1
+			add 500 to {level.%player%}
+			message "&a&lGetting Stoned Completed!" to player
+			message "&aYou have received &e300 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lGetting Stoned &afor the first time!"
+			stop
+			
+		#sugarrush	
+		argument 1 is 2:
+		
+			#check for items
+			player does not have 128 sugar:
+				message "&c&lYou do not have enough sugar!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.rush} is 1:
+				#check for amount of items
+				player does not have 2304 sugar:
+					message "&c&1You do not have enough sugar!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 sugar from player
+				add 5 to player's balance
+				message "&a&lSugar Rush Completed!"
+				message "&aYou have received &e5 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 128 sugar from player
+			add 300 to player's balance
+			set {chal.%player%.rush} to 1
+			add 500 to {level.%player%}
+			message "&a&lSugar Rush Completed!" to player
+			message "&aYou have received &e300 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lSugar Rush &afor the first time!"
+			stop
+			
+
+			
+		#johnnyappleseed	
+		argument 1 is 3:
+		
+			#check for items
+			player does not have 32 apple:
+				message "&c&lYou do not have enough apples!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.apple} is 1:
+				#check for amount of items
+				player does not have 256 apple:
+					message "&c&lYou do not have enough apples!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 256 apples from player
+				add 5 to player's balance
+				message "&a&lJohnny Appleseed Completed!"
+				message "&aYou have received &e5 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 32 apples from player
+			add 300 to player's balance
+			set {chal.%player%.apple} to 1
+			add 500 to {level.%player%}
+			message "&a&lJohnny Appleseed Completed!" to player
+			message "&aYou have received &e300 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lJohnny Appleseed &afor the first time!"
+			stop
+			
+		#dememlons	
+		argument 1 is 4:
+		
+			#check for items
+			player does not have 256 melon slice:
+				message "&c&lYou do not have enough melons!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.melon} is 1:
+				#check for amount of items
+				player does not have 2304 melon slice:
+					message "&c&lYou do not have enough melons!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 melon slice from player
+				add 5 to player's balance
+				message "&a&lDem Melons Completed!"
+				message "&aYou have received &e5 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 256 melon from player
+			add 300 to player's balance
+			set {chal.%player%.melon} to 1
+			add 500 to {level.%player%}
+			message "&a&lDem Melons Completed!" to player
+			message "&aYou have received &e300 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lDem Melons &afor the first time!"
+			stop
+			
+		#dospumpkins	
+		argument 1 is 5:
+		
+			#check for items
+			player does not have 128 pumpkin:
+				message "&c&lYou do not have enough pupmkins!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.pumpkin} is 1:
+				#check for amount of items
+				player does not have 2304 pumpkin:
+					message "&c&lYou do not have enough melons!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 pumpkin from player
+				add 5 to player's balance
+				message "&a&lDos Pumpkins Completed!"
+				message "&aYou have received &e5 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 128 pumpkin from player
+			add 300 to player's balance
+			set {chal.%player%.pumpkin} to 1
+			add 500 to {level.%player%}
+			message "&a&lDos Pumpkins Completed!" to player
+			message "&aYou have received &e300 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lDos Pumpkins &afor the first time!"
+			stop
+			
+		#pricklyplant	
+		argument 1 is 6:
+		
+			#check for items
+			player does not have 32 cactus:
+				message "&c&lYou do not have enough cactus!" to player
+				stop
+				
+			#check for previous completion
+			{chal.%player%.cacti} is 1:
+				#check for amount of items
+				player does not have 2304 cactus:
+					message "&c&lYou do not have enough cactus!" to player
+					stop
+					
+					
+				#repeatable challenge attempt	
+				remove 2304 cactus from player
+				add 5 to player's balance
+				message "&a&lPrickly Plant Completed!"
+				message "&aYou have received &e5 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+				stop
+			
+			#actual challenge
+			remove 32 cactus from player
+			add 300 to player's balance
+			set {chal.%player%.cacti} to 1
+			add 500 to {level.%player%}
+			message "&a&lPrickly Plant Completed!" to player
+			message "&aYou have received &e300 Tickets&a! Your Current Balance is &e%player's balance%&a!" to player
+			broadcast "&a%player% has completed &a&lPrickly Plant &afor the first time!"
+			stop
+			
+
+			
+			
+			
+			
+			
+#challenge reset command
+command /chalr <player> <number>:
+	usage: /chalr <player> <number of challenge>
+	permission: obam.chal.admin
+	trigger:
+		
+		
+		#gettingstoned
+		argument 2 is 1:
+			set {chal.%player-argument%.stoned} to 0
+			message "&aYou have reset %player-argument%'s 'Getting Stoned' Completion Status" to player
+			message "&aYour 'Getting Stoned' Complteion status has been reset by %player%" to player-argument
+			stop
+				
+		#sugarrush
+		argument 2 is 2:
+			set {chal.%player-argument%.rush} to 0
+			message "&aYou have reset %player-argument%'s 'Sugar Rush' Completion Status" to player
+			message "&aYour 'Sugar Rush' Completion status has been reset by %player%" to player-argument
+			stop
+			
+		#johnnyappleseed	
+		argument 2 is 3:
+			set {chal.%player-argument%.apple} to 0
+			message "&aYou have reset %player-argument%'s 'Johnny Appleseed' Completion Status" to player
+			message "&aYour 'Johnny Appleseed' Completion status has been reset by %player%" to player-argument
+			stop
+			
+		#demmelons
+		argument 2 is 4:
+			set {chal.%player-argument%.melon} to 0
+			message "&aYou have reset %player-argument%'s 'Dem Melons' Completion Status" to player
+			message "&aYour 'Dem Melons' Completion status has been reset by %player%" to player-argument
+			stop
+			
+		#dospupmkins
+		argument 2 is 5:
+			set {chal.%player-argument%.pupmkin} to 0
+			message "&aYou have reset %player-argument%'s 'Dos Pumpkin' Completion Status" to player
+			message "&aYour 'Dos Pumpkin' Completion status has been reset by %player%" to player-argument
+			stop
+			
+			
+		#pricklyplant
+		argument 2 is 6:
+			set {chal.%player-argument%.cacti} to 0
+			message "&aYou have reset %player-argument%'s 'Prickly Plant' Completion Status" to player
+			message "&aYour 'Prickly Plant' Completion status has been reset by %player%" to player-argument
+			stop
+			
+						
+				
+						

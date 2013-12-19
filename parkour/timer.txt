@@ -1,0 +1,28 @@
+variables:
+	{parkourcourse::*}
+
+#parkourcourseadd
+command /parkadd <text>:
+	usage: /parkadd <Parkour Course Name>
+	trigger:
+		add argument to {parkourcourse::*}
+
+#listparkourcourses
+command /parkshow:
+	usage: /parkshow
+	tirgger:
+		size of parkourcourse::* is 0:
+			send "No courses" to player
+			
+		else:
+			send "Courses: %{parkourcourse::*}%" to player
+
+
+
+#timer
+command /starttimer <player> <text>:
+	executable by: console
+	trigger:
+		set {timer.parkour.%player-argument%.%argument 2%} to now
+		set {courseontime} to argument 2
+		

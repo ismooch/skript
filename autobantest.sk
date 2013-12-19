@@ -1,0 +1,10 @@
+on place of sponge:
+    kick the player due to "&cAutobanned for hacking."
+    ban the player
+    broadcast "%player%&c was autobanned."
+    cancel event
+on place of bedrock:
+    kick the player due to "&cAutobanned for hacking."
+    ban the player
+    broadcast "%player%&c was autobanned."
+    cancel event

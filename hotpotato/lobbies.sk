@@ -1,0 +1,154 @@
+#=======================================================================================================
+#												Lobbies v1.5
+#                                               By: iSmooch
+#=======================================================================================================
+
+
+
+#=======================================================================================================
+#                                                   Description:
+#                                          Game Lobbies - Serving Hot Potato.
+#                                        ***********************************
+#                                         Game lobbies that automatically update 
+#                                         Game statuses and occupation, in relation
+#                                         to Hot Potato courses.
+#                                         Need at least one correctly configured
+#										  Skript from "hpTemp.sk" to function
+#										  correctly.
+#========================================================================================================
+
+command /lobby:
+	permission: obam.lobby.use
+	trigger:
+		world is "hotpotatolobby":
+			{current.hotpotato.%player%.lobby} is set:
+				subtract 1 from {hotpotato.%{current.hotpotato.%player%.lobby}%.lobby}
+				teleport player to {hotpotatolobby.spawn}
+				send "&aYou have been sent to the &eHot Potato&a lobby. From &e%{current.hotpotato.%player%.lobby}%&a lobby." to player
+				clear {current.hotpotato.%player%.lobby}
+				stop
+			else:
+				teleport player to {hotpotatolobby.spawn}
+			send "&aYou have been sent to the &eHot Potato&a lobby." to player
+		{current.hotpotato.%player%.lobby} is set:
+			{current.hotpotato.%player%.lobby} is set:
+				{active.game.lobby.%{current.hotpotato.%player%.lobby}%} is true:
+					player has potato or poisonous potato:
+						remove potato from player
+						remove poisonous potato from player
+						send "&c&l%player% has rage quit! Restarting Round!" to all players in player's world
+						clear {hotpotatolist.%{current.hotpotato.%player%.lobby}%::*}
+						loop all players in player's world:
+							{hotpotato.%{current.hotpotato.%loop-player%.lobby}%.%loop-player%.dead} is false:
+								add loop-player to {hotpotatolist.%{current.hotpotato.%loop-player%.lobby}%::*}
+								teleport loop-player to {hptp.%{current.hotpotato.%loop-player%.lobby}%}
+						set {track.%{current.hotpotato.%player%.lobby}%} to 0
+					subtract 1 from {hotpotato.%{current.hotpotato.%player%.lobby}%.lobby}
+					teleport player to {hotpotatolobby.spawn}
+					send "&aYou have been sent to the &eHot Potato&a lobby. From &e%{current.hotpotato.%player%.lobby}%&a lobby" to player
+					clear {current.hotpotato.%player%.lobby}
+				
+			
+		
+
+command /hpls:
+	trigger:
+		set {hotpotatolobby.spawn} to location of player
+		
+		
+command /lobbyhpset <text>:
+	trigger:
+		{hotpotato.%arg%.lobby.tp} is set:
+			message "%arg% is already a lobby!" to player
+		set {hotpotato.%arg%.lobby.tp} to location of player
+		
+		
+command /lobbyjoin <player> <text>:
+	executable by: console
+	trigger:
+		{hotpotato.%arg 2%.lobby} is not set:
+			set {hotpotato.%arg 2%.lobby} to 0
+		{hotpotato.%arg 2%.lobby} is less than 16:
+			{active.game.lobby.%arg 2%} is false:
+				set {current.hotpotato.%player-argument%.lobby} to arg 2
+				add 1 to {hotpotato.%arg 2%.lobby}
+				teleport player-argument to {hotpotato.%arg 2%.lobby.tp}
+				{hotpotato.%arg 2%.lobby} is less than 5:
+					loop all players in world "hotpotatolobby":
+						{current.hotpotato.%loop-player%.lobby} is arg 2:
+							send "&c&l[%{hotpotato.%arg 2%.lobby}%/16]: &e%player-argument% &a&lhas joined the lobby! Only &e%5 - {hotpotato.%arg 2%.lobby}% &a&lmore players need to start the game!" to loop-player
+				{hotpotato.%arg 2%.lobby} is greater than or equal to 5:			
+					loop all players in world "hotpotatolobby":
+						{current.hotpotato.%loop-player%.lobby} is arg 2:
+							send "&c&l[%{hotpotato.%arg 2%.lobby}%/16]: &e%player-argument% &a&lhas joined the lobby! The game will being in %45 - {timer.hotpotato.%arg 2%}%" to loop-player
+						
+			else:
+				message "&cGame for lobby &e&l%arg 2% &cis already in progress" to player-argument
+		else:
+			message "&cThe lobby &e&l%arg 2% &cis currently full. Please try another lobby." to player-argument
+	
+			
+
+			
+on sign change:
+	player is op:
+		world is "hotpotatolobby":
+			line 1 is "lobby":
+				add block to {hotpotato.lobby.%line 2%.signs::*}
+				set line 1 to "&9&l[LOBBY]"
+				set line 3 to "&a&l[%{hotpotato.%line 2%.lobby}%/16]"
+				set line 4 to "%{display.sign.%line 2%}%"
+			line 3 is "remove":
+				set block to {check}
+				loop {hotpotato.lobby.%line 2%.signs::*}:
+					loop-value is {check}
+					delete {hotpotato.lobby.%line 2%.signs::%loop-index%}
+					
+command /lobbyclear <text>:
+	trigger:
+		clear {hotpotato.lobby.%arg%.signs::*}
+					
+				
+				
+on quit:
+	world is "hotpotatolobby":
+		{current.hotpotato.%player%.lobby} is set:
+			subtract 1 from {hotpotato.%{current.hotpotato.%player%.lobby}%.lobby}
+			clear {current.hotpotato.%player%.lobby}
+			
+on join:
+	world is "hopotatolobby":
+		{current.hotpotato.%player%.lobby} is not set:
+			teleport player to {hotpotatolobby.spawn}
+			
+			
+command /reset <text>:
+	trigger:
+		set {active.game.lobby.%arg%} to false
+		set {hotpotato.%arg%.lobby} to 0
+		set {timer.hotpotato.%arg%} to 0
+		clear {room.full.%arg%}
+		
+command /lobbyshow:
+	trigger:
+		message "%{current.hotpotato.%player%.lobby}%" to player
+
+command /lobbysize <text>:
+	trigger:
+		message "%{hotpotato.%arg%.lobby}%" to player
+		
+command /lobbydisplay <text>:
+	trigger:
+		message "%{display.sign.%arg%}%" to player
+		
+command /lobbybypass [<text>]:
+	trigger:
+		arg 1 is not set:
+			set {hotpotato.%{current.hotpotato.%player%.lobby}%.lobby} to 16
+		arg 1 is set:
+			set {hotpotato.%arg 1%.lobby} to 16
+			
+	
+		
+
+		

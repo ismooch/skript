@@ -1,0 +1,44 @@
+command /kick <player> <text>:
+	description: Kicks a player.
+	usage: /kick <player> <reason>
+	permission: obam.kick
+	permission message: Command failed! You are not fluffy enough to do that!
+	executable by: players, console
+	trigger:
+		if argument-2 is "":
+			create a safe explosion of force 1 at player-argument
+			strike lightning effect at player-argument
+			kick player-argument due to "&cKicked by &4%player%&c! Reason: &4Breaking the Rules"
+			broadcast "&r%player-argument%&c was kicked by &r%player%&c. Reason: Breaking the Rules"
+			stop
+		else:
+			create a safe explosion of force 1 at player-argument
+			strike lightning effect at player-argument
+			kick player-argument due to "&cKicked by &4%player%&c! Reason: &4%argument-2%"
+			broadcast "&r%player-argument%&c was kicked by &r%player%&c. Reason: %argument-2%"
+			stop
+command /ban <offline player> <text>:
+	description: Bans a player.
+	usage: /ban <player> <reason>
+	permission: obam.ban
+	permission message: Command failed! You are not fluffy enough to do that!
+	executable by: players, console
+	trigger:
+		kick offlineplayer-argument because of argument 2
+		ban "%offlineplayer-argument%"
+		broadcast "&e%offlineplayer-argument%&c &lwas banned by &e%player%. &c&lReason: &e%argument-2%"
+		stop
+		
+command /g <player>:
+	description: Teleports to a Player
+	permission: obam.mod
+	trigger:
+		teleport player to player-argument
+		send "&aYou have teleported to %player-argument%." to player
+		
+command /grab <player>:
+	permission: obam.mod
+	trigger:
+		teleport player-argument to player
+		send "&aYou have snatched %player-argument%." to player
+		send "&aYou have been snatched by %player%!" to player-argument

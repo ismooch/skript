@@ -1,0 +1,13 @@
+command /showmecrap:
+    description: Gives you all kinds of useless information
+    usage: /showmecrap
+    executable by: players
+    permission: obam.showmecrap
+    permission message: Command failed! This is a staff command!
+    aliases: /smc
+    trigger:
+        send "&9----&b[&3 OBAM Admin &b]&9-------------------------------------" to player
+        send "&9All info is based on current location/player" to player
+        send "&3Players online: &b%number of all players% &9-&3 Connected as: &b%player%" to player
+        send "&3Gamemode: &b%gamemode of player% &9-&3 Health: &b%health of player% &9- &3Hunger: &b%hunger of player%" to player
+        send "&3Location: &b%location of player% &9-&3 Air: &b%remaining air of player% &9" to playe

@@ -1,0 +1,8 @@
+on damage of a entity:
+	world is "skyworld"
+	attacker is a player
+	attacker can't build at location of attacker:
+		send "&cThis area is protected!" to attacker
+		cancel event
+		stop trigger
+		

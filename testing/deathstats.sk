@@ -1,0 +1,305 @@
+#death stats
+
+
+on damage of villager:
+	world is "skyworld"
+	damage cause is lightning
+	cancel event
+
+on death of skeleton:
+	world is "skyworld"
+	attacker is a player
+	{skeleton.kills.%attacker%} is not set:
+		set {skeleton.kills.%attacker%} to 0
+	add 1 to {skeleton.kills.%attacker%}
+	{skeleton.kills.%attacker%} is 100 or 500 or 1000:
+		broadcast "&a%attacker% has slain &a&l%{skeleton.kills.%attacker%}% skeletons!"
+		add {skeleton.kills.%attacker%} to {level.%attacker%}
+		add 200 to attacker's balance
+	{skeleton.kills.%attacker%} is 5000 or 10000 or 15000 or 20000:
+		broadcast "&a%attacker% has slain &a&l%{skeleton.kills.%attacker%}% skeletons!"
+		add 500 to {level.%attacker%}
+		add 400 to attacker's balance
+	
+	
+on death of creeper:
+	world is "skyworld"
+	attacker is a player
+	{creeper.kills.%attacker%} is not set:
+		set {creeper.kills.%attacker%} to 0
+	add 1 to {creeper.kills.%attacker%}
+	{creeper.kills.%attacker%} is 100 or 500 or 1000:
+		broadcast "&a%attacker% has slain &a&l%{creeper.kills.%attacker%}% creepers!"
+		add {creeper.kills.%attacker%} to {level.%attacker%}
+		add 200 to attacker's balance
+	{creeper.kills.%attacker%} is 5000 or 10000 or 15000 or 20000:
+		broadcast "&a%attacker% has slain &a&l%{creeper.kills.%attacker%}% creepers!"
+		add 500 to {level.%attacker%}
+		add 400 to attacker's balance
+	
+on death of spider:
+	world is "skyworld"
+	attacker is a player
+	{spider.kills.%attacker%} is not set:
+		set {spider.kills.%attacker%} to 0
+	add 1 to {spider.kills.%attacker%}
+	{spider.kills.%attacker%} is 100 or 500 or 1000:
+		broadcast "&a%attacker% has slain &a&l%{spider.kills.%attacker%}% spiders!"
+		add {spider.kills.%attacker%} to {level.%attacker%}
+		add 200 to attacker's balance	
+	{spider.kills.%attacker%} is 5000 or 10000 or 15000 or 20000:
+		broadcast "&a%attacker% has slain &a&l%{spider.kills.%attacker%}% spider!"
+		add 500 to {level.%attacker%}
+		add 400 to attacker's balance		
+		
+on death of zombie:
+	world is "skyworld"
+	attacker is a player
+	{zombie.kills.%attacker%} is not set:
+		set {zombie.kills.%attacker%} to 0
+	add 1 to {zombie.kills.%attacker%}
+	{zombie.kills.%attacker%} is 100 or 500 or 1000:
+		broadcast "&a%attacker% has slain &a&l%{zombie.kills.%attacker%}% zombies!"
+		add {zombie.kills.%attacker%} to {level.%attacker%}
+		add 200 to attacker's balance	
+	{zombie.kills.%attacker%} is 5000 or 10000 or 15000 or 20000:
+		broadcast "&a%attacker% has slain &a&l%{zombie.kills.%attacker%}% zombies!"
+		add 500 to {level.%attacker%}
+		add 400 to attacker's balance		
+		
+on death of witch:
+	world is "skyworld"
+	attacker is a player
+	{witch.kills.%attacker%} is not set:
+		set {witch.kills.%attacker%} to 0
+	add 1 to {witch.kills.%attacker%}
+	{witch.kills.%attacker%} is 100 or 500 or 1000:
+		broadcast "&a%attacker% has slain &a&l%{witch.kills.%attacker%}% witches!"
+		add {witch.kills.%attacker%} to {level.%attacker%}
+		add 200 to attacker's balance	
+	{witch.kills.%attacker%} is 5000 or 10000 or 15000 or 20000:
+		broadcast "&a%attacker% has slain &a&l%{witch.kills.%attacker%}% witches!"
+		add 500 to {level.%attacker%}
+		add 400 to attacker's balance	
+
+		
+on death of enderman:
+	world is "skyworld"
+	attacker is a player
+	{enderman.kills.%attacker%} is not set:
+		set {enderman.kills.%attacker%} to 0
+	add 1 to {enderman.kills.%attacker%}
+	{enderman.kills.%attacker%} is 100 or 500 or 1000:
+		broadcast "&a%attacker% has slain &a&l%{enderman.kills.%attacker%}% endermen!"
+		add {enderman.kills.%attacker%} to {level.%attacker%}
+		add 200 to attacker's balance
+	{enderman.kills.%attacker%} is 5000 or 10000 or 15000 or 20000:
+		broadcast "&a%attacker% has slain &a&l%{enderman.kills.%attacker%}% endermen!"
+		add 500 to {level.%attacker%}
+		add 400 to attacker's balance	
+		
+on death of slime:
+	world is "skyworld"
+	attacker is a player
+	{slime.kills.%attacker%} is not set:
+		set {slime.kills.%attacker%} to 0
+	add 1 to {slime.kills.%attacker%}
+	{slime.kills.%attacker%} is 100 or 500 or 1000:
+		broadcast "&a%attacker% has slain &a&l%{slime.kills.%attacker%}% slimes!"
+		add {slime.kills.%attacker%} to {level.%attacker%}
+		add 200 to attacker's balance
+	{slime.kills.%attacker%} is 5000 or 10000 or 15000 or 20000:
+		broadcast "&a%attacker% has slain &a&l%{slime.kills.%attacker%}% slimes!"
+		add 500 to {level.%attacker%}
+		add 400 to attacker's balance	
+
+		
+on death of a slime or a witch or a enderman or a zombie or a skeleton or a creeper or a spider:
+	world is "skyworld":
+		attacker is a player:
+			set {_quickhold} to 0
+			{zombie.kills.%attacker%} is set:
+				add {zombie.kills.%attacker%} to {_quickhold}
+			{witch.kills.%attacker%} is set:
+				add {witch.kills.%attacker%} to {_quickhold}
+			{creeper.kills.%attacker%} is set:
+				add {creeper.kills.%attacker%} to {_quickhold}
+			{spider.kills.%attacker%} is set:
+				add {spider.kills.%attacker%} to {_quickhold}
+			{skeleton.kills.%attacker%} is set:
+				add {skeleton.kills.%attacker%} to {_quickhold}
+			{enderman.kills.%attacker%} is set:
+				add {enderman.kills.%attacker%} to {_quickhold}
+			{slime.kills.%attacker%} is set:
+				add {slime.kills.%attacker%} to {_quickhold}
+			set {total.kills.%attacker%} to {_quickhold}
+			
+			
+on death of player:
+	world is "skyworld"
+	{deaths.%player%.skyworld} is not set:
+		set {deaths.%player%.skyworld} to 0
+	add 1 to {deaths.%player%.skyworld}
+
+on respawn:
+	world is "skyworld"
+	{deaths.%player%.skyworld} is less than 2:
+		send "&cYou have died &e%{deaths.%player%.skyworld}% time!" to player
+		stop	
+	send "&cYou have died &e%{deaths.%player%.skyworld}% times!" to player
+	
+
+	
+on join:
+	{off.sb.%player%} is not set:
+		set {off.sb.%player%} to true
+	set {board.up.%player%.sb} to false
+	set {board.up.%player%.kp} to false
+		
+	
+#startfold @scoreboards	
+every 1 second:
+	#subfold @sbstats
+	loop all players in world "skyworld":
+		{off.sb.%loop-player%} is not set:
+			set {off.sb.%loop-player%} to true
+		{off.sb.%loop-player%} is true
+		{board.up.%loop-player%.sb} is not set:
+			set {board.up.%loop-player%.sb} to false
+		{board.up.%loop-player%.sb} is true:
+			make score "&cDeaths:" in board of loop-player to {deaths.%loop-player%.skyworld}
+			make score "&3Creepers:" in board of loop-player to {creeper.kills.%loop-player%}
+			make score "&3Skeletons:" in board of loop-player to {skeleton.kills.%loop-player%}
+			make score "&3Spiders:" in board of loop-player to {spider.kills.%loop-player%}
+			make score "&3Zombies:" in board of loop-player to {zombie.kills.%loop-player%}
+			make score "&3Endermen:" in board of loop-player to {enderman.kills.%loop-player%}
+			make score "&3Slimes:" in board of loop-player to {slime.kills.%loop-player%}
+			make score "&3Witches:" in board of loop-player to {witch.kills.%loop-player%}
+			make score "&aTickets:" in board of loop-player to loop-player's balance
+			make score "&6Total Kills:" in board of loop-player to {total.kills.%loop-player%}
+			set {board.up.%loop-player%.kp} to false
+			
+
+		{board.up.%loop-player%.sb} is false:	
+			display board named "&9&lSB &9Stats" to loop-player
+			make score "&cDeaths:" in board of loop-player to {deaths.%loop-player%.skyworld}
+			make score "&3Creepers:" in board of loop-player to {creeper.kills.%loop-player%}
+			make score "&3Skeletons:" in board of loop-player to {skeleton.kills.%loop-player%}
+			make score "&3Spiders:" in board of loop-player to {spider.kills.%loop-player%}
+			make score "&3Zombies:" in board of loop-player to {zombie.kills.%loop-player%}
+			make score "&3Endermen:" in board of loop-player to {enderman.kills.%loop-player%} 
+			make score "&3Slimes:" in board of loop-player to {slime.kills.%loop-player%}
+			make score "&3Witches:" in board of loop-player to {witch.kills.%loop-player%}
+			make score "&aTickets:" in board of loop-player to loop-player's balance
+			make score "&6Total Kills:" in board of loop-player to {total.kills.%loop-player%}
+			set {board.up.%loop-player%.sb} to true
+			move display of loop-player to "sidebar"
+			set {board.up.%loop-player%.kp} to false
+			
+	#subfold @KPstata
+	loop all players in world "kitpvpkillingfields":
+		{off.sb.%loop-player%} is not set:
+			set {off.sb.%loop-player%} to true
+		{off.sb.%loop-player%} is true
+		{board.up.%loop-player%} is not set:
+			set {board.up.%loop-player%.kp} to false
+		{board.up.%loop-player%.kp} is true:
+			make score of "&cDeaths:" in board of loop-player to {deaths.%loop-player%.kit}
+			make score of "&aKills:" in board of loop-player to {kills.%loop-player%.kit}
+			make score of "&aKillstreak:" in board of loop-player to {killstreak.%loop-player%}
+			make score of "&aAssists:" in board of loop-player to {assist.%loop-player%.kp}
+			make score of "&eBounty:" in board of loop-player to {value.%loop-player%.kit.live}
+			make score "&aTickets:" in board of loop-player to loop-player's balance
+			set {board.up.%loop-player%.sb} to false
+			
+		{board.up.%loop-player%.kp} is false:
+			display board named "&9&lKP &9Stats" to loop-player
+			make score of "&cDeaths:" in board of loop-player to {deaths.%loop-player%.kit}
+			make score of "&aKills:" in board of loop-player to {kills.%loop-player%.kit}
+			make score of "&aKillstreak:" in board of loop-player to {killstreak.%loop-player%}
+			make score of "&aAssists:" in board of loop-player to {assist.%loop-player%.kp}
+			make score of "&eBounty:" in board of loop-player to {value.%loop-player%.kit.live}
+			make score "&aTickets:" in board of loop-player to loop-player's balance
+			set {board.up.%loop-player%.sb} to false
+			set {board.up.%loop-player%.kp} to true
+			move display of loop-player to "sidebar"
+			
+			
+			
+#subfold @command		
+command /togglestats:
+	executable by: players
+	trigger:
+		{off.sb.%player%} is not set:
+			set {off.sb.%player%} to false
+			send "&aYou have turned off OBAM Stats" to player
+			display board named " " to player
+			stop
+		{off.sb.%player%} is true:
+			set {off.sb.%player%} to false
+			send "&aYou have turned off OBAM Stats" to player
+			display board named " " to player
+			stop
+		{off.sb.%player%} is false:
+			set {off.sb.%player%} to true
+			send "&aYou have turned on OBAM Stats" to player
+			world is "skyworld":
+				display board named "&9&lSB &lStats" to player
+				make score "&cDeaths:" in board of player to {deaths.%player%.skyworld}
+				make score "&3Creepers:" in board of player to {creeper.kills.%player%}
+				make score "&3Skeletons:" in board of player to {skeleton.kills.%player%}
+				make score "&3Spiders:" in board of player to {spider.kills.%player%}
+				make score "&3Zombies:" in board of player to {zombie.kills.%player%}
+				make score "&3Endermen:" in board of player to {enderman.kills.%player%}
+				make score "&3Slimes:" in board of player to {slime.kills.%player%}			
+				make score "&3Witches:" in board of player to {witch.kills.%player%}
+				make score "&6Total Kills:" in board of player to {total.kills.%player%}
+				make score "&aTickets:" in board of player to player's balance
+				move display of player to "sidebar"
+				set {board.up.%player%.sb} to true
+				stop
+			world is "kitpvpkillingfields":
+				display board named "&9&lKP &9Stats" to player
+				make score of "&cDeaths:" in board of player to {deaths.%player%.kit}
+				make score of "&aKills:" in board of player to {kills.%player%.kit}
+				make score of "&aKillstreak:" in board of player to {killstreak.%player%}
+				make score of "&eBounty:" in board of player to {value.%player%.kit.live}
+				make score of "&aAssists:" in board of player to {assist.%player%.kp}
+				set {board.up.%player%.sb} to false
+				set {board.up.%player%.kp} to true
+				move display of player to "sidebar"
+	
+	
+#endfold	
+	
+	
+command /showkills [<text>]:
+	permission: obam.kill.check
+	executable by: players and console
+	trigger:
+		world is not "skyworld":
+			send "&cYou Can only do that command in &eSkyBlock!"
+			stop
+		arg is not set:
+			send "&a-------------&e&l%player%'s &9&lKill Board!&a-------------" to player
+			send "&eSkeleton&a ------------------------ &e%{skeleton.kills.%player%}%" to player
+			send "&eCreeper  &a------------------------&e %{creeper.kills.%player%}%" to player
+			send "&eZombie   &a------------------------&e %{zombie.kills.%player%}%" to player
+			send "&eSpider   &a------------------------ &e%{spider.kills.%player%}%" to player
+			send "&eEnderman &a------------------------ &e%{enderman.kills.%player%}%" to player
+			send "&eSlimes &a------------------------ &e%{slimes.kills.%player%}%" to player
+			send "&eWitches &a------------------------ &e%{witch.kills.%player%}%" to player
+			send "&a----------------- &9&lEnd  &a-----------------------" to player
+			
+		arg is set:
+			has permission "obam.kill.admin"
+			send "&a-------------&e&l%arg%'s &9&lKill Board!&a-------------" to player
+			send "&eSkeleton&a ------------------------ &e%{skeleton.kills.%arg%}%" to player
+			send "&eCreeper  &a------------------------&e %{creeper.kills.%arg%}%" to player
+			send "&eZombie   &a------------------------&e %{zombie.kills.%arg%}%" to player
+			send "&eSpider   &a------------------------ &e%{spider.kills.%arg%}%" to player
+			send "&eEnderman &a------------------------ &e%{enderman.kills.%arg%}%" to player
+			send "&eSlimes &a------------------------ &e%{slimes.kills.%arg%}%" to player
+			send "&eWitches &a------------------------ &e%{witch.kills.%arg%}%" to player
+			send "&a----------------- &9&lEnd  &a-----------------------" to player
+	

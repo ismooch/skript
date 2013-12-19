@@ -1,0 +1,177 @@
+######################
+#+                  +#
+#   MENU SETTINGS    #
+#+                  +#
+######################
+
+menu-settings:
+
+  # name - appears as the title - REQUIRED
+  name: '&9&lSkyblock &1Level Tier 1'
+
+  # rows - the number of rows of the chest - REQUIRED
+  rows: 3
+
+  # command - OPTIONAL (you can remove this or set it to '')
+  command: 'skyworldchallenge2'
+
+  # open-with-item - OPTIONAL (you can remove this or
+  # set the item to 0)
+  open-with-item:
+    item-id: 0
+    left-click: false
+    right-click: true
+
+
+######################
+#+                  +#
+#       ITEMS        #
+#+                  +#
+######################
+
+
+Lumberjack:
+  COMMAND: 'chal 25'
+  NAME: '&b&l&nLumberjack'
+  LORE:
+    - ' '
+    - '&a&l&nFirst Completion:'
+    - '&aTrade 256 Oak Log'
+    - '&7&l&nThe Grind:'
+    - '&7Trade &c2304 &7Oak Log'
+    - ' '
+    - '&a&l&nIntial Reward:'
+    - '&a800 Tickets'
+    - '&7&l&nGrind Reward:'
+    - '&c15 &7Tickets'
+  ID: 17
+  POSITION-X: 1
+  POSITION-Y: 1
+  KEEP-OPEN: True
+
+
+gotmilk:
+  COMMAND: 'chal 26'
+  NAME: '&b&l&nThe Oven!'
+  LORE:
+    - ' '
+    - '&a&l&nFirst Completion:'
+    - '&aTrade 256 Furnaces'
+    - '&7&l&nThe Grind:'
+    - '&7Trade &c2304 &7Furnaces'
+    - ' '
+    - '&a&l&nIntial Reward:'
+    - '&a800 Tickets'
+    - '&7&l&nGrind Reward:'
+    - '&c15 &7Tickets'
+  ID:  61
+  POSITION-X: 2
+  POSITION-Y: 1
+  KEEP-OPEN: True
+
+
+gotbeef:
+  COMMAND: 'chal 27'
+  NAME: '&b&l&nStorage Wars'
+  LORE:
+    - ' '
+    - '&a&l&nFirst Completion:'
+    - '&aTrade 256 Chests'
+    - '&7&l&nThe Grind:'
+    - '&7Trade &c2304 &7Chests'
+    - ' '
+    - '&a&l&nIntial Reward:'
+    - '&a800 Tickets'
+    - '&7&l&nGrind Reward:'
+    - '&c15 &7Tickets'
+  ID:  54
+  POSITION-X: 3
+  POSITION-Y: 1
+  KEEP-OPEN: True
+
+
+cookies:
+  COMMAND: 'chal 28'
+  NAME: '&b&l&nWith an Apple!'
+  LORE:
+    - ' '
+    - '&a&l&nFirst Completion:'
+    - '&aTrade 256 Cooked Porkchops'
+    - '&7&l&nThe Grind:'
+    - '&7Trade &c2304 &7Cooked Porkchops'
+    - ' '
+    - '&a&l&nIntial Reward:'
+    - '&a800 Tickets'
+    - '&7&l&nGrind Reward:'
+    - '&c15 &7Tickets'
+  ID:  320
+  POSITION-X: 4
+  POSITION-Y: 1
+  KEEP-OPEN: True
+  
+birthdaycake:
+  COMMAND: 'chal 29'
+  NAME: '&b&l&nCook em in a Stew!!'
+  LORE:
+    - ' '
+    - '&a&l&nFirst Completion:'
+    - '&aTrade 256 Poisonous Potato'
+    - '&7&l&nThe Grind:'
+    - '&7Trade &c2304 &7Poisonous Potato'
+    - ' '
+    - '&a&l&nIntial Reward:'
+    - '&a800 Tickets'
+    - '&7&l&nGrind Reward:'
+    - '&c15 &7Tickets'
+  ID:  394
+  POSITION-X: 5
+  POSITION-Y: 1
+  KEEP-OPEN: True
+  
+secret recepie:
+  COMMAND: 'chal 30'
+  NAME: '&b&l&nSplit it down the Middle!'
+  LORE:
+    - ' '
+    - '&a&l&nFirst Completion:'
+    - '&aTrade 256 Stone Brick Slabs'
+    - '&7&l&nThe Grind:'
+    - '&7Trade &c2304 &7Stone Brick Slabs'
+    - ' '
+    - '&a&l&nIntial Reward:'
+    - '&a800 Tickets'
+    - '&7&l&nGrind Reward:'
+    - '&c15 &7Tickets'
+  ID:  44
+  DATA-VALUE: 5
+  POSITION-X: 6
+  POSITION-Y: 1
+  KEEP-OPEN: True
+  
+back:
+  COMMAND: 'console:chestcommands open skyworldchallenge <player>'
+  NAME: '&b&l&nBack to the Challenge Menus'
+  LORE:
+    - ' '
+    - '&a&l&nClick to Go Back'
+  ID:  51
+  POSITION-X: 2
+  POSITION-Y: 3
+ 
+close:
+  COMMAND: ''
+  NAME: '&c&l&nClick to Exit'
+  LORE:
+  ID:  46
+  POSITION-X: 1
+  POSITION-Y: 3
+  
+shop:
+  COMMAND: 'console:chestcommands open skyworldshop <player>'
+  NAME: '&b&l&nShop'
+  LORE:
+    - '&7&lClick to Go to Shop!'
+  ID:  41
+  POSITION-X: 9
+  POSITION-Y: 3
+  

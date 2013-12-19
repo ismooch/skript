@@ -1,0 +1,3 @@
+command /is:
+	trigger:
+		message "I do not do anything"

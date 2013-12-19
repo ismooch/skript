@@ -1,0 +1,474 @@
+#--------------------------------------------------------------------------------------------------------------
+#                                      HP Arena Template V0.8
+#                                      DESIGNED TO WORK WITH:
+#                                      HotPotato V1.3 and LobbiesV1.5 and HPStat 1.0
+#                                      By: iSmooch
+#--------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+options:#                                  ::::::::INSTRUCTIONS::::::::	
+#							step 1
+#							-	you have to run a set of commands
+#							-	/setpoint [coursename] at the spawn location of your arena
+#							-	/setdeathpoint [coursename] at the respawn are of your arena
+#							-	/lobbyhpset [coursename] at the lobby spawn area of your arena
+#							-	a sign needs to be placed where you plan on its use in the lobby area
+#							-	the first line needs to be 'lobby'
+#							-	the second line needs to be the course name
+#							-	/svs add <server> /lobbyjoin <player> [coursename] then add this command to your sign
+#							step 2 fill in these two spots:
+	
+	
+	coursename.%script% :NetherFort#<----- put your coursename here! Be sure it matches spelling and spaceing to the what you used above
+	worldname.%script% :hotpotatoNetherFort#<----- Put your world name here! be sure it matches spelling and spacing to what is on the MV list. DO NOT USE ALIASES AND DO NOT SET ALIASES!
+	
+	
+#							step 3
+#							-	save as "hpCOURSENAME.sk"
+#							-	upload to the "hotpotato" folder on the OBAMGAMING Copy Drive.
+#							-	bam boom... youre done.	
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#																	DO NOT EDIT BELOW THIS!
+#													You risk horrible malfunction if you edit below this area!
+#													If you edit below this line and your script causes problems
+#													I will DELETE IT!
+#													Something not working? Tell iSmooch about it. DO NOT TRY AND FIX
+#													IT YOURSELF! FOR THE LOVE OF ALL THAT IS HOLY!!!!!
+#game	
+every 1 second:
+	{hotpotato.{@coursename.%script%}.game.active} is true:
+		size of {hotpotatolist.{@coursename.%script%}::*} is 1:
+			send "&e%{hotpotatolist.{@coursename.%script%}::*}% &a&lwon! Congratulations!" to all players in "{@worldname.%script%}"
+			message "&aYou have received &e50 Tickets &afor winning!" to {hotpotatolist.{@coursename.%script%}::1}
+			add 50 to {hotpotatolist.{@coursename.%script%}::1}'s balance
+			add 100 to {level.%{hotpotatolist.{@coursename.%script%}::1}%}
+			{wins.hotpotato.overall.%{hotpotatolist.{@coursename.%script%}::1}%} is not set:
+				set {wins.hotpotato.overall.%{hotpotatolist.{@coursename.%script%}::1}%} to 0
+			add 1 to {wins.hotpotato.%{hotpotatolist.{@coursename.%script%}::1}%}
+			{wins.hotpotato.{@coursename.%script%}.%{hotpotatolist.{@coursename.%script%}::1}%} is not set:
+				set {wins.hotpotato.{@coursename.%script%}.%{hotpotatolist.{@coursename.%script%}::1}%} to 0
+			add 1 to {wins.hotpotato.{@coursename.%script%}.%{hotpotatolist.{@coursename.%script%}::1}%}
+			execute console command "/hotpotatostop{@coursename.%script%}"
+			wait 3 seconds
+			send "&a&lTeleporting back to Lobby Spawn in: &e5!" to all players in "{@worldname.%script%}"
+			loop all players in world "{@worldname.%script%}":
+				play "note piano" at location of loop-player with pitch 3
+			wait 1 second
+			send "&a&lTeleporting back to Lobby Spawn in: &e4!" to all players in "{@worldname.%script%}"
+			loop all players in world "{@worldname.%script%}":
+				play "note piano" at location of loop-player with pitch 3
+			wait 1 second
+			send "&a&lTeleporting back to Lobby Spawn in: &e3!" to all players in "{@worldname.%script%}"
+			loop all players in world "{@worldname.%script%}":
+				play "note piano" at location of loop-player with pitch 3
+			wait 1 second
+			send "&a&lTeleporting back to Lobby Spawn in: &e2!" to all players in "{@worldname.%script%}"
+			loop all players in world "{@worldname.%script%}":
+				play "note piano" at location of loop-player with pitch 3
+			wait 1 second
+			send "&a&lTeleporting back to Lobby Spawn in: &e1!" to all players in "{@worldname.%script%}"
+			loop all players in world "{@worldname.%script%}":
+				play "note piano" at location of loop-player with pitch 3
+			loop all players in world "{@worldname.%script%}":
+				{resetlobbyname} is not set:
+					set {resetlobbyname} to {current.hotpotato.%loop-player%.lobby}
+				clear {current.hotpotato.%loop-player%.lobby}
+				teleport loop-player to {hotpotatolobby.spawn}
+			set {hotpotato.%{resetlobbyname}%.lobby} to 0
+			set {active.game.lobby.%{resetlobbyname}%} to false
+			clear {resetlobbyname}
+				
+			stop
+		size of {hotpotatolist.{@coursename.%script%}::*} is greater than or equal to 6:
+			{track.{@coursename.%script%}} is not set:
+				set {track.{@coursename.%script%}} to 1
+			add 1 to {track.{@coursename.%script%}}
+			{track.{@coursename.%script%}} is less than 5:
+				send "&a&lThe Potato will be given in: &e%5 - {track.{@coursename.%script%}}%" to all players in "{@worldname.%script%}"
+				loop all players in world "{@worldname.%script%}":
+					play "note bass guitar" at location of loop-player with pitch 1
+			loop all players in world "{@worldname.%script%}":
+				set loop-player's level to 50 - {track.{@coursename.%script%}}
+			{track.{@coursename.%script%}} is 5:
+				loop 2 times:		
+					set {_count} to size of {hotpotatolist.{@coursename.%script%}::*}
+					set {_temp} to random integer between 1 and {_count}
+					{potato.has.%{hotpotatolist.{@coursename.%script%}::%{_temp}%}%} is true:
+						send "&a&1A &e&lPosionous Potato &a&lhas been given to &e&l%{hotpotatolist.{@coursename.%script%}::%{_temp}%}%!" to all players in {hotpotatolist.{@coursename.%script%}::%{_temp}%}'s world
+						remove potato from {hotpotatolist.{@coursename.%script%}::%{_temp}%}
+						give poisonous potato to {hotpotatolist.{@coursename.%script%}::%{_temp}%}
+						apply nausea to {hotpotatolist.{@coursename.%script%}::%{_temp}%} for 999 days
+						apply swiftness 5 to {hotpotatolist.{@coursename.%script%}::%{_temp}%} for 999 days
+						remove potato from {hotpotatolist.{@coursename.%script%}::%{_temp}%}
+					{potato.has.%{hotpotatolist.{@coursename.%script%}::%{_temp}%}%} is false:
+						set {potato.has.%{hotpotatolist.{@coursename.%script%}::%{_temp}%}%} to true
+						give potato to {hotpotatolist.{@coursename.%script%}::%{_temp}%}
+						ignite {hotpotatolist.{@coursename.%script%}::%{_temp}%}
+						send "&a&l%{hotpotatolist.{@coursename.%script%}::%{_temp}%}% has the potato!" to all players in {hotpotatolist.{@coursename.%script%}::%{_temp}%}'s world
+			{track.{@coursename.%script%}} is 50:
+				clear {hotpotatolist.{@coursename.%script%}::*}
+				loop all players in world "{@worldname.%script%}":
+					loop-player has potato:
+						remove potato from loop-player
+						teleport loop-player to {hpdtp.{@coursename.%script%}}
+						create a fake explosion at loop-player
+						set {hotpotato.{@coursename.%script%}.%loop-player%.dead} to true
+						send "&c&l%loop-player% has been baked!" to all players in "{@worldname.%script%}"
+						message "&aYou have recieved &e5 Tickets&a for trying!" to loop-player
+						add 5 to loop-player's balance
+						add 5 to {level.%loop-player%}
+						apply invisibility 1 to loop-player for 999 days
+						allow loop-player to fly
+						message "&aYou can now fly. Use the &eCompass&a to go spectate other players" to loop-player
+						extinguish loop-player
+						give loop-player clock
+					loop-player has poisonous potato:
+						remove poisonous potato from loop-player
+						teleport loop-player to {hpdtp.{@coursename.%script%}}
+						create a fake explosion at loop-player
+						set {hotpotato.{@coursename.%script%}.%loop-player%.dead} to true
+						send "&c&l%loop-player% has been baked!" to all players in "{@worldname.%script%}"
+						message "&aYou have recieved &e5 Tickets&a for trying!" to loop-player
+						add 5 to loop-player's balance
+						add 5 to {level.%loop-player%}
+						remove nausea from loop-player
+						remove speed from loop-player
+						apply invisibility 1 to loop-player for 999 days
+						allow loop-player to fly
+						message "&aYou can now fly. Use the &eClock&a to go spectate other players" to loop-player
+						extinguish loop-player
+						give loop-player clock
+					
+					{hotpotato.{@coursename.%script%}.%loop-player%.dead} is false:
+						add loop-player to {hotpotatolist.{@coursename.%script%}::*}
+						teleport loop-player to {hptp.{@coursename.%script%}}
+						set {track.{@coursename.%script%}} to 0
+		size of {hotpotatolist.{@coursename.%script%}::*} is less than or equal to 5:
+			{track.{@coursename.%script%}} is not set:
+				set {track.{@coursename.%script%}} to 1
+			add 1 to {track.{@coursename.%script%}}
+			{track.{@coursename.%script%}} is less than 5:
+				send "&a&lThe Potato will be given in: &e%5 - {track.{@coursename.%script%}}%" to all players in "{@worldname.%script%}"
+				loop all players in world "{@worldname.%script%}":
+					play "note bass guitar" at location of loop-player with pitch 1
+			loop all players in world "{@worldname.%script%}":
+				set loop-player's level to 35 - {track.{@coursename.%script%}}
+			{track.{@coursename.%script%}} is 5:
+				size of {hotpotatolist.{@coursename.%script%}::*} is 2:
+					give poisonous potato to {hotpotatolist.{@coursename.%script%}::1}
+					send "&a&l%{hotpotatolist.{@coursename.%script%}::1}% has the &c&lPoisonous Potato&a&l!" to all players in "{@worldname.%script%}"	
+					ignite {hotpotatolist.{@coursename.%script%}::1}
+				else:		
+					set {_count} to size of {hotpotatolist.{@coursename.%script%}::*}
+					set {_temp} to random integer between 1 and {_count}
+					give potato to {hotpotatolist.{@coursename.%script%}::%{_temp}%}
+				
+					send "&a&l%{hotpotatolist.{@coursename.%script%}::%{_temp}%}% has the potato!" to all players in "{@worldname.%script%}"
+			{track.{@coursename.%script%}} is 35:
+				clear {hotpotatolist.{@coursename.%script%}::*}
+				loop all players in world "{@worldname.%script%}":
+					loop-player has potato:
+						remove potato from loop-player
+						teleport loop-player to {hpdtp.{@coursename.%script%}}
+						create a fake explosion at loop-player
+						set {hotpotato.{@coursename.%script%}.%loop-player%.dead} to true
+						send "&c&l%loop-player% has been baked!" to all players in "{@worldname.%script%}"
+						message "&aYou have recieved &e5 Tickets&a for trying!" to loop-player
+						add 5 to loop-player's balance
+						add 5 to {level.%loop-player%}
+						apply invisibility 1 to loop-player for 999 days
+						allow loop-player to fly
+						message "&aYou can now fly. Use the &eClock&a to go spectate other players" to loop-player
+						extinguish loop-player
+						give loop-player clock
+					loop-player has poisonous potato:
+						remove poisonous potato from loop-player
+						teleport loop-player to {hpdtp.{@coursename.%script%}}
+						create a fake explosion at loop-player
+						set {hotpotato.{@coursename.%script%}.%loop-player%.dead} to true
+						send "&c&l%loop-player% has been baked!" to all players in "{@worldname.%script%}"
+						message "&aYou have recieved &e5 Tickets&a for trying!" to loop-player
+						add 5 to loop-player's balance
+						add 5 to {level.%loop-player%}
+						remove nausea from loop-player
+						remove speed from loop-player
+						apply invisibility 1 to loop-player for 999 days
+						allow loop-player to fly
+						message "&aYou can now fly. Use the &eClock&a to go spectate other players" to loop-player
+						extinguish loop-player
+						give loop-player clock
+					
+					{hotpotato.{@coursename.%script%}.%loop-player%.dead} is false:
+						add loop-player to {hotpotatolist.{@coursename.%script%}::*}
+						teleport loop-player to {hptp.{@coursename.%script%}}
+						set {track.{@coursename.%script%}} to 0
+						
+						
+#lobby						
+every 1 second:
+	{active.game.lobby.{@coursename.%script%}} is not set:
+		set {active.game.lobby.{@coursename.%script%}} to false
+	{active.game.lobby.{@coursename.%script%}} is false:
+		{hotpotato.{@coursename.%script%}.lobby} is 0:
+			set {display.sign.{@coursename.%script%}} to "&4&lEmpty"
+			stop trigger
+		{hotpotato.{@coursename.%script%}.lobby} is less than 5:
+			set {display.sign.{@coursename.%script%}} to "&eNeeds Players"
+			loop all players in world "hotpotatolobby":
+				{current.hotpotato.%loop-player%.lobby} is "{@coursename.%script%}":
+					set loop-player's level to 45
+		{hotpotato.{@coursename.%script%}.lobby} is greater than or equal to 5:
+			{timer.hotpotato.{@coursename.%script%}} is not set:
+				set {timer.hotpotato.{@coursename.%script%}} to 0
+			{timer.hoptoato.{@coursename.%script%}} is greater than 45:
+				set {timer.hotpotato.{@coursename.%script%}} to 0
+			add 1 to {timer.hotpotato.{@coursename.%script%}}
+			set {display.sign.{@coursename.%script%}} to "&aStarting"
+			{timer.hotpotato.{@coursename.%script%}} is greater than 35:
+				set {display.sign.{@coursename.%script%}} to "&aBegins in &e%45 - {timer.hotpotato.{@coursename.%script%}}%"
+			loop all players in world "hotpotatolobby":
+				{current.hotpotato.%loop-player%.lobby} is "{@coursename.%script%}":
+					set loop-player's level to 45 - {timer.hotpotato.{@coursename.%script%}}
+			{hotpotato.{@coursename.%script%}.lobby} is 16:
+				{timer.hotpotato.{@coursename.%script%}} is less than 40:
+					set {timer.hotpotato.{@coursename.%script%}} to 40
+			{timer.hotpotato.{@coursename.%script%}} is greater than 40:
+				loop all players in world "hotpotatolobby":
+					{current.hotpotato.%loop-player%.lobby} is "{@coursename.%script%}":
+						send "&aBeginning match in &e%45 - {timer.hotpotato.{@coursename.%script%}}%&a seconds!" to loop-player
+						play "note piano" at location of loop-player with pitch 5
+			{timer.hotpotato.{@coursename.%script%}} is 45:
+				loop all players in world "hotpotatolobby":
+					{current.hotpotato.%loop-player%.lobby} is "{@coursename.%script%}":
+						teleport loop-player to {hptp.{@coursename.%script%}}
+				set {active.game.lobby.{@coursename.%script%}} to true
+				set {timer.hotpotato.{@coursename.%script%}} to 0
+				clear {room.full.{@coursename.%script%}}
+				wait 1 second
+				execute console command "/hotpotatostart{@coursename.%script%}"
+					
+		{active.game.lobby.{@coursename.%script%}} is true:
+			set {display.sign.{@coursename.%script%}} to "&a&lIn Game"
+			
+
+
+#world stuff			
+every 1 seconds:
+					
+	loop all players in "{@worldname.%script%}":
+		loop-player has potato or poisonous potato:
+			ignite loop-player
+		set loop-player's food level to 10
+		set loop-player's health to 10
+		apply swiftness 2 to loop-player
+
+on right click with clock:
+	world is "{@worldname.%script%}":
+		set {tp} to a random player out of all players in "{@worldname.%script%}"
+		{hotpotato.{@coursename.%script%}.%{tp}%.dead} is false:
+			teleport player to {tp}
+			message "&cYou are now spectating: &e%{tp}%"
+
+
+#basic mechanics		
+on damage:
+	world is "{@worldname.%script%}":
+		damage cause is fall:
+			cancel event
+		if damage cause is burning or fire or lava:
+			heal victim by 10 hearts
+			cancel event
+		attacker is player
+		victim is player
+		cancel event
+		attacker has potato:
+			victim has potato:
+				stop
+			{hotpotato.%{current.hotpotato.%victim%.lobby}%.%victim%.dead} is true:
+				stop
+			remove potato from attacker
+			ignite victim
+			extinguish attacker
+			give potato to victim
+			message "&aYou no longer have the hot potato!" to attacker
+			send "&c&l%victim% now has the potato!" to all players in attacker's world
+		attacker does not have potato:
+			attacker has poisonous potato:
+				victim has poisonous potato:
+					stop
+				{hotpotato.%{current.hotpotato.%victim%.lobby}%.%victim%.dead} is true:
+					stop
+				remove poisonous potato from attacker
+				give poisonous potato to victim
+				message "&a&lYou have been saved!" to attacker
+				remove swiftness from attacker
+				remove nausea from attacker
+				apply swiftness 4 to victim for 999 days
+				apply nausea  to victim for 999 days
+				ignite victim
+				extinguish attacker
+				send "&c&l%victim% now has the poisonous potato!" to all players in attacker's world
+				
+#connect stuff
+on drop of poisonous potato or potato:
+	world is "{@worldname.%script%}":
+		cancel event
+		message "&cYou can not drop your potato, cheater!" to player
+	
+	
+on quit:
+	player is in world "{@worldname.%script%}":
+		set {hotpotato.{@coursename.%script%}.%player%.dead} to true
+		player has potato or poisonous potato:
+			remove potato from player
+			remove poisonous potato from player
+			send "&c&l%player% has rage quit! Restarting Round!" to all players in player's world
+			player is in world "{@worldname.%script%}":
+				clear {hotpotatolist.{@coursename.%script%}::*}
+				loop all players in world "{@worldname.%script%}":
+					{hotpotato.{@coursename.%script%}.%loop-player%.dead} is false:
+						add loop-player to {hotpotatolist.{@coursename.%script%}::*}
+						teleport loop-player to {hptp.{@coursename.%script%}}
+						set {track.{@coursename.%script%}} to 0
+						
+	
+on join:
+	world is "{@worldname.%script%}":
+		{hotpotato.{@coursename.%script%}.%player%.dead} is true:
+			teleport player to {hpdtp.{@coursename.%script%}}
+			
+every 1 second:
+	loop {hotpotato.lobby.{@coursename.%script%}.signs::*}:
+		set line 3 of loop-value to "&a&l[%{hotpotato.{@coursename.%script%}.lobby}%/16]"
+		set line 4 of loop-value to "%{display.sign.{@coursename.%script%}}%"	
+		
+		
+command /hotpotatostop{@coursename.%script%}:
+	executable by: console
+	trigger:
+		set {hotpotato.{@coursename.%script%}.game.active} to false
+		loop all players:
+			loop-player is in world "{@worldname.%script%}":
+				remove invisibility from loop-player
+				disallow loop-player to fly
+		execute console command "/hotpotatoboardsrun"
+		loop all players:
+			{wins.hotpotato.{@coursename.%script%}.%loop-player%} is set:
+				loop-player has permission "obam.mod.compete":
+					stop
+			
+				#{@coursename.%script%} leaderboards
+				{wins.hotpotato.{@coursename.%script%}.first} is not set:
+					set {wins.hotpotato.{@coursename.%script%}.first} to {wins.hotpotato.{@coursename.%script%}.%loop-player%}
+					set {wins.hotpotato.{@coursename.%script%}.first.name} to loop-player's name
+					broadcast "&a%loop-player% now has the most {@coursename.%script%} wins for Hotpotato!"
+					stop
+					
+				
+				{wins.hotpotato.{@coursename.%script%}.%loop-player%} is {wins.hotpotato.{@coursename.%script%}.first}:
+					{wins.hotpotato.first.{@coursename.%script%}.name} is loop-player's name:
+						stop
+					set {wins.hotpotato.{@coursename.%script%}.third} to {wins.hotpotato.{@coursename.%script%}.second}
+					set {wins.hotpotato.{@coursename.%script%}.third.name} to {wins.hotpotato.{@coursename.%script%}.second.name}
+					set {wins.hotpotato.{@coursename.%script%}.second} to {wins.hotpotato.{@coursename.%script%}.first}
+					set {wins.hotpotato.{@coursename.%script%}.second.name} to {wins.hotpoato.{@coursename.%script%}.first.name}
+					set {wins.hotpotato.{@coursename.%script%}.first} to {wins.hotpotato.{@coursename.%script%}.%loop-player%}
+					set {wins.hotpoato.{@coursename.%script%}.first.name} to loop-player's name
+					broadcast "&a%loop-player% now has the most {@coursename.%script%} wins for Hotpotato!"
+					stop
+				
+				
+				{wins.hotpotato.{@coursename.%script%}.%loop-player%} is greater than {wins.hotpotato.{@coursename.%script%}.first}:
+					{wins.hotpoato.{@coursename.%script%}.first.name} is loop-player's name:
+						set {wins.hotpotato.{@coursename.%script%}.first} to {wins.hotpotato.{@coursename.%script%}.%loop-player%}
+						stop
+					set {wins.hotpotato.{@coursename.%script%}.third} to {wins.hotpotato.{@coursename.%script%}.second}
+					set {wins.hotpotato.{@coursename.%script%}.third.name} to {wins.hotpotato.{@coursename.%script%}.second.name}
+					set {wins.hotpotato.{@coursename.%script%}.second} to {wins.hotpotato.{@coursename.%script%}.first}
+					set {wins.hotpotato.{@coursename.%script%}.second.name} to {wins.hotpoato.{@coursename.%script%}.first.name}
+					set {wins.hotpotato.{@coursename.%script%}.first} to {wins.hotpotato.{@coursename.%script%}.%loop-player%}
+					set {wins.hotpoato.{@coursename.%script%}.first.name} to loop-player's name
+					broadcast "&a%loop-player% now has the most {@coursename.%script%} wins for Hotpotato!"
+					stop
+			
+				{wins.hotpotato.{@coursename.%script%}.second} is not set:
+					set {wins.hotpotato.{@coursename.%script%}.second} to {wins.hotpotato.{@coursename.%script%}.%loop-player%}
+					set {wins.hotpotato.{@coursename.%script%}.second.name} to loop-player's name
+					broadcast "&a%loop-player% now has the second most {@coursename.%script%} wins for Hotpotato!"
+					stop
+				
+				{wins.hotpotato.{@coursename.%script%}.%loop-player%} is {wins.hotpotato.{@coursename.%script%}.second}:
+					{wins.hotpotato.{@coursename.%script%}.second.name} is loop-player's name:
+						stop
+					set {wins.hotpotato.{@coursename.%script%}.third} to {wins.hotpotato.{@coursename.%script%}.second}
+					set {wins.hotpotato.{@coursename.%script%}.third.name} to {wins.hotpotato.{@coursename.%script%}.second.name}
+					set {wins.hotpotato.{@coursename.%script%}.second} to {wins.hotpotato.{@coursename.%script%}.%loop-player%}
+					set {wins.hotpotato.{@coursename.%script%}.second.name} to loop-player's name
+					broadcast "&a%loop-player% now has the second most {@coursename.%script%} wins for Hotpotato!"
+					stop
+				
+				
+				{wins.hotpotato.{@coursename.%script%}.%loop-player%} is greater than {wins.hotpotato.{@coursename.%script%}.second}:
+					{wins.hotpotato.{@coursename.%script%}.second.name} is loop-player's name:
+						set {wins.hotpotato.{@coursename.%script%}.second} to {wins.hotpotato.{@coursename.%script%}.%loop-player%}
+						stop
+					set {wins.hotpotato.{@coursename.%script%}.third} to {wins.hotpotato.{@coursename.%script%}.second}
+					set {wins.hotpotato.{@coursename.%script%}.third.name} to {wins.hotpotato.{@coursename.%script%}.second.name}
+					set {wins.hotpotato.{@coursename.%script%}.second} to {wins.hotpotato.{@coursename.%script%}.%loop-player%}
+					set {wins.hotpotato.{@coursename.%script%}.second.name} to loop-player's name
+					broadcast "&a%loop-player% now has the second most {@coursename.%script%} wins for Hotpotato!"
+					stop
+
+
+				{wins.hotpotato.{@coursename.%script%}.third} is not set:
+					set {wins.hotpotato.{@coursename.%script%}.third} to {wins.hotpoato.{@coursename.%script%}.%loop-player%}
+					set {wins.hotpotato.{@coursename.%script%}.third.name} to loop-player's name
+					broadcast "&a%loop-player% now has the third most {@coursename.%script%} wins for Hotpotato!"
+					stop
+				
+				{wins.hotpotato.{@coursename.%script%}.%loop-player%} is {wins.hotpotato.{@coursename.%script%}.third}:
+					{wins.hotpotato.{@coursename.%script%}.third.name} is loop-player's name:
+						stop
+					set {wins.hotpotato.{@coursename.%script%}.third} to {wins.hotpoato.{@coursename.%script%}.%loop-player%}
+					set {wins.hotpotato.{@coursename.%script%}.third.name} to loop-player's name
+					broadcast "&a%loop-player% now has the third most {@coursename.%script%} wins for Hotpotato!"
+					stop
+				
+				{wins.hotpotato.{@coursename.%script%}.%loop-player%} is greater than {wins.hotpotato.{@coursename.%script%}.third}:
+					{wins.hotpotato.{@coursename.%script%}.third.name} is loop-player's name:
+						set {wins.hotpotato.{@coursename.%script%}.third} to {wins.hotpotato.{@coursename.%script%}.%loop-player%}
+						stop
+					set {wins.hotpotato.{@coursename.%script%}.third} to {wins.hotpoato.{@coursename.%script%}.%loop-player%}
+					
+					set {wins.hotpotato.{@coursename.%script%}.third.name} to loop-player's name
+					broadcast "&a%loop-player% now has the third most {@coursename.%script%} wins for Hotpotato!"
+					stop
+		
+
+				
+				
+				
+				
+				
+				
+					
+command /hotpotatostart{@coursename.%script%}:
+	executable by: console
+	trigger:
+		clear {hotpotatolist.{@coursename.%script%}::*}
+		Broadcast "&aA Game of &e&lHot Potato&a has started!" in "{@worldname.%script%}"
+		loop all players in world "{@worldname.%script%}":
+			set {potato.has.%loop-player%} to false
+			remove invisibility from loop-player
+			clear loop-player's inventory
+			add loop-player to {hotpotatolist.{@coursename.%script%}::*}
+			teleport loop-player to {hptp.{@coursename.%script%}}
+			add 1 to {_count}
+			set {hotpotato.{@coursename.%script%}.%loop-player%.dead} to false
+			set {_%{_count}%} to loop-player
+			disallow loop-player to fly
+		set {track.{@coursename.%script%}} to 0
+		set {hotpotato.{@coursename.%script%}.game.active} to true

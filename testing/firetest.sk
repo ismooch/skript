@@ -1,0 +1,3 @@
+on place of fresh fire:
+	send "&cYou can not place this!" to player
+	cancel event

@@ -1,0 +1,66 @@
+command /setpspawn <text>:
+	description: Creates a new warp
+	permission: obam.parkour.setspawn
+	executable by: players
+	usage: /setpspawn <warp name>
+	trigger:
+		if variable {parkourspawn.%argument%} is set:
+			message "&c&l%argument% is already a course! Remove with /delpspawn."
+			stop
+		else:
+			set variable {parkourspawn.%argument%} to location of player
+			message "&6&l%argument%'s spawn point has been set"
+			stop
+ 
+command /pspawn <text>:
+	permission: obam.parkour.teleportto
+	executable by: players
+	usage: /pspawn <course name>
+	trigger:
+		if variable {parkourspawn.%argument%} is set:
+			set variable {parkourtp.%player%.back} to location of player
+			teleport player to {parkourspawn.%argument%}
+			stop
+		else:
+			message "&c&lThat course doesn't exist."
+			stop
+
+command /delpspawn <text>:
+	description: Deletes a warp
+	permission: obam.parkour.removespawn
+	usage: /delpspawn <warp name>
+	trigger:
+		if variable {parkourspawn.%argument%} is not set:
+			message "&c&l%argument% is not an existing course."
+			stop
+		else:
+			delete {parkourspawn.%argument%}
+			message "&6&l%argument%'s spawnpoint was deleted."
+			stop
+
+command /parkourspawn <text> <player>:
+	executable by: console
+	trigger:
+		set variable {currentparkourcourse.%player-argument%} to "%arg 1%"
+		if variable {parkourspawn.%argument 1%} is set:
+			set variable {parkourtp.%player-argument%.back} to location of player
+			set {fallen.%player-argument%} to 0 
+			teleport player-argument to {parkourspawn.%argument 1%}
+			set {checkpoint.%player-argument%.active} to 0
+			{holding.%arg 1%.count} is not set:
+				set {holding.%arg 1%.count} to 0
+			add 1 to {holding.%arg 1%.count}
+			execute console command "/starttimer %player-argument% %arg 1%"
+			stop
+
+command /mcpc:
+	executable by: player
+	trigger:
+		message "&6Current parkour course: %{currentparkourcourse.%player%}%" to the player
+		
+		
+command /fr <player>:
+	executable by: player
+	trigger:
+		set {fallen.%player-argument%} to 0
+		send "&cYou have reset %player-argument%'s Fallen Counter!" to player

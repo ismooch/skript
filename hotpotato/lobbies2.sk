@@ -1,0 +1,117 @@
+#lobbies
+
+command /hpls:
+	trigger:
+		set {hotpotatolobby.spawn} to location of player
+		
+		
+command /lobbyhpset <text>:
+	trigger:
+		{hotpotato.%arg%.lobby.tp} is set:
+			message "%arg% is already a lobby!" to player
+		set {hotpotato.%arg%.lobby.tp} to location of player
+		
+		
+command /lobbyjoin <player> <text>:
+	executable: by console
+	trigger:
+		{hotpotato.%arg 2%.lobby} is not set:
+			set {hotpotato.%arg 2%.lobby} to 0
+		{hotpotato.%arg 2%.lobby} is less than 16:
+			{active.game.lobby.%arg 2%} is false:
+				set {current.hotpotato.%player-argument%.lobby} to arg 2
+				add 1 to {hotpotato.%arg 2%.lobby}
+				teleport player-argument to {hotpotato.%arg 2%.lobby.tp}
+			else:
+				message "&cGame for lobby &e&l%arg 2% &cis already in progress" to player-argument
+		else:
+			message "&cThe lobby &e&l%arg 2% &cis currently full. Please try another lobby." to player-argument
+			
+every 1 second:
+	{active.game.lobby.test} is not set:
+		set {active.game.lobby.test} to false
+	{active.game.lobby.test} is false:
+		{hotpotato.test.lobby} is 0:
+			set {display.sign.test} to "&4&lEmpty"
+			stop trigger
+		{hotpotato.test.lobby} is less than 5:
+			set {display.sign.test} to "&eNeeds Players"
+			loop all players in world "hotpotatolobby":
+				{current.hotpotato.%loop-player%.lobby} is "test":
+					set loop-player's level to 45
+		{hotpotato.test.lobby} is greater than or equal to 5:
+			{timer.hotpotato.test} is not set:
+				set {timer.hotpotato.test} to 0
+			{timer.hoptoato.test} is greater than 45:
+				set {timer.hotpotato.test} to 0
+			add 1 to {timer.hotpotato.test}
+			set {display.sign.test} to "&aStarting"
+			{timer.hotpotato.test} is greater than 35:
+				set {display.sign.test} to "&aBegins in &e%45 - {timer.hotpotato.test}%"
+			loop all players in world "hotpotatolobby":
+				{current.hotpotato.%loop-player%.lobby} is "test":
+					set loop-player's level to 45 - {timer.hotpotato.test}
+			size of {hotpotato.test.lobby::*} is 16:
+				set {timer.hotpotato.test} to 40
+			{timer.hotpotato.test} is 45:
+				loop all players in world "hotpotatolobby":
+					{current.hotpotato.%loop-player%.lobby} is "test":
+						teleport loop-player to {hptp.city}
+				set {active.game.lobby.test} to true
+				set {timer.hotpotato.test} to 0
+				wait 1 second
+				execute console command "/hotpotatostartcity"
+					
+		{active.game.lobby.test} is true:
+			set {display.sign.test} to "&a&lIn Game"
+			
+on sign change:
+	player is op:
+		world is "hotpotatolobby":
+			line 1 is "lobby":
+				add block to {hotpotato.lobby.%line 2%.signs::*}
+				set line 1 to "&9&l[LOBBY]"
+				set line 3 to "&a&l[%{hotpotato.%line 2%.lobby}%/16]"
+				set line 4 to "%{display.sign.%line 2%}%"
+				
+every 1 second:
+	loop {hotpotato.lobby.test.signs::*}:
+		set line 3 of loop-value to "&a&l[%{hotpotato.test.lobby}%/16]"
+		set line 4 of loop-value to "%{display.sign.test}%"		
+						
+				
+on quit:
+	world is "hotpotatolobby":
+		{current.hotpotato.%player%.lobby} is set:
+			wait 3 seconds
+			subtract 1 from {hotpotato.%{current.hotpotato.%player%.lobby}%.lobby}
+			clear {current.hotpotato.%player%.lobby}
+			
+on join:
+	world is "hopotatolobby":
+		wait 3 seconds
+		{current.hotpotato.%player%.lobby} is not set:
+			teleport player to {hotpotatolobby.spawn}
+			
+			
+command /reset <text>:
+	trigger:
+		set {active.game.lobby.%arg%} to false
+		set {hotpotato.%arg%.lobby} to 0
+		set {timer.hotpotato.%arg%} to 0
+		
+command /lobbyshow:
+	trigger:
+		message "%{current.hotpotato.%player%.lobby}%" to player
+
+command /lobbysize <text>:
+	trigger:
+		message "%{hotpotato.%arg%.lobby}%" to player
+		
+command /lobbydisplay <text>:
+	trigger:
+		message "%{display.sign.%arg%}%" to player
+	
+		
+
+		

@@ -1,0 +1,4 @@
+command /shat:
+    permission: obam.test.admin
+    trigger:
+        set the player's helmet as "19"

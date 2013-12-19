@@ -1,0 +1,24 @@
+options:
+	general: i;iron block;n;&9&lGeneral Help!;l;&7Click this for &eGeneral &7help;c;sudo %player% helpgeneral
+	skyblock: i;grass;n;&9&lSkyblock Help!;l;&7Click this for &eSkyblock&7 help;c;sudo %player% helpskyblock
+	parkour: i;fence;n;&9&lParkour Help!;l;&7Click this for &eParkour&7 help;c;sudo %player% helpparkour
+	hotpotato: i;potato;n;&9&lHot Potato Help!;l;&7Click this for &eHot Potato&7 help;c;sudo %player% helphotpotato
+	kitpvp: i;iron helmet;n;&9&lKit PvP Help!;l;&7Click this for &eKit PvP&7 help;c;sudo %player% helpkitpvp
+	first: i;diamond;n;&9&lFirst Arrivals!;l;&7Welcome to OBAM! We hope to provide you with||&7many different game modes and styles that have||&7unique twists on them compared to what you've||&7seen elsewhere. If you wish to quickly get started,||&7Skyblock is a great place to start! You can also||&7browse the rest of this help menu to get an idea||&7on general commands and other fun things that||&7we offer here! We hope you enjoy your stay!|| ||&a-OBAM Staff
+
+	
+	
+	
+	
+	
+command /help:
+	executable by: players
+	trigger:
+		send "&aBringing up menu..." to player
+		wait 1 second
+		show "s;1;{@first};s;3;{@general};s;4;{@skyblock};s;5;{@parkour};s;6;{@hotpotato};s;7;{@kitpvp}" with 1 row named "&9&lOBAM &9Help" to player
+	
+
+			
+
+		

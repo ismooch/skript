@@ -1,0 +1,20 @@
+#parkour Signs
+
+
+
+on sign change:
+	player is op:
+		line 1 is "[PLAY]":
+			add block to {holding.count::*}
+			set line 1 to "&9&l[PLAY]"
+			set line 2 to "%line 2%"
+			set line 3 to "&c&l[%{holding.%line 2%.count}%]"
+			set line 4 to "&1Players"
+				
+every 10 seconds:
+	loop {holding.count::*}:
+		set line 3 of loop-value to "&a&l[%{holding.%line 2 of loop-value%.count}%]"
+		
+command /countreset <text>:
+	trigger:
+		set {holding.%arg%.count} to 0

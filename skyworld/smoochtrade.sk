@@ -1,0 +1,91 @@
+#tradesystem
+
+command /trade <player>:
+	executable by: players
+	trigger:
+		{trade.%player%} is set:
+			send "&cYou already have an active trade! Use &e/tradec &cto cancel this trade!" to player
+			stop
+		{trade.%player-argument%.active} is set:
+			send "&cThis player is already in an active trade!" to player
+			stop
+		set {trade.%player%} to player's tool
+		set {trade.%player%.current} to player-argument
+		set {trade.%player-argument%.active} to player
+		send "&aYou have started a trade with &e%player-argument%!" to player
+		send "&e%player% &ahas requested a trade! It is &e%{trade.%player%}%&a! Use &e/tradea&a    with the item in your hand you wish to trade, to complete the trade!" to player-argument
+		
+		
+command /tradea [<text>]:
+	executable by: players
+	trigger:
+		argument is not set:
+			{trade.%player%.active} is set:
+				send "&aDo you wish to trade &e%{trade.%player%.active}% &aa &e%player's tool% &afor their &e%{trade.%{trade.%player%.active}%}%&a? Use &e/tradea c&a to confirm or &e/tradea d&a to decline." to player
+				set player's tool to {trade.push.%player%}
+		argument is "c":
+			set {_player} to {trade.%player%.active}
+			player does not have {trade.push.%player%}:
+				send "&cTrade Failed!" to player
+				send "&cTrade Failed!" to {_player}
+				stop
+			{_player} does not have {trade.%{_player}%}:
+				send "&cTrade Failed!" to player
+				send "&cTrade Failed!" to {_player}
+				stop
+			
+			remove {trade.push.%player%} from player
+			remove {trade.%{_player}%} from {_player}
+			send "&aItems Shipped" to player
+			send "&aItems Shipped" to {_player}
+			wait 1 second
+			
+			give {trade.%{_player}%} to player
+			give {trade.push.%player%} to {trade.%player%.active}
+			wait 0.5 second
+			{_player} does not have {trade.push.%player%}:
+				send "&cSomething Happened!" to player
+				send "&cSomething Happened!" to {_player}
+				stop
+			player does not have {trade.%{_player}%}:
+				send "&cSomething Happened!" to player
+				send "&CSomething Happened!" to {_player}
+				stop
+			send "&aItems Received!" to player
+			send "&aItems Received!" to {_player}
+			send "&aTrade Successful" to player
+			send "&aTrade Successful" to {_player}
+			clear {trade.%player%}
+			clear {trade.%{_player}%}
+			clear {trade.%{_player}%.current}
+			clear {trade.%player%.active}
+			
+			
+		argument is "d":
+			clear {trade.%player%}
+			clear {trade.%{trade.%player%.active}%}
+			clear {trade.%{trade.%player%.active}%.current}
+			set {_player} to {trade.%player%.active}
+			clear {trade.%player%.active}
+			send "&cTrade Declined" to player
+			send "&cTrade Declined" to {_player}
+			
+command /tradec:
+	executable by: players
+	trigger:
+		{trade.%player%} is not set:
+			send "&cYou have no active trades" to player
+			stop
+		clear {trade.%player%}
+		clear {trade.%{trade.%player%.current}%.active}
+		set {_player} to {trade.%player%.current}
+		clear {trade.%player%.current}
+		send "&cYou have cancelled the trade!" to player
+		send "&e%player%&c has cancelled a trade!" to {_player}
+
+command /tradeclear <player>:
+	trigger:
+		clear {trade.%player-argument%.active}
+		clear {trade.%player%.active}
+		
+			

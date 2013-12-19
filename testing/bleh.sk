@@ -1,0 +1,26 @@
+#===================================================================
+#                                 Breakable Homes v0.1
+#                                     By: iSmooch
+#===================================================================
+
+
+on sign change:
+	line 1 is "[Home]":
+		line 2 is "":
+			message "&cYou need to name your home!" to player
+			cancel event
+			stop
+		add block to {home.location::*}
+		add line 2 to {home.name.%player%::*}
+		set line 1 to "&c&l[Home]"
+		set line 3 to "&1%player%"
+		set line 4 to " "
+		
+on break:
+	block was sign:
+		line 1 of block is "[Home]":
+			delete {home.name.%line 3 of block%::%line 2 of block%}
+			message "&cYour Home &e%line 2 of block%&c, was destroyed!" to "%line 3%" parsed as player
+			delete {home.location::%block%}
+		
+			

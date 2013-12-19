@@ -1,0 +1,145 @@
+command /hotpotatoboardsrun:
+	trigger:
+		
+		
+		loop all players:
+			{wins.hotpotato.%loop-player%} is set:
+				loop-player has permission "obam.mod.compete":
+					stop
+			
+				#overall leaderboards
+				{wins.hotpotato.overall.first} is not set:
+					set {wins.hotpotato.overall.first} to {wins.hotpotato.%loop-player%}
+					set {wins.hotpotato.overall.first.name} to loop-player's name
+					broadcast "&a%loop-player% now has the most overall wins for Hotpotato!"
+					stop
+				
+				{wins.hotpotato.%loop-player%} is {wins.hotpotato.overall.first}:
+					{wins.hotpotato.overall.first.name} is loop-player's name:
+						stop
+					set {wins.hotpotato.overall.third} to {wins.hotpotato.overall.second}
+					set {wins.hotpotato.overall.third.name} to {wins.hotpotato.overall.second.name}
+					set {wins.hotpotato.overall.second} to {wins.hotpotato.overall.first}
+					set {wins.hotpotato.overall.second.name} to {wins.hotpoato.overall.first.name}
+					set {wins.hotpotato.overall.first} to {wins.hotpotato.%loop-player%}
+					set {wins.hotpoato.overall.first.name} to loop-player's name
+					broadcast "&a%loop-player% now has the most overall wins for Hotpotato!"
+					stop
+				
+				
+				{wins.hotpotato.%loop-player%} is greater than {wins.hotpotato.overall.first}:
+					{wins.hotpotato.overall.first.name} is loop-player's name:
+						set {wins.hotpotato.overall.first} to {wins.hotpotato.%loop-player%}
+						stop
+					set {wins.hotpotato.overall.third} to {wins.hotpotato.overall.second}
+					set {wins.hotpotato.overall.third.name} to {wins.hotpotato.overall.second.name}
+					set {wins.hotpotato.overall.second} to {wins.hotpotato.overall.first}
+					set {wins.hotpotato.overall.second.name} to {wins.hotpoato.overall.first.name}
+					set {wins.hotpotato.overall.first} to {wins.hotpotato.%loop-player%}
+					set {wins.hotpoato.overall.first.name} to loop-player's name
+					broadcast "&a%loop-player% now has the most overall wins for Hotpotato!"
+					stop
+			
+				{wins.hotpotato.overall.second} is not set:
+					set {wins.hotpotato.overall.second} to {wins.hotpotato.%loop-player%}
+					set {wins.hotpotato.overall.second.name} to loop-player's name
+					broadcast "&a%loop-player% now has set the second most overall wins for Hotpotato!"
+					stop
+				
+				{wins.hotpotato.%loop-player%} is {wins.hotpotato.overall.second}:
+					{wins.hotpotato.overall.second.name} is loop-player's name:
+						stop
+					set {wins.hotpotato.overall.third} to {wins.hotpotato.overall.second}
+					set {wins.hotpotato.overall.third.name} to {wins.hotpotato.overall.second.name}
+					set {wins.hotpotato.overall.second} to {wins.hotpotato.%loop-player%}
+					set {wins.hotpotato.overall.second.name} to loop-player's name
+					broadcast "&a%loop-player% now has the second most overall wins for Hotpotato!"
+					stop
+				
+				
+				{wins.hotpotato.%loop-player%} is greater than {wins.hotpotato.overall.second}:
+					{wins.hotpotato.overall.second.name} is loop-player's name:
+						set {wins.hotptato.overall.second} to {wins.hotpotato.%loop-player%}
+						stop
+					set {wins.hotpotato.overall.third} to {wins.hotpotato.overall.second}
+					set {wins.hotpotato.overall.third.name} to {wins.hotpotato.overall.second.name}
+					set {wins.hotpotato.overall.second} to {wins.hotpotato.%loop-player%}
+					set {wins.hotpotato.overall.second.name} to loop-player's name
+					broadcast "&a%loop-player% now has the second most overall wins for Hotpotato!"
+					stop
+
+				{wins.hotpotato.overall.third} is not set:
+					set {wins.hotpotato.overall.third} to {wins.hotpoato.%loop-player%}
+					set {wins.hotpotato.overall.third.name} to loop-player's name
+					broadcast "&a%loop-player% now has set the third most overall wins for Hotpotato!"
+					stop
+				
+				{wins.hotpotato.%loop-player%} is {wins.hotpotato.overall.third}:
+					{wins.hotpotato.overall.third.name} is loop-player's name:
+						set {wins.hotptato.overall.third} to {wins.hotpotato.%loop-player%}
+						stop
+					set {wins.hotpotato.overall.third} to {wins.hotpoato.%loop-player%}
+					set {wins.hotpotato.overall.third.name} to loop-player's name
+					broadcast "&a%loop-player% now has the third most overall wins for Hotpotato!"
+					stop
+				
+				{wins.hotpotato.%loop-player%} is greater than {wins.hotpotato.overall.third}:
+					set {wins.hotpotato.overall.third} to {wins.hotpoato.%loop-player%}
+					set {wins.hotpotato.overall.third.name} to loop-player's name
+					broadcast "&a%loop-player% now has the third most overall wins for Hotpotato!"
+					stop
+				
+				
+on sign change:
+	player is op:
+		line 1 is "hpboard1":
+			add block to {signs.hp.wins.first::*}
+			set line 1 to "&9%line 2%"
+			set line 3 to "&a%{wins.hotpotato.%line 2%.first}% Wins"
+			set line 4 to "&3&l1st Place"
+			set line 2 to "&1%{wins.hotpotato.%line 2%.first.name}%"
+		line 1 is "hpboard2":
+			add block to {signs.hp.wins.second::*}
+			set line 1 to "&9%line 2%"
+			set line 3 to "&a%{wins.hotpotato.%line 2%.second}% Wins"
+			set line 4 to "&e&l2nd Place"
+			set line 2 to "&1%{wins.hotpotato.%line 2%.second.name}%"
+		line 1 is "hpboard3":
+			add block to {signs.hp.wins.third::*}
+			set line 1 to "&9%line 2%"
+			set line 3 to "&a%{wins.hotpotato.%line 2%.third}% Wins"
+			set line 4 to "&7&l3rd Place"
+			set line 2 to "&1%{wins.hotpotato.%line 2%.third.name}%"
+				
+				
+every 30 seconds:
+	loop {signs.hp.wins.first::*}:
+		set {name.hp} to uncolored line 1 of loop-value
+		set line 3 of loop-value to "&a%{wins.hotpotato.%{name.hp}%.first}% Wins"
+		set line 2 of loop-value to "&1%{wins.hotpotato.%{name.hp}%.first.name}%"
+	loop {signs.hp.wins.second::*}:
+		set {name2.hp} to uncolored line 1 of loop-value
+		set line 3 of loop-value to "&a%{wins.hotpotato.%{name2.hp}%.second}% Wins"
+		set line 2 of loop-value to "&1%{wins.hotpotato.%{name2.hp}%.second.name}%"
+	loop {signs.hp.wins.third::*}:
+		set {name3.hp} to uncolored line 1 of loop-value
+		set line 3 of loop-value to "&a%{wins.hotpotato.%{name3.hp}%.third}% Wins"
+		set line 2 of loop-value to "&1%{wins.hotpotato.%{name3.hp}%.third.name}%"
+		
+command /clearhp [<text="overall">]:
+	trigger:
+		clear {wins.hotpotato.%arg%.first.name}
+		clear {wins.hotpotato.%arg%.first}
+		clear {wins.hotpotato.%arg%.second.name}
+		clear {wins.hotpotato.%arg%.second}
+		clear {wins.hotpotato.%arg%.third.name}
+		clear {wins.hotpotato.%arg%.third}
+
+			
+
+				
+				
+				
+				
+				
+				

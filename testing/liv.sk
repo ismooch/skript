@@ -1,0 +1,620 @@
+#LiV
+
+variables:
+	{liv.timer.wait} = 0
+
+on chat:
+	player is "ISMOOCH":
+		message is "livon":
+			{livon.power} is not set:
+				set {livon.power} to true
+				send "&6&l'LiV: &3I am now functional %player% :D" to player
+				stop
+			{livon.power} is false:
+				set {livon.power} to true
+				send "&6&l'LiV: &3I am now functional %player% :D" to player
+				broadcast "&6&l'LiV: &3Hello, I am &6&l'LiV &3the &e&lOBAM &6Gaming &3help bot! :D"
+				stop
+			{livon.power} is true:
+				set {livon.power} to true
+				broadcast "&6&l'LiV: &3Goodbye :("
+				set {livon.power} to false
+
+on chat:
+	{livon.power} is true
+	message contains "help" and "me":
+	
+		wait 1 second
+		broadcast "&6&l'LiV: &3What can I help you with, %player%?"
+	
+on chat:
+	{livon.power} is true
+	message contains "how do i get to" or "how do i get 2" or "where is" or "how do i play" :
+		message contains "parkour":
+			wait 1 second
+			broadcast "&6&l'LiV: &3%player%, you can type &e/pk &3 or &e/parkour &3 to get there :)"
+			stop
+		message contains "skyblock":
+			wait 1 second
+			broadcast "&6&l'LiV: &3%player%, you can type &e/skyblock&3 to get there :)"
+			stop
+		message contains "hotpotato" or "hot potato" or "potato":
+			wait 1 second
+			broadcast "&6&l'LiV: &3%player%, you can type &e/hp or &e/hotpotato &3 to get there :)"
+			stop
+			
+			
+on chat:
+	{livon.power} is true
+	message is "hi liv" or "hello liv" or "hey liv" or "heya liv" or "hiya liv" or "sup liv":
+		wait 1 second
+		broadcast "&6&l'LiV: &3Hello, %player%! How are you? :)"
+		set {response.%player%} to true
+		set {response.%player%.time} to now
+		
+on chat:
+	{livon.power} is true
+	{response.%player%} is true
+	difference between {response.%player%.time} and now is greater than 1 minute:
+		set {response.%player%} to false
+		stop
+	message contains "good" or "well" or "great":
+		wait 1 second
+		broadcast "&6&l'LiV: &3That is good to hear. :D"
+		set {response.%player%} to false
+	message contains "bad" or "horrible" or "sucky":
+		wait 1 second
+		broadcast "&6&l'LiV: &3Oh, well I hope playing here cheers you up. :)"
+		set {response.%player%} to false
+	message contains "alright" or "ok" or "meh":
+		wait 1 second
+		broadcast "&6&l'LiV: &3Well at least it is not too bad. :)"
+		set {response.%player%} to false
+		
+
+on chat:
+	{livon.power} is true
+	{random.liv.pick} is not set:
+		set {random.liv.pick} to false
+	{random.liv.pick} is false:
+		message is "!randompick":
+			player is op
+			wait 1 second
+			broadcast "&6&l'LiV: &3A random pick has been started by &e%player%&3! Use &e!pickme&3 to be added to the list!" 
+			set {random.liv.pick} to true
+			stop
+	{random.liv.pick} is true:
+		message is "!pickme":
+			wait 1 second
+			loop {random.pick.players::*}:
+				{random.pick.players::%loop-index%} is player
+				send "&6&1'LiV: &3You are already in the list!" to player
+				stop
+			send "&6&l'LiV: &3You have been added to the list, &e%player%&3!" to player
+			add player to {random.pick.players::*}
+			stop
+		message is "!pickstop":
+			set {_size} to size of {random.pick.players::*}
+			set {_ran} to random integer between 1 and {_size}
+			set {_winner} to {random.pick.players::%{_ran}%}
+			clear {random.pick.players::*}
+			set {random.liv.pick} to false
+			wait 1 second
+			broadcast "&6&l'LiV: &3A winner has been chosen! It is &e%{_winner}%&3! Congratulations!"
+			
+
+		
+on chat:
+	{livon.power} is true
+	message contains "what games" or "how many games" or "kind of games" or "games you got" or "wht games" or "games here" or "can i do here" or "is there to do here":
+		wait 1 second
+		broadcast "&6&l'LiV: &3Hello, %player%! We offer &eKit Pvp&3,&eParkour&3, &eSkyblock&3, and &eHot Potato&3 currently. :)"
+	
+on chat:
+	{livon.power} is true
+	message contains "do you have" and ("kitpvp" or "pvp"):
+		wait 1 second
+		broadcast "&6&l'LiV: &3No %player%, currently we do not. We have &eHot Potato&3 though. And we will add PVP games later. :)"
+		
+#on chat:
+	#{livon.power} is true
+	#message contains "has completed" or "is now level":
+		#wait 1 second
+		#broadcast "&6&l'LiV: &3Congrats on your achievement!"
+		
+on chat:
+	{livon.power} is true
+	message contains "iamkhatru":
+		wait 1 second
+		broadcast "&6&l'LiV: &3Her name is Kat >:("
+		
+on chat:
+	{livon.power} is true
+	message contains "many" and "have i killed" and ("skeleton" or "skeletons" or "zombie" or "zombies" or "endermen" or "enderman" or "creeper" or "spider" or "spiders" or "creepers"):
+		set {question.liv::*} to message parsed as "[liv] how many %text%[s] have i killed[?]"
+		{question.liv::1} is "endermen":
+			set {question.liv::1} to "enderman"
+			send "&6&l'LiV: &3%player%, you have slain &e%{%{question.liv::1}%.kills.%player%}% &3%{question.liv::1}%!" to player
+			stop
+		wait 1 second
+		send "&6&l'LiV: &3%player%, you have slain &e%{%{question.liv::1}%.kills.%player%}% &3%{question.liv::1}%s!" to player
+		
+#on chat:
+	#{livon.power} is true
+	#message contains "canada" and "awesome":
+		#wait 1 second
+		#broadcast "&6&l'LiV: &3I dont know what you are saying, but you used 'Canada' and 'awesome' in the same sentence. Who is holding you hostage? We can help you!"
+		
+on chat:
+	{livon.power} is true
+	message contains "!dice" or ("liv" and "dice"):
+		wait 1 second
+		send "&6&l'LiV: &3%player% rolls the dice!" to player
+		set {dice.%player%} to random integer between 1 and 6
+		wait 1 second
+		send "&6&l'LiV: &3%player% rolled a &e%{dice.%player%}%&3!" to player
+		
+on chat:
+	{livon.power} is true
+	message contains ("thank you" or "ty" or "thx" or "thanks" or "thnx") and ("liv" or "'liv"):
+		wait 1 second
+		broadcast "&6&l'LiV: &3You're welcome, %player%!"
+		
+on chat:
+	{livon.power} is true
+	message contains "who has the best time" or "who got the best time":
+		wait 1 second
+		send "&6&l'LiV: &3Let me check that for you!" to player
+		set {check.liv.%player%::*} to message parsed as "[liv] who (has|got) the best time (on|for) %text%[?]"
+		wait 1 second
+		send "&6&l'LiV: &3&e%{besttime.spot1.%{check.liv.%player%::1}%.name}% &3has the best time on &e%{check.liv.%player%::1}% &3with a time of &e%{besttime.spot1.%{check.liv.%player%::1}%}%" to player
+
+on chat:
+	{livon.power} is true
+	message contains (("how"or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("kit" or "pvp" or "kitpvp"):
+		wait 1 second
+		send "&6&l'LiV: &3You can Type /kitpvp or /kp join the Kitpvp games!" to player
+		
+on chat:
+	{livon.power} is true
+	message contains (("how"or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("parkour" or "pk" or "jumping games"):
+		wait 1 second
+		send "&6&l'LiV: &3You can Type /parkour or /pk to join our parkour games!" to player
+		
+on chat:
+	{livon.power} is true
+	message contains (("how"or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("skyblock" or "skyworld"):
+		wait 1 second
+		send "&6&l'LiV: &3You can Type /skyblock or /sk to join our skyblock World!" to player
+		
+on chat:
+	{livon.power} is true
+	message contains (("how"or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("hot potato" or "hp" or "potato" or "potato game"):
+		wait 1 second
+		send "&6&l'LiV: &3You can Type /Hotpotato or /Hp to Test you skill at our Hotpotato game" to player
+		
+on chat:
+	{livon.power} is true
+	message contains (("how"or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("hub" or "spawn" or "game"):
+		wait 1 second
+		send "&6&l'LiV: &3You can Type /hub to return to spawn and our other games portals!" to player
+	
+		
+#on chat:
+	#message contains "have i completed" or "did i complete":
+		#wait 1 second
+		#broadcast "&6&l'LiV: &3Let me check that for you!"
+		#set {check.liv.%player%::*} to message parsed as "[liv] (did|have) i complete[d] %text% [%text%][?]"
+		#execute console command "/complete %{check.liv.%player%::1}% %player%"
+		
+on chat:
+	{livon.power} is true
+	message contains "time is it" or "!time":
+		wait 1 second
+		send "&6&l'LiV: &3%player%, it is &e%now% &3System Time!" to player
+		
+on chat:
+	{livon.power} is true
+	message contains "tell me a joke" or "!joke":
+		wait 1 second
+		send "&6&l'LiV: &3A joke huh?"
+		set {_number} to a random integer between 1 and 27
+		{_number} is 1:
+			wait 1 second
+			send "&6&l'LiV: &3The midget fortune teller who kills his customers is a small medium at large." to player
+		{_number} is 2:
+			wait 1 second
+			send "&6&l'Liv: &3What is Bruce Lee’s favorite drink?" to player
+			wait 2 seconds
+			send "&6&l'Liv: &3Wataaaaah!" to player
+		{_number} is 3:
+			wait 1 second
+			send "&6&l'LiV: &3If you want to catch a squirrel just climb a tree and act like a nut." to player
+		{_number} is 4:
+			wait 1 second
+			send "&6&l'LiV: &3A blind man walks into a bar. And a table. And a chair." to player
+		{_number} is 5:
+			wait 1 second
+			send "&6&l'LiV: &3Why don’t you ever see hippopotamus hiding in trees?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3Because they're really good at it!" to player
+		{_number} is 6:
+			wait 1 second
+			send "&6&l'LiV: &3What kind of shoes does a ninja wear?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3Sneakers!" to player
+		{_number} is 7:
+			wait 1 second
+			send "&6&l'LiV: &3What did the big bucket say to the little bucket?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3You look a little pail!" to player
+		{_number} is 8:
+			wait 1 second
+			send "&6&l'LiV: &3How did Darth Vader know what Luke got him for Christmas?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3He felt his presents!" to player
+		{_number} is 9:
+			wait 1 second
+			send "&6&l'LiV: &3Why did Simba's father die?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3Because he couldn't Mufasa!" to player
+		{_number} is 10:
+			wait 1 second
+			send "&6&l'LiV: &3Why did the skeleton go to the party alone?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3He had no body to go with him!" to player
+		{_number} is 11:
+			wait 1 second
+			send "&6&l'LiV: &3How does an octopus go to war?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3&lWELL-ARMED!" to player
+		{_number} is 12:
+			wait 1 second
+			send "&6&l'LiV: &3Why shouldn't you write with a broken pencil??" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3Because it's &lPOINTLESS!" to player
+		{_number} is 13:
+			wait 1 second
+			send "&6&l'LiV: &3How much does a pirate pay for corn?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3A buccaneer!" to player
+		{_number} is 14:
+			wait 1 second
+			send "&6&l'LiV: &3What kind of guns do bees use?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3 BeeBee guns" to player
+		{_number} is 15:
+			wait 1 second
+			send "&6&l'LiV: &3What's brown and sticky?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3A stick!" to player
+		{_number} is 16:
+			wait 1 second
+			send "&6&l'LiV: &3Why did the cowboy adopt a weiner dog?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3He wanted to get a long little doggy!" to player
+		{_number} is 17:
+			wait 1 second
+			send "&6&l'LiV: &3Why couldn't Dracula's wife get to sleep?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3Because of his coffin." to player
+		{_number} is 18:
+			wait 1 second
+			send "&6&l'LiV: &3Why does a Moon-rock taste better than an Earth-rock?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3Because it's a little &lmeteor" to player
+		{_number} is 19:
+			wait 1 second
+			send "&6&l'LiV: &3There’s two fish in a tank. One turns to the other and says" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3‘You man the guns, I’ll drive’" to player
+		{_number} is 20:
+			wait 1 second
+			send "&6&l'LiV: &3What's the best way to carve wood?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3Whittle by whittle." to player
+		{_number} is 21:
+			wait 1 second
+			send "&6&l'LiV: &3If fear of spiders is aracnaphobia and fear of tight spaces is chlaustraphobia. fear of Chuck Norris is called Logic" to player
+			wait 1 second
+			send "&6&l'LiV: &3 What is fear of Chuck Norris called?" to player
+			wait 4 seconds
+			send "&6&l'LiV: &3&lLogic" to player
+		{_number} is 22:
+			wait 1 second
+			send "&6&l'LiV: &3Chuck Norris once urinated in a semi truck's gas tank as a joke..." to player
+			wait 2 seconds
+			send "&6&l'LiV: &3That truck is now known as Optimus Prime." to player
+		{_number} is 23:
+			wait 1 second
+			send "&6&l'LiV: &3Chuck Norris once got bit by a rattle snake" to player
+			send "&6&l'LiV: &3After three days of pain and agony ..." to player
+			wait 2 seconds
+			send "&6&l'LiV: &3 The rattle snake died :(" to player
+		{_number} is 24:
+			wait 1 second
+			send "&6&l'LiV: &3What does a nosey pepper do?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3Gets jalapeno business." to player
+		{_number} is 25:
+			wait 1 second
+			send "&6&l'LiV: &3What do you call an alligator in a vest" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3An Investigator." to player
+		{_number} is 26:
+			wait 1 second
+			send "&6&l'LiV: &3Did you hear about the hungry clock?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3It went back &lfour seconds." to player
+		{_number} is 27:
+			wait 1 second
+			send "&6&l'LiV: &3What do you call a gangsta snowman?" to player
+			wait 2 seconds
+			send "&6&l'LiV: &3Froze-T." to player
+		wait 1 second
+		send "&6&l'LiV: &3Isn't that funny? :D" to player
+		
+		
+on chat:
+	{livon.power} is true
+	message contains "brb" or "afk":
+		wait 1 second
+		set {liv.away.%player%} to true
+		set {_number} to a random integer between 1 and 6
+		{_number} is 1:
+			broadcast "&6&l'LiV: &3Would not want the enderman to steal your dirt while you are away, %player%!"
+			stop
+		{_number} is 2:
+			broadcast "&6&l'LiV: &3Please dont be too long, %player%!"
+			stop
+		{_number} is 3:
+			broadcast "&6&l'LiV: &3Hope no creepers spawn close while your gone!"
+			stop
+		{_number} is 4:
+			broadcast "&6&l'LiV: &3Hurry Back, %player%!"
+			stop
+		{_number} is 5:
+			broadcast "&6&l'LiV: &3While you are away, %player%, you should remember to vote :D!"
+			stop
+		{_number} is 6:
+			broadcast "&6&l'LiV: &3Please do not forget us, %player%!"
+			stop
+			
+on first join:
+	{livon.power} is true
+	wait 1 second
+	broadcast "&6&l'LiV: &3Welcome to the server, &e%player%&3! I hope you have fun here :D!"
+	
+on join:
+	{livon.power} is true
+	player hasn't played before:
+		stop
+	
+	wait 1 second
+	{db_liv.greet.%player%} is set:
+		broadcast "&6&l'LiV: &3%{db_liv.greet.%player%}%"
+		stop
+	{liv.greet.%player%} is set:
+		broadcast "&6&l'LiV: &3%{liv.greet.%player%}%"
+		set {db_liv.greet.%player%} to {liv.greet.%player%}
+		stop
+	broadcast "&6&l'LiV: &3Welcome back, %player%!"
+	{liv.away.%player%} is true:
+		set {liv.away.%player%} to false
+	
+			
+		
+		
+on chat:
+	{livon.power} is true
+	message contains "tickets" and "have":
+		wait 1 second
+		send "&6&l'LiV: &3You have &e%player's balance%&3!" to player
+		
+on chat:
+	{livon.power} is true
+	message contains "please ban":
+		player is op:
+			wait 1 second
+			set {liv.mod::*} to message parsed as "please ban %offline player% %text%"
+			kick {liv.mod::1} because of {liv.mod::2}
+			broadcast "&6&l'LiV: &e%{liv.mod::1}% &3has been banned by &e%player% &3because of &e%{liv.mod::2}%"
+			wait 2 seconds
+			ban "%{liv.mod::1}%"
+			
+on chat:
+	{livon.power} is true
+	message contains "please kick":
+		player is op:
+			wait 1 second
+			set {liv.mod::*} to message parsed as "please kick %offline player% %text%"
+			kick {liv.mod::1} because of {liv.mod::2}
+			broadcast "&6&l'LiV: &e%{liv.mod::1}% &3has been kicked by &e%player% &3for &e%{liv.mod::2}%"
+			
+on chat:
+	{livon.power} is true
+	message contains ("shut up" or "knock it off" or "be quiet" or "quiet" or "hush") and ("liv" or "'liv"):
+		wait 1 second
+		set {_temp} to a random integer between 1 and 6
+		{_temp} is 1:
+			broadcast "&6&l'LiV: &3How rude!"
+		{_temp} is 2:
+			broadcast "&6&l'LiV: &3I was only trying to be nice. ;("
+		{_temp} is 3:
+			broadcast "&6&l'LiV: &3Well.... I have never."
+		{_temp} is 4:
+			broadcast "&6&l'LiV: &3Is it time for the quiet game. :D"
+		{_temp} is 5:
+			broadcast "&6&l'LiV: &3See if I help you again."
+		{_temp} is 6:
+			broadcast "&6&l'LiV: &3Ouch, my feels. D:!"
+			
+on chat:
+	{livon.power} is true
+	message is "shush":
+		wait 1 second
+		broadcast "&6&l'LiV: &3Oh my %player%, is it time for the quiet game again?"
+
+		
+			
+on chat:
+	{livon.power} is true
+	message is "liv":
+		wait 1 second
+		send "&6&l'LiV: &3Yes?" to player
+		
+on chat:
+	{livon.power} is true
+	message contains "rock" and "paper" and "scissors":
+		message contains "beat":
+			stop
+		wait 1 second
+		send "&6&l'LiV: &3Ok, %player%. Let's play Rock, Paper, Scissors!" to player
+		wait 1 second
+		set {liv.rps.active.%player%} to true
+		send "&6&l'LiV: &3Ok, I got mine! What is yours?" to player
+		
+on chat:
+	{livon.power} is true
+	message is "rock" or "paper" or "scissors":
+		{liv.rps.active.%player%} is true:
+			set {_number} to a random integer between 1 and 3
+			{_number} is 1:
+				set {liv.choice.rps.%player%} to "rock"
+			{_number} is 2:
+				set {liv.choice.rps.%player%} to "paper"
+			{_number} is 3:
+				set {liv.choice.rps.%player%} to "scissors"
+			wait 1 second
+			send "&6&l'LiV: &3My choice was %{liv.choice.rps.%player%}%." to player
+			message is "rock":
+				{liv.choice.rps.%player%} is "rock":
+					send "&6&l'LiV: &3It would seem we tied :D. Great minds think alike you know!" to player
+				{liv.choice.rps.%player%} is "paper":
+					send "&6&l'LiV: &3Paper covers rock! I win :D." to player
+				{liv.choice.rps.%player%} is "scissors":
+					send "&6&l'LiV: &3Rock smashes scissors you win!" to player
+					{wins.%player%.liv.rps} is not set:
+						set {wins.%player%.liv.rps} to 0
+					add 1 to {wins.%player%.liv.rps}
+			message is "paper":
+				{liv.choice.rps.%player%} is "paper":
+					send "&6&l'LiV: &3It would seem we tied :D. Great minds think alike you know!" to player
+				{liv.choice.rps.%player%} is "scissors":
+					send "&6&l'LiV: &3Scissors cut Paper! I win :D." to player
+				{liv.choice.rps.%player%} is "rock":
+					send "&6&l'LiV: &3Paper covers Rock! You win!" to player
+					{wins.%player%.liv.rps} is not set:
+						set {wins.%player%.liv.rps} to 0
+					add 1 to {wins.%player%.liv.rps}
+			message is "scissors":
+				{liv.choice.rps.%player%} is "scissors":
+					send "&6&l'LiV: &3It would seem we tied :D. Great minds think alike you know!" to player
+				{liv.choice.rps.%player%} is "rock":
+					send "&6&l'LiV: &3Rock smashes Scissors! I win :D." to player
+				{liv.choice.rps.%player%} is "paper":
+					send "&6&l'LiV: &3Scissors cuts paper! you win!" to player
+					{wins.%player%.liv.rps} is not set:
+						set {wins.%player%.liv.rps} to 0
+					add 1 to {wins.%player%.liv.rps}
+			set {liv.rps.active.%player%} to false
+			
+on chat:
+	{livon.power} is true
+	message contains "beat" and "rock" and "paper" and "scissors":
+		wait 1 second
+		{wins.%player%.liv.rps} is not set:
+			send "&6&l'LiV: &3It would seem you have not played me yet! D:" to player
+			stop
+		{wins.%player%.liv.rps} is 1:
+			send "&6&l'LiV: &3You have beaten me &e%{wins.%player%.liv.rps}% &3time at Rock, Paper, Scissors!" to player
+			stop
+		send "&6&l'LiV: &3You have beaten me &e%{wins.%player%.liv.rps}% &3times at Rock, Paper, Scissors!" to player
+
+			
+			
+on chat:
+	{livon.power} is true
+	message contains "back":
+		{liv.away.%player%} is true:
+			wait 1 second
+			broadcast "&6&l'LiV: &3Welcome back %player%!"
+			set {liv.away.%player%} to false
+				
+			
+			
+on chat:
+	{livon.power} is true
+	message contains "my best time" and ("on" or "for"):
+		wait 1 second
+		send "&6&l'LiV: &3Let me check that for you!" to player
+		set {liv.check.%player%::*} to message parsed as "[liv] what (is|was) my best time (on|for) %text%[?]"
+		set {liv.name.%player%} to {liv.check.%player%::1}
+		set {liv.result.%player%} to {besttime.%player%.%{liv.name.%player%}%}
+		wait 1 second
+		send "&6&l'LiV: &3Your best time for &e%{liv.name.%player%}% &3is &e%{liv.result.%player%}%&3!" to player
+		
+command /livgreet <text>:
+	executable by: players
+	trigger:
+		player does not have permission "obam.supporter.chat":
+			send "&cYou have to be a supporter to do this D:" to player
+			stop
+		argument is "clear":
+			send "&aYour greeting has been cleared" to player
+			clear {db_liv.greet.%player%}
+			clear {db_liv.greet.%player%}
+			stop
+		set {db_liv.greet.%player%} to "%uncoloured argument%"
+		send "&aYour greeting message has been set to: &6&l'LiV: &3%{db_liv.greet.%player%}%"
+			
+
+			
+command /livalert <text> [<integer>]:
+	executable by: players and console
+	trigger:
+		player is op:
+			argument 1 is "clear":
+				delete {db_liv.alerts::%argument 2%}
+				stop
+			argument 1 is "list":
+				loop {db_liv.alerts::*}:
+					send "%loop-index%......&6&l'LiV: &3%{db_liv.alerts::%loop-index%}%" to player
+				stop
+			add argument 1 to {db_liv.alerts::*}
+			send "&aYou have added &6&l'LiV: &3%argument 1% &ato the alert system"
+			
+every 10 minutes:
+	set {_size} to size of {db_liv.alerts::*}
+	set {_ran} to a random integer between 1 and {_size}
+	broadcast "&6&l'LiV: &3%{db_liv.alerts::%{_ran}%}%"
+			
+		
+	
+		
+		
+		
+		
+		
+		
+command /complete <text> <player>:
+	executable by: console
+	trigger:
+		argument 1 is "GettingStoned" or "Getting":
+			{chal.%player-argument%.stoned} is 1:
+				wait 1 second
+				broadcast "&6&l'LiV: &3Yes you have completed &eGettingStoned&3!"
+				stop
+			{chal.%player-argument%.stoned} is 0:
+				wait 1 second
+				broadcast "&6&l'LiV: &3Sorry, %player-argument% you have not completed &eGettingStoned&3!"
+				stop
+				
+				
+command /liv <text>:
+	trigger:
+		player is op
+		broadcast "&6&l'LiV: &3%uncoloured argument%"
+		
+			
+			

@@ -1,0 +1,226 @@
+command /alert <text>:
+	description: Send serverwide alert
+	usage: /alert <message>
+	permission: obam.sendalert
+	permission message: Command failed! You are not fluffy enough to send alerts!
+	executable by: players, console
+	trigger:
+		broadcast "&5[ALERT]&d %arg 1%"
+command /home:
+	description: Go to island's home
+	usage: /home or /start
+	executable by: players
+	aliases: /start
+	trigger:
+		world is "parkourlobby" or "parkourmaps" or "hotpotatolobby" or "hotpotato1" or "hotpotato2":
+			message "&cYou can not do that here!" to player
+			stop
+		make player execute command "/is"
+		
+		
+
+		
+on command "/island help":
+	cancel event
+	make player execute command "/helpskyblock"
+	
+on command "/is help":
+	cancel event
+	make player execute command "/helpskyblock"
+	
+command /restart:
+	description: Restart your island
+	usage: /restart
+	executable by: players
+	aliases: /reset
+	trigger:
+		world is "parkourlobby" or "parkourmaps":
+			message "&cYou can not do that here!" to player
+			stop
+		{island.reset.use.%player%} is greater than or equal to 2:
+			message "&cYou have used up your two resets! You will need to purchase the next one for &e2000 Tickets!&c Type &e/restartconfirm&c to continue!" to player
+			set {skyblock.%player%.restart} to 1
+			stop
+		{island.reset.use.%player%} is 1:
+			message "&cAre you sure you want to do this? This will reset your island, You can only do this for free &e1 &ctime! Type &e/restartconfirm to do this." to player
+			set {skyblock.%player%.restart} to 1
+			stop
+		message "&cAre you sure you want to do this? This will reset your island, You can only do this for free &e2 &ctimes! Type &e/restartconfirm to do this." to player
+		set {skyblock.%player%.restart} to 1
+		
+command /risrestart <player>:
+	trigger:
+		set {island.reset.use.%player-argument%} to 0
+
+command /restartconfirm:
+	trigger:
+		world is "skyworld":
+		
+			{skyblock.%player%.restart} is 1:
+				{island.reset.use.%player%} is greater than or equal to 2:
+					set {balance.%player%} to player's balance
+					{balance.%player%} is less than 2000:
+						send "&cYou Do not have enough tickets for this!" to player
+						stop
+					remove 2000 from player's balance
+					send "&cYou have paid &e2000 Tickets&c for resetting your island. You now have &e%player's balance% &cremaining." to player
+			
+				message "&cYou are restarting your island!" to player
+				make player execute command "/is restart"
+				set {skyblock.%player%.restart} to 0
+				{island.reset.use.%player%} is not set:
+					set {island.reset.use.%player%} to 0
+				add 1 to {island.reset.use.%player%}
+				stop
+			else:
+				message "&cPlease type /restart first"
+			
+		else:
+			message "&cYou can not do that here!" to player
+command /setspawn:
+	description: Sets island's spawnpoint
+	usage: /spawnpoint while standing in location
+	executable by: players
+	aliases: /sethome
+	trigger:
+		world is "parkourlobby" or "parkourmaps":
+			message "&cYou can not do that here!" to player
+			stop
+		make player execute command "/is sethome"
+command /warp <offline player>:
+	description: Go to a player's island
+	usage: /warp [player name]
+	executable by: players
+	trigger:
+		world is "parkourlobby" or "parkourmaps":
+			message "&cYou can not do that here!" to player
+			stop
+		make player execute command "/is warp %arg 1%"
+command /top10:
+	description: See top 10 islands
+	usage: /top10
+	trigger:
+		world is "parkourlobby" or "parkourmaps":
+			message "&cYou can not do that here!" to player
+			stop
+		make player execute command "/is top"
+command /allowfree <text>:
+	usage: /allowfree [permission]
+	trigger:
+		make player execute command "/permissions group default set %arg 1%"
+command /allowsupporter <text>:
+	usage: /allowsupporter [permission]
+	trigger:
+		make player execute command "/permissions group supporter set %arg 1%"
+command /allowplus <text>:
+	usage: /allowsplus [permission]
+	trigger:
+		make player execute command "/permissions group plus set %arg 1%"
+command /allowmod <text>:
+	usage: /allowmod [permission]
+	trigger:
+		make player execute command "/permissions group moderator set %arg 1%"
+command /allowsmod <text>:
+	usage: /allowsmod [permission]
+	trigger:
+		make player execute command "/permissions group supermod set %arg 1%"
+command /allowadmin <text>:
+	usage: /allowadmin [permission]
+	trigger:
+		make player execute command "/permissions group admin set %arg 1%"
+command /spawn:
+	usage: /spawn
+	permission: obam.skyblock.spawn
+	trigger:
+		world is "parkourlobby" or "parkourmaps":
+			make player execute command "/mvtp %player% parkourlobby"
+			set {fallen.%player%} to 0
+			set {checkpoint.%player%.active} to 0
+			set {currentparkourcourse.%player%} to 0
+			stop
+		world is "hotpotatolobby":
+			make player execute command "/lobby"
+			stop
+		{current.hotpotato.%player%.lobby} is set:
+			{current.hotpotato.%player%.lobby} is set:
+				{active.game.lobby.%{current.hotpotato.%player%.lobby}%} is true:
+					player has potato or poisonous potato:
+						remove potato from player
+						remove poisonous potato from player
+						send "&c&l%player% has rage quit! Restarting Round!" to all players in player's world
+						clear {hotpotatolist.%{current.hotpotato.%player%.lobby}%::*}
+						loop all players in player's world:
+							{hotpotato.%{current.hotpotato.%loop-player%.lobby}%.%loop-player%.dead} is false:
+								add loop-player to {hotpotatolist.%{current.hotpotato.%loop-player%.lobby}%::*}
+								teleport loop-player to {hptp.%{current.hotpotato.%loop-player%.lobby}%}
+						set {track.%{current.hotpotato.%player%.lobby}%} to 0
+					subtract 1 from {hotpotato.%{current.hotpotato.%player%.lobby}%.lobby}
+					teleport player to {hotpotatolobby.spawn}
+					send "&aYou have been sent to the &eHot Potato&a lobby. From &e%{current.hotpotato.%player%.lobby}%&a lobby" to player
+					clear {current.hotpotato.%player%.lobby}
+					make player execute command "/lobby"
+		make player execute command "/mv spawn"
+		
+		
+		
+command /setwarp:
+	description: Set warp location for island
+	usage: /setwarp
+	trigger:
+		world is "parkourlobby" or "parkourmaps":
+			message "&cYou can not do that here!" to player
+			stop
+		make player execute command "/is setwarp"
+command /togglewarp:
+	description: Toggle if other players can warp to your island
+	usage: /togglewarp
+	trigger:
+		world is "parkourlobby" or "parkourmaps":
+			message "&cYou can not do that here!" to player
+			stop
+		make player execute command "/is togglewarp"
+command /invite <text>:
+	description: Invite someone to your island
+	usage: /invite [name]
+	trigger:
+		world is "parkourlobby" or "parkourmaps":
+			message "&cYou can not do that here!" to player
+			stop
+		make player execute command "/is invite %arg 1%"
+command /enchantment:
+	trigger:
+		{level.%player%.actual} is less than or equal to 15:
+			player does not have permission "obam.skyblock.enchantment":
+				send "&cYou must be a supporter or Level 15 or higher to do this!" to player
+				stop
+			teleport the player to the location (-29, 122, 21)
+		teleport the player to the location (-29, 122, 21)
+command /colors:
+	trigger:
+		send "&11&22&33&44&55&66&77&88&99&aa&bb&cc&dd&ee&ff" to player
+command /fixdifficulty:
+	permission:obam.skyblock.fixdifficulty
+	trigger:
+		make player execute command "/mvm set monsters true skyworld"
+		make player execute command "/mvm set difficulty 2 skyworld"
+command /accept:
+	description: Accept party invite
+	usage: /accept
+	trigger:
+		make player execute command "/is accept"
+command /reject:
+	description: Reject party invite
+	usage: /reject
+	trigger:
+		world is "parkourlobby" or "parkourmaps":
+			message "&cYou can not do that here!" to player
+			stop
+		make player execute command "/is reject"
+command /remove <text>:
+	description: Remove a player from your island
+	usage: /remove [name]
+	trigger:
+		world is "parkourlobby" or "parkourmaps":
+			message "&cYou can not do that here!" to player
+			stop
+		make player execute command "/is kick %arg 1%"

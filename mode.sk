@@ -1,0 +1,8 @@
+command /m:
+	trigger:
+		if player's gamemode is survival:
+			make player execute command "/gamemode creative"
+			stop
+		if player's gamemode is creative:
+			make player execute command "/gamemode survival"
+			stop

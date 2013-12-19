@@ -1,0 +1,105 @@
+#IHS
+options:
+	dirt: i;dirt;n;&b&nDirt;l;&7Click to claim your &epurchased dirt.;c;sudo %player% redeem dirt
+	grass: i;grass;n;&b&nGrass;l;&7Click to claim your &epurchased grass.;c;sudo %player% redeem grass
+	sand: i;sand;n;&b&nSand;l;&7Click to claim your &epurchased sand.;c;sudo %player% redeem sand
+	redstone: i;redstone;n;&b&nRedstone;l;&7Click to claim your &epurchased redstone.;c;sudo %player% redeem redstone
+	lavabucket: i;lava bucket;n;&b&nLava Bucket;l;&7Click to claim your &epurchased lava buckets.;c;sudo %player% redeem lava bucket
+	dampener: i;fullblock spruce wood block;n;&b&nxPlosion Dampener;l;&7Click to claim your &epurchased xPlosion Dampeners.;c;sudo %player% redeem fullblock spruce wood block
+command /itemstore <offline player> <item> <integer>:
+	trigger:
+		{db_ihs.%offline player-argument%.%argument 2%} is set:
+			add argument 3 to {db_ihs.%offline player-argument%.%argument 2%}
+			send "&aYou have made a purchase! Type &e/redeem&a to redeem your items!" to offline player-argument
+			play "level up" at location of offline player-argument with pitch 2
+			wait 0.2 seconds
+			play "level up" at location of offline player-argument with pitch 2
+			wait 0.2 seconds
+			play "level up" at location of offline player-argument with pitch 2
+			wait 0.2 seconds
+			play "level up" at location of offline player-argument with pitch 2
+			wait 0.2 seconds
+			play "level up" at location of offline player-argument with pitch 2
+			stop
+		set {db_ihs.%offline player-argument%.%argument 2%} to argument 3
+		set {db_alert.redeem.%offline player-argument%} to true
+		send "&aYou have made a purchase! Type &e/redeem&a to redeem your items!" to offline player-argument
+		play "level up" at location of offline player-argument with pitch 2
+		wait 0.2 seconds
+		play "level up" at location of offline player-argument with pitch 2
+		wait 0.2 seconds
+		play "level up" at location of offline player-argument with pitch 2
+		wait 0.2 seconds
+		play "level up" at location of offline player-argument with pitch 2
+		wait 0.2 seconds
+		play "level up" at location of offline player-argument with pitch 2
+		
+on join:
+	{db_alert.redeem.%player%} is true
+	send "&c&lYou have items waiting to be redeemed! Use &e/redeem &c&lto redeem your items!" to player
+	play "level up" at location of player with pitch 2
+	wait 0.2 seconds
+	play "level up" at location of player with pitch 2
+	wait 0.2 seconds
+	play "level up" at location of player with pitch 2
+	wait 0.2 seconds
+	play "level up" at location of player with pitch 2
+	wait 0.2 seconds
+	play "level up" at location of player with pitch 2
+
+
+	
+command /redeem [<item>]:
+	executable by: players
+	trigger:
+	
+		argument is not set:
+			world is "skyworld":
+				show "s;1;{@dirt};s;2;{@grass};s;3;{@sand};s;4;{@redstone};s;5;{@lavabucket};s;6;{@dampener}" with 1 row named "&9&lOBAM &9Redeem" to player
+				stop
+				
+			world is "world":
+				show "s;1;{@dampener}" with 1 row named "&9&lOBAM &9Redeem" to player
+				stop
+			
+			send "&cMake sure you are in the right world!" to player
+				
+		
+		argument is set:
+			{db_ihs.%player%.%argument%} is 0:
+				send "&cYou do not have any of this item to redeem! If this is incorrect, please contact the Administrator" to player
+				stop
+				
+			{db_ihs.%player%.%argument%} is not set:
+				send "&cYou do not have any of this item to redeem! If this is incorrect, please contact the Administrator" to player
+				stop
+			give player {db_ihs.%player%.%argument%} of item-argument
+			argument is fullblock spruce wood block:
+				{db_ihs.%player%.%argument%} is less than 2:
+					send "&aYou have received your &e%{db_ihs.%player%.%argument%}% xPlosion Dampener&a! Thank you for your purchase!"
+					stop
+				
+				send "&aYou have received your &e%{db_ihs.%player%.%argument%}% xPlosion Dampeners&a! Thank you for your purchase!"
+				set {db_ihs.%player%.%argument%} to 0
+				set {db_alert.redeem.%player%} to false
+				stop
+			send "&aYou have received your &e%{db_ihs.%player%.%argument%}% %argument%&a! Thank you for your purchase!"
+			set {db_ihs.%player%.%argument%} to 0
+			set {db_alert.redeem.%player%} to false
+			
+		send "&cIf you did not have a menu open, ensure you are in the correct world for redeeming! D:" to player
+		
+			
+command /ihslist <player> <item>:
+	trigger:
+		send "%{db_ihs.%player-argument%.%argument 2%}% %argument 2% on file" to player
+		
+command /sudo [<player>] [<text>]:
+	executable by: console and players
+	
+	trigger:
+		has permission "obam.staff.admin"
+		make player-argument execute command "%argument 2%"
+		
+
+		

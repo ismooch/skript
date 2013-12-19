@@ -1,0 +1,23 @@
+command /setplace:
+	trigger:
+		set {king.of.the.ladder} to location of player
+
+		
+every 1 second:
+	loop all players in "wildtest":
+		y-coordinate of loop-player's head is greater than y-coordinate of {king.of.the.ladder}:
+			{%loop-player%.kotl.points} is not set:
+				set {%loop-player%.kotl.points} to 0
+			add 1 to {%loop-player%.kotl.points}
+			{%loop-player%.kotl.points} is 10:
+				send "&aYou are now the King!" to loop-player
+			{%loop-player%.kotl.points} is greater than 11:
+				set {%loop-player%.kotl.points} to 11
+		y-coordinate of loop-player's head is less than y-coordinate of {king.of.the.ladder}:
+			{%loop-player%.kotl.points} is not set:
+				set {%loop-player%.kotl.points} to 0
+			subtract 1 from {%loop-player%.kotl.points} 
+			{%loop-player%.kotl.points} is 9:
+				send "&cYou have been dethroned" to loop-player
+			{%loop-player%.kotl.points} is less than or equal to 0:
+				set {%loop-player%.kotl.points} to 0

@@ -1,0 +1,78 @@
+#todo list
+command /todolist [<text="list">] [<text>]:
+	usage: &e/todolist &b[add|delete|list|help|complete|clear] [text|number]
+	aliases: /todo
+	trigger:
+		arg 1 is "help":
+			send "&a----------&e&lTodo List Help&a----------" to player
+			send " " to player
+			send "&a&l&nADD: &e/todolist add [text] &awill add item to your todo list" to player
+			send " " to player
+			send "&a&l&nDELETE: &e/todolist delete [number] &awill delete the numbered item on your todo list" to player
+			send " " to player
+			send "&a&l&nCOMPLETE: &e/todolist complete [number]&a will &mstrikethrough &a the numbered item" to player
+			send " " to player
+			send "&a&l&nCLEAR: &e/todolist clear &awill clear your entire ToDo List" to player
+			send " " to player
+			send "&a&l&nLIST: &e/todolist &aor&e /todolist list &a will show your whole todo list" to player
+			send " " to player
+			send "&a&l&nLIST SPECIFIC: &e/todolist list [number] &a will show the specific number on your todo list" to player
+			send " " to player
+			send "&a&l&nHELP: &e/todolist help&a will display this help prompt" to player
+			send " " to player
+			send "&c-----------------&eend&c----------------" to player
+			send "&aToDo List V.0.4 --- By: iSmooch" to player
+			stop
+		arg 1 is "clear":
+			send "&cClearing your todo list" to player
+			clear {todolist.%player%::*}
+			send "&cDone!" to player
+		arg 1 is "complete":
+			clear {todo.%player%.number::*}
+			set {todo.%player%.number::*} to arg 2 parsed as numbers
+			{todo.%player%.number::1} is not set:
+				send "&cCorrect usage &e/todolist &b[add|delete|list] [text|number]" to player
+				stop
+			set {todo.%player%.number.live} to {todo.%player%.number::1}
+			send "&aCompleteing: &e%{todolist.%player%::%{todo.%player%.number.live}%}%!" to player
+			set {todolist.%player%::%{todo.%player%.number.live}%} to  "&f&m%{todolist.%player%::%{todo.%player%.number.live}%}%"
+			message "&aItem Completed!" to player
+			stop
+			
+		arg 1 is "add":
+			arg 2 is not set:
+				send "&cCorrect usage &e/todolist &b[add|delete|list] [text|number]" to player
+				stop
+			add arg 2 to {todolist.%player%::*}
+			send "&e%arg 2% &cSuccessfully added!"
+			stop
+		arg 1 is "delete":
+			clear {todo.%player%.number::*}
+			set {todo.%player%.number::*} to arg 2 parsed as numbers
+			{todo.%player%.number::1} is not set:
+				send "&cCorrect usage &e/todolist &b[add|delete|list] [text|number]" to player
+				stop
+			set {todo.%player%.number.live} to {todo.%player%.number::1}
+			send "&cRemoving: &e%{todolist.%player%::%{todo.%player%.number.live}%}% &cfrom to do list!" to player
+			delete {todolist.%player%::%{todo.%player%.number.live}%}
+			message "&cItem Removed" to player
+			stop
+		arg 1 is "list":
+			arg 2 is not set:
+				send "&a----------&e&l%player%'s &eTo Do List&a-----------" to player
+				send " " to player
+				loop {todolist.%player%::*}:
+					send "  &b%loop-index%.---------&e%loop-value%" to player
+					send " " to player
+				send "&c------------------&eend&c---------------------" to player
+				stop
+			clear {todo.%player%.number::*}
+			set {todo.%player%.number::*} to arg 2 parsed as numbers
+			{todo.%player%.number::1} is not set:
+				send "&cCorrect usage &e/todolist &b[add|delete|list] [text|number]" to player
+				stop
+			set {todo.%player%.number.live} to {todo.%player%.number::1}
+			send "&b%{todo.%player%.number.live}%.---------&e%{todolist.%player%::%{todo.%player%.number.live}%}%!" to player
+			stop
+		send "&cCorrect usage &e/todolist &b[add|delete|list] [text|number]" to player
+		

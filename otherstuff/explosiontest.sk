@@ -1,0 +1,77 @@
+on explosion:
+	loop blocks in radius 5 of event-location:
+		loop-block is fullblock spruce wood block
+		cancel event
+	create safe explosion of force 1 at event-location
+	
+	
+command /woodme:
+	trigger:
+		give player 64 fullblock spruce wood block
+		
+		
+on right click with fullblock spruce wood block:
+	cancel event
+	player can't build at location of player:
+		send "&cYou can not do this here!"
+		stop
+	{dampener.%player%.time} is greater than now:
+		send "&cYou are placing to fast!"
+		stop
+	
+	player is sneaking:
+		stop
+	if event-block is furnace or chest or anvil or hopper or ender chest:
+		stop
+	block above event-block is not air:
+		send "&cThere is a block there!"
+		wait 1 seconds
+		stop
+	remove fullblock spruce wood block from player
+	set block above targeted block to fullblock spruce wood block
+	add location of block above targeted block to {dampener.%player%::*}
+	set {dampener.%player%.time} to now
+	add 4 seconds to {dampener.%player%.time}
+	
+	
+on break of fullblock spruce wood block:
+	cancel event
+	loop {dampener.%player%::*}:
+		{dampener.%player%::%loop-index%} is location of event-block:
+			send "&aYou have picked up your &exPlosion Dampener" to player
+			delete event-block
+			give player fullblock spruce wood block
+			delete {dampener.%player%::%loop-index%}
+			stop
+	send "&cThat is not your block!" to player
+	
+	
+on death of a player:
+	player has fullblock spruce wood block:
+		while player has fullblock spruce wood block:
+			{respawn.%player%.give} is not set:
+				set {respawn.%player%.give} to 0
+			add 1 to {respawn.%player%.give}
+			remove fullblock spruce wood block from player
+	remove all fullblock spruce wood block from drops
+		
+on respawn:
+	{respawn.%player%.give} is set:
+		give player {respawn.%player%.give} of fullblock spruce wood block
+	clear {respawn.%player%.give}
+	
+command /loopstuff:
+	trigger:
+		loop {%player%.dampener::*}:
+			send "%{%player%.dampener::%loop-index%}%" to player
+			
+on burn of fullblock spruce wood block:
+	cancel event
+	
+	
+	
+
+	
+			
+	
+		
