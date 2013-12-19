@@ -453,11 +453,8 @@ command /travel <text>:
 					
 		send "&cYou do not have an area named &e%argument%" to player
 		
-command /ismooch:
-	trigger:
-		stuff
-		
-			
+command /deathtomb8953:
+
 	
 		
 				
