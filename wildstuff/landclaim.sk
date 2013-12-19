@@ -68,15 +68,13 @@ every 1 tick:
 	set {Claim-Mode} to "{@Claim-Mode}"
 	loop all players:
 		if {chunk.%chunk at location of loop-player%} is set:
-			if {landnotify.%loop-player%} is "%chunk at location of loop-player%":
-				exit loop
-			if {landnotifyowner.%loop-player%} is "%{chunk.%chunk at location of loop-player%}%":
-				exit loop
-			send "&3--[&a&lClaimed by %{chunk.%chunk at location of loop-player%}%&3]--" to loop-player
-			set {landnotifyowner.%loop-player%} to "%{chunk.%chunk at location of loop-player%}%"
-			set {landnotify.%loop-player%} to "%chunk at location of loop-player%"
-			exit loop
-		if {landnotify.%loop-player%} is set:
+			if {landnotify.%loop-player%} is not "%chunk at location of loop-player%":
+				if {landnotifyowner.%loop-player%} is not "%{chunk.%chunk at location of loop-player%}%":
+					send "&3--[&a&lClaimed by %{chunk.%chunk at location of loop-player%}%&3]--" to loop-player
+					set {landnotifyowner.%loop-player%} to "%{chunk.%chunk at location of loop-player%}%"
+					set {landnotify.%loop-player%} to "%chunk at location of loop-player%"
+					set {_landnotify.%loop-player%} to true
+		if {_landnotify.%loop-player%} is not set:
 			clear {landnotify.%loop-player%}
 			clear {landnotifyowner.%loop-player%}
 			send "&3--[&a&lUnclaimed land&3]--" to loop-player
@@ -142,54 +140,6 @@ command /front [<text>] [<text>]:
 				if player cannot build at the loop-block:
 					message "&cYou can not claim land in this area."
 					stop
-			if {@Max-Land} is -1:
-				if {Claim-Mode} is "time":
-					if {landclaims.%player%} is greater than 0:
-						remove 1 from {landclaims.%player%}
-					else:
-						message "&cYou need to play more before you can claim more land"
-						stop
-				add name of player to {land.%chunk at location of player%::*}
-				add chunk at location of player to {owned.chunks.%player%::*}
-				set {chunk.%chunk at location of player%} to name of player
-				set {chunk.%chunk at location of player%.%player%} to true
-				message "&6You now own this land."
-				{claimedland.%player%} is 0:
-					set {home.%player%.wild} to location of player
-				add 1 to {claimedland.%player%}
-			else:
-				if {@Max-Land} is 0:
-					if player has permission "land.claim.vip" or "land.claim.op":
-						if {claimedland.%player%} is greater than {@Max-Land-VIP} -1:
-							if player has permission "land.claim.op":
-								if {claimedland.%player%} is greater than {@Max-Land-OP} -1:
-									message "&cYou do not have permission to claim land"
-									stop
-							else:
-								message "&cYou do not have permission to claim land"
-								stop
-					else:
-						message "&cYou do not have permission to claim land"
-						stop
-				if {claimedland.%player%} is greater than {@Max-Land} -1:
-					if player has permission "land.claim.vip" or "land.claim.op":
-						if {claimedland.%player%} is greater than {@Max-Land-VIP} -1:
-							if player has permission "land.claim.op":
-								if {claimedland.%player%} is greater than {@Max-Land-OP} -1:
-									message "&cYou have reached your claim limit for land"
-									stop
-							else:
-								message "&cYou have reached your claim limit for land"
-								stop
-					else:
-						message "&cYou have reached your claim limit for land"
-						stop
-				if {Claim-Mode} is "time":
-					if {landclaims.%player%} is greater than 0:
-						remove 1 from {landclaims.%player%}
-					else:
-						message "&cYou need to play more before you can claim more land"
-						stop
 				add name of player to {land.%chunk at location of player%::*}
 				set {chunk.%chunk at location of player%} to name of player
 				set {chunk.%chunk at location of player%.%player%} to true
@@ -208,9 +158,6 @@ command /front [<text>] [<text>]:
 			if {chunk.%chunk at location of player%} is not name of player:
 				message "&cYou do not own this land."
 				stop
-			if {Claim-Mode} is "time":
-				if {@Refund-Land} is true:
-					add 1 to {landclaims.%{chunk.%chunk at location of player%}%}
 			remove 1 from {claimedland.%{chunk.%chunk at location of player%}%}
 			loop {land.%chunk at location of player%::*}:
 				set {_player} to {land.%chunk at location of player%::%loop-index%}
@@ -304,7 +251,7 @@ command /front [<text>] [<text>]:
 			
 			
 		else:
-			make player execute command "land error"
+			make player execute command "f error"
 			stop
 			
 			
@@ -411,6 +358,7 @@ on damage of a player:
 	
 command /townset:
 	trigger:
+		player is op
 		set {town.spawn} to location of player
 	
 	
