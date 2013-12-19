@@ -452,8 +452,6 @@ command /travel <text>:
 				stop
 					
 		send "&cYou do not have an area named &e%argument%" to player
-		
-command /deathtomb8953:
 
 	
 		
