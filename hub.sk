@@ -5,3 +5,11 @@ command /hub:
 		world is "hotpotatolobby" or "hotpotato1" or "hotpotato2":
 			make player execute command "/lobby"
 		make console execute command "/mvtp %player% plan"
+		
+		
+command /survival:
+	description: Go to the survival world
+	usage: /survival
+	aliases: /s
+	trigger:
+		make player execute command "/server survival"

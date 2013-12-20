@@ -1,8 +1,7 @@
 options:     
 	Max-Land: 10      
 	Max-Land-OP: -1 
-	Starting-Land: 1     
-    
+	Starting-Land: 1
 variables:
 	{landclaims.%player%} = 0
 	{claimedland.%player%} = 0
@@ -26,15 +25,9 @@ every 1 tick:
 				send "&a&lUnclaimed Land" to loop-player
 				set {alert.notify.owner.%loop-player%} to "Unclaimed"
 				set {land.unclaim.%loop-player%} to true
-				
-			
-			
 command /showstuff:
 	trigger:
-		send "%{alert.notify.owner.%player%}%" to player
-					
-			
-			
+		send "%{alert.notify.owner.%player%}%" to player	
 #startfold
 command /front [<text>] [<text>]:
 	description: For all land related commands
@@ -96,16 +89,15 @@ command /front [<text>] [<text>]:
 				if player cannot build at the loop-block:
 					message "&cYou can not claim land in this area."
 					stop
-				add name of player to {land.%chunk at location of player%::*}
-				set {chunk.%chunk at location of player%} to name of player
-				set {chunk.%chunk at location of player%.%player%} to true
-				add chunk at location of player to {owned.chunks.%player%::*}
-				message "&6You now own this land."
-				{claimedland.%player%} is 0:
-					set {home.%player%.wild} to location of player
-				add 1 to {claimedland.%player%}
+			add name of player to {land.%chunk at location of player%::*}
+			set {chunk.%chunk at location of player%} to name of player
+			set {chunk.%chunk at location of player%.%player%} to true
+			add chunk at location of player to {owned.chunks.%player%::*}
+			message "&6You now own this land."
+			{claimedland.%player%} is 0:
+				set {home.%player%.wild} to location of player
+			add 1 to {claimedland.%player%}
 			stop
-			
 		#subfold @unclaim
 		argument 1 is "unclaim" or "u":
 			if {chunk.%chunk at location of player%} is not set:
@@ -187,9 +179,7 @@ command /front [<text>] [<text>]:
 				message "&6You can now bypass claimed land."
 				stop
 			message "&cYou do not have permission to use this command."
-			stop
-
-			
+			stop	
 		argument 1 is "name" or "n":
 			if {chunk.%chunk at location of player%} is not set:
 				message "&cThis land has not been claimed."
@@ -202,14 +192,10 @@ command /front [<text>] [<text>]:
 				stop
 			message "&aYou have named this chunk to &e%argument 2%"
 			set {chunk.name.%chunk at location of player%} to "%argument 2%"
-			send "&aYou need to use &e/travelset &ato travel to this land." to player
-			
-			
+			send "&aYou need to use &e/travelset &ato travel to this land." to player	
 		else:
 			make player execute command "f error"
-			stop
-			
-			
+			stop	
 #endfold
 on quit:
 	if {bypassland.%player%} is true:
@@ -247,10 +233,11 @@ on explode:
 	loop blocks in radius 10 of entity:
 		if {chunk.%chunk at location of loop-block%} is set:
 			cancel event
-
 on damage of a entity:
 	attacker is a player
 	loop blocks in radius 3 of victim:
+		{bypassland.%attacker%} is true:
+			stop
 		if {chunk.%chunk at location of loop-block%} is set:
 			{chunk.%chunk at location of loop-block%} is not attacker:
 				{chunk.%chunk at location of loop-block%.%attacker%} is set:
@@ -258,8 +245,8 @@ on damage of a entity:
 				send "&cThis area is protected!" to attacker
 				cancel event
 				stop trigger
-			
-on right click on lead:
+on right click on lead:	{bypassland.%player%} is true:
+		stop
 	if {chunk.%chunk at location of event-player%} is set:
 		{chunk.%chunk at location of event-player%} is not event-player:
 			{chunk.%chunk at location of event-player%.%event-player%} is set:
@@ -267,8 +254,9 @@ on right click on lead:
 			send "&cThis area is protected!" to event-player
 			cancel event
 			stop trigger
-		
 on left click on fence:
+	{bypassland.%player%} is true:
+		stop
 	if {chunk.%chunk at location of event-player%} is set:
 		{chunk.%chunk at location of event-player%} is not event-player:
 			{chunk.%chunk at location of event-player%.%event-player%} is set:
@@ -276,11 +264,9 @@ on left click on fence:
 			send "&cThis area is protected!" to event-player
 			cancel event
 			stop trigger
-		
-
-	
-	
 on right click on horse:
+	{bypassland.%player%} is true:
+		stop
 	if {chunk.%chunk at location of event-player%} is set:
 		{chunk.%chunk at location of event-player%} is not event-player:
 			{chunk.%chunk at location of event-player%.%event-player%} is set:
@@ -288,10 +274,6 @@ on right click on horse:
 			send "&cThis area is protected!" to event-player
 			cancel event
 			stop trigger
-	
-		
-			
-
 on damage of a player:
 	attacker is a player
 	loop blocks in radius 10 of victim:
@@ -299,24 +281,22 @@ on damage of a player:
 			send "&cThis area is protected!" to attacker
 			cancel event
 			stop trigger
-			
-			
-			
-
-			
-			
-	
-	
-	
-	
-	
-	
 command /townset:
 	trigger:
 		player is op
 		set {town.spawn} to location of player
-	
-	
+		
+		
+command /town:
+	trigger:
+		{chunk.%chunk at location of player%} is not player:
+			{chunk.%chunk at location of player%} is not "Town":
+				send "&cYou can only do this in Town, or on your own land!" to player
+		if {chunk.%chunk at location of player%} is not set:
+			message "&cYou must do this on your land!"
+			stop
+		teleport player to {town.spawn}
+		
 on sign change:
 	world is "wildtest":
 		line 1 of block is "warp" or "[warp]":
@@ -330,7 +310,6 @@ on sign change:
 					{chunk.name.%{_chunk}%} is line 2 of block
 			send "&cYou can not do that here!" to player
 			cancel event
-
 on right click on sign:
 	world is "wildtest":
 		line 1 of block is "[WARP]"
@@ -339,14 +318,8 @@ on right click on sign:
 				teleport player to {town.spawn}
 				stop
 			send "&cYou can not do this here!" to player
-			
-on command "/home":
-	cancel event
-	teleport player to {home.%player%.wild}
-		
 command /clearland:
 	trigger:
-
 		send "&cPreparing to delete &e%size of {owned.chunks.%player%::*}% &cchunks...." to player
 		wait 0.5 seconds
 		loop {owned.chunks.%player%::*}:
@@ -364,22 +337,18 @@ command /clearland:
 		send "&cManginling variables" to player
 		set {claimedland.%player%} to 0
 		clear {owned.chunks.%player%::*}
-		send "&aLand clear complete!" to player
-			
-			
+		send "&aLand clear complete!" to player	
 command /listland:
 	trigger:
 		loop {owned.chunks.%player%::*}:
 			set {_chunk} to {owned.chunks.%player%::%loop-index%}
 			set {_chunk.name} to {chunk.name.%{_chunk}%}
 			send "&a%loop-index%................%{_chunk}%" to player
-
 command /travelset:
 	trigger:
 		set {travel.%player%.%{chunk.name.%chunk at location of player%}%} to location of player
 		send "&aYou have set the travel location for &e{chunk.name.%chunk at location of player%}&a!" to player
-		send "&aUse &e/travel <land name>&a to travel to your locations!" to player
-			
+		send "&aUse &e/travel <land name>&a to travel to your locations!" to player	
 command /sethome:
 	trigger:
 		if {chunk.%chunk at location of player%} is not set:
@@ -390,7 +359,6 @@ command /sethome:
 			stop
 		set {home.%player%.wild} to location of player
 		send "&aYour home has been set!" to player
-		
 on command "/home":
 	cancel event
 	{chunk.%chunk at location of player%} is not player:
@@ -400,8 +368,6 @@ on command "/home":
 		message "&cYou must do this on your land!"
 		stop
 	teleport player to {home.%player%.wild}
-	
-	
 command /travel <text>:
 	trigger:
 		{chunk.%chunk at location of player%} is not player:
@@ -412,21 +378,15 @@ command /travel <text>:
 			stop
 		if {chunk.%chunk at location of player%} is not set:
 			message "&cYou must do this on your land!"
-			stop
-					
+			stop	
 		send "&cYou do not have an area named &e%argument%" to player
-		
 on bed enter:
 	set {bed.%event-player%.wild} to true
 	set {bed.owner.%event-block%} to event-player
-	
 on break of a bed:
 	{bed.owner.%event-block%} is set:
 		clear {bed.%{bed.owner.%event-block%}%.wild}
 		clear {bed.ownder.%event-block%}
-	
-	
-		
 on respawn:
 	{home.%player%.wild} is set:
 		{bed.%event-player%.wild} is set:
@@ -434,11 +394,10 @@ on respawn:
 		wait 1 second
 		teleport player to {home.%player%.wild}
 		
-
-
-	
+command /townclaim:
+	trigger:
+		set {chunk.%chunk at location of player%} to "Town"
 		
-				
-			
-			
-		
+command /hub:
+	trigger:
+		execute console command "sudo %player% server hub"

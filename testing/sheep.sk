@@ -1,11 +1,13 @@
 every 1 second:
 	loop all entities:
-		loop-entity is sheep:
-			name of loop-entity is "&aISMOOCH":
+		loop-entity is sheep or bat or powered creeper or pig:
+			name of loop-entity is "&aISMOOCH" or "&aBru Swain" or "&aSparky" or "&aBacon":
 				play 4 of effect "heart" with data 1 at location of loop-entity
+				distance between location of loop-entity and location of {owner.%loop-entity%} is greater than 20:
+					teleport loop-entity to location of {owner.%loop-entity%}
 				
-on damage of sheep:
-	name of victim is "&aISMOOCH":
+on damage of sheep or bat or powered creeper or pig:
+	name of victim is "&aISMOOCH" or "&aBru Swain" or "&aSparky" or "&aBacon":
 		cancel event
 		
 command /pet <text>:
@@ -13,22 +15,90 @@ command /pet <text>:
 		argument is "clear":
 			kill {pets.%player%}
 			clear {pets.%player%}
-		{pets.%player%} is set:
-			send "&cYou can only have one pet at a time!" to player
+			loop {pets.%player%::*}:
+				kill loop-value
+			clear {pets.%player%::*}
 			stop
+		{pets.%player%} is set:
+			player does not have permission "obam.supporter.tickets": 
+				send "&cYou can only have one pet at a time!" to player
+				stop
+			size of {pets.%player%::*} is 5:
+				send "&cYou can only have 5 pets at a time!" to player
+				stop
 		argument is "ISMOOCH":
 			spawn sheep at location of player
 			set name of spawned sheep to "&aISMOOCH"
 			set color of spawned sheep to pink
 			make player leash spawned sheep
 			set {pets.%player%} to spawned sheep
+			set {owner.%{pets.%player%}%} to player
+			add {pets.%player%} to {pets.%player%::*}
+			stop
+			
+		argument is "Bru Swain":
+			player has permission "obam.supporter.tickets":
+				spawn bat at location of player
+				set name of spawned bat to "&aBru Swain"
+				make player leash spawned bat
+				set {pets.%player%} to spawned bat
+				set {owner.%{pets.%player%}%} to player
+				add {pets.%player%} to {pets.%player%::*}
+				stop
+			send "&cYou must be Supporter Ultimate to do this!" to player
+			
+		argument is "Sparky":
+			spawn powered creeper at location of player
+			set name of spawned powered creeper to "&aSparky"
+			make player leash spawned powered creeper
+			set {pets.%player%} to spawned powered creeper
+			set {owner.%{pets.%player%}%} to player
+			add {pets.%player%} to {pets.%player%::*}
+			stop
 		
-on death of a sheep:
-	name of victim is "&aISMOOCH"
+		argument is "bacon":
+			spawn pig at location of player
+			set name of spawned pig to "&aBacon"
+			make player leash spawned pig
+			set {pets.%player%} to spawned pig
+			set {owner.%{pets.%player%}%} to player
+			add {pets.%player%} to {pets.%player%::*}
+			stop
+		
+		argument is "dragon":
+			send "&cI bet you wish you could...." to player
+			stop
+			
+		argument is "lead":
+			loop {pets.%player%::*}:
+				teleport loop-value to location of player
+				make player leash loop-value
+			stop
+			
+			
+		send "&cThat is not an option!" to player
+			
+			
+		
+			
+
+on explosion prime:
+	entity is powered creeper:
+		name of entity is "&aSparky":
+			cancel event
+			
+			
+on death of a sheep or a bat or a powered creeper or a pig:
+	name of victim is "&aISMOOCH" or "&aBru Swain" or "&aSparky" or "&aBacon"
 	clear drops
 			
 on right click with wheat on sheep:
 	name of event-entity is "&aISMOOCH"
+	cancel event
+	send "&cYou can not mate pets D:" to event-player
+	
+on right click with carrot on sheep:
+	name of event-entity is "&aBacon"
 	cancel event
 	send "&cYou can not mate pets D:" to event-player
 	

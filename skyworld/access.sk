@@ -1,5 +1,7 @@
 on right click on a chest or a door or a anvil or a lever or a button or a wood button or a furnace  or a jukebox or a dropper or a hopper or a brewing stand or a dispenser or a beacon or a trapdoor or a fence gate or a trapped chest or a enchantment table or a repeater or a redstone comparator or a ender chest or a note block:
 	
+	{bypassland.%player%} is true:
+		stop
 	{chunk.%chunk at location of event-player%} is not event-player:
 		{chunk.%chunk at location of event-player%.%event-player%} is not set:
 			loop blocks in radius 2 of event-block:
