@@ -1,13 +1,9 @@
-options:     
-	Max-Land: 10      
-	Max-Land-OP: -1 
-	Starting-Land: 1
+
 variables:
-	{landclaims.%player%} = 0
 	{claimedland.%player%} = 0
+	{availableland.%player%} = 1
 on join:
 	if {played.%player%} is not set:
-		set {landclaims.%player%} to {@Starting-Land}
 		set {played.%player%} to true
 every 1 tick:
 	loop all players:
@@ -24,10 +20,7 @@ every 1 tick:
 			{chunk.%chunk at location of loop-player%} is not set:
 				send "&a&lUnclaimed Land" to loop-player
 				set {alert.notify.owner.%loop-player%} to "Unclaimed"
-				set {land.unclaim.%loop-player%} to true
-command /showstuff:
-	trigger:
-		send "%{alert.notify.owner.%player%}%" to player	
+				set {land.unclaim.%loop-player%} to true	
 #startfold
 command /front [<text>] [<text>]:
 	description: For all land related commands
@@ -37,9 +30,10 @@ command /front [<text>] [<text>]:
 		argument 1 is not set:
 			message "&3-[&a&lLand Claimed&3]-"
 			message "&6 %{claimedland.%player%}%"
-			if {Claim-Mode} is "time":
-				message "&3-[&a&lLand Claim Points&3]-"
-				message "&6 %{landclaims.%player%}%"
+			send "&3-[&a&lPurchased Slots&3]-" to player
+			send "&6 %{availableland.%player%}%"
+			send "&3-[&a&lAvailible Slots&3]-" to player
+			send "&6 %{availableland.%player%} - {claimedland.%player%}%" to player
 			stop
 		#subfold @help
 		argument 1 is "help" or "h":
@@ -89,6 +83,24 @@ command /front [<text>] [<text>]:
 				if player cannot build at the loop-block:
 					message "&cYou can not claim land in this area."
 					stop
+			{claimedland.%player%} is greater than or equal to {availibleland.%player%}:
+				send "&cYou do not have enough Availiable land for this action! Please purchase more with /shop!" to player
+				stop
+			player does not have permission "obam.supporter.1":
+				{claimedland.%player%} is 5:
+					send "&cYou have reached your max land count! Upgrade to a supporter rank to receive more!" to player
+					stop
+			player does not have permission "obam.supporter.2":
+				{claimedland.%player%} is 10:
+					send "&cYou have reached your max land count! Upgrade to a supporter rank to receive more!" to player
+					stop
+			
+			player does not have permission "obam.supporter.3":
+				{claimedland.%player%} is 20:
+					send "&cYou have reached your max land count! Upgrade to a supporter rank to receive more!" to player
+					stop
+					
+
 			add name of player to {land.%chunk at location of player%::*}
 			set {chunk.%chunk at location of player%} to name of player
 			set {chunk.%chunk at location of player%.%player%} to true

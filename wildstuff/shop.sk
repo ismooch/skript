@@ -1,0 +1,33 @@
+#shop for Fronts
+
+options:
+	land: i;grass;n;&9&lPurchase more land!;l;&7Click to purchase 1 more land!|| ||&e10 Tickets! &7(beta);c;sudo %player% shop land
+	
+	
+command /shop [<text>]:
+	trigger:
+		argument is not set:
+			show "s;1;{@land}" with 1 row named "&9&lFronts&9 Shop" to player
+		argument is "land":
+			player does not have permission "obam.supporter.1":
+				{availableland.%player%} is greater than or equal to 5:
+					send "&cYou have your max amount of available land purchased! Please support to get more!" to player
+					stop
+			player does not have permission "obam.supporter.2":
+				{availableland.%player%} is greater than or equal to 10:
+					send "&cYou have your max amount of available land purchased! Please upgrade to get more!" to player
+					stop
+			player does not have permission "obam.supporter.3":
+				{availableland.%player%} is greater than or equal to 20:
+					send "&cYou have your max amount of available land purchased! Please support to get more!" to player
+					stop
+			set {_curbal} to player's balance
+			{_curbal} is less than 10:
+				send "&cYou do not have enough tickets!" to player
+				stop
+			subtract 10 from player's balance
+			add 1 to {availableland.%player%}
+			
+					
+			
+				
