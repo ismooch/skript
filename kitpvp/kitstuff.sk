@@ -1012,8 +1012,6 @@ on right click with wood hoe:
 		create safe explosion of force 5 at block 6 meters south of {loc.sheep.%player%}
 
 		
-every 3 seconds:
-	kill all sheep in "kitpvpkillingfields"
 		
 		
 on death of red sheep:
