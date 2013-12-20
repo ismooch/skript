@@ -4,3 +4,10 @@ command /jackishere:
 			send "&aYay!" to player
 			stop
 		send "&cYou do not have permission D:" to player
+		
+command /deathtombiscool
+         Trigger:
+                 Player is op
+                        Send "&aDang stright" to player
+                 Send "&c&7 You know he is but dont have the rights to know just how cool" to player
+                 
