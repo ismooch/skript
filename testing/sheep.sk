@@ -1,0 +1,39 @@
+every 1 second:
+	loop all entities:
+		loop-entity is sheep:
+			name of loop-entity is "&aISMOOCH":
+				play 4 of effect "heart" with data 1 at location of loop-entity
+				
+on damage of sheep:
+	name of victim is "&aISMOOCH":
+		cancel event
+		
+command /pet <text>:
+	trigger:
+		argument is "clear":
+			kill {pets.%player%}
+			clear {pets.%player%}
+		{pets.%player%} is set:
+			send "&cYou can only have one pet at a time!" to player
+			stop
+		argument is "ISMOOCH":
+			spawn sheep at location of player
+			set name of spawned sheep to "&aISMOOCH"
+			set color of spawned sheep to pink
+			make player leash spawned sheep
+			set {pets.%player%} to spawned sheep
+		
+on death of a sheep:
+	name of victim is "&aISMOOCH"
+	clear drops
+			
+on right click with wheat on sheep:
+	name of event-entity is "&aISMOOCH"
+	cancel event
+	send "&cYou can not mate pets D:" to event-player
+	
+on right click with shears on sheep:
+	name of event-entity is "&aISMOOCH"
+	cancel event
+	send "&cYou can not shear pets!" to event-player
+			
