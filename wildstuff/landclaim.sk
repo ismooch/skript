@@ -12,17 +12,28 @@ on join:
 		set {played.%player%} to true
 every 1 tick:
 	loop all players:
-		if {chunk.%chunk at location of loop-player%} is set:
-			if {landnotify.%loop-player%} is not "%chunk at location of loop-player%":
-				if {landnotifyowner.%loop-player%} is not "%{chunk.%chunk at location of loop-player%}%":
-					send "&3--[&a&lClaimed by %{chunk.%chunk at location of loop-player%}%&3]--" to loop-player
-					set {landnotifyowner.%loop-player%} to "%{chunk.%chunk at location of loop-player%}%"
-					set {landnotify.%loop-player%} to "%chunk at location of loop-player%"
-					set {_landnotify.%loop-player%} to true
-		if {_landnotify.%loop-player%} is not set:
-			clear {landnotify.%loop-player%}
-			clear {landnotifyowner.%loop-player%}
-			send "&3--[&a&lUnclaimed land&3]--" to loop-player
+		{alert.notify.owner.%loop-player%} is not {chunk.%chunk at location of loop-player%}:
+			{chunk.%chunk at location of loop-player%} is not set:
+				{alert.notify.owner.%loop-player%} is not "Unclaimed":
+					send "&a&lUnclaimed Land" to loop-player
+					set {alert.notify.owner.%loop-player%} to "Unclaimed"
+					set {land.unclaim.%loop-player%} to true
+			{chunk.%chunk at location of loop-player%} is set:
+				send "&a&lLand Claimed by: &e%{chunk.%chunk at location of loop-player%}%" to loop-player
+				set {alert.notify.owner.%loop-player%} to {chunk.%chunk at location of loop-player%}
+		{alert.notify.owner.%loop-player%} is not set:
+			{chunk.%chunk at location of loop-player%} is not set:
+				send "&a&lUnclaimed Land" to loop-player
+				set {alert.notify.owner.%loop-player%} to "Unclaimed"
+				set {land.unclaim.%loop-player%} to true
+				
+			
+			
+command /showstuff:
+	trigger:
+		send "%{alert.notify.owner.%player%}%" to player
+					
+			
 			
 #startfold
 command /front [<text>] [<text>]:
@@ -188,7 +199,7 @@ command /front [<text>] [<text>]:
 				stop
 			loop {owned.chunks.%player%::*}:
 				set {_chunk} to {owned.chunks.%player%::%loop-index%}
-				argument 2 is {chunk.name.%{_chunk}%}
+				"%argument 2%" is "%{chunk.name.%{_chunk}%}%"
 				send "&cYou already have an area named &e%argument 2%" to player
 				stop
 			set {chunk.name.%chunk at location of player%} to "%argument 2%"
@@ -391,7 +402,7 @@ command /travel <text>:
 	trigger:
 		loop {owned.chunks.%player%::*}:
 			set {_chunk} to {owned.chunks.%player%::%loop-index%}
-			argument is "%{chunk.name.%{_chunk}%}%":
+			"%argument%" is "%{chunk.name.%{_chunk}%}%":
 				teleport player to {_chunk}
 				send "&aYou have been teleported to &e%argument%" to player
 				stop
