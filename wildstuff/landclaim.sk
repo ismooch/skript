@@ -1,44 +1,8 @@
-options:
-#+------------------------------------------------------------------------------+
-#| [V]                        Land Claiming                                 [V] |
-#+-----------------------------------------------------------------------+------+
-#|                                                                       |      
-	Max-Land: 10 
-#| The max land default players can claim.                               |
-#| (Set to -1 for unlimited land claiming for default players)           |
-#+-----------------------------------------------------------------------+
-#|                                                                       |      
-	Max-Land-VIP: 25
-#| The max land VIP's can claim. Requires permission node land.claim.vip |
-#| (Set to -1 for unlimited land claiming for VIP's)                     |
-#+-----------------------------------------------------------------------+
-#|                                                                       |      
+options:     
+	Max-Land: 10      
 	Max-Land-OP: -1 
-#| The max land staff can claim. Requires permission node land.claim.op  |
-#| (Set to -1 for unlimited land claiming for staff)                     |
-#+-----------------------------------------------------------------------+
-#|                                                                       |      
-	Claim-Mode: none
-#| none = No claim requirement | time = Able to claim more land the      |
-#| longer you play                                                       |
-#+-----------------------------------------------------------------------+
-#|                                                                       |      
-	Starting-Land: 1
-#| The amount of land new players start off with. Will only work if      |
-#| Claim-Mode is something other than none (For example, time)           |
-#+-----------------------------------------------------------------------+
-#|                                                                       |      
-	Land-Gain-Time: 10
-#| The amount of time in minuets when someone earns a new piece of land  |
-#| to claim                                                              |
-#+-----------------------------------------------------------------------+
-#|                                                                       |      
-	Refund-Land: true
-#| When a player unclaims a land should they get the land back as a      |
-#| point or lose it permanantly. Requires claim-mode = time (true/false) |
-#+-----------------------------------------------------------------------+------+
-#| [V]       Only edit anything below if you know what you're doing         [V] |
-#+------------------------------------------------------------------------------+
+	Starting-Land: 1     
+    
 variables:
 	{landclaims.%player%} = 0
 	{claimedland.%player%} = 0
@@ -46,26 +10,7 @@ on join:
 	if {played.%player%} is not set:
 		set {landclaims.%player%} to {@Starting-Land}
 		set {played.%player%} to true
-every 1 minute:
-	if {Claim-Mode} is "time":
-		loop all players:
-			add 1 to {timeplayed.%loop-player%}
-			if {timeplayed.%loop-player%} is greater than {@Land-Gain-Time} -1:
-				remove {@Land-Gain-Time} from {timeplayed.%loop-player%}
-				if {landclaims.%loop-player%} is greater than {@Max-Land} -1:
-					if loop-player has permission "land.claim.vip" or "land.claim.op":
-						if {landclaims.%loop-player%} is greater than {@Max-Land-VIP} -1:
-							if loop-player has permission "land.claim.op":
-								if {landclaims.%loop-player%} is greater than {@Max-Land-OP} -1:
-									stop
-							else:
-								stop
-					else:
-						stop
-				add 1 to {landclaims.%loop-player%}
-				send "&6You have earned more land. To claim use /land claim at the land you want to claim." to loop-player
 every 1 tick:
-	set {Claim-Mode} to "{@Claim-Mode}"
 	loop all players:
 		if {chunk.%chunk at location of loop-player%} is set:
 			if {landnotify.%loop-player%} is not "%chunk at location of loop-player%":
