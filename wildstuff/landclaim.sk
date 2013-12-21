@@ -83,7 +83,7 @@ command /front [<text>] [<text>]:
 				if player cannot build at the loop-block:
 					message "&cYou can not claim land in this area."
 					stop
-			{claimedland.%player%} is greater than or equal to {availibleland.%player%}:
+			{claimedland.%player%} is greater than or equal to {availableland.%player%}:
 				send "&cYou do not have enough Availiable land for this action! Please purchase more with /shop!" to player
 				stop
 			player does not have permission "obam.supporter.1":
@@ -204,7 +204,8 @@ command /front [<text>] [<text>]:
 				stop
 			message "&aYou have named this chunk to &e%argument 2%"
 			set {chunk.name.%chunk at location of player%} to "%argument 2%"
-			send "&aYou need to use &e/travelset &ato travel to this land." to player	
+			send "&aYou need to use &e/travelset &ato travel to this land." to player
+			add {chunk.name.%chunk at location of player%} to {name.list.%player%::*}
 		else:
 			make player execute command "f error"
 			stop	
@@ -246,6 +247,7 @@ on explode:
 		if {chunk.%chunk at location of loop-block%} is set:
 			cancel event
 on damage of a entity:
+	entity is not creeper or zombie or skeleton or powered creeper or spider
 	attacker is a player
 	loop blocks in radius 3 of victim:
 		{bypassland.%attacker%} is true:
@@ -257,7 +259,8 @@ on damage of a entity:
 				send "&cThis area is protected!" to attacker
 				cancel event
 				stop trigger
-on right click on lead:	{bypassland.%player%} is true:
+on right click on lead:
+	{bypassland.%player%} is true:
 		stop
 	if {chunk.%chunk at location of event-player%} is set:
 		{chunk.%chunk at location of event-player%} is not event-player:
@@ -358,8 +361,19 @@ command /listland:
 			send "&a%loop-index%................%{_chunk}%" to player
 command /travelset:
 	trigger:
+		if {chunk.%chunk at location of player%} is not set:
+			message "&cThis land has not been claimed."
+			stop
+		if {chunk.%chunk at location of player%} is not name of player:
+			{chunk.%chunk at location of player%.%player%} is not set:
+				message "&cThis is not your land!"
+				stop	
+		{chunk.name.%chunk at location of player%} is not set:
+			send "&cThis land needs a name first!" to player
+			stop
 		set {travel.%player%.%{chunk.name.%chunk at location of player%}%} to location of player
-		send "&aYou have set the travel location for &e{chunk.name.%chunk at location of player%}&a!" to player
+		add {travel.%player%.%{chunk.name.%chunk at location of player%}%} to {travel.list.%player%::*}
+		send "&aYou have set the travel location for &e%{chunk.name.%chunk at location of player%}%&a!" to player
 		send "&aUse &e/travel <land name>&a to travel to your locations!" to player	
 command /sethome:
 	trigger:
@@ -384,7 +398,8 @@ command /travel <text>:
 	trigger:
 		{chunk.%chunk at location of player%} is not player:
 			{chunk.%chunk at location of player%} is not "Town":
-				send "&cYou can only do this in Town, or on your own land!" to player
+				{chunk.%chunk at location of player%.%player%} is not set:
+					send "&cYou can only do this in Town, or on your own land!" to player
 		{travel.%player%.%argument%} is set:
 			teleport player to {travel.%player%.%argument%}
 			stop
@@ -413,3 +428,11 @@ command /townclaim:
 command /hub:
 	trigger:
 		execute console command "sudo %player% main"
+		
+command /travellist:
+	trigger:
+		send "&a---------&a&lChunk Name&A--------" to player
+		send " " to player
+		loop {name.list.%player%::*}:
+			{travel.%player%.%loop-value%} is set:
+				send "&a              &a&l%loop-value%&a" to player

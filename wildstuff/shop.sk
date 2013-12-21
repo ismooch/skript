@@ -27,6 +27,8 @@ command /shop [<text>]:
 				stop
 			subtract 10 from player's balance
 			add 1 to {availableland.%player%}
+			send "&aYou have purchased &e1 Land Slot&a for &e10 Tickets" to player
+			
 			
 					
 			
