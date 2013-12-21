@@ -12,6 +12,9 @@ on damage of sheep or bat or powered creeper or pig:
 		
 command /pet <text>:
 	trigger:
+		world is "kitpvpkillingfields":
+			send "&cYou can not do that here" to player
+			stop
 		argument is "clear":
 			kill {pets.%player%}
 			clear {pets.%player%}

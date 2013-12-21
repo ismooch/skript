@@ -398,7 +398,7 @@ on bed enter:
 on break of a bed:
 	{bed.owner.%event-block%} is set:
 		clear {bed.%{bed.owner.%event-block%}%.wild}
-		clear {bed.ownder.%event-block%}
+		clear {bed.owner.%event-block%}
 on respawn:
 	{home.%player%.wild} is set:
 		{bed.%event-player%.wild} is set:
@@ -412,4 +412,4 @@ command /townclaim:
 		
 command /hub:
 	trigger:
-		execute console command "sudo %player% server hub"
+		execute console command "sudo %player% main"
