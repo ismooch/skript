@@ -27,6 +27,12 @@ command /pet <text>:
 		world is "kitpvpkillingfields":
 			send "&cYou can not do that here" to player
 			stop
+			
+		argument is "lead":
+			loop {pets.%player%::*}:
+				teleport loop-value to location of player
+				make player leash loop-value
+			stop
 		argument is "clear":
 			kill {pets.%player%}
 			clear {pets.%player%}
@@ -83,12 +89,6 @@ command /pet <text>:
 		
 		argument is "dragon":
 			send "&cI bet you wish you could...." to player
-			stop
-			
-		argument is "lead":
-			loop {pets.%player%::*}:
-				teleport loop-value to location of player
-				make player leash loop-value
 			stop
 			
 			
