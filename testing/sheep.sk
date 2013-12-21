@@ -3,12 +3,24 @@ every 1 second:
 		loop-entity is sheep or bat or powered creeper or pig:
 			name of loop-entity is "&aISMOOCH" or "&aBru Swain" or "&aSparky" or "&aBacon":
 				play 4 of effect "heart" with data 1 at location of loop-entity
+				{owner.%loop-entity%} is not set:
+					kill loop-entity
 				distance between location of loop-entity and location of {owner.%loop-entity%} is greater than 20:
 					teleport loop-entity to location of {owner.%loop-entity%}
 				
 on damage of sheep or bat or powered creeper or pig:
 	name of victim is "&aISMOOCH" or "&aBru Swain" or "&aSparky" or "&aBacon":
 		cancel event
+		
+on quit:
+	kill {pets.%player%}
+	clear {pets.%player%}
+	loop {pets.%player%::*}:
+		clear {owner.%loop-value%}
+		kill loop-value
+	clear {pets.%player%::*}
+	stop
+	
 		
 command /pet <text>:
 	trigger:
@@ -20,6 +32,7 @@ command /pet <text>:
 			clear {pets.%player%}
 			loop {pets.%player%::*}:
 				kill loop-value
+				clear {owner.%loop-value%}
 			clear {pets.%player%::*}
 			stop
 		{pets.%player%} is set:
