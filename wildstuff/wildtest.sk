@@ -37,7 +37,7 @@ on right click with iron ingot:
 			
 command /setarea:
 	trigger:
-		add location of player to {places::*}
+		add chunk at player
 		
 
 		

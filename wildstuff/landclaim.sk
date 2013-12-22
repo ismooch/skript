@@ -105,6 +105,7 @@ command /front [<text>] [<text>]:
 			set {chunk.%chunk at location of player%} to name of player
 			set {chunk.%chunk at location of player%.%player%} to true
 			add chunk at location of player to {owned.chunks.%player%::*}
+			set {loc.chunks.%player%::%chunk at location of player%} to location of player
 			message "&6You now own this land."
 			{claimedland.%player%} is 0:
 				set {home.%player%.wild} to location of player
@@ -125,6 +126,9 @@ command /front [<text>] [<text>]:
 			clear {land.%chunk at location of player%::*}
 			clear {chunk.%chunk at location of player%}
 			clear {chunk.name.%chunk at location of player%}
+			loop {owned.chunks.%player%::*}:
+				chunk at location of player is {owned.chunks.%player%::%loop-index%}
+				delete {owned.chunks.%player%::%loop-index%}
 			message "&6You have unclaimed this land."
 			stop
 		#subfold @add
@@ -198,9 +202,6 @@ command /front [<text>] [<text>]:
 				stop
 			if {chunk.%chunk at location of player%} is not name of player:
 				message "&cThis is not your land!"
-				stop
-			{travel.%player%.%argument 2%} is set:
-				send "&cYou already have an area named &e%argument 2%" to player
 				stop
 			message "&aYou have named this chunk to &e%argument 2%"
 			set {chunk.name.%chunk at location of player%} to "%argument 2%"
@@ -353,12 +354,49 @@ command /clearland:
 		set {claimedland.%player%} to 0
 		clear {owned.chunks.%player%::*}
 		send "&aLand clear complete!" to player	
-command /listland:
+command /listland [<text>]:
 	trigger:
-		loop {owned.chunks.%player%::*}:
-			set {_chunk} to {owned.chunks.%player%::%loop-index%}
+		argument is not set:
+			loop {owned.chunks.%player%::*}:
+				set {_chunk} to {owned.chunks.%player%::%loop-index%}
+				send "&a%loop-index%................%{_chunk}%" to player
+		argument is set:
+			player is op
+			loop {owned.chunks.%argument%::*}:
+				set {_chunk} to {owned.chunks.%argument%::%loop-index%}
+				send "&a%loop-index%.................%{_chunk}%" to player
+				
+				
+			
+command /testing:
+	trigger:
+		loop {loc.chunks.%player%::*}:
+			set {_loc} to {loc.chunks.%player%::%loop-index%}
+			set {_chunk} to chunk at location of {_loc}
 			set {_chunk.name} to {chunk.name.%{_chunk}%}
-			send "&a%loop-index%................%{_chunk}%" to player
+			{_chunk.name} is not set:
+				set {_chunk.name} to "&cNot Named"
+			send "&a%loop-index%.......%{_chunk}%....%{_chunk.name}%" to player
+			
+command /testing2 <text>:
+	trigger:
+		loop {loc.chunks.%player%::*}:
+			set {_loc} to loop-value
+			set {_chunk} to chunk at location of {_loc}
+			set {_chunk.name} to {chunk.name.%{_chunk}%}
+			{_chunk.name} is argument:
+				send "&aTeleporting to &e%argument%" to player
+				teleport player to {_loc}
+				stop
+		send "&cYou do not have an area named &e%argument%"
+
+		
+command /travelmove:
+	trigger:
+		set {loc.chunks.%player%::%chunk at location of player%} to location of player
+		send "&aYour travel location for this area, has been moved" to player
+
+
 command /travelset:
 	trigger:
 		if {chunk.%chunk at location of player%} is not set:
@@ -390,23 +428,25 @@ on command "/home":
 	{chunk.%chunk at location of player%} is not player:
 		{chunk.%chunk at location of player%} is not "Town":
 			send "&cYou can only do this in Town, or on your own land!" to player
+			stop
 	if {chunk.%chunk at location of player%} is not set:
 		message "&cYou must do this on your land!"
 		stop
 	teleport player to {home.%player%.wild}
-command /travel <text>:
+command /travel <text> [<text=player>]:
 	trigger:
 		{chunk.%chunk at location of player%} is not player:
 			{chunk.%chunk at location of player%} is not "Town":
 				{chunk.%chunk at location of player%.%player%} is not set:
 					send "&cYou can only do this in Town, or on your own land!" to player
-		{travel.%player%.%argument%} is set:
-			teleport player to {travel.%player%.%argument%}
-			stop
+
 		if {chunk.%chunk at location of player%} is not set:
 			message "&cYou must do this on your land!"
 			stop	
-		send "&cYou do not have an area named &e%argument%" to player
+		{travel.%player%.%argument 1%} is set:
+			teleport player to {travel.%player%.%argument 1%}
+			stop
+		send "&cYou do not have an area named &e%argument 1%" to player
 on bed enter:
 	set {bed.%event-player%.wild} to true
 	set {bed.owner.%event-block%} to event-player
@@ -433,6 +473,9 @@ command /travellist:
 	trigger:
 		send "&a---------&a&lChunk Name&A--------" to player
 		send " " to player
-		loop {name.list.%player%::*}:
-			{travel.%player%.%loop-value%} is set:
-				send "&a              &a&l%loop-value%&a" to player
+		loop {travel.list.%player%::*}:
+			send "&a              &a&l%{chunk.name.%chunk at location of loop-value%}%&a" to player
+			
+command /owner <text>:
+	trigger:
+		set {chunk.%chunk at location of player%} to argument

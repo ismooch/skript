@@ -28,11 +28,11 @@ on command "/is help":
 	cancel event
 	make player execute command "/helpskyblock"
 	
-command /restart:
+command /restartisland:
 	description: Restart your island
 	usage: /restart
-	executable by: players
-	aliases: /reset
+	executable by: players or console
+	aliases: /ri
 	trigger:
 		world is "parkourlobby" or "parkourmaps":
 			message "&cYou can not do that here!" to player
@@ -96,14 +96,6 @@ command /warp <offline player>:
 			message "&cYou can not do that here!" to player
 			stop
 		make player execute command "/is warp %arg 1%"
-command /top10:
-	description: See top 10 islands
-	usage: /top10
-	trigger:
-		world is "parkourlobby" or "parkourmaps":
-			message "&cYou can not do that here!" to player
-			stop
-		make player execute command "/is top"
 command /allowfree <text>:
 	usage: /allowfree [permission]
 	trigger:
