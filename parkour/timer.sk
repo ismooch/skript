@@ -366,12 +366,14 @@ every 30 seconds:
 
 #clearlistcommand
 command /cllist <text>:
+	permission:obam.admin.parkour
 	trigger:
 		clear {BestTime.%argument%.Signs::*}
 		clear {BestTime2.%argument%.Signs::*}
 		clear {BestTime3.%argument%.Signs::*}
 		
 command /clrvar <text>:
+	permission:obam.admin.parkour
 	trigger:
 		clear {besttime.spot1.%argument%}
 		clear {besttime.spot1.%argument%.name}
@@ -381,6 +383,7 @@ command /clrvar <text>:
 		clear {besttime.spot3.%argument%.name}
 		
 command /clrsign:
+	permission:obam.admin.parkour
 	trigger:
 		set {this.block} to location of targeted block
 		delete {BestTime.Signs::%{this.block}%}
@@ -390,6 +393,7 @@ command /clrsign:
 		
 		
 command /shiftvar <text> <number>:
+	permission:obam.admin.parkour
 	trigger:
 		argument 2 is 1:
 
