@@ -1,4 +1,5 @@
 command /setplace:
+	permission: obam.admin.kotl
 	trigger:
 		set {king.of.the.ladder} to location of player
 
