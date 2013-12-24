@@ -2,7 +2,7 @@
 #give player money
 command /tixg <player> <number>:
 	description: Give a Player some money
-	usage: /tixg<player> <amount> [reason]
+	usage: /tixg <player> <amount> [reason]
 	executable by: console and players
 	permission: obam.money.admin
 	trigger:
