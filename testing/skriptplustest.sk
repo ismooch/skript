@@ -5,6 +5,6 @@ command /hide:
 
 command /unhide:
 	trigger:
-		show player to all players
+		reveal player to all players
 		message "&eYou are now un-hidden"
 		
