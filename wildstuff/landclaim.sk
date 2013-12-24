@@ -2,9 +2,13 @@
 variables:
 	{claimedland.%player%} = 0
 	{availableland.%player%} = 1
+	
+	
+
 on join:
 	if {played.%player%} is not set:
 		set {played.%player%} to true
+		
 every 1 tick:
 	loop all players:
 		{alert.notify.owner.%loop-player%} is not {chunk.%chunk at location of loop-player%}:
@@ -20,7 +24,8 @@ every 1 tick:
 			{chunk.%chunk at location of loop-player%} is not set:
 				send "&a&lUnclaimed Land" to loop-player
 				set {alert.notify.owner.%loop-player%} to "Unclaimed"
-				set {land.unclaim.%loop-player%} to true	
+				set {land.unclaim.%loop-player%} to true
+				
 #startfold
 command /front [<text>] [<text>]:
 	description: For all land related commands
@@ -334,6 +339,8 @@ on right click on sign:
 				teleport player to {town.spawn}
 				stop
 			send "&cYou can not do this here!" to player
+			
+			
 command /clearland:
 	trigger:
 		send "&cPreparing to delete &e%size of {owned.chunks.%player%::*}% &cchunks...." to player
@@ -354,6 +361,7 @@ command /clearland:
 		set {claimedland.%player%} to 0
 		clear {owned.chunks.%player%::*}
 		send "&aLand clear complete!" to player	
+		
 command /listland [<text>]:
 	trigger:
 		argument is not set:
@@ -413,6 +421,9 @@ command /travelset:
 		add {travel.%player%.%{chunk.name.%chunk at location of player%}%} to {travel.list.%player%::*}
 		send "&aYou have set the travel location for &e%{chunk.name.%chunk at location of player%}%&a!" to player
 		send "&aUse &e/travel <land name>&a to travel to your locations!" to player	
+		
+		
+		
 command /sethome:
 	trigger:
 		if {chunk.%chunk at location of player%} is not set:
@@ -423,16 +434,21 @@ command /sethome:
 			stop
 		set {home.%player%.wild} to location of player
 		send "&aYour home has been set!" to player
+		
+		
 on command "/home":
 	cancel event
 	{chunk.%chunk at location of player%} is not player:
 		{chunk.%chunk at location of player%} is not "Town":
 			send "&cYou can only do this in Town, or on your own land!" to player
 			stop
+			
 	if {chunk.%chunk at location of player%} is not set:
 		message "&cYou must do this on your land!"
 		stop
 	teleport player to {home.%player%.wild}
+	
+	
 command /travel <text> [<text=player>]:
 	trigger:
 		{chunk.%chunk at location of player%} is not player:
@@ -447,6 +463,8 @@ command /travel <text> [<text=player>]:
 			teleport player to {travel.%player%.%argument 1%}
 			stop
 		send "&cYou do not have an area named &e%argument 1%" to player
+		
+		
 on bed enter:
 	set {bed.%event-player%.wild} to true
 	set {bed.owner.%event-block%} to event-player
@@ -462,12 +480,10 @@ on respawn:
 		teleport player to {home.%player%.wild}
 		
 command /townclaim:
+	permission: obam.admin.command
 	trigger:
 		set {chunk.%chunk at location of player%} to "Town"
-		
-command /hub:
-	trigger:
-		execute console command "sudo %player% main"
+
 		
 command /travellist:
 	trigger:
@@ -477,5 +493,6 @@ command /travellist:
 			send "&a              &a&l%{chunk.name.%chunk at location of loop-value%}%&a" to player
 			
 command /owner <text>:
+	permission: obam.admin.command
 	trigger:
 		set {chunk.%chunk at location of player%} to argument

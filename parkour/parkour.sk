@@ -28,6 +28,7 @@ command /parkourcourse:
 		
 
 command /courseadd <text>:
+	permission: obam.admin.parkour
 	trigger:
 		arg is not "clear":
 			add arg to {parkour.courses::*}
@@ -35,6 +36,7 @@ command /courseadd <text>:
 			clear {parkour.courses::*}
 	
 command /listcourses <number>:
+	permission: obam.admin.parkour
 	trigger:
 		set {course.add} to 0
 		loop arg times:
@@ -43,6 +45,7 @@ command /listcourses <number>:
 		message "%{course}%" to player
 		
 command /courserandom <player>:
+	executable by: console
 	trigger:
 		set {course.add} to 0
 		set {top.course} to size of {parkour.courses::*}
@@ -53,6 +56,7 @@ command /courserandom <player>:
 		execute console command "/parkourspawn %{course}% %player-argument%"
 					
 command /lobbyset <text>:
+	permission: obam.admin.parkour
 	trigger:
 		set {parkour.%arg%.tp} to location of player
 			

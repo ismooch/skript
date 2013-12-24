@@ -1758,6 +1758,7 @@ command /chalr <player> <number>:
 			
 			
 command /fillme <item>:
+	permission: obam.admin.command
 	trigger:
 		clear player's inventory
 		while player has space for argument:

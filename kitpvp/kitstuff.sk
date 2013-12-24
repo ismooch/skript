@@ -253,6 +253,24 @@ command /kit [<text>]:
 			wait 1 second
 			make player execute command "/arena"
 			
+		#subfold @earthmage
+		argument is "earthmage":
+			{active.kit.%player%} is true:
+				send "&cYou already have a kit D:" to player
+				stop
+			clear player's inventory
+			equip player with all leather armor of protection 5 named "&fEarth Mage's Robes"
+			dye player's helmet brown
+			dye player's chestplate brown
+			dye player's leggings brown
+			dye player's boots brown
+			give player dirt named "&fTrusty Earth"
+			give player iron pickaxe of knockback 2 and sharpness 2 named "&fHole Maker"
+			give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
+			set {kit.earthmage.%player%} to true
+			set {kit.active.%player%} to true
+			
+			
 			
 			
 #endfold
@@ -315,7 +333,7 @@ on damage:
 							play "level up" at location of attacker with pitch 1
 							send "&cHeadshot!" to victim
 							play "anvil land" at location of victim with pitch 2
-			{kit.skelemancer.%attacker%} is true:
+			{kit.archer.%attacker%} is true:
 				{kit.tank.%victim%} is true:
 					send "&cYou can not slow the tank!" to attacker
 					stop
@@ -324,6 +342,10 @@ on damage:
 					victim has blindness:
 						apply wither to victim for 2 seconds
 				apply slowness 2 to victim for 4 seconds
+				chance of 10%:
+					apply poison to victim for 8 seconds
+					send "&aYour enemy bleeds..." to attacker
+					send "&cYour wounds are too deep" to victim
 
 						
 		#subfold @snowball-alteration
@@ -1022,11 +1044,39 @@ on death of red sheep:
 		clear drops
 #endfold
 		
+		
+#startfold @earthmage-casting
+on left click with dirt:
+	world is "kitpvpkillingfields"
+	{kit.earthmage.%player%} is true:
+		set {_loc.head} to location of player's head
+		set {_loc.feet} to location of player
+		loop blocks in radius 3 of player:
+			
+			loop-block is air:
+				wait 0.02 second
+				set loop-block to dirt
+				add loop-block to {earth.%player%::*}
+				
+		set block 2 blocks above block below player to air
+		apply regeneration to player for 4 seconds
+				
+		wait 3 seconds
+		loop {earth.%player%::*}:
+			set block at location of loop-value to air
+			wait 0.02 second
+			delete {earth.%player%::%loop-value%}
+		clear {earth.%player%::*}
 on xp spawn:
 	world is "kitpvpkillingfields"
 	cancel event
 		
 
+on damage of a player:
+	damage cause is suffocation:
+		world is "kitpvpvkillingfields"
+		cancel event
+		
 		
 on damage of a zombie:
 	world is "kitpvpkillingfields"
@@ -1161,6 +1211,7 @@ on drop:
 		
 command /dm <text>:
 	#startfold @deathmessage-addition-command
+	permission: obam.admin.kp
 	trigger:
 		add argument to {deathmessages.kitpvp::*}
 #endfold
@@ -1168,25 +1219,26 @@ command /dm <text>:
 #startfold @commands
 command /sound <text> [<integer=1>]:
 	trigger:
+		player is op
 		play "%argument 1%" at location of player with pitch argument 2
 		
 command /headset:
 	trigger:
+		player is op
 		set {kitpvp.area} to location of player
 		
 command /clearkit <player>:
+	executable by: console
 	trigger:
 		set {active.kit.%player-argument%} to false
 		
 command /mapset <text>:
+	permission: obam.admin.kp
 	trigger:
 		send "&aYou have added a spawn point for '&e%argument%&a'" to player
 		add location of player to {map.%argument%.spawns::*}
 		
 		
-command /revive:
-	trigger:
-		set {kitpvp.dead.%player%} to false
 		
 command /spawnplayer <player> <text>:
 	executable by: console
@@ -1196,17 +1248,10 @@ command /spawnplayer <player> <text>:
 		teleport player-argument to {map.%argument 2%.spawns::%{_tmp}%}
 		
 command /clearspawn <text>:
+	permission: obam.admin.kp
 	trigger:
 		clear {map.%argument%.spawns::*}
 		
-command /zombieclear:
-	trigger:
-		clear {zombie.%player%.active}	
-		
-command /skeletonclear:
-	trigger:
-		clear {skeleton.%player%.active}
-
 command /kitpvp:
 	executable by: players
 	aliases: /kp
@@ -1224,21 +1269,10 @@ every 1 second:
 		{value.%loop-player%.kit} is greater than 100:
 			set {value.%loop-player%.kit} to 100
 		set {value.%loop-player%.kit.live} to rounded {value.%loop-player%.kit}
-		
-command /showvaule:
-	trigger:
-		send "%{value.%player%.kit}%" to player
+
 	
 command /tixset <player> <integer>:
+	permission: obam.admin.tix
 	trigger:
 		set player-argument's balance to argument 2
 		
-		
-command /bowtome:
-	trigger:
-		give player stick named "&fGod Bow"
-		
-on right click with stick:
-	world is "wildtest":
-		player's tool is stick named "&fGod Bow"
-		shoot arrow from player

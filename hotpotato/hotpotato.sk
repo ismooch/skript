@@ -19,10 +19,12 @@
 
 
 command /setpoint <text>:
+	permission: obam.admin.lobby
 	trigger:
 		set {hptp.%arg%} to location of player
 		
 command /setdeathpoint <text>:
+	permission: obam.admin.lobby
 	trigger:
 		set {hpdtp.%arg%} to location of player
 		

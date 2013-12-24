@@ -42,10 +42,12 @@ command /hatgive <item> [<player>]:
 		set name of player-argument's helmet to "hat"
 		
 command /hatadd <item>:
+	permission: obam.admin.hats
 	trigger:
 		add arg 1 to {hat.items.list::*}
 
 command /hatshow:
+	permission: obam.admin.hats
 	trigger:
 		loop {hat.items.list::*}:
 			send "%loop-value%" to player

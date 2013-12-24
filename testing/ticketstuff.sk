@@ -1,6 +1,7 @@
 #ticket stuff
 command /settickettime:
 	trigger:
+		player is op
 		set {ticket.tracker} to now
 		
 on join:
@@ -46,29 +47,34 @@ every 30 minutes:
 			
 command /syncup:
 	trigger:
+		player is op
 		set {db_ticket.tracker.count} to {ticket.tracker.count}
 		set {db_ticket.tracker} to {ticket.tracker}
 		
 command /syncdown:
 	trigger:
+		player is op
 		set {ticket.tracker.count} to {db_ticket.tracker.count}
 		set {ticket.tracker} to {db_ticket.tracker}	
 			
 			
 command /addtoticket:
 	trigger:
+		player is op
 		{ticket.tracker.count} is not set:
 			set {ticket.tracker.count} to 0
 		add 1 to {ticket.tracker.count}
 		
 command /viewtime:
 	trigger:
+		player is op
 		send "%{ticket.tracker.count}%" to player
 		send "%{ticket.tracker.count.%player%}%" to player
 		
 		
 command /clearultimate <offline player>:
 	trigger:
+		player is op
 		clear {ticket.tracker.count.%offline player-argument%}
 		
 		

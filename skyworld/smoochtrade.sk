@@ -72,6 +72,7 @@ command /tradea [<text>]:
 			
 command /tradec:
 	executable by: players
+	
 	trigger:
 		{trade.%player%} is not set:
 			send "&cYou have no active trades" to player
@@ -84,6 +85,7 @@ command /tradec:
 		send "&e%player%&c has cancelled a trade!" to {_player}
 
 command /tradeclear <player>:
+	permissions: obam.admin.trade
 	trigger:
 		clear {trade.%player-argument%.active}
 		clear {trade.%player%.active}

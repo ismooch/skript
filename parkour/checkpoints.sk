@@ -21,6 +21,7 @@ command /checkpointbuy <player>:
 		message "&aYou can buy personal checkpoints at &ehttp://l.obamgaming.com/ParkourShop" to player-argument 
 
 command /checkpointh <player>:
+	executable by: console
 	trigger:
 		player-argument's balance is less than 25:
 			message "&cYou do not have enough tickets!"
@@ -62,6 +63,7 @@ command /checkpoint:
 #givecheckpoints
 command /givec <player> <number>:
 	trigger:
+		player is op
 		add argument 2 to {checkpoint.%player-argument%}
 		message "&aYou received &e%argument 2% &aCheckpoints!" to player-argument
 		

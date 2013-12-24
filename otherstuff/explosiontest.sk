@@ -7,6 +7,7 @@ on explosion:
 	
 command /woodme:
 	trigger:
+		player is op
 		give player 64 fullblock spruce wood block
 		
 		
@@ -59,11 +60,7 @@ on respawn:
 	{respawn.%player%.give} is set:
 		give player {respawn.%player%.give} of fullblock spruce wood block
 	clear {respawn.%player%.give}
-	
-command /loopstuff:
-	trigger:
-		loop {%player%.dampener::*}:
-			send "%{%player%.dampener::%loop-index%}%" to player
+
 			
 on burn of fullblock spruce wood block:
 	cancel event

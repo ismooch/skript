@@ -171,31 +171,31 @@ on chat:
 
 on chat:
 	{livon.power} is true
-	message contains (("how"or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("kit" or "pvp" or "kitpvp"):
+	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("kit" or "pvp" or "kitpvp"):
 		wait 1 second
 		send "&6&l'LiV: &3You can Type /kitpvp or /kp join the Kitpvp games!" to player
 		
 on chat:
 	{livon.power} is true
-	message contains (("how"or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("parkour" or "pk" or "jumping games"):
+	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("parkour" or "pk" or "jumping games"):
 		wait 1 second
 		send "&6&l'LiV: &3You can Type /parkour or /pk to join our parkour games!" to player
 		
 on chat:
 	{livon.power} is true
-	message contains (("how"or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("skyblock" or "skyworld"):
+	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("skyblock" or "skyworld"):
 		wait 1 second
 		send "&6&l'LiV: &3You can Type /skyblock or /sk to join our skyblock World!" to player
 		
 on chat:
 	{livon.power} is true
-	message contains (("how"or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("hot potato" or "hp" or "potato" or "potato game"):
+	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("hot potato" or "hp" or "potato" or "potato game"):
 		wait 1 second
 		send "&6&l'LiV: &3You can Type /Hotpotato or /Hp to Test you skill at our Hotpotato game" to player
 		
 on chat:
 	{livon.power} is true
-	message contains (("how"or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("hub" or "spawn" or "game"):
+	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("hub" or "spawn" or "game"):
 		wait 1 second
 		send "&6&l'LiV: &3You can Type /hub to return to spawn and our other games portals!" to player
 	
