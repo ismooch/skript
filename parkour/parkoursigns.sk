@@ -16,5 +16,6 @@ every 10 seconds:
 		set line 3 of loop-value to "&a&l[%{holding.%line 2 of loop-value%.count}%]"
 		
 command /countreset <text>:
+	permissions:obam.admin.parkour
 	trigger:
 		set {holding.%arg%.count} to 0
