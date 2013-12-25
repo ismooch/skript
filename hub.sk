@@ -12,7 +12,7 @@ command /list:
 	trigger:
 		loop all players:
 			add loop-player to {obam.players::*}
-		send "&3[&b&lOBAM&3] %{obam.player::*}%" to player
+		send "&3[&b&lOBAM&3] &bOnline Players: &3%{obam.player::*}%" to player
 		delete {obam.player::*}
 		
 		
