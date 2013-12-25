@@ -6,6 +6,15 @@ command /hub:
 			make player execute command "/lobby"
 		make console execute command "/mvtp %player% plan"
 		
+command /list:
+	description: It gets annoying not having this :)
+	usage: /list
+	trigger:
+		loop all players:
+			add loop-player to {obam.players::*}
+		send "&3[&b&lOBAM&3] &bOnline Players: &3%{obam.player::*}%" to player
+		delete {obam.player::*}
+		
 		
 command /survival:
 	description: Go to the survival world
