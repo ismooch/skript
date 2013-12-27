@@ -2,7 +2,7 @@ options:
 	skyblock1: i;paper;n;&9&lSkyblock General Info;l;&7Learn more about Skyblock and how to get||&7started!||||&6Please click to receive a book about Skyblock!;c;sudo %player% helpskyblock general
 	skyblock2: i;command block;n;&9&lSkyblock General Commands;l;&7These are the basic commands you will need to know while||&7you play on OBAM Skyblock!||||&6Please click to receive a book about Skyblock General Commands!;c;sudo %player% helpskyblock commands
 	skyblock3: i;cake item;n;&9&lSkyblock Party Commands;l;&7Learn more about Skyblock Party Commands!||||&6Please click to receive a book about Skyblock Party Commands!;c;sudo %player% helpskyblock party
-	skyblock4: i;gold block;n;&9&lSapling;l;&e/sapling||&7If you harvest a tree, and no sapling spawns, this command||&7will give you 1 sapling. It has a coold down of &c24 Hours.
+	skyblock4: i;gold block;n;&9&lSapling;l;&e/sapling||&7If you harvest a tree, and no sapling spawns, this command||&7will give you 1 sapling. It has a cool down of &c24 Hours.
 	skyblock5: i;iron block;n;&9&lSpawn;l;&e/spawn||&7This command will teleport you to the||&7main spawn area of the Skyblock World.
 	back: i;tnt;n;&9&lMain Menu;l;&7Click to return to the main||&7help menu.;c;sudo %player% helpbeta
 	
