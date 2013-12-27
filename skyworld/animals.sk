@@ -1,4 +1,4 @@
-on damage of a entity:
+on damage of a passive mob:
 	world is "skyworld"
 	attacker is a player
 	attacker can't build at location of attacker:
