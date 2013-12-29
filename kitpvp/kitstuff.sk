@@ -254,21 +254,7 @@ command /kit [<text>]:
 			make player execute command "/arena"
 			
 		#subfold @earthmage
-		argument is "earthmage":
-			{active.kit.%player%} is true:
-				send "&cYou already have a kit D:" to player
-				stop
-			clear player's inventory
-			equip player with all leather armor of protection 5 named "&fEarth Mage's Robes"
-			dye player's helmet brown
-			dye player's chestplate brown
-			dye player's leggings brown
-			dye player's boots brown
-			give player dirt named "&fTrusty Earth"
-			give player iron pickaxe of knockback 2 and sharpness 2 named "&fHole Maker"
-			give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
-			set {kit.earthmage.%player%} to true
-			set {kit.active.%player%} to true
+
 			
 			
 			
@@ -1046,27 +1032,7 @@ on death of red sheep:
 		
 		
 #startfold @earthmage-casting
-on left click with dirt:
-	world is "kitpvpkillingfields"
-	{kit.earthmage.%player%} is true:
-		set {_loc.head} to location of player's head
-		set {_loc.feet} to location of player
-		loop blocks in radius 3 of player:
-			
-			loop-block is air:
-				wait 0.02 second
-				set loop-block to dirt
-				add loop-block to {earth.%player%::*}
-				
-		set block 2 blocks above block below player to air
-		apply regeneration to player for 4 seconds
-				
-		wait 3 seconds
-		loop {earth.%player%::*}:
-			set block at location of loop-value to air
-			wait 0.02 second
-			delete {earth.%player%::%loop-value%}
-		clear {earth.%player%::*}
+
 on xp spawn:
 	world is "kitpvpkillingfields"
 	cancel event
@@ -1231,6 +1197,72 @@ command /clearkit <player>:
 	executable by: console
 	trigger:
 		set {active.kit.%player-argument%} to false
+		#subfold @ninja-clear
+		{kit.ninja.%player-argument%} is true:
+			remove jump from player-argument
+			remove speed from player-argument
+			set {kit.ninja.%player-argument%} to false
+			remove absorption from player-argument
+			set {snowball.ninja.%player-argument%} to false
+			set {active.kit.%player-argument%} to false
+			set {ninja.poof.%player-argument%} to false
+						
+		#subfold @archer-clear
+		{kit.archer.%player-argument%} is true:
+			remove speed from player-argument
+			remove absorption from player-argument
+			set {kit.archer.%player-argument%} to false
+			set {egg.archer.%player-argument%} to false
+			set {active.kit.%player-argument%} to false
+			set {kitpvp.dead.%player-argument%} to false
+		#subfold @melee-clear
+		{kit.melee.%player-argument%} is true:
+			set {snowball.melee.%player-argument%} to false
+			set {active.kit.%player-argument%} to false
+						
+		#subfold @firemage-clear
+		{kit.firemage.%player-argument%} is true:
+			set {kit.firemage.%player-argument%} to false
+			set {active.kit.%player-argument%} to false
+			remove speed from player-argument
+		#subfold @tank-clear
+		{kit.tank.%player-argument%} is true:
+			set {kit.tank.%player-argument%} to false
+			remove slowness from player-argument
+			remove health boost from player-argument
+		#subfold @lightningmage-clear
+		{kit.lightningmage.%player-argument%} is true:
+			set {kit.lightningmage.%player-argument%} to false
+			remove jump from player-argument
+		#subfold @necromancer-clear
+		{kit.necromancer.%player-argument%} is true:
+			set {kit.necromancer.%player-argument%} to false
+			loop all zombies in world "kitpvpkillingfields":
+				{owner.zombie.%loop-entity%} is player-argument
+				delete loop-entity
+			clear {zombie.%player-argument%.active}
+			remove speed from player-argument
+		#subfold @fishermanclear
+		{kit.fisherman.%player-argument%} is true:
+			set {kit.fisherman.%player-argument%} to false
+		{kit.something.%player-argument%} is true:
+			remove speed from player-argument
+			set {kit.something.%player-argument%} to false
+		#subfold @skelemancerclear
+		{kit.skelemancer.%player-argument%} is true:
+			set {kit.skelemancer.%player-argument%} to false
+			loop all wither skeletons in world "kitpvpkillingfields":
+				{owner.skeleton.%loop-entity%} is player-argument
+				delete loop-entity
+			clear {skeleton.%player-argument%.active}
+		execute console command "effect %player-argument% clear"
+		clear player-argument's inventory
+		
+command /revive <player>:
+	executable by: console or players
+	permission: obam.admin.kp
+	trigger:
+		set {kitpvp.dead.%player-argument%} to false
 		
 command /mapset <text>:
 	permission: obam.admin.kp

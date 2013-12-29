@@ -20,6 +20,7 @@ options:
 	rosebush: i;175:4;n;&3&lRose Bush;l;&7Click to purchase a||&eRose Bush|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 175:4 100
 	peony: i;175:5;n;&3&lPeony;l;&7Click to purchase a||&ePeony|| ||&7&lPrice: &e100 tickets;c;skyshopbuy %player% 1 175:5 100
 	#endfold
+	#startfold @stainedglass
 	regularglass: i;glass;n;&3&lPlain Jane Glass Block;l;&7Click to purchase||&e32 Plane Jane Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 20 300
 	whitesg: i;95;n;&3&lWhite Stained Glass;l;&7Click to purchase||&e32 White Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95 300
 	orangesg: i;95:1;n;&3&lOrange Stained Glass;l;&7Click to purchase||&e32 Orange Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:1 300
@@ -37,11 +38,34 @@ options:
 	greensg: i;95:13;n;&3&lGreen Stained Glass;l;&7Click to purchase||&e32 Green Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:13 300
 	redsg: i;95:14;n;&3&lRed Stained Glass;l;&7Click to purchase||&e32 Red Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:14 300
 	blacksg: i;95:15;n;&3&lBlack Stained Glass;l;&7Click to purchase||&e32 Black Stained Glass|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 95:15 300
+	#endfold
+	#startfold @vanitiy-items
+	jukebox: i;jukebox;n;&3&lJukebox!;l;&7Click to purchase a||&eJukebox|| ||&7&lPrice &e500 Tickets;c;skyshopbuy %player% 1 jukebox 500
+	beacon: i;beacon;n;&3&lBeacon!;l;&7Click to purchase a||&eBeacon|| ||&7&lPrice &e10000 Tickets;c;skyshopbuy %player% 1 beacon 10000
+	skeletonhead: i;skeleton head;n;&3&lSkeleton Skull;l;&7Click to purchase a||&eSkeleton Skull|| ||&7&lPrice &e500 Ticket;c;skyshopbuy %player% 1 skeleton head 500
+	zombiehead: i;zombie head;n;&3&lCreeper Head;l;&7Click to purchase a||&eZombie Skull|| ||&7&lPrice &e500 Ticket;c;skyshopbuy %player% 1 zombie head 500
+	creeperhead: i;creeper head;n;&3&lZombie Head;l;&7Click to purchase a||&eCreeper Skull|| ||&7&lPrice &e500 Ticket;c;skyshopbuy %player% 1 creeper head 500
+	#endfold
+	#startfold @stainedclay
+	regularclay: i;clay;n;&3&lPlain Jane clay Block;l;&7Click to purchase||&e32 Plane Jane clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 82 300
+	whiteclay: i;159;n;&3&lWhite Stained clay;l;&7Click to purchase||&e32 White Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159 300
+	orangeclay: i;159:1;n;&3&lOrange Stained clay;l;&7Click to purchase||&e32 Orange Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:1 300
+	magentaclay: i;159:2;n;&3&lMagenta Stained clay;l;&7Click to purchase||&e32 Magenta Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:2 300
+	lightblueclay: i;159:3;n;&3&lLight Blue Stained clay;l;&7Click to purchase||&e32 Light Blue Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:3 300
+	yellowclay: i;159:4;n;&3&lYellow Stained clay;l;&7Click to purchase||&e32 Yellow Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:4 300
+	limeclay: i;159:5;n;&3&lLime Stained clay;l;&7Click to purchase||&e32 Lime Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:5 300
+	pinkclay: i;159:6;n;&3&lPink Stained clay;l;&7Click to purchase||&e32 Pink Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:6 300
+	greyclay: i;159:7;n;&3&lGrey Stained clay;l;&7Click to purchase||&e32 Grey Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:7 300
+	lightgreyclay: i;159:8;n;&3&lLight Grey Stained clay;l;&7Click to purchase||&e32 Light Grey Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:8 300
+	cyanclay: i;159:9;n;&3&lCyan Stained clay;l;&7Click to purchase||&e32 Cyan Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:9 300
+	purpleclay: i;159:10;n;&3&lPurple Stained clay;l;&7Click to purchase||&e32 Purple Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:10 300
+	blueclay: i;159:11;n;&3&lBlue Stained clay;l;&7Click to purchase||&e32 Blue Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:11 300
+	brownclay: i;159:12;n;&3&lBrown Stained clay;l;&7Click to purchase||&e32 Brown Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:12 300
+	greenclay: i;159:13;n;&3&lGreen Stained clay;l;&7Click to purchase||&e32 Green Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:13 300
+	redclay: i;159:14;n;&3&lRed Stained clay;l;&7Click to purchase||&e32 Red Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:14 300
+	blackclay: i;159:15;n;&3&lBlack Stained clay;l;&7Click to purchase||&e32 Black Stained clay|| ||&7&lPrice: &e300 tickets;c;skyshopbuy %player% 32 159:15 300
 	
-
-
-
-
+	
 command /skyshop [<text>]:
 	trigger:
 		world is "skyworld"
@@ -58,11 +82,17 @@ command /skyshop [<text>]:
 		
 		argument is "clayshop":
 		
-			send "&aComing Soon!" to player
+			send "&aOpening Menu..." to player
+			wait 0.5 seconds
+		
+			show "s;1;{@regularclay};s;2;{@whiteclay};s;3;{@orangeclay};s;4;{@magentaclay};s;5;{@lightblueclay};s;6;{@yellowclay};s;7;{@limeclay};s;8;{@pinkclay};s;9;{@greyclay};s;10;{@lightgreyclay};s;11;{@cyanclay};s;12;{@purpleclay};s;13;{@blueclay};s;14;{@brownclay};s;15;{@greenclay};s;16;{@redclay};s;17;{@blackclay}" with 2 rows named "&9&lOBAM&9 Clay Shop" to player
 		
 		argument is "vanityshop":
 		
-			send "&aComing Soon!" to player
+			send "&aOpening Menu..." to player
+			wait 0.5 seconds
+			
+			show "s;1;{@jukebox};s;2;{@skeletonhead};s;3;{@zombiehead};s;4;{@creeperhead};s;5;{@beacon}" with 1 row named "&9&lOBAM &9Vanity Shop" to player
 		
 		argument is "natureshop":
 			

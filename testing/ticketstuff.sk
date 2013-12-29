@@ -27,6 +27,7 @@ on join:
 
 
 every 30 minutes:
+	set {ticket.tracker.count} to {db_ticket.tracker.count}
 	difference between {ticket.tracker} and now is greater than or equal to 7 days:
 		set {ticket.tracker} to now
 		{ticket.tracker.count} is not set:
@@ -50,6 +51,14 @@ command /syncup:
 		player is op
 		set {db_ticket.tracker.count} to {ticket.tracker.count}
 		set {db_ticket.tracker} to {ticket.tracker}
+		
+command /ticketcounterset <integer> [<player>]:
+	trigger:
+		player is op
+		player-argument is not set:
+			set {ticket.tracker.count} to argument 1
+		player-argument is set:
+			set {ticket.tracker.count.%player-argument%} to argument 1
 		
 command /syncdown:
 	trigger:
@@ -76,6 +85,13 @@ command /clearultimate <offline player>:
 	trigger:
 		player is op
 		clear {ticket.tracker.count.%offline player-argument%}
+		
+command /updateplayers:
+	trigger:
+		player is op
+		loop all players:
+			loop-player has permission "obam.supporter.tickets":
+				set {db_ticket.tracker.count.%loop-player%} to {ticket.tracker.count.%loop-player%}
 		
 		
 			

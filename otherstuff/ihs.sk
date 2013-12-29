@@ -6,12 +6,12 @@ options:
 	redstone: i;redstone;n;&b&nRedstone;l;&7Click to claim your &epurchased redstone.;c;sudo %player% redeem redstone
 	lavabucket: i;lava bucket;n;&b&nLava Bucket;l;&7Click to claim your &epurchased lava buckets.;c;sudo %player% redeem lava bucket
 	dampener: i;fullblock spruce wood block;n;&b&nxPlosion Dampener;l;&7Click to claim your &epurchased xPlosion Dampeners.;c;sudo %player% redeem fullblock spruce wood block
-command /itemstore <offline player> <item> <integer>:
+command /itemstore <player> <item> <integer>:
 	permission: obam.admin.ihs
 	trigger:
-		{db_ihs.%offline player-argument%.%argument 2%} is set:
-			add argument 3 to {db_ihs.%offline player-argument%.%argument 2%}
-			send "&aYou have made a purchase! Type &e/redeem&a to redeem your items!" to offline player-argument
+		{db_ihs.%player-argument%.%argument 2%} is set:
+			add argument 3 to {db_ihs.%player-argument%.%argument 2%}
+			send "&aYou have made a purchase! Type &e/redeem&a to redeem your items!" to player-argument
 			play "level up" at location of offline player-argument with pitch 2
 			wait 0.2 seconds
 			play "level up" at location of offline player-argument with pitch 2
@@ -22,9 +22,9 @@ command /itemstore <offline player> <item> <integer>:
 			wait 0.2 seconds
 			play "level up" at location of offline player-argument with pitch 2
 			stop
-		set {db_ihs.%offline player-argument%.%argument 2%} to argument 3
-		set {db_alert.redeem.%offline player-argument%} to true
-		send "&aYou have made a purchase! Type &e/redeem&a to redeem your items!" to offline player-argument
+		set {db_ihs.%player-argument%.%argument 2%} to argument 3
+		set {db_alert.redeem.%player-argument%} to true
+		send "&aYou have made a purchase! Type &e/redeem&a to redeem your items!" to player-argument
 		play "level up" at location of offline player-argument with pitch 2
 		wait 0.2 seconds
 		play "level up" at location of offline player-argument with pitch 2
@@ -78,6 +78,8 @@ command /redeem [<item>]:
 			argument is fullblock spruce wood block:
 				{db_ihs.%player%.%argument%} is less than 2:
 					send "&aYou have received your &e%{db_ihs.%player%.%argument%}% xPlosion Dampener&a! Thank you for your purchase!"
+					set {db_ihs.%player%.%argument%} to 0
+					set {db_alert.redeem.%player%} to false
 					stop
 				
 				send "&aYou have received your &e%{db_ihs.%player%.%argument%}% xPlosion Dampeners&a! Thank you for your purchase!"
@@ -91,10 +93,10 @@ command /redeem [<item>]:
 		send "&cIf you did not have a menu open, ensure you are in the correct world for redeeming! D:" to player
 		
 			
-command /ihslist <player> <item>:
+command /ihslist <text> <item>:
 	permission: obam.admin.ihs
 	trigger:
-		send "%{db_ihs.%player-argument%.%argument 2%}% %argument 2% on file" to player
+		send "%{db_ihs.%text argument%.%argument 2%}% %argument 2% on file" to player
 		
 command /sudo [<player>] [<text>]:
 	executable by: console and players

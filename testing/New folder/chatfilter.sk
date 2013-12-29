@@ -1,0 +1,31 @@
+on chat:
+	message contains "fuck":
+		replace "fuck" in message with "BLAM!"
+		wait 1 second
+		send "&cPlease do not excessively swear!" to player
+	
+on chat:
+	message contains "fuc" or "fuk":
+		replace "fuc" or "fuk" in message with "BLAM!"
+		wait 1 second
+		send "&cPlease do not excessively swear!" to player
+		
+on chat:
+	message contains ("f " and "u " and "c ") or ("c " and "u " and "n "):
+		cancel event
+		send "&cPlease do not bypass the chat filter!" to player
+			
+on chat:
+	message contains "cunt" or "c unt":
+		replace "cunt" or "c unt" in message with "BLAM!"
+		wait 1 second
+		send "&CPlease do not excessively swear!"
+		
+on chat:
+	message contains "twat" or "t wat":
+		replace "twat" or "t wat" in message with "BLAM!"
+		wait 1 second
+		send "&cPlease do not excessively swear!" to player
+		
+		
+		

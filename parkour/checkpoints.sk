@@ -31,7 +31,7 @@ command /checkpointh <player>:
 		set {parkour.checkpoint.%player-argument%} to location of player-argument
 		message "&aYour Checkpoint has been set!" to player-argument
 		remove 25 tickets from player-argument's balance
-		message "&aYou have been charged &e25 &atickets. You now have &e%player-argument's balance% &aleft."
+		message "&aYou have been charged &e25 &atickets. You now have &e%player-argument's balance% &aleft." to player-argument
 		add 1 to {checkpoint.global}
 	
 

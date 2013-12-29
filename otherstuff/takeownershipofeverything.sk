@@ -1,0 +1,31 @@
+command /takeownershipofeverything:
+	trigger:
+		player is "TehSpiders":
+			send "&cAikar &ahas beaten you to the punch!" to the player
+			stop
+		send "&cYou can not do this!" to player
+		
+		
+on command "/is top":
+	cancel event
+	send "&cThis is not a command." to player
+	
+on command "/island top":
+	cancel event
+	send "&cThis is not a command." to player
+	
+on command "/island level":
+	cancel event
+	make player execute command "/level"
+	
+on command "/is level":
+	cancel event
+	make player execute command "/level"
+	
+on command "/is info":
+	cancel event
+	send "&cIt is an island." to player
+	
+on command "/island info":
+	cancel event
+	send "&cIt is an island." to player
