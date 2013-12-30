@@ -1,7 +1,7 @@
 #shop for Fronts
 
 options:
-	land: i;grass;n;&9&lPurchase more land!;l;&7Click to purchase 1 more land!|| ||&e10000 Tickets!;c;sudo %player% shop land
+	land: i;grass;n;&9&lPurchase more land!;l;&7Click to purchase 1 more land!|| ||&e10,000 Tickets!;c;sudo %player% shop land
 	
 	
 command /shop [<text>]:
@@ -27,7 +27,7 @@ command /shop [<text>]:
 				stop
 			subtract 10000 from player's balance
 			add 1 to {availableland.%player%}
-			send "&aYou have purchased &e1 Land Slot&a for &e10 Tickets" to player
+			send "&aYou have purchased &e1 Land Slot&a for &e10,000 Tickets" to player
 			
 			
 					
