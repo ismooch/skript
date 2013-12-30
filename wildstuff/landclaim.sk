@@ -38,7 +38,7 @@ on join:
 		
 every 1 tick:
 	loop all players:
-		{alert.notify.owner.%loop-player%} is not {chunk.live.%chunk at location of loop-player%} :
+		{alert.notify.owner.%loop-player%} is not {chunk.live.%chunk at location of loop-player%}:
 			{chunk.live.%chunk at location of loop-player%}  is not set:
 				{alert.notify.owner.%loop-player%} is not "Unclaimed":
 					send "&a&lUnclaimed Front" to loop-player
@@ -90,7 +90,7 @@ command /front [<text>] [<text>] [<text>]:
 					message "&3--[&lFront Owner&3]--"
 					message "&a * %{chunk.live.%chunk at location of player%} %"
 					message "&3--[&lFront Members&3]--"
-					message "&a * %{land.live.%chunkat location of player%::*}%"
+					message "&a * %{land.live.%chunk at location of player%::*}%"
 					send "&3---[&lFront Name&3]--"
 					{chunk.name.%chunk at location of player%} is not set:
 						send "&a * Name not set"
@@ -290,7 +290,7 @@ command /front [<text>] [<text>] [<text>]:
 					
 					{_chunk.name} is not set:
 						set {_chunk.name} to "&cNot Named"
-					{chunk.%{_chunk}%.%player%} is true:
+					{chunk.live.%{_chunk}%.%player%} is true:
 						add 1 to {_count}
 						send "&a%{_count}%.......%{_chunk}%....%{_chunk.name}%" to player
 				stop
@@ -329,7 +329,7 @@ command /front [<text>] [<text>] [<text>]:
 					set {_chunk} to chunk at location of {_loc}
 					set {_chunk.name} to {chunk.name.%{_chunk}%}
 					{_chunk.name} is argument 2:
-						{chunk.%{_chunk}%.%player%} is not set:
+						{chunk.live.%{_chunk}%.%player%} is not set:
 							send "&cYou do not have permission to go here!" to player
 							stop
 						send "&aTeleporting to &e%argument 2%" to player
@@ -582,3 +582,17 @@ command /owner <text>:
 on command "/hub":
 	cancel event
 	send "&aUse &e/main &ato return to the hub server!" to player
+	
+on command "/spawn":
+	{chunk.live.%chunk at location of player%}  is not player:
+		{chunk.live.%chunk at location of player%}  is not "Town":
+			{chunk.live.%chunk at location of player%.%player%} is not set:
+				send "&cYou can only do this in Town, or on your own land!" to player
+				cancel event
+				stop
+			
+	if {chunk.live.%chunk at location of player%}  is not set:
+		message "&cYou must do this on your land!"
+		cancel event
+		stop
+	

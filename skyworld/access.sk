@@ -2,8 +2,8 @@ on right click on a chest or a door or a anvil or a lever or a button or a wood 
 	
 	{bypassland.%player%} is true:
 		stop
-	{chunk.%chunk at location of event-player%} is not event-player:
-		{chunk.%chunk at location of event-player%.%event-player%} is not set:
+	{chunk.live.%chunk at location of event-player%} is not event-player:
+		{chunk.live.%chunk at location of event-player%.%event-player%} is not set:
 			loop blocks in radius 2 of event-block:
 				loop-block is sign
 				
@@ -34,8 +34,8 @@ on sign change:
 		set line 1 of block to "[ACCESS]"
 		
 on bed enter:
-	{chunk.%chunk at location of event-player%} is not event-player:
-		{chunk.%chunk at location of event-player%.%event-player%} is not set:
+	{chunk.live.%chunk at location of event-player%} is not event-player:
+		{chunk.live.%chunk at location of event-player%.%event-player%} is not set:
 			cancel event
 			send "&cYou can not do that here!" to event-player
 		
@@ -43,36 +43,36 @@ on bed enter:
 on right click on painting:
 	if {bypassland.%player%} is true:
 		stop
-	if {chunk.%chunk at location of block%} is set:
-		if {chunk.%chunk at location of block%.%player%} is true:
+	if {chunk.live.%chunk at location of block%} is set:
+		if {chunk.live.%chunk at location of block%.%player%} is true:
 			stop
-		message "&cThis land is owned by %{chunk.%chunk at location of block%}%."
+		message "&cThis land is owned by %{chunk.live.%chunk at location of block%}%."
 		cancel event
 		
 on damage of a painting:
 	if {bypassland.%attacker%} is true:
 		stop
-	if {chunk.%chunk at location of attacker%} is set:
-		if {chunk.%chunk at location of attacker%.%attacker%} is true:
+	if {chunk.live.%chunk at location of attacker%} is set:
+		if {chunk.live.%chunk at location of attacker%.%attacker%} is true:
 			stop
-		message "&cThis land is owned by %{chunk.%chunk at location of attacker%}%."
+		message "&cThis land is owned by %{chunk.live.%chunk at location of attacker%}%."
 		cancel event
 			
 on right click on hopper minecart:
 	if {bypassland.%player%} is true:
 		stop
-	if {chunk.%chunk at location of block%} is set:
-		if {chunk.%chunk at location of block%.%player%} is true:
+	if {chunk.live.%chunk at location of block%} is set:
+		if {chunk.live.%chunk at location of block%.%player%} is true:
 			stop
-		message "&cThis land is owned by %{chunk.%chunk at location of block%}%."
+		message "&cThis land is owned by %{chunk.live.%chunk at location of block%}%."
 		cancel event
 on right click on storage minecart:
 	if {bypassland.%player%} is true:
 		stop
-	if {chunk.%chunk at location of block%} is set:
-		if {chunk.%chunk at location of block%.%player%} is true:
+	if {chunk.live.%chunk at location of block%} is set:
+		if {chunk.live.%chunk at location of block%.%player%} is true:
 			stop
-		message "&cThis land is owned by %{chunk.%chunk at location of block%}%."
+		message "&cThis land is owned by %{chunk.live.%chunk at location of block%}%."
 		cancel event
 	
 			
