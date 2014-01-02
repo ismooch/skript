@@ -383,7 +383,8 @@ on explode:
 		if {chunk.live.%chunk at location of loop-block%} is set:
 			cancel event
 on damage of a entity:
-	entity is not creeper or zombie or skeleton or powered creeper or spider
+	event-entity is creeper or zombie or skeleton or spider or enderman or blaze or ghast or magma slime or slime or witch or silverfish:
+		stop
 	attacker is a player
 	loop blocks in radius 3 of victim:
 		{bypassland.%attacker%} is true:

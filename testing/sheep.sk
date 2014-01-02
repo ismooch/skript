@@ -108,6 +108,7 @@ on death of a sheep or a bat or a powered creeper or a pig:
 	name of victim is "&aISMOOCH" or "&aBru Swain" or "&aSparky" or "&aBacon"
 	clear drops
 			
+			
 on right click with wheat on sheep:
 	name of event-entity is "&aISMOOCH"
 	cancel event

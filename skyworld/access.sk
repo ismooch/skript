@@ -2,8 +2,8 @@ on right click on a chest or a door or a anvil or a lever or a button or a wood 
 	
 	{bypassland.%player%} is true:
 		stop
-	{chunk.live.%chunk at location of event-player%} is not event-player:
-		{chunk.live.%chunk at location of event-player%.%event-player%} is not set:
+	{chunk.live.%chunk at location of event-block%} is not event-player:
+		{chunk.live.%chunk at location of event-block%.%event-player%} is not set:
 			loop blocks in radius 2 of event-block:
 				loop-block is sign
 				
@@ -34,7 +34,7 @@ on sign change:
 		set line 1 of block to "[ACCESS]"
 		
 on bed enter:
-	{chunk.live.%chunk at location of event-player%} is not event-player:
+	{chunk.live.%chunk at location of event-block%} is not event-player:
 		{chunk.live.%chunk at location of event-player%.%event-player%} is not set:
 			cancel event
 			send "&cYou can not do that here!" to event-player
@@ -74,6 +74,8 @@ on right click on storage minecart:
 			stop
 		message "&cThis land is owned by %{chunk.live.%chunk at location of block%}%."
 		cancel event
+		
+
 	
 			
 			
