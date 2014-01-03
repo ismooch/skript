@@ -33,5 +33,11 @@ command /tix:
 	trigger:
 		send "&aYour current balance is &e%player's balance%&a!" to player
 		
+command /tixpeek <text>:
+	permission: obam.admin.commad
+	trigger:	
+		set {_player} to argument parsed as offline player
+		send "&e%argument%'s&a ticket balance is &e%{_player}'s balance%" to player
+		
 		
 			

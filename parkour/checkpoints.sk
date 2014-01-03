@@ -72,6 +72,28 @@ command /cpbalance:
 	trigger:
 		message "&aYou have &e%{checkpoint.%player%}% &acheckpoints!" to player
 		
+command /checkset <text> <integer>:
+	permission: obam.admin.command
+	trigger:
+		set {checkpoint.%argument 1%} to argument 2
+		send "&aYou have set &e%argument 1%'s &acheckpoint balance to &e%argument 2%" to player
+		
+command /checkreset <text>:
+	permission: obam.admin.command
+	trigger:
+		set {checkpoint.%argument%} to 0
+		send "&aYou have reset &e%argument%'s &acheckpoint balance!" to player
+		
+command /cpcheck <text>:
+	permission: obam.admin.command
+	trigger:
+		{checkpoint.%argument%} is not set:
+			send "&e%argument%&a has &e0&a checkpoints." to player
+			stop
+		send "&e%argument%&a has &e%{checkpoint.%argument%}%&a checkpoints." to player
+		
+
+		
 		
 		
 		
