@@ -84,7 +84,7 @@ command /kit [<text>]:
 			dye player's boots black
 			apply jump 2 to player for 999 days
 			apply absorption 3 to player for 999 days
-			give iron sword of sharpness 2 named "&fSamuri Blade &b[Sharpness II]" to player
+			give iron sword of sharpness 2 named "&fSamurai Blade &b[Sharpness II]" to player
 			give 3 snowball named "&fBlindness Balls" to player
 			give 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]" to player
 			give potion of poison named "&fJump Potion" to player
@@ -158,7 +158,7 @@ command /kit [<text>]:
 			dye player's chestplate blue
 			dye player's leggings blue
 			dye player's boots blue
-			give player stick of knockback 1 named "&fLightning Wand"
+			give nameditemstack from "Stick of knockback 1;&fLightning Wand;&fPowers:|| ||&bTeleport: &3Left click to teleport to the block||&3you're looking at! &b -50% Mana|| ||&bLightning: &3Right click to shoot lighting" to the player
 			give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
 			give player 3 splash potions of harming named "&fPain Juice"
 			apply jump 1 to player for 999 days
