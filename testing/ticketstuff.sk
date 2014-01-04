@@ -5,10 +5,9 @@ command /settickettime:
 		set {ticket.tracker} to now
 		
 on join:
-	wait 30 seconds
-	{db_ticket.tracker.count.%player%} is not set:
-		set {db_ticket.tracker.count.%player%} to {ticket.tracker.count.%player%}
-	set {ticket.tracker.count.%player%} to {db_ticket.tracker.count.%player%}
+	{ticket.tracker.count.%player%} is not set:
+		set {ticket.tracker.count.%player%} to {ticket.tracker.count.%player%}
+	set {ticket.tracker.count.%player%} to {ticket.tracker.count.%player%}
 	player has permission "obam.supporter.tickets":
 		{ticket.tracker.count.%player%} is not set:
 			set {ticket.tracker.count.%player%} to {ticket.tracker.count}
@@ -22,28 +21,15 @@ on join:
 			set {_pay.%player%} to 2000 * {_pay.%player%}
 			add {_pay.%player%} to player's balance
 			set {ticket.tracker.count.%player%} to {ticket.tracker.count}
-			set {db_ticket.tracker.count.%player%} to {ticket.tracker.count.%player%}
 			send "&aYou have received &e2000&a tickets for your weekly allowance! Enjoy!" to player
 
 
-every 30 minutes:
-	set {ticket.tracker.count} to {db_ticket.tracker.count}
+every 1 minute:
 	difference between {ticket.tracker} and now is greater than or equal to 7 days:
 		set {ticket.tracker} to now
 		{ticket.tracker.count} is not set:
 			set {ticket.tracker.count} to 0
 		add 1 to {ticket.tracker.count}
-		set {db_ticket.tracker.count} to {ticket.tracker.count}
-		
-	loop all players:
-		loop-player has permission "obam.supporter.tickets"
-		{ticket.tracker.count.%loop-player%} is not equal to {ticket.tracker.count}:
-			add 2000 to loop-player's balance
-			add 1 to {ticket.tracker.count.%loop-player%}
-			{ticket.tracker.count.%loop-player%} is not set:
-				set {ticket.tracker.count.%loop-player%} to {ticket.tracker.count}
-				set {db_ticket.tracker.count.%loop-player%} to {ticket.tracker.count.%loop-player%}
-			send "&aYou have received &e2000&a tickets for your weekly allowance! Enjoy!" to loop-player
 
 			
 command /syncup:
@@ -65,6 +51,12 @@ command /syncdown:
 		player is op
 		set {ticket.tracker.count} to {db_ticket.tracker.count}
 		set {ticket.tracker} to {db_ticket.tracker}	
+		
+command /trackcheck:
+	trigger:
+		player is op
+		set {_check} to difference between {ticket.tracker} and now
+		send "%{_check}%" to player
 			
 			
 command /addtoticket:
