@@ -158,7 +158,7 @@ command /kit [<text>]:
 			dye player's chestplate blue
 			dye player's leggings blue
 			dye player's boots blue
-			give nameditemstack from "Stick of knockback 1;&fLightning Wand;&fPowers:|| ||&bTeleport: &3Left click to teleport to the block||&3you're looking at! &b -50% Mana|| ||&bLightning: &3Right click to shoot lighting" to the player
+			give nameditemstack from "Stick of knockback 1;&fLightning Wand;&fPowers:|| ||&bTeleport: &3Left click to teleport to the block||&3you're looking at!||&b&lCOST:&b 50 Mana|| ||&bLightning: &3Right click to shoot lighting||&b&lCOST:&b 10 Mana" to the player
 			give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
 			give player 3 splash potions of harming named "&fPain Juice"
 			apply jump 1 to player for 999 days
@@ -479,7 +479,6 @@ on damage:
 					#subfold @ninja-special
 					chance of 80%:
 						{ninja.poof.%victim%} is true:
-							victim's helmet is a leather helmet named "&fNinja Cloaks"
 							hide victim from all players
 							set victim's health to 10
 							apply speed 5 to victim for 3 seconds
@@ -703,7 +702,7 @@ on right click with stick:
 	world is "kitpvpkillingfields"
 	cancel event
 	{kit.firemage.%player%} is true:
-		player's tool is a stick named "&fFire Wand"
+		name of player's tool is "&fFire Wand"
 		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
 			send "&cYou can not do that here. Please select an arena!" to player
 			stop
@@ -725,7 +724,7 @@ on right click with stick:
 			reduce the player's level progress by 0.1
 	{kit.lightningmage.%player%} is true:
 	
-		player's tool is a stick named "&fLightning Wand"
+		name of player's tool is "&fLightning Wand"
 		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
 			send "&cYou can not do that here. Please select an arena!" to player
 			stop
