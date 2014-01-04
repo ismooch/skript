@@ -82,7 +82,7 @@ command /lobbyjoin <player> <text>:
 				{hotpotato.%arg 2%.lobby} is greater than or equal to 5:			
 					loop all players in world "hotpotatolobby":
 						{current.hotpotato.%loop-player%.lobby} is arg 2:
-							send "&c&l[%{hotpotato.%arg 2%.lobby}%/16]: &e%player-argument% &a&lhas joined the lobby! The game will being in %45 - {timer.hotpotato.%arg 2%}%" to loop-player
+							send "&c&l[%{hotpotato.%arg 2%.lobby}%/16]: &e%player-argument% &a&lhas joined the lobby! The game will begin in %45 - {timer.hotpotato.%arg 2%}%" to loop-player
 						
 			else:
 				message "&cGame for lobby &e&l%arg 2% &cis already in progress" to player-argument
