@@ -7,7 +7,7 @@ options:
 	lavabucket: i;lava bucket;n;&b&nLava Bucket;l;&7Click to claim your &epurchased lava buckets.;c;sudo %player% redeem lava bucket
 	dampener: i;fullblock spruce wood block;n;&b&nxPlosion Dampener;l;&7Click to claim your &epurchased xPlosion Dampeners.;c;sudo %player% redeem fullblock spruce wood block
 command /itemstore <player> <item> <integer>:
-	permission: obam.admin.ihs
+	permission: obam.admin
 	trigger:
 		{db_ihs.%player-argument%.%argument 2%} is set:
 			add argument 3 to {db_ihs.%player-argument%.%argument 2%}
@@ -51,6 +51,7 @@ on join:
 
 	
 command /redeem [<item>]:
+	permission: obam.free
 	executable by: players
 	trigger:
 	
@@ -94,13 +95,13 @@ command /redeem [<item>]:
 		
 			
 command /ihslist <text> <item>:
-	permission: obam.admin.ihs
+	permission: obam.admin
 	trigger:
 		send "%{db_ihs.%text argument%.%argument 2%}% %argument 2% on file" to player
 		
 command /sudo [<player>] [<text>]:
 	executable by: console and players
-	permission: obam.admin.ihs
+	permission: obam.admin
 	trigger:
 		has permission "obam.staff.admin"
 		make player-argument execute command "%argument 2%"

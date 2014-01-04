@@ -9,6 +9,7 @@ options:
 	
 	
 command /helpgeneral [<text>]:
+	permission: obam.free
 	executable by: players
 	trigger:
 		argument is not set:

@@ -67,6 +67,7 @@ options:
 	
 	
 command /skyshop [<text>]:
+	permission: obam.free
 	trigger:
 		world is "skyworld"
 		argument is not set:

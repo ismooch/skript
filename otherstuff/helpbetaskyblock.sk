@@ -8,6 +8,7 @@ options:
 	
 	
 command /helpskyblock [<text>]:
+	permission: obam.free
 	executable by: players
 	trigger:
 		argument is not set:

@@ -12,6 +12,7 @@ options:
 	
 	
 command /help:
+	permission: obam.free
 	executable by: players
 	trigger:
 		send "&aBringing up menu..." to player
