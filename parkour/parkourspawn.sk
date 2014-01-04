@@ -1,6 +1,6 @@
 command /setpspawn <text>:
 	description: Creates a new warp
-	permission: obam.parkour.setspawn
+	permission: obam.admin
 	executable by: players
 	usage: /setpspawn <warp name>
 	trigger:
@@ -13,7 +13,7 @@ command /setpspawn <text>:
 			stop
  
 command /pspawn <text>:
-	permission: obam.parkour.teleportto
+	permission: obam.admin
 	executable by: players
 	usage: /pspawn <course name>
 	trigger:
@@ -27,7 +27,7 @@ command /pspawn <text>:
 
 command /delpspawn <text>:
 	description: Deletes a warp
-	permission: obam.parkour.removespawn
+	permission: obam.admin
 	usage: /delpspawn <warp name>
 	trigger:
 		if variable {parkourspawn.%argument%} is not set:
@@ -54,12 +54,14 @@ command /parkourspawn <text> <player>:
 			stop
 
 command /mcpc:
+	permission: obam.admin
 	executable by: player
 	trigger:
 		message "&6Current parkour course: %{currentparkourcourse.%player%}%" to the player
 		
 		
 command /fr <player>:
+	permission: obam.admin
 	executable by: player
 	trigger:
 		set {fallen.%player-argument%} to 0

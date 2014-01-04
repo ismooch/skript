@@ -1,7 +1,7 @@
 #itemid check
 command /itemid [<item>]:
 	executable by: players
-	permission: obam.item.check
+	permission: obam.free
 	trigger:
 		argument is set:
 			set {this.block} to argument
@@ -16,7 +16,7 @@ command /itemid [<item>]:
 		
 command /itemcheck:
 	executable by: players
-	permission: obam.item.check
+	permission: obam.free
 	trigger:
 		set {this.block} to targeted block
 		message "&e%{this.block}% : %id of {this.block}% : %data value of {this.block}%" to player

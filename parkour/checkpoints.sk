@@ -38,8 +38,8 @@ command /checkpointh <player>:
 
 command /checkpoint:
 	executable by: player
-	permission: obam.parkour.cp
-	aliases: /seepee
+	permission: obam.free
+	aliases: /cp
 	trigger:
 		world is "parkourmaps":
 		
@@ -62,6 +62,7 @@ command /checkpoint:
 #debug
 #givecheckpoints
 command /givec <player> <number>:
+	permission: obam.admin
 	trigger:
 		player is op
 		add argument 2 to {checkpoint.%player-argument%}
@@ -69,23 +70,24 @@ command /givec <player> <number>:
 		
 #checkpointbalance
 command /cpbalance:
+	permission: obam.free
 	trigger:
 		message "&aYou have &e%{checkpoint.%player%}% &acheckpoints!" to player
 		
 command /checkset <text> <integer>:
-	permission: obam.admin.command
+	permission: obam.admin
 	trigger:
 		set {checkpoint.%argument 1%} to argument 2
 		send "&aYou have set &e%argument 1%'s &acheckpoint balance to &e%argument 2%" to player
 		
 command /checkreset <text>:
-	permission: obam.admin.command
+	permission: obam.admin
 	trigger:
 		set {checkpoint.%argument%} to 0
 		send "&aYou have reset &e%argument%'s &acheckpoint balance!" to player
 		
 command /cpcheck <text>:
-	permission: obam.admin.command
+	permission: obam.admin
 	trigger:
 		{checkpoint.%argument%} is not set:
 			send "&e%argument%&a has &e0&a checkpoints." to player

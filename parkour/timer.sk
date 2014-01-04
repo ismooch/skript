@@ -213,6 +213,7 @@ command /stoptimer <player> <text>:
 						
 #leaderboard check
 command /ldr <text>:
+	permission: obam.free
 	trigger:
 		{besttime.spot1.%argument%} is set:
 		
@@ -259,7 +260,7 @@ command /ldr <text>:
 #debuggingstuff
 
 command /sshift <text> <text>:
-	permission: obam.admin.timer
+	permission: obam.admin
 	trigger:
 		set {time.test} to now
 		wait 3 seconds
@@ -367,14 +368,14 @@ every 30 seconds:
 
 #clearlistcommand
 command /cllist <text>:
-	permission: obam.admin.timer
+	permission: obam.admin
 	trigger:
 		clear {BestTime.%argument%.Signs::*}
 		clear {BestTime2.%argument%.Signs::*}
 		clear {BestTime3.%argument%.Signs::*}
 		
 command /clrvar <text>:
-	permission: obam.admin.timer
+	permission: obam.admin
 	trigger:
 		clear {besttime.spot1.%argument%}
 		clear {besttime.spot1.%argument%.name}
@@ -384,7 +385,7 @@ command /clrvar <text>:
 		clear {besttime.spot3.%argument%.name}
 		
 command /clrsign:
-	permission: obam.admin.timer
+	permission: obam.admin
 	trigger:
 		set {this.block} to location of targeted block
 		delete {BestTime.Signs::%{this.block}%}
@@ -394,7 +395,7 @@ command /clrsign:
 		
 		
 command /shiftvar <text> <number>:
-	permission: obam.admin.timer
+	permission: obam.admin
 	trigger:
 		argument 2 is 1:
 

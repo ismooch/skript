@@ -21,6 +21,7 @@ variables:
 	(completed.beginner} = 0
 
 command /parkourcourse:
+	permission: obam.free
 	executable by: players
 	trigger:
 	
@@ -28,7 +29,7 @@ command /parkourcourse:
 		
 
 command /courseadd <text>:
-	permission: obam.admin.parkour
+	permission: obam.admin
 	trigger:
 		arg is not "clear":
 			add arg to {parkour.courses::*}
@@ -36,7 +37,7 @@ command /courseadd <text>:
 			clear {parkour.courses::*}
 	
 command /listcourses <number>:
-	permission: obam.admin.parkour
+	permission: obam.admin
 	trigger:
 		set {course.add} to 0
 		loop arg times:
@@ -56,7 +57,7 @@ command /courserandom <player>:
 		execute console command "/parkourspawn %{course}% %player-argument%"
 					
 command /lobbyset <text>:
-	permission: obam.admin.parkour
+	permission: obam.admin
 	trigger:
 		set {parkour.%arg%.tp} to location of player
 			
@@ -136,7 +137,7 @@ command /completebeginnerparkourcourse <player>:
 		
 command /parkour:
 	executable by: players
-	permission: obam.parkour.use
+	permission: obam.free
 	aliases: /pk
 	trigger:
 		world is "hotpotatolobby" or "hotpotato1" or "hotpotato2":

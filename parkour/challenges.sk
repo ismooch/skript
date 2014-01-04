@@ -2,6 +2,7 @@ variables:
 	{purchase.sb.tier2.%player%} = 0
 
 command /challenge:
+	permission: obam.free
 	description: opens the chestcommands for challenges
 	usage: /challenge
 	trigger:
@@ -11,6 +12,7 @@ command /challenge:
 #challenges tier1
 #legacy check command
 command /challengelist <text>:
+	permission: obam.free
 	description: displays the skyblock challenges
 	usage: /challengelist <page number>                            'example: /challenge page 1'
 	trigger:
@@ -209,6 +211,7 @@ command /challengelist <text>:
 		
 #challenge complete 
 command /chal <number>:
+	permission: obam.free
 	usage: /chal <number of challenge>
 	description: Displays and Completes Challenges
 	trigger:
@@ -664,7 +667,7 @@ command /chal <number>:
 #challenge reset command
 command /chalr <player> <number>:
 	usage: /chalr <player> <number of challenge>
-	permission: obam.chal.admin
+	permission: obam.admin
 	trigger:
 		
 		
