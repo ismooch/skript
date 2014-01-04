@@ -13,6 +13,7 @@ on join:
 			set {ticket.tracker.count.%player%} to {ticket.tracker.count}
 			{ticket.tracker.bonus.%player%} is not set:
 				add 2000 to player's balance
+				wait 1 second
 				send "&aYou have received your first &e2000&a tickets for getting supporter ultimate! Enjoy!" to player
 				set {ticket.tracker.bonus.%player%} to true
 				stop
@@ -21,6 +22,7 @@ on join:
 			set {_pay.%player%} to 2000 * {_pay.%player%}
 			add {_pay.%player%} to player's balance
 			set {ticket.tracker.count.%player%} to {ticket.tracker.count}
+			wait 1 second
 			send "&aYou have received &e2000&a tickets for your weekly allowance! Enjoy!" to player
 
 

@@ -7,8 +7,8 @@ on login:
     send "&r" to the player
     send "&r" to the player
     send "&r" to the player
-    send "&9--------------&3[ &bWelcome to OBAM Skyblock&3 ]&9--------------" to the player
-    send "&3Hey, &r%name of player%&3! Welcome to Skyblock!" to the player
+    send "&9--------------&3[ &bWelcome to OBAM Craft&3 ]&9--------------" to the player
+    send "&3Hey, &r%name of player%&3! Welcome to OBAMCraft!" to the player
     send "&3There are currently &b%number of all players%&3 players online." to the player
     send "&3Need help? Use &b/help&3, or check out the boards at &b/spawn&3." to the player
     send "&r" to the player
