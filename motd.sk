@@ -19,4 +19,4 @@ on join:
 on quit:
     set the quit message to "&7%name of player% disconnected"
 on first join:
-    set the quit message to "&7%name of player% connected for the first time!"
+    set the join message to "&7%name of player% connected for the first time!"
