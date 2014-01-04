@@ -25,6 +25,7 @@ variables:
 	
 	
 command /arena:
+	permission: obam.free
 	trigger:
 		world is "kitpvpkillingfields":
 			
@@ -37,11 +38,12 @@ command /arena:
 			show "s;2;{@killingfieldarena};s;3;{@vacantarena};s;4;{@showdownarena}" with 1 row named "&9&lOBAM &9 :: Arenas" to player
 command /kit [<text>]:
 	#startfold @kits
+	permission: obam.free
 	executable by: players and console
 	trigger:
 		world is "kitpvpkillingfields"
 		argument is not set:
-			player has permission "obam.kits.supporter":
+			player has permission "obam.supporter":
 				show "s;11;{@ninjakit};s;12;{@archerkit};s;13;{@meleekit};s;14;{@firemagekit};s;15;{@lightningmagekit};s;16;{@tankkit};s;17;{@necrokit};s;23;{@fishermankit};s;24;{@skelemancerkit}" with 4 rows named "&9&lOBAM &9:: Kits" to player
 				stop
 			show "s;10;{@meleekit};s;11;{@archerkit};s;12;{@tankkit};s;13;{@lightningmagekit};s;14;{@fishermankit};s;27;{@supporterstuff};s;28;{@skelemancerkit}" with 4 rows named "&9&lOBAM &9:: Kits" to player
@@ -1176,20 +1178,20 @@ on drop:
 		
 command /dm <text>:
 	#startfold @deathmessage-addition-command
-	permission: obam.admin.kp
+	permission: obam.admin
 	trigger:
 		add argument to {deathmessages.kitpvp::*}
 #endfold
 		
 #startfold @commands
 command /sound <text> [<integer=1>]:
+	permission: obam.admin
 	trigger:
-		player is op
 		play "%argument 1%" at location of player with pitch argument 2
 		
 command /headset:
+	permission: obam.admin
 	trigger:
-		player is op
 		set {kitpvp.area} to location of player
 		
 command /clearkit <player>:
@@ -1303,7 +1305,7 @@ every 1 second:
 
 	
 command /tixset <player> <integer>:
-	permission: obam.admin.tix
+	permission: obam.admin
 	trigger:
 		set player-argument's balance to argument 2
 		
