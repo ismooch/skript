@@ -18,7 +18,7 @@
 #========================================================================================================
 
 command /lobby:
-	permission: obam.lobby.use
+	permission: obam.free
 	trigger:
 		world is "hotpotatolobby":
 			{current.hotpotato.%player%.lobby} is set:
@@ -52,13 +52,13 @@ command /lobby:
 		
 
 command /hpls:
-	permission: obam.admin.lobby
+	permission: obam.admin
 	trigger:
 		set {hotpotatolobby.spawn} to location of player
 		
 		
 command /lobbyhpset <text>:
-	permission: obam.admin.lobby
+	permission: obam.admin
 	trigger:
 		{hotpotato.%arg%.lobby.tp} is set:
 			message "%arg% is already a lobby!" to player
@@ -107,7 +107,7 @@ on sign change:
 					delete {hotpotato.lobby.%line 2%.signs::%loop-index%}
 					
 command /lobbyclear <text>:
-	permission: obam.admin.lobby
+	permission: obam.admin
 	trigger:
 		clear {hotpotato.lobby.%arg%.signs::*}
 					
@@ -126,7 +126,7 @@ on join:
 			
 			
 command /reset <text>:
-	permission: obam.admin.lobby
+	permission: obam.admin
 	trigger:
 		set {active.game.lobby.%arg%} to false
 		set {hotpotato.%arg%.lobby} to 0
@@ -134,22 +134,22 @@ command /reset <text>:
 		clear {room.full.%arg%}
 		
 command /lobbyshow:
-	permission: obam.admin.lobby
+	permission: obam.admin
 	trigger:
 		message "%{current.hotpotato.%player%.lobby}%" to player
 
 command /lobbysize <text>:
-	permission: obam.admin.lobby
+	permission: obam.admin
 	trigger:
 		message "%{hotpotato.%arg%.lobby}%" to player
 		
 command /lobbydisplay <text>:
-	permission: obam.admin.lobby
+	permission: obam.admin
 	trigger:
 		message "%{display.sign.%arg%}%" to player
 		
 command /lobbybypass [<text>]:
-	permission: obam.admin.lobby
+	permission: obam.admin
 	trigger:
 		arg 1 is not set:
 			set {hotpotato.%{current.hotpotato.%player%.lobby}%.lobby} to 16

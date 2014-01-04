@@ -19,18 +19,18 @@
 
 
 command /setpoint <text>:
-	permission: obam.admin.lobby
+	permission: obam.admin
 	trigger:
 		set {hptp.%arg%} to location of player
 		
 command /setdeathpoint <text>:
-	permission: obam.admin.lobby
+	permission: obam.admin
 	trigger:
 		set {hpdtp.%arg%} to location of player
 		
 command /hotpotato:
 	aliases: /hp
-	permission: obam.hp.go
+	permission: obam.free
 	trigger:
 		world is "plan" or "parkourmaps" or "parkourlobby" or "skyworld":
 			execute console command "/mvtp %player% hotpotatolobby"
