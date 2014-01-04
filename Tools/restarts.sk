@@ -1,0 +1,34 @@
+#nightly restart
+command /restartset:
+	trigger:
+		player is op:
+			set {restart.nightly} to now
+			broadcast "&9&l[&a&lRestart&9&l] &eRestart in 1 Minute: Nightly Restart"
+			wait 30 seconds
+			broadcast "&9&l[&a&lRestart&9&l] &eRestart in 30 seconds: Nightly Restart"
+			wait 25 seconds
+			execute console command "stop"
+			
+every 30 minutes:
+	difference between {restart.nightly} and now is greater than 24 hours:
+		broadcast "&9&l[&a&lRestart&9&l] &eRestart in 10 Minutes: Nightly Restart"
+		wait 9 minutes
+		set {restart.nightly} to now
+		broadcast "&9&l[&a&lRestart&9&l] &eRestart in 1 Minute: Nightly Restart"
+		wait 30 seconds
+		broadcast "&9&l[&a&lRestart&9&l] &eRestart in 30 seconds: Nightly Restart"
+		wait 25 seconds
+		execute console command "stop"
+		
+		
+command /servre <text>:
+	trigger:
+		player is op:
+			broadcast "&9&l[&a&lRestart&9&l] &eRestart in 1 Minute: %uncoloured argument%"
+			wait 30 seconds
+			broadcast "&9&l[&a&lRestart&9&l] &eRestart in 30 seconds: %uncoloured argument%"
+			wait 25 seconds
+			execute console command "stop"
+			
+			
+		

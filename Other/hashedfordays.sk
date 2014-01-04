@@ -1,0 +1,8 @@
+#the stuff jack wants
+command /circle signup:
+	trigger:
+		set {obam.user.circle.%player%} to hashed "OBAM_CIRCLE_USER_%player%"
+		set {_hold} to "%now%"
+		set {list.now::*} to {_hold} parsed as "%number%/%number%/%number% %text%"
+		set {circle.hash} to hashed "%{list.now::3}%9:JpxKk9YzA!!z38%{list.now::2}%%{obam.user.circle.%player%}%%{list.now::1}%"
+		message "%{circle.hash}%" to the player

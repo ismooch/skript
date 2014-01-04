@@ -1,5 +1,0 @@
-command /test:
-	trigger:
-		set {_tes} to difference between now and now
-		add 24 days to {_tes}
-		send "%{_tes}%" to player

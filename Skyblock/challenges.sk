@@ -64,6 +64,7 @@ on script load:
 command /challenge [<text>]:
 	description: opens the chestcommands for challenges
 	usage: /challenge
+	permission: obam.free
 	trigger:
 #startfold @menus
 	#subfold @mainmenu
@@ -278,6 +279,7 @@ every 10 seconds:
 command /challengelist <text>:
 	description: displays the skyblock challenges
 	usage: /challengelist <page number>                            'example: /challenge page 1'
+	permission: obam.free
 	trigger:
 	
 		world is "skyworld":
@@ -512,6 +514,7 @@ command /challengelist <text>:
 #challenge complete 
 command /chal <number>:
 	usage: /chal <number of challenge>
+	permission: obam.free
 	description: Displays and Completes Challenges
 	trigger:
 	
@@ -1661,7 +1664,7 @@ command /chal <number>:
 #challenge reset command
 command /chalr <player> <number>:
 	usage: /chalr <player> <number of challenge>
-	permission: obam.chal.admin
+	permission: obam.admin
 	trigger:
 		
 		
@@ -1758,7 +1761,7 @@ command /chalr <player> <number>:
 			
 			
 command /fillme <item>:
-	permission: obam.admin.command
+	permission: obam.admin
 	trigger:
 		clear player's inventory
 		while player has space for argument:

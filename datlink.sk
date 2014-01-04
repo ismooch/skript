@@ -1,3 +1,0 @@
-command /link <text> <text>:
-	trigger:
-		execute console command "say {"text":"%argument 1%","color":"white","bold":"false","italic":"false","underlined":"false","strikethrough":"false","obfuscated":"false","clickEvent":{"action":"open_url","value":"%argument 2%"}}"

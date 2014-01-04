@@ -1,9 +1,0 @@
-command /testleveltimer:
-	permission: obam.admin.commands
-	trigger:
-		loop 10 times:
-			execute command "playsound mob.pig.say %player% ~0 ~0 ~0 1.0 18"
-			set the player's level to 10 - loop-number
-			wait a second
-		
-		create a safe explosion with force 1 at the player

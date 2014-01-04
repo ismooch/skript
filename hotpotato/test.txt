@@ -1,9 +1,0 @@
-#testingstuff
-
-every 20 minutes:
-	loop all players:
-		loop-player is in world "skyworld" or "hotpotatolobby" or "plan":
-			display board named "stats" to %loop-player%
-			make score "Balance" of board to loop-player's money
-			move display of loop-player to sidebar
-			
