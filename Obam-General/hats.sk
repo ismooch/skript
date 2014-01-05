@@ -5,6 +5,7 @@ options:
 
 	
 command /hat:
+	permission: obam.free
 	executable by: players
 	trigger:
 		show "s;1;{@betahat}" with 3 rows named "&9&lOBAM &9Hats" to player
@@ -21,7 +22,7 @@ command /hatreward <text> <player>:
 
 command /hatgive <item> [<player>]:
 	executable by: players and console
-	permission: obam.admin.hats
+	permission: obam.admin
 	trigger:
 		set {item.exist.true} to false
 		loop {hat.items.list::*}:
@@ -42,12 +43,12 @@ command /hatgive <item> [<player>]:
 		set name of player-argument's helmet to "hat"
 		
 command /hatadd <item>:
-	permission: obam.admin.hats
+	permission: obam.admin
 	trigger:
 		add arg 1 to {hat.items.list::*}
 
 command /hatshow:
-	permission: obam.admin.hats
+	permission: obam.admin
 	trigger:
 		loop {hat.items.list::*}:
 			send "%loop-value%" to player
@@ -66,6 +67,7 @@ on drop:
 	
 
 command /hattoggle:
+	permission: obam.mod
 	trigger:
 		{hat.off.%player%} is not set:
 			set {hat.off.%player%} to true

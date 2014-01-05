@@ -2,9 +2,9 @@
 #give player money
 command /tixg <player> <number>:
 	description: Give a Player some money
-	usage: /tixg<player> <amount> [reason]
+	usage: /tixg <player> <amount> [reason]
 	executable by: console and players
-	permission: obam.money.admin
+	permission: obam.admin
 	trigger:
 		add arg 2 to player-argument's balance
 		message "&aYou have been given &e%arg 2% Tickets&a. Your balance is now &e%player-argument's money%&a." to player-argument
@@ -14,7 +14,7 @@ command /tixg <player> <number>:
 command /tixp <player> <number>:
 	description: Pay a Player
 	usage: /tixp <player> <amount>
-	permission: obam.money.basic
+	permission: obam.admin
 	trigger:
 		set {_curbalance} to player's money
 		set {_valid} to difference between {_curbalance} and argument 2
@@ -30,11 +30,12 @@ command /tixp <player> <number>:
 		
 command /tix:
 	executable by: players
+	permission: obam.free
 	trigger:
 		send "&aYour current balance is &e%player's balance%&a!" to player
 		
 command /tixpeek <text>:
-	permission: obam.admin.commad
+	permission: obam.admin
 	trigger:	
 		set {_player} to argument parsed as offline player
 		send "&e%argument%'s&a ticket balance is &e%{_player}'s balance%" to player

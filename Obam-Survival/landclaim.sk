@@ -55,6 +55,7 @@ every 1 tick:
 				
 #startfold
 command /front [<text>] [<text>] [<text>]:
+	permission: obam.free
 	description: For all land related commands
 	usage: &c/front (claim, unclaim, add, remove, name)
 	aliases: /f
@@ -119,20 +120,6 @@ command /front [<text>] [<text>] [<text>]:
 			{claimedland.%player%} is greater than or equal to {availableland.%player%}:
 				send "&cYou do not have enough Availiable land for this action! Please purchase more with /shop!" to player
 				stop
-			player does not have permission "obam.supporter.1":
-				{claimedland.%player%} is 5:
-					send "&cYou have reached your max land count! Upgrade to a supporter rank to receive more!" to player
-					stop
-			player does not have permission "obam.supporter.2":
-				{claimedland.%player%} is 10:
-					send "&cYou have reached your max land count! Upgrade to a supporter rank to receive more!" to player
-					stop
-			
-			player does not have permission "obam.supporter.3":
-				{claimedland.%player%} is 20:
-					send "&cYou have reached your max land count! Upgrade to a supporter rank to receive more!" to player
-					stop
-					
 			{first.claim.%player%} is set:
 				{first.claim.%player%} is true:
 					set {_bal} to player's balance
@@ -434,12 +421,13 @@ on damage of a player:
 			cancel event
 			stop trigger
 command /townset:
+	permission: obam.admin
 	trigger:
-		player is op
 		set {town.spawn} to location of player
 		
 		
 command /town:
+	permission: obam.free
 	trigger:
 		{chunk.live.%chunk at location of player%}  is not player:
 			{chunk.live.%chunk at location of player%}  is not "Town":
@@ -473,7 +461,7 @@ on right click on sign:
 			
 			
 command /clearland [<text>]:
-	permission: obam.admin.wild
+	permission: obam.admin
 	trigger:
 		argument is not set:
 			send "&cPreparing to delete &e%size of {owned.chunks.%player%::*}% &cchunks...." to player
@@ -517,6 +505,7 @@ command /clearland [<text>]:
 			stop
 		
 command /travelmove:
+	permission: obam.free
 	trigger:
 	
 		if {chunk.live.%chunk at location of player%}  is not set:
@@ -529,6 +518,7 @@ command /travelmove:
 		send "&aYour travel location for this area, has been moved" to player
 		
 command /sethome:
+	permission: obam.free
 	trigger:
 		if {chunk.live.%chunk at location of player%}  is not set:
 			message "&cYou must do this on your land!"
@@ -571,12 +561,12 @@ on respawn:
 		teleport player to {home.%player%.wild}
 		
 command /townclaim:
-	permission: obam.admin.command
+	permission: obam.admin
 	trigger:
 		set {chunk.live.%chunk at location of player%}  to "Town"
 		
 command /owner <text>:
-	permission: obam.admin.command
+	permission: obam.admin
 	trigger:
 		set {chunk.live.%chunk at location of player%}  to argument
 		

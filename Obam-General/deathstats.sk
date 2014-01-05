@@ -158,7 +158,7 @@ on join:
 		
 
 command /showkills [<text>]:
-	permission: obam.kill.check
+	permission: obam.free
 	executable by: players and console
 	trigger:
 		world is not "skyworld":
@@ -176,7 +176,7 @@ command /showkills [<text>]:
 			send "&a----------------- &9&lEnd  &a-----------------------" to player
 			
 		arg is set:
-			has permission "obam.kill.admin"
+			has permission "obam.mod"
 			send "&a-------------&e&l%arg%'s &9&lKill Board!&a-------------" to player
 			send "&eSkeleton&a ------------------------ &e%{skeleton.kills.%arg%}%" to player
 			send "&eCreeper  &a------------------------&e %{creeper.kills.%arg%}%" to player

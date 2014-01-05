@@ -557,7 +557,7 @@ on chat:
 command /livgreet <text>:
 	executable by: players
 	trigger:
-		player does not have permission "obam.supporter.chat":
+		player does not have permission "obam.supporter":
 			send "&cYou have to be a supporter to do this D:" to player
 			stop
 		argument is "clear":
@@ -572,17 +572,17 @@ command /livgreet <text>:
 			
 command /livalert <text> [<integer>]:
 	executable by: players and console
+	permission: obam.admin
 	trigger:
-		player is op:
-			argument 1 is "clear":
-				delete {db_liv.alerts::%argument 2%}
-				stop
-			argument 1 is "list":
-				loop {db_liv.alerts::*}:
-					send "%loop-index%......&6&l'LiV: &3%{db_liv.alerts::%loop-index%}%" to player
-				stop
-			add argument 1 to {db_liv.alerts::*}
-			send "&aYou have added &6&l'LiV: &3%argument 1% &ato the alert system"
+		argument 1 is "clear":
+			delete {db_liv.alerts::%argument 2%}
+			stop
+		argument 1 is "list":
+			loop {db_liv.alerts::*}:
+				send "%loop-index%......&6&l'LiV: &3%{db_liv.alerts::%loop-index%}%" to player
+			stop
+		add argument 1 to {db_liv.alerts::*}
+		send "&aYou have added &6&l'LiV: &3%argument 1% &ato the alert system"
 			
 every 10 minutes:
 	set {_size} to size of {db_liv.alerts::*}
@@ -612,8 +612,8 @@ command /complete <text> <player>:
 				
 				
 command /liv <text>:
+	permission: obam.smod
 	trigger:
-		player is op
 		broadcast "&6&l'LiV: &3%uncoloured argument%"
 		
 			

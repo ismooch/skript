@@ -70,6 +70,7 @@ every 1 second:
 			
 #subfold @command		
 command /togglestats:
+	permission: obam.free
 	executable by: players
 	trigger:
 		{off.sb.%player%} is not set:

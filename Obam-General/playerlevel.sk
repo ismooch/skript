@@ -208,7 +208,7 @@ on join:
 
 command /lvlg <player> <number>:
 	description: gives players levels
-	permission: obam.admin.lvl
+	permission: obam.admin
 	usage: /lvlg <Player Name> <Level Number>
 	trigger:
 		argument 2 is 0:
@@ -321,7 +321,7 @@ command /lvlg <player> <number>:
 command /lvlc <offline player>:
 	description: debug for levels
 	usage: /lvlc <player>
-	permission: obam.level.admin
+	permission: obam.admin
 	trigger:
 		send "%offline player-argument%'s level is %{db_level.%offline player-argument%.actual}%" to player
 		send "%offline player-argument%'s level score is %{db_level.%offline player-argument%}%" to player
@@ -330,7 +330,8 @@ command /lvlc <offline player>:
 command /level:
 	description: Displays level
 	usage: level
-	permission: obam.level.user
+	permission: obam.free
+	aliases: /lvl
 	trigger:
 		send "&aYour level is &a&l%{db_level.%player%.actual}%&a!" to player
 		{db_level.%player%.actual} is 20:
@@ -392,6 +393,7 @@ command /level:
 		clear {level.display.%player%::*}
 			
 command /lvlscg <player> <number>:
+	permission: obam.admin
 	trigger:
 		add arg 2 to {level.%player-argument%}
 		

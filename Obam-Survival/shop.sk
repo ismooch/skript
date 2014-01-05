@@ -5,19 +5,20 @@ options:
 	
 	
 command /shop [<text>]:
+	permission: obam.free
 	trigger:
 		argument is not set:
 			show "s;1;{@land}" with 1 row named "&9&lFronts&9 Shop" to player
 		argument is "land":
-			player does not have permission "obam.supporter.1":
+			player does not have permission "obam.supporter":
 				{availableland.%player%} is greater than or equal to 5:
 					send "&cYou have your max amount of available land purchased! Please support to get more!" to player
 					stop
-			player does not have permission "obam.supporter.2":
+			player does not have permission "obam.plus":
 				{availableland.%player%} is greater than or equal to 10:
 					send "&cYou have your max amount of available land purchased! Please upgrade to get more!" to player
 					stop
-			player does not have permission "obam.supporter.3":
+			player does not have permission "obam.ultimate":
 				{availableland.%player%} is greater than or equal to 20:
 					send "&cYou have your max amount of available land purchased! Please support to get more!" to player
 					stop

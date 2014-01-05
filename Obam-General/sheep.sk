@@ -23,6 +23,7 @@ on quit:
 	
 		
 command /pet <text>:
+	permission: obam.free
 	trigger:
 		world is "kitpvpkillingfields":
 			send "&cYou can not do that here" to player

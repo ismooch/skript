@@ -1,7 +1,7 @@
 
 command /sapling:
 	description: Recieve a sapling, but you can only do this once per minute!
-	permission: obam.skyblock.sapling
+	permission: obam.free
 	executable by: players
 	trigger:
 		world is not "skyworld":
@@ -25,13 +25,13 @@ command /sapling:
 		
 		
 command /tr:
-	permission:obam.skyblock.timer
+	permission:obam.admin
 	trigger:
 		set {skyblocksapling.%player%.lastused} to 0
 		message "&aSapling timer has been reset."
 		
 command /trp <player>:
-	permission: obam.skyblock.timer
+	permission: obam.admin
 	trigger:
 		set {skyblocksapling.%player-argument%.lastused} to 0
 		message "&aYou have reset %player-argument%'s Sapling timer."
