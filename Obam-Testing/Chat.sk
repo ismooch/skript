@@ -1,0 +1,163 @@
+on chat:
+	cancel event
+#startfold @header-settings
+	if player has permission "obam.admin":
+		player is "ISMOOCH":
+			set {_header} to "&d[DEV] %player%"
+		set {_header} to "&d[ADMIN] %player%"
+	{_header} is not set:
+		if player has permission "obam.smod":
+			set {_header} to "&2[MOD] %player%"
+	{_header} is not set:
+		if player has permission "obam.mod":
+			set {_header} to "&2[MOD] %player%"
+	{_header} is not set:
+		if player has permission "obam.ultimate":
+			set {_header} to "&6[^] %player%"
+	{_header} is not set:
+		if player has permission "obam.plus":
+			set {_header} to "&b[+] %player%"
+	{_header} is not set:
+		if player has permission "obam.supporter":
+			set {_header} to "&f%player%"
+	{_header} is not set:
+		set {_header} to "&f%player%"
+#endfold
+#startfold @channel-detection
+
+	#subfold @friends
+	{channel.%player%} is "group":
+		{group.%player%} is true:
+			loop {group.%{group.id.%player%}%.%player%::*}:
+				send "%{_header}%&a: %message%" to loop-value
+			stop
+		else:
+			clear {channel.%player%}
+	
+	#subfold @staff
+	{channel.%player%} is "staff":
+		loop {channel.staff::*}:
+			send "%{_header}%&3: %message%" to loop-value
+			stop
+			
+	#subfold @supporter
+	{channel.%player%} is "supporter":
+		loop {channel.supporter::*}:
+			send "%{_header}%&e: %message%" to loop-value
+			stop
+	#subfold @main		
+	broadcast "%{_header}%&f: %message%"
+#endfold
+
+#startfold @chatcommand
+command /ch [<text>]:
+	permission: obam.free
+	trigger:
+		argument 1 is not set:
+			send "&aProper usage: &e/ch [Channel Name]" to player
+			stop
+			
+			
+		argument 1 is "m":
+			player does not have permission "obam.mod":
+				send "&cYou do not have permission to do this!" to player
+				stop
+			set {channel.%player%} to "staff"
+			set {channel.staff::%player%} to player
+			send "&aYou are now speaking in the &3Moderator&a channel!" to player
+			stop
+			
+			
+		argument 1 is "s":
+			player does not have permission "obam.supporter":
+				send "&cYou do not have permission to do this!" to player
+				stop
+			set {channel.%player%} to "supporter"
+			set {channel.supporter::%player%} to player
+			send "&aYou are now speaking in the &eSupporter&a channel!" to player
+			stop
+			
+			
+		argument 1 is "f":
+			{group.%player%} is not true:
+				send "&cYou must be in a group to do this!" to player
+				stop
+			set {channel.%player%} to "group"
+			send "&aYou are now speaking in the &a&lFriend&a channel!" to player
+			stop
+			
+			
+		argument 1 is "g":
+			clear {channel.%player%}
+			send "&aYou are now speaking in the &fGlobal&a channel!"
+#endfold
+#startfold @friendsystem	
+		
+command /friend [<text>] [<text>]:
+	permission: obam.free
+	trigger:
+	
+	
+		argument 1 is not set:
+			{group.creation.count} is not set:
+				set {group.creation.count} to 0
+			add 1 to {group.creation.count}
+			set {group.%{group.creation.count}%.%player%::%player%} to player
+			set {group.%player%} to true
+			set {group.id.%player%} to {group.creation.count}
+			set {group.owner.%{group.id.%player%}%} to player
+			send "&aGroup Created!"
+			stop
+			
+			
+		set {_group.id} to {group.id.%player%}
+		set {_group.owner} to {group.owner.%{_group.id}%}
+		
+		
+		argument 1 is "leave" or "l":
+			{group.%player%} is not true:
+				send "&cYou are not in a group!" to player
+				stop
+			delete {group.%{_group.id}%.%{_group.owner}%::%player%}
+			size of {group.%{_group.id}%.%{_group.owner}%::*} is 0:
+				send "&aGroup Disbanded!" to player
+				set {_run.check} to true
+			set {group.%player%} to false
+			clear {group.id.%player%}
+			{_run.check} is not set:
+				send "&aYou have left your group!" to player
+			stop
+			
+		argument 1 is "invite" or "i":
+			{group.%player%} is not true:
+				send "&cYou are not in a group!" to player
+				stop
+			argument 2 is not set:
+				send "&cPlease input a player's name!" to player
+				stop
+			set {_player.invite} to argument 2 parsed as player
+			set {inv.%{_player.invite}%.group.id} to {_group.id}
+			set {inv.%{_player.invite}%.group.owner} to {_group.owner}
+			set {inv.%{_player.invite}%} to true
+			set {waited.invite.%{_player.invite}%} to now
+			send "&aYou have invited &e%{_player.invite}%&a to the group!" to player
+			send "&aYou have been invited to a group by &e%player%&a! Use &e/friend accept&a to join the group!" to {_player.invite}
+			stop
+			
+		argument 1 is "accept" or "a":
+			{inv.%player%} is not true:
+				send "&cYou do not have any invites!"
+				stop
+			set {_group.id} to {inv.%player%.group.id}
+			set {_group.owner} to {inv.%player%.group.owner}
+			size of {group.%{_group.id}%.%{_group.owner}%::*} is 0:
+				send "&cThat group no longer exists!"
+				stop
+			difference between {waited.invite.%player%} and now is greater than or equal to 1 minute:
+				send "&cYour invite has expired!" to player
+				stop
+			set {group.id.%player%} to {group.id}
+			send "&aYou have accepted the invite!" to player
+			
+			
+#endfold
