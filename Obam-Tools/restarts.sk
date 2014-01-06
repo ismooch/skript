@@ -1,13 +1,13 @@
 #nightly restart
 command /restartset:
+	permission: obam.admin
 	trigger:
-		player is op:
-			set {restart.nightly} to now
-			broadcast "&9&l[&a&lRestart&9&l] &eRestart in 1 Minute: Nightly Restart"
-			wait 30 seconds
-			broadcast "&9&l[&a&lRestart&9&l] &eRestart in 30 seconds: Nightly Restart"
-			wait 25 seconds
-			execute console command "stop"
+		set {restart.nightly} to now
+		broadcast "&9&l[&a&lRestart&9&l] &eRestart in 1 Minute: Nightly Restart"
+		wait 30 seconds
+		broadcast "&9&l[&a&lRestart&9&l] &eRestart in 30 seconds: Nightly Restart"
+		wait 25 seconds
+		execute console command "stop"
 			
 every 30 minutes:
 	difference between {restart.nightly} and now is greater than 24 hours:
@@ -22,13 +22,13 @@ every 30 minutes:
 		
 		
 command /servre <text>:
+	permission: obam.admin
 	trigger:
-		player is op:
-			broadcast "&9&l[&a&lRestart&9&l] &eRestart in 1 Minute: %uncoloured argument%"
-			wait 30 seconds
-			broadcast "&9&l[&a&lRestart&9&l] &eRestart in 30 seconds: %uncoloured argument%"
-			wait 25 seconds
-			execute console command "stop"
+		broadcast "&9&l[&a&lRestart&9&l] &eRestart in 1 Minute: %uncoloured argument%"
+		wait 30 seconds
+		broadcast "&9&l[&a&lRestart&9&l] &eRestart in 30 seconds: %uncoloured argument%"
+		wait 25 seconds
+		execute console command "stop"
 			
 			
 		

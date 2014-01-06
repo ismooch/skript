@@ -1,11 +1,11 @@
 command /kick <player> <text>:
 	description: Kicks a player.
 	usage: /kick <player> <reason>
-	permission: obam.kick
+	permission: obam.mod
 	permission message: Command failed! You are not fluffy enough to do that!
 	executable by: players, console
 	trigger:
-		if argument-2 is "":
+		if argument-2 is not set:
 			create a safe explosion of force 1 at player-argument
 			strike lightning effect at player-argument
 			kick player-argument due to "&cKicked by &4%player%&c! Reason: &4Breaking the Rules"
@@ -17,10 +17,13 @@ command /kick <player> <text>:
 			kick player-argument due to "&cKicked by &4%player%&c! Reason: &4%argument-2%"
 			broadcast "&r%player-argument%&c was kicked by &r%player%&c. Reason: %argument-2%"
 			stop
+			
+			
+			
 command /ban <offline player> <text>:
 	description: Bans a player.
 	usage: /ban <player> <reason>
-	permission: obam.ban
+	permission: obam.mod
 	permission message: Command failed! You are not fluffy enough to do that!
 	executable by: players, console
 	trigger:
@@ -28,6 +31,8 @@ command /ban <offline player> <text>:
 		ban "%offlineplayer-argument%"
 		broadcast "&e%offlineplayer-argument%&c &lwas banned by &e%player%. &c&lReason: &e%argument-2%"
 		stop
+		
+		
 		
 command /g <player>:
 	description: Teleports to a Player

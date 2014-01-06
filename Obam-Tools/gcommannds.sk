@@ -1,8 +1,8 @@
 command /gup:
-	permission: obam.mod.command
+	permission: obam.mod
 	trigger:
 		make player execute command "/ascend"
 command /gdown:
-	permission: obam.mod.command
+	permission: obam.mod
 	trigger:
 		make player execute command "/descend"

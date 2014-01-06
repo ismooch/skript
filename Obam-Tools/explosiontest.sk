@@ -6,8 +6,8 @@ on explosion:
 	
 	
 command /woodme:
+	permission: obam.admin
 	trigger:
-		player is op
 		give player 64 fullblock spruce wood block
 		
 		
