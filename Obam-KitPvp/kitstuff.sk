@@ -116,14 +116,14 @@ command /kit [<text>]:
 				send "&cYou already have a kit D:" to player
 				stop
 			clear player's inventory
-			equip player with all leather armor of blast protection 4 and protection 4 named "&fFireMage's Robes"
+			equip player with all leather armor of blast protection 3 and protection 3 and fire protection 3 and unbreaking 2 named "&fFireMage's Robes"
 			dye player's helmet red
 			dye player's chestplate red
 			dye player's leggings red
 			dye player's boots red
-			give player stick of knockback 1 named "&fFire Wand"
+			give nameditemstack from "Stick of knockback 1;&fFire Wand;&fPowers:|| ||&bConfuse: &3Left click to shoot a confusion||&3egg at a player!||&b&lCOST:&b 5 Mana|| ||&bFireball: &3Right click to shoot a fireball||&b&lCOST:&b 10 Mana" to the player
 			give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
-			give player 3 splash potions of harming named "&fPain Juice"
+			give player 3 splash potions of harming 2 named "&fPain Juice"
 			apply speed 1 to player for 999 days
 			{active.kit.%player%} is false:
 				set player's level progress to 0.99
@@ -155,14 +155,14 @@ command /kit [<text>]:
 				send "&cYou already have a kit D:" to player
 				stop
 			clear player's inventory
-			equip player with all leather armor of unbreaking 4 and protection 5 named "&fLightning Mage's Robes"
+			equip player with all leather armor of unbreaking 3 and protection 4 named "&fLightning Mage's Robes"
 			dye player's helmet blue
 			dye player's chestplate blue
 			dye player's leggings blue
 			dye player's boots blue
 			give nameditemstack from "Stick of knockback 1;&fLightning Wand;&fPowers:|| ||&bTeleport: &3Left click to teleport to the block||&3you're looking at!||&b&lCOST:&b 50 Mana|| ||&bLightning: &3Right click to shoot lighting||&b&lCOST:&b 10 Mana" to the player
 			give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
-			give player 3 splash potions of harming named "&fPain Juice"
+			give player 3 splash potions of harming 2 named "&fPain Juice"
 			apply jump 1 to player for 999 days
 			{active.kit.%player%} is false:
 				set player's level progress to 0.99
@@ -183,7 +183,7 @@ command /kit [<text>]:
 			dye player's chestplate yellow
 			dye player's leggings yellow
 			dye player's boots yellow
-			give player blaze rod of knockback 1 and sharpness 1 named "&fSummoning Rod"
+			give nameditemstack from "Blaze Rod;&fSummoning Rod;&fPowers:|| ||&bSummon: &3Right Click to summon the undead to serve you!||&b&lCOST:&b 30 Mana|| ||&bCall of the dead: &3Left click to call your minions back!||&b&lCOST:&b 10 Mana" to player
 			give player stone sword of knockback 1 and sharpness 2 named "&fSummoner's Trust"
 			give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
 			apply speed 1 to player for 999 days
@@ -751,6 +751,7 @@ on left click with stick:
 	world is "kitpvpkillingfields"
 	cancel event
 	{kit.firemage.%player%} is true:
+		name of player's tool is "&fFire Wand"
 		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
 			send "&cYou can not do that here. Please select an Arena!" to player
 			stop
@@ -758,6 +759,7 @@ on left click with stick:
 			shoot a egg from the player
 			reduce the player's level progress by 0.05
 	{kit.lightningmage.%player%} is true:
+		name of player's tool is "&fLightning Wand"
 		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
 			send "&cYou can not do that here. Please select an Arena!" to player
 			stop
