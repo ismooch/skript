@@ -26,6 +26,18 @@ command /team [<text>] [<text>]:
 		set {_group.id} to {group.id.%player%}
 		set {_group.owner} to {group.owner.%{_group.id}%}
 		
+		argument 1 is "help" or "h":
+			send "&a-----------&eTeams!&a---------" to player
+			send "&e/team &a-------------<reset>Create a team" to player
+			send "&e/team name &a--------<reset>Name current team" to player
+			send "&e/team leave &a-------<reset>Leave a team" to player
+			send "&e/team promote/demote&a-<reset>Promote or Demote a player" to player
+			send "&e/team kick &a----------<reset>Kick a player from a team" to player
+			send "&e/team invite &a------<reset>Invite a player to the team" to player
+			send "&e/team accept &a------<reset>Accept an Invite" to player
+			send "&e/team show &a--------<reset>Show members of a team" to player
+			send "&e/team help &a--------<reset>Open this help menu" to player
+		
 		
 		argument 1 is "leave" or "l":
 			{group.%player%} is not true:

@@ -38,9 +38,9 @@ on chat:
 			loop {group.%{_group.id}%.%{_group.owner}%::*}:
 				set {_player} to loop-index parsed as player
 				{group.%{_group.id}%.name} is set:
-					send "&a[%{group.%{_group.id}%.name}%] <reset>%{_header}%&a: %message%" to {_player}
+					send "&b[%{group.%{_group.id}%.name}%] <reset>%{_header}%&b: %message%" to {_player}
 				else:
-					send "%{_header}%&a: %message%" to {_player}
+					send "%{_header}%&b: %message%" to {_player}
 			stop
 		else:
 			clear {channel.%player%}
@@ -49,33 +49,33 @@ on chat:
 	{channel.%player%} is "staff":
 		player does not have permission "obam.mod":
 			clear {channel.%player%}
-			broadcast "%{_header}%&f: %message%"
+			uncancel event
 			delete {channel.staff::%player%}
 			stop
 		loop {channel.staff::*}:
-			send "%{_header}%&3: %message%" to loop-value
+			send "%{_header}%&2: %message%" to loop-value
 		stop
 			
 	#subfold @supporter
 	{channel.%player%} is "supporter":
 		player does not have permission "obam.supporter":
 			clear {channel.%player%}
-			broadcast "%{_header}%&f: %message%"
+			uncancel event
 			delete {channel.supporter::%player%}
 			stop
 		loop {channel.supporter::*}:
-			send "%{_header}%&e: %message%" to loop-value
+			send "%{_header}%&a: %message%" to loop-value
 		stop
-	#subfold @main		
-	broadcast "%{_header}%&f: %message%"
+	#subfold @main	
+	uncancel event
 #endfold
 
 #startfold @chatcommand
-command /ch [<text>]:
+command /c [<text>]:
 	permission: obam.free
 	trigger:
 		argument 1 is not set:
-			send "&aProper usage: &e/ch [Channel Name]" to player
+			send "&aProper usage: &e/c [Channel Name]" to player
 			stop
 			
 			
@@ -85,7 +85,7 @@ command /ch [<text>]:
 				stop
 			set {channel.%player%} to "staff"
 			set {channel.staff::%player%} to player
-			send "&aYou are now speaking in the &3Moderator&a channel!" to player
+			send "&aYou are now speaking in the &2Moderator&a channel!" to player
 			stop
 			
 			
@@ -95,7 +95,7 @@ command /ch [<text>]:
 				stop
 			set {channel.%player%} to "supporter"
 			set {channel.supporter::%player%} to player
-			send "&aYou are now speaking in the &eSupporter&a channel!" to player
+			send "&aYou are now speaking in the &aSupporter&a channel!" to player
 			stop
 			
 			
@@ -104,13 +104,17 @@ command /ch [<text>]:
 				send "&cYou must be in a Team to do this!" to player
 				stop
 			set {channel.%player%} to "group"
-			send "&aYou are now speaking in the &a&lTeam&a channel!" to player
+			send "&aYou are now speaking in the &bTeam&a channel!" to player
 			stop
 			
 			
 		argument 1 is "g":
 			clear {channel.%player%}
 			send "&aYou are now speaking in the &fGlobal&a channel!"
+			stop
+		
+		else:
+			send "&cThat is not a chat channel!" to player
 #endfold
 
 on join:
@@ -119,4 +123,12 @@ on join:
 	player does not have permission "obam.supporter":
 		delete {channel.supporter::%player%}
 	clear {channel.%player%}
+	
+on command "ch s":
+	cancel event
+	make player execute command "/c s"
+	
+on command "ch g":
+	cancel event
+	make player execute command "/c g"
 #endfold
