@@ -36,7 +36,7 @@ on chat:
 			set {_group.owner} to {group.owner.%{_group.id}%}
 				
 			loop {group.%{_group.id}%.%{_group.owner}%::*}:
-				set {_player} to loop-index
+				set {_player} to loop-index parsed as player
 				{group.%{_group.id}%.name} is set:
 					send "&a[%{group.%{_group.id}%.name}%] <reset>%{_header}%&a: %message%" to {_player}
 				else:
@@ -47,12 +47,22 @@ on chat:
 	
 	#subfold @staff
 	{channel.%player%} is "staff":
+		player does not have permission "obam.mod":
+			clear {channel.%player%}
+			broadcast "%{_header}%&f: %message%"
+			delete {channel.staff::%player%}
+			stop
 		loop {channel.staff::*}:
 			send "%{_header}%&3: %message%" to loop-value
 		stop
 			
 	#subfold @supporter
 	{channel.%player%} is "supporter":
+		player does not have permission "obam.supporter":
+			clear {channel.%player%}
+			broadcast "%{_header}%&f: %message%"
+			delete {channel.supporter::%player%}
+			stop
 		loop {channel.supporter::*}:
 			send "%{_header}%&e: %message%" to loop-value
 		stop
@@ -91,7 +101,7 @@ command /ch [<text>]:
 			
 		argument 1 is "t":
 			{group.%player%} is not true:
-				send "&cYou must be in a group to do this!" to player
+				send "&cYou must be in a Team to do this!" to player
 				stop
 			set {channel.%player%} to "group"
 			send "&aYou are now speaking in the &a&lTeam&a channel!" to player
@@ -103,5 +113,10 @@ command /ch [<text>]:
 			send "&aYou are now speaking in the &fGlobal&a channel!"
 #endfold
 
-			
+on join:
+	player does not have permission "obam.mod":
+		delete {channel.staff::%player%}
+	player does not have permission "obam.supporter":
+		delete {channel.supporter::%player%}
+	clear {channel.%player%}
 #endfold
