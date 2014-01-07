@@ -19,10 +19,10 @@ command /refer <text>:
 					send "&cThat Player is make believe!" to player
 					stop
 				
-				set {_player} to argument parsed as player
-				add 300 to player's balance
+				set {_player} to argument parsed as offline player
+				add 1000 to player's balance
 				send "&aYou have received &e300 Tickets&a for using a referral!" to player
-				add 300 to {_player}'s balance
+				add 2000 to {_player}'s balance
 				send "&aYou have received &e300 Tickets&a for referring &e%player%!" to {_player}
 				set {refer.chance.%player%} to false
 				stop
@@ -32,6 +32,7 @@ command /refer <text>:
 		
 		
 command /imnew:
+	permission: obam.admin
 	trigger:
 		set {refer.chance.%player%} to true
 		set {join.time.%player%} to now

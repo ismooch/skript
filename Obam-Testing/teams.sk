@@ -1,0 +1,165 @@
+#groups
+
+#startfold @friendsystem	
+		
+command /team [<text>] [<text>]:
+	permission: obam.free
+	trigger:
+	
+	
+		argument 1 is not set:
+			{group.%player%} is true:
+				send "&cYou can only be in one group at a time!" to player
+			{group.creation.count} is not set:
+				set {group.creation.count} to 0
+			add 1 to {group.creation.count}
+			set {group.%{group.creation.count}%.%player%::%player%} to player
+			set {group.%player%} to true
+			set {group.id.%player%} to {group.creation.count}
+			set {group.owner.%{group.id.%player%}%} to player
+			send "&aTeam Created!"
+			stop
+			
+			
+		set {_group.id} to {group.id.%player%}
+		set {_group.owner} to {group.owner.%{_group.id}%}
+		
+		
+		argument 1 is "leave" or "l":
+			{group.%player%} is not true:
+				send "&cYou are not in a Team!" to player
+				stop
+			{_group.owner} is player:
+				send "&cYou must choose a new Team owner first!" to player
+				stop
+			delete {group.%{_group.id}%.%{_group.owner}%::%player%}
+			size of {group.%{_group.id}%.%{_group.owner}%::*} is 0:
+				send "&aTeam Disbanded!" to player
+				set {_run.check} to true
+			loop {group.%{_group.id}%.%{_group.owner}%::*}:
+				send "&e%player% &chas left the Team!" to loop-value
+			set {group.%player%} to false
+			clear {group.id.%player%}
+			{_run.check} is not set:
+				send "&aYou have left your Team!" to player
+			stop
+			
+		argument 1 is "invite" or "i":
+			{group.%player%} is not true:
+				send "&cYou are not in a Team!" to player
+				stop
+			argument 2 is not set:
+				send "&cPlease input a player's name!" to player
+				stop
+			set {_player.invite} to argument 2 parsed as player
+			set {inv.%{_player.invite}%.group.id} to {_group.id}
+			set {inv.%{_player.invite}%.group.owner} to {_group.owner}
+			set {inv.%{_player.invite}%} to true
+			set {waited.invite.%{_player.invite}%} to now
+			send "&aYou have invited &e%{_player.invite}%&a to the Team!" to player
+			send "&aYou have been invited to %{_group.owner}%'s Team by &e%player%&a! Use &e/friend accept&a to join the Team!" to {_player.invite}
+			stop
+			
+		argument 1 is "accept" or "a":
+			{inv.%player%} is not true:
+				send "&cYou do not have any invites!"
+				stop
+			{group.%player%} is true:
+				send "&cYou can only be in one Team at a time!" to player
+			set {_group.id} to {inv.%player%.group.id}
+			set {_group.owner} to {inv.%player%.group.owner}
+			size of {group.%{_group.id}%.%{_group.owner}%::*} is 0:
+				send "&cThat Team no longer exists!"
+				stop
+			difference between {waited.invite.%player%} and now is greater than or equal to 1 minute:
+				send "&cYour invite has expired!" to player
+				stop
+			set {group.id.%player%} to {_group.id}
+			set {group.%player%} to true
+			set {group.%{_group.id}%.%{_group.owner}%::%player%} to player
+			loop {group.%{_group.id}%.%{_group.owner}%::*}:
+				send "&e%player% has joined the Team!" to loop-value
+				send "&aYou have accepted the invite!" to player
+			
+		argument 1 is "name" or "n":
+			{_group.owner} is not player:
+				send "&cYou must be the Team owner to do this!" to player
+				stop
+			argument 2 is not set:
+				clear {group.%{_group.id}%.name}
+				send "&aTeam name erased!" to player
+				stop
+			set {group.%{_group.id}%.name} to "%argument 2%"
+			send "&aTeam name set to &e%argument 2%" to player
+			
+		argument 1 is "kick" or "k":
+			{_group.owner} is not player:
+				send "&cYou must be the Team owner to do this!" to player
+				stop
+			argument 2 is not set:
+				send "&cPlease input a player name!" to player
+				stop
+			{group.%{_group.id}%.%{_group.owner}%::%argument 2%} is not set:
+				send "&cThat player is not part of the Team!" to player
+				stop
+			delete {group.%{_group.id}%.%{_group.owner}%::%argument 2%}
+			loop {group.%{_group.id}%.%{_group.owner}%::*}:
+				send "&e%argument 2% &chas been kicked from the Team!" to loop-value
+			clear {group.%argument 2%}
+			clear {group.id.%argument 2%}
+		
+		argument 1 is "owner" or "o":
+			{_group.owner} is not player:
+				send "&cYou must be the Team owner to do this!" to player
+				stop
+			argument 2 is not set:
+				send "&cPlease input a player name!" to player
+				stop
+			{group.%{_group.id}%.%{_group.owner}%::%argument 2%} is not set:
+				send "&e%argument% &cis not part of the Team!" to player
+				stop
+			loop {group.%{_group.id}%.%{_group.owner}%::*}:
+				set {group.%{_group.id}%.%argument 2%::%loop-value%} to loop-value
+				delete {group.%{_group.id}%.%{_group.owner}%::%loop-value%}
+			set {group.owner.%{_group.id}%} to argument 2
+			set {_group.owner} to {group.owner.%{_group.id}%}
+			loop {group.%{_group.id}%.%{_group.owner}%::*}:
+				send "&e%argument%&a is now the owner of the Team!" to player
+			
+		argument 1 is "disband" or "d":
+			{_group.owner} is not player:
+				send "&cYou must be the Team owner to do this!" to player
+				stop
+			loop {group.%{_group.id}%.%{_group.owner}%::*}:
+				clear {group.%loop-value%}
+				clear {group.id.%loop-value%}
+				send "&aGroup Disbanded!"
+				delete {group.%{_group.id}%.%{_group.owner}%::%loop-value%}
+				
+				
+				
+on quit:
+	set {_group.id} to {group.id.%player%}
+	set {_group.owner} to {group.owner.%{_group.id}%}
+	
+	{_group.owner} is player:
+		send "&cYou must choose a new Team owner first!" to player
+		stop
+	delete {group.%{_group.id}%.%{_group.owner}%::%player%}
+	size of {group.%{_group.id}%.%{_group.owner}%::*} is 0:
+		send "&aTeam Disbanded!" to player
+		set {_run.check} to true
+	loop {group.%{_group.id}%.%{_group.owner}%::*}:
+		send "&e%player% &chas left the Team!" to loop-value
+	set {group.%player%} to false
+	clear {group.id.%player%}
+	
+			
+			
+			
+command /groupshow [<text>]:
+	trigger:
+		send "%{group.id.%argument%}%"
+		
+		
+			
