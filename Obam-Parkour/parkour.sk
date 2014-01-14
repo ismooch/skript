@@ -470,7 +470,7 @@ on walking on stone:
 	stop
 
 #PipeWorld
-on walking on mycelium:
+on walking on mycelium or wool or stained clay:
 	{currentparkourcourse.%player%} is "PipeWorld"
 	player is in "parkourmaps"
 	message "&cYou were sent back for falling!" to the player
