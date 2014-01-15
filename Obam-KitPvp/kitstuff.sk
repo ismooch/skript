@@ -60,7 +60,7 @@ command /kit [<text>]:
 				stop
 			clear player's inventory
 			apply speed 1 to player for 999 days
-			equip player with all iron armor of protection 2 and projectile protection 1 and unbreaking 2
+			equip player with all iron armor of protection 2 and unbreaking 2
 			give player bow of infinity 1 and power 1 named "&fBow of Truth"
 			give 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]" to player
 			give player 2 egg named "&fStun Bomb"
@@ -101,7 +101,7 @@ command /kit [<text>]:
 				send "&cYou already have a kit D:" to player
 				stop
 			clear player's inventory
-			equip player with all iron armor of protection 3 named "&fArmor of Light"
+			equip player with all iron armor of protection 3 and projectile protection 1 named "&fArmor of Light"
 			give player iron sword of sharpness 1 named "&fBlade of Justice &b[Sharpness I]"
 			give 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]" to player
 			give 2 snowball named "&fPoison Pills" to player
