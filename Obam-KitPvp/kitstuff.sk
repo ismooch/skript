@@ -1313,5 +1313,12 @@ command /tixset <player> <integer>:
 		
 command /motors:
 	trigger:
-		send "&6&l[&a❖&6&l] &eInsert self advertisement for &e_Motors_ &6here!" to player
+		send "&6&l[&a❖&6&l] &eInsert self advertisement for &6_Motors_ &ehere!" to player
+		#Hi, Smooch :D
+		
+every 10 minutes:
+	loop projectiles in world "kitpvpkillingfields":
+		delete loop-projectile
+	loop all players with permission "obam.admin":
+		send "&6&l[&a❖&6&l] &eAll projectiles have been removed from KitPvP!" to loop-player
 		
