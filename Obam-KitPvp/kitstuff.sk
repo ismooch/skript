@@ -60,7 +60,7 @@ command /kit [<text>]:
 				stop
 			clear player's inventory
 			apply speed 1 to player for 999 days
-			equip player with all iron armor of protection 2
+			equip player with all iron armor of protection 2 pand projectile protection 1 and unbreaking 2
 			give player bow of infinity 1 and power 1 named "&fBow of Truth"
 			give 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]" to player
 			give player 2 egg named "&fStun Bomb"
@@ -178,7 +178,7 @@ command /kit [<text>]:
 				send "&cYou already have a kit D:" to player
 				stop
 			clear player's inventory
-			equip player with all leather armor of protection 5 and fire protection 2 named "&fNecromancer's Robes"
+			equip player with all leather armor of protection 5 and unbreaking 3 and fire protection 2 named "&fNecromancer's Robes"
 			dye player's helmet yellow
 			dye player's chestplate yellow
 			dye player's leggings yellow
@@ -201,7 +201,7 @@ command /kit [<text>]:
 				send "&cYou already have a kit D:" to player
 				stop
 			clear player's inventory
-			equip player with all leather armor of protection 5 and projectile protection 2 named "&fFishing Gear"
+			equip player with all leather armor of protection 5 and unbreaking 3 and projectile protection 2 named "&fFishing Gear"
 			give player fishing rod of unbreaking 10 named "&fOld Faithful"
 			give player fish of sharpness 3 named "&fBig Fish"
 			give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
@@ -233,7 +233,7 @@ command /kit [<text>]:
 				send "&cYou already have a kit D:" to player
 				stop
 			clear player's inventory
-			equip player with all leather armor of protection 5 and fire protection 2 named "&fSkelemancer's Robes"
+			equip player with all leather armor of protection 5 and unbreaking 3 and fire protection 2 named "&fSkelemancer's Robes"
 			dye player's helmet white
 			dye player's chestplate white
 			dye player's leggings white
