@@ -116,7 +116,7 @@ command /kit [<text>]:
 				send "&cYou already have a kit D:" to player
 				stop
 			clear player's inventory
-			equip player with all leather armor of blast protection 3 and protection 4 and fire protection 3 and unbreaking 2 named "&fFireMage's Robes"
+			equip player with all leather armor of blast protection 3 and unbreaking 2 and protection 4 and fire protection 3 and unbreaking 2 named "&fFireMage's Robes"
 			dye player's helmet red
 			dye player's chestplate red
 			dye player's leggings red
