@@ -1311,3 +1311,7 @@ command /tixset <player> <integer>:
 	trigger:
 		set player-argument's balance to argument 2
 		
+command /motors:
+	trigger:
+		send "&6&l[&a❖&6&l] &eInsert self advertisement for &e_Motors_ &6here!" to player
+		
