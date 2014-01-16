@@ -47,8 +47,18 @@ command /pet <text>:
 				send "&cYou can only have one pet at a time!" to player
 				stop
 			size of {pets.%player%::*} is 5:
-				send "&cYou can only have 5 pets at a time!" to player
+				send "&cYou can only have 5 pets at a time! Do /pet clear to clear your pets!" to player
 				stop
+				
+		argument is "list":
+			send "&cHere is a list of all the pets:" to player
+			send "&c- ISMOOCH" to player
+			send "&c- Bru Swain" to player
+			send "&c- Sparky" to player
+			send "&c- Bacon" to player
+			send "&c- Dragon" to player
+			stop
+			
 		argument is "ISMOOCH":
 			spawn sheep at location of player
 			set name of spawned sheep to "&aISMOOCH"
