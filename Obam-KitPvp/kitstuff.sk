@@ -1319,6 +1319,7 @@ command /motors:
 every 10 minutes:
 	loop projectiles in world "kitpvpkillingfields":
 		delete loop-projectile
-	loop all players with permission "obam.admin":
-		send "&6&l[&a❖&6&l] &eAll projectiles have been removed from KitPvP!" to loop-player
+	loop all players:
+		loop player has permission "obam.admin":
+			send "&6&l[&a❖&6&l] &eAll projectiles have been removed from KitPvP!" to loop-player
 		
