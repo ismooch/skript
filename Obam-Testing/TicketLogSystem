@@ -1,0 +1,42 @@
+#going to try and use a command, that I call in other Skripts, and make a cool log system, that we can later just parse with php, and create something nice (hopefully)
+
+command /tls <text> <number> <number> <text> <text> <text>:
+	usage: /tls [SYSTEM|STAFF] [COST] [BALANCE] [DEDUCT|INCREASE] [PLAYERNAME] [DESCRIPTION]
+	trigger:
+		
+		#choices will be "SYSTEM" or "STAFF" to differtiate between SYSTEM and PLAYER actions. For now, only SYSTEM will be used
+		
+		
+		argument 1 is "SYSTEM":
+		
+			set {_cost} to argument 2
+			set {_bal} to argument 3
+			set {_desc} to argument 6
+			set {_player} to argument 5
+			argument 4 is "DEDUCT":
+				set {_sym} to "-"
+				set {_diff} to difference between {_cost} and {_bal}
+			argument 4 is "ICNREASE":
+				set {_sym} to "+"
+				set {_diff} to sum of {_cost} and {_bal}
+			
+			log "%date%^%{_player}%^SYSTEM INT^%{_bal}%^%{_sym}%%{_cost}%^%{_diff}%^{_desc}%" to "logs/tickets/TLS.log"
+			log "%date%^%{_player}%^SYSTEM INT^%{_bal}%^%{_sym}%%{_cost}%^%{_diff}%^{_desc}%" to "logs/tickets/TLS-SYSTEM.log"
+			
+		argument 1 is "STAFF":
+		
+			set {_cost} to argument 2
+			set {_bal} to argument 3
+			set {_desc} to argument 5
+			set {_diff} to difference between {_cost} and {_bal}
+			set {_player} to argument 4
+			
+			log "%date%^%{_player}%^STAFF INT^%{_bal}%^%{_sym}%%{_cost}%^%{_diff}%^{_desc}%" to "logs/tickets/TLS.log"
+			log "%date%^%{_player}%^STAFF INT^%{_bal}%^%{_sym}%%{_cost}%^%{_diff}%^{_desc}%" to "logs/tickets/TLS-STAFF.log"
+			
+			
+#to properly use this simple uniform log system, whenever doing ANYTHING with tickets, just have it execute a console command of /tls [SYSTEM|STAFF] the cost of the transaction the player's balance before the transaction (so you need to grab the balance before you change anything), whether or not it is an increase or deduction, the player's balance being altered, and the description. Example: /tls SYSTEM 10000 {_player.balance} DEDUCT {_player} Purchase of Fronts Slot
+			
+			
+			 
+      
