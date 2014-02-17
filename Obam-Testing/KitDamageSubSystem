@@ -1,0 +1,53 @@
+#actual damage subsystem
+
+on damage:
+	victim is a player
+	attacker is a player
+	set damage to 0
+	
+	
+#commands to set up category hooks
+
+
+command /kdss [text] [integer] [item]:
+	description: adds items to to different subsystem categories
+	permission: obam.admin
+	usage: /kdss [add/delete] [(category) 1 , 2 , 3 , 4....] [item name]
+	trigger:
+		
+
+#add to category protocol
+		argument 1 is "add":
+			
+			#sets the current item to a local variable for easy coding identification
+			set {_item} to item-arugment
+			
+			#for ease of use in the "add" protocol, setting local variable for amount of categories
+			set {_count} to size of {kdss.category.counts::*}
+			
+			#looping a check protocol for items existence before adding
+			loop {_count} times:
+				{_loop.count} is not set:
+					set {_loop.count} to 0
+				add 1 to {_loop.count}
+				
+				#checking for existence of item
+				{kdss.cat.%{_loop.count}%::%{_item}%} is set:
+					
+					#error kickout for item detection
+					set {_kdss.error} to "&cThis item is already assigned in &eCategory %{_loop.count}%&c. Please delete before preseding."
+					send "%{_kdss.error}%" to player
+					stop
+					
+			argument 2 is not set:
+				
+				send "&cPlease input a category! (Must be a number!)" to player
+				stop
+				
+			{kdss.category.counts::%argument 2%} is not set:
+				
+				send "&cThat category is not set! Please set that category first!" to player
+				stop
+				
+			#activates item in specfied category	
+			set {kdss.cat.%argument 2%::%{_item}%} to true
