@@ -6,6 +6,55 @@ on damage:
 	set damage to 0
 	
 	
+	damage cause is not potion:
+		damage cause is not projectile:
+			{kdss.cat.1::%attacker's weapon%} is set:
+				set {_dmg} to 0.75
+		
+			{kdss.cat.2::%attacker's weapon%} is set:
+				set {_dmg} to 1.0
+		
+			{kdss.cat.3::%attacker's weapon%} is set:
+				set {_dmg} to 1.5
+		
+			{kdss.cat.4::%attacker's weapon%} is set:
+				set {_dmg} to 2.0
+		
+			{kdss.cat.5::%attacker's weapon%} is set:
+				set {_dmg} to 2.5
+		
+			{kdss.cat.6::%attacker's weapon%} is set:
+				set {_dmg} to 3.0
+	
+		damage cause is projectile:
+			
+			set {_dmg} to 0.75
+			
+	damage cause is potion:
+		
+		damage cause is potion of harming 1:
+			
+			set {_dmg} to 1.0
+			
+		damage cause is potion of harming 2:
+			
+			set {_dmg} to 2.0
+			
+	damage cause is poison or wither:
+		
+		set {_dmg} to 0.25
+		
+		
+	damage cause is fire or burning:
+		
+		set {_dmg} to 0.5
+		
+	damage cause is lava:
+		
+		set {_dmg} to 0.75
+		
+	
+	
 #commands to set up category hooks
 
 
