@@ -1,0 +1,420 @@
+#basic systems needed
+#@block-recognition
+
+options:
+#@weapons
+	PStab: diamond sword;&aThe Green Justice;&7Crafted from the purest||&7items to cut through||&7the souls of the purest humans
+	ZStab: diamond sword;&cThe Red Death;&7Laced with the poisonous||&7Blood of the zombies||&7to deliver a powerful strike
+	Supp1: bow of infinity 1;&fBow of Healing;&7Powerful darts loaded||&7with medical properties to||&7to heal friends from afar
+	Supp2: paper;&fBandage;&7The most current healing technology||&7In a convenient travel||&7ready delivery system|| ||&eRight click on a player to use
+	Tank: wood sword of knockback 1;&eHit Stick;&7Built with rubber infused wood for ||&7that extra push against attacking enemies
+on death of a zombie:
+	{zbeta.game.active} is true
+	attacker is a player
+	block below attacker is white hard clay:
+		set {_color.team} to "white"
+	block below attacker is orange hard clay:
+		set {_color.team} to "orange"
+	block below attacker is magenta hard clay:
+		set {_color.team} to "magenta"
+	block below attacker is light blue hard clay:
+		set {_color.team} to "lblue"
+	block below attacker is yellow hard clay:
+		set {_color.team} to "yellow"
+	block below attacker is light green hard clay:
+		set {_color.team} to "lime"
+	block below attacker is pink hard clay:
+		set {_color.team} to "pink"
+	block below attacker is gray hard clay:
+		set {_color.team} to "gray"
+	block below attacker is light gray hard clay:
+		set {_color.team} to "lgray"
+	block below attacker is cyan hard clay:
+		set {_color.team} to "cyan"
+	block below attacker is purple hard clay:
+		set {_color.team} to "purple"
+	block below attacker is blue hard clay:
+		set {_color.team} to "blue"
+	block below attacker is brown hard clay:
+		set {_color.team} to "brown"
+	block below attacker is green hard clay:
+		set {_color.team} to "green"
+	block below attacker is red hard clay:
+		set {_color.team} to "red"
+	block below attacker is black hard clay:
+		set {_color.team} to "black"
+		
+		
+	{_color.team} is not set:
+		stop
+		
+	{_color.team} is not {zbeta.team.%attacker%}:
+		{zbeta.%{_color.team}%.score} is greater than 0:
+			execute console command "/zbeta deduct %{_color.team}% %attacker%"
+			stop
+		
+		
+	{zbeta.%{_color.team}%.score} is greater than or equal to 29:
+		execute console command "/zbeta end %{_color.team}% %attacker%"
+		stop
+		
+	execute console command "/zbeta score %{_color.team}% %attacker%"
+		
+command /zbeta [<text>] [<text>] [<text>]:
+	permission: obam.admin
+	trigger:
+		
+		argument 1 is "addspawn":
+			
+			argument 2 is "list":
+				loop {zbeta.spawn::*}:
+					send "%loop-value%" to player
+				stop
+			add location of player to {zbeta.spawn::*}
+			
+		argument 1 is "setspawn":
+			
+			set {zbeta.spawn.%argument 2%} to location of player
+			
+		argument 1 is "start":
+		
+			set {zbeta.game.active} to true
+			broadcast "&aThe game of &e'ZBETA'&a has begun!"
+			clear {zbeta.white.score}
+			clear {zbeta.orange.score}
+			clear {zbeta.magenta.score}
+			clear {zbeta.lblue.score}
+			clear {zbeta.yellow.score}
+			clear {zbeta.lime.score}
+			clear {zbeta.pink.score}
+			clear {zbeta.gray.score}
+			clear {zbeta.lgray.score}
+			clear {zbeta.cyan.score}
+			clear {zbeta.purple.score}
+			clear {zbeta.blue.score}
+			clear {zbeta.brown.score}
+			clear {zbeta.green.score}
+			clear {zbeta.red.score}
+			clear {zbeta.black.score}
+			clear {zbeta.game.level}
+			clear {zbeta.player.list::*}
+			loop all players in world "DB":
+				loop-player's y coordinate is less than 37:
+					{_loop.count} is not set:
+						set {_loop.count} to 0
+					add 1 to {_loop.count}
+					{_loop.count} is not divisible by 2:
+						teleport loop-player to {zbeta.spawn.red}
+						clear loop-player's inventory
+						give diamond sword to loop-player
+						set {zbeta.team.%loop-player%} to "red"
+						set helmet of loop-player to red wool
+					{_loop.count} is divisible by 2:
+						teleport loop-player to {zbeta.spawn.yellow}
+						clear loop-player's inventory
+						give diamond sword to loop-player
+						set {zbeta.team.%loop-player%} to "yellow"
+						set helmet of loop-player to yellow wool
+
+
+						
+						
+		argument 1 is "lobbyset":
+			
+			set {zbeta.lobby} to location of player
+			
+		argument 1 is "list":
+			
+			loop {zbeta.player.list::*}:
+				send "%loop-value%" to player
+				
+			
+			
+		argument 1 is "score":
+		
+			{zbeta.%argument 2%.score} is not set:
+				set {zbeta.%argument 2%.score} to 0
+				
+			add 1 to {zbeta.%argument 2%.score}
+			broadcast "&e%argument 2% &ateam now has &e%{zbeta.%argument 2%.score}% &apoints!"
+			{zbeta.%argument 2%.score} is greater than or equal to 30
+			execute console command "/zbeta end %argument 2%"
+			
+		argument 1 is "deduct":
+		
+			{zbeta.%argument 2%.score} is not set:
+				stop
+			
+			subtract 1 from {zbeta.%argument 2%.score}
+			broadcast "&e%argument 2% &aloses a point to &e%argument 3%"
+			
+			
+			
+		argument 1 is "end":
+		
+			set {zbeta.game.active} to false
+			broadcast "&aThe game is now over! &e%argument 2% &ateam wins!"
+			loop all zombies:
+				delete loop-entity
+	
+		
+	
+every 1 second:
+	loop all players:
+		set loop-player's hunger level to 10	
+		
+every 10 seconds:
+	loop all zombies:
+		{_loop.count} is not set:
+			set {_loop.count} to 0
+		add 1 to {_loop.count}
+	{_loop.count} is more than 75:
+		stop
+	{zbeta.game.active} is true:
+		{zbeta.game.level} is not set:
+			set {zbeta.game.level} to 0
+		add 1 to {zbeta.game.level}
+		{zbeta.game.level} is less than 10:
+			set {_ran} to random integer between 1 and size of {zbeta.spawn::*}
+			spawn 5 zombies at {zbeta.spawn::%{_ran}%}
+		{zbeta.game.level} is more than 10:
+			set {_number.speed} to {zbeta.game.level} / 2
+			set {_number.speed} to random integer between 1 and {_number.speed}
+			set {_number.armor} to {zbeta.game.level} / 3
+			set {_number.armor} to random integer between 1 and {_number.armor}
+			loop {zbeta.game.level} times:
+				set {_ran} to random integer between 1 and size of {zbeta.spawn::*}
+				spawn 2 zombies at {zbeta.spawn::%{_ran}%}
+			loop {_number.speed} times:
+				set {_ran} to random integer between 1 and size of {zbeta.spawn::*}
+				spawn 1 zombie at {zbeta.spawn::%{_ran}%}
+				apply speed 1 to spawned zombie
+			loop {_number.armor} times:
+				set {_ran} to random integer between 1 and size of {zbeta.spawn::*}
+				spawn 1 zombie at {zbeta.spawn::%{_ran}%}
+				set helmet of spawned zombie to iron helmet
+				set chestplate of spawned zombie to iron chestplate
+				set leggings of spawned zombie to iron leggings
+				set boots of spawned zombie to iron boots
+				
+				
+				
+on respawn:
+	{zbeta.game.active} is true
+	give player diamond sword
+	{zbeta.team.%player%} is "red":
+		set helmet of player to red wool
+	{zbeta.team.%player%} is "yellow":
+		set helmet of player to yellow wool
+				
+				
+			
+on right click on a sign:
+	line 1 of event-block is "[LOBBY]":
+		teleport event-player to {zbeta.lobby}
+	line 1 of event-block is "[LOADOUT]":
+		line 3 of event-block is not {zbeta.team.%player%}:
+			send "&cYou can not use another team's loadouts!" to player
+			stop
+		line 2 of event-block is "Z-STABBER":
+			clear player's inventory
+			{zbeta.team.%player%} is "red":
+				set player's helmet to red wool
+			{zbeta.team.%player%} is "yellow":
+				set player's helmet to yellow wool
+			give player named item stack from "{@ZStab}"
+			equip player with leather chestplate named "&cStabber Gear"
+			equip player with leather leggings named "&cStabber Gear"
+			equip player with leather boots named "&CStabber Gear"
+			dye player's chestplate red
+			dye player's leggings red
+			dye player's boots red
+			set {zbeta.lo.%player%} to "Z-STABBER"
+			
+		line 2 of event-block is "P-STABBER":
+			clear player's inventory
+			{zbeta.team.%player%} is "red":
+				set player's helmet to red wool
+			{zbeta.team.%player%} is "yellow":
+				set player's helmet to yellow wool
+			give player named item stack from "{@PStab}"
+			equip player with leather chestplate named "&aStabber Gear"
+			equip player with leather leggings named "&aStabber Gear"
+			equip player with leather boots named "&aStabber Gear"
+			dye player's chestplate green
+			dye player's leggings green
+			dye player's boots green
+			set {zbeta.lo.%player%} to "P-STABBER"
+			
+		line 2 of event-block is "SUPPORT":
+			clear player's inventory
+			{zbeta.team.%player%} is "red":
+				set player's helmet to red wool
+			{zbeta.team.%player%} is "yellow":
+				set player's helmet to yellow wool
+			give player named item stack from "{@Supp1}"
+			give player arrow
+			give player named item stack from "{@Supp2}"
+			equip player with leather chestplate named "&fDoctor's Coat"
+			equip player with leather leggings named "&fDoctor's Coat"
+			equip player with leather boots named "&fDoctor's Coat"
+			dye player's chestplate white
+			dye player's leggings white
+			dye player's boots white
+			set {zbeta.lo.%player%} to "SUPPORT"
+			
+		line 2 of event-block is "TANK":
+			clear player's inventory
+			{zbeta.team.%player%} is "red":
+				set player's helmet to red wool
+			{zbeta.team.%player%} is "yellow":
+				set player's helmet to yellow wool
+			give player named item stack from "{@Tank}"
+			equip player with leather chestplate named "&eTanks Armor"
+			equip player with leather leggings named "&eTanks Armor"
+			equip player with leather boots named "&eTanks Armor"
+			dye player's chestplate yellow
+			dye player's leggings yellow
+			dye player's boots yellow
+			set {zbeta.lo.%player%} to "TANK"
+			
+		line 2 of event-block is "BAIT":
+			clear player's inventory
+			{zbeta.team.%player%} is "red":
+				set player's helmet to red wool
+			{zbeta.team.%player%} is "yellow":
+				set player's helmet to yellow wool
+			equip player with leather chestplate named "&bBait's Garments"
+			equip player with leather leggings named "&bBait's Garments"
+			equip player with leather boots named "&bBait's Garments"
+			apply speed 2 to the player for 999 days
+			set {zbeta.lo.%player%} to "BAIT"
+			
+on damage of a player:
+	damage cause is projectile:
+		{zbeta.team.%victim%} is {zbeta.team.%shooter%}:
+			{zbeta.lo.%shooter%} is "SUPPORT":
+				shooter's tool is named item stack from "{@Supp1}":
+					add 2 to victim's health
+					send "&aYou have been healed by %shooter%" to victim
+	attacker is player:
+		set damage to 0
+		{zbeta.team.%attacker%} is {zbeta.team.%victim%}:
+			{zbeta.lo.%attacker%} is "SUPPORT":
+				attacker's tool is named item stack from "{@Supp1}":
+					add 2 to victim's health
+					send "&aYou have been healed by %attacker%" to victim
+					stop
+				attacker's tool is named item stack from "{@Supp2}":
+					add 3 to victim's health
+					send "&aYou have been healed by %attacker%" to victim
+					stop
+			cancel event
+			send "&cYou can not hurt your own team mates!" to attacker
+			stop
+		{zbeta.lo.%attacker%} is "Z-STABBER":
+			attacker's tool is named item stack from "{@ZStab}":
+				set {_dmg} to a random number between 0.09 to 0.12
+			attacker's tool is not named item stack from "{@ZStab}":
+				set {_dmg} to a random number between 0.08 to 0.1
+		{zbeta.lo.%attacker%} is "P-STABBER":
+			attacker's tool is named item stack from "{@PStab}":
+			
+				set {_dmg} to a random number between 0.3 and 0.8
+			attacker's tool is not named item stack from "{@PStab}":
+				set {_dmg} to a random number between 0.1 and 0.4
+		{zbeta.lo.%attacker%} is "SUPPORT":
+			set {_dmg} to 0.025
+		
+		{zbeta.lo.%attacker%} is "TANK":
+			set {_dmg} to 0.050
+			
+		{zbeta.lo.%attacker%} is "BAIT":
+			set {_dmg} to 0.025
+			
+		{zbeta.lo.%victim%} is "TANK":
+			set {_ran} to random number between 1 and 3
+			set {_dmg1} to {_dmg} / {_ran}
+			set {_dmg} to {_dmg} - {_dmg1}
+			
+		set {_p.health} to victim's health
+		{_dmg} is greater than or equal to {_p.health}:
+			clear victim's inventory
+			send "&e%victim% &chas reached an end to the hand of &e%attacker%" to all players in attacker's world
+			teleport victim to {zbeta.spawn.%{zbeta.team.%victim%}%}
+			set victim's health to 10
+			victim has speed:
+				remove speed from victim
+			stop
+		
+		
+		set {_n.health} to {_p.health} - {_dmg}
+		set health of victim to {_n.health}
+		
+	attacker is a zombie:
+		set damage to 0
+		set {_dmg} to a random number between 0.05 and 0.1
+		
+		set {_p.health} to victim's health
+		{_dmg} is greater than or equal to {_p.health}:
+			clear victim's inventory
+			send "&e%victim% &chas been taken down by the horde!" to all players in attacker's world
+			teleport victim to {zbeta.spawn.%{zbeta.team.%victim%}%}
+			set victim's health to 10
+			victim has speed:
+				remove speed from victim
+			repair tool of attacker by 10000
+			stop
+			
+			
+		set {_n.health} to {_p.health} - {_dmg}
+		set health of victim to {_n.health}
+		repair tool of attacker by 10000
+			
+				
+		
+		
+		
+on damage of a zombie:
+	attacker is player:
+		{zbeta.lo.%attacker%} is "Z-STABBER":
+			attacker's tool is named item stack from "{@ZStab}":
+				set {_dmg} to 8
+			attacker's tool is not named item stack from "{@ZStab}":
+				set {_dmg} to 0.75
+		{zbeta.lo.%attacker%} is "P-STABBER":
+			attacker's tool is named item stack from "{@PStab}":
+			
+				set {_dmg} to 1.0
+			attacker's tool is not named item stack from "{@PStab}":
+				set {_dmg} to 0.25
+		{zbeta.lo.%attacker%} is "SUPPORT":
+			set {_dmg} to 0.25
+		
+		{zbeta.lo.%attacker%} is "TANK":
+			set {_dmg} to 0.5
+			
+		{zbeta.lo.%attacker%} is "BAIT":
+			set {_dmg} to 0.25
+			
+			
+			
+		set damage to {_dmg}
+		repair tool of attacker by 10000
+		
+on target:
+	set {_target} to entity's target
+	{zbeta.lo.%{_target}%} is "BAIT":
+		apply speed 3 to event-entity for 10 seconds
+		set {zbeta.%event-entity%.speed} to true
+		
+	
+			
+		
+			
+			
+		
+		
+		
+
+	

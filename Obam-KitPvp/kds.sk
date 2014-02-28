@@ -1,0 +1,19 @@
+#
+on damage:
+	world is "Kittest"
+	set damage to 0
+	attacker is player:
+		victim is player:
+			set {_%victim%.health} to victim's health
+			attacker's tool is air:
+				set {_dmg} to 1
+			attacker's tool is iron sword:
+				set {_dmg} to 3
+				
+			{_%victim%.health} is less than or equal to {_dmg}:
+				send "&e%victim% &cis dead because of &e%attacker%" to all players in victim's world
+				set victim's health to 10
+				stop
+			
+			set {_new.health} to {_%victim%.health} - {_dmg}
+			set victim's health to {_new.health}
