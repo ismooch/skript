@@ -1,0 +1,3 @@
+
+command("perm player %target% unset vote.check")
+command("tokenadmin %target% end")

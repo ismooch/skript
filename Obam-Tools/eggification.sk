@@ -1,0 +1,171 @@
+options:
+	egg: snowball;&3Projeggtile Capture Ball;&6Capture the essence of various creatures||&6by tossing your balls at them.
+	
+on shoot:
+	projectile is snowball
+	shooter's tool is named item stack from "{@egg}":
+		set {projeggtile.%projectile%} to true
+
+on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or mooshroom or sheep or horse:
+	attacker is a player:
+		{projeggtile.%projectile%} is set:
+			if {chunk.live.%chunk at location of victim%} is not attacker:
+				{chunk.live.%chunk at location of victim%.%attacker%} is not set:
+					send "&cYou can not steal animals! D:" to attacker
+					stop
+				{chunk.live.%chunk at location of victim%.%attacker%} is false:
+					send "&cYou can not steal animals! D:" to attacker
+					stop
+			set {_player} to "%attacker%" parsed as player
+			attacker does not have permission "obam.plus":
+				set {_bal} to attacker's balance
+				{_bal} is less than 10:
+					send "&cYou do not have enough tickets!" to attacker
+					cancel event
+					give attacker named item stack from "{@egg}"
+					stop
+				subtract 10 from attacker's balance
+				send "&aYou have spent &e10&a tickets on capturing a creature!" to attacker
+				log "%attacker%^%{_bal}%^DEDUCT^10^%attacker's balance%^CREATURE CAPTURE FEE" to "tickets/CREATURECAPTURE.log"
+				
+			attacker has permission "obam.plus":
+				attacker does not have permission "obam.ultimate":
+					set {_bal} to attacker's balance
+					{_bal} is less than 5:
+						send "&cYou do not have enought tickets!" to attacker
+						cancel event
+						give attacker named item stack from "{@egg}"
+						stop
+					remove 5 from attacker's balance
+					send "&aYou have spent &e5&a tickets on capturing a creature!" to attacker
+					log "%attacker%^%{_bal}%^DEDUCT^5^%{_player}'s balance%^CREATURE CAPTURE FEE" to "tickets/CREATURECAPTURE.log"
+					
+			
+			victim is a pig:
+				set {_egg} to pig spawn egg
+				set {_mob.name} to "pig"
+			victim is a chicken:
+				set {_egg} to chicken spawn egg
+				set {_mob.name} to "chicken"
+			victim is ocelot:
+				set {_egg} to ocelot spawn egg
+				set {_mob.name} to "ocelot"
+			victim is squid:
+				set {_egg} to squid spawn egg
+				set {_mob.name} to "squid"
+			victim is cow:
+				set {_egg} to cow spawn egg
+				set {_mob.name} to "cow"
+			victim is bat:
+				set {_egg} to bat spawn egg
+				set {_mob.name} to "bat"
+			victim is wolf:
+				set {_egg} to wolf spawn egg
+				set {_mob.name} to "wolf"
+			victim is mooshroom:
+				set {_egg} to mooshroom spawn egg
+				set {_mob.name} to "mooshroom"
+			victim is sheep:
+				set {_egg} to sheep spawn egg
+				set {_mob.name} to "sheep"
+			victim is horse:
+				set {_egg} to horse spawn egg
+				set {_mob.name} to "horse"
+			
+			display name of victim is not set:
+				cancel event
+				attacker doesn't have space for {_egg}:
+					drop {_egg} at location of attacker
+				attacker has space for {_egg}:
+					give attacker {_egg}
+				delete victim
+				set {_top} to size of {pegg.messages.capture::*}
+				set {_ran} to random integer between 1 and {_top}
+				loop {pegg.messages.capture::*}:
+					{_loop.count} is not set:
+						set {_loop.count} to 0
+					add 1 to {_loop.count}
+					{_loop.count} is {_ran}:
+						set {_message} to "%loop-value%"
+						replace "MOB" in {_message} with "%{_mob.name}%"
+						send "&e%{_message}%" to attacker
+				stop
+			
+			cancel event
+			set {_top} to size of {pegg.messages.capture::*}
+			set {_ran} to random integer between 1 and {_top}
+			loop {pegg.messages.capture::*}:
+				{_loop.count} is not set:
+					set {_loop.count} to 0
+				add 1 to {_loop.count}
+				{_loop.count} is {_ran}:
+					set {_message} to "%loop-value%"
+					replace "MOB" in {_message} with "%display name of victim%"
+					send "&e%{_message}%" to attacker
+			attacker doesn't have space for {_egg}:
+				set {_egg} to {_egg} named "%display name of victim%"
+				drop {_egg} at location of attacker
+			attacker has space for {_egg}:
+				give attacker {_egg} named "%display name of victim%"
+			delete victim
+			stop
+
+			
+on death of a creeper or a zombie or a silverfish or a witch or a spider or magma cube or wither skeleton or skeleton or enderman or cave spider or slime or ghast or zombie pigman:
+	
+	
+	chance of 20%:
+		add named item stack from "{@egg}" to drops
+	clear {player.hit.%event-entity%}
+	
+on damage of a creeper or a zombie or a silverfish or a witch or a spider or magma cube or wither skeleton or skeleton or enderman or cave spider or slime or ghast or zombie pigman:
+	attacker is player:
+		set {player.hit.%victim%} to true
+
+			
+command /pegg [<text>] [<text>]:
+	permission: obam.admin
+	trigger:
+		argument 1 is not set:
+			send "&a-------&eProjeggtile System&a--------" to player
+			send " " to player
+			send " " to player
+			send "&e/pegg &a--------------------- &eOpen this menu" to player
+			send "&e/pegg list &a---------------- &eList active messages" to player
+			send "&e/pegg add [message] &a------- &eAdd message to list" to player
+			send "&e/pegg delete [number] &a----- &eDelete Specified message from list"
+			send "&e/pegg test [number] &a------- &eTest specific message with 'OBAM' "
+			send " "
+			send " "
+			send "&cV 1.2 &eCoded by: &aISMOOCH"
+			send "&eDeveloped for: OBAM CRAFT" to player
+		argument 1 is "list":
+			loop {pegg.messages.capture::*}:
+				{_loop.count} is not set:
+					set {_loop.count} to 0
+				add 1 to {_loop.count}
+				send "&e%loop-index%&a.... &e%loop-value%" to player
+				
+		argument 1 is "add":
+			argument 2 is not set:
+				send "&cCorrect usage: &e/pegg [list|add|delete|test] [message|number]" to player
+				stop
+			add argument 2 to {pegg.messages.capture::*}
+			send "&aMessage &e%argument 2%&a added!" to player
+		argument 1 is "delete":
+			argument 2 is not set:
+				send "&cCorrect usage: &e/pegg [list|add|delete|test] [message|number]" to player
+				stop
+			send "&cDeleteing message &e%{pegg.messages.capture::%argument 2%}%&c..."
+			delete {pegg.messages.capture::%argument 2%}
+			send "&aMessage deleted!" to player
+		
+		argument 1 is "test":
+			argument 2 is not set:
+				send "&cCorrect usage: &e/pegg [list|add|delete|test] [message|number]" to player
+				stop
+			set {_message} to {pegg.messages.capture::%argument 2%}
+			replace "MOB" in {_message} with "OBAM"
+			send {_message} to player
+			
+			

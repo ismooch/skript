@@ -1,0 +1,64 @@
+options:
+	powerpick: diamond pickaxe;&cPower Pick;&7Reinforced by diamonds to speed up;&7the mining process
+
+
+
+on script load:
+	register new shapeless recipe for named item stack from "{@powerpick}" using diamond block, diamond block, diamond block, diamond block, diamond pick, diamond block, diamond block, diamond block, diamond block
+	
+	
+	
+on mine:
+	name of player's tool is "&cPower Pick":
+		x-coordinate of event-block is not x-coordinate of player:
+			loop blocks in radius 1.5 of event-block:
+				loop-block's x-coordinate is event-block's x-coordinate:
+					loop-block is not diamond ore or coal ore or gravel or redstone ore:
+					
+						drop 1  of loop-block at location of event-block
+						set loop-block to air
+					loop-block is diamond ore:
+						drop 1 diamond at location of event-block
+						set loop-block to air
+					loop-block is coal ore:
+						drop 1 coal at location of event-block
+						set loop-block to air
+					loop-block is redstone ore:
+						set {_ran} to random integer between 2 and 9
+						drop {_ran} of redstone dust at location of event-block
+						set loop-block to air
+					loop-block is gravel:
+						chance of 15%:
+							drop flint at location of event-block
+							set loop-block to air
+							set {_flint} to true
+						{_fint} is not set:
+							drop gravel at location of event-block
+							set loop-block to air
+							
+		z-coordinate of event-block is not z-coordinate of player:
+			loop blocks in radius 3 of event-block:
+				loop-block's z-coordinate is event-block's z-coordinate:
+					loop-block is not diamond ore or coal ore or gravel or redstone ore:
+					
+						drop 1 of loop-block at location of event-block
+						set loop-block to air
+					loop-block is diamond ore:
+						drop 1 diamond at location of event-block
+						set loop-block to air
+					loop-block is coal ore:
+						drop 1 coal at location of event-block
+						set loop-block to air
+					loop-block is redstone ore:
+						set {_ran} to random integer between 2 and 9
+						drop {_ran} of redstone dust at location of event-block
+						set loop-block to air
+					loop-block is gravel:
+						chance of 15%:
+							drop flint at location of event-block
+							set loop-block to air
+							set {_flint} to true
+						{_fint} is not set:
+							drop gravel at location of event-block
+							set loop-block to air
+			

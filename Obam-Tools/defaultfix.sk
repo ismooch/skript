@@ -1,0 +1,3 @@
+on join:
+	player does not have permission "obam.default":
+		execute console command "permissions group default add %player%"
