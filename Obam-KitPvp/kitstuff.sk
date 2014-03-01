@@ -1332,11 +1332,11 @@ on right click with rose red:
 			create safe explosion with force 5 at targeted block
 			play "blaze hit" at targeted block with pitch 2
 			loop entities in radius 2 of targeted block:
-				loop-entity is not "%player%":
+				loop-entity is not player:#this is all you ever have to do on an event intitiated by the player.
 					loop-entity is not a player:
-						make player damage loop-entity by 10
+						make player damage loop-entity by 10 #just so you are aware... this is half health
 					{active.kit.%loop-entity%} is true:
-						make player damage loop-entity by 10
+						make player damage loop-entity by 10 #this may be slightly different because of KDSS, otherwise would work fine.
 			send "&aYou have brewed a &cMassive Attack!" to player
 			reduce player's level progress by 0.25
 
@@ -1357,7 +1357,7 @@ on right click with blaze powder:
 			create safe explosion with force 3 at targeted block
 			play "blaze hit" at targeted block with pitch 1
 			loop entities in radius 2 of targeted block:
-				loop-entity is not "%player%":
+				loop-entity is not player:#reference to comments in above block to this same block
 					loop-entity is not a player:
 						make player damage loop-entity by 6
 					{active.kit.%loop-entity%} is true:
@@ -1383,7 +1383,7 @@ on right click with purple dye:
 			create safe explosion with force 5 at player's location
 			play "blaze hit" at player's location with pitch 1
 			loop entities in radius 8 of player's location:
-				loop-entity is not "%player%":
+				loop-entity is not player:#reference comments two blocks up
 					loop-entity is not a player:
 						make player damage loop-entity by 5
 					{active.kit.%loop-entity%} is true:
@@ -1405,10 +1405,10 @@ on right click with orange dye:
 			give player 1 redstone named "&fAttack"
 			give player 1 glowstone dust named "&fHeal"
 			give player 1 Lapis Luzuli named "&fDebuff"
-			play effect "splash potion of fire resist" at targeted block
-			loop entities in radius 2 of targeted block:
+			play effect "splash potion of fire resist" at targeted block#does splash potion of fire resist have its own sound?
+			loop entities in radius 2 of targeted block:#targeted block also means, anything in that can be targeted with the only limit to range being draw distance
 				{active.kit.%loop-entity%} is true:
-					add 10 to loop-entity's health
+					add 10 to loop-entity's health#again KDSS may change something like this. Healing is new, so I do not know how it will be handled
 			send "&aYou have brewed a &eMassive Heal!" to player
 			reduce player's level progress by 0.25
 
@@ -1474,8 +1474,13 @@ on right click with magenta dye:
 					loop-entity is not a player:
 						make player damage loop-entity by 10
 					{active.kit.%loop-entity%} is true:
+					#for all of this, I would rather do a command. And create a custom command. Otherwise, you force the loop to focus on the player for 5 seconds. Stopping the loop. I.E. If there were 3 people in the loop area, it would take 15 seconds to execute.
+					#something like:
+						#execute console command "/kpconfused create %loop-entity%"
+						#and then define /kpconfused later down the code.
 						set {confused.%loop-entity%} to true
-						send "&aYou have been &9Confused &aby &e%attacker% &afor 5 seconds!" to loop-entity
+						send "&aYou have been &9Confused &aby &e%player% &afor 5 seconds!" to loop-entity
+											#attacker can only be used in 'on damage' events. would not apply here.
 						wait 1 second
 						send "&aYou are &9Confused &afor 4 more seconds!" to loop-entity
 						wait 1 second
@@ -1504,7 +1509,7 @@ on right click with cactus green:
 			give player 1 redstone named "&fAttack"
 			give player 1 glowstone dust named "&fHeal"
 			give player 1 Lapis Luzuli named "&fDebuff"
-			play effect "splash potion of night vision" at targeted block
+			play effect "splash potion of night vision" at targeted block#i will need to link you the proper effects list. its crazy.. and not as simple as that <---
 			loop entities in radius 2 of targeted block:
 				loop-entity is not "%player%":
 					{active.kit.%loop-entity%} is true:
@@ -1530,8 +1535,9 @@ on right click with cyan dye:
 			loop entities in radius 10 of player:
 				loop-entity is not "%player%":
 					{active.kit.%loop-entity%} is true:
-						{kit.tank.%victim%} is true:
-							send "&cYou can not slow the tank!" to attacker
+						{kit.tank.%loop-entity%} is true:
+							  #no victim.. just loop-entity here. victim is only on damage, though i think this is copy paste error
+							send "&cYou can not slow the tank!" to player #^^^^
 							stop
 						apply slowness 5 to loop-entity for 5 seconds
 						send "&aYou have been &9Slowed &aby &e%attacker% &afor 5 seconds!" to loop-entity
