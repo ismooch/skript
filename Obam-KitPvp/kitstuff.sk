@@ -10,6 +10,7 @@ options:
 	fishermankit: i;fish;n;&9&lFisherman;l;&7Click to pick the||&eFisherman&7 class;c;sudo %player% kit fisherman
 	something: i;wood hoe;n;&9&lSomething;c;sudo %player% kit something
 	skelemancerkit: i;wither skeleton head;n;&9&lSkele-Mancer;l;&7Click to pick the||&eSkele-Mancer&7 class;c;sudo %player% kit skelemancer
+	alchemistkit: i;brewing stand;n;&9&lAlchemist;l;&7Click to pick the||&eAlchemist&7 class;c;sudo %player% kit alchemist
 	supporterstuff: i;diamond block;n;&9&lMore Kits for Supporters!;l;&7Purchase a Supporter membership||&7To get even more fun||&7kits from &9OBAM&7!
 	#endfold
 	#startfold @arena-chest-stuff
@@ -20,15 +21,20 @@ options:
 #kits
 
 
+
+
 variables:
 	{safety.%player%} = 0
-	
-	
+
+
+
+
 command /arena:
 	permission: obam.free
 	trigger:
 		world is "kitpvpkillingfields":
-			
+
+
 			{active.kit.%player%} is not set:
 				send "&cPlease choose a kit first!" to player
 				stop
@@ -44,7 +50,7 @@ command /kit [<text>]:
 		world is "kitpvpkillingfields"
 		argument is not set:
 			player has permission "obam.supporter":
-				show "s;11;{@ninjakit};s;12;{@archerkit};s;13;{@meleekit};s;14;{@firemagekit};s;15;{@lightningmagekit};s;16;{@tankkit};s;17;{@necrokit};s;23;{@fishermankit};s;24;{@skelemancerkit}" with 4 rows named "&9&lOBAM &9:: Kits" to player
+				show "s;11;{@ninjakit};s;12;{@archerkit};s;13;{@meleekit};s;14;{@firemagekit};s;15;{@lightningmagekit};s;16;{@tankkit};s;17;{@necrokit};s;20;{@alchemistkit};s;23;{@fishermankit};s;24;{@skelemancerkit}" with 4 rows named "&9&lOBAM &9:: Kits" to player
 				stop
 			show "s;10;{@meleekit};s;11;{@archerkit};s;12;{@tankkit};s;13;{@lightningmagekit};s;14;{@fishermankit};s;27;{@supporterstuff};s;28;{@skelemancerkit}" with 4 rows named "&9&lOBAM &9:: Kits" to player
 		{kitpvp.dead.%player%} is true:
@@ -54,7 +60,8 @@ command /kit [<text>]:
 		{active.kit.%player%} is false:
 			set {_arena.run} to true
 		argument is "archer":
-		
+
+
 			{active.kit.%player%} is true:
 				send "&cYou already have a kit D:" to player
 				stop
@@ -69,11 +76,13 @@ command /kit [<text>]:
 			set {kit.archer.%player%} to true
 			set {egg.archer.%player%} to true
 			set {active.kit.%player%} to true
-			
+
+
 		#subfold @ninja
 		argument is "ninja":
 			player has permission "obam.kits.supporter"
-		
+
+
 			{active.kit.%player%} is true:
 				send "&cYou already have a kit D:" to player
 				stop
@@ -96,7 +105,8 @@ command /kit [<text>]:
 			set {ninja.poof.%player%} to true
 		#subfold @melee	
 		argument is "melee":
-		
+
+
 			{active.kit.%player%} is true:
 				send "&cYou already have a kit D:" to player
 				stop
@@ -111,12 +121,13 @@ command /kit [<text>]:
 		#subfold @firemage
 		argument is "firemage":
 			player has permission "obam.kits.supporter"
-			
+
+
 			{active.kit.%player%} is true:
 				send "&cYou already have a kit D:" to player
 				stop
 			clear player's inventory
-			equip player with all leather armor of blast protection 3 and unbreaking 2 and protection 4 and fire protection 3 and unbreaking 2 named "&fFireMage's Robes"
+			equip player with all leather armor of blast protection 3 and unbreaking 2 and protection 4 and fire protection 3 named "&fFireMage's Robes"
 			dye player's helmet red
 			dye player's chestplate red
 			dye player's leggings red
@@ -133,7 +144,8 @@ command /kit [<text>]:
 			set {active.kit.%player%} to true
 		#subfold @tank
 		argument is "tank":
-			
+
+
 			{active.kit.%player%} is true:
 				send "&cYou already have a kit D:" to player
 				stop
@@ -147,10 +159,12 @@ command /kit [<text>]:
 			heal player by 10 hearts
 			set {kit.tank.%player%} to true
 			set {active.kit.%player%} to true
-		
+
+
 		#subfold @lightningmage
 		argument is "lightningmage":
-			
+
+
 			{active.kit.%player%} is true:
 				send "&cYou already have a kit D:" to player
 				stop
@@ -173,7 +187,8 @@ command /kit [<text>]:
 		#subfold @necromancer
 		argument is "necromancer":
 			player has permission "obam.kits.supporter"
-			
+
+
 			{active.kit.%player%} is true:
 				send "&cYou already have a kit D:" to player
 				stop
@@ -193,10 +208,12 @@ command /kit [<text>]:
 				set player's level progress to 0.99
 			set {kit.necromancer.%player%} to true
 			set {active.kit.%player%} to true
-		
+
+
 		#subfold @fisherman
 		argument is "fisherman":
-		
+
+
 			{active.kit.%player%} is true:
 				send "&cYou already have a kit D:" to player
 				stop
@@ -207,13 +224,18 @@ command /kit [<text>]:
 			give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
 			set {kit.fisherman.%player%} to true
 			set {active.kit.%player%} to true
-			
-			
-				
-			
+
+
+
+
+
+
+
+
 		#subfold @something
 		#argument is "something":
-			
+
+
 			#{active.kit.%player%} is true:
 				#send "&cYou already have a kit D:" to player
 				#stop
@@ -225,8 +247,10 @@ command /kit [<text>]:
 			#give player 3 eggs named "&fFlashBang"
 			#set {kit.something.%player%} to true
 			#set {active.kit.%player%} to true
-			
-		
+
+
+
+
 		#subfold @skelemancer
 		argument is "skelemancer":
 			{active.kit.%player%} is true:
@@ -249,22 +273,60 @@ command /kit [<text>]:
 				set player's level progress to 0.99
 			set {kit.skelemancer.%player%} to true
 			set {active.kit.%player%} to true
-			
+
+
+
+
+		argument is "alchemist":
+			player has permission "obam.kits.supporter"
+
+
+			{active.kit.%player%} is true:
+				send "&cYou already have a kit D:" to player
+				stop
+			clear player's inventory
+			equip player with all leather armor of protection 3 and unbreaking 3 and fire protection 3 named "&fAlchemist's Robes"
+			dye player's helmet orange
+			dye player's chestplate orange
+			dye player's leggings orange
+			dye player's boots orange
+			give player blaze rod of knockback 3 and sharpness 1 named "&fStirring Stick"
+			give player 1 redstone named "&fAttack"
+			give player 1 glowstone dust named "&fHeal"
+			give player 1 lapis luzuli named "&fDebuff"
+			apply speed 2 to player for 999 days
+			{active.kit.%player%} is false:
+				set player's level progress to 0.99
+			{active.kit.%player%} is not set:
+				set player's level progress to 0.99
+			set {kit.alchemist.%player%} to true
+			set {active.kit.%player%} to true
+
+
 		{_arena.run} is true:
 			send "&aOpening Arena Menu...." to player
 			wait 1 second
 			make player execute command "/arena"
-			
+
+
 		#subfold @earthmage
 
-			
-			
-			
-			
+
+
+
+
+
+
+
+
+
 #endfold
 
-			
-			
+
+
+
+
+
 on damage:
 	#startfold @damage-kits
 	world is "kitpvpkillingfields":
@@ -294,7 +356,8 @@ on damage:
 				{active.kit.%attacker%} is not set:
 					cancel event
 					send "&cYou do not have a kit yet! Do not be crazy!" to attacker
-					
+
+
 				{active.kit.%attacker%} is false:
 					cancel event
 					send "&cYou do not have a kit yet! Do not be crazy!" to attacker
@@ -304,7 +367,8 @@ on damage:
 				{active.kit.%victim%} is false:
 					cancel event
 					send "&cThis player has not chosen a kit! Please play fair :(" to attacker
-					
+
+
 		#subfold @falldamage-cancellation
 		damage cause is fall:
 			cancel event
@@ -335,7 +399,9 @@ on damage:
 					send "&aYour enemy bleeds..." to attacker
 					send "&cYour wounds are too deep" to victim
 
-						
+
+
+
 		#subfold @snowball-alteration
 		projectile is snowball:
 			#subfold @ninja-snowball
@@ -353,9 +419,8 @@ on damage:
 				apply slowness 8 to victim for 4 seconds
 				apply blindness to victim for 2 seconds
 				{kit.tank.%victim%} is true:
-					remove slowness from victim
-					apply slowness 2 to victim
-					send "&cYou can not slow the tank." to attacker
+					send "&cYou can not slow the tank!" to attacker
+					stop
 		#subfold @egg-alteration	
 		projectile is egg:
 			#subfold @archer-egg
@@ -364,10 +429,9 @@ on damage:
 				message "&cYou have been stunned by &e%attacker%&c!" to victim
 				message "&aYou have stunned &e%victim%&a!" to attacker
 				{kit.tank.%victim%} is true:
-					remove slowness from victim
-					apply slowness 2 to victim
-					send "&cYou can not slow the tank." to attacker
-				
+					send "&cYou can not slow the tank!" to attacker
+					stop
+
 			#subfold @firemage-egg
 			{kit.firemage.%attacker%} is true:
 				{kit.tank.%victim%} is true:
@@ -378,6 +442,7 @@ on damage:
 				message "&cYou have been confused by &e%attacker%&c!" to victim
 				message "&aYou have confused &e%victim%&a!" to attacker
 			#subfold @something-class
+
 
 		#subfold @fire/lava-damage-event		
 		damage cause is lava or burning or drowning or wither or poison:
@@ -410,8 +475,10 @@ on damage:
 									add 1 to {assist.%{_player}%.kp}
 									set {_cut} to {value.%victim%.kit.live} / {_size2}
 									add rounded {_cut} to {_player}'s balance
-									
-									
+
+
+
+
 					clear {last.attacker.%victim%}
 					{kit.ninja.%victim%} is true:
 						remove jump from victim
@@ -432,7 +499,7 @@ on damage:
 						set {active.kit.%victim%} to false
 						set {kit.melee.%victim%} to false
 					{kit.firemage.%victim%} is true:
-						set {kit.mage.%victim%} to false
+						set {kit.firemage.%victim%} to false
 						set {active.kit.%victim%} to false
 						remove speed from victim
 					{kit.tank.%victim%} is true:
@@ -455,29 +522,38 @@ on damage:
 					{kit.skelemancer.%victim%} is true:
 						set {kit.skelemancer.%victim%} to false
 						set {active.kit.%victim%} to false
-					clear {killstreak.%victim%}
 					{kit.fisherman.%victim%} is true:
 						set {kit.fisherman.%victim%} to false
-			
+					{kit.alchemist.%victim%} is true:
+						set {kit.alchemist.%victim%} to false
+						set {active.kit.%victim%} to false
+						remove speed from victim
+					clear {killstreak.%victim%}
+
+
 		#subfold @death-event	
 		attacker is a player:
 			victim is a player:
 				loop {assists.%victim%::*}:
 					{assists.%victim%::%loop-index%} is attacker:
 						set {_assists.check} to 1
-					
+
+
 				{_assists.check} is not set:
 					victim is not attacker:
 						add attacker to {assists.%victim%::*}
-						
+
+
 				clear {_assists.check}
 				set {last.attacker.%victim%} to attacker
-				
+
+
 				set {_health.%victim%} to victim's health
 				set {_health.%victim%} to {_health.%victim%} + 1
 				damage is greater than {_health.%victim%}:
 					cancel event
-						
+
+
 					#subfold @ninja-special
 					chance of 80%:
 						{ninja.poof.%victim%} is true:
@@ -504,7 +580,8 @@ on damage:
 							stop
 					set {active.kit.%victim%} to false
 					set {kitpvp.dead.%victim%} to true
-					
+
+
 					#subfold @rampage
 					{killstreak.%attacker%} is not set:
 						set {killstreak.%attacker%} to 0
@@ -543,7 +620,8 @@ on damage:
 								add 1 to {assist.%{_player}%.kp}
 								set {_cut} to {value.%victim%.kit.live} / {_size2}
 								add rounded {_cut} to {_player}'s balance
-					
+
+
 					clear {assists.%victim%::*}
 					{kills.%attacker%.kit} is not set:
 						set {kills.%attacker%.kit} to 0
@@ -576,6 +654,7 @@ on damage:
 					execute console command "effect %victim% clear"
 					set {kitpvp.dead.%victim%} to false
 
+
 					#subfold @ninja-clear
 					{kit.ninja.%victim%} is true:
 						remove jump from victim
@@ -585,7 +664,8 @@ on damage:
 						set {snowball.ninja.%victim%} to false
 						set {active.kit.%victim%} to false
 						set {ninja.poof.%victim%} to false
-						
+
+
 					#subfold @archer-clear
 					{kit.archer.%victim%} is true:
 						remove speed from victim
@@ -594,25 +674,34 @@ on damage:
 						set {egg.archer.%victim%} to false
 						set {active.kit.%victim%} to false
 						set {kitpvp.dead.%victim%} to false
+
+
 					#subfold @melee-clear
 					{kit.melee.%victim%} is true:
 						set {snowball.melee.%victim%} to false
 						set {active.kit.%victim%} to false
-						
+
+
 					#subfold @firemage-clear
 					{kit.firemage.%victim%} is true:
 						set {kit.firemage.%victim%} to false
 						set {active.kit.%victim%} to false
 						remove speed from victim
+
+
 					#subfold @tank-clear
 					{kit.tank.%victim%} is true:
 						set {kit.tank.%victim%} to false
 						remove slowness from victim
 						remove health boost from victim
+
+
 					#subfold @lightningmage-clear
 					{kit.lightningmage.%victim%} is true:
 						set {kit.lightningmage.%victim%} to false
 						remove jump from victim
+
+
 					#subfold @necromancer-clear
 					{kit.necromancer.%victim%} is true:
 						set {kit.necromancer.%victim%} to false
@@ -621,13 +710,19 @@ on damage:
 							delete loop-entity
 						clear {zombie.%victim%.active}
 						remove speed from victim
-					#subfold @fishermanclear
+
+
+					#subfold @fisherman-clear
 					{kit.fisherman.%victim%} is true:
 						set {kit.fisherman.%victim%} to false
+
+
 					{kit.something.%victim%} is true:
 						remove speed from victim
 						set {kit.something.%victim%} to false
-					#subfold @skelemancerclear
+
+
+					#subfold @skelemancer-clear
 					{kit.skelemancer.%victim%} is true:
 						set {kit.skelemancer.%victim%} to false
 						loop all wither skeletons in world "kitpvpkillingfields":
@@ -635,12 +730,24 @@ on damage:
 							delete loop-entity
 						clear {skeleton.%victim%.active}
 
-					
+					#subfold @alchemist-clear
+					{kit.alchemist.%victim%} is true:
+						set {kit.alchemist.%victim%} to false
+						set {active.kit.%victim%} to false
+						remove speed from victim
+
+
+
+
 #endfold
 
 
-			
-			
+
+
+
+
+
+
 on consume:
 	item is potion of poison named "&fJump Potion":
 		cancel event
@@ -651,8 +758,10 @@ on consume:
 		wait 10 seconds
 		remove jump from player
 		apply jump 2 to player for 999 days
-		
-		
+
+
+
+
 #startfold @fisherman
 on right click with fishing rod:
 	world is "kitpvpkillingfields"
@@ -668,7 +777,8 @@ on right click with fishing rod:
 			loop players in radius 5 of targeted entity:
 				push loop-player in the direction of player with speed -4
 				make player damage loop-player by 4
-				
+
+
 on damage of a player:
 	world is "kitpvpkillingfields"
 	attacker's weapon is fish:
@@ -682,8 +792,10 @@ on damage of a player:
 			play "slime attack" at location of victim with pitch 1
 			stop
 #endfold
-			
-			
+
+
+
+
 on right click with mushroom soup:
 	#startfold @mushroom-soup-stuff
 	world is "kitpvpkillingfields"
@@ -694,11 +806,14 @@ on right click with mushroom soup:
 		stop
 	remove mushroom soup from player
 	give player bowl
-	
+
+
 	add 5 to player's health
-	
+
+
 	#endfold
-	
+
+
 on right click with stick:
 	#startfold @firemage-wand-fire
 	world is "kitpvpkillingfields"
@@ -725,7 +840,8 @@ on right click with stick:
 						send "&cCritical hit!" to loop-entity
 			reduce the player's level progress by 0.1
 	{kit.lightningmage.%player%} is true:
-	
+
+
 		name of player's tool is "&fLightning Wand"
 		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
 			send "&cYou can not do that here. Please select an arena!" to player
@@ -741,11 +857,13 @@ on right click with stick:
 					push loop-entity up with force 1
 					make player damage loop-entity by 6
 					apply wither to loop-entity for 3 seconds
-			
+
+
 on explode:
 	world is "kitpvpkillingfields":
 		cancel event
-			
+
+
 on left click with stick:
 	#subfold @mage-wand-slowness
 	world is "kitpvpkillingfields"
@@ -769,18 +887,25 @@ on left click with stick:
 				stop
 			the distance between targeted block and player is less than or equal to 30:
 				teleport player to block above targeted block
-			
+
+
 				reduce the player's level progress by 0.5
 				stop
 			send "&cThat is too far!" to player
-		
-			
-			
+
+
+
+
+
+
 #endfold
+
 
 #startfold @necromancer	
 
-			
+
+
+
 on right click with blaze rod:
 	world is "kitpvpkillingfields"
 	{kit.necromancer.%player%} is true:
@@ -798,7 +923,8 @@ on right click with blaze rod:
 			set {_loc} to block 20 meters above player
 			play 1 of effect "largeexplode" with data 1 at {_loc}
 			make player damage player by 2
-			
+
+
 			apply speed 3 to spawned zombie for 999 days
 			send "&aYou Summon the dead!" to player
 			set {owner.zombie.%spawned zombie%} to player
@@ -806,10 +932,12 @@ on right click with blaze rod:
 				set {zombie.%player%.active} to 0
 			add 1 to {zombie.%player%.active}
 			reduce player's level progress by 0.3
-			
+
+
 on left click with blaze rod:
 	world is "kitpvpkillingfields"
-	
+
+
 	{kit.necromancer.%player%} is true:
 		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
 			send "&cYou can not do that here. Please select an arena!" to player
@@ -828,9 +956,12 @@ on left click with blaze rod:
 			reduce player's level progress by {zombie.%player%.active} / 10
 			clear {zombie.%player%.active}
 			send "&aYou call back the dead!" to player
-		
-			
-			
+
+
+
+
+
+
 on damage of a player:
 	world is "kitpvpkillingfields"
 	attacker is a zombie:
@@ -845,19 +976,27 @@ on damage of a player:
 		{active.kit.%{_player}%} is not set:
 			stop
 		make {_player} damage victim by 4
-		
+
+
 on death of a zombie:
 	world is "kitpvpkillingfields"
 	clear drops
-	
-		
+
+
+
+
 #endfold
+
+
+
 
 
 
 #startfold @skelemancer	
 
-			
+
+
+
 on right click with bone:
 	world is "kitpvpkillingfields"
 	{kit.skelemancer.%player%} is true:
@@ -876,7 +1015,8 @@ on right click with bone:
 			set {_loc} to block 20 meters above player
 			play 1 of effect "largeexplode" with data 1 at {_loc}
 			make player damage player by 2
-			
+
+
 			apply speed 3 to spawned wither skeleton for 999 days
 			send "&aYou Summon the dead!" to player
 			set {owner.skeleton.%spawned wither skeleton%} to player
@@ -884,10 +1024,12 @@ on right click with bone:
 				set {skeleton.%player%.active} to 0
 			add 1 to {skeleton.%player%.active}
 			reduce player's level progress by 0.3
-			
+
+
 on left click with bone:
 	world is "kitpvpkillingfields"
-	
+
+
 	{kit.skelemancer.%player%} is true:
 		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
 			send "&cYou can not do that here. Please select an arena!" to player
@@ -906,9 +1048,12 @@ on left click with bone:
 			reduce player's level progress by {skeleton.%player%.active} / 10
 			clear {skeleton.%player%.active}
 			send "&aYou call back the dead!" to player
-		
-			
-			
+
+
+
+
+
+
 on damage of a player:
 	world is "kitpvpkillingfields"
 	attacker is a wither skeleton:
@@ -923,12 +1068,15 @@ on damage of a player:
 		{active.kit.%{_player}%} is not set:
 			stop
 		make {_player} damage victim by 4
-		
+
+
 on death of a wither skeleton:
 	world is "kitpvpkillingfields"
 	clear drops
-	
-	
+
+
+
+
 on damage of a wither skeleton:
 	world is "kitpvpkillingfields"
 	{active.kit.%attacker%} is not set:
@@ -946,10 +1094,13 @@ on damage of a wither skeleton:
 	subtract 1 from {skeleton.%{_player}%.active}
 	send "&a%{_player}%'s spawn has died to your hand." to attacker
 	delete victim
-	
+
+
 #endfold
-		
-		
+
+
+
+
 #startfold @hunter	
 on damage of a player:
 	world is "kitpvpkillingfields"
@@ -968,33 +1119,42 @@ on damage of a player:
 			set {_player} to {owner.wolf.%attacker%}
 		cancel event
 		make {owner.wolf.%{_player}%} damage victim by 8
-		
+
+
+
+
 
 
 on damage of a wolf:
-	
+
+
 	loop {hunters.wolves::*}:
 		loop-value is victim:
 			delete {hunters.wolves::%loop-index%}
 			set {_player} to {owner.wolf.%victim%}
-			
+
+
 		clear {wolf.%{_player}%}
 		{_player} is attacker:
 			send "&cWhy?!?!?!?" to {_player}
 			stop
 		send "&c&e%attacker%&c has killed your wolf :(" to {_player}
-		
-		
+
+
+
+
 command /clearwolf <player>:
 	trigger:
 		clear {wolf.%player-argument%}
 #endfold
-	
+
+
 #startfold @something-class
 on right click with wood hoe:
 	world is "kitpvpkillingfields"
 	{kit.something.%player%} is true:
 		level progress of player is greater than or equal to 0.3
+
 
 		set {loc.sheep.%player%} to location of targeted block
 		spawn 1 sheep above targeted block
@@ -1022,9 +1182,13 @@ on right click with wood hoe:
 		wait 1 second
 		create safe explosion of force 5 at block 6 meters south of {loc.sheep.%player%}
 
-		
-		
-		
+
+
+
+
+
+
+
 on death of red sheep:
 	world is "kitpvpkillingfields":
 		loop players in radius 10 of event-location:
@@ -1032,21 +1196,28 @@ on death of red sheep:
 			send "&cYeah.. a Sheep bomb" to loop-player
 		clear drops
 #endfold
-		
-		
+
+
+
+
 #startfold @earthmage-casting
+
 
 on xp spawn:
 	world is "kitpvpkillingfields"
 	cancel event
-		
+
+
+
 
 on damage of a player:
 	damage cause is suffocation:
-		world is "kitpvpvkillingfields"
+		world is "kitpvpkillingfields"
 		cancel event
-		
-		
+
+
+
+
 on damage of a zombie:
 	world is "kitpvpkillingfields"
 	{active.kit.%attacker%} is not set:
@@ -1064,7 +1235,8 @@ on damage of a zombie:
 	send "&a%{_player}%'s spawn has died to your hand." to attacker
 	subtract 1 from {zombie.%{_player}%.active}
 	delete victim
-			
+
+
 on shoot:
 	world is "kitpvpkillingfields"
 	shooter's Y coordinate is greater than {kitpvp.area}'s Y coordinate
@@ -1076,11 +1248,313 @@ every 2 seconds:
 		{kit.firemage.%loop-player%} or {kit.lightningmage.%loop-player%} or {kit.necromancer.%loop-player%} or {kit.something.%loop-player%} or {kit.skelemancer.%loop-player%} is true:
 			level progress of loop-player is less than 0.9:
 				increase loop-player's level progress by 0.05
+		{kit.alchemist.%loop-player%} is true:
+			level progress of loop-player is less than 0.9:
+				increase loop-player's level progress by 0.09
+
 			else:
 				set loop-player's level progress to 0.99
 
+
 #endfold
-				
+
+
+
+
+#startfold @alchemist... bob
+
+on right click with redstone:
+	world is "kitpvpkillingfields"
+	cancel event
+	{kit.alchemist.%player%} is true:
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.25:
+			remove redstone from player
+			remove glowstone dust from player
+			remove lapis luzuli from player
+			give player 1 rose red named "&fHigh"
+			give player 1 blaze powder named "&fLow"
+			give player 1 purple dye named "&fAOE"
+			send "&aYou are brewing an &cAttack!" to player
+			reduce player's level progress by 0.25
+
+on right click with glowstone dust:
+	world is "kitpvpkillingfields"
+	cancel event
+	{kit.alchemist.%player%} is true:
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.1:
+			remove redstone from player
+			remove glowstone dust from player
+			remove lapis luzuli from player
+			give player 1 orange dye named "&fHigh"
+			give player 1 dandelion yellow named "&fLow"
+			give player 1 lime dye named "&fAOE"
+			send "&aYou are brewing a &eHeal!" to player
+			reduce player's level progress by 0.1
+
+
+on right click with lapis luzuli:
+	world is "kitpvpkillingfields"
+	cancel event
+	{kit.alchemist.%player%} is true:
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.05:
+			remove redstone from player
+			remove glowstone dust from player
+			remove lapis luzuli from player
+			give player 1 magenta dye named "&fHigh"
+			give player 1 cactus green named "&fLow"
+			give player 1 cyan dye named "&fAOE"
+			send "&aYou are brewing a &9Debuff!" to player
+			reduce player's level progress by 0.05
+
+on right click with rose red:
+	world is "kitpvpkillingfields"
+	cancel event
+	{kit.alchemist.%player%} is true:
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.25:
+			remove rose red from player
+			remove blaze powder from player
+			remove purple dye from player
+			give player 1 redstone named "&fAttack"
+			give player 1 glowstone dust named "&fHeal"
+			give player 1 Lapis Luzuli named "&fDebuff"
+			create safe explosion with force 5 at targeted block
+			play "blaze hit" at targeted block with pitch 2
+			loop entities in radius 2 of targeted block:
+				loop-entity is not player:#this is all you ever have to do on an event intitiated by the player.
+					loop-entity is not a player:
+						make player damage loop-entity by 10 #just so you are aware... this is half health
+					{active.kit.%loop-entity%} is true:
+						make player damage loop-entity by 10 #this may be slightly different because of KDSS, otherwise would work fine.
+			send "&aYou have brewed a &cMassive Attack!" to player
+			reduce player's level progress by 0.25
+
+on right click with blaze powder:
+	world is "kitpvpkillingfields"
+	cancel event
+	{kit.alchemist.%player%} is true:
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.1:
+			remove rose red from player
+			remove blaze powder from player
+			remove purple dye from player
+			give player 1 redstone named "&fAttack"
+			give player 1 glowstone dust named "&fHeal"
+			give player 1 Lapis Luzuli named "&fDebuff"
+			create safe explosion with force 3 at targeted block
+			play "blaze hit" at targeted block with pitch 1
+			loop entities in radius 2 of targeted block:
+				loop-entity is not player:#reference to comments in above block to this same block
+					loop-entity is not a player:
+						make player damage loop-entity by 6
+					{active.kit.%loop-entity%} is true:
+						make player damage loop-entity by 6
+			send "&aYou have brewed a &cWeak Attack!" to player
+			reduce player's level progress by 0.1
+
+
+on right click with purple dye:
+	world is "kitpvpkillingfields"
+	cancel event
+	{kit.alchemist.%player%} is true:
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.05:
+			remove rose red from player
+			remove blaze powder from player
+			remove purple dye from player
+			give player 1 redstone named "&fAttack"
+			give player 1 glowstone dust named "&fHeal"
+			give player 1 Lapis Luzuli named "&fDebuff"
+			create safe explosion with force 5 at player's location
+			play "blaze hit" at player's location with pitch 1
+			loop entities in radius 8 of player's location:
+				loop-entity is not player:#reference comments two blocks up
+					loop-entity is not a player:
+						make player damage loop-entity by 5
+					{active.kit.%loop-entity%} is true:
+						make player damage loop-entity by 5
+			send "&aYou have brewed an &cAOE Attack!" to player
+			reduce player's level progress by 0.05
+
+on right click with orange dye:
+	world is "kitpvpkillingfields"
+	cancel event
+	{kit.alchemist.%player%} is true:
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.25:
+			remove orange dye from player
+			remove dandelion yellow from player
+			remove lime dye from player
+			give player 1 redstone named "&fAttack"
+			give player 1 glowstone dust named "&fHeal"
+			give player 1 Lapis Luzuli named "&fDebuff"
+			play effect "splash potion of fire resist" at targeted block#does splash potion of fire resist have its own sound?
+			loop entities in radius 2 of targeted block:#targeted block also means, anything in that can be targeted with the only limit to range being draw distance
+				{active.kit.%loop-entity%} is true:
+					add 10 to loop-entity's health#again KDSS may change something like this. Healing is new, so I do not know how it will be handled
+			send "&aYou have brewed a &eMassive Heal!" to player
+			reduce player's level progress by 0.25
+
+on right click with dandelion yellow:
+	world is "kitpvpkillingfields"
+	cancel event
+	{kit.alchemist.%player%} is true:
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.1:
+			remove orange dye from player
+			remove dandelion yellow from player
+			remove lime dye from player
+			give player 1 redstone named "&fAttack"
+			give player 1 glowstone dust named "&fHeal"
+			give player 1 Lapis Luzuli named "&fDebuff"
+			play effect "splash potion of fire resist" at targeted block
+			loop entities in radius 2 of targeted block:
+				{active.kit.%loop-entity%} is true:
+					add 6 to loop-entity's health
+			send "&aYou have brewed a &eWeak Heal!" to player
+			reduce player's level progress by 0.1
+
+on right click with lime dye:
+	world is "kitpvpkillingfields"
+	cancel event
+	{kit.alchemist.%player%} is true:
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.05:
+			remove orange dye from player
+			remove dandelion yellow from player
+			remove lime dye from player
+			give player 1 redstone named "&fAttack"
+			give player 1 glowstone dust named "&fHeal"
+			give player 1 Lapis Luzuli named "&fDebuff"
+			play effect "splash potion of fire resist" at player's location
+			loop entities in radius 8 of player's location:
+				{active.kit.%loop-entity%} is true:
+					add 5 to loop-entity's health
+			send "&aYou have brewed an &eAOE Heal!" to player
+			reduce player's level progress by 0.05
+
+on right click with magenta dye:
+	world is "kitpvpkillingfields"
+	cancel event
+	{kit.alchemist.%player%} is true:
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.25:
+			remove magenta dye from player
+			remove cactus green from player
+			remove cyan dye from player
+			give player 1 redstone named "&fAttack"
+			give player 1 glowstone dust named "&fHeal"
+			give player 1 Lapis Luzuli named "&fDebuff"
+			play effect "splash potion of night vision" at targeted block
+			loop entities in radius 2 of targeted block:
+				loop-entity is not "%player%":
+					loop-entity is not a player:
+						make player damage loop-entity by 10
+					{active.kit.%loop-entity%} is true:
+					#for all of this, I would rather do a command. And create a custom command. Otherwise, you force the loop to focus on the player for 5 seconds. Stopping the loop. I.E. If there were 3 people in the loop area, it would take 15 seconds to execute.
+					#something like:
+						#execute console command "/kpconfused create %loop-entity%"
+						#and then define /kpconfused later down the code.
+						set {confused.%loop-entity%} to true
+						send "&aYou have been &9Confused &aby &e%player% &afor 5 seconds!" to loop-entity
+											#attacker can only be used in 'on damage' events. would not apply here.
+						wait 1 second
+						send "&aYou are &9Confused &afor 4 more seconds!" to loop-entity
+						wait 1 second
+						send "&aYou are &9Confused &afor 3 more seconds!" to loop-entity
+						wait 1 second
+						send "&aYou are &9Confused &afor 2 more seconds!" to loop-entity
+						wait 1 second
+						send "&aYou are &9Confused &afor 1 more seconds!" to loop-entity
+						wait 1 second
+						send "&aYou are no longer &9Confused&a!" to loop-entity
+						set {confused.%loop-entity%} to false
+			send "&aYou have brewed a &eMassive Debuff!" to player
+			reduce player's level progress by 0.25
+
+on right click with cactus green:
+	world is "kitpvpkillingfields"
+	cancel event
+	{kit.alchemist.%player%} is true:
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.1:
+			remove magenta dye from player
+			remove cactus green from player
+			remove cyan dye from player
+			give player 1 redstone named "&fAttack"
+			give player 1 glowstone dust named "&fHeal"
+			give player 1 Lapis Luzuli named "&fDebuff"
+			play effect "splash potion of night vision" at targeted block#i will need to link you the proper effects list. its crazy.. and not as simple as that <---
+			loop entities in radius 2 of targeted block:
+				loop-entity is not "%player%":
+					{active.kit.%loop-entity%} is true:
+						apply blindness to loop-entity for 3 seconds
+			send "&aYou have brewed a &eWeak Debuff!" to player
+			reduce player's level progress by 0.1
+
+on right click with cyan dye:
+	world is "kitpvpkillingfields"
+	cancel event
+	{kit.alchemist.%player%} is true:
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.05:
+			remove magenta dye from player
+			remove cactus green from player
+			remove cyan dye from player
+			give player 1 redstone named "&fAttack"
+			give player 1 glowstone dust named "&fHeal"
+			give player 1 Lapis Luzuli named "&fDebuff"
+			play effect "splash potion of night vision" at player's location
+			loop entities in radius 10 of player:
+				loop-entity is not "%player%":
+					{active.kit.%loop-entity%} is true:
+						{kit.tank.%loop-entity%} is true:
+							  #no victim.. just loop-entity here. victim is only on damage, though i think this is copy paste error
+							send "&cYou can not slow the tank!" to player #^^^^
+							stop
+						apply slowness 5 to loop-entity for 5 seconds
+						send "&aYou have been &9Slowed &aby &e%attacker% &afor 5 seconds!" to loop-entity
+			send "&aYou have brewed an &eAOE Debuff!" to player
+			reduce player's level progress by 0.05
+
+on damage of a player:
+	world is "kitpvpkillingfields"
+		{confused.%attacker%} is true:
+			make attacker damage attacker by 5
+			send "&cStop hitting yourself!" to attacker
+			stop
+
+
+#endfold
+
+
 on death of a player:
 	world is "kitpvpkillingfields"
 	victim is a player:
@@ -1107,8 +1581,10 @@ on death of a player:
 						add 1 to {assist.%{_player}%.kp}
 						set {_cut} to {value.%victim%.kit.live} / {_size2}
 						add rounded {_cut} to {_player}'s balance
-									
-									
+
+
+
+
 		clear {last.attacker.%victim%}
 		{kit.ninja.%victim%} is true:
 			remove jump from victim
@@ -1129,7 +1605,7 @@ on death of a player:
 			set {active.kit.%victim%} to false
 			set {kit.melee.%victim%} to false
 		{kit.firemage.%victim%} is true:
-			set {kit.mage.%victim%} to false
+			set {kit.firemage.%victim%} to false
 			set {active.kit.%victim%} to false
 			remove speed from victim
 		{kit.tank.%victim%} is true:
@@ -1152,50 +1628,67 @@ on death of a player:
 		{kit.skelemancer.%victim%} is true:
 			set {kit.skelemancer.%victim%} to false
 			set {active.kit.%victim%} to false
-		clear {killstreak.%victim%}
 		{kit.fisherman.%victim%} is true:
 			set {kit.fisherman.%victim%} to false
-	
+			set {active.kit.%victim%} to false
+		{kit.alchemist.%victim%} is true:
+			set {kit.alchemist.%victim%} to false
+			set {active.kit.%victim%} to false
+			remove speed from victim
+		clear {killstreak.%victim%}
+
+
 	clear drops
 	set {kitpvp.dead.%player%} to false
 #endfold
-	
-		
-	
+
+
+
+
+
+
 every 1 second:
 	#startfold @hunger-level
 	loop all players:
 		loop-player is in world "kitpvpkillingfields":
 			set loop-player's hunger level to 10
 #endfold
-			
-			
+
+
+
+
 on drop:
 	#startfold @drop-event-cancel
 	world is "kitpvpkillingfields":
 		cancel event
 	#endfold
-	
-	
-		
+
+
+
+
+
+
 command /dm <text>:
 	#startfold @deathmessage-addition-command
 	permission: obam.admin
 	trigger:
 		add argument to {deathmessages.kitpvp::*}
 #endfold
-		
+
+
 #startfold @commands
 command /sound <text> [<integer=1>]:
 	permission: obam.admin
 	trigger:
 		play "%argument 1%" at location of player with pitch argument 2
-		
+
+
 command /headset:
 	permission: obam.admin
 	trigger:
 		set {kitpvp.area} to location of player
-		
+
+
 command /clearkit <player>:
 	executable by: console
 	trigger:
@@ -1209,7 +1702,7 @@ command /clearkit <player>:
 			set {snowball.ninja.%player-argument%} to false
 			set {active.kit.%player-argument%} to false
 			set {ninja.poof.%player-argument%} to false
-						
+
 		#subfold @archer-clear
 		{kit.archer.%player-argument%} is true:
 			remove speed from player-argument
@@ -1218,25 +1711,29 @@ command /clearkit <player>:
 			set {egg.archer.%player-argument%} to false
 			set {active.kit.%player-argument%} to false
 			set {kitpvp.dead.%player-argument%} to false
+
 		#subfold @melee-clear
 		{kit.melee.%player-argument%} is true:
 			set {snowball.melee.%player-argument%} to false
 			set {active.kit.%player-argument%} to false
-						
+
 		#subfold @firemage-clear
 		{kit.firemage.%player-argument%} is true:
 			set {kit.firemage.%player-argument%} to false
 			set {active.kit.%player-argument%} to false
 			remove speed from player-argument
+
 		#subfold @tank-clear
 		{kit.tank.%player-argument%} is true:
 			set {kit.tank.%player-argument%} to false
 			remove slowness from player-argument
 			remove health boost from player-argument
+
 		#subfold @lightningmage-clear
 		{kit.lightningmage.%player-argument%} is true:
 			set {kit.lightningmage.%player-argument%} to false
 			remove jump from player-argument
+
 		#subfold @necromancer-clear
 		{kit.necromancer.%player-argument%} is true:
 			set {kit.necromancer.%player-argument%} to false
@@ -1245,13 +1742,15 @@ command /clearkit <player>:
 				delete loop-entity
 			clear {zombie.%player-argument%.active}
 			remove speed from player-argument
-		#subfold @fishermanclear
+
+		#subfold @fisherman-clear
 		{kit.fisherman.%player-argument%} is true:
 			set {kit.fisherman.%player-argument%} to false
 		{kit.something.%player-argument%} is true:
 			remove speed from player-argument
 			set {kit.something.%player-argument%} to false
-		#subfold @skelemancerclear
+
+		#subfold @skelemancer-clear
 		{kit.skelemancer.%player-argument%} is true:
 			set {kit.skelemancer.%player-argument%} to false
 			loop all wither skeletons in world "kitpvpkillingfields":
@@ -1259,42 +1758,58 @@ command /clearkit <player>:
 				delete loop-entity
 			clear {skeleton.%player-argument%.active}
 		execute console command "effect %player-argument% clear"
+
+		#subfold @alchemist-clear
+		{kit.alchemist.%player-argument%} is true:
+			set {kit.alchemist.%player-argument%} to false
+			set {active.kit.%player-argument%} to false
+			remove speed from player-argument
+
 		clear player-argument's inventory
-		
+
+
 command /revive <player>:
 	executable by: console or players
 	permission: obam.admin.kp
 	trigger:
 		set {kitpvp.dead.%player-argument%} to false
-		
+
+
 command /mapset <text>:
 	permission: obam.admin.kp
 	trigger:
 		send "&aYou have added a spawn point for '&e%argument%&a'" to player
 		add location of player to {map.%argument%.spawns::*}
-		
-		
-		
+
+
+
+
+
+
 command /spawnplayer <player> <text>:
 	executable by: console
 	trigger:
 		set {_size} to size of {map.%argument 2%.spawns::*}
 		set {_tmp} to random integer between 1 and {_size}
 		teleport player-argument to {map.%argument 2%.spawns::%{_tmp}%}
-		
+
+
 command /clearspawn <text>:
 	permission: obam.admin.kp
 	trigger:
 		clear {map.%argument%.spawns::*}
-		
+
+
 command /kitpvp:
 	executable by: players
 	aliases: /kp
 	trigger:
 		execute console command "/mvtp %player% kitpvpkillingfields"
 #endfold
-			
+
+
 #startfold @valueexpression
+
 
 every 1 second:
 	loop all players in world "kitpvpkillingfields":
@@ -1305,21 +1820,28 @@ every 1 second:
 			set {value.%loop-player%.kit} to 100
 		set {value.%loop-player%.kit.live} to rounded {value.%loop-player%.kit}
 
-	
+
+
+
 command /tixset <player> <integer>:
 	permission: obam.admin
 	trigger:
 		set player-argument's balance to argument 2
-		
+
+
 command /motors:
 	trigger:
 		send "&6&l[&a❖&6&l] &eInsert self advertisement for &6_Motors_ &ehere!" to player
 		#Hi, Smooch :D
-		
+
+command /ob1
+	triggers:
+		send "&aYou are right, ob1bob69 is the coolest!" to player
+
+
 every 10 minutes:
 	loop projectiles in world "kitpvpkillingfields":
 		delete loop-projectile
 	loop all players:
 		loop player has permission "obam.admin":
 			send "&6&l[&a❖&6&l] &eAll projectiles have been removed from KitPvP!" to loop-player
-		
