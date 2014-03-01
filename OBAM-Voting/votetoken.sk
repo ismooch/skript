@@ -1,0 +1,44 @@
+command /votetoken [<text>] [<text>]:
+	permission: obam.admin
+	trigger:
+		argument 1 is not set:
+			send "&cCorrect usage is /votetoken <player> <service>"
+			stop
+		argument 1 is "Test":
+			argument 2 is "Notifcation":
+				loop all players:
+					loop-player's name is "ISMOOCH":
+						send "Shit" to loop-player
+						
+				stop
+		{db_votecount.%argument 1%} is not set:
+			set {db_votecount.%argument 1%} to 0
+		add 1 to {db_votecount.%argument 1%}
+		log "%argument 1%^VOTE^ADD^1^%{db_votecount.%argument 1%}%^SERVICE^%argument 2%" to "vote/VOTES.log"
+		{db_votetokens.%argument 1%} is not set:
+			set {db_votetokens.%argument 1%} to 0
+			add 1 to {db_votetokens.%argument 1%}
+			set {db_votetokens.%argument 1%.time} to now
+			set {db_votetokens.%argument 1%.lserv} to argument 2
+			log "%argument 1%^VOTETOKEN^ADD^1^SERVICE^%argument 2%" to "vote/TOKENS.log"
+			stop
+		{db_votetokens.%argument 1%} is set:
+			set {_waited} to difference between now and {db_votetokens.%argument 1%.time}
+			{_waited} is more than a day:
+				add 1 to {db_votetokens.%argument 1%}
+				set {db_votetokens.%argument 1%.time} to now
+				set {db_votetokens.%argument 1%.lserv} to argument 2
+				log "%argument 1%^VOTETOKEN^ADD^1^SERVICE^%argument 2%" to "vote/TOKENS.log"
+				stop
+			{_waited} is less than a day:
+				set {_ran} to random integer between 25 and 200
+				set {_player} to "%argument 1%" parsed as offline player
+				set {_bal} to {_player}'s balance
+				add {_ran} to {_player}'s balance
+				send "&aYou have received &e%{_ran}% Tickets &afor voting!" to {_player}
+				log "%{_player}%^%{_bal}%^ADD^%{_ran}%^%{_player}'s balance%^VOTING BONUS" to "tickets/VOTEBONUSES.log"
+					
+				
+				
+			
+		
