@@ -1,10 +1,12 @@
 command /vote [<text>] [<text>] [<text>]:
 	trigger:
 		argument 1 is not set:
+			send " "
 			send "&a------------&eOBAM Voting List!&a----------"
+			send " "
 			loop {db_obam.vote.sites::*}:
 				send "&e%loop-index%&a..........&e%loop-value%" to player
-			
+			send " "
 		argument 1 is "add":
 			player has permission "obam.admin":
 				argument 2 is not set:
@@ -25,6 +27,7 @@ command /vote [<text>] [<text>] [<text>]:
 					
 					
 		argument 1 is "delete":
+			player has permission "obam.admin"
 			argument 2 is not set:
 				send "&cProper usage: &e/vote delete [site name]" to player
 				stop
@@ -33,6 +36,10 @@ command /vote [<text>] [<text>] [<text>]:
 				stop
 			delete {obam.vote.sites::%argument 2%}
 			send "&cDeleted %argument 2%" to player
+			
+		argument 1 is "clear":
+			player has permission "obam.admin":
+				clear {db_obam.vote.sites::*}
 
 
 				
