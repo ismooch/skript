@@ -2,7 +2,6 @@
 
 command /fixit:
         executable by: players
-        aliases: /fixthispieceofshit
 		trigger:
 			player's tool is not a sword or axe or pickaxe or shovel or bow or helmet or chestplate or leggings or boots
 				message "&cYou may only repair Armour, Weapons or Tools!" to player
@@ -15,7 +14,7 @@ command /fixit:
 					stop
 			set {_level} to player's level
 				{_level} is less than 30:
-					send "&cYou do not have enough levels to do this!" to player
+					send "&cYou have not gained enough experiance to do this!" to player
 					stop
 			remove player's tool
 			
