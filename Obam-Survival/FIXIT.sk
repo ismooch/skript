@@ -14,7 +14,7 @@ command /fixit:
 					stop
 			set {_level} to player's level
 				{_level} is less than 30:
-					send "&cYou have not gained enough experiance to do this!" to player
+					send "&cYou do not have enough tickets to do this!" to player
 					stop
 			remove player's tool
 			
