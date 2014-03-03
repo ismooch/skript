@@ -9,22 +9,20 @@ command /fixit:
 			set {_c.tool} to player's tool
 
 			set {_bal} to player's balance
-				{_bal} is less than 500:
-					send "&cYou do not have enough tickets to do this!" to player
-					stop
+			{_bal} is less than 500:
+				send "&cYou do not have enough tickets to do this!" to player
+				stop
 			set {_level} to player's level
-				{_level} is less than 30:
-					send "&cYou must have at least 30 levels to do this!" to player
-					stop
-			remove player's tool
-			
-			give player {_c.tool}
+			{_level} is less  than 30:
+				send "&cYou must have at least 30 levels to do this!" to player
+				stop
+			repair player's tool
 			
 			reduce the player's level by 30	
 			
 			remove 500 from player's balance
-				send "&aYou have used &e500 Tickets&a to repair this tool" to player
-				send "&aYou have &e%player's balance%&a remaining" to player
-				stop
-				
+			send "&aYou have used &e500 Tickets&a to repair this tool" to player
+			send "&aYou have &e%player's balance%&a remaining" to player
+			stop
+		
 			log "%player%^%{_bal}%^DEDUCT^500^%player's balance%^FIXIT FEE" to "tickets/FIXIT.log"
