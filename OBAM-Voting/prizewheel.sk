@@ -14,12 +14,12 @@ command /prize [<text>] [<text>] [<text>]:
 						stop
 					send "&e%argument 2% &ahas &e%{db_votetokens.%argument 2%}%&a tokens" to player
 			{db_votetokens.%player%} is not set:
-				send "&aYou do not have any Vote Tokens!!! Please vote to receive some!" to player
+				send "&aYou do not have any Prize Tokens!!! Please vote to receive some!" to player
 				stop
 			{db_votetokens.%player%} is 0:
-				send "&aYou do not have any Vote Tokens!!! Please vote to receive some!" to player
+				send "&aYou do not have any Prize Tokens!!! Please vote to receive some!" to player
 				stop
-			send "&aYour current balance is &e%{db_votetokens.%player%}%&a Vote Tokens!" to player
+			send "&aYour current balance is &e%{db_votetokens.%player%}%&a Prize Tokens!" to player
 			stop
 		argument 1 is "spin" or "s":
 			send "&cThe prize wheel is under maintenance! You have not been charged any tokens." to player

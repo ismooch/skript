@@ -1,11 +1,19 @@
-#FTAS is short for Front Teleport Assistance System.
+#FTAS is short for Front Travel Assistance System.
 
 
 on right click on sign:
-	world is "wildtest":
-		line 1 of block is "[Front]" or "Front":
-		line 2 of block is "[Teleport]" or "Teleport":
-			set {_3.t} to "%line 3 of block%" 
-			set {_4.t} to "%line 4 of block%" 
-			make player execute command "/front teleport %{_3.t}% %{_4.t}%"
-			stop
+
+	line 1 of block is "[Front]" or "Front" or "[FRONT]"
+	line 2 of block is "[Travel]" or "Travel" or "[TRAVEL]":
+		set {_3.t} to "%line 3 of block%" 
+		set {_4.t} to "%line 4 of block%" 
+		make player execute command "/front travel %{_3.t}% %{_4.t}%"
+		stop
+			
+on sign change:
+	line 1 is "front" or "Front":
+		set line 1 to "[FRONT]"
+	line 2 is "travel" or "Travel":
+		set line 2 to "[TRAVEL]"
+		line 4 is empty:
+			set line 4 to "%event-player%"

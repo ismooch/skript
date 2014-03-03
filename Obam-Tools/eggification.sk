@@ -1,12 +1,104 @@
 options:
 	egg: snowball;&3Projeggtile Capture Ball;&6Capture the essence of various creatures||&6by tossing your balls at them.
+	egg2: snowball;&3Projeggtile Hostile Holder;&6Reinforced storage walls designed to||&6contain hostile mobs.
 	
+on script load:
+	register new shaped recipe for mooshroom spawn egg using red mushroom, red mushroom, red mushroom, red mushroom, cow spawn egg, red mushroom, red mushroom, red mushroom, red mushroom
+	register new shaped recipe for named item stack from "{@egg2}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", 64 rotten flesh, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
 on shoot:
 	projectile is snowball
 	shooter's tool is named item stack from "{@egg}":
 		set {projeggtile.%projectile%} to true
+		
+on shoot:
+	projectile is snowball
+	shooter's tool is named item stack from "{@egg2}":
+		set {projeggtile.hostile.%projectile%} to true
+		
+		
+on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
+	attacker is a player:
+		{projeggtile.hostile.%projectile%} is set:
+			if {chunk.live.%chunk at location of victim%} is not attacker:
+				{chunk.live.%chunk at location of victim%.%attacker%} is not set:
+					send "&cYou can not steal animals! D:" to attacker
+					stop
+				{chunk.live.%chunk at location of victim%.%attacker%} is false:
+					send "&cYou can not steal animals! D:" to attacker
+					stop
+			set {_player} to "%attacker%" parsed as player
+			set {_bal} to attacker's balance
+			{_bal} is less than 150:
+				send "&cYou do not have enough tickets!" to attacker
+				cancel event
+				give attacker named item stack from "{@egg2}"
+				stop
+			subtract 150 from attacker's balance
+			send "&aYou have spent &e150&a tickets on capturing a creature!" to attacker
+			log "%attacker%^%{_bal}%^DEDUCT^150^%attacker's balance%^CREATURE CAPTURE FEE - HOSTILE" to "tickets/CREATURECAPTURE.log"
 
-on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or mooshroom or sheep or horse:
+					
+			
+			victim is a zombie:
+				set {_egg} to zombie spawn egg
+				set {_mob.name} to "zombie"
+			victim is a creeper:
+				set {_egg} to creeper spawn egg
+				set {_mob.name} to "creeper"
+			victim is skeleton:
+				set {_egg} to skeleton spawn egg
+				set {_mob.name} to "skeleton"
+			victim is zombie pigman:
+				set {_egg} to zombie pigman spawn egg
+				set {_mob.name} to "zombie pigman"
+			victim is spider:
+				set {_egg} to spider spawn egg
+				set {_mob.name} to "spider"
+
+			
+			display name of victim is not set:
+				cancel event
+				attacker doesn't have space for {_egg}:
+					drop {_egg} at location of attacker
+				attacker has space for {_egg}:
+					give attacker {_egg}
+				delete victim
+				set {_top} to size of {pegg.messages.capture::*}
+				set {_ran} to random integer between 1 and {_top}
+				loop {pegg.messages.capture::*}:
+					{_loop.count} is not set:
+						set {_loop.count} to 0
+					add 1 to {_loop.count}
+					{_loop.count} is {_ran}:
+						set {_message} to "%loop-value%"
+						replace "MOB" in {_message} with "%{_mob.name}%"
+						send "&e%{_message}%" to attacker
+				stop
+			
+			cancel event
+			set {_top} to size of {pegg.messages.capture::*}
+			set {_ran} to random integer between 1 and {_top}
+			loop {pegg.messages.capture::*}:
+				{_loop.count} is not set:
+					set {_loop.count} to 0
+				add 1 to {_loop.count}
+				{_loop.count} is {_ran}:
+					set {_message} to "%loop-value%"
+					replace "MOB" in {_message} with "%display name of victim%"
+					send "&e%{_message}%" to attacker
+			attacker doesn't have space for {_egg}:
+				set {_egg} to {_egg} named "%display name of victim%"
+				drop {_egg} at location of attacker
+			attacker has space for {_egg}:
+				give attacker {_egg} named "%display name of victim%"
+			delete victim
+			stop
+		
+	
+		
+
+
+on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep or horse:
 	attacker is a player:
 		{projeggtile.%projectile%} is set:
 			if {chunk.live.%chunk at location of victim%} is not attacker:
@@ -54,6 +146,7 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or mooshr
 				set {_egg} to squid spawn egg
 				set {_mob.name} to "squid"
 			victim is cow:
+				victim is not mooshroom
 				set {_egg} to cow spawn egg
 				set {_mob.name} to "cow"
 			victim is bat:
@@ -62,7 +155,7 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or mooshr
 			victim is wolf:
 				set {_egg} to wolf spawn egg
 				set {_mob.name} to "wolf"
-			victim is mooshroom:
+			name of victim is "mooshroom":
 				set {_egg} to mooshroom spawn egg
 				set {_mob.name} to "mooshroom"
 			victim is sheep:

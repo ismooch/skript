@@ -18,8 +18,30 @@ command /votetoken [<text>] [<text>]:
 		{db_votetokens.%argument 1%} is not set:
 			set {db_votetokens.%argument 1%} to 0
 			add 1 to {db_votetokens.%argument 1%}
+			set {db_server.%argument 2%.%argument 1%} to now
+			argument 2 is "Minecraftservers.org":
+				set {db_server.minecraftserversorg.%argument 1%} to now
+			argument 2 is "MC-Serverlist.com":
+				set {db_server.mcserverlistcom.%argument 1%} to now
+			argument 2 is "mc-list.org":
+				set {db_server.mclistorg.%argument 1%} to now
+			argument 2 is "serverlistminecraft":
+				set {db_server.serverlistminecraft.%argument 1%} to now
+			argument 2 is "TopG.org":
+				set {db_server.topgorg.%argument 1%} to now
+			argument 2 is "Minestatus":
+				set {db_server.minestatus.%argument 1%} to now
+			argument 2 is "PlanetMinecraft.com":
+				set {db_server.planetminecraftcom.%argument 1%} to now
+			argument 2 is "MCSL":
+				set {db_server.mcsl.%argument 1%} to now
+			argument 2 is "Minecraft-MP.com":
+				set {db_server.minecraftmpcom.%argument 1%} to now
+			argument 2 is "minecraftservers":
+				set {db_server.minecraftservers.%argument 1%} to now
 			set {db_votetokens.%argument 1%.time} to now
 			set {db_votetokens.%argument 1%.lserv} to argument 2
+			execute console command "/alert %argument 1% just received their first &ePrize Token!"
 			log "%argument 1%^VOTETOKEN^ADD^1^SERVICE^%argument 2%" to "vote/TOKENS.log"
 			stop
 		{db_votetokens.%argument 1%} is set:
@@ -27,7 +49,30 @@ command /votetoken [<text>] [<text>]:
 			{_waited} is more than a day:
 				add 1 to {db_votetokens.%argument 1%}
 				set {db_votetokens.%argument 1%.time} to now
+				set {db_server.%argument 2%.%argument 1%} to now
 				set {db_votetokens.%argument 1%.lserv} to argument 2
+				argument 2 is "Minecraftservers.org":
+					set {db_server.minecraftserversorg.%argument 1%} to now
+				argument 2 is "MC-Serverlist.com":
+					set {db_server.mcserverlistcom.%argument 1%} to now
+				argument 2 is "mc-list.org":
+					set {db_server.mclistorg.%argument 1%} to now
+				argument 2 is "serverlistminecraft":
+					set {db_server.serverlistminecraft.%argument 1%} to now
+				argument 2 is "TopG.org":
+					set {db_server.topgorg.%argument 1%} to now
+				argument 2 is "Minestatus":
+					set {db_server.minestatus.%argument 1%} to now
+				argument 2 is "PlanetMinecraft.com":
+					set {db_server.planetminecraftcom.%argument 1%} to now
+				argument 2 is "MCSL":
+					set {db_server.mcsl.%argument 1%} to now
+				argument 2 is "Minecraft-MP.com":
+					set {db_server.minecraftmpcom.%argument 1%} to now
+				argument 2 is "minecraftservers":
+					set {db_server.minecraftservers.%argument 1%} to now
+					set {db_server.mcserverlistcom.%argument 1%} to now
+				execute console command "/alert %argument 1% just received a &eVote Token&5 by voting on %argument 2%!"
 				log "%argument 1%^VOTETOKEN^ADD^1^SERVICE^%argument 2%" to "vote/TOKENS.log"
 				stop
 			{_waited} is less than a day:
@@ -36,9 +81,37 @@ command /votetoken [<text>] [<text>]:
 				set {_bal} to {_player}'s balance
 				add {_ran} to {_player}'s balance
 				send "&aYou have received &e%{_ran}% Tickets &afor voting!" to {_player}
+				set {db_server.%argument 2%.%argument 1%} to now
+				argument 2 is "Minecraftservers.org":
+					set {db_server.minecraftserversorg.%argument 1%} to now
+				argument 2 is "MC-Serverlist.com":
+					set {db_server.mcserverlistcom.%argument 1%} to now
+				argument 2 is "mc-list.org":
+					set {db_server.mclistorg.%argument 1%} to now
+				argument 2 is "serverlistminecraft":
+					set {db_server.serverlistminecraft.%argument 1%} to now
+				argument 2 is "TopG.org":
+					set {db_server.topgorg.%argument 1%} to now
+				argument 2 is "Minestatus":
+					set {db_server.minestatus.%argument 1%} to now
+				argument 2 is "PlanetMinecraft.com":
+					set {db_server.planetminecraftcom.%argument 1%} to now
+				argument 2 is "MCSL":
+					set {db_server.mcsl.%argument 1%} to now
+				argument 2 is "Minecraft-MP.com":
+					set {db_server.minecraftmpcom.%argument 1%} to now
+				argument 2 is "minecraftservers":
+					set {db_server.minecraftservers.%argument 1%} to now
+				execute console command "/alert %argument 1% just received %{_ran}% tickets by voting on %argument 2%! Get tickets too with &e/vote&d."
 				log "%{_player}%^%{_bal}%^ADD^%{_ran}%^%{_player}'s balance%^VOTING BONUS" to "tickets/VOTEBONUSES.log"
 					
-				
+			
+
+		
+
+
+
+
 				
 			
 		

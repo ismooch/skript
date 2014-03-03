@@ -353,9 +353,9 @@ on damage:
                                         send "&cYou can not slow the tank!" to attacker
                                         stop
                                 victim has slowness:
+										victim has blindness:
+											apply wither to victim for 2 seconds
                                         apply blindness to victim for 2 seconds
-                                        victim has blindness:
-                                                apply wither to victim for 2 seconds
                                 apply slowness 2 to victim for 4 seconds
                                 chance of 10%:
                                         apply poison to victim for 8 seconds
@@ -388,12 +388,13 @@ on damage:
                 projectile is egg:
                         #subfold @archer-egg
                         {egg.archer.%attacker%} is true:
+	
                                 apply slowness 8 to victim for 2 seconds
                                 message "&cYou have been stunned by &e%attacker%&c!" to victim
                                 message "&aYou have stunned &e%victim%&a!" to attacker
                                 {kit.tank.%victim%} is true:
                                         remove slowness from victim
-                                        apply slowness 2 to victim
+                                        apply slowness 2 to victim for 999 days
                                         send "&cYou can not slow the tank." to attacker
                                 
                         #subfold @firemage-egg
