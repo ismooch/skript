@@ -79,7 +79,7 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 					wait 1 second
 					create safe explosion with force 1 at {_loc}
 					spawn zombie at {_loc}
-					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					send "&cThe strength of that Projeggtile was not rated for this Mob!" to attacker
 					add 150 to attacker's balance
 					stop
 					
@@ -92,7 +92,7 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 					wait 1 second
 					create safe explosion with force 1 at {_loc}
 					spawn creeper at {_loc}
-					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					send "&cThe strength of that Projeggtile was not rated for this Mob!" to attacker
 					add 150 to attacker's balance
 					stop
 				set {_egg} to creeper spawn egg
@@ -104,7 +104,7 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 					wait 1 second
 					create safe explosion with force 1 at {_loc}
 					spawn skeleton at {_loc}
-					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					send "&cThe strength of that Projeggtile was not rated for this Mob!" to attacker
 					add 150 to attacker's balance
 					stop
 				set {_egg} to skeleton spawn egg
@@ -117,7 +117,7 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 					create safe explosion with force 1 at {_loc}
 					spawn zombie pigman at {_loc}
 					make attacker damage victim by 1
-					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					send "&cThe strength of that Projeggtile was not rated for this Mob!" to attacker
 					add 150 to attacker's balance
 					stop
 				set {_egg} to zombie pigman spawn egg
@@ -129,7 +129,7 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 					wait 1 second
 					create safe explosion with force 1 at {_loc}
 					spawn spider at {_loc}
-					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					send "&cThe strength of that Projeggtile was not rated for this Mob!" to attacker
 					add 150 to attacker's balance
 					stop
 				set {_egg} to spider spawn egg
