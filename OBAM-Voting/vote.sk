@@ -1,0 +1,144 @@
+command /vote [<text>] [<number>] [<text>]:
+	trigger:
+	
+		argument 1 is not set:
+			send " "
+			send " "
+			send "&3&l=========================================="
+			send "&6         Vote for &lOBAM&6&fCraft" 
+			send "&3&l=========================================="
+			send "&eVote for &6&lOBAM&fCraft &eon the following server lists" 
+			send "&eto earn special prizes and win OBAM Tickets! "
+			send " "
+			send "&2&l✔&f - Voted Today  &d|  &c&lX&f - Not Voted Today"
+			send " "
+	
+			set {_waited1} to difference between now and {db_server.minecraftserversorg.%player%}
+			{_waited1} is less than 1 day:
+				set {_vote.check1} to "&a[&2&l✔&a]"
+			{_waited1} is more than 1 day:
+				set {_vote.check1} to "&a[&c&lX&a]"
+			{_waited1} is not set:
+				set {_vote.check1} to "&a[&c&lX&a]"
+			{db_server.minecraftserversorg.%player%} is not set:
+				set {_vote.check1} to "&a[&c&lX&a]"
+			send "&a01.  - %{_vote.check1}% - %{db_obam.vote.link.1}%" to player
+		
+		
+			set {_waited2} to difference between now and {db_server.mcserverlistcom.%player%}
+			{_waited2} is less than 1 day:
+				set {_vote.check2} to "&a[&2&l✔&a]"
+			{_waited2} is more than 1 day:
+				set {_vote.check2} to "&a[&c&lX&a]"
+			{_waited2} is not set:
+				set {_vote.check2} to "&a[&c&lX&a]"
+			{db_server.mcserverlistcom.%player%} is not set:
+				set {_vote.check2} to "&a[&c&lX&a]"
+			send "&a02.  - %{_vote.check2}% - %{db_obam.vote.link.2}%" to player
+		
+			set {_waited3} to difference between now and {db_server.mclistorg.%player%}
+			{_waited3} is less than 1 day:
+				set {_vote.check3} to "&a[&2&l✔&a]"
+			{_waited3} is more than 1 day:
+				set {_vote.check3} to "&a[&c&lX&a]"
+			{_waited3} is not set:
+				set {_vote.check3} to "&a[&c&lX&a]"
+			{db_server.mclistorg.%player%} is not set:
+				set {_vote.check3} to "&a[&c&lX&a]"
+			send "&a03.  - %{_vote.check3}% - %{db_obam.vote.link.3}%" to player
+		
+			set {_waited4} to difference between now and {db_server.serverlistminecraft.%player%}
+			{_waited4} is less than 1 day:
+				set {_vote.check4} to "&a[&2&l✔&a]"
+			{_waited4} is more than 1 day:
+				set {_vote.check4} to "&a[&c&lX&a]"
+			{_waited4} is not set:
+				set {_vote.check4} to "&a[&c&lX&a]"
+			{db_server.serverlistminecraft.%player%} is not set:
+				set {_vote.check4} to "&a[&c&lX&a]"
+			send "&a04.  - %{_vote.check4}% - %{db_obam.vote.link.4}%" to player
+		
+			set {_waited5} to difference between now and {db_server.topgorg.%player%}
+			{_waited5} is less than 1 day:
+				set {_vote.check5} to "&a[&2&l✔&a]"
+			{_waited5} is more than 1 day:
+				set {_vote.check5} to "&a[&c&lX&a]"
+			{_waited5} is not set:
+				set {_vote.check5} to "&a[&c&lX&a]"
+			{db_server.topgorg.%player%} is not set:
+				set {_vote.check5} to "&a[&c&lX&a]"
+			send "&a05.  - %{_vote.check5}% - %{db_obam.vote.link.5}%" to player
+		
+			set {_waited6} to difference between now and {db_server.minestatus.%player%}
+			{_waited6} is less than 1 day:
+				set {_vote.check6} to "&a[&2&l✔&a]"
+			{_waited6} is more than 1 day:
+				set {_vote.check6} to "&a[&c&lX&a]"
+			{_waited6} is not set:
+				set {_vote.check6} to "&a[&c&lX&a]"
+			{db_server.minestatus.%player%} is not set:
+				set {_vote.check6} to "&a[&c&lX&a]"
+			send "&a06.  - %{_vote.check6}% - %{db_obam.vote.link.6}%" to player
+		
+			set {_waited7} to difference between now and {db_server.planetminecraftcom.%player%}
+			{_waited7} is less than 1 day:
+				set {_vote.check7} to "&a[&2&l✔&a]"
+			{_waited7} is more than 1 day:
+				set {_vote.check7} to "&a[&c&lX&a]"
+			{_waited7} is not set:
+				set {_vote.check7} to "&a[&c&lX&a]"
+			{db_server.planetminecraftcom.%player%} is not set:
+				set {_vote.check7} to "&a[&c&lX&a]"
+			send "&a07.  - %{_vote.check7}% - %{db_obam.vote.link.7}%" to player
+		
+			set {_waited8} to difference between now and {db_server.mcsl.%player%}
+			{_waited8} is less than 1 day:
+				set {_vote.check8} to "&a[&2&l✔&a]"
+			{_waited8} is more than 1 day:
+				set {_vote.check8} to "&a[&c&lX&a]"
+			{_waited8} is not set:
+				set {_vote.check8} to "&a[&c&lX&a]"
+			{db_server.mcsl.%player%} is not set:
+				set {_vote.check8} to "&a[&c&lX&a]"
+			send "&a08.  - %{_vote.check8}% - %{db_obam.vote.link.8}%" to player
+		
+			set {_waited9} to difference between now and {db_server.minecraftmpcom.%player%}
+			{_waited9} is less than 1 day:
+				set {_vote.check9} to "&a[&2&l✔&a]"
+			{_waited9} is more than 1 day:
+				set {_vote.check9} to "&a[&c&lX&a]"
+			{_waited9} is not set:
+				set {_vote.check9} to "&a[&c&lX&a]"
+			{db_server.minecraftmpcom.%player%} is not set:
+				set {_vote.check9} to "&a[&c&lX&a]"
+			send "&a09.  - %{_vote.check9}% - %{db_obam.vote.link.9}%" to player
+		
+			set {_waited0} to difference between now and {db_server.minecraftservers.%player%}
+			{_waited0} is less than 1 day:
+				set {_vote.check0} to "&a[&2&l✔&a]"
+			{_waited0} is more than 1 day:
+				set {_vote.check0} to "&a[&c&lX&a]"
+			{_waited0} is not set:
+				set {_vote.check0} to "&a[&c&lX&a]"
+			{db_server.minecraftservers.%player%} is not set:
+				set {_vote.check0} to "&a[&c&lX&a]"
+			send "&a10.  - %{_vote.check0}% - %{db_obam.vote.link.10}%" to player
+			
+		argument 1 is "set" or "s":
+			player has permission "obam.admin"
+			set {db_obam.vote.link.%argument 2%} to argument 3
+		send " "
+		send " "
+		
+		argument 1 is "sync":
+			player has permission "obam.admin"
+			loop 10 times:
+				{_loop.count} is not set:
+					set {_loop.count} to 0
+				add 1 to {_loop.count}
+				set {db_obam.vote.link.%{_loop.count}%} to {obam.vote.link.%{_loop.count}%}
+		
+
+
+				
+		

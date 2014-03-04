@@ -8,6 +8,7 @@ command /shop [<text>]:
 	permission: obam.free
 	trigger:
 		argument is not set:
+		
 			show "s;1;{@land}" with 1 row named "&9&lFronts&9 Shop" to player
 		argument is "land":
 			player does not have permission "obam.supporter":

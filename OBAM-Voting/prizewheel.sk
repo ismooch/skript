@@ -1,0 +1,29 @@
+command /prize [<text>] [<text>] [<text>]:
+	trigger:
+		argument 1 is not set:
+			send "&cInformation needs to go here ISMOOCH!!!!!21212!@!!@!@!@" to player
+			stop
+		argument 1 is "balance" or "b":
+			argument 2 is set:
+				player has permission "obam.smod":
+					{db_votetokens.%argument 2%} is not set:
+						send "&aThis player has no tokens." to player
+						stop
+					{db_votetokens.%argument 2%} is 0:
+						send "&aThis player has no tokens." to player
+						stop
+					send "&e%argument 2% &ahas &e%{db_votetokens.%argument 2%}%&a tokens" to player
+			{db_votetokens.%player%} is not set:
+				send "&aYou do not have any Prize Tokens!!! Please vote to receive some!" to player
+				stop
+			{db_votetokens.%player%} is 0:
+				send "&aYou do not have any Prize Tokens!!! Please vote to receive some!" to player
+				stop
+			send "&aYour current balance is &e%{db_votetokens.%player%}%&a Prize Tokens!" to player
+			stop
+		argument 1 is "spin" or "s":
+			send "&cThe prize wheel is under maintenance! You have not been charged any tokens." to player
+			stop
+		
+		
+			

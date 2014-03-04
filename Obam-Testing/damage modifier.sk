@@ -1,0 +1,29 @@
+on left click on a block:
+	set {block.hold.1.%player%.orginal} to event-block type
+	set event-block to tnt
+	set {block.hold.1.%player%} to event-block
+	
+	
+on explosion:
+	loop players in radius 5 of event location:
+		{shellshock.%loop-player%} is set:
+			difference between {shellshock.%loop-player%.time} and now is less than 3 seconds
+			{shellshock.%loop-player%} is 2:
+				apply this much damage to player
+				set {shellshock.%loop-player%.time} to now
+				
+			{shellshock.%loop-player%} is 1:
+				apply this much damage to player
+				add 1 to {shellshock.%loop-player%}
+				set {shellshock.%loop-player%.time} to now
+				
+			difference between {shellshock.%loop-player%.time} and now is greater than or equal to 3 seconds:
+				clear {shellshock.%loop-player%}
+				
+		{shellshock.%loop-player%} is not set:
+			apply this much to player
+			set {shellshock.%loop-player%} to 1
+			set {shellshock.%loop-player%.time} to now
+			send "OMG IT HURTS!" to loop-player
+			
+	
