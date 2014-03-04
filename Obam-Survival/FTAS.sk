@@ -5,6 +5,7 @@ on right click on sign:
 
 	line 1 of block is "[Front]" or "Front" or "[FRONT]"
 	line 2 of block is "[Travel]" or "Travel" or "[TRAVEL]":
+		cancel event
 		set {_3.t} to "%line 3 of block%" 
 		set {_4.t} to "%line 4 of block%" 
 		make player execute command "/front travel %{_3.t}% %{_4.t}%"
