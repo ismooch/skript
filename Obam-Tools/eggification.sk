@@ -22,19 +22,19 @@ on shoot:
 	projectile is snowball
 	shooter's tool is named item stack from "{@egg2}":
 		set {projeggtile.hostile.%projectile%} to true
-		set {_egg.creeper} to true
+		set {creeper.%projectile%} to true
 	shooter's tool is named item stack from "{@egg3}":
 		set {projeggtile.hostile.%projectile%} to true
-		set {_egg.skeleton} to true
+		set {skeleton.%projectile%} to true
 	shooter's tool is named item stack from "{@egg4}":
 		set {projeggtile.hostile.%projectile%} to true
-		set {_egg.pigman} to true
+		set {pigman.%projectile%} to true
 	shooter's tool is named item stack from "{@egg5}":
 		set {projeggtile.hostile.%projectile%} to true
-		set {_egg.zombie} to true
+		set {zombie.%projectile%} to true
 	shooter's tool is named item stack from "{@egg6}":
 		set {projeggtile.hostile.%projectile%} to true
-		set {_egg.spider} to true
+		set {spider.%projectile%} to true
 
 
 on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
@@ -52,40 +52,86 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 			{_bal} is less than 150:
 				send "&cYou do not have enough tickets!" to attacker
 				cancel event
-				{_egg.creeper} is set:
+				{creeper.%projectile%} is set:
 					give attacker named item stack from "{@egg2}"
 					stop
-				{_egg.skeleton} is set:
+				{skeleton.%projectile%} is set:
 					give attacker named item stack from "{@egg3}"
 					stop
-				{_egg.pigman} is set:
+				{pigman.%projectile%} is set:
 					give attacker named item stack from "{@egg4}"
 					stop
-				{_egg.zombie} is set:
+				{zombie.%projectile%} is set:
 					give attacker named item stack from "{@egg5}"
 					stop
-				{_egg.spider} is set:
+				{spider.%projectile%} is set:
 					give attacker named item stack from "{@egg6}"
 					stop
 			subtract 150 from attacker's balance
-			send "&aYou have spent &e150&a tickets on capturing a creature!" to attacker
-			log "%attacker%^%{_bal}%^DEDUCT^150^%attacker's balance%^CREATURE CAPTURE FEE - HOSTILE" to "tickets/CREATURECAPTURE.log"
+		
 
 
 
 			victim is a zombie:
+				{zombie.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn zombie at {_loc}
+					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
+					
 				set {_egg} to zombie spawn egg
 				set {_mob.name} to "zombie"
 			victim is a creeper:
+				{creeper.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn creeper at {_loc}
+					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
 				set {_egg} to creeper spawn egg
 				set {_mob.name} to "creeper"
 			victim is skeleton:
+				{skeleton.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn skeleton at {_loc}
+					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
 				set {_egg} to skeleton spawn egg
 				set {_mob.name} to "skeleton"
 			victim is zombie pigman:
+				{pigman.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn zombie pigman at {_loc}
+					make attacker damage victim by 1
+					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
 				set {_egg} to zombie pigman spawn egg
 				set {_mob.name} to "zombie pigman"
 			victim is spider:
+				{spider.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn spider at {_loc}
+					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
 				set {_egg} to spider spawn egg
 				set {_mob.name} to "spider"
 
@@ -99,6 +145,8 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 				delete victim
 				set {_top} to size of {pegg.messages.capture::*}
 				set {_ran} to random integer between 1 and {_top}
+				send "&aYou have spent &e150&a tickets on capturing a creature!" to attacker
+				log "%attacker%^%{_bal}%^DEDUCT^150^%attacker's balance%^CREATURE CAPTURE FEE - HOSTILE" to "tickets/CREATURECAPTURE.log"
 				loop {pegg.messages.capture::*}:
 					{_loop.count} is not set:
 						set {_loop.count} to 0
@@ -112,6 +160,8 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 			cancel event
 			set {_top} to size of {pegg.messages.capture::*}
 			set {_ran} to random integer between 1 and {_top}
+			send "&aYou have spent &e150&a tickets on capturing a creature!" to attacker
+			log "%attacker%^%{_bal}%^DEDUCT^150^%attacker's balance%^CREATURE CAPTURE FEE - HOSTILE" to "tickets/CREATURECAPTURE.log"
 			loop {pegg.messages.capture::*}:
 				{_loop.count} is not set:
 					set {_loop.count} to 0
