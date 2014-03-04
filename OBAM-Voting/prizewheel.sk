@@ -1,6 +1,7 @@
 command /prize [<text>] [<text>] [<text>]:
 	trigger:
 		argument 1 is not set:
+		
 			send "&cInformation needs to go here ISMOOCH!!!!!21212!@!!@!@!@" to player
 			stop
 		argument 1 is "balance" or "b":
