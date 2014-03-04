@@ -1,21 +1,42 @@
 options:
 	egg: snowball;&3Projeggtile Capture Ball;&6Capture the essence of various creatures||&6by tossing your balls at them.
-	egg2: snowball;&3Projeggtile Hostile Holder;&6Reinforced storage walls designed to||&6contain hostile mobs.
-	
+	egg2: snowball;&3Projeggtile &2Creeper &3Ball;&6Heavily reinforced to prevent even the||&6most explosive creepers from escaping!
+	egg3: snowball;&3Projeggtile &7Skeleton &3Ball;&6An ironic prison of bones made to hold||&6a skeleton, made from its own kin!
+	egg4: snowball;&3Projeggtile &aZombie &dPigman &3Ball;&6A containment area with a nugget inside||&6to lure and keep the pigman content!
+	egg5: snowball;&3Projeggtile &aZombie &3Ball;&6Layered in flesh to make even the||&6loneliest zombie feel at home!
+	egg6: snowball;&3Projeggtile &4Spider &3Ball;&6Tangles an eight legged bugger||&6into a silky woven sack!
+
 on script load:
 	register new shaped recipe for mooshroom spawn egg using red mushroom, red mushroom, red mushroom, red mushroom, cow spawn egg, red mushroom, red mushroom, red mushroom, red mushroom
-	register new shaped recipe for named item stack from "{@egg2}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", 64 rotten flesh, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
+	register new shaped recipe for named item stack from "{@egg2}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", gunpowder, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
+	register new shaped recipe for named item stack from "{@egg3}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", bone, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
+	register new shaped recipe for named item stack from "{@egg4}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", gold nugget, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
+	register new shaped recipe for named item stack from "{@egg5}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", rotten flesh, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
+	register new shaped recipe for named item stack from "{@egg6}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", string, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
 on shoot:
 	projectile is snowball
 	shooter's tool is named item stack from "{@egg}":
 		set {projeggtile.%projectile%} to true
-		
+
 on shoot:
 	projectile is snowball
 	shooter's tool is named item stack from "{@egg2}":
 		set {projeggtile.hostile.%projectile%} to true
-		
-		
+		set {creeper.%projectile%} to true
+	shooter's tool is named item stack from "{@egg3}":
+		set {projeggtile.hostile.%projectile%} to true
+		set {skeleton.%projectile%} to true
+	shooter's tool is named item stack from "{@egg4}":
+		set {projeggtile.hostile.%projectile%} to true
+		set {pigman.%projectile%} to true
+	shooter's tool is named item stack from "{@egg5}":
+		set {projeggtile.hostile.%projectile%} to true
+		set {zombie.%projectile%} to true
+	shooter's tool is named item stack from "{@egg6}":
+		set {projeggtile.hostile.%projectile%} to true
+		set {spider.%projectile%} to true
+
+
 on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 	attacker is a player:
 		{projeggtile.hostile.%projectile%} is set:
@@ -31,31 +52,90 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 			{_bal} is less than 150:
 				send "&cYou do not have enough tickets!" to attacker
 				cancel event
-				give attacker named item stack from "{@egg2}"
-				stop
+				{creeper.%projectile%} is set:
+					give attacker named item stack from "{@egg2}"
+					stop
+				{skeleton.%projectile%} is set:
+					give attacker named item stack from "{@egg3}"
+					stop
+				{pigman.%projectile%} is set:
+					give attacker named item stack from "{@egg4}"
+					stop
+				{zombie.%projectile%} is set:
+					give attacker named item stack from "{@egg5}"
+					stop
+				{spider.%projectile%} is set:
+					give attacker named item stack from "{@egg6}"
+					stop
 			subtract 150 from attacker's balance
-			send "&aYou have spent &e150&a tickets on capturing a creature!" to attacker
-			log "%attacker%^%{_bal}%^DEDUCT^150^%attacker's balance%^CREATURE CAPTURE FEE - HOSTILE" to "tickets/CREATURECAPTURE.log"
+		
 
-					
-			
+
+
 			victim is a zombie:
+				{zombie.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn zombie at {_loc}
+					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
+					
 				set {_egg} to zombie spawn egg
 				set {_mob.name} to "zombie"
 			victim is a creeper:
+				{creeper.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn creeper at {_loc}
+					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
 				set {_egg} to creeper spawn egg
 				set {_mob.name} to "creeper"
 			victim is skeleton:
+				{skeleton.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn skeleton at {_loc}
+					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
 				set {_egg} to skeleton spawn egg
 				set {_mob.name} to "skeleton"
 			victim is zombie pigman:
+				{pigman.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn zombie pigman at {_loc}
+					make attacker damage victim by 1
+					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
 				set {_egg} to zombie pigman spawn egg
 				set {_mob.name} to "zombie pigman"
 			victim is spider:
+				{spider.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn spider at {_loc}
+					send "&cThe strentgh of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
 				set {_egg} to spider spawn egg
 				set {_mob.name} to "spider"
 
-			
+
 			display name of victim is not set:
 				cancel event
 				attacker doesn't have space for {_egg}:
@@ -65,6 +145,8 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 				delete victim
 				set {_top} to size of {pegg.messages.capture::*}
 				set {_ran} to random integer between 1 and {_top}
+				send "&aYou have spent &e150&a tickets on capturing a creature!" to attacker
+				log "%attacker%^%{_bal}%^DEDUCT^150^%attacker's balance%^CREATURE CAPTURE FEE - HOSTILE" to "tickets/CREATURECAPTURE.log"
 				loop {pegg.messages.capture::*}:
 					{_loop.count} is not set:
 						set {_loop.count} to 0
@@ -74,10 +156,12 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 						replace "MOB" in {_message} with "%{_mob.name}%"
 						send "&e%{_message}%" to attacker
 				stop
-			
+
 			cancel event
 			set {_top} to size of {pegg.messages.capture::*}
 			set {_ran} to random integer between 1 and {_top}
+			send "&aYou have spent &e150&a tickets on capturing a creature!" to attacker
+			log "%attacker%^%{_bal}%^DEDUCT^150^%attacker's balance%^CREATURE CAPTURE FEE - HOSTILE" to "tickets/CREATURECAPTURE.log"
 			loop {pegg.messages.capture::*}:
 				{_loop.count} is not set:
 					set {_loop.count} to 0
@@ -93,9 +177,9 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 				give attacker {_egg} named "%display name of victim%"
 			delete victim
 			stop
-		
-	
-		
+
+
+
 
 
 on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep or horse:
@@ -119,7 +203,7 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 				subtract 10 from attacker's balance
 				send "&aYou have spent &e10&a tickets on capturing a creature!" to attacker
 				log "%attacker%^%{_bal}%^DEDUCT^10^%attacker's balance%^CREATURE CAPTURE FEE" to "tickets/CREATURECAPTURE.log"
-				
+
 			attacker has permission "obam.plus":
 				attacker does not have permission "obam.ultimate":
 					set {_bal} to attacker's balance
@@ -131,8 +215,8 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 					remove 5 from attacker's balance
 					send "&aYou have spent &e5&a tickets on capturing a creature!" to attacker
 					log "%attacker%^%{_bal}%^DEDUCT^5^%{_player}'s balance%^CREATURE CAPTURE FEE" to "tickets/CREATURECAPTURE.log"
-					
-			
+
+
 			victim is a pig:
 				set {_egg} to pig spawn egg
 				set {_mob.name} to "pig"
@@ -164,7 +248,7 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 			victim is horse:
 				set {_egg} to horse spawn egg
 				set {_mob.name} to "horse"
-			
+
 			display name of victim is not set:
 				cancel event
 				attacker doesn't have space for {_egg}:
@@ -183,7 +267,7 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 						replace "MOB" in {_message} with "%{_mob.name}%"
 						send "&e%{_message}%" to attacker
 				stop
-			
+
 			cancel event
 			set {_top} to size of {pegg.messages.capture::*}
 			set {_ran} to random integer between 1 and {_top}
@@ -203,19 +287,19 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 			delete victim
 			stop
 
-			
+
 on death of a creeper or a zombie or a silverfish or a witch or a spider or magma cube or wither skeleton or skeleton or enderman or cave spider or slime or ghast or zombie pigman:
-	
-	
+
+
 	chance of 20%:
 		add named item stack from "{@egg}" to drops
 	clear {player.hit.%event-entity%}
-	
+
 on damage of a creeper or a zombie or a silverfish or a witch or a spider or magma cube or wither skeleton or skeleton or enderman or cave spider or slime or ghast or zombie pigman:
 	attacker is player:
 		set {player.hit.%victim%} to true
 
-			
+
 command /pegg [<text>] [<text>]:
 	permission: obam.admin
 	trigger:
@@ -238,7 +322,7 @@ command /pegg [<text>] [<text>]:
 					set {_loop.count} to 0
 				add 1 to {_loop.count}
 				send "&e%loop-index%&a.... &e%loop-value%" to player
-				
+
 		argument 1 is "add":
 			argument 2 is not set:
 				send "&cCorrect usage: &e/pegg [list|add|delete|test] [message|number]" to player
@@ -252,7 +336,7 @@ command /pegg [<text>] [<text>]:
 			send "&cDeleteing message &e%{pegg.messages.capture::%argument 2%}%&c..."
 			delete {pegg.messages.capture::%argument 2%}
 			send "&aMessage deleted!" to player
-		
+
 		argument 1 is "test":
 			argument 2 is not set:
 				send "&cCorrect usage: &e/pegg [list|add|delete|test] [message|number]" to player
@@ -260,5 +344,3 @@ command /pegg [<text>] [<text>]:
 			set {_message} to {pegg.messages.capture::%argument 2%}
 			replace "MOB" in {_message} with "OBAM"
 			send {_message} to player
-			
-			
