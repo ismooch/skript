@@ -27,14 +27,14 @@ command /bounty [<text>] [<text>]:
 		argument 1 is "list" or "l":
 			loop {bounty.list::*}:
 				set {_target} to {bounty.list::%loop-index%}
-				set {_ransom} to {bounty.%{_target}%.ran}
+				set {_ransom} to {bounty.%{_target}%}
 				set {_who} to {bounty.%{_target}%.who}
 				{_count} is not set:
 					set {_count} to 0
 				add 1 to {_count}
 				{_who} is not set:
 					set {_who} to "&cANONYMOUS"
-				send "&a%{_count}%...A ransom of &6%{_ransom}%&a diamonds has been placed on &4%{_target}%&a by &1%{_who}%&a." to player
+				send "&a%{_count}%...A bounty of &6%{_ransom}%&a diamonds has been placed on &4%{_target}%&a by &1%{_who}%&a." to player
 		argument 1 is greater than 0:
 			player does not have %argument 1% diamonds:
 				message "&c&lYou do not have that many Diamonds!" to player
@@ -46,7 +46,6 @@ command /bounty [<text>] [<text>]:
 				message "&c&l%argument 2% already has a bounty on their head of %{bounty.%argument 2%}%!" to player
 				stop
 			add %argument 2% to {bounty.list::*}
-			set {bounty.%argument 2%.ran} to %argument 1%
 			argument 3 is "anonymous" or "a":
 				set {_bal} to player's balance
 				{_bal} is less than 500:
@@ -82,11 +81,26 @@ on death of a player:
 			broadcast "&a&6%player's%&1 bounty has been claimed by &6%attacker%"
 			attacker does not have space for {bounty.%player%} diamonds:
 				drop {bounty.%player%} at location of attacker
-				send "&cADude, you dropped your loot!" to player
+				send "&cDude, you dropped your loot!" to player
 			give attacker {bounty.%player%} diamonds
 			set {bounty.%player%} to 0
 			delete {bounty.%argument 2%.who}
-			delete {bounty.%argument 2%.ran}
+			loop {bounty.list::*}:
+				if loop-value is player:
+					delete {bounty.list::%loop-index%}
+					exit loop
+			stop
+			
+command /bountyclear [<text>]:
+	permission: obam.admin
+	trigger:
+		argument 1 is not set:
+			send "&cYou must type a players name." to player
+		{bounty.%argument 1%} is 0:
+			send "&cPlayer does not have a bounty." to player
+		{bounty.%argument 1%} is greater than or euqal to 1:
+			set {bounty.%player%} to 0
+			delete {bounty.%argument 2%.who}
 			loop {bounty.list::*}:
 				if loop-value is player:
 					delete {bounty.list::%loop-index%}
