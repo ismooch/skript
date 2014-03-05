@@ -26,7 +26,7 @@ command /bounty [<text>] [<text>]:
 			message "&7 from knowing who paid the bounty but this option comes with a cost."
 		argument 1 is "list" or "l":
 			loop {bounty.list::*}:
-				set {_target} to {bounty.list::%loop-index%}
+				set {_target} to loop-index
 				set {_ransom} to {bounty.%{_target}%}
 				set {_who} to {bounty.%{_target}%.who}
 				{_count} is not set:
@@ -36,7 +36,7 @@ command /bounty [<text>] [<text>]:
 					set {_who} to "&cANONYMOUS"
 				send "&a%{_count}%...A bounty of &6%{_ransom}%&a diamonds has been placed on &4%{_target}%&a by &1%{_who}%&a." to player
 		argument 1 is greater than 0:
-			player does not have %argument 1% diamonds:
+			player does not have argument 1 diamonds:
 				message "&c&lYou do not have that many Diamonds!" to player
 				stop
 			{played.%argument 2%} is not set:
@@ -45,7 +45,7 @@ command /bounty [<text>] [<text>]:
 			{bounty.%argument 2%} is greater than or equal to 1:
 				message "&c&l%argument 2% already has a bounty on their head of %{bounty.%argument 2%}%!" to player
 				stop
-			add %argument 2% to {bounty.list::*}
+			
 			argument 3 is "anonymous" or "a":
 				set {_bal} to player's balance
 				{_bal} is less than 500:
@@ -56,14 +56,16 @@ command /bounty [<text>] [<text>]:
 				send "&aYou have &e%player's balance%&a remaining" to player
 				log "%player%^%{_bal}%^DEDUCT^500^%player's balance%^ANON FEE" to "tickets/BOUNTY.log"
 				log "%player%^%argument 2%^%argument 3%^ANON" to "Misc/BOUNTY.log"				
-				remove %argument 1% diamonds from player
-				set {bounty.%argument 2%} to %argument 1%
-				remove %argument 1% diamonds from player
+				remove argument 1 diamonds from player
+				set {bounty.%argument 2%} to argument 1
+				set {bounty.list::%argument 2%} to true
+				remove argument 1 diamonds from player
 				broadcast "&a&1An Unknown Figure has set a bounty of %{bounty.%argument 2%}% on %argument 2%"
 				stop
-			set {bounty.%argument 2%} to %argument 1%
-			remove %argument 1% diamonds from player
-			set {bounty.%argument 2%.who} to %player%
+			set {bounty.%argument 2%} to argument 1
+			remove argument 1 diamonds from player
+			set {bounty.list::%argument 2%}
+			set {bounty.%argument 2%.who} to player
 			log "%player%^%argument 2%^%argument 3%^*" to "Misc/BOUNTY.log"	
 			broadcast "&a&1%player% has set a bounty of %{bounty.%argument 2%}% on %argument 2%"
 			stop
@@ -72,37 +74,37 @@ on log in:
 	{bounty.%player%} is greater than or equal to 1:
 		{bounty.%player%.who} in not set:
 			send "&cA bounty has been set on your head by an Unknown Player" to player
+			stop
 		send "&cA bounty has been set on your head by &a%{bounty.%player%.who}%" to player
 		stop
 		
 on death of a player:
 	attacker is a player:
-		{bounty.%player%} is greater than or equal to 1:
-			broadcast "&a&6%player's%&1 bounty has been claimed by &6%attacker%"
+		{bounty.%victim%} is greater than or equal to 1:
+			broadcast "&a&6%victim%'s&1 bounty has been claimed by &6%attacker%"
 			attacker does not have space for {bounty.%player%} diamonds:
-				drop {bounty.%player%} at location of attacker
-				send "&cDude, you dropped your loot!" to player
-			give attacker {bounty.%player%} diamonds
-			set {bounty.%player%} to 0
-			delete {bounty.%argument 2%.who}
-			loop {bounty.list::*}:
-				if loop-value is player:
-					delete {bounty.list::%loop-index%}
-					exit loop
+				drop {bounty.%victim%} diamonds at location of attacker
+				send "&cDude, you dropped your loot!" to attacker
+			give attacker {bounty.%victim%} diamonds
+			set {bounty.%victim%} to 0
+			delete {bounty.%victim%.who}
+			delete {bounty.list::%victim%}
 			stop
 			
 command /bountyclear [<text>]:
 	permission: obam.admin
 	trigger:
-		argument 1 is not set:
+		argument is not set:
 			send "&cYou must type a players name." to player
-		{bounty.%argument 1%} is 0:
+		{bounty.%argument%} is 0:
 			send "&cPlayer does not have a bounty." to player
-		{bounty.%argument 1%} is greater than or equal to 1:
-			set {bounty.%player%} to 0
-			delete {bounty.%argument 2%.who}
-			loop {bounty.list::*}:
-				if loop-value is player:
-					delete {bounty.list::%loop-index%}
-					exit loop
+		{bounty.%argument%} is greater than or equal to 1:
+			set {bounty.%argument%} to 0
+			send "&cClearing &e%argument%'s &cbounty..."
+			delete {bounty.%argument%.who}
+			send "&cRemoving nametags...."
+			delete {bounty.list::%victim%}
+			send "&cTearing down posters..."
+			send "a%argument%'s bounty has been cleared!" 
+			log "%player%^STAFF ACTION^BOUNT CLEAR^%argument%" to "staff/STAFFACTION.log"
 			stop
