@@ -64,7 +64,7 @@ command /bounty [<text>] [<text>]:
 				stop
 			set {bounty.%argument 2%} to argument 1
 			remove argument 1 diamonds from player
-			set {bounty.list::%argument 2%}
+			set {bounty.list::%argument 2%} to true
 			set {bounty.%argument 2%.who} to player
 			log "%player%^%argument 2%^%argument 3%^*" to "Misc/BOUNTY.log"	
 			broadcast "&a&1%player% has set a bounty of %{bounty.%argument 2%}% on %argument 2%"
@@ -103,7 +103,7 @@ command /bountyclear [<text>]:
 			send "&cClearing &e%argument%'s &cbounty..."
 			delete {bounty.%argument%.who}
 			send "&cRemoving nametags...."
-			delete {bounty.list::%victim%}
+			delete {bounty.list::%argument%}
 			send "&cTearing down posters..."
 			send "a%argument%'s bounty has been cleared!" 
 			log "%player%^STAFF ACTION^BOUNT CLEAR^%argument%" to "staff/STAFFACTION.log"
