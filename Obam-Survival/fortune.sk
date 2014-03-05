@@ -1,0 +1,99 @@
+#The Fortune Aura will cause minerals a chance to drop extras but at the cost of notifying everyone else to your location.
+	#Parts
+		#Toggle for alerts
+		#command on/off
+		#rising chance vs. time
+		
+
+		
+command /fortune [<text>] [<text>]
+	permission: obam.free
+	description: For all Fortune Aura related commands
+	usage: &c/fortune (alerts, aura)
+	trigger:
+		argument 1 is blank:
+			send "&7You have a &6%{fortune.chance}%%&7 chance to find extra ores/gems" to player
+		argument 1 is "help" or "h":
+			message "&3--[&6&lFortune Help&3]--"
+			message "&cRequired = [] Optional = ()"
+			message "&a * /fortune"
+			message "&7 Shows you what your chance is of finding extra ores/gems"
+			message "&a * /fortune [alert] [on/off]"
+			message "&7 Turn on/off fortune alerts from other players."
+			message "&a * /fortune [aura] [on/off]"
+			message "&7 Places/removes an aura on you that will cause you"
+			message "&7 to occasionally find extra ores/gems while mining."
+		argument 1 is "alerts":
+			argument 2 is blank:
+				send "&cYou must choose &6on&c or &6off&c." to player
+			argument 2 is "on":
+				set {fortune.alert.%player%} to true
+			argument 2 is "off":
+				set {fortune.alert.%player%} to false
+		argument 1 is "aura":
+			argument 2 is blank:
+				send "&cYou must choose &6on&c or &6off&c." to player
+			argument 2 is "on":
+				{fortune.aura.%player%} is true:
+					send "&cYou already have a Fortune Aura active." to player
+				set {fortune.aura.%player%} to true
+				set {fortune.chance.%player%} to 5
+			argument 2 is "off":
+				set {fortune.aura.%player%} to false
+				set {fortune.spam.%player%} to 0
+
+every 15 minutes:
+	loop all players:
+		{fortune.aura.%player%} is true:
+		{fortune.chance.%player%} is less than 15
+			increase {fortune.chance.%player%} by 1
+			send "&7Your chances of fortune have increased!" to player
+
+on break:
+	{fortune.aura.%player%} is true:
+		block is diamond ore or emerald ore or gold ore or iron ore or lapis ore or redstone ore or coal ore or nether quartz ore:
+			{fortune.spam.%player%} is 15:
+				loop all players:
+					{fortune.alert.%loop-player%} is true:
+						broadcast "&a&1It seems %player% hit the %block% jackpot at %location of player%!"
+				set {fortune.spam.%player%} to 0
+	block is diamond ore:
+		add 1 to{fortune.spam.%player%}
+		chance of {fortune.chance.%player%}%:
+			drop 1 diamond
+			add 1 to{fortune.spam.%player%}
+	block is emerald ore:
+		add 1 to{fortune.spam.%player%}
+		chance of {fortune.chance.%player%}%:
+			drop 1 emerald
+			add 1 to{fortune.spam.%player%}
+	block is gold ore:
+		add 1 to{fortune.spam.%player%}
+		chance of {fortune.chance.%player%}%:
+			drop 1 gold ingot
+			add 1 to{fortune.spam.%player%}
+	block is iron ore:
+		add 1 to{fortune.spam.%player%}
+		chance of {fortune.chance.%player%}%:
+			drop 1 iron ingot
+			add 1 to{fortune.spam.%player%}
+	block is lapis ore:
+		add 1 to{fortune.spam.%player%}
+		chance of {fortune.chance.%player%}%:
+			drop 1 lapis
+			add 1 to{fortune.spam.%player%}
+	block is redstone ore:
+		add 1 to{fortune.spam.%player%}
+		chance of {fortune.chance.%player%}%:
+			drop 1 redstone
+			add 1 to{fortune.spam.%player%}
+	block is coal ore:
+		add 1 to{fortune.spam.%player%}
+		chance of {fortune.chance.%player%}%:
+			drop 1 coal
+			add 1 to{fortune.spam.%player%}
+	block is nether quartz ore:
+		add 1 to{fortune.spam.%player%}
+		chance of {fortune.chance.%player%}%:
+			drop 1 nether quartz
+			add 1 to{fortune.spam.%player%}
