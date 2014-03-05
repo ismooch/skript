@@ -58,6 +58,9 @@ on break:
 						broadcast "&a&1It seems %player% hit the %block% jackpot at %location of player%!"
 				set {fortune.spam.%player%} to 0
 	block is diamond ore:
+		player's tool is a pickaxe of silk touch:
+			send "&cYour fortune aura has no effect with this enchantment" to player
+			stop
 		add 1 to {fortune.spam.%player%}
 		chance of {fortune.chance.%player%}%:
 			drop 1 diamond
