@@ -68,7 +68,7 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 					give attacker named item stack from "{@egg6}"
 					stop
 			subtract 150 from attacker's balance
-		
+
 
 
 
@@ -82,7 +82,7 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 					send "&cThe strength of that Projeggtile was not rated for this Mob!" to attacker
 					add 150 to attacker's balance
 					stop
-					
+
 				set {_egg} to zombie spawn egg
 				set {_mob.name} to "zombie"
 			victim is a creeper:
@@ -161,6 +161,7 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 			set {_top} to size of {pegg.messages.capture::*}
 			set {_ran} to random integer between 1 and {_top}
 			send "&aYou have spent &e150&a tickets on capturing a creature!" to attacker
+			send "&aYou have &e%attacker's balance%&a remaining." to attacker		
 			log "%attacker%^%{_bal}%^DEDUCT^150^%attacker's balance%^CREATURE CAPTURE FEE - HOSTILE" to "tickets/CREATURECAPTURE.log"
 			loop {pegg.messages.capture::*}:
 				{_loop.count} is not set:
@@ -202,6 +203,7 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 					stop
 				subtract 10 from attacker's balance
 				send "&aYou have spent &e10&a tickets on capturing a creature!" to attacker
+				send "&aYou have &e%attacker's balance%&a remaining." to attacker	
 				log "%attacker%^%{_bal}%^DEDUCT^10^%attacker's balance%^CREATURE CAPTURE FEE" to "tickets/CREATURECAPTURE.log"
 
 			attacker has permission "obam.plus":
@@ -214,6 +216,7 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 						stop
 					remove 5 from attacker's balance
 					send "&aYou have spent &e5&a tickets on capturing a creature!" to attacker
+					send "&aYou have &e%attacker's balance%&a remaining." to attacker	
 					log "%attacker%^%{_bal}%^DEDUCT^5^%{_player}'s balance%^CREATURE CAPTURE FEE" to "tickets/CREATURECAPTURE.log"
 
 
