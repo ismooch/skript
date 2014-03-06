@@ -1,7 +1,18 @@
 command /vote [<text>] [<number>] [<text>]:
 	trigger:
 	
+		argument 1 is not "set" or "s" or "sync":
+			player has permission "obam.staff":
+				set {_player} to argument 1
+			player does not have permission "obam.staff":
+				set {_player} to player
+	
 		argument 1 is not set:
+			set {_player} to player
+		argument 1 is not "set" or "s" or "sync":
+			set {_player} to argument 1
+			
+		{_player} is set:
 			send " "
 			send " "
 			send "&3&l=========================================="
@@ -13,7 +24,7 @@ command /vote [<text>] [<number>] [<text>]:
 			send "&2&l✔&f - Voted Today  &d|  &c&lX&f - Not Voted Today"
 			send " "
 	
-			set {_waited} to difference between now and {db_server.minecraftserversorg.%player%}
+			set {_waited} to difference between now and {db_server.minecraftserversorg.%{_player}%}
 			clear {time.vote::*}
 			{_waited} is less than 1 day:
 				set {_vote.check1} to "&a[&2&l✔&a]"
@@ -23,7 +34,7 @@ command /vote [<text>] [<number>] [<text>]:
 				set {_vote.check1} to "&a[&c&lX&a]"
 				set {_message} to "Now Availible!"
 			{_waited} is less than 1 day:
-				set {_time} to {db_server.minecraftserversorg.%player%}
+				set {_time} to {db_server.minecraftserversorg.%{_player}%}
 				add 1 day to {_time}
 				set {_time} to difference between {_time} and now
 				{_time} is greater than 1 hour:
@@ -43,13 +54,13 @@ command /vote [<text>] [<number>] [<text>]:
 					set {_message} to "&In a few seconds!"
 			{_waited} is more than 1 day:
 				set {_message} to "Now available!"
-			{db_server.minecraftserversorg.%player%} is not set:
+			{db_server.minecraftserversorg.%{_player}%} is not set:
 				set {_vote.check1} to "&a[&c&lX&a]"
 			send "&a01.  - %{_vote.check1}% - %{db_obam.vote.link.1}% - %{_message}%" to player
 			clear {_message}
 		
 		
-			set {_waited} to difference between now and {db_server.mcserverlistcom.%player%}
+			set {_waited} to difference between now and {db_server.mcserverlistcom.%{_player}%}
 			clear {time.vote::*}
 			{_waited} is less than 1 day:
 				set {_vote.check2} to "&a[&2&l✔&a]"
@@ -59,7 +70,7 @@ command /vote [<text>] [<number>] [<text>]:
 				set {_vote.check2} to "&a[&c&lX&a]"
 				set {_message2} to "Now Availible!"
 			{_waited} is less than 1 day:
-				set {_time} to {db_server.mcserverlistcom.%player%}
+				set {_time} to {db_server.mcserverlistcom.%{_player}%}
 				add 1 day to {_time}
 				set {_time} to difference between {_time} and now
 				{_time} is greater than 1 hour:
@@ -80,12 +91,12 @@ command /vote [<text>] [<number>] [<text>]:
 			{_waited} is more than 1 day:
 				set {_message2} to "Now available!"
 			
-			{db_server.mcserverlistcom.%player%} is not set:
+			{db_server.mcserverlistcom.%{_player}%} is not set:
 				set {_vote.check2} to "&a[&c&lX&a]"
 			send "&a02.  - %{_vote.check2}% - %{db_obam.vote.link.2}% - %{_message2}%" to player
 			clear {_message}
 		
-			set {_waited} to difference between now and {db_server.mclistorg.%player%}
+			set {_waited} to difference between now and {db_server.mclistorg.%{_player}%}
 			clear {time.vote::*}
 			{_waited} is less than 1 day:
 				set {_vote.check3} to "&a[&2&l✔&a]"
@@ -96,10 +107,10 @@ command /vote [<text>] [<number>] [<text>]:
 				set {_vote.check3} to "&a[&c&lX&a]"
 				set {_message3} to "Now Availible!"
 			{_waited} is less than 1 day:
-				set {_time} to {db_server.mclistorg.%player%}
+				set {_time} to {db_server.mclistorg.%{_player}%}
 				add 1 day to {_time}
 				set {_time} to difference between {_time} and now
-				{_time} is greater than 1 hour:
+				{_time} is greater than or equal to 1 hour:
 					set {_time} to "%{_time}%"
 					clear {time.vote::*}
 					set {time.vote::*} to {_time} parsed as "%number% hour[s] and %integer%.%integer% minute[s]"
@@ -110,7 +121,7 @@ command /vote [<text>] [<number>] [<text>]:
 				{_time} is less than 1 hour:
 					set {_time} to "%{_time}%"
 					clear {time.vote::*}
-					set {time.vote::*} to {_time} parsed as "%number% minute[s] and %integer%.%integer% minute[s]"
+					set {time.vote::*} to {_time} parsed as "%number% minute[s] and %integer%.%integer% second[s]"
 					set {_message3} to "&eVote in &a%{time.vote::1}%m &e& &a%{time.vote::2}%s"
 				{_time} is less than 1 minute:
 					set {_message3} to "&In a few seconds!"
@@ -119,12 +130,12 @@ command /vote [<text>] [<number>] [<text>]:
 			{_message3} is not set:
 				set {_message3} to "&cERROR"
 			
-			{db_server.mclistorg.%player%} is not set:
+			{db_server.mclistorg.%{_player}%} is not set:
 				set {_vote.check3} to "&a[&c&lX&a]"
 			send "&a03.  - %{_vote.check3}% - %{db_obam.vote.link.3}% - %{_message3}%" to player
 			clear {_message}
 		
-			set {_waited} to difference between now and {db_server.serverlistminecraft.%player%}
+			set {_waited} to difference between now and {db_server.serverlistminecraft.%{_player}%}
 			clear {time.vote::*}
 			{_waited} is less than 1 day:
 				set {_vote.check4} to "&a[&2&l✔&a]"
@@ -134,7 +145,7 @@ command /vote [<text>] [<number>] [<text>]:
 				set {_vote.check4} to "&a[&c&lX&a]"
 				set {_message4} to "Now Availible!"
 			{_waited} is less than 1 day:
-				set {_time} to {db_server.serverlistminecraft.%player%}
+				set {_time} to {db_server.serverlistminecraft.%{_player}%}
 				add 1 day to {_time}
 				set {_time} to difference between {_time} and now
 				{_time} is greater than 1 hour:
@@ -155,13 +166,13 @@ command /vote [<text>] [<number>] [<text>]:
 			{_waited} is more than 1 day:
 				set {_message4} to "Now available!"
 			
-			{db_server.serverlistminecraft.%player%} is not set:
+			{db_server.serverlistminecraft.%{_player}%} is not set:
 				set {_vote.check4} to "&a[&c&lX&a]"
 			send "&a04.  - %{_vote.check4}% - %{db_obam.vote.link.4}% - %{_message4}%" to player
 			clear {_message}
 			clear {_waited}
 		
-			set {_waited} to difference between now and {db_server.topgorg.%player%}
+			set {_waited} to difference between now and {db_server.topgorg.%{_player}%}
 			clear {time.vote::*}
 			{_waited} is less than 1 day:
 				set {_vote.check5} to "&a[&2&l✔&a]"
@@ -171,7 +182,7 @@ command /vote [<text>] [<number>] [<text>]:
 				set {_vote.check5} to "&a[&c&lX&a]"
 				set {_message5} to "Now Availible!"
 			{_waited} is less than 1 day:
-				set {_time} to {db_server.topgorg.%player%}
+				set {_time} to {db_server.topgorg.%{_player}%}
 				add 1 day to {_time}
 				set {_time} to difference between {_time} and now
 				{_time} is greater than 1 hour:
@@ -192,13 +203,13 @@ command /vote [<text>] [<number>] [<text>]:
 			{_waited} is more than 1 day:
 				set {_message5} to "Now available!"
 			
-			{db_server.topgorg.%player%} is not set:
+			{db_server.topgorg.%{_player}%} is not set:
 				set {_vote.check5} to "&a[&c&lX&a]"
 			send "&a05.  - %{_vote.check5}% - %{db_obam.vote.link.5}% - %{_message5}%" to player
 			clear {_message}
 			clear {_waited}
 		
-			set {_waited} to difference between now and {db_server.minestatus.%player%}
+			set {_waited} to difference between now and {db_server.minestatus.%{_player}%}
 			clear {time.vote::*}
 			{_waited} is less than 1 day:
 				set {_vote.check6} to "&a[&2&l✔&a]"
@@ -208,7 +219,7 @@ command /vote [<text>] [<number>] [<text>]:
 				set {_vote.check6} to "&a[&c&lX&a]"
 				set {_message6} to "Now Availible!"
 			{_waited} is less than 1 day:
-				set {_time} to {db_server.minestatus.%player%}
+				set {_time} to {db_server.minestatus.%{_player}%}
 				add 1 day to {_time}
 				set {_time} to difference between {_time} and now
 				{_time} is greater than 1 hour:
@@ -229,13 +240,13 @@ command /vote [<text>] [<number>] [<text>]:
 			{_waited} is more than 1 day:
 				set {_message6} to "Now available!"
 			
-			{db_server.minestatus.%player%} is not set:
+			{db_server.minestatus.%{_player}%} is not set:
 				set {_vote.check6} to "&a[&c&lX&a]"
 			send "&a06.  - %{_vote.check6}% - %{db_obam.vote.link.6}% - %{_message6}%" to player
 			clear {_message6}
 			clear {_waited}
 		
-			set {_waited} to difference between now and {db_server.planetminecraftcom.%player%}
+			set {_waited} to difference between now and {db_server.planetminecraftcom.%{_player}%}
 			clear {time.vote::*}
 			{_waited} is less than 1 day:
 				set {_vote.check7} to "&a[&2&l✔&a]"
@@ -245,7 +256,7 @@ command /vote [<text>] [<number>] [<text>]:
 				set {_vote.check7} to "&a[&c&lX&a]"
 				set {_message7} to "Now Availible!"
 			{_waited} is less than 1 day:
-				set {_time} to {db_server.planetminecraftcom.%player%}
+				set {_time} to {db_server.planetminecraftcom.%{_player}%}
 				add 1 day to {_time}
 				set {_time} to difference between {_time} and now
 				{_time} is greater than 1 hour:
@@ -266,13 +277,13 @@ command /vote [<text>] [<number>] [<text>]:
 			{_waited} is more than 1 day:
 				set {_message7} to "Now available!"
 			
-			{db_server.planetminecraftcom.%player%} is not set:
+			{db_server.planetminecraftcom.%{_player}%} is not set:
 				set {_vote.check7} to "&a[&c&lX&a]"
 			send "&a07.  - %{_vote.check7}% - %{db_obam.vote.link.7}% - %{_message7}%" to player
 			clear {_message}
 			clear {_waited}
 		
-			set {_waited} to difference between now and {db_server.mcsl.%player%}
+			set {_waited} to difference between now and {db_server.mcsl.%{_player}%}
 			clear {time.vote::*}
 			{_waited} is less than 1 day:
 				set {_vote.check8} to "&a[&2&l✔&a]"
@@ -282,7 +293,7 @@ command /vote [<text>] [<number>] [<text>]:
 				set {_vote.check8} to "&a[&c&lX&a]"
 				set {_message8} to "Now Availible!"
 			{_waited} is less than 1 day:
-				set {_time} to {db_server.mcsl.%player%}
+				set {_time} to {db_server.mcsl.%{_player}%}
 				add 1 day to {_time}
 				set {_time} to difference between {_time} and now
 				{_time} is greater than 1 hour:
@@ -303,13 +314,13 @@ command /vote [<text>] [<number>] [<text>]:
 			{_waited} is more than 1 day:
 				set {_message8} to "Now available!"
 			
-			{db_server.mcsl.%player%} is not set:
+			{db_server.mcsl.%{_player}%} is not set:
 				set {_vote.check8} to "&a[&c&lX&a]"
 			send "&a08.  - %{_vote.check8}% - %{db_obam.vote.link.8}% - %{_message8}%" to player
 			clear {_message}
 			clear {_waited}
 		
-			set {_waited} to difference between now and {db_server.minecraftmpcom.%player%}
+			set {_waited} to difference between now and {db_server.minecraftmpcom.%{_player}%}
 			clear {time.vote::*}
 			{_waited} is less than 1 day:
 				set {_vote.check9} to "&a[&2&l✔&a]"
@@ -319,7 +330,7 @@ command /vote [<text>] [<number>] [<text>]:
 				set {_vote.check9} to "&a[&c&lX&a]"
 				set {_message9} to "Now Availible!"
 			{_waited} is less than 1 day:
-				set {_time} to {db_server.minecraftmpcom.%player%}
+				set {_time} to {db_server.minecraftmpcom.%{_player}%}
 				add 1 day to {_time}
 				set {_time} to difference between {_time} and now
 				{_time} is greater than 1 hour:
@@ -340,13 +351,13 @@ command /vote [<text>] [<number>] [<text>]:
 			{_waited} is more than 1 day:
 				set {_message9} to "Now available!"
 			
-			{db_server.minecraftmpcom.%player%} is not set:
+			{db_server.minecraftmpcom.%{_player}%} is not set:
 				set {_vote.check9} to "&a[&c&lX&a]"
 			send "&a09.  - %{_vote.check9}% - %{db_obam.vote.link.9}% - %{_message9}%" to player
 			clear {_message}
 			clear {_waited}
 		
-			set {_waited} to difference between now and {db_server.minecraftservers.%player%}
+			set {_waited} to difference between now and {db_server.minecraftservers.%{_player}%}
 			clear {time.vote::*}
 			{_waited} is less than 1 day:
 				set {_vote.check0} to "&a[&2&l✔&a]"
@@ -356,7 +367,7 @@ command /vote [<text>] [<number>] [<text>]:
 				set {_vote.check0} to "&a[&c&lX&a]"
 				set {_message0} to "Now Availible!"
 			{_waited} is less than 1 day:
-				set {_time} to {db_server.minecraftservers.%player%}
+				set {_time} to {db_server.minecraftservers.%{_player}%}
 				add 1 day to {_time}
 				set {_time} to difference between {_time} and now
 				{_time} is greater than 1 hour:
@@ -377,11 +388,12 @@ command /vote [<text>] [<number>] [<text>]:
 			{_waited} is more than 1 day:
 				set {_message0} to "Now available!"
 			
-			{db_server.minecraftservers.%player%} is not set:
+			{db_server.minecraftservers.%{_player}%} is not set:
 				set {_vote.check0} to "&a[&c&lX&a]"
 			send "&a10.  - %{_vote.check0}% - %{db_obam.vote.link.10}% - %{_message0}%" to player
 			clear {_message}
 			clear {_waited}
+
 			
 		argument 1 is "set" or "s":
 			player has permission "obam.admin"
