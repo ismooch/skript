@@ -78,7 +78,7 @@ command /votetoken [<text>] [<text>]:
 				stop
 			{_waited} is less than a day:
 				set {_ran} to random integer between 25 and 200
-				set {_player} to "%argument 1%" parsed as offline player
+				set {_player} to argument 1 parsed as offline player
 				set {_bal} to {_player}'s balance
 				add {_ran} to {_player}'s balance
 				send "&aYou have received &e%{_ran}% Tickets &afor voting!" to {_player}
@@ -103,14 +103,25 @@ command /votetoken [<text>] [<text>]:
 					set {db_server.minecraftmpcom.%argument 1%} to now
 				argument 2 is "minecraftservers":
 					set {db_server.minecraftservers.%argument 1%} to now
+				{_bal} is not set:
+					{offline.%{_player}%.ticketadd} is not set:
+						set {offline.%{_player}%.ticketadd} to 0
+					set {_bal} to {offline.%{_player}%.ticketadd}
+					add {_ran} to {offline.%{_player}%.ticketadd}
+					log "%{_player}%^%{_bal}%^ADD^%{_ran}%^%{offline.%{_player}%.ticketadd}%^VOTING BONUS - OFFLINE POOL" to "tickets/VOTEBONUSES.log"
+					execute console command "/alert %argument 1% just received %{_ran}% tickets by voting on %argument 2%! Get tickets too with &e/vote&d."
+					stop
 				execute console command "/alert %argument 1% just received %{_ran}% tickets by voting on %argument 2%! Get tickets too with &e/vote&d."
 				log "%{_player}%^%{_bal}%^ADD^%{_ran}%^%{_player}'s balance%^VOTING BONUS" to "tickets/VOTEBONUSES.log"
 					
 			
-
-		
-
-
+on join:
+	{offline.%player%.ticketadd} is set:
+		set {_bal} to player's balance
+		add {offline.%player%.ticketadd} to player's balance
+		send "&aYou have recieved &e%{offline.%player%.ticketadd}% Tickets&a, while offline!" to player
+		log "%player%^%{_bal}%^ADD^%{offline.%player%.ticketadd}%^%player's balance%^OFFLINE TICKET ADD" to "tickets/OFFLINETICKETPOOL.log"
+		clear {offline.%player%.ticketadd}
 
 
 				
