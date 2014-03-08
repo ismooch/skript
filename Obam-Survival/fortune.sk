@@ -43,11 +43,21 @@ command /fortune [<text>] [<text>]
 				set {fortune.spam.%player%} to 0
 
 every 15 minutes:
-	loop all players:
-		{fortune.aura.%player%} is true:
-		{fortune.chance.%player%} is less than 15
-			increase {fortune.chance.%player%} by 1
-			send "&7Your chances of fortune have increased!" to player
+    loop all players:
+        {fortune.aura.%player%} is true:
+        player does not have permission: "obam.plus":
+            {fortune.chance.%player%} is less than 5:
+                increase {fortune.chance.%player%} by 1
+                send "&7Your chances of fortune have increased!" to player
+        player does not have permission "obam.ultimate":
+            player has permission "obam.plus":
+                {fortune.chance.%player%} is less than 10:
+                    increase {fortune.chance.%player%} by 1
+                    send "&7Your chances of fortune have increased!" to player
+        player has permission "obam.ultimate":
+            {fortune.chance.%player%} is less than 15
+                increase {fortune.chance.%player%} by 1
+                send "&7Your chances of fortune have increased!" to player 
 
 on break:
 	{fortune.aura.%player%} is true:
@@ -57,46 +67,75 @@ on break:
 					{fortune.alert.%loop-player%} is true:
 						broadcast "&a&1It seems %player% hit the %block% jackpot at %location of player%!"
 				set {fortune.spam.%player%} to 0
-	block is diamond ore:
-		player's tool is a pickaxe of silk touch:
-			send "&cYour fortune aura has no effect with this enchantment" to player
-			stop
-		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
-			drop 1 diamond
-			add 1 to{fortune.spam.%player%}
+	 block is diamond ore:
+        add 1 to {fortune.spam.%player%}
+        chance of {fortune.chance.%player%}%:
+            player's tool is a pickaxe of silk touch:
+                send "&cYour fortune aura has no effect with this enchantment!" to player
+                stop
+            send "&aFortune favours you!" to player
+            drop 1 diamond
+            add 1 to {fortune.spam.%player%} 
 	block is emerald ore:
-		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
+        add 1 to {fortune.spam.%player%}
+        chance of {fortune.chance.%player%}%:
+            player's tool is a pickaxe of silk touch:
+                send "&cYour fortune aura has no effect with this enchantment!" to player
+                stop
+            send "&aFortune favours you!" to player
 			drop 1 emerald
 			add 1 to{fortune.spam.%player%}
 	block is gold ore:
-		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
+        add 1 to {fortune.spam.%player%}
+        chance of {fortune.chance.%player%}%:
+            player's tool is a pickaxe of silk touch:
+                send "&cYour fortune aura has no effect with this enchantment!" to player
+                stop
+            send "&aFortune favours you!" to player
 			drop 1 gold ingot
 			add 1 to{fortune.spam.%player%}
 	block is iron ore:
-		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
+        add 1 to {fortune.spam.%player%}
+        chance of {fortune.chance.%player%}%:
+            player's tool is a pickaxe of silk touch:
+                send "&cYour fortune aura has no effect with this enchantment!" to player
+                stop
+            send "&aFortune favours you!" to player
 			drop 1 iron ingot
 			add 1 to{fortune.spam.%player%}
 	block is lapis ore:
-		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
+        add 1 to {fortune.spam.%player%}
+        chance of {fortune.chance.%player%}%:
+            player's tool is a pickaxe of silk touch:
+                send "&cYour fortune aura has no effect with this enchantment!" to player
+                stop
+            send "&aFortune favours you!" to player
 			drop 1 lapis
 			add 1 to{fortune.spam.%player%}
 	block is redstone ore:
-		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
+        add 1 to {fortune.spam.%player%}
+        chance of {fortune.chance.%player%}%:
+            player's tool is a pickaxe of silk touch:
+                send "&cYour fortune aura has no effect with this enchantment!" to player
+                stop
+            send "&aFortune favours you!" to player
 			drop 1 redstone
 			add 1 to{fortune.spam.%player%}
 	block is coal ore:
-		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
+        add 1 to {fortune.spam.%player%}
+        chance of {fortune.chance.%player%}%:
+            player's tool is a pickaxe of silk touch:
+                send "&cYour fortune aura has no effect with this enchantment!" to player
+                stop
+            send "&aFortune favours you!" to player
 			drop 1 coal
 			add 1 to{fortune.spam.%player%}
 	block is nether quartz ore:
-		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
+        add 1 to {fortune.spam.%player%}
+        chance of {fortune.chance.%player%}%:
+            player's tool is a pickaxe of silk touch:
+                send "&cYour fortune aura has no effect with this enchantment!" to player
+                stop
+            send "&aFortune favours you!" to player
 			drop 1 nether quartz
 			add 1 to{fortune.spam.%player%}
