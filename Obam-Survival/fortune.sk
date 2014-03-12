@@ -4,47 +4,75 @@
 		#command on/off
 		#rising chance vs. time
 		
-
+variables:
+	{fortune.spam.%player%} = 0
 		
-command /fortune [<text>] [<text>]:
+command /aura [<text>] [<text>] [text]:
 	permission: obam.free
 	description: For all Fortune Aura related commands
 	usage: &c/fortune (alerts, aura)
 	trigger:
 		argument 1 is not set:
-			send "&7You have a &6%{fortune.chance}%%&7 chance to find extra ores/gems" to player
+			{current.aura.%player%} is not set:
+				send "&7You do not have an active aura! Use &e/aura list&7 for a list of available auras"
+				stop
+			{current.aura.%player%} is "fortune":
+				send "&7You have the &eFortune Aura&7 activated" to player
+				send "&7You have a &6%{fortune.chance.%player%}% Percent&7 chance to find extra ingots/gems" to player
 		argument 1 is "help" or "h":
-			message "&3--[&6&lFortune Help&3]--"
+			message "&3--[&6&lAura Help&3]--"
 			message "&cRequired = [] Optional = ()"
-			message "&a * /fortune"
-			message "&7 Shows you what your chance is of finding extra ores/gems"
-			message "&a * /fortune [alert] [on/off]"
-			message "&7 Turn on/off fortune alerts from other players."
-			message "&a * /fortune [aura] [on/off]"
-			message "&7 Places/removes an aura on you that will cause you"
-			message "&7 to occasionally find extra ores/gems while mining."
+			message "&a * /Aura"
+			message "&7 Shows you what information based off your aura"
+			message "&a * /aura [alerts] [on/off]"
+			message "&7 Turn on/off aura alerts from other players."
+			message "&a * /aura [aura-name] [on/off]"
+			message "&7 A mystical aura is placed on you, with a price to pay"
+			send "&a * /aura list"
+			send "&7 List the currently availible auras"
+			send " "
+			send " "
+			send "&6Developed for &7OBAMCraft &eBy: &aThe OBAM Mechanics"
+			send "&cV 1.0"
 		argument 1 is "alerts":
 			argument 2 is not set :
 				send "&cYou must choose &6on&c or &6off&c." to player
 			argument 2 is "on":
-				set {fortune.alert.%player%} to true
+				set {aura.alert.%player%} to true
+				send "&aYou have activated aura alerts" to player
 			argument 2 is "off":
-				set {fortune.alert.%player%} to false
-		argument 1 is "aura":
+				set {aura.alert.%player%} to false
+				send "&aYou have deactivated aura alerts" to player
+		argument 1 is "fortune":
 			argument 2 is not set:
 				send "&cYou must choose &6on&c or &6off&c." to player
 			argument 2 is "on":
-				{fortune.aura.%player%} is true:
+				{current.aura.%player%} is "fortune":
 					send "&cYou already have a Fortune Aura active." to player
-				set {fortune.aura.%player%} to true
-				set {fortune.chance.%player%} to 5
+					stop
+				set {current.aura.%player%} to "fortune"
+				send "&aYou have activated the &eFortune&a aura!" to player
+				set {fortune.chance.%player%} to 1
+				set {for.ran.%player%} to random number between 5 and 15
 			argument 2 is "off":
-				set {fortune.aura.%player%} to false
+				clear {current.aura.%player%}
+				send "&aYou have deactivated your fortune aura!" to player
 				set {fortune.spam.%player%} to 0
+		argument 1 is "list":
+			message "&3--[&6&lAura List&3]--"
+			send "&a Fortune Aura"
+			send "&7 This aura gives you an increasing chance to find more gems and ingots at the cost of alerting others your position"
+		argument 1 is "debug":
+			send "spam count: %{fortune.spam.%player%}%"
+			send "Fortune on: %{fortune.aura.%player%}%"
+			send "Current chance: %{fortune.chance.%player%}%"
+			send "Alert Status: %{fortune.alert.%player%}%"
 
 every 15 minutes:
 	loop all players:
-		{fortune.aura.%loop-player%} is true
+		{fortune.spam.%loop-player%} is greater than 15:
+			set {fortune.spam.%loop-player%} to 0
+		{current.aura.%loop-player%} is "fortune"
 		loop-player does not have permission "obam.plus":
 			{fortune.chance.%loop-player%} is less than 5:
 				increase {fortune.chance.%loop-player%} by 1
@@ -60,13 +88,22 @@ every 15 minutes:
 				send "&7Your chances of fortune have increased!" to loop-player 
 
 on break:
-	{fortune.aura.%player%} is true:
+	{chunk.live.%chunk at location of event-block%} is not name of player:
+		{chunk.live.%chunk at location of event-block%.%player%} is not set:
+			cancel event
+			stop
+	{fortune.spam.%player%} is greater than 16:
+		set {fortune.spam.%player%} to 0
+	{for.ran.%player%} is not set:
+		set {for.ran.%player%} to random integer between 5 and 15
+	{current.aura.%player%} is "fortune":
 		block is diamond ore or emerald ore or gold ore or iron ore or lapis ore or redstone ore or coal ore or nether quartz ore:
-			{fortune.spam.%player%} is 15:
+			{fortune.spam.%player%} is greater than {for.ran.%player%}:
 				loop all players:
-					{fortune.alert.%loop-player%} is true:
-						broadcast "&a&1It seems %player% hit the %block% jackpot at %location of player%!"
+					{aura.alert.%player%} is true:
+						send "&3&lIt seems %player% hit the %block% jackpot at %location of player%!" to loop-player
 				set {fortune.spam.%player%} to 0
+				set {for.ran.%player%} to random integer between 5 and 15
 	block is diamond ore:
 		add 1 to {fortune.spam.%player%}
 		chance of {fortune.chance.%player%}%:
@@ -91,6 +128,9 @@ on break:
 			player's tool is a pickaxe of silk touch:
 				send "&cYour fortune aura has no effect with this enchantment!" to player
 				stop
+			cancel event
+			delete event-block
+			drop 1 gold ingot
 			send "&aFortune favours you!" to player
 			drop 1 gold ingot
 			add 1 to {fortune.spam.%player%}
@@ -100,6 +140,9 @@ on break:
 			player's tool is a pickaxe of silk touch:
 				send "&cYour fortune aura has no effect with this enchantment!" to player
 				stop
+			cancel event
+			delete event-block
+			drop 1 iron ingot
 			send "&aFortune favours you!" to player
 			drop 1 iron ingot
 			add 1 to {fortune.spam.%player%}

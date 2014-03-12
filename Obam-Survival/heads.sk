@@ -1,0 +1,13 @@
+on death of a player:
+	attacker is a player:
+		add skull of victim to drops
+		
+on death of a creeper or skeleton or zombie:
+	attacker is a player:
+		chance of 2%:
+			victim is a creeper:
+				add creeper head to drops
+			victim is a skeleton:
+				add skeleton head to drops
+			victim is a zombie:
+				add zombie head to drops

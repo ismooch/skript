@@ -2,7 +2,21 @@ command /prize [<text>] [<text>] [<text>]:
 	trigger:
 		argument 1 is not set:
 		
-			send "&cInformation needs to go here ISMOOCH!!!!!21212!@!!@!@!@" to player
+			send "&a================================="
+			send "&6            OBAMCraft            "
+			send "&6            PrizeWheel         "
+			send "&a================================="
+			send " "
+			send "&e/prize balance"
+			send "&7Check your available balance of Prize Tokens"
+			send " "
+			send "&e/prize spin"
+			send "&7Spin the prize wheel! (only once every 12 hours)"
+			send " "
+			send "&e/prize"
+			send "&7Open this help menu"
+			send " "
+			send "&6Developed for &7OBAMCraft &eBy: &aThe OBAM Mechanics"
 			stop
 		argument 1 is "balance" or "b":
 			argument 2 is set:
@@ -23,8 +37,19 @@ command /prize [<text>] [<text>] [<text>]:
 			send "&aYour current balance is &e%{db_votetokens.%player%}%&a Prize Tokens!" to player
 			stop
 		argument 1 is "spin" or "s":
-			send "&cThe prize wheel is under maintenance! You have not been charged any tokens." to player
-			stop
+			{db_votetokens.%player%} is 0:
+				send "&cYou do not have any Prize Tokens! Please use &e/vote&c to get more!"
+				stop
+			{db_votetokens.%player%} is not set:
+				send "&cYou do not have any Prize Tokens! Please use &evote&c to get more!"
+				stop
+			set {_time} to difference between {db_wheel.time.%player%} and now
+			{db_wheel.time.%player%} is not set:
+				set {_time} to 12 hours
+			{_time} is less than 12 hours:
+				send "&cYou must wait &e%12 hours - {_time}% &cbefore you can spin again!"
+				stop
+			
 		
 		
 			

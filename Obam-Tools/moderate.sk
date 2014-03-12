@@ -10,14 +10,14 @@ command /kick <player> <text>:
 			strike lightning effect at player-argument
 			kick player-argument due to "&cKicked by &4%player%&c! Reason: &4Breaking the Rules"
 			broadcast "&r%player-argument%&c was kicked by &r%player%&c. Reason: Breaking the Rules"
-			log "%player-argument%^KICK^%player%^NO REASON SET" to "admin/ACTIONS.log"
+			log "%player-argument%^KICK ACTION^%player%^NO REASON SET" to "admin/ACTIONS.log"
 			stop
 		else:
 			create a safe explosion of force 1 at player-argument
 			strike lightning effect at player-argument
 			kick player-argument due to "&cKicked by &4%player%&c! Reason: &4%argument-2%"
 			broadcast "&r%player-argument%&c was kicked by &r%player%&c. Reason: %argument-2%"
-			log "%player-argument%^KICK^%player%^%argument 2%" to "admin/ACTIONS.log"
+			log "%player-argument%^KICK ACTION^%player%^%argument 2%" to "admin/ACTIONS.log"
 			stop
 			
 			
@@ -50,6 +50,8 @@ command /g <player>:
 			
 		teleport player to player-argument
 		send "&aYou have teleported to %player-argument%." to player
+		log "%player%^GO ACTION^%player-argument%^%location of player-argument%" to "admin/actions.log"
+		
 		
 command /grab <player>:
 	permission: obam.mod
@@ -57,10 +59,12 @@ command /grab <player>:
 		player-argument is player:
 			send "&cYou should not grab yourself in public!" to player
 			stop
+		set {_loc} to location of player-argument
 		teleport player-argument to player
+		
 		send "&aYou have snatched %player-argument%." to player
 		send "&aYou have been snatched by %player%!" to player-argument
-		
+		log "%player%^%location of player%^GRAB ACTION^%player-argument%^%{_loc}%" to "admin/actions.log"
 		
 command /monitor:
 	permission: obam.mod
@@ -71,19 +75,46 @@ command /monitor:
 			reveal player to all players
 			disallow player to fly
 			teleport player to {loc.mon.%player%}
+			set {tim.mon.%player%} to difference between {tim.mon.%player%} and now
 			send "&aYou are no longer in monitor mode! You have been returned to your position!"
+			log "%player%^MONITOR DISABLE ACTION^%{loc.mon.%player%}%^%{tim.mon.%player%}%" to "admin/actions.log"
 			stop
 		{monitor.%player%} is not set:
 			set {monitor.%player%} to false
 		{monitor.%player%} is false:
 			set {loc.mon.%player%} to location of player
 			set {monitor.%player%} to true
+			set {tim.mon.%player%} to now
 			hide player from all players
 			allow player to fly
 			send "&aYou are now in monitor mode!" to player
+			log "%player%^MONITOR ENABLE ACTION^%{loc.mon.%player%}%" to "admin/actions.log"
 			
 			
 every 1 second:
 	loop all players:
 		{monitor.%loop-player%} is true:
 			hide loop-player from all players
+			allow loop-player to fly
+			
+on damage of a player:
+	{monitor.%victim%} is true:
+		cancel event
+		
+on target:
+	target is a player:
+		set {_player} to target
+		{monitor.%{_player}%} is true:
+			cancel event
+		
+on pick up:
+	{monitor.%player%} is true:
+		cancel event
+		
+on right click:
+	{monitor.%player%} is true:
+		cancel event
+
+on left click:
+	{monitor.%player%} is true:
+		cancel event
