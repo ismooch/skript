@@ -248,7 +248,7 @@ command /front [<text>] [<text>] [<text>]:
 			if {chunk.live.%chunk at location of player%}  is not name of player:
 				message "&cThis is not your land!"
 				stop
-			argument 1 is "set":
+			argument 2 is "set":
 				send "&cThat is an invalid name!" to player
 				stop
 			message "&aYou have named this Front to &e%argument 2%"
@@ -287,6 +287,16 @@ command /front [<text>] [<text>] [<text>]:
 		#subfold @travel
 		argument 1 is "travel" or "t":
 			argument 3 is not set:
+				argument 2 is "set":
+					if {chunk.live.%chunk at location of player%}  is not set:
+						message "&cThis land has not been claimed."
+						stop
+					if {chunk.live.%chunk at location of player%}  is not name of player:
+						message "&cThis is not your land!"
+						stop
+					set {loc.chunks.%player%::%chunk at location of player%} to location of player
+					send "&aYour travel location for this area, has been moved" to player
+					stop
 				if {chunk.live.%chunk at location of player%}  is not set:
 					message "&cYou can only do this in &eTown&c, or on your land!"
 					stop
@@ -306,16 +316,6 @@ command /front [<text>] [<text>] [<text>]:
 				send "&cYou do not have a Front named &e%argument 2%"
 				stop
 			argument 3 is set:
-				argument 3 is "set":
-					if {chunk.live.%chunk at location of player%}  is not set:
-						message "&cThis land has not been claimed."
-						stop
-					if {chunk.live.%chunk at location of player%}  is not name of player:
-						message "&cThis is not your land!"
-						stop
-					set {loc.chunks.%player%::%chunk at location of player%} to location of player
-					send "&aYour travel location for this area, has been moved" to player
-					stop
 				if {chunk.live.%chunk at location of player%}  is not set:
 					message "&cYou can only do this in &eTown&c, or on your land!"
 					stop
