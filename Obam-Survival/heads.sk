@@ -1,6 +1,7 @@
 on death of a player:
 	attacker is a player:
-		add skull of victim to drops
+		attacker is not victim:
+			add skull of victim to drops
 		
 on death of a creeper or skeleton or zombie:
 	attacker is a player:
