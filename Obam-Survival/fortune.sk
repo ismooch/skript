@@ -3,14 +3,13 @@
 		#Toggle for alerts		
 		#command on/off
 		#rising chance vs. time
-		
+
 variables:
 	{fortune.spam.%player%} = 0
-		
+
 command /aura [<text>] [<text>] [text]:
 	permission: obam.free
-	description: For all Fortune Aura related commands
-	usage: &c/fortune (alerts, aura)
+	description: For all Aura related commands
 	trigger:
 		argument 1 is not set:
 			{current.aura.%player%} is not set:
@@ -23,13 +22,13 @@ command /aura [<text>] [<text>] [text]:
 			message "&3--[&6&lAura Help&3]--"
 			message "&cRequired = [] Optional = ()"
 			message "&a * /Aura"
-			message "&7 Shows you what information based off your aura"
+			message "&7 Shows you information regarding your current Aura."
 			message "&a * /aura [alerts] [on/off]"
 			message "&7 Turn on/off aura alerts from other players."
 			message "&a * /aura [aura-name] [on/off]"
-			message "&7 A mystical aura is placed on you, with a price to pay"
+			message "&7 A mystical aura is placed on you, with a price to pay."
 			send "&a * /aura list"
-			send "&7 List the currently availible auras"
+			send "&7 Lists the currently available auras."
 			send " "
 			send " "
 			send "&6Developed for &7OBAMCraft &eBy: &aThe OBAM Mechanics"
@@ -39,10 +38,10 @@ command /aura [<text>] [<text>] [text]:
 				send "&cYou must choose &6on&c or &6off&c." to player
 			argument 2 is "on":
 				set {aura.alert.%player%} to true
-				send "&aYou have activated aura alerts" to player
+				send "&aYou have activated aura alerts." to player
 			argument 2 is "off":
 				set {aura.alert.%player%} to false
-				send "&aYou have deactivated aura alerts" to player
+				send "&aYou have deactivated aura alerts." to player
 		argument 1 is "fortune":
 			argument 2 is not set:
 				send "&cYou must choose &6on&c or &6off&c." to player
@@ -51,17 +50,17 @@ command /aura [<text>] [<text>] [text]:
 					send "&cYou already have a Fortune Aura active." to player
 					stop
 				set {current.aura.%player%} to "fortune"
-				send "&aYou have activated the &eFortune&a aura!" to player
+				send "&aYou have activated the &eFortune&a Aura!" to player
 				set {fortune.chance.%player%} to 1
 				set {for.ran.%player%} to random number between 5 and 15
 			argument 2 is "off":
 				clear {current.aura.%player%}
-				send "&aYou have deactivated your fortune aura!" to player
+				send "&aYou have deactivated your Fortune Aura!" to player
 				set {fortune.spam.%player%} to 0
 		argument 1 is "list":
 			message "&3--[&6&lAura List&3]--"
 			send "&a Fortune Aura"
-			send "&7 This aura gives you an increasing chance to find more gems and ingots at the cost of alerting others your position"
+			send "&7 This aura gives you an increasing chance to find more gems and ingots at the cost of alerting others to your position."
 		argument 1 is "debug":
 			send "spam count: %{fortune.spam.%player%}%"
 			send "Fortune on: %{fortune.aura.%player%}%"
