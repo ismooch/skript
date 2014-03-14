@@ -49,6 +49,146 @@ command /prize [<text>] [<text>] [<text>]:
 			{_time} is less than 12 hours:
 				send "&cYou must wait &e%12 hours - {_time}% &cbefore you can spin again!"
 				stop
+			chance of 1%:
+				set {_size} to size of {db_wheel.ultrarare::*}
+				set {_ran} to random integer between 1 and {_size}
+				loop {db_wheel.ultrarare::*}:
+					{_loop.count} is not set:
+						set {_loop.count} to 0
+					add 1 to {_loop.count}
+					{_loop.count} is {_ran}:
+						set {_amount} to loop-value
+						set {_item} to loop-index
+						set {_location} to {db_wheel.ultrarare::%loop-index%::"location"}
+						{_item} is "tickets":
+							set {_bal} to player's balance
+							add {_amount} to player's balance
+							send "&aYou have received &e%{_amount}% Tickets&a as your prize"
+							log "%player%^%{_bal}%^ADD^%{_amount}%^%player's balance%^ultrarare PRIZE WHEEL WINNINGS" to "tickets/PRIZEWHEELWINNINGS.log"
+							stop
+						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is not set:
+							set {db_wheel.rewards.%player%::%{_location}%::%{_item}%} to {_amount}
+							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
+							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^ultrarare PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
+							stop
+						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is set:
+							add {_amount} to {db_wheel.rewards.%player%::%{_location}%::%{_item}%}
+							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
+							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^ultrarare PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
+							stop
+			
+			chance of 5%:
+				set {_size} to size of {db_wheel.rare::*}
+				set {_ran} to random integer between 1 and {_size}
+				loop {db_wheel.rare::*}:
+					{_loop.count} is not set:
+						set {_loop.count} to 0
+					add 1 to {_loop.count}
+					{_loop.count} is {_ran}:
+						set {_amount} to loop-value
+						set {_item} to loop-index
+						set {_location} to {db_wheel.rare::%loop-index%::"location"}
+						{_item} is "tickets":
+							set {_bal} to player's balance
+							add {_amount} to player's balance
+							send "&aYou have received &e%{_amount}% Tickets&a as your prize"
+							log "%player%^%{_bal}%^ADD^%{_amount}%^%player's balance%^rare PRIZE WHEEL WINNINGS" to "tickets/PRIZEWHEELWINNINGS.log"
+							stop
+						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is not set:
+							set {db_wheel.rewards.%player%::%{_location}%::%{_item}%} to {_amount}
+							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
+							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^rare PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
+							stop
+						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is set:
+							add {_amount} to {db_wheel.rewards.%player%::%{_location}%::%{_item}%}
+							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
+							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^rare PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
+							stop
+			
+			chance of 8%:
+				set {_size} to size of {db_wheel.semirare::*}
+				set {_ran} to random integer between 1 and {_size}
+				loop {db_wheel.semirare::*}:
+					{_loop.count} is not set:
+						set {_loop.count} to 0
+					add 1 to {_loop.count}
+					{_loop.count} is {_ran}:
+						set {_amount} to loop-value
+						set {_item} to loop-index
+						set {_location} to {db_wheel.semirare::%loop-index%::"location"}
+						{_item} is "tickets":
+							set {_bal} to player's balance
+							add {_amount} to player's balance
+							send "&aYou have received &e%{_amount}% Tickets&a as your prize"
+							log "%player%^%{_bal}%^ADD^%{_amount}%^%player's balance%^semirare PRIZE WHEEL WINNINGS" to "tickets/PRIZEWHEELWINNINGS.log"
+							stop
+						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is not set:
+							set {db_wheel.rewards.%player%::%{_location}%::%{_item}%} to {_amount}
+							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
+							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^semirare PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
+							stop
+						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is set:
+							add {_amount} to {db_wheel.rewards.%player%::%{_location}%::%{_item}%}
+							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
+							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^semirare PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
+							stop
+			
+			chance of 15%:
+				set {_size} to size of {db_wheel.uncommon::*}
+				set {_ran} to random integer between 1 and {_size}
+				loop {db_wheel.uncommon::*}:
+					{_loop.count} is not set:
+						set {_loop.count} to 0
+					add 1 to {_loop.count}
+					{_loop.count} is {_ran}:
+						set {_amount} to loop-value
+						set {_item} to loop-index
+						set {_location} to {db_wheel.uncommon::%loop-index%::"location"}
+						{_item} is "tickets":
+							set {_bal} to player's balance
+							add {_amount} to player's balance
+							send "&aYou have received &e%{_amount}% Tickets&a as your prize"
+							log "%player%^%{_bal}%^ADD^%{_amount}%^%player's balance%^uncommon PRIZE WHEEL WINNINGS" to "tickets/PRIZEWHEELWINNINGS.log"
+							stop
+						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is not set:
+							set {db_wheel.rewards.%player%::%{_location}%::%{_item}%} to {_amount}
+							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
+							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^uncommon PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
+							stop
+						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is set:
+							add {_amount} to {db_wheel.rewards.%player%::%{_location}%::%{_item}%}
+							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
+							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^uncommon PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
+							stop
+			
+			set {_size} to size of {db_wheel.common::*}
+			set {_ran} to random integer between 1 and {_size}
+			loop {db_wheel.common::*}:
+				{_loop.count} is not set:
+					set {_loop.count} to 0
+				add 1 to {_loop.count}
+				{_loop.count} is {_ran}:
+					set {_amount} to loop-value
+					set {_item} to loop-index
+					set {_location} to {db_wheel.common::%loop-index%::"location"}
+					{_item} is "tickets":
+						set {_bal} to player's balance
+						add {_amount} to player's balance
+						send "&aYou have received &e%{_amount}% Tickets&a as your prize"
+						log "%player%^%{_bal}%^ADD^%{_amount}%^%player's balance%^COMMON PRIZE WHEEL WINNINGS" to "tickets/PRIZEWHEELWINNINGS.log"
+						stop
+					{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is not set:
+						set {db_wheel.rewards.%player%::%{_location}%::%{_item}%} to {_amount}
+						send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
+						log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^COMMON PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
+						stop
+					{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is set:
+						add {_amount} to {db_wheel.rewards.%player%::%{_location}%::%{_item}%}
+						send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
+						log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^COMMON PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
+						stop
+					
+					
 			
 		
 		
