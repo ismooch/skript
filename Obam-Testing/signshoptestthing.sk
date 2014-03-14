@@ -1,0 +1,13 @@
+on sign chage:
+	set {_lookup} to line 4 of block
+	{item.alias::%{_lookup}%} is set:
+		set line 4 of block to {item.alias::%{_lookup}%}
+		stop
+	loop {item.alias::*}:
+		{item.alias::%loop-index%::%{_lookup}%} is set:
+			set line 4 of block to {item.alias::%loop-index%}
+			stop
+			
+	cancel event
+	send "&e%{_lookup}% &c is not a recognized item!" to player
+		

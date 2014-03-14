@@ -2,6 +2,11 @@ on death of a player:
 	attacker is a player:
 		attacker is not victim:
 			add skull of victim to drops
+			set {_item} to "paper;&3Death Note - &eVICTIM;&7This note shows that &eATTACKER&7 took the||&7life of &eVICTIM&7 on &eDATE EST"
+			replace "VICTIM" in {_item} with "%victim%"
+			replace "ATTACKER" in {_item} with "%attacker%"
+			replace "DATE" in {_item} with "%now%"
+			add named item stack from {_item} to drops
 		
 on death of a creeper or skeleton or zombie:
 	attacker is a player:

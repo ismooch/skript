@@ -63,9 +63,13 @@ command /aura [<text>] [<text>] [text]:
 			send "&7 This aura gives you an increasing chance to find more gems and ingots at the cost of alerting others to your position."
 		argument 1 is "debug":
 			send "spam count: %{fortune.spam.%player%}%"
-			send "Fortune on: %{fortune.aura.%player%}%"
+			send "Fortune on: %{current.aura.%player%}%"
 			send "Current chance: %{fortune.chance.%player%}%"
-			send "Alert Status: %{fortune.alert.%player%}%"
+			send "Alert Status: %{aura.alert.%player%}%"
+			{for.ran.%player%} is not set:
+				send "Random Number: &cNOT SET"
+			{for.ran.%player%} is set:
+				send "Random Number: %{for.ran.%player%}%"
 
 every 15 minutes:
 	loop all players:
@@ -99,10 +103,11 @@ on break:
 		block is diamond ore or emerald ore or gold ore or iron ore or lapis ore or redstone ore or coal ore or nether quartz ore:
 			{fortune.spam.%player%} is greater than {for.ran.%player%}:
 				loop all players:
-					{aura.alert.%player%} is true:
+					{aura.alert.%loop-player%} is true:
 						send "&3&lIt seems %player% hit the %block% jackpot at %location of player%!" to loop-player
 				set {fortune.spam.%player%} to 0
 				set {for.ran.%player%} to random integer between 5 and 15
+	{current.aura.%player%} is "fortune"
 	block is diamond ore:
 		add 1 to {fortune.spam.%player%}
 		chance of {fortune.chance.%player%}%:
