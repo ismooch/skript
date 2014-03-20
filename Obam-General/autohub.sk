@@ -1,0 +1,10 @@
+on join:
+	set {_hold} to difference between {db_time.join.%player%} and now
+	{_hold} is more than 15 minutes:
+	
+		set {db_time.join.%player%} to now
+		make player execute command "/hub"
+		
+on disconnect:
+	set {db_time.join.%player%} to now
+	

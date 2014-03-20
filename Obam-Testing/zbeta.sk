@@ -100,21 +100,30 @@ command /zbeta [<text>] [<text>] [<text>]:
 			clear {zbeta.player.list::*}
 			loop all players in world "DB":
 				loop-player's y coordinate is less than 37:
+					apply night vision to player for 999 days
 					{_loop.count} is not set:
 						set {_loop.count} to 0
 					add 1 to {_loop.count}
 					{_loop.count} is not divisible by 2:
 						teleport loop-player to {zbeta.spawn.red}
 						clear loop-player's inventory
-						give diamond sword to loop-player
 						set {zbeta.team.%loop-player%} to "red"
 						set helmet of loop-player to red wool
 					{_loop.count} is divisible by 2:
 						teleport loop-player to {zbeta.spawn.yellow}
 						clear loop-player's inventory
-						give diamond sword to loop-player
 						set {zbeta.team.%loop-player%} to "yellow"
 						set helmet of loop-player to yellow wool
+						
+		argument 1 is "status":
+			argument 2 is not set:
+				send "%{zbeta.team.%player%}%"
+				send "%{zbeta.lo.%player%}%"
+				stop
+			argument 2 is set:
+				send "%{zbeta.team.%argument 2%}%"
+				send "%{zbeta.lo.%argument 2%}%"
+				stop
 
 
 						
@@ -136,10 +145,843 @@ command /zbeta [<text>] [<text>] [<text>]:
 				set {zbeta.%argument 2%.score} to 0
 				
 			add 1 to {zbeta.%argument 2%.score}
+			{zbeta.%argument 2%.score} is 1:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to air
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to air
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to air
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to air
+				set block at location of {score.%argument 2%.14} to air
+				set block at location of {score.%argument 2%.15} to air
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to air
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to air
+				set block at location of {score.%argument 2%.20} to air
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to air
+				set block at location of {score.%argument 2%.25} to air
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+			{zbeta.%argument 2%.score} is 2:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to air
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to air
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to air
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to air
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to air
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to redstone block
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+			{zbeta.%argument 2%.score} is 3:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to air
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to air
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to air
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to air
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to air
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to air
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+			
+			{zbeta.%argument 2%.score} is 4:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to air
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to air
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to air
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to air
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to air
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to air
+				set block at location of {score.%argument 2%.25} to air
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+			{zbeta.%argument 2%.score} is 5:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to air
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to air
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to air
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to air
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to air
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 6:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to air
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to air
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to air
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to air
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to air
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to redstone block
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+			{zbeta.%argument 2%.score} is 7:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to air
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to air
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to air
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to air
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to air
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to air
+				set block at location of {score.%argument 2%.20} to air
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to air
+				set block at location of {score.%argument 2%.25} to air
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+			{zbeta.%argument 2%.score} is 8:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to air
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to air
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to air
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to air
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to redstone block
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 9:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to air
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to air
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to air
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to air
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to air
+				set block at location of {score.%argument 2%.25} to air
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+			{zbeta.%argument 2%.score} is 10:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to redstone block
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to air
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to redstone block
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 11:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to redstone block
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to air
+				set block at location of {score.%argument 2%.15} to air
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to air
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to air
+				set block at location of {score.%argument 2%.20} to air
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to air
+				set block at location of {score.%argument 2%.25} to air
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 12:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to redstone block
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to air
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to redstone block
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 13:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to redstone block
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to air
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to air
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+			{zbeta.%argument 2%.score} is 14:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to redstone block
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to air
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to air
+				set block at location of {score.%argument 2%.25} to air
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+				
+				
+			{zbeta.%argument 2%.score} is 15:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to redstone block
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to air
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 16:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to redstone block
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to air
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to redstone block
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 17:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to redstone block
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to air
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to air
+				set block at location of {score.%argument 2%.20} to air
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to air
+				set block at location of {score.%argument 2%.25} to air
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+			{zbeta.%argument 2%.score} is 18:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to redstone block
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to redstone block
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+			
+			{zbeta.%argument 2%.score} is 19:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to redstone block
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to air
+				set block at location of {score.%argument 2%.25} to air
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 20:
+				set block at location of {score.%argument 2%.1} to redstone block
+				set block at location of {score.%argument 2%.2} to redstone block
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to redstone block
+				set block at location of {score.%argument 2%.7} to redstone block
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to redstone block
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to redstone block
+				set block at location of {score.%argument 2%.12} to redstone block
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to air
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to redstone block
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 21:
+				set block at location of {score.%argument 2%.1} to redstone block
+				set block at location of {score.%argument 2%.2} to redstone block
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to redstone block
+				set block at location of {score.%argument 2%.7} to redstone block
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to redstone block
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to redstone block
+				set block at location of {score.%argument 2%.12} to redstone block
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to air
+				set block at location of {score.%argument 2%.15} to air
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to air
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to air
+				set block at location of {score.%argument 2%.20} to air
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to air
+				set block at location of {score.%argument 2%.25} to air
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 22:
+				set block at location of {score.%argument 2%.1} to redstone block
+				set block at location of {score.%argument 2%.2} to redstone block
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to redstone block
+				set block at location of {score.%argument 2%.7} to redstone block
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to redstone block
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to redstone block
+				set block at location of {score.%argument 2%.12} to redstone block
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to air
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to redstone block
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 23:
+				set block at location of {score.%argument 2%.1} to redstone block
+				set block at location of {score.%argument 2%.2} to redstone block
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to redstone block
+				set block at location of {score.%argument 2%.7} to redstone block
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to redstone block
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to redstone block
+				set block at location of {score.%argument 2%.12} to redstone block
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to air
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to air
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+			{zbeta.%argument 2%.score} is 24:
+				set block at location of {score.%argument 2%.1} to redstone block
+				set block at location of {score.%argument 2%.2} to redstone block
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to redstone block
+				set block at location of {score.%argument 2%.7} to redstone block
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to redstone block
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to redstone block
+				set block at location of {score.%argument 2%.12} to redstone block
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to air
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to air
+				set block at location of {score.%argument 2%.25} to air
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+				
+				
+			{zbeta.%argument 2%.score} is 25:
+				set block at location of {score.%argument 2%.1} to redstone block
+				set block at location of {score.%argument 2%.2} to redstone block
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to redstone block
+				set block at location of {score.%argument 2%.7} to redstone block
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to redstone block
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to redstone block
+				set block at location of {score.%argument 2%.12} to redstone block
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to air
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 26:
+				set block at location of {score.%argument 2%.1} to air
+				set block at location of {score.%argument 2%.2} to air
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to air
+				set block at location of {score.%argument 2%.7} to air
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to air
+				set block at location of {score.%argument 2%.10} to redstone block
+				set block at location of {score.%argument 2%.11} to air
+				set block at location of {score.%argument 2%.12} to air
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to air
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to redstone block
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+				
+			{zbeta.%argument 2%.score} is 27:
+				set block at location of {score.%argument 2%.1} to redstone block
+				set block at location of {score.%argument 2%.2} to redstone block
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to redstone block
+				set block at location of {score.%argument 2%.7} to redstone block
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to redstone block
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to redstone block
+				set block at location of {score.%argument 2%.12} to redstone block
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to air
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to air
+				set block at location of {score.%argument 2%.20} to air
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to air
+				set block at location of {score.%argument 2%.25} to air
+				set block at location of {score.%argument 2%.26} to redstone block
+				
+			{zbeta.%argument 2%.score} is 28:
+				set block at location of {score.%argument 2%.1} to redstone block
+				set block at location of {score.%argument 2%.2} to redstone block
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to redstone block
+				set block at location of {score.%argument 2%.7} to redstone block
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to redstone block
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to redstone block
+				set block at location of {score.%argument 2%.12} to redstone block
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to redstone block
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to redstone block
+				set block at location of {score.%argument 2%.25} to redstone block
+				set block at location of {score.%argument 2%.26} to redstone block
+			
+			{zbeta.%argument 2%.score} is 29:
+				set block at location of {score.%argument 2%.1} to redstone block
+				set block at location of {score.%argument 2%.2} to redstone block
+				set block at location of {score.%argument 2%.3} to redstone block
+				set block at location of {score.%argument 2%.4} to air
+				set block at location of {score.%argument 2%.5} to redstone block
+				set block at location of {score.%argument 2%.6} to redstone block
+				set block at location of {score.%argument 2%.7} to redstone block
+				set block at location of {score.%argument 2%.8} to redstone block
+				set block at location of {score.%argument 2%.9} to redstone block
+				set block at location of {score.%argument 2%.10} to air
+				set block at location of {score.%argument 2%.11} to redstone block
+				set block at location of {score.%argument 2%.12} to redstone block
+				set block at location of {score.%argument 2%.13} to redstone block
+				set block at location of {score.%argument 2%.14} to redstone block
+				set block at location of {score.%argument 2%.15} to redstone block
+				set block at location of {score.%argument 2%.16} to redstone block
+				set block at location of {score.%argument 2%.17} to redstone block
+				set block at location of {score.%argument 2%.18} to redstone block
+				set block at location of {score.%argument 2%.19} to redstone block
+				set block at location of {score.%argument 2%.20} to redstone block
+				set block at location of {score.%argument 2%.21} to redstone block
+				set block at location of {score.%argument 2%.22} to air
+				set block at location of {score.%argument 2%.23} to redstone block
+				set block at location of {score.%argument 2%.24} to air
+				set block at location of {score.%argument 2%.25} to air
+				set block at location of {score.%argument 2%.26} to redstone block
 			broadcast "&e%argument 2% &ateam now has &e%{zbeta.%argument 2%.score}% &apoints!"
 			{zbeta.%argument 2%.score} is greater than or equal to 30
 			execute console command "/zbeta end %argument 2%"
 			
+			
+				
+				
 		argument 1 is "deduct":
 		
 			{zbeta.%argument 2%.score} is not set:
@@ -158,10 +1000,9 @@ command /zbeta [<text>] [<text>] [<text>]:
 				delete loop-entity
 	
 		
-	
-every 1 second:
-	loop all players:
-		set loop-player's hunger level to 10	
+
+
+			
 		
 every 10 seconds:
 	loop all zombies:
@@ -197,7 +1038,23 @@ every 10 seconds:
 				set leggings of spawned zombie to iron leggings
 				set boots of spawned zombie to iron boots
 				
-				
+	
+command /lobby:
+	trigger:
+		{zbeta.game.active} is true:
+			send "&cYou can not do that during a game!" to player
+			stop
+		teleport player to {zbeta.lobby}
+		
+		
+command /score <text> <number>:
+	permission: obam.admin
+	trigger:
+		set {score.%argument 1%.%argument 2%} to location of target block
+		send "&a%location of target block% now added to spot %argument 2% for %argument 1% team." 
+		
+on xp spawn:
+	cancel event
 				
 on respawn:
 	{zbeta.game.active} is true
@@ -207,6 +1064,20 @@ on respawn:
 	{zbeta.team.%player%} is "yellow":
 		set helmet of player to yellow wool
 				
+every 1 second:
+	loop all players:
+		set loop-player's hunger level to 10
+		
+on death of a zombie:
+	clear drops
+	chance of 2%:
+		drop apple at event-location
+		
+on pickup of apple:
+	cancel event
+	delete event-entity
+	send "&aYou have been healed by the apple!" to player
+	heal the player by 4
 				
 			
 on right click on a sign:
@@ -290,28 +1161,37 @@ on right click on a sign:
 			apply speed 2 to the player for 999 days
 			set {zbeta.lo.%player%} to "BAIT"
 			
+every 1 seconds:
+	loop all players:
+		loop-player's health is less than 7:
+			set {_location} to location of block above loop-player
+			play 1 of effect "heart" with data 1 at {_location}
+			
 on damage of a player:
-	damage cause is projectile:
-		{zbeta.team.%victim%} is {zbeta.team.%shooter%}:
-			{zbeta.lo.%shooter%} is "SUPPORT":
-				shooter's tool is named item stack from "{@Supp1}":
-					add 2 to victim's health
-					send "&aYou have been healed by %shooter%" to victim
+
 	attacker is player:
-		set damage to 0
 		{zbeta.team.%attacker%} is {zbeta.team.%victim%}:
 			{zbeta.lo.%attacker%} is "SUPPORT":
-				attacker's tool is named item stack from "{@Supp1}":
-					add 2 to victim's health
-					send "&aYou have been healed by %attacker%" to victim
-					stop
 				attacker's tool is named item stack from "{@Supp2}":
-					add 3 to victim's health
+					add 7 to victim's health
 					send "&aYou have been healed by %attacker%" to victim
+					remove named item stack from "{@Supp2}" from attacker
+					stop
+				attacker's tool is not air:
+					attacker's tool is not arrow
+					victim has regeneration:
+						send "&cYou can not stack healing!" to attacker
+						cancel event
+						stop
+					send "You have healed %victim%!" to attacker
+					send "You have been healed by %attacker%" to victim
+					apply regeneration 2 to victim for 6 seconds
+					cancel event
 					stop
 			cancel event
 			send "&cYou can not hurt your own team mates!" to attacker
 			stop
+		set damage to 0
 		{zbeta.lo.%attacker%} is "Z-STABBER":
 			attacker's tool is named item stack from "{@ZStab}":
 				set {_dmg} to a random number between 0.09 to 0.12
@@ -324,7 +1204,7 @@ on damage of a player:
 			attacker's tool is not named item stack from "{@PStab}":
 				set {_dmg} to a random number between 0.1 and 0.4
 		{zbeta.lo.%attacker%} is "SUPPORT":
-			set {_dmg} to 0.025
+			set {_dmg} to 0.050
 		
 		{zbeta.lo.%attacker%} is "TANK":
 			set {_dmg} to 0.050
@@ -407,6 +1287,8 @@ on target:
 	{zbeta.lo.%{_target}%} is "BAIT":
 		apply speed 3 to event-entity for 10 seconds
 		set {zbeta.%event-entity%.speed} to true
+		
+
 		
 	
 			

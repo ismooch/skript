@@ -579,7 +579,7 @@ command /livalert <text> [<integer>]:
 			stop
 		argument 1 is "list":
 			loop {db_liv.alerts::*}:
-				send "%loop-index%......&6&l'LiV: &3%{db_liv.alerts::%loop-index%}%" to player
+				send "%loop-index%......&6&l'LiV: &3%{db_liv.alerts::%loop-index%}%"
 			stop
 		add argument 1 to {db_liv.alerts::*}
 		send "&aYou have added &6&l'LiV: &3%argument 1% &ato the alert system"
