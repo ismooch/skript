@@ -1,5 +1,4 @@
 on first join:
-	broadcast "&eEveryone Welcome &e&l%player%&e to OBAMGaming!"
-	message "&aWelcome to &eOBAMCraft&a! Here is &e1000&a Tickets for Joining!" to player
-	add 1000 to player's balance
+	broadcast "&eEveryone Welcome &e&l%player%&e to WTFronts!"
+	message "&aWelcome to &eWTFronts&a! Please feel free to comment on this open beta!" to player
 	
