@@ -8,6 +8,8 @@ on script load:
 	
 	
 	
+
+	
 on mine:
 	name of player's tool is "&cPower Pick":
 		x-coordinate of event-block is not x-coordinate of player:

@@ -251,6 +251,9 @@ command /front [<text>] [<text>] [<text>]:
 			argument 2 is "set":
 				send "&cThat is an invalid name!" to player
 				stop
+			argument 2 is not set:
+				send "&cPlease choose a name!" to player
+				stop
 			message "&aYou have named this Front to &e%argument 2%"
 			set {chunk.name.%chunk at location of player%} to "%argument 2%"
 			add {chunk.name.%chunk at location of player%} to {name.list.%player%::*}
@@ -266,6 +269,9 @@ command /front [<text>] [<text>] [<text>]:
 					{_count} is not set:
 						set {_count} to 0
 					add 1 to {_count}
+					{chunk.name.%{_chunk}%} is not set:
+						set {chunk.name.%{_chunk}%} to "%{_count}%"
+					set {_chunk.name} to {chunk.name.%{_chunk}%}
 					{_chunk.name} is not set:
 						set {_chunk.name} to "&cNot Named"
 					send "&a%{_count}%.......%{_chunk}%....%{_chunk.name}%" to player
