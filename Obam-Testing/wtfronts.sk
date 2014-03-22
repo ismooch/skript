@@ -8,8 +8,8 @@ options:
 	stableele: slimeball;&3Stable Element;&6Stable plasma like element used to enhance other||&6items in special ways.|| ||&5&oThe goo feels nice and warm as it slides through||&5&oyour fingers.
 	envradar: compass;&3Environmental Radar;&6A must have tool for always being in the know about||&6the dangerous environment around you.|| ||&c-1 Elemental Fuel per use|| ||&5&oRight click with radar in hand to get the environmental||&5&ostatistics of the land you’re standing on.
 	elefuel: coal item;&3Elemental Fuel;&6The universal fuel used to power most of the tools||&6and machines created with &3Energized Metal Bars.
-	fairydust: sugar;&3Fairy Dust;&6This mysterious dust is filled special properties that||&6nobody quite understands. Rumor is the dust||&6when combined with the right items or situations||&6can yield interesting results.
-	stable: 174;&3Stabilizer;&6The stabilizer contains the perfect elemental makeup||&6to bring unstable energies down to usable levels.|| ||&5&oSurround the Stabilizer in a crafting table with items||&5&othat contain unstable energy.
+	fairydust: sugar;&3Fairy Dust;&6This mysterious dust is filled with special properties||&6that nobody quite understands. Rumor is the dust||&6when combined with the right items or situations can||&6yield interesting results.
+	stable: packed ice;&3Stabilizer;&6The stabilizer contains the perfect elemental makeup||&6to bring unstable energies down to usable levels.|| ||&5&oSurround the Stabilizer in a crafting table with items||&5&othat contain unstable energy.
 	
 	
 	
@@ -33,6 +33,8 @@ on join:
 	display board named "&9&lWTF&9ronts" to player
 	make score "&3Thirst" in board of player to {thirst.%player%}
 	set {board.%player%} to true
+	{injured.%player%} is true:
+		make score "&cINJURED" in board of player to 0
 	move display of player to "sidebar"
 			
 on chunk load:
@@ -113,8 +115,13 @@ on mine:
 				send "&cMethane!" to loop-player
 			wait 2 seconds
 			create explosion of force 2 at event-location
+			chance of {methane.%chunk at location of player%.chance}%:
+				wait 2 seconds
+				drop named item stack from "{@unstele}" at event-location
+				chance of {methane.%chunk at location of player%.chance}%:
+					drop named item stack from "{@unstmetal}" at event-location
 		
-	chance of 5%:
+	chance of {cavein.%chunk at location of player%.chance}%:
 		loop blocks in radius 3:
 			loop-block is water
 			set {_found.water} to true
@@ -196,8 +203,11 @@ every 3 seconds:
 			make score "&3Thirst" in board of loop-player to {thirst.%loop-player%}
 		
 		block above loop-player is water:
-			set {_ran} to random number between 1 and 2
-			add {_ran} to {thirst.%loop-player%}
+			{thirst.%loop-player%} is less than 100:
+				set {_ran} to random number between 1 and 2
+				add {_ran} to {thirst.%loop-player%}
+				{thirst.%loop-player%} is greater than 100:
+					set {thirst.%loop-player%} to 100
 			
 		{thirst.%loop-player%} is not set:
 			set {thirst.%loop-player%} to 100
@@ -233,7 +243,7 @@ every 3 seconds:
 		{injured.%loop-player%} is true:
 			chance of 10%:
 				set {_location} to location of loop-player
-				play 1 of effect "angryVillager" of data 1 at {_location}
+				play 1 of effect "spell" with data 1 at {_location}
 				damage loop-player by 0.5
 				{injured.%loop-player%.length} is not set:
 					set {injured.%loop-player%.length} to 0
@@ -253,65 +263,67 @@ every 3 seconds:
 					
 on spawn of a creeper or a skeleton or a spider or zombie:
 	{unstable.%chunk at event-location%} is true:
-		chance of 20%:
-			cancel event
-			event-entity is a creeper:
-				spawn creeper at {_loc}
-				set name of spawned entity to "&cUnstable Spawn"
-				apply resistance 2 to spawned creeper for 999 days
-				apply speed to spawned creeper for 999 days
-				set {unstable.%spawned entity%} to true
-				spawn creeper at {_loc}
-				set name of spawned entity to "&cUnstable Spawn"
-				apply resistance 2 to spawned creeper for 999 days
-				apply speed to spawned creeper for 999 days
-				set {unstable.%spawned entity%} to true
-			event-entity is a zombie:
-				spawn zombie at {_loc}
-				set name of spawned entity to "&cUnstable Spawn"
-				apply resistance 2 to spawned entity for 999 days
-				apply speed to spawned entity for 999 days
-				equip spawned entity with iron sword of sharpness
-				set spawned entity's helmet to iron helmet
-				set {unstable.%spawned entity%} to true
-				spawn zombie at {_loc}
-				set name of spawned entity to "&cUnstable Spawn"
-				apply resistance 2 to spawned entity for 999 days
-				apply speed to spawned entity for 999 days
-				equip spawned entity with iron sword of sharpness
-				set spawned entity's helmet to iron helmet
-				set {unstable.%spawned entity%} to true
-			event-entity is skeleton:
-				spawn skeleton at {_loc}
-				set name of spawned entity to "&cUnstable Spawn"
-				apply resistance 2 to spawned entity for 999 days
-				apply speed to spawned entity for 999 days
-				equip spawned entity with bow
-				set spawned entity's helmet to gold helmet
-				set {unstable.%spawned entity%} to true
-				spawn skeleton at {_loc}
-				set name of spawned entity to "&cUnstable Spawn"
-				apply resistance 2 to spawned entity for 999 days
-				apply speed to spawned entity for 999 days
-				equip spawned entity with bow
-				set spawned entity's helmet to gold helmet
-				set {unstable.%spawned entity%} to true
-			event-entity is a spider:
-				spawn spider at {_loc}
-				set name of spawned entity to "&cUnstable Spawn"
-				apply resistance 2 to spawned entity for 999 days
-				apply speed to spawned entity for 999 days
-				apply jump to spawned entity for 999 days
-				set {unstable.%spawned entity%} to true
-				spawn spider at {_loc}
-				set name of spawned entity to "&cUnstable Spawn"
-				apply resistance 2 to spawned entity for 999 days
-				apply speed to spawned entity for 999 days
-				apply jump to spawned entity for 999 days
-				set {unstable.%spawned entity%} to true
+
+		cancel event
+		event-entity is a creeper:
+			spawn creeper at {_loc}
+			set name of spawned entity to "&cUnstable Spawn"
+			apply resistance 2 to spawned creeper for 999 days
+			apply speed to spawned creeper for 999 days
+			set {unstable.%spawned entity%} to true
+			spawn creeper at {_loc}
+			set name of spawned entity to "&cUnstable Spawn"
+			apply resistance 2 to spawned creeper for 999 days
+			apply speed to spawned creeper for 999 days
+			set {unstable.%spawned entity%} to true
+		event-entity is a zombie:
+			spawn zombie at {_loc}
+			set name of spawned entity to "&cUnstable Spawn"
+			apply resistance 2 to spawned entity for 999 days
+			apply speed to spawned entity for 999 days
+			equip spawned entity with iron sword of sharpness
+			set spawned entity's helmet to iron helmet
+			set {unstable.%spawned entity%} to true
+			spawn zombie at {_loc}
+			set name of spawned entity to "&cUnstable Spawn"
+			apply resistance 2 to spawned entity for 999 days
+			apply speed to spawned entity for 999 days
+			equip spawned entity with iron sword of sharpness
+			set spawned entity's helmet to iron helmet
+			set {unstable.%spawned entity%} to true
+		event-entity is skeleton:
+			spawn skeleton at {_loc}
+			set name of spawned entity to "&cUnstable Spawn"
+			apply resistance 2 to spawned entity for 999 days
+			apply speed to spawned entity for 999 days
+			equip spawned entity with bow
+			set spawned entity's helmet to gold helmet
+			set {unstable.%spawned entity%} to true
+			spawn skeleton at {_loc}
+			set name of spawned entity to "&cUnstable Spawn"
+			apply resistance 2 to spawned entity for 999 days
+			apply speed to spawned entity for 999 days
+			equip spawned entity with bow
+			set spawned entity's helmet to gold helmet
+			set {unstable.%spawned entity%} to true
+		event-entity is a spider:
+			spawn spider at {_loc}
+			set name of spawned entity to "&cUnstable Spawn"
+			apply resistance 2 to spawned entity for 999 days
+			apply speed to spawned entity for 999 days
+			apply jump to spawned entity for 999 days
+			set {unstable.%spawned entity%} to true
+			spawn spider at {_loc}
+			set name of spawned entity to "&cUnstable Spawn"
+			apply resistance 2 to spawned entity for 999 days
+			apply speed to spawned entity for 999 days
+			apply jump to spawned entity for 999 days
+			set {unstable.%spawned entity%} to true
 				
 				
 on death of a creeper or a skeleton or a zombie or a spider:
+	chance of 15%:
+		add named item stack from "{@bandages}" to drops
 	entity's name is "&cUnstable Spawn":
 		chance of 10%:
 			chance of 2%:
@@ -366,6 +378,16 @@ on right click with paper:
 			nullify score "&cINJURED" in board of player
 			set {injured.%player%} to false
 			set {injured.%player%.length} to 0
+			
+on bed enter:
+	{injured.%player%} is true:
+		set {injured.%player%} to false
+		set {injured.%player%.length} to 0
+		remove mining fatigue from player
+		remove weakness from player
+		remove slowness from player
+		nullify score "&cINJURED" in board of player
+		send "&aYou have been healed of your injuries!" to player
 
 on consume of water bottle:
 	{thirst.%player%} is greater than or equal to 100:
@@ -465,23 +487,26 @@ command /togglestats:
 on place:
 	former tool's name is set:
 		set {information.%block%.1} to former tool
-		send "DEBUG You placed %former tool's name%"
+		{debug.%player%} is true:
+			send "DEBUG You placed %former tool's name%"
 		set {information.%block%.2} to lore of former tool
 		set {information.%block%.3} to name of former tool
-		send "DEBUG %block%"
-		send "DEBUG %{information.%block%.1}%"
-		send "DEBUG %lore of former tool%"
-		send "DEBUG %name of former tool%"
-		send "DEBUG  %{information.%block%.2}%"
-		send "DEBUG %{information.%block%.3}%"
+		{debug.%player%} is true:
+			send "DEBUG %block%"
+			send "DEBUG %{information.%block%.1}%"
+			send "DEBUG %lore of former tool%"
+			send "DEBUG %name of former tool%"
+			send "DEBUG  %{information.%block%.2}%"
+			send "DEBUG %{information.%block%.3}%"
 		set {information.%block%.1} to "%{information.%block%.1}%"
 		
 on break:
 	{information.%block%.1} is set:
 		cancel event
-		send "DEBUG I ama message"
-		set {_message} to "%{information.%block%.1}%;%{information.%block%.3}%;%{information.%block%.2}%"
-		send "DEBUG %{_message}%"
+		{debug.%player%} is true:
+			send "DEBUG I ama message"
+			set {_message} to "%{information.%block%.1}%;%{information.%block%.3}%;%{information.%block%.2}%"
+			send "DEBUG %{_message}%"
 		delete block
 		drop named item stack from "%{_message}%" at location of block
 
@@ -501,5 +526,20 @@ on right click with sugar:
 		wait 5 seconds
 		disallow player to fly
 		
+command /debug:
+	permission: obam.admin
+	trigger:
+		{debug.%player%} is not set:
+			set {debug.%player%} to false
+		{debug.%player%} is false:
+			set {debug.%player%} to true
+			send "&aDebug on"
+			stop
+		{debug.%player%} is true:
+			set {debug.%player%} to false
+			send "&aDebug off"
+			stop
+			
+
 
 		
