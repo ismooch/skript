@@ -69,6 +69,7 @@ command /kit [<text>]:
 						give player 2 egg named "&fStun Bomb"
 						apply absorption 3 to player for 999 days
 						give player arrow
+						add 10 to player's health
 						set {kit.archer.%player%} to true
 						set {egg.archer.%player%} to true
 						set {active.kit.%player%} to true
@@ -102,6 +103,7 @@ command /kit [<text>]:
 						give 3 snowball named "&fBlindness Balls" to player
 						give 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]" to player
 						give potion of poison named "&fJump Potion" to player
+						add 10 to player's health
 						set {snowball.ninja.%player%} to true
 						set {kit.ninja.%player%} to true
 						set {active.kit.%player%} to true
@@ -147,6 +149,7 @@ command /kit [<text>]:
 								set player's level progress to 0.99
 						{active.kit.%player%} is not set:
 								set player's level progress to 0.99
+						add 10 to player's health
 						set {kit.firemage.%player%} to true
 						set {active.kit.%player%} to true
 						set {active.game.kit.%player%} to true
@@ -164,6 +167,7 @@ command /kit [<text>]:
 						apply health boost 3 to player for 999 days
 						give player 5 snowballs named "&fDisabling Bombs"
 						heal player by 10 hearts
+						add 20 to player's health
 						set {kit.tank.%player%} to true
 						set {active.kit.%player%} to true
 						set {active.game.kit.%player%} to true
@@ -188,6 +192,7 @@ command /kit [<text>]:
 								set player's level progress to 0.99
 						{active.kit.%player%} is not set:
 								set player's level progress to 0.99
+						add 10 to player's health
 						set {kit.lightningmage.%player%} to true
 						set {active.kit.%player%} to true
 						set {active.game.kit.%player%} to true
@@ -216,6 +221,7 @@ command /kit [<text>]:
 								set player's level progress to 0.99
 						{active.kit.%player%} is not set:
 								set player's level progress to 0.99
+						add 10 to player's health
 						set {kit.necromancer.%player%} to true
 						set {active.kit.%player%} to true
 						set {active.game.kit.%player%} to true
@@ -231,6 +237,7 @@ command /kit [<text>]:
 						give player fishing rod of unbreaking 10 named "&fOld Faithful"
 						give player fish of sharpness 3 named "&fBig Fish"
 						give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
+						add 10 to player's health
 						set {kit.fisherman.%player%} to true
 						set {active.kit.%player%} to true
 						set {active.game.kit.%player%} to true
@@ -249,6 +256,7 @@ command /kit [<text>]:
 						#apply speed 2 to player for 999 days
 						#give player 3 snowballs named "&fGrenades"
 						#give player 3 eggs named "&fFlashBang"
+						add 10 to player's health
 						#set {kit.something.%player%} to true
 						#set {active.kit.%player%} to true
 						
@@ -273,6 +281,7 @@ command /kit [<text>]:
 								set player's level progress to 0.99
 						{active.kit.%player%} is not set:
 								set player's level progress to 0.99
+						add 10 to player's health
 						set {kit.skelemancer.%player%} to true
 						set {active.kit.%player%} to true
 						set {active.game.kit.%player%} to true
