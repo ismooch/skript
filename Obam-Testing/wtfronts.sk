@@ -34,7 +34,7 @@ on join:
 	make score "&3Thirst" in board of player to {thirst.%player%}
 	set {board.%player%} to true
 	{injured.%player%} is true:
-		make score "&cINJURED" in board of player to 0
+		make score "&cINJURED" in board of player to 1
 	move display of player to "sidebar"
 			
 on chunk load:
@@ -62,6 +62,7 @@ on chunk load:
 		
 		
 on mine:
+	player's tool is pickaxe
 	y-coordinate of player is less than 40
 	{cavein.%chunk at location of player%.chance} is false:
 		set {_run} to false
@@ -115,10 +116,10 @@ on mine:
 				send "&cMethane!" to loop-player
 			wait 2 seconds
 			create explosion of force 2 at event-location
-			chance of {methane.%chunk at location of player%.chance}%:
+			chance of {methane.%chunk at location of player%.chance} * 2 %:
 				wait 2 seconds
 				drop named item stack from "{@unstele}" at event-location
-				chance of {methane.%chunk at location of player%.chance}%:
+				chance of {methane.%chunk at location of player%.chance} * 2%:
 					drop named item stack from "{@unstmetal}" at event-location
 		
 	chance of {cavein.%chunk at location of player%.chance}%:
@@ -128,7 +129,8 @@ on mine:
 		{_found.water} is true:
 			send "&3Flood!" to player
 			loop blocks in radius 3 of event-location:
-				set loop-block to water
+				loop-block is air:
+					set loop-block to water
 				
 			
 			
@@ -208,7 +210,8 @@ every 3 seconds:
 				add {_ran} to {thirst.%loop-player%}
 				{thirst.%loop-player%} is greater than 100:
 					set {thirst.%loop-player%} to 100
-			
+		{debug.%loop-player%} is true:
+			set {thirst.%loop-player%} to 100
 		{thirst.%loop-player%} is not set:
 			set {thirst.%loop-player%} to 100
 		{thirst.%loop-player%} is less than 0:
@@ -264,62 +267,57 @@ every 3 seconds:
 on spawn of a creeper or a skeleton or a spider or zombie:
 	{unstable.%chunk at event-location%} is true:
 
-		cancel event
+
+		set {_loc} to event-location
 		event-entity is a creeper:
-			spawn creeper at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned creeper for 999 days
-			apply speed to spawned creeper for 999 days
-			set {unstable.%spawned entity%} to true
-			spawn creeper at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned creeper for 999 days
-			apply speed to spawned creeper for 999 days
-			set {unstable.%spawned entity%} to true
+			set name of event-entity to "&cUnstable Creeper"
+			apply resistance 2 to event-entity for 999 days
+			apply speed to event-entity for 999 days
+
+			
+			set {unstable.%event-entity%} to true
+
 		event-entity is a zombie:
-			spawn zombie at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned entity for 999 days
-			apply speed to spawned entity for 999 days
-			equip spawned entity with iron sword of sharpness
-			set spawned entity's helmet to iron helmet
-			set {unstable.%spawned entity%} to true
-			spawn zombie at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned entity for 999 days
-			apply speed to spawned entity for 999 days
-			equip spawned entity with iron sword of sharpness
-			set spawned entity's helmet to iron helmet
-			set {unstable.%spawned entity%} to true
+
+			set name of event-entity to "&cUnstable Zombie"
+			apply resistance 2 to event-entity for 999 days
+			apply speed 2 to event-entity for 999 days
+			equip event-entity with iron sword of sharpness
+			set event-entity's helmet to iron helmet
+			set {unstable.%event-entity%} to true
+
 		event-entity is skeleton:
-			spawn skeleton at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned entity for 999 days
-			apply speed to spawned entity for 999 days
-			equip spawned entity with bow
-			set spawned entity's helmet to gold helmet
-			set {unstable.%spawned entity%} to true
-			spawn skeleton at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned entity for 999 days
-			apply speed to spawned entity for 999 days
-			equip spawned entity with bow
-			set spawned entity's helmet to gold helmet
-			set {unstable.%spawned entity%} to true
+			set name of event-entity to "&cUnstable Skeleton"
+			apply resistance 2 to event-entity for 999 days
+			apply speed 2 to event-entity for 999 days
+			equip event-entity with bow
+			set event-entity's helmet to gold helmet
+			set {unstable.%event-entity%} to true
+
 		event-entity is a spider:
-			spawn spider at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned entity for 999 days
-			apply speed to spawned entity for 999 days
-			apply jump to spawned entity for 999 days
-			set {unstable.%spawned entity%} to true
-			spawn spider at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned entity for 999 days
-			apply speed to spawned entity for 999 days
-			apply jump to spawned entity for 999 days
-			set {unstable.%spawned entity%} to true
-				
+			set name of event-entity to "&cUnstable Spider"
+			apply resistance 2 to event-entity for 999 days
+			apply speed 2 to event-entity for 999 days
+			apply jump 5 to event-entity for 999 days
+			set {unstable.%event-entity%} to true
+
+on explosion prime:
+	event-entity is creeper:
+		{unstable.%event-entity%} is true:
+			cancel event
+			create an explosion of force 5 at event-location
+			set {_loc} to event-location
+			play 100 of effect "reddust" with data 1 at {_loc}
+			loop players in radius 5 of event-location:
+				make event-entity damage loop-player by 4
+			
+on damage:
+	victim is not a player
+	{unstable.%victim%} is set:
+		damage cause is fall:
+			cancel event
+		damage cause is block explosion:
+			cancel event
 				
 on death of a creeper or a skeleton or a zombie or a spider:
 	chance of 15%:

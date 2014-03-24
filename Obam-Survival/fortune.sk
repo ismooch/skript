@@ -11,6 +11,15 @@ command /aura [<text>] [<text>] [text]:
 	permission: obam.free
 	description: For all Aura related commands
 	trigger:
+		{abstain.%player%} is true:
+			send "&cThis feature is unavailable while abstaining"
+			stop
+		{abstain.%player%} is "wait abstain":
+			send "&cThis feature is unavailable while abstaining"
+			stop
+		{abstain.%player%} is "wait pvp":
+			send "&cThis feature is unavailable while abstaining"
+			stop
 		argument 1 is not set:
 			{current.aura.%player%} is not set:
 				send "&7You do not have an active aura! Use &e/aura list&7 for a list of available auras"
@@ -76,6 +85,9 @@ every 15 minutes:
 		{fortune.spam.%loop-player%} is greater than 15:
 			set {fortune.spam.%loop-player%} to 0
 		{current.aura.%loop-player%} is "fortune"
+		{abstain.%loop-player%} is true:
+			clear {current.aura.%loop-player%}
+			
 		loop-player does not have permission "obam.plus":
 			{fortune.chance.%loop-player%} is less than 5:
 				increase {fortune.chance.%loop-player%} by 1
@@ -100,6 +112,10 @@ on break:
 	{for.ran.%player%} is not set:
 		set {for.ran.%player%} to random integer between 5 and 15
 	{current.aura.%player%} is "fortune":
+		{abstain.%player%} is true:
+			clear {current.aura.%player%}
+		{abstain.%player%} is "wait abstain":
+			clear {current.auar.%player%}
 		block is diamond ore or emerald ore or gold ore or iron ore or lapis ore or redstone ore or coal ore or nether quartz ore:
 			player's tool is a pickaxe of silk touch:
 				send "&cYour fortune aura has no effect with this enchantment!" to player

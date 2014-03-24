@@ -41,14 +41,20 @@ every 1 tick:
 		{alert.notify.owner.%loop-player%} is not {chunk.live.%chunk at location of loop-player%}:
 			{chunk.live.%chunk at location of loop-player%}  is not set:
 				{alert.notify.owner.%loop-player%} is not "Unclaimed":
+					{alert.fronts.%loop-player%} is false:
+						stop
 					send "&a&lUnclaimed Front" to loop-player
 					set {alert.notify.owner.%loop-player%} to "Unclaimed"
 					set {land.unclaim.%loop-player%} to true
 			{chunk.live.%chunk at location of loop-player%}  is set:
+				{alert.fronts.%loop-player%} is false:
+					stop
 				send "&a&lFront Claimed by: &e%{chunk.live.%chunk at location of loop-player%} %" to loop-player
 				set {alert.notify.owner.%loop-player%} to {chunk.live.%chunk at location of loop-player%} 
 		{alert.notify.owner.%loop-player%} is not set:
 			{chunk.live.%chunk at location of loop-player%}  is not set:
+				{alert.fronts.%loop-player%} is false:
+					stop
 				send "&a&lUnclaimed Front" to loop-player
 				set {alert.notify.owner.%loop-player%} to "Unclaimed"
 				set {land.unclaim.%loop-player%} to true
@@ -343,6 +349,21 @@ command /front [<text>] [<text>] [<text>]:
 						stop
 				send "&c%argument 3% does not have a Front named &e%argument 2%"
 				stop
+		argument 1 is "alert":
+			{alert.fronts.%player%} is not set:
+				send "&aFront alerts are now &eoff"
+				set {alert.fronts.%player%} to false
+				stop
+			{alert.fronts.%player%} is false:
+				send "&aFront alerts are now &eon"
+				set {alert.fronts.%player%} to true
+				stop
+			{alert.fronts.%player%} is true:
+				send "&aFront alerts are now &eoff"
+				set {alert.fronts.%player%} to false
+				stop
+				
+				
 				
 				
 				
