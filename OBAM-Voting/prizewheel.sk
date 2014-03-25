@@ -60,6 +60,20 @@ command /prize [<text>] [<text>] [<text>]:
 					log "%player%^ADD^2500^%{_bal}%^%player's balance%^ULTRARARE PRIZE WINNINGS" to "prizewheel/WINNINGS.log"
 					stop
 					
+				{_ran} is 2:
+					{winnings.chest.%player%.skyblock::"fullblock spruce wood block"} is not set:
+						set {winnings.chest.%player%.skyblock::"fullblock spruce wood block"} to 1
+						send "&aYou have won &e1 xPlosion Dampener&a for &eSkyblock!"
+						send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+						log "%player%^ADD^1 xPlosion Dampener^ULTRARARE PRIZE WINNINGS" to "prizewheel/winnings.log"
+						stop
+					add 1 to {winnings.chest.%player%.skyblock::"fullblock spruce wood block"}
+					send "&aYou have won &e1 xPlosion Dampener&a for &eSkyblock!"
+					send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+					log "%player%^ADD^1 xPlosion Dampener^ULTRARARE PRIZE WINNINGS" to "prizewheel/winnings.log"
+					stop
+					
+					
 					
 			chance of 5%:
 				set {_ran} to a random integer between 1 and
@@ -71,6 +85,47 @@ command /prize [<text>] [<text>] [<text>]:
 					send "&aYou now have &e%player's balance%"
 					log "%player%^ADD^1000^%{_bal}%^%player's balance%^RARE PRIZE WINNINGS" to "prizewheel/WINNINGS.log"
 					stop
+					
+				{_ran} is 2:
+					{winnings.chest.%player%.skyblock::"diamond pickaxe"} is not set:
+						set {winnings.chest.%player%.skyblock::"diamond pickaxe"} to 1
+						send "&aYou have won &e1 diamond pickaxe&a for &eSkyblock!"
+						send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+						log "%player%^ADD^1 diamond pickaxe^RARE PRIZE WINNINGS" to "prizewheel/winnings.log"
+						stop
+					add 1 to {winnings.chest.%player%.skyblock::"diamond pickaxe"}
+					send "&aYou have won &e1 diamond pickaxe&a for &eSkyblock!"
+					send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+					log "%player%^ADD^1 diamond pickaxe^RARE PRIZE WINNINGS" to "prizewheel/winnings.log"
+					stop
+					
+				{_ran} is 3:
+					{winnings.chest.%player%.skyblock::"diamond axe"} is not set:
+						set {winnings.chest.%player%.skyblock::"diamond axe"} to 1
+						send "&aYou have won &e1 diamond axe&a for &eSkyblock!"
+						send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+						log "%player%^ADD^1 diamond axe^RARE PRIZE WINNINGS" to "prizewheel/winnings.log"
+						stop
+					add 1 to {winnings.chest.%player%.skyblock::"diamond axe"}
+					send "&aYou have won &e1 diamond axe&a for &eSkyblock!"
+					send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+					log "%player%^ADD^1 diamond axe^RARE PRIZE WINNINGS" to "prizewheel/winnings.log"
+					stop
+					
+				{_ran} is 4:
+					{winnings.chest.%player%.skyblock::"beacon"} is not set:
+						set {winnings.chest.%player%.skyblock::"beacon"} to 1
+						send "&aYou have won &e1 beacon&a for &eSkyblock!"
+						send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+						log "%player%^ADD^1 beacon^RARE PRIZE WINNINGS" to "prizewheel/winnings.log"
+						stop
+					add 1 to {winnings.chest.%player%.skyblock::"beacon"}
+					send "&aYou have won &e1 beacon&a for &eSkyblock!"
+					send "&aUse &e/prizewheel claim&a in skbylock to claim!"
+					log "%player%^ADD^1 beacon^RARE PRIZE WINNINGS" to "prizewheel/winnings.log"
+					stop
+				
+				
 			
 			chance of 15%:
 				set {_ran} to a random integer between 1 and
@@ -81,6 +136,32 @@ command /prize [<text>] [<text>] [<text>]:
 					send "&aYou have won &e500 Tickets&a!"
 					send "&aYou now have &e%player's balance%"
 					log "%player%^ADD^500^%{_bal}%^%player's balance%^SEMIRARE PRIZE WINNINGS" to "prizewheel/WINNINGS.log"
+					stop
+					
+				{_ran} is 2:
+					{winnings.chest.%player%.skyblock::"poisonous potato"} is not set:
+						set {winnings.chest.%player%.skyblock::"poisonous potato"} to 10
+						send "&aYou have won &e10 poisonous potato&a for &eSkyblock!"
+						send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+						log "%player%^ADD^10 poisonous potato^SEMIRARE PRIZE WINNINGS" to "prizewheel/winnings.log"
+						stop
+					add 10 to {winnings.chest.%player%.skyblock::"poisonous potato"}
+					send "&aYou have won &e10 poisonous potato&a for &eSkyblock!"
+					send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+					log "%player%^ADD^10 poisonous potato^SEMIRARE PRIZE WINNINGS" to "prizewheel/winnings.log"
+					stop
+					
+				{_ran} is 3:
+					{winnings.chest.%player%.skyblock::"piston"} is not set:
+						set {winnings.chest.%player%.skyblock::"piston"} to 3
+						send "&aYou have won &e3 piston&a for &eSkyblock!"
+						send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+						log "%player%^ADD^3 piston^SEMIRARE PRIZE WINNINGS" to "prizewheel/winnings.log"
+						stop
+					add 3 to {winnings.chest.%player%.skyblock::"piston"}
+					send "&aYou have won &e3 piston&a for &eSkyblock!"
+					send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+					log "%player%^ADD^3 piston^SEMIRARE PRIZE WINNINGS" to "prizewheel/winnings.log"
 					stop
 					
 			chance of 25%:
@@ -217,6 +298,48 @@ command /prize [<text>] [<text>] [<text>]:
 					send "&aUse &e/prizewheel claim&a in skyblock to claim!"
 					log "%player%^ADD^1 iron axe of unbreaking 2 and efficency 3^UNCOMMON PRIZE WINNINGS" to "prizewheel/winnings.log"
 					stop
+					
+				{_ran} is 11:
+					{winnings.chest.%player%.skyblock::"iron shovel of unbreaking 3 and efficency 3"} is not set:
+						set {winnings.chest.%player%.skyblock::"iron shovel of unbreaking 3 and efficency 3"} to 1
+						send "&aYou have won &e1 iron shovel of unbreaking 3 and efficency 3&a for &eSkyblock!"
+						send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+						log "%player%^ADD^1 iron shovel of unbreaking 3 and efficency 3^UNCOMMON PRIZE WINNINGS" to "prizewheel/winnings.log"
+						stop
+					add 1 to {winnings.chest.%player%.skyblock::"iron shovel of unbreaking 3 and efficency 3"}
+					send "&aYou have won &e1 iron shovel of unbreaking 3 and efficency 3&a for &eSkyblock!"
+					send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+					log "%player%^ADD^1 iron shovel of unbreaking 3 and efficency 3^UNCOMMON PRIZE WINNINGS" to "prizewheel/winnings.log"
+					stop
+					
+					
+				{_ran} is 12:
+					{winnings.chest.%player%.skyblock::"iron hoe unbreaking 3 and fortune 2"} is not set:
+						set {winnings.chest.%player%.skyblock::"iron hoe unbreaking 3 and fortune 2"} to 1
+						send "&aYou have won &e1 iron hoe unbreaking 3 and fortune 2&a for &eSkyblock!"
+						send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+						log "%player%^ADD^1 iron hoe unbreaking 3 and fortune 2^UNCOMMON PRIZE WINNINGS" to "prizewheel/winnings.log"
+						stop
+					add 1 to {winnings.chest.%player%.skyblock::"iron hoe unbreaking 3 and fortune 2"}
+					send "&aYou have won &e1 iron hoe unbreaking 3 and fortune 2&a for &eSkyblock!"
+					send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+					log "%player%^ADD^1 iron hoe unbreaking 3 and fortune 2^UNCOMMON PRIZE WINNINGS" to "prizewheel/winnings.log"
+					stop
+					
+				{_ran} is 13:
+					{winnings.chest.%player%.skyblock::"iron shovel of unbreaking 2 and looting 2"} is not set:
+						set {winnings.chest.%player%.skyblock::"iron shovel of unbreaking 2 and looting 2"} to 1
+						send "&aYou have won &e1 iron shovel of unbreaking 2 and looting 2&a for &eSkyblock!"
+						send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+						log "%player%^ADD^1 iron shovel of unbreaking 2 and looting 2^UNCOMMON PRIZE WINNINGS" to "prizewheel/winnings.log"
+						stop
+					add 1 to {winnings.chest.%player%.skyblock::"iron shovel of unbreaking 2 and looting 2"}
+					send "&aYou have won &e1 iron shovel of unbreaking 2 and looting 2&a for &eSkyblock!"
+					send "&aUse &e/prizewheel claim&a in skyblock to claim!"
+					log "%player%^ADD^1 iron shovel of unbreaking 2 and looting 2^UNCOMMON PRIZE WINNINGS" to "prizewheel/winnings.log"
+					stop
+					
+				
 					
 					
 			set {_ran} to random integer between 1 and 
