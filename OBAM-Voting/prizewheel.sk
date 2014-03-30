@@ -36,6 +36,142 @@ command /prize [<text>] [<text>] [<text>]:
 				stop
 			send "&aYour current balance is &e%{db_votetokens.%player%}%&a Prize Tokens!" to player
 			stop
+		argument 1 is "list":
+			player does not have permission "obam.admin":
+				send "&cYou do not have permission to do that!"
+				stop
+			world is "skyworld":
+				argument 2 is not set:
+					loop {db_winnings.chest.%player%.skyblock::*}:
+						send "%loop-index%.....%loop-value%"
+				argument 2 is set:
+					loop {db_winnings.chest.%argument 2%.skyblock::*}:
+						send "%loop-index%....%loop-value%"
+			
+			world is "world":
+				argument 2 is not set:
+					loop {db_winnings.chest.%player%.fronts::*}:
+						send "%loop-index%.....%loop-value%"
+				argument 2 is set:
+					loop {db_winnings.chest.%argument 2%.fronts::*}:
+						send "%loop-index%....%loop-value%"
+					
+		argument 1 is "delete":
+			player does not have permission "obam.admin":
+				send "&cYou do not have permission to do that!"
+				stop
+			argument 2 is not set:
+				send "&cPlease specify a player name!"
+				stop
+			argument 3 is not set:
+				send "&cPlease specify an item name!"
+				stop
+			world is "skyworld":
+				delete {db_winnings.chest.%argument 2%.skyblock::%argument 3%}
+			
+			world is "world":
+				delete {db_winnings.chest.%argument 2%.fronts::%argument 3%}
+				
+			
+			send "&cDeleted..."
+				
+		argument 1 is "claim":
+			world is not "world" or "skyworld":
+				send "&cYou must be in Skyblock or Fronts to use this!" to player
+				stop
+			world is "skyworld":
+				size of {db_winnings.chest.%player%.skyblock::*} is 0:
+					send "&cYou do not have any prizes for Skyblock!"
+					stop
+				loop {db_winnings.chest.%player%.skyblock::*}:
+					set {_item} to loop-index
+					{_item} is "piston":
+						set {_item} to "piston base"
+					{_item} is "enderpearl":
+						set {_item} to "ender pearl"
+					replace "afinity" in {_item} with "affinity"
+					
+						
+					
+					set {_lore} to "&aAmount: %loop-value%|| ||&eClick to claim!;c;sudo %player% prizedrop skyblock %loop-index%"
+					{_loop.count} is not set:
+						set {_loop.count} to 0
+					add 1 to {_loop.count}
+					{_chest.message} is not set:
+						set {_chest.message} to "s;%{_loop.count}%;i;%{_item}%;n;&eVote Reward;l;%{_lore}%"
+					{_chest.message} is set:
+						set {_chest.message} to "%{_chest.message}%;s;%{_loop.count}%;i;%{_item}%;n;&eVote Reward;l;%{_lore}%"
+						
+				{_loop.count} is less than or equal to 9:
+					set {_chest.size} to 1
+				{_loop.count} is greater than 9:
+					{_loop.count} is less than 18:
+						set {_chest.size} to 2
+				{_loop.count} is greater than 18:
+					{_loop.count} is less than 27:
+						set {_chest.size} to 3
+				{_loop.count} is greater than 36:
+					{_loop.count} is less than 45:
+						set {_chest.size} to 4
+				{_loop.count} is greater than 45:
+					{_loop.count} is less than 54:
+						set {_chest.size} to 5
+						
+				{_loop.count} is greater than 54:
+					send "&cThere was an error, please contact staff!" 
+					stop
+				
+				
+				send "&aBringing up menu..."
+				
+				show "%{_chest.message}%" with {_chest.size} rows named "&9Prize Wheel" to player
+				
+			
+			world is "world":
+				size of {db_winnings.chest.%player%.fronts::*} is 0:
+					send "&cYou do not have any prizes for Fronts!"
+					stop
+				loop {db_winnings.chest.%player%.fronts::*}:
+					set {_item} to loop-index
+					{_item} is "diamond chestplate of ubreaking 2 and protection 2":
+						set {_item} to "diamond chestplate of unbreaking 2 and protection 2"
+					set {_lore} to "&aAmount: %loop-value%|| ||&eClick to claim!;c;sudo %player% prizedrop fronts %loop-index%"
+					{_loop.count} is not set:
+						set {_loop.count} to 0
+					add 1 to {_loop.count}
+					{_chest.message} is not set:
+						set {_chest.message} to "s;%{_loop.count}%;i;%{_item}%;n;&eVote Reward;l;%{_lore}%"
+					{_chest.message} is set:
+						set {_chest.message} to "%{_chest.message}%;s;%{_loop.count}%;i;%{_item}%;n;&eVote Reward;l;%{_lore}%"
+						
+				{_loop.count} is less than or equal to 9:
+					set {_chest.size} to 1
+				{_loop.count} is greater than 9:
+					{_loop.count} is less than 18:
+						set {_chest.size} to 2
+				{_loop.count} is greater than 18:
+					{_loop.count} is less than 27:
+						set {_chest.size} to 3
+				{_loop.count} is greater than 36:
+					{_loop.count} is less than 45:
+						set {_chest.size} to 4
+				{_loop.count} is greater than 45:
+					{_loop.count} is less than 54:
+						set {_chest.size} to 5
+						
+				{_loop.count} is greater than 54:
+					send "&cThere was an error, please contact staff!" 
+					stop
+				
+				
+				send "&aBringing up menu..."
+				
+				
+				show "%{_chest.message}%" with {_chest.size} rows named "&9Prize Wheel" to player
+						
+				
+					
+					
 		argument 1 is "spin" or "s":
 			{db_votetokens.%player%} is 0:
 				send "&cYou do not have any Prize Tokens! Please use &e/vote&c to get more!"
@@ -44,152 +180,649 @@ command /prize [<text>] [<text>] [<text>]:
 				send "&cYou do not have any Prize Tokens! Please use &evote&c to get more!"
 				stop
 			set {_time} to difference between {db_wheel.time.%player%} and now
-			{db_wheel.time.%player%} is not set:
-				set {_time} to 12 hours
-			{_time} is less than 12 hours:
-				send "&cYou must wait &e%12 hours - {_time}% &cbefore you can spin again!"
-				stop
+			#player does not have permission "obam.admin":
+				#{db_wheel.time.%player%} is not set:
+					#set {_time} to 12 hours
+				#{_time} is less than 12 hours:
+					#send "&cYou must wait &e%12 hours - {_time}% &cbefore you can spin again!"
+					#stop
+			set {db_votetokens.%player%} to {db_votetokens.%player%} - 1
 			chance of 1%:
-				set {_size} to size of {db_wheel.ultrarare::*}
-				set {_ran} to random integer between 1 and {_size}
-				loop {db_wheel.ultrarare::*}:
-					{_loop.count} is not set:
-						set {_loop.count} to 0
-					add 1 to {_loop.count}
-					{_loop.count} is {_ran}:
-						set {_amount} to loop-value
-						set {_item} to loop-index
-						set {_location} to {db_wheel.ultrarare::%loop-index%::"location"}
-						{_item} is "tickets":
-							set {_bal} to player's balance
-							add {_amount} to player's balance
-							send "&aYou have received &e%{_amount}% Tickets&a as your prize"
-							log "%player%^%{_bal}%^ADD^%{_amount}%^%player's balance%^ultrarare PRIZE WHEEL WINNINGS" to "tickets/PRIZEWHEELWINNINGS.log"
-							stop
-						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is not set:
-							set {db_wheel.rewards.%player%::%{_location}%::%{_item}%} to {_amount}
-							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
-							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^ultrarare PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
-							stop
-						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is set:
-							add {_amount} to {db_wheel.rewards.%player%::%{_location}%::%{_item}%}
-							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
-							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^ultrarare PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
-							stop
-			
+				set {_ran} to a random integer between 1 and 3
+				
+				{_ran} is 1:
+					set {_bal} to player's balance
+					add 2500 to player's balance
+					send "&aYou have won &e2500 Tickets!"
+					send "&aYou now have &e%player's balance%"
+					log "%player%^ADD^2500^%{_bal}%^%player's balance%^ULTRARARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 2:
+					{db_winnings.chest.%player%.skyblock::fullblock spruce wood block} is not set:
+						set {db_winnings.chest.%player%.skyblock::fullblock spruce wood block} to 1
+						send "&aYou have won &e1 xPlosion Dampener&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 xPlosion Dampener^ULTRARARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::fullblock spruce wood block}
+					send "&aYou have won &e1 xPlosion Dampener&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^1 xPlosion Dampener^ULTRARARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 3:
+					{db_prizecheck.%player%} is not set:
+						set {db_prizecheck.%player%} to 3
+						send "&aYou have won &e3 Fronts slots&a."
+						send "&aRelog on Fronts to receive!"
+						log "%player%^ADD^3 Fronts Slots^ULTRARARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_prizecheck.%player%}
+					send "&aYou have won &e8 Skeleton Projeggtiles&a on &eFronts&a."
+					send "&aRelog on Fronts to receive!"
+					log "%player%^ADD^3 Fronts Slots^ULTRARARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+					
+					
 			chance of 5%:
-				set {_size} to size of {db_wheel.rare::*}
-				set {_ran} to random integer between 1 and {_size}
-				loop {db_wheel.rare::*}:
-					{_loop.count} is not set:
-						set {_loop.count} to 0
-					add 1 to {_loop.count}
-					{_loop.count} is {_ran}:
-						set {_amount} to loop-value
-						set {_item} to loop-index
-						set {_location} to {db_wheel.rare::%loop-index%::"location"}
-						{_item} is "tickets":
-							set {_bal} to player's balance
-							add {_amount} to player's balance
-							send "&aYou have received &e%{_amount}% Tickets&a as your prize"
-							log "%player%^%{_bal}%^ADD^%{_amount}%^%player's balance%^rare PRIZE WHEEL WINNINGS" to "tickets/PRIZEWHEELWINNINGS.log"
-							stop
-						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is not set:
-							set {db_wheel.rewards.%player%::%{_location}%::%{_item}%} to {_amount}
-							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
-							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^rare PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
-							stop
-						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is set:
-							add {_amount} to {db_wheel.rewards.%player%::%{_location}%::%{_item}%}
-							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
-							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^rare PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
-							stop
+				set {_ran} to a random integer between 1 and 9
+				
+				{_ran} is 1:
+					set {_bal} to player's balance
+					add 1000 to player's balance
+					send "&aYou have won &e1000 Tickets&a!"
+					send "&aYou now have &e%player's balance%"
+					log "%player%^ADD^1000^%{_bal}%^%player's balance%^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 2:
+					{db_winnings.chest.%player%.skyblock::diamond pickaxe} is not set:
+						set {db_winnings.chest.%player%.skyblock::diamond pickaxe} to 1
+						send "&aYou have won &e1 diamond pickaxe&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 diamond pickaxe^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::diamond pickaxe}
+					send "&aYou have won &e1 diamond pickaxe&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^1 diamond pickaxe^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 3:
+					{db_prizecheck.%player%} is not set:
+						set {db_prizecheck.%player%} to 3
+						send "&aYou have been given &e3 Front Slot&a!"
+						send "&aRelog on Fronts to receive!"
+						log "%player%^ADD^3 FRONTS SLOT^ULTRARARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_prizecheck.%player%}
+					send "&aYou have been given &e3 Front Slot&a!"
+					send "&aRelog on Fronts to receive!"
+					log "%player%^ADD^1 FRONTS SLOT^ULTRARARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 4:
+					{db_winnings.chest.%player%.skyblock::beacon} is not set:
+						set {db_winnings.chest.%player%.skyblock::beacon} to 1
+						send "&aYou have won &e1 beacon&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 beacon^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::beacon}
+					send "&aYou have won &e1 beacon&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skbylock to claim!"
+					log "%player%^ADD^1 beacon^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 5:
+					{db_prizecheck.%player%} is not set:
+						set {db_prizecheck.%player%} to 1
+						send "&aYou have been given &e1 Front Slot&a!"
+						send "&aRelog on Fronts to receive!"
+						log "%player%^ADD^1 FRONTS SLOT^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_prizecheck.%player%}
+					send "&aYou have been given &e1 Front Slot&a!"
+					send "&aRelog on Fronts to receive!"
+					log "%player%^ADD^1 FRONTS SLOT^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
 			
-			chance of 8%:
-				set {_size} to size of {db_wheel.semirare::*}
-				set {_ran} to random integer between 1 and {_size}
-				loop {db_wheel.semirare::*}:
-					{_loop.count} is not set:
-						set {_loop.count} to 0
-					add 1 to {_loop.count}
-					{_loop.count} is {_ran}:
-						set {_amount} to loop-value
-						set {_item} to loop-index
-						set {_location} to {db_wheel.semirare::%loop-index%::"location"}
-						{_item} is "tickets":
-							set {_bal} to player's balance
-							add {_amount} to player's balance
-							send "&aYou have received &e%{_amount}% Tickets&a as your prize"
-							log "%player%^%{_bal}%^ADD^%{_amount}%^%player's balance%^semirare PRIZE WHEEL WINNINGS" to "tickets/PRIZEWHEELWINNINGS.log"
-							stop
-						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is not set:
-							set {db_wheel.rewards.%player%::%{_location}%::%{_item}%} to {_amount}
-							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
-							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^semirare PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
-							stop
-						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is set:
-							add {_amount} to {db_wheel.rewards.%player%::%{_location}%::%{_item}%}
-							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
-							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^semirare PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
-							stop
+				
+				
 			
 			chance of 15%:
-				set {_size} to size of {db_wheel.uncommon::*}
-				set {_ran} to random integer between 1 and {_size}
-				loop {db_wheel.uncommon::*}:
-					{_loop.count} is not set:
-						set {_loop.count} to 0
-					add 1 to {_loop.count}
-					{_loop.count} is {_ran}:
-						set {_amount} to loop-value
-						set {_item} to loop-index
-						set {_location} to {db_wheel.uncommon::%loop-index%::"location"}
-						{_item} is "tickets":
-							set {_bal} to player's balance
-							add {_amount} to player's balance
-							send "&aYou have received &e%{_amount}% Tickets&a as your prize"
-							log "%player%^%{_bal}%^ADD^%{_amount}%^%player's balance%^uncommon PRIZE WHEEL WINNINGS" to "tickets/PRIZEWHEELWINNINGS.log"
-							stop
-						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is not set:
-							set {db_wheel.rewards.%player%::%{_location}%::%{_item}%} to {_amount}
-							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
-							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^uncommon PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
-							stop
-						{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is set:
-							add {_amount} to {db_wheel.rewards.%player%::%{_location}%::%{_item}%}
-							send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
-							log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^uncommon PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
-							stop
-			
-			set {_size} to size of {db_wheel.common::*}
-			set {_ran} to random integer between 1 and {_size}
-			loop {db_wheel.common::*}:
-				{_loop.count} is not set:
-					set {_loop.count} to 0
-				add 1 to {_loop.count}
-				{_loop.count} is {_ran}:
-					set {_amount} to loop-value
-					set {_item} to loop-index
-					set {_location} to {db_wheel.common::%loop-index%::"location"}
-					{_item} is "tickets":
-						set {_bal} to player's balance
-						add {_amount} to player's balance
-						send "&aYou have received &e%{_amount}% Tickets&a as your prize"
-						log "%player%^%{_bal}%^ADD^%{_amount}%^%player's balance%^COMMON PRIZE WHEEL WINNINGS" to "tickets/PRIZEWHEELWINNINGS.log"
+				set {_ran} to a random integer between 1 and 4
+				
+				{_ran} is 1:
+					set {_bal} to player's balance
+					add 500 to player's balance
+					send "&aYou have won &e500 Tickets&a!"
+					send "&aYou now have &e%player's balance%"
+					log "%player%^ADD^500^%{_bal}%^%player's balance%^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 2:
+					{db_winnings.chest.%player%.skyblock::poisonous potato} is not set:
+						set {db_winnings.chest.%player%.skyblock::poisonous potato} to 10
+						send "&aYou have won &e10 poisonous potato&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^10 poisonous potato^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is not set:
-						set {db_wheel.rewards.%player%::%{_location}%::%{_item}%} to {_amount}
-						send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
-						log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^COMMON PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
+					add 10 to {db_winnings.chest.%player%.skyblock::poisonous potato}
+					send "&aYou have won &e10 poisonous potato&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^10 poisonous potato^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 3:
+					{db_winnings.chest.%player%.skyblock::piston} is not set:
+						set {db_winnings.chest.%player%.skyblock::piston} to 3
+						send "&aYou have won &e3 piston&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^3 piston^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					{db_wheel.rewards.%player%::%{_location}%::%{_item}%} is set:
-						add {_amount} to {db_wheel.rewards.%player%::%{_location}%::%{_item}%}
-						send "&aYou have had &e%{_amount}% %{_item}%&a added to your rewards chest. Do &e/prize show&a in &e%{_location}%&a to claim the items."
-						log "%player%^ADD^%{_amount}%^%{_item}%^%{_location}%^COMMON PRIZE WHEEL WINNINGS" to "prizewheel/PRIZELOGS.log"
+					add 3 to {db_winnings.chest.%player%.skyblock::piston}
+					send "&aYou have won &e3 piston&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^3 piston^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+				
+				{_ran} is 4:
+					{db_winnings.chest.%player%.fronts::enchanted book of unbreaking 4} is not set:
+						set {db_winnings.chest.%player%.fronts::enchanted book of unbreaking 4} to 1
+						send "&aYou have won &e1 enchanted book of unbreaking 4&a for &eFronts!"
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^1^enchanted book of unbreaking 4^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
+					add 3 to {db_winnings.chest.%player%.fronts::enchanted book of unbreaking 4}
+					send "&aYou have won &e1 enchanted book of unbreaking 4&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^enchanted book of unbreaking 4^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+			chance of 25%:
+				set {_ran} to a random integer between 1 and 24
+					
+				{_ran} is 1:
+					{db_winnings.chest.%player%.skyblock::redstone dust} is not set:
+						set {db_winnings.chest.%player%.skyblock::redstone dust} to 10
+						send "&aYou have won &e10 redstone dust&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^10 redstone dust^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 10 to {db_winnings.chest.%player%.skyblock::redstone dust}
+					send "&aYou have won &e10 redstone dust&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^10 redstone dust^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 2:
+					{db_winnings.chest.%player%.skyblock::dirt} is not set:
+						set {db_winnings.chest.%player%.skyblock::dirt} to 10
+						send "&aYou have won &e10 dirt&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^10 dirt^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 10 to {db_winnings.chest.%player%.skyblock::dirt}
+					send "&aYou have won &e10 dirt&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^10 dirt^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 3:
+					{db_winnings.chest.%player%.skyblock::grass} is not set:
+						set {db_winnings.chest.%player%.skyblock::grass} to 10
+						send "&aYou have won &e10 grass&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^10 grass^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 10 to {db_winnings.chest.%player%.skyblock::grass}
+					send "&aYou have won &e10 grass&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^10 grass^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 4:
+					{db_winnings.chest.%player%.skyblock::lava bucket} is not set:
+						set {db_winnings.chest.%player%.skyblock::lava bucket} to 1
+						send "&aYou have won &e1 lava bucket&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 lava bucket^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::lava bucket}
+					send "&aYou have won &e1 lava bucket&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^1 lava bucket^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 5:
+					{db_winnings.chest.%player%.skyblock::iron chestplate of unbreaking 2 and protection 2} is not set:
+						set {db_winnings.chest.%player%.skyblock::iron chestplate of unbreaking 2 and protection 2} to 1
+						send "&aYou have won &e1 iron chestplate of unbreaking 2 and protection 2&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 iron chestplate of unbreaking 2 and protection 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::iron chestplate of unbreaking 2 and protection 2}
+					send "&aYou have won &e1 iron chestplate of unbreaking 2 and protection 2&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^1 iron chestplate of unbreaking 2 and protection 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+				
+				{_ran} is 6:
+					{db_winnings.chest.%player%.skyblock::iron helmet of unbreaking 2 and projectile protection 2 and aqua affinity} is not set:
+						set {db_winnings.chest.%player%.skyblock::iron helmet of unbreaking 2 and projectile protection 2 and aqua affinity} to 1
+						send "&aYou have won &e1 iron helmet of unbreaking 2 and projectile protection 2 and aqua affinity&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 iron helmet of unbreaking 2 and projectile protection 2 and aqua affinity^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::iron helmet of unbreaking 2 and projectile protection 2 and aqua affinity}
+					send "&aYou have won &e1 iron helmet of unbreaking 2 and projectile protection 2 and aqua affinity&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^1 iron helmet of unbreaking 2 and projectile protection 2 and aqua affinity^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 7:
+					{db_winnings.chest.%player%.skyblock::iron boots of unbreaking 2 and blast protection 2 and feather falling 3} is not set:
+						set {db_winnings.chest.%player%.skyblock::iron boots of unbreaking 2 and blast protection 2 and feather falling 3} to 1
+						send "&aYou have won &e1 iron boots of unbreaking 2 and blast protection 2 and feather falling 3&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 iron boots of unbreaking 2 and blast protection 2 and feather falling 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::iron boots of unbreaking 2 and blast protection 2 and feather falling 3}
+					send "&aYou have won &e1 iron boots of unbreaking 2 and blast protection 2 and feather falling 3&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^1 iron boots of unbreaking 2 and blast protection 2 and feather falling 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 8:
+					{db_winnings.chest.%player%.skyblock::iron boots of unbreaking 2 and protection 2} is not set:
+						set {db_winnings.chest.%player%.skyblock::iron boots of unbreaking 2 and protection 2} to 1
+						send "&aYou have won &e1 iron boots of unbreaking 2 and protection 2&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 iron boots of unbreaking 2 and protection 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::iron boots of unbreaking 2 and protection 2}
+					send "&aYou have won &e1 iron boots of unbreaking 2 and protection 2&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^1 iron boots of unbreaking 2 and protection 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				
+				{_ran} is 9:
+					{db_winnings.chest.%player%.skyblock::iron pickaxe of unbreaking 2 and efficiency 3 and fortune 2} is not set:
+						set {db_winnings.chest.%player%.skyblock::iron pickaxe of unbreaking 2 and efficiency 3 and fortune 2} to 1
+						send "&aYou have won &e1 iron pickaxe of unbreaking 2 and efficiency 3 and fortune 2&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 iron pickaxe of unbreaking 2 and efficiency 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::iron pickaxe of unbreaking 2 and efficiency 3 and fortune 2}
+					send "&aYou have won &e1 iron pickaxe of unbreaking 2 and efficiency 3 and fortune 2&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^1 iron pickaxe of unbreaking 2 and efficiency 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				
+					stop
+					
+				{_ran} is 10:
+					{db_winnings.chest.%player%.skyblock::iron axe of unbreaking 2 and efficiency 3} is not set:
+						set {db_winnings.chest.%player%.skyblock::iron axe of unbreaking 2 and efficiency 3} to 1
+						send "&aYou have won &e1 iron axe of unbreaking 2 and efficiency 3&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 iron axe of unbreaking 2 and efficiency 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::iron axe of unbreaking 2 and efficiency 3}
+					send "&aYou have won &e1 iron axe of unbreaking 2 and efficiency 3&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^1 iron axe of unbreaking 2 and efficiency 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 11:
+					{db_winnings.chest.%player%.skyblock::iron shovel of unbreaking 3 and efficiency 3} is not set:
+						set {db_winnings.chest.%player%.skyblock::iron shovel of unbreaking 3 and efficiency 3} to 1
+						send "&aYou have won &e1 iron shovel of unbreaking 3 and efficiency 3&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 iron shovel of unbreaking 3 and efficiency 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::iron shovel of unbreaking 3 and efficiency 3}
+					send "&aYou have won &e1 iron shovel of unbreaking 3 and efficiency 3&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^1 iron shovel of unbreaking 3 and efficiency 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
 					
 					
+				{_ran} is 12:
+					{db_winnings.chest.%player%.skyblock::iron hoe of unbreaking 3 and fortune 2} is not set:
+						set {db_winnings.chest.%player%.skyblock::iron hoe of unbreaking 3 and fortune 2} to 1
+						send "&aYou have won &e1 iron hoe of unbreaking 3 and fortune 2&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 iron hoe of unbreaking 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::iron hoe of unbreaking 3 and fortune 2}
+					send "&aYou have won &e1 iron hoe of unbreaking 3 and fortune 2&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^1 iron hoe of unbreaking 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 13:
+					{db_winnings.chest.%player%.skyblock::iron shovel of unbreaking 2 and looting 2} is not set:
+						set {db_winnings.chest.%player%.skyblock::iron shovel of unbreaking 2 and looting 2} to 1
+						send "&aYou have won &e1 iron shovel of unbreaking 2 and looting 2&a for &eSkyblock!"
+						send "&aUse &e/prize claim&a in skyblock to claim!"
+						log "%player%^ADD^1 iron shovel of unbreaking 2 and looting 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 1 to {db_winnings.chest.%player%.skyblock::iron shovel of unbreaking 2 and looting 2}
+					send "&aYou have won &e1 iron shovel of unbreaking 2 and looting 2&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^1 iron shovel of unbreaking 2 and looting 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 14:
+					{db_winnings.chest.%player%.fronts::enchanted book of fortune 3} is not set:
+						set {db_winnings.chest.%player%.fronts::enchanted book of fortune 3} to 1
+						send "&aYou have won &e1 enchanted book of fortune 3&a for &eFronts!"
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^1^enchanted book of fortune 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_winnings.chest.%player%.fronts::enchanted book of fortune 3}
+					send "&aYou have won &e1 enchanted book of fortune 3&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^enchanted book of fortune 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 15:
+					{db_winnings.chest.%player%.fronts::mooshroom spawn egg} is not set:
+						set {db_winnings.chest.%player%.fronts::mooshroom spawn egg} to 1
+						send "&aYou have won &e1 mooshroom spawn egg&a for &eFronts!"
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^1^mooshroom spawn egg^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_winnings.chest.%player%.fronts::mooshroom spawn egg}
+					send "&aYou have won &e1 mooshroom spawn egg&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^mooshroom spawn egg^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 16:
+					{db_winnings.chest.%player%.fronts::wolf spawn egg} is not set:
+						set {db_winnings.chest.%player%.fronts::wolf spawn egg} to 1
+						send "&aYou have won &e1 wolf spawn egg&a for &eFronts!"
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^1^wolf spawn egg^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_winnings.chest.%player%.fronts::wolf spawn egg}
+					send "&aYou have won &e1 wolf spawn egg&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^wolf spawn egg^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 17:
+					{db_winnings.chest.%player%.fronts::ocelot spawn egg} is not set:
+						set {db_winnings.chest.%player%.fronts::ocelot spawn egg} to 1
+						send "&aYou have won &e1 ocelot spawn egg&a for &eFronts!"
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^1^ocelot spawn egg^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_winnings.chest.%player%.fronts::ocelot spawn egg}
+					send "&aYou have won &e1 ocelot spawn egg&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^ocelot spawn egg^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 18:
+					{db_winnings.chest.%player%.fronts::diamond chestplate of unbreaking 2 and protection 2} is not set:
+						set {db_winnings.chest.%player%.fronts::diamond chestplate of unbreaking 2 and protection 2} to 1
+						send "&aYou have won &e1 diamond chestplate of ubreaking 2 and protection 2&a for &eFronts!"
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^1^diamond chestplate of ubreaking 2 and protection 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_winnings.chest.%player%.fronts::diamond chestplate of unbreaking 2 and protection 2}
+					send "&aYou have won &e1 diamond chestplate of ubreaking 2 and protection 2&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^diamond chestplate of ubreaking 2 and protection 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 19:
+					{db_winnings.chest.%player%.fronts::diamond helmet of unbreaking 2 and projectile protection 2 and aqua affinity 2} is not set:
+						set {db_winnings.chest.%player%.fronts::diamond helmet of unbreaking 2 and projectile protection 2 and aqua affinity 2} to 1
+						send "&aYou have won &e1 diamond helmet of unbreaking 2 and projectile protection 2 and aqua affinity 2&a for &eFronts!"
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^1^diamond helmet of unbreaking 2 and projectile protection 2 and aqua affinity 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_winnings.chest.%player%.fronts::diamond helmet of unbreaking 2 and projectile protection 2 and aqua affinity 2}
+					send "&aYou have won &e1 diamond helmet of unbreaking 2 and projectile protection 2 and aqua affinity 2&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^diamond helmet of unbreaking 2 and projectile protection 2 and aqua affinity 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 20:
+					{db_winnings.chest.%player%.fronts::diamond leggings of unbreaking 2 and protection 2} is not set:
+						set {db_winnings.chest.%player%.fronts::diamond leggings of unbreaking 2 and protection 2} to 1
+						send "&aYou have won &e1 diamond leggings of unbreaking 2 and protection 2&a for &eFronts!"
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^1^diamond leggings of unbreaking 2 and protection 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_winnings.chest.%player%.fronts::diamond leggings of unbreaking 2 and protection 2}
+					send "&aYou have won &e1 diamond leggings of unbreaking 2 and protection 2&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^diamond leggings of unbreaking 2 and protection 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 21:
+					{db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2} is not set:
+						set {db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2} to 1
+						send "&aYou have won &e1 diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2&a for &eFronts!"
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^1^diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2}
+					send "&aYou have won &e1 diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 22:
+					{db_winnings.chest.%player%.fronts::diamond shovel of unbreaking 3 and efficiency 3} is not set:
+						set {db_winnings.chest.%player%.fronts::diamond shovel of unbreaking 3 and efficiency 3} to 1
+						send "&aYou have won &e1 diamond shovel of unbreaking 3 and efficiency 3&a for &eFronts!"
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^1^diamond shovel of unbreaking 3 and efficiency 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_winnings.chest.%player%.fronts::diamond shovel of unbreaking 3 and efficiency 3}
+					send "&aYou have won &e1 diamond shovel of unbreaking 3 and efficiency 3&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^diamond shovel of unbreaking 3 and efficiency 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 23:
+					{db_winnings.chest.%player%.fronts::diamond hoe of unbreaking 3 and fortune 2} is not set:
+						set {db_winnings.chest.%player%.fronts::diamond hoe of unbreaking 3 and fortune 2} to 1
+						send "&aYou have won &e1 diamond hoe of unbreaking 3 and fortune 2&a for &eFronts!"
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^1^diamond hoe of unbreaking 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_winnings.chest.%player%.fronts::diamond hoe of unbreaking 3 and fortune 2}
+					send "&aYou have won &e1 diamond hoe of unbreaking 3 and fortune 2&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^diamond hoe of unbreaking 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+				{_ran} is 24:
+					{db_winnings.chest.%player%.fronts::diamond sword of unbreaking 2 and looting 3} is not set:
+						set {db_winnings.chest.%player%.fronts::diamond sword of unbreaking 2 and looting 3} to 1
+						send "&aYou have won &e1 diamond sword of unbreaking 2 and looting 3&a for &eFronts!"
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^1^diamond sword of unbreaking 2 and looting 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						stop
+					add 3 to {db_winnings.chest.%player%.fronts::diamond sword of unbreaking 2 and looting 3}
+					send "&aYou have won &e1 diamond sword of unbreaking 2 and looting 3&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^diamond sword of unbreaking 2 and looting 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+					
+			set {_ran} to random integer between 1 and 12
 			
-		
-		
+			{_ran} is 1:
+				set {_bal} to player's balance
+				add 100 to player's balance
+				send "&aYou have won &e100 Tickets&a!"
+				send "&aYou now have &e%player's balance%"
+				log "%player%^ADD^100%{_bal}%^%player's balance%^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				stop
+				
+			{_ran} is 2:
+				set {_bal} to player's balance
+				add 200 to player's balance
+				send "&aYou have won &e200 Tickets&a!"
+				send "&aYou now have &e%player's balance%"
+				log "%player%^ADD^200%{_bal}%^%player's balance%^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				stop
+				
+			{_ran} is 3:
+				set {_bal} to player's balance
+				add 400 to player's balance
+				send "&aYou have won &e300 Tickets&a!"
+				send "&aYou now have &e%player's balance%"
+				log "%player%^ADD^300%{_bal}%^%player's balance%^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				stop
+					
+					
+			{_ran} is 4:
+				{db_winnings.chest.%player%.skyblock::redstone dust} is not set:
+					set {db_winnings.chest.%player%.skyblock::redstone dust} to 5
+					send "&aYou have won &e5 Redstone Dust&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^5 Redstone Dust^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+				add 5 to {db_winnings.chest.%player%.skyblock::redstone dust}
+				send "&aYou have won &e5 Redstone Dust&a for &eSkyblock!"
+				send "&aUse &e/prize claim&a in skyblock to claim!"
+				log "%player%^ADD^5 Redstone Dust^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				stop
+				
+
+				
+			{_ran} is 5:
+				{db_winnings.chest.%player%.skyblock::dirt} is not set:
+					set {db_winnings.chest.%player%.skyblock::dirt} to 5
+					send "&aYou have won &e5 dirt&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^5 dirt^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+				add 5 to {db_winnings.chest.%player%.skyblock::dirt}
+				send "&aYou have won &e5 dirt&a for &eSkyblock!"
+				send "&aUse &e/prize claim&a in skyblock to claim!"
+				log "%player%^ADD^5 dirt^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				stop
+				
+			{_ran} is 6:
+				{db_winnings.chest.%player%.skyblock::grass} is not set:
+					set {db_winnings.chest.%player%.skyblock::grass} to 5
+					send "&aYou have won &e5 grass&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^5 grass^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+				add 5 to {db_winnings.chest.%player%.skyblock::grass}
+				send "&aYou have won &e5 grass&a for &eSkyblock!"
+				send "&aUse &e/prize claim&a in skyblock to claim!"
+				log "%player%^ADD^5 grass^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				stop
+	
+			{_ran} is 7:
+				{db_winnings.chest.%player%.skyblock::ender pearl} is not set:
+					set {db_winnings.chest.%player%.skyblock::ender pearl} to 16
+					send "&aYou have won &e16 ender pearl&a for &eSkyblock!"
+					send "&aUse &e/prize claim&a in skyblock to claim!"
+					log "%player%^ADD^16 ender pearl^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+				add 16 to {db_winnings.chest.%player%.skyblock::ender pearl}
+				send "&aYou have won &e16 ender pearl&a for &eSkyblock!"
+				send "&aUse &e/prize claim&a in skyblock to claim!"
+				log "%player%^ADD^16 ender pearl^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				stop
 			
+			{_ran} is 8:
+				{db_winnings.chest.%player%.fronts::enchanted book of unbreaking 3} is not set:
+					set {db_winnings.chest.%player%.fronts::enchanted book of unbreaking 3} to 1
+					send "&aYou have won &e1 enchanted book of unbreaking 3&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^enchanted book of unbreaking 3^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+				add 1 to {db_winnings.chest.%player%.fronts::enchanted book of unbreaking 3}
+				send "&aYou have won &e1 enchanted book of unbreaking 3&a for &eFronts!"
+				send "&aUse &e/prize claim&a in Fronts to claim!"
+				log "%player%^ADD^1^enchanted book of unbreaking 3^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				
+			{_ran} is 9:
+				{db_winnings.chest.%player%.fronts::enchanted book of silk touch} is not set:
+					set {db_winnings.chest.%player%.fronts::enchanted book of silk touch} to 1
+					send "&aYou have won &e1 enchanted book of silk touch&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^1^enchanted book of silk touch^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+				add 1 to {db_winnings.chest.%player%.fronts::enchanted book of silk touch}
+				send "&aYou have won &e1 enchanted book of silk touch&a for &eFronts!"
+				send "&aUse &e/prize claim&a in Fronts to claim!"
+				log "%player%^ADD^1^enchanted book of silk touch^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				
+			{_ran} is 10:
+				{db_winnings.chest.%player%.fronts::diamond} is not set:
+					set {db_winnings.chest.%player%.fronts::diamond} to 3
+					send "&aYou have won &e3 diamond&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^3^diamond^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+				add 3 to {db_winnings.chest.%player%.fronts::diamond}
+				send "&aYou have won &e3 diamond&a for &eFronts!"
+				send "&aUse &e/prize claim&a in Fronts to claim!"
+				log "%player%^ADD^3^diamond^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				
+			{_ran} is 11:
+				{db_winnings.chest.%player%.fronts::emerald} is not set:
+					set {db_winnings.chest.%player%.fronts::emerald} to 6
+					send "&aYou have won &e6 emerald&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^6^emerald^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+				add 6 to {db_winnings.chest.%player%.fronts::emerald}
+				send "&aYou have won &e6 emerald&a for &eFronts!"
+				send "&aUse &e/prize claim&a in Fronts to claim!"
+				log "%player%^ADD^6^emerald^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				
+			{_ran} is 12:
+				{db_winnings.chest.%player%.fronts::redstone dust} is not set:
+					set {db_winnings.chest.%player%.fronts::redstone dust} to 20
+					send "&aYou have won &e20 redstone dust&a for &eFronts!"
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^20^redstone dust^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					stop
+				add 20 to {db_winnings.chest.%player%.fronts::redstone dust}
+				send "&aYou have won &e20 redstone dust&a for &eFronts!"
+				send "&aUse &e/prize claim&a in Fronts to claim!"
+				log "%player%^ADD^20^redstone dust^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				
+
+
+command /prizedrop <text> <text>:
+	permission: obam.free
+	trigger:
+		argument 2 is "diamond chestplate of ubreaking 2 and protection 2":
+			set {_item.hold} to "diamond chestplate of unbreaking 2 and protection 2"
+		argument 2 is "enderpearl":
+			set {_item.hold} to "ender pearl"
+			
+		set {_item} to "%argument 2%" parsed as item
+		{_item.hold} is set:
+			set {_item} to "%{_item.hold}%" parsed as item
+		set {_loop} to {db_winnings.chest.%player%.%argument 1%::%argument 2%}
+		drop {_loop} of {_item} at location of player
+			
+		clear {db_winnings.chest.%player%.%argument 1%::%argument 2%}
+		
+command /prizefix <text> <text>:
+	permission: obam.admin
+	trigger:
+		argument 2 is "front":
+			{db_prizecheck.%argument 1%} is not set:
+				set {db_prizecheck.%argument 1%} to 0
+			add 1 to {db_prizecheck.%argument 1%}

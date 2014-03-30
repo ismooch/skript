@@ -1,6 +1,6 @@
 options:
 	bandages: paper;&3Bandage;&6Use of this bandage is the only way to fix a long lasting||&6injury brought on by the hazards of the environment.|| ||&5&oRight click with bandage in hand to cure the effects||&5&obrought on by being badly injured. Multiple bandages||&5&omay be required depending on your injury level.
-	superbottle: water bottle;&3Super Water Bottle;&6Besides saving you inventory space this water ||&6is created extra wet to help quench your thirst.|| ||&a+50 Thirst||  ||&5&oUpon use bottle turns to regular glass bottle.
+	superbottle: water bottle;&3Super Water Bottle;&6Besides saving you inventory space, this water ||&6is created extra wet to help quench your thirst.|| ||&a+50 Thirst||  ||&5&oUpon use, bottle turns to regular glass bottle.
 	unstele: magma cream;&3Unstable Element;&6Highly energized plasma like element found||&6in unstable land and mobs.|| ||&5&oThis goo is really hot!
 	unstmetal: gold nugget;&3Unstable Metal Shard;&6Energized metal shards found in unstable land||&6and mobs.|| ||&5&oYou feel a light energetic charge coming from||&5&othe shard.
 	unstmetalbar: gold ingot;&3Unstable Metal Bar;&6Crafted from broken &3Unstable Metal Shards&6 to||&6become whole again.|| ||&5&oHot to the touch, this bar gives a highly energetic||&5&ocharge.
@@ -10,9 +10,9 @@ options:
 	elefuel: coal item;&3Elemental Fuel;&6The universal fuel used to power most of the tools||&6and machines created with &3Energized Metal Bars.
 	fairydust: sugar;&3Fairy Dust;&6This mysterious dust is filled with special properties||&6that nobody quite understands. Rumor is the dust||&6when combined with the right items or situations can||&6yield interesting results.
 	stable: packed ice;&3Stabilizer;&6The stabilizer contains the perfect elemental makeup||&6to bring unstable energies down to usable levels.|| ||&5&oSurround the Stabilizer in a crafting table with items||&5&othat contain unstable energy.
-	
-	
-	
+	stablechst: diamond chestplate;&3Stable Diamond Chestplate;&6This chestplate contains a slot for special||&6enchantments and a container for &3Elemental||&3Fuel&6.
+	qnhchest: diamond chestplate;&3Chest of Quench;&6Utilizing the power of &3Elemental Fuel &6and||&6the &3Super Water Bottle&6, this chestplate makes||&6sure you never go thirsty!|| ||&c-1 Elemental Fuel Per Use|| ||&5&oWhile wearing this chestplate, your thirst will||&5&oautomatically go back up to 100 whenever it||&5&odips below 50, as long as you have Elemental||&5&oFuel in your inventory.
+	snkchest: diamond chestplate;&3Chest of Snacks;&6Utilizing the power of &3Elemental Fuel &6and an||&6Enchanted Golden Apple, this chestplate makes||&6sure you never go hungry!|| ||&c-1 Elemental Fuel Per Use|| ||&5&oWhile wearing this chestplate, your hunger will||&5&oautomatically go back up to 10 whenever it||&5&odips below 5, as long as you have Elemental||&5&oFuel in your inventory.
 	
 on script load:
 	register new shapeless recipe for named item stack from "{@bandages}" using paper, slimeball, air, air, air, air, air, air, air
@@ -23,10 +23,9 @@ on script load:
 	register new shaped recipe for named item stack from "{@stable}" using ice, ice, ice, ice, named item stack from "{@fairydust}", ice, ice, ice, ice
 	register new shaped recipe for named item stack from "{@elefuel}" using named item stack from "{@stableele}", named item stack from "{@stableele}", named item stack from "{@stableele}", named item stack from "{@stableele}", coal item, named item stack from "{@stableele}", named item stack from "{@stableele}", named item stack from "{@stableele}", named item stack from "{@stableele}"
 	register new shaped recipe for named item stack from "{@envradar}" using named item stack from "{@stablemetal}", named item stack from "{@stablemetal}", named item stack from "{@stablemetal}", named item stack from "{@stablemetal}", compass, named item stack from "{@stablemetal}", named item stack from "{@stablemetal}", named item stack from "{@stablemetal}", named item stack from "{@stablemetal}"
-	
-	
-
-	
+	register new shaped recipe for named item stack from "{@stablechst}" using named item stack from "{@stablemetal}", air, named item stack from "{@stablemetal}", named item stack from "{@stablemetal}", diamond block, named item stack from "{@stablemetal}", named item stack from "{@stablemetal}", named item stack from "{@elefuel}", named item stack from "{@stablemetal}"
+	register new shapeless recipe for named item stack from "{@qnhchest}" using named item stack from "{@superbottle}", named item stack from "{@stablechst}", air, air, air, air, air, air, air
+	register new shapeless recipe for named item stack from "{@snkchest}" using named item stack from "{@stablechst}", enchanted golden apple, air, air, air, air, air, air, air
 
 
 on join:
@@ -34,7 +33,7 @@ on join:
 	make score "&3Thirst" in board of player to {thirst.%player%}
 	set {board.%player%} to true
 	{injured.%player%} is true:
-		make score "&cINJURED" in board of player to 0
+		make score "&cINJURED" in board of player to 1
 	move display of player to "sidebar"
 			
 on chunk load:
@@ -62,6 +61,7 @@ on chunk load:
 		
 		
 on mine:
+	player's tool is pickaxe
 	y-coordinate of player is less than 40
 	{cavein.%chunk at location of player%.chance} is false:
 		set {_run} to false
@@ -115,10 +115,10 @@ on mine:
 				send "&cMethane!" to loop-player
 			wait 2 seconds
 			create explosion of force 2 at event-location
-			chance of {methane.%chunk at location of player%.chance}%:
+			chance of {methane.%chunk at location of player%.chance} * 2 %:
 				wait 2 seconds
 				drop named item stack from "{@unstele}" at event-location
-				chance of {methane.%chunk at location of player%.chance}%:
+				chance of {methane.%chunk at location of player%.chance} * 2%:
 					drop named item stack from "{@unstmetal}" at event-location
 		
 	chance of {cavein.%chunk at location of player%.chance}%:
@@ -128,9 +128,19 @@ on mine:
 		{_found.water} is true:
 			send "&3Flood!" to player
 			loop blocks in radius 3 of event-location:
-				set loop-block to water
+				loop-block is air:
+					set loop-block to water
 				
-			
+
+on portal enter:
+	{unstable.%chunk at event-location%} is false
+	chance of 25%:
+		set {unstable.%chunk at event-location%} to true
+		set {_ran} to random number between 15 and 20
+		set {_ran2} to random number between 18 and 20
+		set {cavein.%chunk at event-location%.chance} to {_ran}
+		set {methane.%chunk at event-location%.chance} to {_ran2}
+
 			
 
 on right click with compass:
@@ -208,7 +218,8 @@ every 3 seconds:
 				add {_ran} to {thirst.%loop-player%}
 				{thirst.%loop-player%} is greater than 100:
 					set {thirst.%loop-player%} to 100
-			
+		{debug.%loop-player%} is true:
+			set {thirst.%loop-player%} to 100
 		{thirst.%loop-player%} is not set:
 			set {thirst.%loop-player%} to 100
 		{thirst.%loop-player%} is less than 0:
@@ -218,8 +229,12 @@ every 3 seconds:
 			send "&cYou are dehydrated" to loop-player
 		{thirst.%loop-player%} is greater than 0:
 			chance of 30%:
-				set {_ran} to random number between 0 and 1
-				set {thirst.%loop-player%} to {thirst.%loop-player%} - {_ran}
+				loop-player is not sprinting:
+					set {_ran} to random number between 0 and 1
+					set {thirst.%loop-player%} to {thirst.%loop-player%} - {_ran}
+				loop-player is sprinting:
+					set {_ran} to random number between 1 and 3
+					set {thirst.%loop-player%} to {thirst.%loop-player%} - {_ran}
 		
 		biome at loop-player is desert:
 			time in loop-player's world is day
@@ -259,67 +274,77 @@ every 3 seconds:
 					apply slowness 3 to loop-player for 999 days
 					apply mining fatigue 2 to loop-player for 1 minute
 					apply weakness to loop-player for 30 seconds
-					
+		{thirst.%loop-player%} is less than or equal to 50:
+			name of loop-player's chestplate is "&3Chest of Quench"
+			loop-player has named item stack from "{@elefuel}":
+				set {thirst.%loop-player%} to 100
+				remove named item stack from "{@elefuel}" from loop-player
+		loop-player's hunger level is less than 5:
+			name of loop-player's chestplate is "&3Chest of Snacks"
+			loop-player has named item stack from "{@elefuel}":
+				set loop-player's hunger level to 10
+				remove named item stack from "{@elefuel}" from loop-player
+				
+				
+	loop all entities:
+		loop-entity is not player:
+			{unstable.%loop-entity%} is set:
+				play 100 of effect "reddust" with data 1 at location of loop-entity
 					
 on spawn of a creeper or a skeleton or a spider or zombie:
 	{unstable.%chunk at event-location%} is true:
 
-		cancel event
+
+		set {_loc} to event-location
 		event-entity is a creeper:
-			spawn creeper at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned creeper for 999 days
-			apply speed to spawned creeper for 999 days
-			set {unstable.%spawned entity%} to true
-			spawn creeper at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned creeper for 999 days
-			apply speed to spawned creeper for 999 days
-			set {unstable.%spawned entity%} to true
+			set name of event-entity to "&cUnstable Creeper"
+			apply resistance 2 to event-entity for 999 days
+			apply speed to event-entity for 999 days
+
+			
+			set {unstable.%event-entity%} to true
+
 		event-entity is a zombie:
-			spawn zombie at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned entity for 999 days
-			apply speed to spawned entity for 999 days
-			equip spawned entity with iron sword of sharpness
-			set spawned entity's helmet to iron helmet
-			set {unstable.%spawned entity%} to true
-			spawn zombie at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned entity for 999 days
-			apply speed to spawned entity for 999 days
-			equip spawned entity with iron sword of sharpness
-			set spawned entity's helmet to iron helmet
-			set {unstable.%spawned entity%} to true
+
+			set name of event-entity to "&cUnstable Zombie"
+			apply resistance 2 to event-entity for 999 days
+			apply speed 2 to event-entity for 999 days
+			equip event-entity with iron sword of sharpness
+			set event-entity's helmet to iron helmet
+			set {unstable.%event-entity%} to true
+
 		event-entity is skeleton:
-			spawn skeleton at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned entity for 999 days
-			apply speed to spawned entity for 999 days
-			equip spawned entity with bow
-			set spawned entity's helmet to gold helmet
-			set {unstable.%spawned entity%} to true
-			spawn skeleton at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned entity for 999 days
-			apply speed to spawned entity for 999 days
-			equip spawned entity with bow
-			set spawned entity's helmet to gold helmet
-			set {unstable.%spawned entity%} to true
+			set name of event-entity to "&cUnstable Skeleton"
+			apply resistance 2 to event-entity for 999 days
+			apply speed 2 to event-entity for 999 days
+			equip event-entity with bow
+			set event-entity's helmet to gold helmet
+			set {unstable.%event-entity%} to true
+
 		event-entity is a spider:
-			spawn spider at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned entity for 999 days
-			apply speed to spawned entity for 999 days
-			apply jump to spawned entity for 999 days
-			set {unstable.%spawned entity%} to true
-			spawn spider at {_loc}
-			set name of spawned entity to "&cUnstable Spawn"
-			apply resistance 2 to spawned entity for 999 days
-			apply speed to spawned entity for 999 days
-			apply jump to spawned entity for 999 days
-			set {unstable.%spawned entity%} to true
-				
+			set name of event-entity to "&cUnstable Spider"
+			apply resistance 2 to event-entity for 999 days
+			apply speed 2 to event-entity for 999 days
+			apply jump 5 to event-entity for 999 days
+			set {unstable.%event-entity%} to true
+
+on explosion prime:
+	event-entity is creeper:
+		{unstable.%event-entity%} is true:
+			cancel event
+			create an explosion of force 5 at event-location
+			set {_loc} to event-location
+			play 100 of effect "reddust" with data 1 at {_loc}
+			loop players in radius 5 of event-location:
+				make event-entity damage loop-player by 4
+			
+on damage:
+	victim is not a player
+	{unstable.%victim%} is set:
+		damage cause is fall:
+			cancel event
+		damage cause is block explosion:
+			cancel event
 				
 on death of a creeper or a skeleton or a zombie or a spider:
 	chance of 15%:
@@ -333,6 +358,8 @@ on death of a creeper or a skeleton or a zombie or a spider:
 on damage of a player:
 	damage cause is fall:
 		chance of 15%:
+			victim's boots are boots of feather falling:
+				stop
 			set {_location} to location of victim
 			play 1 of effect "angryVillager" of data 1 at {_location}
 			set {injured.%victim%} to true
@@ -425,6 +452,9 @@ command /ci [<number>]:
 			send "9  ... Elemental Fuel"
 			send "10 ... Fairy Dust"
 			send "11 ... Stabilizer"
+			send "12 ... Stable Chest"
+			send "13 ... Chest of Quench"
+			send "14 ... Chest of Snacks"
 			stop
 		argument is 1:
 			give named item stack from "{@superbottle}" to player
@@ -458,6 +488,17 @@ command /ci [<number>]:
 			
 		argument is 11:
 			give named item stack from "{@stable}" to player
+			
+		argument is 12:
+			give named item stack from "{@stablechst}" to player
+			
+		argument is 13:
+			give named item stack from "{@qnhchest}" to player
+			
+		argument is 14:
+			give named item stack from "{@snkchest}" to player
+			
+		
 
 		
 		send "Here is your thing"

@@ -13,6 +13,33 @@ on script load:
 	register new shaped recipe for named item stack from "{@egg4}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", gold nugget, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
 	register new shaped recipe for named item stack from "{@egg5}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", rotten flesh, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
 	register new shaped recipe for named item stack from "{@egg6}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", string, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
+
+on join:
+	{db_egg.%player%.skeleton} is set:
+		send "&aYou have received %{db_egg.%player%.skeleton}% Projeggtiles"
+		loop {db_egg.%player%.skeleton} times:
+			drop named item stack from "{@egg3}"
+		clear {db_egg.%player%.skeleton}
+	
+	{db_egg.%player%.creeper} is set:
+		send "&aYou have received %{db_egg.%player%.creeper}% Projeggtiles"
+		loop {db_egg.%player%.creeper} times:
+		
+			drop named item stack from "{@egg2}"
+		clear {db_egg.%player%.creeper}
+	
+	{db_egg.%player%.zpig} is set:
+		send "&aYou have received %{db_egg.%player%.zpig}% Projeggtiles"
+		loop {db_egg.%player%.zpig} times:
+			drop named item stack from "{@egg4}"
+		clear {db_egg.%player%.zpig}
+	
+	{db_egg.%player%.zombie} is set:
+		send "&aYou have received %{db_egg.%player%.zombie}% Projeggtiles"
+		loop {db_egg.%player%.zombie} times:
+			drop named item stack from "{@egg5}"
+		clear {db_egg.%player%.zombie}
+	
 on shoot:
 	projectile is snowball
 	shooter's tool is named item stack from "{@egg}":
