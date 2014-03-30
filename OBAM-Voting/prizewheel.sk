@@ -219,7 +219,7 @@ command /prize [<text>] [<text>] [<text>]:
 						log "%player%^ADD^3 Fronts Slots^ULTRARARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
 					add 3 to {db_prizecheck.%player%}
-					send "&aYou have won &e8 Skeleton Projeggtiles&a on &eFronts&a."
+					send "&aYou have won &e3 Fronts slots&a."
 					send "&aRelog on Fronts to receive!"
 					log "%player%^ADD^3 Fronts Slots^ULTRARARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
 					stop
@@ -227,7 +227,7 @@ command /prize [<text>] [<text>] [<text>]:
 					
 					
 			chance of 5%:
-				set {_ran} to a random integer between 1 and 9
+				set {_ran} to a random integer between 1 and 5
 				
 				{_ran} is 1:
 					set {_bal} to player's balance
@@ -251,16 +251,16 @@ command /prize [<text>] [<text>] [<text>]:
 					stop
 					
 				{_ran} is 3:
-					{db_prizecheck.%player%} is not set:
-						set {db_prizecheck.%player%} to 3
-						send "&aYou have been given &e3 Front Slot&a!"
-						send "&aRelog on Fronts to receive!"
-						log "%player%^ADD^3 FRONTS SLOT^ULTRARARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					{db_winnings.chest.%player%.fronts::Skeleton Projeggtiles} is not set:
+						set {db_winnings.chest.%player%.fronts::Skeleton Projeggtiles} to 8
+						send "&aYou have won &e8 Skeleton Projeggtiles&a on &eFronts&a."
+						send "&aUse &e/prize claim&a in Fronts to claim!"
+						log "%player%^ADD^8^Skeleton Projeggtiles^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_prizecheck.%player%}
-					send "&aYou have been given &e3 Front Slot&a!"
-					send "&aRelog on Fronts to receive!"
-					log "%player%^ADD^1 FRONTS SLOT^ULTRARARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					add 8 to {db_winnings.chest.%player%.fronts::Skeleton Projeggtiles}
+					send "&aYou have won &e8 Skeleton Projeggtiles&a on &eFronts&a."
+					send "&aUse &e/prize claim&a in Fronts to claim!"
+					log "%player%^ADD^8^Skeleton Projeggtiles^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
 					stop
 					
 				{_ran} is 4:
@@ -336,7 +336,7 @@ command /prize [<text>] [<text>] [<text>]:
 						send "&aUse &e/prize claim&a in Fronts to claim!"
 						log "%player%^ADD^1^enchanted book of unbreaking 4^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_winnings.chest.%player%.fronts::enchanted book of unbreaking 4}
+					add 1 to {db_winnings.chest.%player%.fronts::enchanted book of unbreaking 4}
 					send "&aYou have won &e1 enchanted book of unbreaking 4&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
 					log "%player%^ADD^1^enchanted book of unbreaking 4^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
@@ -524,7 +524,7 @@ command /prize [<text>] [<text>] [<text>]:
 						send "&aUse &e/prize claim&a in Fronts to claim!"
 						log "%player%^ADD^1^enchanted book of fortune 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_winnings.chest.%player%.fronts::enchanted book of fortune 3}
+					add 1 to {db_winnings.chest.%player%.fronts::enchanted book of fortune 3}
 					send "&aYou have won &e1 enchanted book of fortune 3&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
 					log "%player%^ADD^1^enchanted book of fortune 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
@@ -537,7 +537,7 @@ command /prize [<text>] [<text>] [<text>]:
 						send "&aUse &e/prize claim&a in Fronts to claim!"
 						log "%player%^ADD^1^mooshroom spawn egg^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_winnings.chest.%player%.fronts::mooshroom spawn egg}
+					add 1 to {db_winnings.chest.%player%.fronts::mooshroom spawn egg}
 					send "&aYou have won &e1 mooshroom spawn egg&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
 					log "%player%^ADD^1^mooshroom spawn egg^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
@@ -550,7 +550,7 @@ command /prize [<text>] [<text>] [<text>]:
 						send "&aUse &e/prize claim&a in Fronts to claim!"
 						log "%player%^ADD^1^wolf spawn egg^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_winnings.chest.%player%.fronts::wolf spawn egg}
+					add 1 to {db_winnings.chest.%player%.fronts::wolf spawn egg}
 					send "&aYou have won &e1 wolf spawn egg&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
 					log "%player%^ADD^1^wolf spawn egg^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
@@ -563,7 +563,7 @@ command /prize [<text>] [<text>] [<text>]:
 						send "&aUse &e/prize claim&a in Fronts to claim!"
 						log "%player%^ADD^1^ocelot spawn egg^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_winnings.chest.%player%.fronts::ocelot spawn egg}
+					add 1 to {db_winnings.chest.%player%.fronts::ocelot spawn egg}
 					send "&aYou have won &e1 ocelot spawn egg&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
 					log "%player%^ADD^1^ocelot spawn egg^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
@@ -576,7 +576,7 @@ command /prize [<text>] [<text>] [<text>]:
 						send "&aUse &e/prize claim&a in Fronts to claim!"
 						log "%player%^ADD^1^diamond chestplate of ubreaking 2 and protection 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_winnings.chest.%player%.fronts::diamond chestplate of unbreaking 2 and protection 2}
+					add 1 to {db_winnings.chest.%player%.fronts::diamond chestplate of unbreaking 2 and protection 2}
 					send "&aYou have won &e1 diamond chestplate of ubreaking 2 and protection 2&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
 					log "%player%^ADD^1^diamond chestplate of ubreaking 2 and protection 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
@@ -589,7 +589,7 @@ command /prize [<text>] [<text>] [<text>]:
 						send "&aUse &e/prize claim&a in Fronts to claim!"
 						log "%player%^ADD^1^diamond helmet of unbreaking 2 and projectile protection 2 and aqua affinity 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_winnings.chest.%player%.fronts::diamond helmet of unbreaking 2 and projectile protection 2 and aqua affinity 2}
+					add 1 to {db_winnings.chest.%player%.fronts::diamond helmet of unbreaking 2 and projectile protection 2 and aqua affinity 2}
 					send "&aYou have won &e1 diamond helmet of unbreaking 2 and projectile protection 2 and aqua affinity 2&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
 					log "%player%^ADD^1^diamond helmet of unbreaking 2 and projectile protection 2 and aqua affinity 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
@@ -602,7 +602,7 @@ command /prize [<text>] [<text>] [<text>]:
 						send "&aUse &e/prize claim&a in Fronts to claim!"
 						log "%player%^ADD^1^diamond leggings of unbreaking 2 and protection 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_winnings.chest.%player%.fronts::diamond leggings of unbreaking 2 and protection 2}
+					add 1 to {db_winnings.chest.%player%.fronts::diamond leggings of unbreaking 2 and protection 2}
 					send "&aYou have won &e1 diamond leggings of unbreaking 2 and protection 2&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
 					log "%player%^ADD^1^diamond leggings of unbreaking 2 and protection 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
@@ -615,7 +615,7 @@ command /prize [<text>] [<text>] [<text>]:
 						send "&aUse &e/prize claim&a in Fronts to claim!"
 						log "%player%^ADD^1^diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2}
+					add 1 to {db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2}
 					send "&aYou have won &e1 diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
 					log "%player%^ADD^1^diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
@@ -628,7 +628,7 @@ command /prize [<text>] [<text>] [<text>]:
 						send "&aUse &e/prize claim&a in Fronts to claim!"
 						log "%player%^ADD^1^diamond shovel of unbreaking 3 and efficiency 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_winnings.chest.%player%.fronts::diamond shovel of unbreaking 3 and efficiency 3}
+					add 1 to {db_winnings.chest.%player%.fronts::diamond shovel of unbreaking 3 and efficiency 3}
 					send "&aYou have won &e1 diamond shovel of unbreaking 3 and efficiency 3&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
 					log "%player%^ADD^1^diamond shovel of unbreaking 3 and efficiency 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
@@ -641,7 +641,7 @@ command /prize [<text>] [<text>] [<text>]:
 						send "&aUse &e/prize claim&a in Fronts to claim!"
 						log "%player%^ADD^1^diamond hoe of unbreaking 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_winnings.chest.%player%.fronts::diamond hoe of unbreaking 3 and fortune 2}
+					add 1 to {db_winnings.chest.%player%.fronts::diamond hoe of unbreaking 3 and fortune 2}
 					send "&aYou have won &e1 diamond hoe of unbreaking 3 and fortune 2&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
 					log "%player%^ADD^1^diamond hoe of unbreaking 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
@@ -654,7 +654,7 @@ command /prize [<text>] [<text>] [<text>]:
 						send "&aUse &e/prize claim&a in Fronts to claim!"
 						log "%player%^ADD^1^diamond sword of unbreaking 2 and looting 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 3 to {db_winnings.chest.%player%.fronts::diamond sword of unbreaking 2 and looting 3}
+					add 1 to {db_winnings.chest.%player%.fronts::diamond sword of unbreaking 2 and looting 3}
 					send "&aYou have won &e1 diamond sword of unbreaking 2 and looting 3&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
 					log "%player%^ADD^1^diamond sword of unbreaking 2 and looting 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
