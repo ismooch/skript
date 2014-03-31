@@ -227,7 +227,7 @@ command /prize [<text>] [<text>] [<text>]:
 					
 					
 			chance of 5%:
-				set {_ran} to a random integer between 1 and 5
+				set {_ran} to a random integer between 1 and 4
 				
 				{_ran} is 1:
 					set {_bal} to player's balance
@@ -250,20 +250,9 @@ command /prize [<text>] [<text>] [<text>]:
 					log "%player%^ADD^1 diamond pickaxe^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
 					stop
 					
-				{_ran} is 3:
-					{db_winnings.chest.%player%.fronts::Skeleton Projeggtiles} is not set:
-						set {db_winnings.chest.%player%.fronts::Skeleton Projeggtiles} to 8
-						send "&aYou have won &e8 Skeleton Projeggtiles&a on &eFronts&a."
-						send "&aUse &e/prize claim&a in Fronts to claim!"
-						log "%player%^ADD^8^Skeleton Projeggtiles^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
-						stop
-					add 8 to {db_winnings.chest.%player%.fronts::Skeleton Projeggtiles}
-					send "&aYou have won &e8 Skeleton Projeggtiles&a on &eFronts&a."
-					send "&aUse &e/prize claim&a in Fronts to claim!"
-					log "%player%^ADD^8^Skeleton Projeggtiles^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
-					stop
+				
 					
-				{_ran} is 4:
+				{_ran} is 3:
 					{db_winnings.chest.%player%.skyblock::beacon} is not set:
 						set {db_winnings.chest.%player%.skyblock::beacon} to 1
 						send "&aYou have won &e1 beacon&a for &eSkyblock!"
@@ -276,7 +265,7 @@ command /prize [<text>] [<text>] [<text>]:
 					log "%player%^ADD^1 beacon^RARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
 					stop
 					
-				{_ran} is 5:
+				{_ran} is 4:
 					{db_prizecheck.%player%} is not set:
 						set {db_prizecheck.%player%} to 1
 						send "&aYou have been given &e1 Front Slot&a!"
