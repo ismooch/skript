@@ -1,4 +1,4 @@
-command /prize [<text>] [<text>] [<text>]:
+command /prize [<text>] [<text>] [<text>] [<integer>]:
 	trigger:
 		argument 1 is not set:
 		
@@ -10,9 +10,26 @@ command /prize [<text>] [<text>] [<text>]:
 			send "&e/prize balance"
 			send "&7Check your available balance of Prize Tokens"
 			send " "
+			player has permission "obam.admin":
+				send "&e/prize balance <playername>"
+				send "&7Check the balance of another player [Admin]"
+				send " "
+				send "&e/prize balance set <playername> <amount>"
+				send "&7Set the balance for another player [Admin]"
+				send " "
 			send "&e/prize spin"
 			send "&7Spin the prize wheel! (only once every 12 hours)"
 			send " "
+			send "&e/prize claim"
+			send "&7Execute in either Fronts or Skyblock to receive your won items"
+			send " "
+			player has permission "obam.admin":
+				send "&e/prize list <playername>"
+				send "&7Execute in either Fronts or Skyblock to see the item chest for listed player [Admin]"
+				send " "
+				send "&e/prize delete <playername> <itemname>"
+				send "&7Execute in either Fronts or Skyblock to delete selected item from seleted player [Admin]"
+				send " "
 			send "&e/prize"
 			send "&7Open this help menu"
 			send " "
@@ -21,13 +38,21 @@ command /prize [<text>] [<text>] [<text>]:
 		argument 1 is "balance" or "b":
 			argument 2 is set:
 				player has permission "obam.smod":
-					{db_votetokens.%argument 2%} is not set:
-						send "&aThis player has no tokens." to player
+					argument 2 is not "set":
+						{db_votetokens.%argument 2%} is not set:
+							send "&aThis player has no tokens." to player
+							stop
+						{db_votetokens.%argument 2%} is 0:
+							send "&aThis player has no tokens." to player
+							stop
+						send "&e%argument 2% &ahas &e%{db_votetokens.%argument 2%}%&a tokens" to player
+					argument 2 is "set":
+						argument 4 is not set:
+							send "&cYou must set a number:&e /prize set %argument 3% <number>"
+							stop
+						set {db_votetokens.%argument 3%} to argument 4
+						send "&e%argument 3% &anow has &e%{db_votetokens.%argument 3%}%&a Prize tokens"
 						stop
-					{db_votetokens.%argument 2%} is 0:
-						send "&aThis player has no tokens." to player
-						stop
-					send "&e%argument 2% &ahas &e%{db_votetokens.%argument 2%}%&a tokens" to player
 			{db_votetokens.%player%} is not set:
 				send "&aYou do not have any Prize Tokens!!! Please vote to receive some!" to player
 				stop
@@ -53,8 +78,12 @@ command /prize [<text>] [<text>] [<text>]:
 					loop {db_winnings.chest.%player%.fronts::*}:
 						send "%loop-index%.....%loop-value%"
 				argument 2 is set:
+					
 					loop {db_winnings.chest.%argument 2%.fronts::*}:
-						send "%loop-index%....%loop-value%"
+						{_loop.count} is not set:
+							set {_loop.count} to 0
+						add 1 to {_loop.count}
+						send "%{_loop.count}%..%loop-index%....%loop-value%"
 					
 		argument 1 is "delete":
 			player does not have permission "obam.admin":
@@ -70,7 +99,18 @@ command /prize [<text>] [<text>] [<text>]:
 				delete {db_winnings.chest.%argument 2%.skyblock::%argument 3%}
 			
 			world is "world":
-				delete {db_winnings.chest.%argument 2%.fronts::%argument 3%}
+				loop {db_winnings.chest.%argument 2%.fronts::*}:
+					{_loop.count} is not set:
+						set {_loop.count} to 0
+					add 1 to {_loop.count}
+					"%{_loop.count}%" is argument 3
+					send "&cDeleteing %loop-index%..."
+					set {_del} to loop-index
+				delete {db_winnings.chest.%argument 2%.fronts::%{_del}%}
+				{db_winnings.chest.%argument 2%.fronts::%{_del}%} is set:
+					send "&cError!"
+					stop
+			
 				
 			
 			send "&cDeleted..."
@@ -598,16 +638,16 @@ command /prize [<text>] [<text>] [<text>]:
 					stop
 					
 				{_ran} is 21:
-					{db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2} is not set:
-						set {db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2} to 1
-						send "&aYou have won &e1 diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2&a for &eFronts!"
+					{db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 2 and efficiency 3 and fortune 2} is not set:
+						set {db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 2 and efficiency 3 and fortune 2} to 1
+						send "&aYou have won &e1 diamond pickaxe of unbreaking 2 and efficiency 3 and fortune 2&a for &eFronts!"
 						send "&aUse &e/prize claim&a in Fronts to claim!"
-						log "%player%^ADD^1^diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						log "%player%^ADD^1^diamond pickaxe of unbreaking 2 and efficiency 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 1 to {db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2}
-					send "&aYou have won &e1 diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2&a for &eFronts!"
+					add 1 to {db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 2 and efficiency 3 and fortune 2}
+					send "&aYou have won &e1 diamond pickaxe of unbreaking 2 and efficiency 3 and fortune 2&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
-					log "%player%^ADD^1^diamond pickaxe of unbreaking 2 and effiiciency 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					log "%player%^ADD^1^diamond pickaxe of unbreaking 2 and efficiency 3 and fortune 2^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 					stop
 					
 				{_ran} is 22:
@@ -795,6 +835,10 @@ command /prize [<text>] [<text>] [<text>]:
 command /prizedrop <text> <text>:
 	permission: obam.free
 	trigger:
+		player doesn't have space for a oak sapling:
+			send "&cMake space in your inventory first!"
+			stop
+			
 		argument 2 is "diamond chestplate of ubreaking 2 and protection 2":
 			set {_item.hold} to "diamond chestplate of unbreaking 2 and protection 2"
 		argument 2 is "enderpearl":
@@ -804,7 +848,7 @@ command /prizedrop <text> <text>:
 		{_item.hold} is set:
 			set {_item} to "%{_item.hold}%" parsed as item
 		set {_loop} to {db_winnings.chest.%player%.%argument 1%::%argument 2%}
-		drop {_loop} of {_item} at location of player
+		give {_loop} of {_item} to player
 			
 		clear {db_winnings.chest.%player%.%argument 1%::%argument 2%}
 		
@@ -815,3 +859,12 @@ command /prizefix <text> <text>:
 			{db_prizecheck.%argument 1%} is not set:
 				set {db_prizecheck.%argument 1%} to 0
 			add 1 to {db_prizecheck.%argument 1%}
+			
+command /fixbook:
+	permission: obamm.free
+	trigger:
+		player's tool is enchanted book:
+			set {_hold} to "%player's tool%"
+			set {_hold} to {_hold} parsed as item
+			send "%{_hold}%"
+			set player's tool to 403 of unbreaking 4

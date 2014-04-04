@@ -42,8 +42,14 @@ on join:
 		
 every 1 tick:
 	loop all players:
+		{chunk.live.%chunk at location of loop-player%} is not set:
+			{alert.notify.owner.%loop-player%} is not "Unclaimed":
+				{alert.fronts.%loop-player%} is true
+				send "&a&lUnclaimed Front" to loop-player
+				set {alert.notify.owner.%loop-player%} to "Unclaimed"
 		{alert.notify.owner.%loop-player%} is not {chunk.live.%chunk at location of loop-player%}:
 			{chunk.live.%chunk at location of loop-player%}  is not set:
+				
 				{alert.notify.owner.%loop-player%} is not "Unclaimed":
 					{alert.fronts.%loop-player%} is true
 					
@@ -51,14 +57,11 @@ every 1 tick:
 					set {alert.notify.owner.%loop-player%} to "Unclaimed"
 					set {land.unclaim.%loop-player%} to true
 			{chunk.live.%chunk at location of loop-player%}  is set:
-				{alert.fronts.%loop-player%} is false:
-					stop
 				send "&a&lFront Claimed by: &e%{chunk.live.%chunk at location of loop-player%} %" to loop-player
 				set {alert.notify.owner.%loop-player%} to {chunk.live.%chunk at location of loop-player%} 
 		{alert.notify.owner.%loop-player%} is not set:
 			{chunk.live.%chunk at location of loop-player%}  is not set:
-				{alert.fronts.%loop-player%} is false:
-					stop
+				{alert.fronts.%loop-player%} is true
 				send "&a&lUnclaimed Front" to loop-player
 				set {alert.notify.owner.%loop-player%} to "Unclaimed"
 				set {land.unclaim.%loop-player%} to true
