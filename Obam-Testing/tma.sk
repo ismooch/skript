@@ -280,69 +280,64 @@ command /tmawave [<text>]:
 		while {_count} is less than or equal to {_size}:
 			{_count} is not set:
 				set {_count} to 1
-			send "&cIn the while loop"
 			loop {active.tma.teams::*}:
-				{_loop.count} is not set:
-					set {_loop.count} to 0
-				add 1 to {_loop.count}
-				{_loop.count} is {_count}:
-					set {_cur.team} to loop-index
-			send "&a%{_cur.team}%"
-			loop {_loop} times:
-				set {_ran} to random element of {tma.spawns::*}
-				set {_loc} to random element of {tma.%{_cur.team}%.spawn::*}
-				spawn {_ran} at {_loc}
-				set {_cur.entity} to spawned entity
-				spawned entity is zombie:
-					
-					equip spawned entity with iron helmet
-					chance of 5%:
-						apply speed 2 to spawned entity for 999 days
-					chance of 10%:
-						equip spawned entity with iron helmet of unbreaking 2
+	
+				send "&a%loop-index%"
+				loop {_loop} times:
+					set {_ran} to random element of {tma.spawns::*}
+					set {_loc} to random element of {tma.%loop-index-1%.spawn::*}
+					spawn {_ran} at {_loc}
+					set {_cur.entity} to spawned entity
+					spawned entity is zombie:
 							
-					chance of 15%:
-						set spawned entity's tool to iron sword
+						equip spawned entity with iron helmet
 						chance of 5%:
-							set spawned entity's tool to iron sword of sharpness 2
-							chance of 5%:
-								set spawned entity's tool to diamond sword
+							apply speed 2 to spawned entity for 999 days
+						chance of 10%:
+							equip spawned entity with iron helmet of unbreaking 2
 									
-				spawned entity is skeleton:
-				
-					equip spawned entity with leather helmet
+						chance of 15%:
+							set spawned entity's tool to iron sword
+							chance of 5%:
+								set spawned entity's tool to iron sword of sharpness 2
+								chance of 5%:
+									set spawned entity's tool to diamond sword
+											
+					spawned entity is skeleton:
 						
-					set spawned entity's tool to bow
-					chance of 5%:
-						apply speed 2 to spawned entity for 999 days
-					chance of 10%:
-						equip spawned entity with iron helmet of unbreaking 2
-					chance of 15%:
-						set spawned entity's tool to bow of punch 1
+						equip spawned entity with leather helmet
+								
+						set spawned entity's tool to bow
 						chance of 5%:
-							equip spawned entity with diamond chestplate
+							apply speed 2 to spawned entity for 999 days
+						chance of 10%:
+							equip spawned entity with iron helmet of unbreaking 2
+						chance of 15%:
+							set spawned entity's tool to bow of punch 1
+							chance of 5%:
+								equip spawned entity with diamond chestplate
 							chance of 2%:
 								equip spawned entity with diamond leggings of projectile protection 1
+											
+					spawned entity is a creeper:
+								
+						chance of 5%:
+							apply speed 2 to spawned entity for 999 days
 									
-				spawned entity is a creeper:
-						
-					chance of 5%:
-						apply speed 2 to spawned entity for 999 days
-							
-				spawned entity is cave spider:
-						
-					chance of 5%:
-						apply speed to spawned entity for 999 days
-						
-				spawned entity is zombie pigman:
-						
-					set spawned entity's tool to gold sword
-					chance of 5%:
-						apply speed to spawned entity for 999 days
+					spawned entity is cave spider:
+								
+						chance of 5%:
+							apply speed to spawned entity for 999 days
+								
+					spawned entity is zombie pigman:
+								
+						set spawned entity's tool to gold sword
+						chance of 5%:
+							apply speed to spawned entity for 999 days
 				
 					
-				send "&aSpawning %{_ran}% at %{_loc}%"
-			send "&aTest message %{_count}%"
+				
+			
 			add 1 to {_count}
 
 	

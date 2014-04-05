@@ -1,0 +1,4 @@
+command /broadcast <text>:
+	permission: obam.admin
+	trigger:
+		broadcast argument
