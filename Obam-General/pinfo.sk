@@ -1,61 +1,64 @@
 variables:
-	{db_dayadd} = 1
+	{db_dayadd} = 0
 
 on join:
 	{db_count.start.%player%} is not set:
 		set {db_count.start.%player%} to {db_dayadd}
 		
-
 every 24 hours:
 	{db_dayadd} = {db_dayadd} + 1
 
 command /playerinfo [<offline player>]:
 	description: Find out information about you
-	aliases: /p, /info, /player
+	aliases: /p, /info, /player, /pinfo
 	executable by: players
 	trigger:
 		argument is not set:
 			player has permission "obam.admin":
-				set {_name} to "&d%player%"
+				set {_name} to "&d[A] &d%player%"
 			{_name} is not set:
 				player has permission "obam.mod":
-					set {_name} to "&2%player%"
+					set {_name} to "&2[M] &2%player%"
 			{_name} is not set:
 				player has permission "obam.ultimate":
-					set {_name} to "&6%player%"
+					set {_name} to "&6[^] &6%player%"
 			{_name} is not set:
 				player has permission "obam.supporter":
-					set {_name} to "&b%player%"
+					set {_name} to "&b[+] &b%player%"
 			{_name} is not set:
 				set {_name} to "&f%player%"
 			message "&aPlayer: %{_name}%"
 			set {_days} to {db_dayadd} - {db_count.start.%player%}
-			set {_days} to {_days} + 1
 			{_days} is less than 2:
 				message "&aThey are &e%{_days}% &aday old."
+				stop
+			{_days} is less than 1:
+				message "&aThis is %argument%''s first day."
 				stop
 			message "&aYou are &e%{_days}% &adays old."
 		argument is set:
 			argument has permission "obam.admin":
-				set {_name} to "&d%argument%"
+				set {_name} to "&d[A] &d%argument%"
 			{_name} is not set:
 				argument has permission "obam.mod":
-					set {_name} to "&2%argument%"
+					set {_name} to "&2[M] &2%argument%"
 			{_name} is not set:
 				argument has permission "obam.ultimate":
-					set {_name} to "&6%argument%"
+					set {_name} to "&6[^] &6%argument%"
 			{_name} is not set:
 				argument has permission "obam.supporter":
-					set {_name} to "&b%argument%"
+					set {_name} to "&b[+] &b%argument%"
 			{_name} is not set:
 				set {_name} to "&f%argument%"
 			argument is not online:
 				set {_name} to "&7%argument% &7&o(Offline)"
 			message "&aPlayer:<reset> %{_name}%"
 			set {_days} to {db_dayadd} - {db_count.start.%argument%}
-			set {_days} to {_days} + 1
 			{_days} is less than 2:
 				message "&aThey are &e%{_days}% &aday old."
+				stop
+			{_days} is less than 1:
+				message "&aThis is %argument%''s first day."
 				stop
 			message "&aThey are &e%{_days}% &adays old."
 			
