@@ -433,7 +433,7 @@ on consume of water bottle:
 		set {thirst.%player%} to 100
 		
 on death of a player:
-	{thirst.%player%} is 0:
+	{thirst.%player%} is less than 25:
 		set {thirst.%player%} to 25
 		
 command /ci [<number>]:
