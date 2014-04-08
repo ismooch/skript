@@ -1,5 +1,6 @@
 command /unenchant:
 	executable by: players
+	permission obam.free:
 	aliases: /disenchant
 	trigger:
 		player's tool is not a sword or axe or pickaxe or shovel or bow or helmet or chestplate or leggings or boots:
