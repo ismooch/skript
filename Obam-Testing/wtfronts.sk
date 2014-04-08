@@ -263,6 +263,14 @@ every 3 seconds:
 					apply mining fatigue 2 to loop-player for 1 minute
 					apply weakness to loop-player for 30 seconds
 					
+every 120 seconds:
+	loop all players:
+		biome is swamp at location of player
+		set {_ran} to a random integer between 1 and 5
+		{_ran} is 1:
+		      apply hunger 2 for 20 seconds
+		
+						
 					
 on spawn of a creeper or a skeleton or a spider or zombie:
 	{unstable.%chunk at event-location%} is true:
