@@ -1,0 +1,33 @@
+variable:
+    {dirty.%player%} = 25
+
+
+options:
+	soap1: Enchant bottle;&3Soap;&6Makes it so you don't stink||&6by tossing it when you are in water.
+
+on script load:
+
+  register new shaped recipe for named item stack from "{@soap1}" using air,air,air,air,milk bucket,dandelion,air,air,water bottle
+  register new shaped recipe for named item stack from "{@soap1}" using air,air,air,air,milk bucket,poppy,air,air,water bottle
+
+on shoot:
+
+    on walking on water block:
+    {dirty.%player%} = 25
+    
+    
+    
+every 5 seconds:
+    walking on dirt or grass:
+    set {dirty.%loop-player%} to {dirty.%loop-player%} - 1
+    
+    
+every 60 seconds:
+   if {dirty.%player%} is less than 10:
+   	apply nausea 2 for 3 seconds
+   	send "&cYour stench affects you, you might want to get some soap" to loop-player
+   	
+   	
+   	#Eventually want to make it so it can repel passive mobs
+   	
+      
