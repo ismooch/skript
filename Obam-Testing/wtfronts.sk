@@ -246,6 +246,19 @@ every 3 seconds:
 					damage loop-player by 2
 					send "&cThe sun beats down on you" to loop-player
 					
+		
+		loop-players inventory is full:
+			apply slowness 2 to loop-player for 20 seconds
+			send "&cYou start to feel the burden of the weight of you backpack" to loop-player
+					
+					
+		biome at loop-player is tundra or ice spike and isn't wearing boots or leggings or chestplate or helmet:
+	         	set {_ran} to a random integer between 1 and 5
+			{_ran} is 1:
+				apply slowness to loop-player for 20 seconds
+				damage player .5 hearts
+				send "&cYou start to get hypothermia" to loop-player
+					
 		biome at loop-player is swamp:
 			set {_ran} to a random integer between 1 and 5
 			{_ran} is 1:
