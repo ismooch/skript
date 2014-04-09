@@ -2,14 +2,10 @@
 variables:
 	{claimedland.%player%} = 0
 	{availableland.live.%player%} = 1
-	{alert.fronts.%player%} = true
+	
 	
 
 on join:
-	{db_prizecheck.%player%} is set:
-		add {db_prizecheck.%player%} to {availableland.%player%}
-		send "&aYou have had &e%{db_prizecheck.%player%}%&a added to your Fronts balance!" to player
-		clear {db_prizecheck.%player%}
 	if {played.%player%} is not set:
 		set {played.%player%} to true
 	{reset.%player%.betamove} is not set:
@@ -42,26 +38,23 @@ on join:
 		
 every 1 tick:
 	loop all players:
-		{chunk.live.%chunk at location of loop-player%} is not set:
-			{alert.notify.owner.%loop-player%} is not "Unclaimed":
-				{alert.fronts.%loop-player%} is true
-				send "&a&lUnclaimed Front" to loop-player
-				set {alert.notify.owner.%loop-player%} to "Unclaimed"
 		{alert.notify.owner.%loop-player%} is not {chunk.live.%chunk at location of loop-player%}:
 			{chunk.live.%chunk at location of loop-player%}  is not set:
-				
 				{alert.notify.owner.%loop-player%} is not "Unclaimed":
-					{alert.fronts.%loop-player%} is true
-					
+					{alert.fronts.%loop-player%} is false:
+						stop
 					send "&a&lUnclaimed Front" to loop-player
 					set {alert.notify.owner.%loop-player%} to "Unclaimed"
 					set {land.unclaim.%loop-player%} to true
 			{chunk.live.%chunk at location of loop-player%}  is set:
+				{alert.fronts.%loop-player%} is false:
+					stop
 				send "&a&lFront Claimed by: &e%{chunk.live.%chunk at location of loop-player%} %" to loop-player
 				set {alert.notify.owner.%loop-player%} to {chunk.live.%chunk at location of loop-player%} 
 		{alert.notify.owner.%loop-player%} is not set:
 			{chunk.live.%chunk at location of loop-player%}  is not set:
-				{alert.fronts.%loop-player%} is true
+				{alert.fronts.%loop-player%} is false:
+					stop
 				send "&a&lUnclaimed Front" to loop-player
 				set {alert.notify.owner.%loop-player%} to "Unclaimed"
 				set {land.unclaim.%loop-player%} to true

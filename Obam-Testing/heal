@@ -1,0 +1,34 @@
+variables:
+	{heal.%player%} = false
+	{check.%player%} = false
+	{use.%player%} = true
+	{abstain.%player%} = true
+	
+
+
+command /heal:
+	executable by: players
+	permission: obam.free
+	trigger:
+	{abstain.%player%} = true
+	  {use.%player%} = true
+       set {_bal} to player's balance
+	   	{_bal} is less than 2000:
+		  	send "&cYou do not have enough tickets to do this!" to player
+		   	stop
+			
+	  remove 2000 from player's balance
+	  set {heal.%player%} to now
+	  set {use.%player%} to false
+		send "&aYou have been healed" to player
+		send "&aYou have &e%player's balance%&a remaining" to player
+		stop
+		
+every 1 hour:
+
+  	loop all players:
+  	set {_check} to difference between {heal.%player%} and now
+	  	{_check} is less than 12 hours
+	  		set {use.%player%} to false:
+	  		
+	  		set {use.%players%} to true
