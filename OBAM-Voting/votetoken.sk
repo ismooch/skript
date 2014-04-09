@@ -109,9 +109,9 @@ command /votetoken [<text>] [<text>]:
 					set {_bal} to {offline.%{_player}%.ticketadd}
 					add {_ran} to {offline.%{_player}%.ticketadd}
 					log "%{_player}%^%{_bal}%^ADD^%{_ran}%^%{offline.%{_player}%.ticketadd}%^VOTING BONUS - OFFLINE POOL" to "tickets/VOTEBONUSES.log"
-					execute console command "/alert %argument 1% just received %{_ran}% tickets by voting on %argument 2%! Get tickets too with &e/vote&d."
+					send "You just received %{_ran}% tickets by voting on %argument 2%!" to {_player}
 					stop
-				execute console command "/alert %argument 1% just received %{_ran}% tickets by voting on %argument 2%! Get tickets too with &e/vote&d."
+				send "You %argument 1% just received %{_ran}% tickets by voting on %argument 2%!" to {_player}
 				log "%{_player}%^%{_bal}%^ADD^%{_ran}%^%{_player}'s balance%^VOTING BONUS" to "tickets/VOTEBONUSES.log"
 					
 			

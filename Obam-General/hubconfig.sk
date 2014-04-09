@@ -1,0 +1,96 @@
+options:
+	help: named item stack from "book;&6&lOBAM&fCraft &3Guide;&7Right click with this book to learn the ins||&7and out of OBAM"
+	worlds: named item stack from "ender pearl;&3Game Worlds;&7Right click with this to check the current Game Worlds!"
+	fly: named item stack from "feather;&3Fly!;&7Right click with this feather to fly in the hub!"
+	skyblock: i;grass;n;&6Skyblock;l;&7Try our Skyblock world with custom challenges and ||&7Villager trading!;c;sudo %player% worlds skyblock
+	fronts: i;cobblestone;n;&6Fronts;l;&7Our Special flavour of Survival with immediate||&7land claiming!;c;sudo %player% worlds survival
+	wtfronts: i;magma cream;n;&6WTFronts;l;&cBETA TESTING|| ||&7Extreme Survival with extreme payoffs!;c;sudo %player% worlds wtf
+	kitpvp: i;blaze rod;n;&6Kit PVP;l;&7Play OBAM's KitPvP with new original kits!;c;sudo %player% worlds kit
+	
+
+
+on join:
+	execute console command "/mv tp %player% Death-hub"
+	clear player's inventory
+	give player {@help}
+	give player {@worlds}
+	give player {@fly}
+	
+on shoot:
+	world is "Death-hub"
+	shooter's tool is ender pearl
+	cancel event
+	
+on right click:
+	player's tool is {@help}:
+		make player execute command "/help"
+	player's tool is {@worlds}:
+		cancel event
+		make player execute command "/worlds"
+	player's tool is {@fly}:
+		{fly.hub.%player%} is not set:
+			set {fly.hub.%player%} to true
+			allow player to fly
+			send "&aYou can fly!"
+			stop
+		{fly.hub.%player%} is true:
+			set {fly.hub.%player%} to false
+			disallow player to fly
+			send "&cYou can no longer fly!"
+			stop
+		{fly.hub.%player%} is false:
+			set {fly.hub.%player%} to true
+			allow player to fly
+			send "&aYou can fly!"
+			stop
+		
+		
+on drop:
+	world is "Death-hub":
+		cancel event
+		
+
+command /worlds [<text>]:
+	permission: obam.free
+	trigger:
+		world is "Death-hub"
+		argument is not set:
+		
+			send "&aBringing up menu..."
+		
+			show "s;1;{@skyblock};s;2;{@kitpvp};s;3;{@fronts};s;4;{@wtfronts}" with 1 row named "&7Worlds" to player
+			
+		argument is "survival":
+			
+			make player execute command "/transfer survival"
+			
+		argument is "wtf":
+		
+			make player execute command "/transfer curtain"
+			
+		argument is "skyblock":
+		
+			execute console command "mv tp %player% skyworld"
+			
+		argument is "kit":
+			
+			execute console command "mv tp %player% kitpvpkillingfields"
+			
+every second:
+
+	loop all players:
+		{fly.hub.%loop-player%} is true:
+			loop-player's world is not "Death-hub":
+				disallow loop-player to fly
+				set {fly.hub.%loop-player%} to false
+			loop-player's world is "Death-hub":
+				allow loop-player to fly
+		
+			
+command /transfer [<text>]:
+	trigger:
+		world is "Death-hub"
+		connect player to "%argument%"
+		
+		
+		
