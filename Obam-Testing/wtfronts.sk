@@ -245,6 +245,13 @@ every 3 seconds:
 				chance of 45%:
 					damage loop-player by 2
 					send "&cThe sun beats down on you" to loop-player
+					
+		biome at loop-player is swamp:
+			set {_ran} to a random integer between 1 and 5
+			{_ran} is 1:
+				apply hunger 2 to loop-player for 20 seconds
+				send "&cMalaria runs through your body" to loop-player
+
 			
 		y-coordinate of loop-player is greater than 110:
 			loop-player's helmet is air
@@ -285,7 +292,12 @@ every 3 seconds:
 				set loop-player's hunger level to 10
 				remove named item stack from "{@elefuel}" from loop-player
 				
-				
+	
+
+
+
+
+	
 	loop all entities:
 		loop-entity is not player:
 			{unstable.%loop-entity%} is set:
@@ -433,7 +445,7 @@ on consume of water bottle:
 		set {thirst.%player%} to 100
 		
 on death of a player:
-	{thirst.%player%} is 0:
+	{thirst.%player%} is less than 25:
 		set {thirst.%player%} to 25
 		
 command /ci [<number>]:
