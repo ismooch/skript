@@ -3,6 +3,7 @@ command /unenchant:
 	permission: obam.free
 	aliases: /disenchant
 	trigger:
+	players tool is enchanted:
 		player's tool is not a sword or axe or pickaxe or shovel or bow or helmet or chestplate or leggings or boots:
 			message "&cYou may only disenchant Armour, Weapons or Tools!" to player
 			stop
