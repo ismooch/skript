@@ -56,7 +56,7 @@ command /vote [<text>] [<number>] [<text>]:
 				set {_message} to "Now available!"
 			{db_server.minecraftserversorg.%{_player}%} is not set:
 				set {_vote.check1} to "&a[&c&lX&a]"
-			send "&a01.  - %{_vote.check1}% - %{db_obam.vote.link.1}% - %{_message}%" to player
+			send "&a01.  - %{_vote.check1}% - %{db_obam.vote.link.1}%" to player
 			clear {_message}
 		
 		
@@ -93,7 +93,7 @@ command /vote [<text>] [<number>] [<text>]:
 			
 			{db_server.mcserverlistcom.%{_player}%} is not set:
 				set {_vote.check2} to "&a[&c&lX&a]"
-			send "&a02.  - %{_vote.check2}% - %{db_obam.vote.link.2}% - %{_message2}%" to player
+			send "&a02.  - %{_vote.check2}% - %{db_obam.vote.link.2}%" to player
 			clear {_message}
 		
 			set {_waited} to difference between now and {db_server.mclistorg.%{_player}%}
@@ -132,7 +132,7 @@ command /vote [<text>] [<number>] [<text>]:
 			
 			{db_server.mclistorg.%{_player}%} is not set:
 				set {_vote.check3} to "&a[&c&lX&a]"
-			send "&a03.  - %{_vote.check3}% - %{db_obam.vote.link.3}% - %{_message3}%" to player
+			send "&a03.  - %{_vote.check3}% - %{db_obam.vote.link.3}%" to player
 			clear {_message}
 		
 			set {_waited} to difference between now and {db_server.serverlistminecraft.%{_player}%}
@@ -168,7 +168,7 @@ command /vote [<text>] [<number>] [<text>]:
 			
 			{db_server.serverlistminecraft.%{_player}%} is not set:
 				set {_vote.check4} to "&a[&c&lX&a]"
-			send "&a04.  - %{_vote.check4}% - %{db_obam.vote.link.4}% - %{_message4}%" to player
+			send "&a04.  - %{_vote.check4}% - %{db_obam.vote.link.4}%" to player
 			clear {_message}
 			clear {_waited}
 		
@@ -205,7 +205,7 @@ command /vote [<text>] [<number>] [<text>]:
 			
 			{db_server.topgorg.%{_player}%} is not set:
 				set {_vote.check5} to "&a[&c&lX&a]"
-			send "&a05.  - %{_vote.check5}% - %{db_obam.vote.link.5}% - %{_message5}%" to player
+			send "&a05.  - %{_vote.check5}% - %{db_obam.vote.link.5}%" to player
 			clear {_message}
 			clear {_waited}
 		
@@ -242,7 +242,7 @@ command /vote [<text>] [<number>] [<text>]:
 			
 			{db_server.minestatus.%{_player}%} is not set:
 				set {_vote.check6} to "&a[&c&lX&a]"
-			send "&a06.  - %{_vote.check6}% - %{db_obam.vote.link.6}% - %{_message6}%" to player
+			send "&a06.  - %{_vote.check6}% - %{db_obam.vote.link.6}%" to player
 			clear {_message6}
 			clear {_waited}
 		
@@ -279,7 +279,7 @@ command /vote [<text>] [<number>] [<text>]:
 			
 			{db_server.planetminecraftcom.%{_player}%} is not set:
 				set {_vote.check7} to "&a[&c&lX&a]"
-			send "&a07.  - %{_vote.check7}% - %{db_obam.vote.link.7}% - %{_message7}%" to player
+			send "&a07.  - %{_vote.check7}% - %{db_obam.vote.link.7}%" to player
 			clear {_message}
 			clear {_waited}
 		
@@ -316,7 +316,7 @@ command /vote [<text>] [<number>] [<text>]:
 			
 			{db_server.mcsl.%{_player}%} is not set:
 				set {_vote.check8} to "&a[&c&lX&a]"
-			send "&a08.  - %{_vote.check8}% - %{db_obam.vote.link.8}% - %{_message8}%" to player
+			send "&a08.  - %{_vote.check8}% - %{db_obam.vote.link.8}%" to player
 			clear {_message}
 			clear {_waited}
 		
@@ -353,7 +353,7 @@ command /vote [<text>] [<number>] [<text>]:
 			
 			{db_server.minecraftmpcom.%{_player}%} is not set:
 				set {_vote.check9} to "&a[&c&lX&a]"
-			send "&a09.  - %{_vote.check9}% - %{db_obam.vote.link.9}% - %{_message9}%" to player
+			send "&a09.  - %{_vote.check9}% - %{db_obam.vote.link.9}%" to player
 			clear {_message}
 			clear {_waited}
 		
@@ -390,7 +390,7 @@ command /vote [<text>] [<number>] [<text>]:
 			
 			{db_server.minecraftservers.%{_player}%} is not set:
 				set {_vote.check0} to "&a[&c&lX&a]"
-			send "&a10.  - %{_vote.check0}% - %{db_obam.vote.link.10}% - %{_message0}%" to player
+			send "&a10.  - %{_vote.check0}% - %{db_obam.vote.link.10}%" to player
 			clear {_message}
 			clear {_waited}
 

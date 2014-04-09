@@ -103,6 +103,8 @@ command /sudo [<player>] [<text>]:
 	executable by: console and players
 	permission: obam.admin
 	trigger:
+		send "%argument 1%"
+		send "%argument 2%"
 		has permission "obam.staff.admin"
 		make player-argument execute command "%argument 2%"
 		

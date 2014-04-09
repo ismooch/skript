@@ -120,7 +120,7 @@ command /challenge [<text>]:
 
 	#subfold @supporter1
 		argument is "supporter1":
-			player has permission "obam.challenge.supporter":
+			player has permission "obam.supporter":
 			
 			
 				send "&aOpening Menu..." to player
@@ -965,7 +965,7 @@ command /chal <number>:
 		
 		
 			#check for purchase
-			player does not have permission "obam.challenge.supporter":
+			player does not have permission "obam.supporter":
 				send "&c You must be a Supporter to do this!" to player
 				stop
 				
@@ -1043,7 +1043,7 @@ command /chal <number>:
 		argument 1 is 15:
 			
 			#check for purchase
-			player does not have permission "obam.challenge.supporter":
+			player does not have permission "obam.supporter":
 				send "&c You must be a Supporter to do this!" to player
 				stop
 				
@@ -1120,7 +1120,7 @@ command /chal <number>:
 		argument 1 is 17:
 			
 			#check for purchase
-			player does not have permission "obam.challenge.supporter":
+			player does not have permission "obam.supporter":
 				send "&c You must be a Supporter to do this!" to player
 				stop
 				
@@ -1312,7 +1312,7 @@ command /chal <number>:
 		argument 1 is 22:
 			
 			#check for purchase
-			player does not have permission "obam.challenge.supporter":
+			player does not have permission "obam.supporter":
 				send "&c You must be a Supporter to do this!" to player
 				stop
 				
@@ -1351,7 +1351,7 @@ command /chal <number>:
 		argument 1 is 23:
 			
 			#check for purchase
-			player does not have permission "obam.challenge.supporter":
+			player does not have permission "obam.supporter":
 				send "&c You must be a Supporter to do this!" to player
 				stop
 				
@@ -1390,7 +1390,7 @@ command /chal <number>:
 		argument 1 is 24:
 			
 			#check for purchase
-			player does not have permission "obam.challenge.supporter":
+			player does not have permission "obam.supporter":
 				send "&c You must be a Supporter to do this!" to player
 				stop
 				
