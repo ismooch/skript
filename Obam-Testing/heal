@@ -2,6 +2,7 @@ variables:
 	{heal.%player%} = false
 	{check.%player%} = false
 	{use.%player%} = true
+	{abstain.%player%} = true
 	
 
 
@@ -9,7 +10,7 @@ command /heal:
 	executable by: players
 	permission: obam.free
 	trigger:
-	
+	{abstain.%player%} = true
 	  {use.%player%} = true
        set {_bal} to player's balance
 	   	{_bal} is less than 2000:
