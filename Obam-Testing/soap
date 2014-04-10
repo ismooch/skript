@@ -10,6 +10,13 @@ on script load:
   register new shaped recipe for named item stack from "{@soap1}" using air,air,air,air,milk bucket,dandelion,air,air,water bottle
   register new shaped recipe for named item stack from "{@soap1}" using air,air,air,air,milk bucket,poppy,air,air,water bottle
 
+on craft:
+  event-item is named item stack from "{@soap1}":
+    drop 1 bucket at locaiton of event-player
+
+
+
+
 on drop:
 
    player's tool is named item stack from "{@soap1}":
