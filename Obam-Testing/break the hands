@@ -1,0 +1,5 @@
+on leftclick on a stone or netherbrick or ore or end stone with fist
+set {_ran} to a random integer between 1 and 5
+
+{_ran} is 1
+damage player by 1 heart
