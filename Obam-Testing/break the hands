@@ -1,4 +1,4 @@
-on leftclick on a stone or netherbrick or ore or end stone with fist
+on leftclick on a stone or netherbrick or ore or end stone with air
 set {_ran} to a random integer between 1 and 5
 
 {_ran} is 1
