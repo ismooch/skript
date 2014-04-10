@@ -3,14 +3,16 @@ variable:
 
 
 options:
-	soap1: Enchant bottle;&3Soap;&6Makes it so you don't stink||&6by tossing it when you are in water.
+	soap1: nether brick;&3Soap;&6Makes it so you don't stink||&6by tossing it when you are in water.
 
 on script load:
 
   register new shaped recipe for named item stack from "{@soap1}" using air,air,air,air,milk bucket,dandelion,air,air,water bottle
   register new shaped recipe for named item stack from "{@soap1}" using air,air,air,air,milk bucket,poppy,air,air,water bottle
 
-on soap1 shoot:
+on drop:
+
+   player's tool is named item stack from "{@soap1}":
 
     on walking on water block:
     {dirty.%player%} = 25
