@@ -2,7 +2,8 @@ variables:
   {rank.%player} = 0
 
 command /rankup [<text>]
-      permission:
-            obam.admin
-            description: ranks up player if their build is good
+      permission: obam.admin
+      description: ranks up player if their build is good
+    
+      trigger:
        set {rank.%player} to {rank.%player} + 1
