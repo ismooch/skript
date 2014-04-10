@@ -1,0 +1,9 @@
+command /rankup [<text>]:
+  permission: obam.admin
+  description: ranks up player if their build is good
+  trigger:
+    if %argument% is set:
+      set {_valenian.rank.%argument%} to {_valenian.rank.%argument%} + 1
+      send "%argument% is now rank {_valenian.rank.%argument%}" to player
+    if %argument% is not set:
+      send "Please type in a playername." to player
