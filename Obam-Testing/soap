@@ -10,7 +10,7 @@ on script load:
   register new shaped recipe for named item stack from "{@soap1}" using air,air,air,air,milk bucket,dandelion,air,air,water bottle
   register new shaped recipe for named item stack from "{@soap1}" using air,air,air,air,milk bucket,poppy,air,air,water bottle
 
-on shoot:
+on soap1 shoot:
 
     on walking on water block:
     {dirty.%player%} = 25
