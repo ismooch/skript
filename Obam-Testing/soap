@@ -17,10 +17,12 @@ on drop:
     on walking on water block:
     {dirty.%player%} = 25
     
+on break of coal ore or dirt:
+    set {dirty.%loop-player%} to {dirty.%loop-player%} - 1
     
-    
-every 5 seconds:
-    walking on dirt or grass:
+
+walking on dirt or grass:
+  every 5 seconds:
     set {dirty.%loop-player%} to {dirty.%loop-player%} - 1
     
     
