@@ -26,11 +26,12 @@ on join:
 		
 on chat:
 	cancel event
-	player has permission "obam.admin":
+	player is "IcecreamCow" or "Electric_Hamster" or "ISMOOCH":
+		
 		set {_pre} to "{@p} &d[A] %player%"
 	{_pre} is not set:
 		player has permission "obam.mod":
-			set {_pre} to "{@p} &3[M] %player%"
+			set {_pre} to "{@p} &2[M] %player%"
 	{_pre} is not set:
 		player has permission "obam.ultimate":
 			set {_pre} to "{@p} &6[^] %player%"
