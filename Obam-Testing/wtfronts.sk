@@ -374,7 +374,7 @@ on damage of a player:
 	damage cause is fall:
 	
         chance of .5%:
-	       set {concussion.%loop-player%} to true
+	       set {concussion.%player%} to true
         chance of 15%:
 			victim's boots are boots of feather falling:
 				stop
@@ -431,6 +431,7 @@ on right click with paper:
 on bed enter:
 	{injured.%player%} is true:
 		set {injured.%player%} to false
+		set {concussion.%player%} to false
 		set {injured.%player%.length} to 0
 		remove mining fatigue from player
 		remove weakness from player
