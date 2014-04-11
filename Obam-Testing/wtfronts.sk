@@ -447,6 +447,7 @@ on consume of water bottle:
 on death of a player:
 	{thirst.%player%} is less than 25:
 		set {thirst.%player%} to 25
+      set {injured.%loop-player%} to false
 		
 command /ci [<number>]:
 	permission: obam.admin
