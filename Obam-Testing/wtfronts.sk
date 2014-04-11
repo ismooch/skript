@@ -293,7 +293,10 @@ every 3 seconds:
 				remove named item stack from "{@elefuel}" from loop-player
 				
 	
+every 60 seconds:
 
+   {concussion.%loop-player%} is true
+	apply nausea 2 for 3 seconds
 
 
 
@@ -369,7 +372,10 @@ on death of a creeper or a skeleton or a zombie or a spider:
 			
 on damage of a player:
 	damage cause is fall:
-		chance of 15%:
+	
+        chance of .5%:
+	       set {concussion.%loop-player%} to true
+        chance of 15%:
 			victim's boots are boots of feather falling:
 				stop
 			set {_location} to location of victim
@@ -379,6 +385,10 @@ on damage of a player:
 			add 1 to damage
 			make score "&cINJURED" in board of victim to 1
 			send "&cYou have been injured from your fall!" to victim
+			
+			
+
+			
 			
 on right click with paper:
 	player is holding named item stack from "{@bandages}":
