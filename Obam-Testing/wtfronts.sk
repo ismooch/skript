@@ -13,6 +13,7 @@ options:
 	stablechst: diamond chestplate;&3Stable Diamond Chestplate;&6This chestplate contains a slot for special||&6enchantments and a container for &3Elemental||&3Fuel&6.
 	qnhchest: diamond chestplate;&3Chest of Quench;&6Utilizing the power of &3Elemental Fuel &6and||&6the &3Super Water Bottle&6, this chestplate makes||&6sure you never go thirsty!|| ||&c-1 Elemental Fuel Per Use|| ||&5&oWhile wearing this chestplate, your thirst will||&5&oautomatically go back up to 100 whenever it||&5&odips below 50, as long as you have Elemental||&5&oFuel in your inventory.
 	snkchest: diamond chestplate;&3Chest of Snacks;&6Utilizing the power of &3Elemental Fuel &6and an||&6Enchanted Golden Apple, this chestplate makes||&6sure you never go hungry!|| ||&c-1 Elemental Fuel Per Use|| ||&5&oWhile wearing this chestplate, your hunger will||&5&oautomatically go back up to 10 whenever it||&5&odips below 5, as long as you have Elemental||&5&oFuel in your inventory.
+	coffee: potion of harming; &3Cup of Coffee;&4Will give 50 fatigue back to you;&5So you can keep mining
 	
 on script load:
 	register new shapeless recipe for named item stack from "{@bandages}" using paper, slimeball, air, air, air, air, air, air, air
@@ -26,11 +27,12 @@ on script load:
 	register new shaped recipe for named item stack from "{@stablechst}" using named item stack from "{@stablemetal}", air, named item stack from "{@stablemetal}", named item stack from "{@stablemetal}", diamond block, named item stack from "{@stablemetal}", named item stack from "{@stablemetal}", named item stack from "{@elefuel}", named item stack from "{@stablemetal}"
 	register new shapeless recipe for named item stack from "{@qnhchest}" using named item stack from "{@superbottle}", named item stack from "{@stablechst}", air, air, air, air, air, air, air
 	register new shapeless recipe for named item stack from "{@snkchest}" using named item stack from "{@stablechst}", enchanted golden apple, air, air, air, air, air, air, air
-
+        register new shaped recipe for named item stack from"{@coffee}" using air,Cocoa beans,air,air,milk bucket,air,air,air,air
 
 on join:
 	display board named "&9&lWTF&9ronts" to player
 	make score "&3Thirst" in board of player to {thirst.%player%}
+	make score "&3Fatigue" in board of player to {fatigue.%player%}
 	set {board.%player%} to true
 	{injured.%player%} is true:
 		make score "&cINJURED" in board of player to 1
@@ -61,6 +63,10 @@ on chunk load:
 		
 		
 on mine:
+	set {_ran} to random integer between 1 and 10
+	   {_ran} is 1
+	       set {fatigue.%player%} to {fatigue.%player%} - 1
+	       
 	player's tool is pickaxe
 	y-coordinate of player is less than 40
 	{cavein.%chunk at location of player%.chance} is false:
@@ -292,7 +298,9 @@ every 3 seconds:
 				set loop-player's hunger level to 10
 				remove named item stack from "{@elefuel}" from loop-player
 				
-	
+	        {fatigue.%loop-player%} is less than or equal to 30:
+	        	apply slowness for 3 seconds
+	        	send "%cYou are fatigued, You can drink coffee or rest to get your strength back"
 
 
 
@@ -427,6 +435,17 @@ on bed enter:
 		remove slowness from player
 		nullify score "&cINJURED" in board of player
 		send "&aYou have been healed of your injuries!" to player
+		set {fatigue.%player%} to 100
+		
+on consume of potion of harming;
+  player is holding named item stack from "{@coffee}"
+   {fatigue.%player%} is greater or equal to 100
+      send &a"You are not fatigued" to player
+   {fatigue.%player%} is less than 100
+   	cancel event
+   	set {fatigue.%player%} to 100
+        apply speed 2 for 30 seconds
+   
 
 on consume of water bottle:
 	{thirst.%player%} is greater than or equal to 100:
@@ -437,16 +456,11 @@ on consume of water bottle:
 		{thirst.%player%} is greater than 100:
 			set {thirst.%player%} to 100
 		stop
-	{thirst.%player%} is greater than or equal to 100:
-		set {thirst.%player%} to 100
-		cancel event
-	add 10 to {thirst.%player%}
-	{thirst.%player%} is greater than 100:
-		set {thirst.%player%} to 100
 		
 on death of a player:
 	{thirst.%player%} is less than 25:
 		set {thirst.%player%} to 25
+      set {injured.%loop-player%} to false
 		
 command /ci [<number>]:
 	permission: obam.admin
