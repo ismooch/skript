@@ -2,10 +2,6 @@ variables:
 	{heal.%player%} = false
 
 
-
-
-
-
 command /heal:
 	executable by: players
 	permission: obam.free
@@ -13,7 +9,7 @@ command /heal:
 		{heal.%player%} is not set:
 			set {heal.%player%} to now
 			add 13 hours to {heal.%player%}
-			
+
 		set {_check} to difference between {heal.%player%} and now
 		{_check} is less than 12 hours:
 			set {_check} to difference between {heal.%player%} and now
@@ -39,5 +35,12 @@ command /heal:
 			set {heal.%player%} to now
 			send "&aYou have been healed" to player
 			set player's health to 10
+			set player's hunger to 10
+			apply regeneration 4 for 30 seconds to player
+			apply fire resistance for 2 minutes to player
+			apply resistance 2 for 2 minutes to player
+			apply absortion 2 for 2 minutes to player
+			apply wither for 0 seconds to player
+			apply poison for 0 seconds to player
 			send "&aYou have &e%player's balance%&a remaining" to player
 			stop
