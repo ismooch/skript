@@ -93,3 +93,5 @@ every 1 second:
 			set loop-player's helmet to sponge named "&b&lThe Hamster Hat"
 		loop-player is "OrigamiJoe":
 			set loop-player's helmet to daylight sensor named "&6Bane's Mask"
+		loop-player is "Deathtomb8953":
+			set loop-player's helmet to spawner block named "&6Death's Hat"
