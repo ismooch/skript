@@ -3,13 +3,13 @@ options:
 	betahat: i;iron pressure plate;n;&3&lBeta Supporter Hat;l;&7This Special hat is for all members who supported||&7during our beta period. This hat is a thank you from the &eOBAM||&7Staff for those that helped us when we were starting. THANK YOU!;c;hatreward betahat %player%
 
 
-	
+
 command /hat:
 	permission: obam.free
 	executable by: players
 	trigger:
 		show "s;1;{@betahat}" with 3 rows named "&9&lOBAM &9Hats" to player
-		
+
 command /hatreward <text> <player>:
 	executable by: console
 	trigger:
@@ -18,7 +18,7 @@ command /hatreward <text> <player>:
 				send "&aYou now have a hat :D" to player-argument
 				execute console command "hatgive iron pressure plate %player-argument%"
 
-				
+
 
 command /hatgive <item> [<player>]:
 	executable by: players and console
@@ -41,7 +41,7 @@ command /hatgive <item> [<player>]:
 		give player-argument's helmet to player-argument
 		set player-argument's helmet to arg 1
 		set name of player-argument's helmet to "hat"
-		
+
 command /hatadd <item>:
 	permission: obam.admin
 	trigger:
@@ -64,7 +64,7 @@ on drop:
 	loop {hat.items.list::*}:
 		item is loop-value named "hat":
 			cancel event
-	
+
 
 command /hattoggle:
 	permission: obam.mod
@@ -91,4 +91,7 @@ every 1 second:
 			set loop-player's helmet to command block named "&d&lSmooch's Sassy Hat"
 		loop-player is "Electric_Hamster":
 			set loop-player's helmet to sponge named "&b&lThe Hamster Hat"
-		
+		loop-player is "OrigamiJoe":
+			set loop-player's helmet to daylight sensor named "&6Bane's Mask"
+		loop-player is "Deathtomb8953":
+			set loop-player's helmet to spawner block named "&6Death's Hat"

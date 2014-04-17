@@ -1,0 +1,18 @@
+variables:
+	set {_nextuse} to difference between {_time} and now
+	set {_time} to now
+	
+
+on right click on block:
+	block is rail:
+			{_nextuse} is less than 1 second
+				place minecart on block-location
+				add 1 minute to {_time}
+				set {_nextuse} to now
+		
+		
+on vehicle exit:
+	destroy vehicle
+	
+
+		
