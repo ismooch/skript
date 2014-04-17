@@ -14,7 +14,9 @@ command /refer <text>:
 					send "&aYou have received &e500 Tickets&a as thanks. If you like our stuff subscribe to us on on PMC! &ehttp://pmc.la/s0mF1" to player
 					set {refer.chance.%player%} to false
 					stop
-					
+				argument is player:
+					send "&3You cannot refer yourself" to player
+					stop
 				{played.%argument%} is not set:
 					send "&cThat Player is make believe!" to player
 					stop
