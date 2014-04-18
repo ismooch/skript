@@ -54,6 +54,7 @@ command /tixp <player> <number>:
 		
 command /tix:
 	executable by: players
+	aliases: /ticket, /tickets, /money, /balance, /bal, /amount
 	permission: obam.free
 	trigger:
 		send "&aYour current balance is &e%player's balance%&a!" to player
