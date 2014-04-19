@@ -9,16 +9,22 @@ command /refer <text>:
 	trigger:
 		{refer.chance.%player%} is true:
 			{join.time.%player%} is greater than or equal to now:
-				argument is "2daa6f95b4c9bcc027a7b6b668bed93b":
+				%argument% has played before:
 					add 500 to player's balance
 					send "&aYou have received &e500 Tickets&a as thanks. If you like our stuff subscribe to us on on PMC! &ehttp://pmc.la/s0mF1" to player
 					set {refer.chance.%player%} to false
 					stop
-					
-				{played.%argument%} is not set:
-					send "&cThat Player is make believe!" to player
+				%argument% has not played before:
+					send "&cThis player has not played before or does not exist."
+					send "&fUsage: /refer <name>" to player
 					stop
-				
+				%argument% is not set:
+					send "&cPlease specify a player!" to player
+					send "&fUsage: /refer <name>" to player
+					stop
+					
+				#I am not sure of what you have below line 26 - Elite.
+
 				set {_player} to argument parsed as offline player
 				add 1000 to player's balance
 				send "&aYou have received &e300 Tickets&a for using a referral!" to player
@@ -27,7 +33,6 @@ command /refer <text>:
 				set {refer.chance.%player%} to false
 				stop
 			send "&cYour refer option has expired" to player
-		
 		send "&cYou can not do that!" to player
 		
 		
