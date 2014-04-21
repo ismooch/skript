@@ -1,0 +1,3 @@
+on connect:
+	player does not have permission "obam.supporter"
+	kick the player due to "&cThis beta is for Supporters only!" 
