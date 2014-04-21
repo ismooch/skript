@@ -1,0 +1,153 @@
+# add back in world is "creature_capture":
+options:
+	lead: named item stack from "lead;&bLasso;&eRight click with this to turn mobs into eggs."
+	rod: named item stack from "fishing rod;&bCapture Rod;&eUse this rod to capture the mobs."
+	
+on rightclick on sign:
+	world is "CreatureCapture"
+	line 1 of block is "Get a":
+		line 2 of block is "Lasso":
+			if player has {@lead}:
+				send "&cYou already have a lasso" to player
+				stop
+			give player {@lead}
+			stop
+		line 2 of block is "Capture Rod":
+			if player has {@rod}:
+				send "&cYou already have a capture rod" to player
+				stop
+			give player {@rod}
+			stop
+
+command /ccsign:
+	permission: obam.admin
+	permission message: "&cThis command is only available for Admins."
+	trigger:
+		world is "CreatureCapture"
+		send "&fSigns:" to player
+		send "&fType &agive &fon line 1" to player
+		send "&fType &alasso &for &acapture rod&f on line 2" to player
+		send "&f-----" to player
+		
+on sign change:
+	world is "CreatureCapture"
+	line 1 is "give" or "Give":
+		set line 1 to "Get a"
+		set line 3 to "HERE"
+		set line 4 to ""
+	line 2 is "lead" or "Lead" or "Leash" or "leash" or "lasso" or "Lasso":
+		set line 2 to "Lasso"
+		set line 4 to ""
+	line 2 is "rod" or "Rod" or "fishingrod" or "FishingRod" or "fishing rod" or "Fishing Rod" or "capturerod" or "CaptureRod" or "capture rod" or "Capture Rod":
+		set line 2 to "Capture Rod"
+		set line 4 to ""
+
+on right click on entity:
+	world is "CreatureCapture"
+	if player is holding {@lead}:
+		distance between player and event-entity is smaller than 3
+		if entity is bat:
+			delete entity
+			give player bat spawn egg
+			stop
+		if entity is chicken:
+			delete entity
+			give player chicken spawn egg
+			stop
+		if entity is cow:
+			delete entity
+			give player cow spawn egg
+			stop
+		if entity is horse:
+			delete entity
+			give player horse spawn egg
+			stop
+		if entity is mooshroom:
+			delete entity
+			give player mooshroom spawn egg
+			stop
+		if entity is ocelot:
+			delete entity
+			give player ocelot spawn egg
+			stop
+		if entity is pig:
+			delete entity
+			give player pig spawn egg
+			stop
+		if entity is sheep:
+			delete entity
+			give player sheep spawn egg
+			stop
+		if entity is squid:
+			delete entity
+			give player squid spawn egg
+			stop
+		if entity is villager:
+			delete entity
+			give player villager spawn egg
+			stop
+		if entity is wolf:
+			delete entity
+			give player wolf spawn egg
+			stop
+		if entity is zombie pigman:
+			delete entity
+			give player zombie pigman spawn egg
+			stop
+		if entity is blaze:
+			delete entity
+			give player blaze spawn egg
+			stop
+		if entity is cave spider:
+			delete entity
+			give player cave spider spawn egg
+			stop
+		if entity is creeper:
+			delete entity
+			give player creeper spawn egg
+			stop
+		if entity is enderman:
+			delete entity
+			give player enderman spawn egg
+			stop
+		if entity is ghast:
+			delete entity
+			give player ghast spawn egg
+			stop
+		if entity is magma cube:
+			delete entity
+			give player magma cube spawn egg
+			stop
+		if entity is silverfish:
+			delete entity
+			give player silverfish spawn egg
+			stop
+		if entity is skeleton:
+			delete entity
+			give player skeleton spawn egg
+			stop
+		if entity is slime:
+			delete entity
+			give player slime spawn egg
+			stop
+		if entity is spider:
+			delete entity
+			give player spider spawn egg
+			stop
+		if entity is witch:
+			delete entity
+			give player witch spawn egg
+			stop
+		if entity is zombie:
+			delete entity
+			give player zombie spawn egg
+			stop
+	
+on drop:
+	world is "CreatureCapture"
+	event-item is not spawn egg
+	cancel event
+	
+on pickup:
+	world is "CreatureCapture"
+	cancel event
