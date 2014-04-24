@@ -62,11 +62,11 @@ command /worlds [<text>]:
 			
 		argument is "survival":
 			
-			make player execute command "/transfer survival"
+			make player execute command "/server fronts"
 			
 		argument is "wtf":
 		
-			make player execute command "/transfer curtain"
+			make player execute command "/wtf"
 			
 		argument is "skyblock":
 		
