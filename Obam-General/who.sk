@@ -11,6 +11,10 @@ command /who:
 			add loop-player to {_cur.list::*}
 			clear {db_fronts.who.2::*}
 			set {db_fronts.who.2::*} to {_cur.list::*}
-		send "&eHub:&a%{db_hub.who::*}%"
-		send "&eWTF:&a%{db_wtf.who::*}%"
-		send "&eFronts:&a%{_cur.list::*}%"
+		send "&eTotal Online: %size of {_cur.list::*} + size of {db_hub.who::*} + size of {db_wtf.who.::*}%"
+		send " "
+		send "&eHub    (%size of {db_hub.who::*}%):&a%{db_hub.who::*}%"
+		send " "
+		send "&eWTF    (%size of {db_wtf.who::*}%):&a%{db_wtf.who::*}%"
+		send " "
+		send "&eFronts (%size of {_cur.list::*}%):&a%{_cur.list::*}%"

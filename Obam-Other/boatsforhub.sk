@@ -1,0 +1,51 @@
+	
+
+on right click:
+	world is "Death-hub"
+	targeted block is water block:
+		{time.boat.%player%} is not set:
+			set {time.boat.%player%} to now
+			add 1 minute to {time.boat.%player%}
+		set {_time} to difference between {time.boat.%player%} and now
+		{_time} is less than 1 minute:
+			send "&cYo... cooldown" to player
+			stop
+		{_time} is greater than or equal to 1 minute:
+			spawn boat at targeted block
+			set {time.boat.%player%} to now
+
+		
+		
+on vehicle exit:
+	world is "Death-hub"
+	vehicle is boat:
+		delete vehicle of player
+	vehicle is minecart:
+		delete vehicle of player
+	
+on vehicle damage:
+	world is "Death-hub"
+	cancel event
+	
+	
+command /vehicledel:
+	permission: obam.admin
+	trigger:
+		loop all entities in "Death-hub":
+			loop-entity is a boat:
+				{_count} is not set:
+					set {_count} to 0
+				add 1 to {_count}
+				delete loop-entity
+			loop-entity is a minecart:
+				{_count} is not set:
+					set {_count} to 0
+				add 1 to {_count}
+				delete loop-entity
+			
+		send "&e%{_count}% &avehicles deleted" to player
+
+	
+
+		
+	

@@ -1,0 +1,24 @@
+	
+
+on right click:
+	targeted block is water block:
+		{time.boat.%player%} is not set:
+			set {time.boat.%player%} to now
+			add 1 minute to {time.boat.%player%}
+		set {_time} to difference between {time.boat.%player%} and now
+		{_time} is less than 1 minute:
+			send "&cYo... cooldown" to player
+			stop
+		{_time} is greater than or equal to 1 minute:
+			spawn boat at targeted block
+			set {time.boat.%player%} to now
+
+		
+		
+on vehicle exit:
+	delete vehicle of player
+	
+on vehicle damage:
+	cancel event
+		
+	

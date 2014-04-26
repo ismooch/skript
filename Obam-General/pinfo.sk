@@ -1,14 +1,14 @@
-variables:
-	{db_dayset.2} = 0
+
 
 on join:
-	{db_count.start.%player%.2} is not set:
-		set {db_count.start.%player%.2} to {db_dayset}
-		set {db_current.server.%player%} to "&eWTF"
+	set {db_current.server.%player%} to "&eFronts"
+		
+		
+
 		
 on disconnect:
 	clear {db_current.server.%player%}
-	set {db_lastseen.%player%} to "%now% on &eWTF"
+	set {db_lastseen.%player%} to "%now% on &eFronts"
 	clear {db_color.%player%}
 	player has permission "obam.admin":
 		set {db_color.%player%} to "&d%player%"
@@ -24,7 +24,6 @@ on disconnect:
 	{db_color.%player%} is not set:
 		set {db_color.%player%} to "&f%player%"
 	
-
 
 
 command /playerinfo [<offline player>]:
@@ -48,7 +47,7 @@ command /playerinfo [<offline player>]:
 			{_name} is not set:
 				set {_name} to "&f%player%"
 			message "&aPlayer:<reset> %{_name}%"
-			set {_days} to {db_dayset} - {db_count.start.%player%}
+			set {_days} to {db_dayset.2} - {db_count.start.%player%.2}
 			{_days} is less than 2:
 				{_days} is 1:
 					message "&aYou are &e%{_days}% &aday old."
@@ -91,7 +90,7 @@ command /playerinfo [<offline player>]:
 				send {_lastseen}
 			{_current.connect} is set:
 				send {_current.connect}
-			set {_days} to {db_dayset} - {db_count.start.%argument%}
+			set {_days} to {db_dayset.2} - {db_count.start.%argument%.2}
 			{_days} is less than 2:
 				{_days} is 1:
 					message "&aThey are &e%{_days}% &aday old."
@@ -100,3 +99,14 @@ command /playerinfo [<offline player>]:
 					message "%{_name}% &ais &e1&a day old"
 					stop
 			message "&aThey are &e%{_days}% &adays old."
+command /daycheck:
+	permission: obam.admin
+	trigger:
+		send "%{db_dayset.2}%" to player
+		send "%{db_count.start.%player%.2}%"
+		send "%{db_dayset.2} - {db_count.start.%player%.2}%"
+		
+command /daypush <number>:
+	permission: obam.admin
+	trigger:
+		set {db_dayset.2} to {db_dayset.2} + argument

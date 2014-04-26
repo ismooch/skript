@@ -1,0 +1,9 @@
+
+command /tnight:
+	permission: obam.mod
+	trigger:
+		player has night vision:
+			remove night vision from player
+			stop
+		player does not have night vision:
+			apply night vision to player for 999 days

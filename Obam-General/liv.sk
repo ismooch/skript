@@ -13,7 +13,7 @@ on chat:
 			{livon.power} is false:
 				set {livon.power} to true
 				send "&6&l'LiV: &3I am now functional %player% :D" to player
-				broadcast "&6&l'LiV: &3Hello, I am &6&l'LiV &3the &e&lOBAM &6Gaming &3help bot! :D"
+				broadcast "&6&l'LiV: &3Hello, I am &6&l'LiV&3, the &e&lOBAM &6Gaming &3help bot! :D"
 				stop
 			{livon.power} is true:
 				set {livon.power} to true
@@ -29,20 +29,116 @@ on chat:
 	
 on chat:
 	{livon.power} is true
+	message contains "what" or "what is":
+		message contains "colour" or "color":
+			message contains "black":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+0 is for &0Black &3(for more colors type /colors)"
+				stop
+			message contains "dark blue":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+1 is for &1Dark Blue &3(for more colors type /colors)"
+				stop
+			message contains "dark green":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+2 is for &2Dark Green &3(for more colors type /colors)"
+				stop
+			message contains "dark aqua":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+3 is for &3Dark Aqua &3(for more colors type /colors)"
+				stop
+			message contains "dark red":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+4 is for &4Dark Red &3(for more colors type /colors)"
+				stop
+			message contains "dark purple":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+5 is for &5Dark Purple &3(for more colors type /colors)"
+				stop
+			message contains "gold":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+6 is for &6Gold &3(for more colors type /colors)"
+				stop
+			message contains "gray" or "grey":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+7 is for &7Gray &3(for more colors type /colors)"
+				stop
+			message contains "dark gray" or "dark grey":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+8 is for &8Dark Gray &3(for more colors type /colors)"
+				stop
+			message contains "blue" or "light blue":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+9 is for &9Blue &3(for more colors type /colors)"
+				stop
+			message contains "green" or "light green" or "lime":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+a is for &aGreen &3(for more colors type /colors)"
+				stop
+			message contains "aqua" or "light aqua":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+b is for &bAqua &3(for more colors type /colors)"
+				stop
+			message contains "red" or "light red":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+c is for &cRed &3(for more colors type /colors)"
+				stop
+			message contains "pink" or "violet" or "light purple":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+d is for &dLight Purple &3(for more colors type /colors)"
+				stop
+			message contains "yellow":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+e is for &eYellow &3(for more colors type /colors)"
+				stop
+			message contains "white":
+				wait 1 second
+				broadcast "&6&l'LiV: &3%player%, &3&+f is for &fWhite &3(for more colors type /colors)"
+				stop
+
+on chat:
+	{livon.power} is true
+	message contains "what" or "what is":
+		message contains "ghost" or "ghostwar" or "ghostwars" or "ghost war" or "ghost wars" or "gw":
+			wait 1 second
+			send "&6&l'LiV: &3%player%, &3Ghost Wars is a minigame Elite is working on." to player
+			stop
+
+on chat:
+	{livon.power} is true
 	message contains "how do i get to" or "how do i get 2" or "where is" or "how do i play" :
-		message contains "parkour":
+		message contains "parkour" or "parkor" or "parkoure":
 			wait 1 second
 			broadcast "&6&l'LiV: &3%player%, you can type &e/pk &3 or &e/parkour &3 to get there :)"
 			stop
-		message contains "skyblock":
+		message contains "skyblock" or "sky block":
 			wait 1 second
-			broadcast "&6&l'LiV: &3%player%, you can type &e/skyblock&3 to get there :)"
+			broadcast "&6&l'LiV: &3%player%, you can type &e/skyblock &3or &e/sb &3to get there :)"
 			stop
-		message contains "hotpotato" or "hot potato" or "potato":
+		message contains "hotpotato" or "hot potato" or "hot potatoe" or "potato" or "potatoe":
 			wait 1 second
-			broadcast "&6&l'LiV: &3%player%, you can type &e/hp or &e/hotpotato &3 to get there :)"
+			broadcast "&6&l'LiV: &3%player%, you can type &e/hp &3or &e/hotpotato &3to get there :)"
 			stop
-			
+		message contains "kit" or "kitpvp" or "kit pvp":
+			wait 1 second
+			broadcast "&6&l'LiV: &3%player%, you can type &e/kp &3or &e/kitpvp &3to get there :)"
+			stop
+		message contains "survival" or "fronts" or "front":
+			wait 1 second
+			broadcast "&6&l'LiV: &3%player%, you can type &e/survival &3to get there :)"
+			stop
+		message contains "wtf" or "wtfronts":
+			wait 1 second
+			broadcast "&6&l'LiV: &3%player%, you can type &e/wtf &3to get there :)"
+			stop
+		message contains "hub" or "main":
+			wait 1 second
+			broadcast "&6&l'LiV: &3%player%, you can type &e/hub &3to get there :)"
+			stop
+		message contains "spawn" or "lobby":
+			wait 1 second
+			broadcast "&6&l'LiV: &3%player%, you can type &e/spawn &3to get there :)"
+			stop
 			
 on chat:
 	{livon.power} is true
@@ -70,7 +166,6 @@ on chat:
 		wait 1 second
 		broadcast "&6&l'LiV: &3Well at least it is not too bad. :)"
 		set {response.%player%} to false
-		
 
 on chat:
 	{livon.power} is true
@@ -101,14 +196,12 @@ on chat:
 			set {random.liv.pick} to false
 			wait 1 second
 			broadcast "&6&l'LiV: &3A winner has been chosen! It is &e%{_winner}%&3! Congratulations!"
-			
-
 		
 on chat:
 	{livon.power} is true
 	message contains "what games" or "how many games" or "kind of games" or "games you got" or "wht games" or "games here" or "can i do here" or "is there to do here":
 		wait 1 second
-		broadcast "&6&l'LiV: &3Hello, %player%! We offer &eKit Pvp&3,&eParkour&3, &eSkyblock&3, and &eHot Potato&3 currently. :)"
+		broadcast "&6&l'LiV: &3Hello, %player%! We offer &eKit Pvp&3,&eParkour&3, &eSkyblock&3, &eSurvival&3, and &eHot Potato&3 currently. :)"
 	
 on chat:
 	{livon.power} is true
@@ -191,14 +284,19 @@ on chat:
 	{livon.power} is true
 	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("hot potato" or "hp" or "potato" or "potato game"):
 		wait 1 second
-		send "&6&l'LiV: &3You can Type /Hotpotato or /Hp to Test you skill at our Hotpotato game" to player
+		send "&6&l'LiV: &3You can Type /Hotpotato or /Hp to test your skill at our Hotpotato game" to player
 		
 on chat:
 	{livon.power} is true
 	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("hub" or "spawn" or "game"):
 		wait 1 second
 		send "&6&l'LiV: &3You can Type /hub to return to spawn and our other games portals!" to player
-	
+		
+on chat:
+	{livon.power} is true
+	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("front" or "fronts" or "survival"):
+		wait 1 second
+		send "&6&l'LiV: &3You can Type /survival to test your skills in the Fronts!" to player
 		
 #on chat:
 	#message contains "have i completed" or "did i complete":
@@ -530,8 +628,6 @@ on chat:
 			send "&6&l'LiV: &3You have beaten me &e%{wins.%player%.liv.rps}% &3time at Rock, Paper, Scissors!" to player
 			stop
 		send "&6&l'LiV: &3You have beaten me &e%{wins.%player%.liv.rps}% &3times at Rock, Paper, Scissors!" to player
-
-			
 			
 on chat:
 	{livon.power} is true
@@ -540,8 +636,6 @@ on chat:
 			wait 1 second
 			broadcast "&6&l'LiV: &3Welcome back %player%!"
 			set {liv.away.%player%} to false
-				
-			
 			
 on chat:
 	{livon.power} is true
@@ -568,8 +662,6 @@ command /livgreet <text>:
 		set {db_liv.greet.%player%} to "%uncoloured argument%"
 		send "&aYour greeting message has been set to: &6&l'LiV: &3%{db_liv.greet.%player%}%"
 			
-
-			
 command /livalert <text> [<integer>]:
 	executable by: players and console
 	permission: obam.admin
@@ -588,14 +680,6 @@ every 10 minutes:
 	set {_size} to size of {db_liv.alerts::*}
 	set {_ran} to a random integer between 1 and {_size}
 	broadcast "&6&l'LiV: &3%{db_liv.alerts::%{_ran}%}%"
-			
-		
-	
-		
-		
-		
-		
-		
 		
 command /complete <text> <player>:
 	executable by: console
@@ -609,7 +693,6 @@ command /complete <text> <player>:
 				wait 1 second
 				broadcast "&6&l'LiV: &3Sorry, %player-argument% you have not completed &eGettingStoned&3!"
 				stop
-				
 				
 command /liv <text>:
 	permission: obam.smod

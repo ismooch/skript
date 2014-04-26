@@ -1,0 +1,20 @@
+	
+
+on right click:
+	targeted block is rail:
+		{time.rail.%player%} is not set:
+			set {time.rail.%player%} to now
+			add 1 minute to {time.rail.%player%}
+		set {_time} to difference between {time.rail.%player%} and now
+		{_time} is less than 1 minute:
+			send "&cYo... cooldown" to player
+			stop
+		{_time} is greater than or equal to 1 minute:
+			spawn minecart at targeted block
+			set {time.rail.%player%} to now
+
+		
+
+
+		
+	
