@@ -1,16 +1,16 @@
 # add back in world is "creature_capture":
 options:
-	lead: named item stack from "lead;&bLasso;&eRight click with this to turn mobs into eggs."
-	rod: named item stack from "fishing rod;&bCapture Rod;&eUse this rod to capture the mobs."
+	lasso: stick named "&bLasso" with lore "&eRight click with this to turn mobs into eggs."
+	rod: fishing rod named "&bCapture Rod" with lore "&eUse this rod to capture the mobs."
 	
 on rightclick on sign:
 	world is "CreatureCapture"
 	line 1 of block is "Get a":
 		line 2 of block is "Lasso":
-			if player has {@lead}:
+			if player has {@lasso}:
 				send "&cYou already have a lasso" to player
 				stop
-			give player {@lead}
+			give player {@lasso}
 			stop
 		line 2 of block is "Capture Rod":
 			if player has {@rod}:
@@ -44,7 +44,7 @@ on sign change:
 
 on right click on entity:
 	world is "CreatureCapture"
-	if player is holding {@lead}:
+	if player is holding {@lasso}:
 		distance between player and event-entity is smaller than 3
 		if entity is bat:
 			delete entity
