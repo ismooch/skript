@@ -141,7 +141,7 @@ command /kit [<text>]:
 						dye player's chestplate red
 						dye player's leggings red
 						dye player's boots red
-						give nameditemstack from "Stick of knockback 1;&fFire Wand;&fPowers:|| ||&bConfuse: &3Left click to shoot a confusion||&3egg at a player!||&b&lCOST:&b 5 Mana|| ||&bFireball: &3Right click to shoot a fireball||&b&lCOST:&b 10 Mana" to the player
+						give player stick of knockback 1 named "&fFire Wand" with lore "&fPowers:|| ||&bConfuse: &3Left click to shoot a confusion||&3egg at a player!||&b&lCOST:&b 5 Mana|| ||&bFireball: &3Right click to shoot a fireball||&b&lCOST:&b 10 Mana"
 						give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
 						give player 3 splash potions of harming 2 named "&fPain Juice"
 						apply speed 1 to player for 999 days
@@ -184,7 +184,7 @@ command /kit [<text>]:
 						dye player's chestplate blue
 						dye player's leggings blue
 						dye player's boots blue
-						give nameditemstack from "Stick of knockback 1;&fLightning Wand;&fPowers:|| ||&bTeleport: &3Left click to teleport to the block||&3you're looking at!||&b&lCOST:&b 50 Mana|| ||&bLightning: &3Right click to shoot lighting||&b&lCOST:&b 10 Mana" to the player
+						give player stick of knockback 1 named "&fLightning Wand" with lore "&fPowers:|| ||&bTeleport: &3Left click to teleport to the block||&3you're looking at!||&b&lCOST:&b 50 Mana|| ||&bLightning: &3Right click to shoot lighting||&b&lCOST:&b 10 Mana"
 						give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
 						give player 3 splash potions of harming 2 named "&fPain Juice"
 						apply jump 1 to player for 999 days
@@ -213,7 +213,7 @@ command /kit [<text>]:
 						dye player's chestplate yellow
 						dye player's leggings yellow
 						dye player's boots yellow
-						give nameditemstack from "Blaze Rod;&fSummoning Rod;&fPowers:|| ||&bSummon: &3Right Click to summon the undead to serve you!||&b&lCOST:&b 30 Mana|| ||&bCall of the dead: &3Left click to call your minions back!||&b&lCOST:&b 10 Mana" to player
+						give player Blaze Rod named "&fSummoning Rod" with lore "&fPowers:|| ||&bSummon: &3Right Click to summon the undead to serve you!||&b&lCOST:&b 30 Mana|| ||&bCall of the dead: &3Left click to call your minions back!||&b&lCOST:&b 10 Mana"
 						give player stone sword of knockback 1 and sharpness 2 named "&fSummoner's Trust"
 						give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
 						apply speed 1 to player for 999 days
