@@ -1,7 +1,7 @@
 options:
-	help: named item stack from "book;&6&lOBAM&fCraft &3Guide;&7Right click with this book to learn the ins||&7and out of OBAM"
-	worlds: named item stack from "ender pearl;&3Game Worlds;&7Right click with this to check the current Game Worlds!"
-	fly: named item stack from "feather;&3Fly!;&7Right click with this feather to fly in the hub!"
+	help: book named "&6&lOBAM&fCraft &3Guide" with lore "&7Right click with this book to learn the ins||&7and out of OBAM"
+	worlds: ender pearl named "&3Game Worlds" with lore "&7Right click with this to check the current Game Worlds!"
+	fly: feather named "&3Fly!" with lore "&7Right click with this feather to fly in the hub!"
 	skyblock: i;grass;n;&6Skyblock;l;&7Try our Skyblock world with custom challenges and ||&7Villager trading!;c;sudo %player% worlds skyblock
 	fronts: i;cobblestone;n;&6Fronts;l;&7Our Special flavour of Survival with immediate||&7land claiming!;c;sudo %player% worlds survival
 	wtfronts: i;magma cream;n;&6WTFronts;l;&cBETA TESTING|| ||&7Extreme Survival with extreme payoffs!;c;sudo %player% worlds wtf
