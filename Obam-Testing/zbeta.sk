@@ -3,11 +3,12 @@
 
 options:
 #@weapons
-	PStab: diamond sword;&aThe Green Justice;&7Crafted from the purest||&7items to cut through||&7the souls of the purest humans
-	ZStab: diamond sword;&cThe Red Death;&7Laced with the poisonous||&7Blood of the zombies||&7to deliver a powerful strike
-	Supp1: bow of infinity 1;&fBow of Healing;&7Powerful darts loaded||&7with medical properties to||&7to heal friends from afar
-	Supp2: paper;&fBandage;&7The most current healing technology||&7In a convenient travel||&7ready delivery system|| ||&eRight click on a player to use
-	Tank: wood sword of knockback 1;&eHit Stick;&7Built with rubber infused wood for ||&7that extra push against attacking enemies
+	PStab: diamond sword named "&aThe Green Justice" with lore "&7Crafted from the purest||&7items to cut through||&7the souls of the purest humans"
+	ZStab: diamond sword named "&cThe Red Death" with lore "&7Laced with the poisonous||&7Blood of the zombies||&7to deliver a powerful strike"
+	Supp1: bow of infinity 1 named "&fBow of Healing" with lore "&7Powerful darts loaded||&7with medical properties to||&7to heal friends from afar"
+	Supp2: paper named "&fBandage" with lore "&7The most current healing technology||&7In a convenient travel||&7ready delivery system|| ||&eRight click on a player to use"
+	Tank: wood sword of knockback 1 named "&eHit Stick" with lore "&7Built with rubber infused wood for ||&7that extra push against attacking enemies"
+	
 on death of a zombie:
 	{zbeta.game.active} is true
 	attacker is a player
@@ -1093,7 +1094,7 @@ on right click on a sign:
 				set player's helmet to red wool
 			{zbeta.team.%player%} is "yellow":
 				set player's helmet to yellow wool
-			give player named item stack from "{@ZStab}"
+			give player {@ZStab}
 			equip player with leather chestplate named "&cStabber Gear"
 			equip player with leather leggings named "&cStabber Gear"
 			equip player with leather boots named "&CStabber Gear"
@@ -1108,7 +1109,7 @@ on right click on a sign:
 				set player's helmet to red wool
 			{zbeta.team.%player%} is "yellow":
 				set player's helmet to yellow wool
-			give player named item stack from "{@PStab}"
+			give player {@PStab}
 			equip player with leather chestplate named "&aStabber Gear"
 			equip player with leather leggings named "&aStabber Gear"
 			equip player with leather boots named "&aStabber Gear"
@@ -1123,9 +1124,9 @@ on right click on a sign:
 				set player's helmet to red wool
 			{zbeta.team.%player%} is "yellow":
 				set player's helmet to yellow wool
-			give player named item stack from "{@Supp1}"
+			give player {@Supp1}
 			give player arrow
-			give player named item stack from "{@Supp2}"
+			give player {@Supp2}
 			equip player with leather chestplate named "&fDoctor's Coat"
 			equip player with leather leggings named "&fDoctor's Coat"
 			equip player with leather boots named "&fDoctor's Coat"
@@ -1140,7 +1141,7 @@ on right click on a sign:
 				set player's helmet to red wool
 			{zbeta.team.%player%} is "yellow":
 				set player's helmet to yellow wool
-			give player named item stack from "{@Tank}"
+			give player {@Tank}
 			equip player with leather chestplate named "&eTanks Armor"
 			equip player with leather leggings named "&eTanks Armor"
 			equip player with leather boots named "&eTanks Armor"
@@ -1172,10 +1173,10 @@ on damage of a player:
 	attacker is player:
 		{zbeta.team.%attacker%} is {zbeta.team.%victim%}:
 			{zbeta.lo.%attacker%} is "SUPPORT":
-				attacker's tool is named item stack from "{@Supp2}":
+				attacker's tool is {@Supp2}:
 					add 7 to victim's health
 					send "&aYou have been healed by %attacker%" to victim
-					remove named item stack from "{@Supp2}" from attacker
+					remove {@Supp2} from attacker
 					stop
 				attacker's tool is not air:
 					attacker's tool is not arrow
@@ -1193,15 +1194,15 @@ on damage of a player:
 			stop
 		set damage to 0
 		{zbeta.lo.%attacker%} is "Z-STABBER":
-			attacker's tool is named item stack from "{@ZStab}":
+			attacker's tool is {@ZStab}:
 				set {_dmg} to a random number between 0.09 to 0.12
-			attacker's tool is not named item stack from "{@ZStab}":
+			attacker's tool is not {@ZStab}:
 				set {_dmg} to a random number between 0.08 to 0.1
 		{zbeta.lo.%attacker%} is "P-STABBER":
-			attacker's tool is named item stack from "{@PStab}":
+			attacker's tool is {@PStab}:
 			
 				set {_dmg} to a random number between 0.3 and 0.8
-			attacker's tool is not named item stack from "{@PStab}":
+			attacker's tool is not {@PStab}:
 				set {_dmg} to a random number between 0.1 and 0.4
 		{zbeta.lo.%attacker%} is "SUPPORT":
 			set {_dmg} to 0.050
@@ -1258,15 +1259,15 @@ on damage of a player:
 on damage of a zombie:
 	attacker is player:
 		{zbeta.lo.%attacker%} is "Z-STABBER":
-			attacker's tool is named item stack from "{@ZStab}":
+			attacker's tool is {@ZStab}:
 				set {_dmg} to 8
-			attacker's tool is not named item stack from "{@ZStab}":
+			attacker's tool is not {@ZStab}:
 				set {_dmg} to 0.75
 		{zbeta.lo.%attacker%} is "P-STABBER":
-			attacker's tool is named item stack from "{@PStab}":
+			attacker's tool is {@PStab}:
 			
 				set {_dmg} to 1.0
-			attacker's tool is not named item stack from "{@PStab}":
+			attacker's tool is not {@PStab}:
 				set {_dmg} to 0.25
 		{zbeta.lo.%attacker%} is "SUPPORT":
 			set {_dmg} to 0.25
@@ -1288,15 +1289,3 @@ on target:
 		apply speed 3 to event-entity for 10 seconds
 		set {zbeta.%event-entity%.speed} to true
 		
-
-		
-	
-			
-		
-			
-			
-		
-		
-		
-
-	
