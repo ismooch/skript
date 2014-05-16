@@ -357,9 +357,9 @@ on damage:
 												chance of 30%:
 														add 3 to damage
 														send "&a&lBoom! &aHeadshot!" to attacker
-														play "level up" at location of attacker with pitch 1
+														play level up at location of attacker with pitch 1
 														send "&cHeadshot!" to victim
-														play "anvil land" at location of victim with pitch 2
+														play anvil land at location of victim with pitch 2
 						{kit.archer.%attacker%} is true:
 								{kit.tank.%victim%} is true:
 										send "&cYou can not slow the tank!" to attacker
@@ -531,17 +531,17 @@ on damage:
 														send "&aYour ninja instincts have saved you this time! They are now used up!" to victim
 														set {ninja.poof.%victim%} to false
 														wait 0.5 seconds
-														play effect "smoke" at location of victim
+														spawn 1 of smoke data 1 offset with 1, 1, 1 at location of victim
 														wait 0.5 seconds
-														play effect "smoke" at location of victim
+														spawn 1 of smoke data 1 offset with 1, 1, 1 at location of victim
 														wait 0.5 seconds
-														play effect "smoke" at location of victim
+														spawn 1 of smoke data 1 offset with 1, 1, 1 at location of victim
 														wait 0.5 seconds
-														play effect "smoke" at location of victim
+														spawn 1 of smoke data 1 offset with 1, 1, 1 at location of victim
 														wait 0.5 seconds
-														play effect "smoke" at location of victim
+														spawn 1 of smoke data 1 offset with 1, 1, 1 at location of victim
 														wait 0.5 seconds
-														play effect "smoke" at location of victim
+														spawn 1 of smoke data 1 offset with 1, 1, 1 at location of victim
 														reveal victim to all players
 														remove speed from victim
 														apply speed 2 to victim for 999 days
@@ -600,7 +600,7 @@ on damage:
 										clear {active.game.kit.%victim%}
 										execute console command "effect %victim% clear"
 										hide victim from all players
-										allow victim to fly
+										set fly state of victim to true
 										send "&cYou have been killed by &e%attacker%&c!" to victim
 										send "&7You will respawn in &e15 &7seconds." to victim
 										wait 5 seconds
@@ -615,7 +615,7 @@ on damage:
 										send "&7You will respawn in &e2&7 seconds." to victim
 										wait 1 second
 										send "&7You will respawn in &e1&7 second." to victim
-										disallow victim to fly
+										set fly state of victim to false
 										teleport victim to {kit.pvp.spawn}
 										reveal victim to all players
 										execute console command "effect %victim% clear"
@@ -724,7 +724,7 @@ on damage of a player:
 						apply nausea to victim for 1 second
 						add 2 to damage
 						send "&cFish Slapped!" to victim
-						play "slime attack" at location of victim with pitch 1
+						play slime attack at location of victim with pitch 1
 						stop
 #endfold
 						
@@ -841,7 +841,7 @@ on right click with blaze rod:
 						equip {_zombie.%player%} with leather helmet
 						set name of spawned zombie to "&cNecroSpawn"
 						set {_loc} to block 20 meters above player
-						play 1 of effect "largeexplode" with data 1 at {_loc}
+						spawn 1 of large explode data 1 offset with 1, 1, 1 at {_loc}
 						make player damage player by 2
 						
 						apply speed 3 to spawned zombie for 999 days
@@ -919,7 +919,7 @@ on right click with bone:
 						set {_skeleton.%player%}'s tool to stone sword
 						set name of spawned wither skeleton to "&cNecroSpawn"
 						set {_loc} to block 20 meters above player
-						play 1 of effect "largeexplode" with data 1 at {_loc}
+						spawn 1 of large explode data 1 offset with 1, 1, 1 at {_loc}
 						make player damage player by 2
 						
 						apply speed 3 to spawned wither skeleton for 999 days
@@ -1256,7 +1256,7 @@ command /dm <text> [<integer>]:
 command /sound <text> [<integer=1>]:
 		permission: obam.admin
 		trigger:
-				play "%argument 1%" at location of player with pitch argument 2
+				play argument 1 at location of player with pitch argument 2
 				
 command /headset:
 		permission: obam.admin

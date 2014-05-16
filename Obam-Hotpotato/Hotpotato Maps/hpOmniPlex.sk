@@ -56,23 +56,23 @@ every 1 second:
 			wait 3 seconds
 			send "&a&lTeleporting back to Lobby Spawn in: &e5!" to all players in "{@worldname.%script%}"
 			loop all players in world "{@worldname.%script%}":
-				play "note piano" at location of loop-player with pitch 3
+				play note piano at location of loop-player with pitch 3
 			wait 1 second
 			send "&a&lTeleporting back to Lobby Spawn in: &e4!" to all players in "{@worldname.%script%}"
 			loop all players in world "{@worldname.%script%}":
-				play "note piano" at location of loop-player with pitch 3
+				play note piano at location of loop-player with pitch 3
 			wait 1 second
 			send "&a&lTeleporting back to Lobby Spawn in: &e3!" to all players in "{@worldname.%script%}"
 			loop all players in world "{@worldname.%script%}":
-				play "note piano" at location of loop-player with pitch 3
+				play note piano at location of loop-player with pitch 3
 			wait 1 second
 			send "&a&lTeleporting back to Lobby Spawn in: &e2!" to all players in "{@worldname.%script%}"
 			loop all players in world "{@worldname.%script%}":
-				play "note piano" at location of loop-player with pitch 3
+				play note piano at location of loop-player with pitch 3
 			wait 1 second
 			send "&a&lTeleporting back to Lobby Spawn in: &e1!" to all players in "{@worldname.%script%}"
 			loop all players in world "{@worldname.%script%}":
-				play "note piano" at location of loop-player with pitch 3
+				play note piano at location of loop-player with pitch 3
 			loop all players in world "{@worldname.%script%}":
 				{resetlobbyname} is not set:
 					set {resetlobbyname} to {current.hotpotato.%loop-player%.lobby}
@@ -90,7 +90,7 @@ every 1 second:
 			{track.{@coursename.%script%}} is less than 5:
 				send "&a&lThe Potato will be given in: &e%5 - {track.{@coursename.%script%}}%" to all players in "{@worldname.%script%}"
 				loop all players in world "{@worldname.%script%}":
-					play "note bass guitar" at location of loop-player with pitch 1
+					play note bass guitar at location of loop-player with pitch 1
 			loop all players in world "{@worldname.%script%}":
 				set loop-player's level to 50 - {track.{@coursename.%script%}}
 			{track.{@coursename.%script%}} is 5:
@@ -122,7 +122,7 @@ every 1 second:
 						add 5 to loop-player's balance
 						add 5 to {level.%loop-player%}
 						apply invisibility 1 to loop-player for 999 days
-						allow loop-player to fly
+						set fly state of loop-player to true
 						message "&aYou can now fly. Use the &eCompass&a to go spectate other players" to loop-player
 						extinguish loop-player
 						give loop-player clock
@@ -138,7 +138,7 @@ every 1 second:
 						remove nausea from loop-player
 						remove speed from loop-player
 						apply invisibility 1 to loop-player for 999 days
-						allow loop-player to fly
+						set fly state of loop-player to true
 						message "&aYou can now fly. Use the &eClock&a to go spectate other players" to loop-player
 						extinguish loop-player
 						give loop-player clock
@@ -154,7 +154,7 @@ every 1 second:
 			{track.{@coursename.%script%}} is less than 5:
 				send "&a&lThe Potato will be given in: &e%5 - {track.{@coursename.%script%}}%" to all players in "{@worldname.%script%}"
 				loop all players in world "{@worldname.%script%}":
-					play "note bass guitar" at location of loop-player with pitch 1
+					play note bass guitar at location of loop-player with pitch 1
 			loop all players in world "{@worldname.%script%}":
 				set loop-player's level to 35 - {track.{@coursename.%script%}}
 			{track.{@coursename.%script%}} is 5:
@@ -181,7 +181,7 @@ every 1 second:
 						add 5 to loop-player's balance
 						add 5 to {level.%loop-player%}
 						apply invisibility 1 to loop-player for 999 days
-						allow loop-player to fly
+						set fly state of loop-player to true
 						message "&aYou can now fly. Use the &eClock&a to go spectate other players" to loop-player
 						extinguish loop-player
 						give loop-player clock
@@ -197,7 +197,7 @@ every 1 second:
 						remove nausea from loop-player
 						remove speed from loop-player
 						apply invisibility 1 to loop-player for 999 days
-						allow loop-player to fly
+						set fly state of loop-player to true
 						message "&aYou can now fly. Use the &eClock&a to go spectate other players" to loop-player
 						extinguish loop-player
 						give loop-player clock
@@ -240,7 +240,7 @@ every 1 second:
 				loop all players in world "hotpotatolobby":
 					{current.hotpotato.%loop-player%.lobby} is "{@coursename.%script%}":
 						send "&aBeginning match in &e%45 - {timer.hotpotato.{@coursename.%script%}}%&a seconds!" to loop-player
-						play "note piano" at location of loop-player with pitch 5
+						play note piano at location of loop-player with pitch 5
 			{timer.hotpotato.{@coursename.%script%}} is 45:
 				loop all players in world "hotpotatolobby":
 					{current.hotpotato.%loop-player%.lobby} is "{@coursename.%script%}":
@@ -354,7 +354,7 @@ command /hotpotatostop{@coursename.%script%}:
 		loop all players:
 			loop-player is in world "{@worldname.%script%}":
 				remove invisibility from loop-player
-				disallow loop-player to fly
+				set fly state of loop-player to false
 		execute console command "/hotpotatoboardsrun"
 		loop all players:
 			{wins.hotpotato.{@coursename.%script%}.%loop-player%} is set:
@@ -470,6 +470,6 @@ command /hotpotatostart{@coursename.%script%}:
 			add 1 to {_count}
 			set {hotpotato.{@coursename.%script%}.%loop-player%.dead} to false
 			set {_%{_count}%} to loop-player
-			disallow loop-player to fly
+			set fly state of loop-player to false
 		set {track.{@coursename.%script%}} to 0
 		set {hotpotato.{@coursename.%script%}.game.active} to true

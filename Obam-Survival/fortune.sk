@@ -102,7 +102,7 @@ every 15 minutes:
 				increase {fortune.chance.%loop-player%} by 1
 				send "&7Your chances of fortune have increased!" to loop-player 
 
-on break:
+on mine:
 	{chunk.live.%chunk at location of event-block%} is not name of player:
 		{chunk.live.%chunk at location of event-block%.%player%} is not set:
 			cancel event
@@ -116,17 +116,25 @@ on break:
 			clear {current.aura.%player%}
 		{abstain.%player%} is "wait abstain":
 			clear {current.auar.%player%}
-		block is diamond ore or emerald ore or gold ore or iron ore or lapis ore or redstone ore or coal ore or nether quartz ore:
+		event-block is diamond ore or emerald ore or gold ore or iron ore or lapis ore or redstone ore or coal ore or nether quartz ore:
 			player's tool is a pickaxe of silk touch:
 				send "&cYour fortune aura has no effect with this enchantment!" to player
 				stop
 			{chunk.live.%chunk at location of event-block%} is set:
 				send "&cYour fortune aura has no effect in this area."
 				stop
-			loop blocks in radius 50 of event-block:
-				{chunk.live.%chunk at location of loop-block%} is set:
-					send "&cYour fortune aura has no effect in this area, go further out!" to player
-					stop	
+			{chunk.live.%chunk south of event-block%} is set:
+				send "&cYour fortune aura has no effect in this area, go further out!" to player
+				stop	
+			{chunk.live.%chunk west of event-block%} is set:
+				send "&cYour fortune aura has no effect in this area, go further out!" to player
+				stop	
+			{chunk.live.%chunk north of event-block%} is set:
+				send "&cYour fortune aura has no effect in this area, go further out!" to player
+				stop	
+			{chunk.live.%chunk east of event-block%} is set:
+				send "&cYour fortune aura has no effect in this area, go further out!" to player
+				stop	
 			
 			{fortune.spam.%player%} is greater than {for.ran.%player%}:
 				loop all players:
@@ -136,19 +144,22 @@ on break:
 				set {fortune.spam.%player%} to 0
 				set {for.ran.%player%} to random integer between 5 and 15
 	{current.aura.%player%} is "fortune"
-	block is diamond ore:
+	event-block is diamond ore:
 		add 1 to {fortune.spam.%player%}
 		chance of {fortune.chance.%player%}%:
+			cancel event
+			delete event-block
+			drop 1 diamond
 			send "&aFortune favours you!" to player
 			drop 1 diamond
 			add 1 to {fortune.spam.%player%} 
-	block is emerald ore:
+	event-block is emerald ore:
 		add 1 to {fortune.spam.%player%}
 		chance of {fortune.chance.%player%}%:
 			send "&aFortune favours you!" to player
 			drop 1 emerald
 			add 1 to {fortune.spam.%player%}
-	block is gold ore:
+	event-block is gold ore:
 		add 1 to {fortune.spam.%player%}
 		chance of {fortune.chance.%player%}%:
 			cancel event
@@ -157,7 +168,7 @@ on break:
 			send "&aFortune favours you!" to player
 			drop 1 gold ingot
 			add 1 to {fortune.spam.%player%}
-	block is iron ore:
+	event-block is iron ore:
 		add 1 to {fortune.spam.%player%}
 		chance of {fortune.chance.%player%}%:
 			cancel event
@@ -166,25 +177,25 @@ on break:
 			send "&aFortune favours you!" to player
 			drop 1 iron ingot
 			add 1 to {fortune.spam.%player%}
-	block is lapis ore:
+	event-block is lapis ore:
 		add 1 to {fortune.spam.%player%}
 		chance of {fortune.chance.%player%}%:
 			send "&aFortune favours you!" to player
 			drop 1 lapis
 			add 1 to {fortune.spam.%player%}
-	block is redstone ore:
+	event-block is redstone ore:
 		add 1 to {fortune.spam.%player%}
 		chance of {fortune.chance.%player%}%:
 			send "&aFortune favours you!" to player
 			drop 1 redstone
 			add 1 to {fortune.spam.%player%}
-	block is coal ore:
+	event-block is coal ore:
 		add 1 to {fortune.spam.%player%}
 		chance of {fortune.chance.%player%}%:
 			send "&aFortune favours you!" to player
 			drop 1 coal
 			add 1 to {fortune.spam.%player%}
-	block is nether quartz ore:
+	event-block is nether quartz ore:
 		add 1 to {fortune.spam.%player%}
 		chance of {fortune.chance.%player%}%:
 			send "&aFortune favours you!" to player

@@ -42,7 +42,7 @@ on join:
 	
 on shoot:
 	projectile is snowball
-	shooter's tool is named item stack from "{@egg}":
+	shooter's tool is {@egg}:
 		set {projeggtile.%projectile%} to true
 
 on shoot:
@@ -226,7 +226,7 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 				{_bal} is less than 10:
 					send "&cYou do not have enough tickets!" to attacker
 					cancel event
-					give attacker named item stack from "{@egg}"
+					give attacker {@egg}
 					stop
 				subtract 10 from attacker's balance
 				send "&aYou have spent &e10&a tickets on capturing a creature!" to attacker
@@ -239,7 +239,7 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 					{_bal} is less than 5:
 						send "&cYou do not have enought tickets!" to attacker
 						cancel event
-						give attacker named item stack from "{@egg}"
+						give attacker {@egg}
 						stop
 					remove 5 from attacker's balance
 					send "&aYou have spent &e5&a tickets on capturing a creature!" to attacker
@@ -322,7 +322,7 @@ on death of a creeper or a zombie or a silverfish or a witch or a spider or magm
 
 
 	chance of 20%:
-		add named item stack from "{@egg}" to drops
+		add {@egg} to drops
 	clear {player.hit.%event-entity%}
 
 on damage of a creeper or a zombie or a silverfish or a witch or a spider or magma cube or wither skeleton or skeleton or enderman or cave spider or slime or ghast or zombie pigman:

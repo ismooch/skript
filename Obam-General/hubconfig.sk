@@ -30,17 +30,17 @@ on right click:
 	player's tool is {@fly}:
 		{fly.hub.%player%} is not set:
 			set {fly.hub.%player%} to true
-			allow player to fly
+			set fly state of player to true
 			send "&aYou can fly!"
 			stop
 		{fly.hub.%player%} is true:
 			set {fly.hub.%player%} to false
-			disallow player to fly
+			set fly state of player to false
 			send "&cYou can no longer fly!"
 			stop
 		{fly.hub.%player%} is false:
 			set {fly.hub.%player%} to true
-			allow player to fly
+			set fly state of player to true
 			send "&aYou can fly!"
 			stop
 		
@@ -81,10 +81,10 @@ every second:
 	loop all players:
 		{fly.hub.%loop-player%} is true:
 			loop-player's world is not "Death-hub":
-				disallow loop-player to fly
+				set fly state of loop-player to false
 				set {fly.hub.%loop-player%} to false
 			loop-player's world is "Death-hub":
-				allow loop-player to fly
+				set fly state of loop-player to true
 		
 			
 command /transfer [<text>]:

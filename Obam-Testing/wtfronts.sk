@@ -58,7 +58,7 @@ on join:
 		make score "&cINJURED" in board of player to 1
 	{infected.%player%.flag} is true:
 		make score "&cINFECTED" in board of player to 1
-	move display of player to "sidebar"
+	move display of player to sidebar
 
 			
 on chunk load:
@@ -123,17 +123,19 @@ on mine:
 					send "&cCave In!" to loop-player
 				{_air.count} is less than or equal to {_block.count} / 3:
 					loop blocks in radius 5:
-						loop-block is not bedrock or wood plank or lava or water
-						set {_block} to loop-block
+						loop-block is not bedrock or wood plank or lava or water or monster spawner
+						set {_block} to "falling %loop-block%"
+						set {_block} to {_block} parsed as entity type
 						set {_loc} to location of loop-block
-						spawn falling block of loop-block at location of loop-block
+						spawn {_block} at location of loop-block
 						delete loop-block
 				{_air.count} is greater than {_block.count} / 3:
 					loop blocks in radius 10:
-						loop-block is not bedrock or wood plank or lava or water
-						set {_block} to loop-block
+						loop-block is not bedrock or wood plank or lava or water or monster spawner
+						set {_block} to "falling %loop-block%"
+						set {_block} to {_block} parsed as entity type
 						set {_loc} to location of loop-block
-						spawn falling block of loop-block at location of loop-block
+						spawn {_block} at location of loop-block
 						delete loop-block
 	{methane.%chunk at location of player%.chance} is false:
 		set {_run2} to false
@@ -150,15 +152,15 @@ on mine:
 				chance of {methane.%chunk at location of player%.chance} * 2%:
 					drop {@unstmetal} at event-location
 		
-	chance of {cavein.%chunk at location of player%.chance}%:
-		loop blocks in radius 3:
-			loop-block is water
-			set {_found.water} to true
-		{_found.water} is true:
-			send "&3Flood!" to player
-			loop blocks in radius 3 of event-location:
-				loop-block is air:
-					set loop-block to water
+	#chance of {cavein.%chunk at location of player%.chance}%:
+	#	loop blocks in radius 3:
+	#		loop-block is water
+	#		set {_found.water} to true
+	#	{_found.water} is true:
+	#		send "&3Flood!" to player
+	#		loop blocks in radius 3 of event-location:
+	#			loop-block is air:
+	#				set loop-block to water
 				
 
 on portal enter:
@@ -195,7 +197,7 @@ every 3 seconds:
 			make score "&3Fatigue" in board of loop-player to {fatigue.%loop-player%}
 			make score "&3Hygiene" in board of loop-player to {hygiene.%loop-player%}
 			set {board.%loop-player%} to true
-			move display of loop-player to "sidebar"
+			move display of loop-player to sidebar
 		{board.%loop-player%} is true:
 			make score "&3Thirst" in board of loop-player to {thirst.%loop-player%}
 			make score "&3Fatigue" in board of loop-player to {fatigue.%loop-player%}
@@ -231,7 +233,7 @@ every 3 seconds:
 				chance of 5%:
 					loop-player's health is less than 10:
 						set {_location} to location of loop-player
-						play 1 of effect "bubbles" with data 1 at {_location}
+						spawn 1 of bubble data 1 offset with 1, 1, 1 at {_location}
 						wait 2 seconds
 						damage loop-player by .5 heart
 						send "&3A fish has nibbled at your toes!" to loop-player
@@ -276,7 +278,7 @@ every 3 seconds:
 		{injured.%loop-player%} is true:
 			chance of 10%:
 				set {_location} to location of loop-player
-				play 1 of effect "spell" with data 1 at {_location}
+				spawn 1 of spell data 1 offset with 1, 1, 1 at {_location}
 				damage loop-player by 0.5
 				{injured.%loop-player%.length} is not set:
 					set {injured.%loop-player%.length} to 0
@@ -349,7 +351,7 @@ every 3 seconds:
 	loop all entities:
 		loop-entity is not player:
 			{unstable.%loop-entity%} is set:
-				play 100 of effect "reddust" with data 1 at location of loop-entity
+				spawn 100 of red dust data 1 offset with 1, 1, 1 at location of loop-entity
 		
 on spawn of a creeper or a skeleton or a spider or zombie:
 	{unstable.%chunk at event-location%} is true:
@@ -394,7 +396,7 @@ on explosion prime:
 			cancel event
 			create an explosion of force 5 at event-location
 			set {_loc} to event-location
-			play 100 of effect "reddust" with data 1 at {_loc}
+			spawn 100 of red dust data 1 offset with 1, 1, 1 at {_loc}
 			loop players in radius 5 of event-location:
 				make event-entity damage loop-player by 4
 			
@@ -433,7 +435,7 @@ on damage:
 				victim's boots are boots of feather falling:
 					stop
 				set {_location} to location of victim
-				play 1 of effect "angryVillager" with data 1 at {_location}
+				spawn 1 of angry villager data 1 offset with 1, 1, 1 at {_location}
 				set {injured.%victim%} to true
 				apply slowness to victim for 999 days
 				add 1 to damage
@@ -806,7 +808,7 @@ command /togglestats:
 			make score "&3Thirst" in board of player to {thirst.%player%}
 			make score "&3Fatigue" in board of player to {fatigue.%player%}
 			make score "&3Hygiene" in board of player to {hygiene.%player%}
-			move display of player to "sidebar"
+			move display of player to sidebar
 			stop
 		{board.%player%} is true:
 			set {board.%player%} to false
@@ -818,7 +820,7 @@ command /togglestats:
 			make score "&3Fatigue" in board of player to {fatigue.%player%}
 			make score "&3Hygiene" in board of player to {hygiene.%player%}
 			set {board.%player%} to true
-			move display of player to "sidebar"
+			move display of player to sidebar
 			stop
 			
 on place of torch:
@@ -854,7 +856,7 @@ on break:
 			set {_message} to "%{information.%block%.1}%;%{information.%block%.3}%;%{information.%block%.2}%"
 			send "DEBUG %{_message}%"
 		delete block
-		drop named item stack from "%{_message}%" at location of block
+		drop {information.%block%.1} named {information.%block%.3} with lore {information.%block%.2} at location of block
 
 on break of glowstone:
 	chance of 10%:
@@ -868,9 +870,9 @@ on right click with sugar:
 			stop
 		remove {@fairydust} from player
 		send "&aYou can fly!" to player
-		allow player to fly
+		set fly state of player to true
 		wait 5 seconds
-		disallow player to fly
+		set fly state of player to false
 		
 command /debug:
 	permission: obam.admin
@@ -885,4 +887,8 @@ command /debug:
 			set {debug.%player%} to false
 			send "&aDebug off"
 			stop
+			
+command /particlelist:
+    trigger:
+        message "%all enum values of particle%"
 		

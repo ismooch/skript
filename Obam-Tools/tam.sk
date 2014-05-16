@@ -1,0 +1,121 @@
+every 1 minute:
+
+	loop all players:
+	
+	
+		loop-player does not have permission "obam.supporter":
+		
+			add 1 to loop-player's balance
+			
+			{session.tam.%loop-player%} is not set:
+				set {session.tam.%loop-player%} to 0
+			add 1 to {session.tam.%loop-player%}
+			
+			{db_total.tam.%loop-player%} is not set:
+				set {db_total.tam.%loop-player%} to 0
+			add 1 to {db_total.tam.%loop-player%}
+			
+			{db_total.tam} is not set:
+				set {db_total.tam} to 0
+			add 1 to {db_total.tam}
+			
+			{db_total.reg} is not set:
+				set {db_total.reg} to 0
+			add 1 to {db_total.reg}
+			
+			
+		loop-player has permission "obam.supporter":
+		
+			loop-player does not have permission "obam.plus"
+			
+			add 2 to loop-player's balance
+			
+			{session.tam.%loop-player%} is not set:
+				set {session.tam.%loop-player%} to 0
+			add 2 to {session.tam.%loop-player%}
+			
+			{db_total.tam.%loop-player%} is not set:
+				set {db_total.tam.%loop-player%} to 0
+			add 2 to {db_total.tam.%loop-player%}
+			
+			{db_total.tam} is not set:
+				set {db_total.tam} to 0
+			add 2 to {db_total.tam}
+			
+			{db_total.sup} is not set:
+				set {db_total.sup} to 0
+			add 2 to {db_total.sup}
+			
+			
+		loop-player has permission "obam.plus":
+		
+			loop-player does not have permission "obam.ultimate"
+			
+			add 3 to loop-player's balance
+			
+			{session.tam.%loop-player%} is not set:
+				set {session.tam.%loop-player%} to 0
+			add 3 to {session.tam.%loop-player%}
+			
+			{db_total.tam.%loop-player%} is not set:
+				set {db_total.tam.%loop-player%} to 0
+			add 3 to {db_total.tam.%loop-player%}
+			
+			{db_total.tam} is not set:
+				set {db_total.tam} to 0
+			add 3 to {db_total.tam}
+			
+			{db_total.plus} is not set:
+				set {db_total.plus} to 0
+			add 3 to {db_total.plus}
+			
+		loop-player has permission "obam.ultimate":
+			
+			add 4 to loop-player's balance
+			
+			{session.tam.%loop-player%} is not set:
+				set {session.tam.%loop-player%} to 0
+			add 4 to {session.tam.%loop-player%}
+			
+			{db_total.tam.%loop-player%} is not set:
+				set {db_total.tam.%loop-player%} to 0
+			add 4 to {db_total.tam.%loop-player%}
+			
+			
+			{db_total.tam} is not set:
+				set {db_total.tam} to 0
+			add 4 to {db_total.tam}
+			
+			{db_total.ult} is not set:
+				set {db_total.ult} to 0
+			add 4 to {db_total.ult}
+			
+command /tam:
+	permission: obam.free
+	trigger:
+		
+		send "&aTotal Tickets earned with -TAM-:"
+		send "&e%{db_total.tam.%player%}%"
+		send "&aTotal this session:"
+		send "&e%{session.tam.%player%}%"
+		send "&aTotal Tickets:"
+		send "&e%player's balance%"
+		
+
+command /tamtotal:
+	permission: obam.admin
+	trigger:
+		send "&aTotal Global Tickets earned with -TAM-:"
+		send "&e%{db_total.tam}%"
+		send "&aRegular:"
+		send "&e%{db_total.reg}%"
+		send "&aSupporter:"
+		send "&e%{db_total.sup}%"
+		send "&aPlus:"
+		send "&e%{db_total.plus}%"
+		send "&aUltimate:"
+		send "&e%{db_total.ult}%"
+		
+on join:
+	set {session.tam.%player%} to 0
+			

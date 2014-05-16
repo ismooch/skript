@@ -16,3 +16,45 @@ command /globalcatch <text>:
 			send argument to {_player}
 				
 		stop
+		
+command /modpush <text>:
+	permission: obam.admin
+	trigger:
+		forward command "modcatch %argument%" to console
+		
+command /modcatch <text>:
+	permission: obam.admin
+	trigger:
+		
+		loop {db_channel.staff::*}:
+			clear {_player} 
+			set {_player} to loop-index parsed as player
+			send argument to {_player}
+			
+		stop
+		
+command /supporterpush <text>:
+	permission: obam.admin
+	trigger:
+		forward command "supportercatch %argument%" to console
+		
+command /supportercatch <text>:
+	permission: obam.admin
+	trigger:
+		loop {db_channel.supporter::*}:
+			clear {_player}
+			set {_player} to loop-index parsed as player
+			send argument to {_player}
+			
+command /mechpush <text>:
+	permission: obam.admin
+	trigger:
+		forward command "mechcatch %argument%" to console
+		
+command /mechcatch <text>:
+	permission: obam.admin
+	trigger:
+		loop {db_channel.mech::*}:
+			clear {_player}
+			set {_player} to loop-index parsed as player
+			send argument to {_player}

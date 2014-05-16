@@ -1,0 +1,42 @@
+
+command /ent <integer=10>:
+	permission: obam.free
+	description: Counts the living entities in a sphere of specified radius around player
+	trigger:
+		{cool.ent.%player%} is not set:
+			set {cool.ent.%player%} to difference between now and now
+			add 3 seconds to {cool.ent.%player%}
+		set {_hold} to difference between now and {cool.ent.%player%}
+		{_hold} is less than 2 seconds:
+			send "&cPlease wait ...."
+			stop
+			
+		argument is greater than 160:
+			send "&cPlease choose a number between &e1 &cand &e160"
+			stop
+		loop entities in radius argument of player's location:
+			
+			loop-entity is not a player
+			set {_type} to "%type of loop-entity%"
+			set {_hold::*} to {_type} split at ":"
+
+			{_count.list::%{_hold::1}%} is not set:
+				set {_count.list::%{_hold::1}%} to 0
+			set {_count.list::%{_hold::1}%} to {_count.list::%{_hold::1}%} + 1
+
+			{_count.total} is not set:
+				set {_count.total} to 0
+			add 1 to {_count.total}
+
+		
+		{_count.total} is not set:
+			send "&eNo entites... MAGIC!"
+			stop
+			
+		send "&aThere are currently &e%{_count.total}%&a entities in the radius of &e%argument%"
+		send "&aList:"
+		
+		loop {_count.list::*}:
+			send "&a%loop-index%: &e%loop-value%"
+			
+		set {cool.ent.%player%} to now
