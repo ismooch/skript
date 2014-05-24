@@ -675,4 +675,11 @@ on command "/spawn":
 		message "&cYou must do this on your land!"
 		cancel event
 		stop
+		
+command /claimedset <player> <number>:
+	permission: obam.admin
+	trigger:
+		set {claimedland.%player-arg%} to argument 2
+		send "&e%player-arg%&a claimed balance set to &e%argument 2%"
+
 	

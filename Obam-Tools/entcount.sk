@@ -1,5 +1,5 @@
 
-command /ent <integer=10>:
+command /ent [<integer>]:
 	permission: obam.free
 	description: Counts the living entities in a sphere of specified radius around player
 	trigger:
@@ -9,6 +9,39 @@ command /ent <integer=10>:
 		set {_hold} to difference between now and {cool.ent.%player%}
 		{_hold} is less than 2 seconds:
 			send "&cPlease wait ...."
+			stop
+		argument is not set:
+		
+
+			
+			loop entities in radius 160 of player:
+				
+				loop-entity is not a player
+				chunk at location of loop-entity is chunk at location of player
+				set {_type} to "%type of loop-entity%"
+				set {_hold::*} to {_type} split at ":"
+
+				{_count.list::%{_hold::1}%} is not set:
+					set {_count.list::%{_hold::1}%} to 0
+				set {_count.list::%{_hold::1}%} to {_count.list::%{_hold::1}%} + 1
+
+				{_count.total} is not set:
+					set {_count.total} to 0
+				add 1 to {_count.total}
+
+			
+			{_count.total} is not set:
+				send "&eNo entites... MAGIC!"
+				stop
+				
+			send "&aThere are currently &e%{_count.total}%&a entities in chunk &e%player's chunk%"
+			send "&aList:"
+			
+			loop {_count.list::*}:
+				send "&a%loop-index%: &e%loop-value%"
+				
+			set {cool.ent.%player%} to now
+			
 			stop
 			
 		argument is greater than 160:
@@ -40,3 +73,37 @@ command /ent <integer=10>:
 			send "&a%loop-index%: &e%loop-value%"
 			
 		set {cool.ent.%player%} to now
+		
+command /entworld:
+	permission: obam.admin
+	trigger:
+		loop entities in player's world:
+			
+			loop-entity is not a player
+			set {_type} to "%type of loop-entity%"
+			set {_hold::*} to {_type} split at ":"
+
+			{_count.list::%{_hold::1}%} is not set:
+				set {_count.list::%{_hold::1}%} to 0
+			set {_count.list::%{_hold::1}%} to {_count.list::%{_hold::1}%} + 1
+
+			{_count.total} is not set:
+				set {_count.total} to 0
+			add 1 to {_count.total}
+
+		
+		{_count.total} is not set:
+			send "&eNo entites... MAGIC!"
+			stop
+			
+		send "&aThere are currently &e%{_count.total}%&a entities in world &e%player's world%"
+		send "&aList:"
+		
+		loop {_count.list::*}:
+			send "&a%loop-index%: &e%loop-value%"
+			
+
+		
+		
+
+	

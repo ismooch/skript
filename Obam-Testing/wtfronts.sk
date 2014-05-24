@@ -20,6 +20,9 @@ options:
 	grapplinghook: fishing rod named "&3Grappling hook" with lore "&4Will teleport you to where the hook lands||&5-1 Elemental Fuel per use"
 	safetytorch: redstone torch named "&3Safety Torch" with lore "&6When placed will preven mobs from spawning in the chunk"
 	soap1: nether brick item named "&3Soap" with lore "&6Used to clean yourself||&6by tossing in the water|| ||&a+100 Hygiene"
+	stblgun: bow named "&3Stablizer Gun" with lore "&bThis weapon is crafted||&6to annihilate the unstable||&6infestion.|| ||&c-1 Elemental Fuel|| ||&5&oOnly effective against unstable||&5&oMobs."
+	stblmine: diamond pickaxe named "&3Stable Miner" with lore "&bA pickaxe crafted||&6with stable metal to||&6to counteract the environment|| ||&c-1 Elemental Fuel||&c&oOn event elimination|| ||&5&oThis tool will eliminate the||&5&oeffects of the unstable||&5&oenvrionment with the use of||&5&oelemental fuel"
+	
 	
 	
 on script load:
@@ -40,7 +43,9 @@ on script load:
 	register new shapeless recipe for {@strengthchest} using air, air, air, air, {@stablechst}, beacon, air, air, diamond sword
 	register new shaped recipe for {@grapplinghook} using {@elefuel}, Fishing Rod, {@elefuel}, {@elefuel}, {@elefuel}, {@elefuel}, {@elefuel}, {@elefuel}, {@elefuel}
 	register new shaped recipe for {@soap1} using air, milk bucket, air, air, rose, air, air, water bottle, air
-
+	register new shaped recipe for {@stblgun} using air, {@stablemetal}, {@stablemetal}, {@stablemetal}, {@stable}, air, {@stablemetal}, air, air
+	register new shaped recipe for {@stblmine} using diamond, {@stable}, diamond, air, {@stablemetal}, air, air, {@stablemetal}, air
+	
 	
 on join:
 	{fatigue.%player%} is not set:
@@ -96,6 +101,13 @@ on mine:
 		set {_run} to false
 	{_run} is not set:
 		chance of {cavein.%chunk at location of player%.chance}%:
+			name of player's tool is "&3Stable Miner":
+				player has {@elefuel}
+				remove 1 {@elefuel} from player
+				send "&aYour Miner prevents a cave in"
+				drop {@unstmetal} at event-location
+				set {_stop} to true
+			{_stop} is not set
 			loop blocks in radius 5:
 				{_block.count} is not set:
 					set {_block.count} to 0
@@ -141,6 +153,13 @@ on mine:
 		set {_run2} to false
 	{_run2} is not set:
 		chance of {methane.%chunk at location of player%.chance}%:
+			name of player's tool is "&3Stable Miner":
+				player has {@elefuel}
+				remove 1 {@elefuel} from player
+				send "&aYour Miner prevents a Methane Explosion!"
+				drop 1 {@unstele} at event-location
+				set {_stop} to true
+			{_stop} is not set
 			send "&cMethane!" to player
 			loop players in radius 10 of player:
 				send "&cMethane!" to loop-player
@@ -152,15 +171,15 @@ on mine:
 				chance of {methane.%chunk at location of player%.chance} * 2%:
 					drop {@unstmetal} at event-location
 		
-	#chance of {cavein.%chunk at location of player%.chance}%:
-	#	loop blocks in radius 3:
-	#		loop-block is water
-	#		set {_found.water} to true
-	#	{_found.water} is true:
-	#		send "&3Flood!" to player
-	#		loop blocks in radius 3 of event-location:
-	#			loop-block is air:
-	#				set loop-block to water
+	chance of {cavein.%chunk at location of player%.chance}%:
+		loop blocks in radius 3:
+			loop-block is water
+			set {_found.water} to true
+		{_found.water} is true:
+			send "&3Flood!" to player
+			loop blocks in radius 3 of event-location:
+				loop-block is air:
+					set loop-block to water
 				
 
 on portal enter:
@@ -316,32 +335,40 @@ every 3 seconds:
 			loop-player has {@elefuel}:
 				apply speed 2 to loop-player for 4 seconds
 				remove {@elefuel} from loop-player
-				loop players in radius 5 of loop-player:
+				loop players in radius 75 of loop-player:
 					apply speed 2 to loop-player-2 for 4 seconds
 				
 		name of loop-player's chestplate is "&3Haste Chestplate":
 			loop-player has {@elefuel}:
 				apply haste 2 to loop-player for 4 seconds
 				remove {@elefuel} from loop-player
-				loop players in radius 5 of loop-player:
+				loop players in radius 75 of loop-player:
 					apply haste 2 to loop-player-2 for 4 seconds
 				
 		name of loop-player's chestplate is "&3Strength Chestplate":
 			loop-player has {@elefuel}:
 				apply strength 2 to loop-player for 4 seconds
 				remove {@elefuel} from loop-player
-				loop players in radius 5 of loop-player:
+				loop players in radius 75 of loop-player:
 					apply strength 2 to loop-player-2 for 4 seconds
+				
+		#wildsilverfish
+		block above block below loop-player is 175:2:
+			chance of 5%:
+				spawn silverfish at location of loop-player
+				send "&cA wild silverfish appears!" to loop-player
 				
 		#hygiene
 		block below loop-player is dirt or grass:
 			{hygiene.%loop-player%} is greater than 0
-			set {_ran} to random number between 0 and 2
+			set {_ran} to random number between 0 and 0.5
 			{hygiene.%loop-player%} is not set:
 				set {hygiene.%loop-player%} to 100
 			set {hygiene.%loop-player%} to {hygiene.%loop-player%} - {_ran}
 			{hygiene.%loop-player%} is less than or equal to 0:
 				set {hygiene.%loop-player%} to 0
+			{debug.%loop-player%} is true:
+				set {hygiene.%loop-player%} to 100
 				
 		{hygiene.%loop-player%} is less than 10:
 			chance of 5%:
@@ -353,12 +380,13 @@ every 3 seconds:
 			{unstable.%loop-entity%} is set:
 				spawn 100 of red dust data 1 offset with 1, 1, 1 at location of loop-entity
 		
-on spawn of a creeper or a skeleton or a spider or zombie:
+on spawn of a creeper or a skeleton or a spider or zombie or a cow:
 	{unstable.%chunk at event-location%} is true:
 
 
 		set {_loc} to event-location
 		event-entity is a creeper:
+			wait 5 ticks
 			set name of event-entity to "&cUnstable Creeper"
 			apply resistance 2 to event-entity for 999 days
 			apply speed to event-entity for 999 days
@@ -367,7 +395,8 @@ on spawn of a creeper or a skeleton or a spider or zombie:
 			set {unstable.%event-entity%} to true
 
 		event-entity is a zombie:
-
+				
+			wait 5 ticks
 			set name of event-entity to "&cUnstable Zombie"
 			apply resistance 2 to event-entity for 999 days
 			apply speed 2 to event-entity for 999 days
@@ -376,6 +405,9 @@ on spawn of a creeper or a skeleton or a spider or zombie:
 			set {unstable.%event-entity%} to true
 
 		event-entity is skeleton:
+			
+			
+			wait 5 ticks
 			set name of event-entity to "&cUnstable Skeleton"
 			apply resistance 2 to event-entity for 999 days
 			apply speed 2 to event-entity for 999 days
@@ -384,10 +416,19 @@ on spawn of a creeper or a skeleton or a spider or zombie:
 			set {unstable.%event-entity%} to true
 
 		event-entity is a spider:
+		
+			wait 5 ticks
 			set name of event-entity to "&cUnstable Spider"
 			apply resistance 2 to event-entity for 999 days
 			apply speed 2 to event-entity for 999 days
 			apply jump 5 to event-entity for 999 days
+			set {unstable.%event-entity%} to true
+			
+		event-entity is a cow:
+			
+			wait 5 ticks
+			set name of event-entity to "&cUnstable Cow"
+			apply speed 2 to event-entity for 999 days
 			set {unstable.%event-entity%} to true
 
 on explosion prime:
@@ -407,10 +448,24 @@ on damage:
 			cancel event
 		damage cause is block explosion:
 			cancel event
-				
+
+on death of cow:
+	{hit.%victim%} is set:
+		clear drops
+		stop
+	{unstable.%victim%} is set:
+		create an explosion of force 5 at victim
+		chance of 20%:
+			add {@unstmetal} to drops
+			chance of 15%:
+				add {@unstele} to drops
 on death of a creeper or a skeleton or a zombie or a spider:
 	chance of 15%:
 		add {@bandages} to drops
+	{hit.%victim%} is set:
+		loop drops:
+			add loop-item to attacker's inventory
+		clear drops
 	entity's name is "&cUnstable Spawn":
 		chance of 10%:
 			chance of 2%:
@@ -529,8 +584,19 @@ on right click with nether brick item:
 			remove {@soap1} from player
 			send "&aYou wash yourself"
 			set {hygiene.%player%} to 100
+			spawn 500 of bubble data 1 offset with 2, 2, 2 at location of player
 			player has nausea:
 				remove nausea from player
+			loop players in radius 10 of player:
+				block above block below loop-player is water:
+					{hygiene.%loop-player%} is less than 100:
+						send "&aYou have been washed by &e%player%&a!" to loop-player
+					set {_loc} to loop-player's location
+					spawn 500 of bubble data 1 offset with 2, 2, 2 at {_loc}
+					set {hygiene.%loop-player%} to 100
+					loop-player has nausea:
+						remove nausea from loop-player
+			
 					
 on shoot:
 	shooter's tool is {@grapplinghook}:
@@ -623,7 +689,7 @@ on death of a player:
     apply speed to entity for 999 days
 	
 command /ci [<number>] [<number>]:
-	permission: obam.admin
+	permission: obam.free
 	trigger:
 		argument 1 is not set:
 			send "list"
@@ -643,11 +709,12 @@ command /ci [<number>] [<number>]:
 			send "14 ... Chest of Snacks"
 			send "15 ... Grappling Hook"
 			send "16 ... Coffee"
-			send "17 ... Safety Torch"
 			send "18 ... Speed Chestplate"
 			send "19 ... Haste Chestplate"
 			send "20 ... Strength Chestplate"
 			send "21 ... Soap (1)"
+			send "22 ... Stabilizer Gun"
+			send "23 ... Stable Miner"
 			stop
 		argument 2 is not set:
 			argument 1 is 1:
@@ -698,8 +765,6 @@ command /ci [<number>] [<number>]:
 			argument 1 is 16:
 				give {@coffee} to player
 				
-			argument 1 is 17:
-				give {@safetytorch} to player
 				
 			argument 1 is 18:
 				give {@speedchest} to player
@@ -712,6 +777,13 @@ command /ci [<number>] [<number>]:
 				
 			argument 1 is 21:
 				give {@soap1} to player
+				
+			argument 1 is 22:
+				give {@stblgun} to player
+				
+			argument 1 is 23:
+				give {@stblmine} to player
+				
 		argument 2 is set:
 			argument 1 is 1:
 				loop argument 2 times:
@@ -777,9 +849,6 @@ command /ci [<number>] [<number>]:
 				loop argument 2 times:
 					give {@coffee} to player
 				
-			argument 1 is 17:
-				loop argument 2 times:
-					give {@safetytorch} to player
 				
 			argument 1 is 18:
 				loop argument 2 times:
@@ -796,6 +865,14 @@ command /ci [<number>] [<number>]:
 			argument 1 is 21:
 				loop argument 2 times:
 					give {@soap1} to player
+					
+			argument 1 is 22:
+				loop argument 2 times:
+					give {@stblgun} to player
+					
+			argument 1 is 23:
+				loop argument 2 times:
+					give {@stblmine} to player
 				
 		send "Here is your item. :)"
 			
@@ -891,4 +968,140 @@ command /debug:
 command /particlelist:
     trigger:
         message "%all enum values of particle%"
+		
+command /unstclear:
+	permission: obam.admin
+	trigger:
+		loop all entities:
+			{unstable.%loop-entity%} is true:
+				kill loop-entity
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+			
+		send "&e%{_count}%&a Unstable Entities eliminated" 
+		
+command /unstlist:
+	permission: obam.admin
+	trigger:
+		loop all entities:
+			loop-entity is not a player
+			{unstable.%loop-entity%} is true
+			{_list::%name of loop-entity%} is not set:
+				set {_list::%name of loop-entity%} to 0
+			add 1 to {_list::%name of loop-entity%}
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+			
+		send "&aThere are &e%{_count}% &cUnstable&a entities."
+		send "&aList:"
+		loop {_list::*}:
+			send "&a%loop-index%:&e %loop-value%"
+
+#bloodmoon			
+every 30 seconds:
+	time in "world" is between 18:00 and 19:00:
+		chance of 5%:
+			{blood.moon} is not set
+			set {blood.moon} to true
+			broadcast "&cA blood moon rises..."
+	time in "world" is between 6:00 and 18:00:
+		{blood.moon} is true:
+			clear {blood.moon}
+			broadcast "&aThe blood moon sets!"
+			
+on spawn of a creeper or a skeleton or a spider or zombie or a cow:
+	{blood.moon} is true:
+
+
+		set {_loc} to event-location
+		event-entity is a creeper:
+			wait 5 ticks
+			set name of event-entity to "&cUnstable Creeper"
+			apply resistance 2 to event-entity for 999 days
+			apply speed to event-entity for 999 days
+
+			
+			set {unstable.%event-entity%} to true
+
+		event-entity is a zombie:
+				
+			wait 5 ticks
+			set name of event-entity to "&cUnstable Zombie"
+			apply resistance 2 to event-entity for 999 days
+			apply speed 2 to event-entity for 999 days
+			equip event-entity with iron sword of sharpness
+			set event-entity's helmet to iron helmet
+			set {unstable.%event-entity%} to true
+
+		event-entity is skeleton:
+			
+			
+			wait 5 ticks
+			set name of event-entity to "&cUnstable Skeleton"
+			apply resistance 2 to event-entity for 999 days
+			apply speed 2 to event-entity for 999 days
+			equip event-entity with bow
+			set event-entity's helmet to gold helmet
+			set {unstable.%event-entity%} to true
+
+		event-entity is a spider:
+		
+			wait 5 ticks
+			set name of event-entity to "&cUnstable Spider"
+			apply resistance 2 to event-entity for 999 days
+			apply speed 2 to event-entity for 999 days
+			apply jump 5 to event-entity for 999 days
+			set {unstable.%event-entity%} to true
+			
+		event-entity is a cow:
+			
+			wait 5 ticks
+			set name of event-entity to "&cUnstable Cow"
+			apply speed 2 to event-entity for 999 days
+			set {unstable.%event-entity%} to true
+			
+command /bloodmoon:
+	permission: obam.admin
+	trigger:
+		set time of "world" to 18:00
+		set {blood.moon} to true
+		broadcast "&cA blood moon rises..."
+		
+command /dawn:
+	permission: obam.admin
+	trigger:
+		set time of "world" to 5:30
+		
+on right click with bow:
+	player's tool is a bow:
+		name of player's tool is "&3Stablizer Gun"
+		cancel event
+		{cool.gun.%player%} is not set:
+			set {cool.gun.%player%} to now
+			add 3 seconds to {cool.gun.%player%}
+		set {_cool} to difference between {cool.gun.%player%} and now
+		{_cool} is less than 2 seconds:
+			send "&cYou are reloading!"
+			stop
+		{unstable.%target entity%} is set:
+			name of target entity contains "&cUnstable"
+			player does not have {@elefuel}:
+				send "&cYou are out of &eElemental Fuel!"
+				stop
+			{hit.%target entity%} is not set
+			remove 1 {@elefuel} from player
+			set {hit.%target entity%} to true
+			make player shoot item projectile packed ice at speed 5
+			set {cool.gun.%player%} to now
+			set {_target} to target entity
+			wait 0.2 seconds
+			strike lightning effect at location of {_target}
+			kill {_target}
+			send "&aYou capture the stable soul of the creature"
+			add {@unstele} to player's inventory
+			add {@unstmetal} to player's inventory
+			add {@stable} to player's inventory
+			
 		

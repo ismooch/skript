@@ -1,4 +1,4 @@
-command /g <player>:
+command /g <text> [<number>] [<number>] [<number>]:
 	description: Teleports to a Player
 	permission: obam.mod
 	trigger:
@@ -8,10 +8,19 @@ command /g <player>:
 			{monitor.%player%} is false:
 				send "&cYou must be in monitor mode to do this!" to player
 				stop
-			
-		teleport player to player-argument
-		send "&aYou have teleported to %player-argument%." to player
-		log "%player%^GO ACTION^%player-argument%^%location of player-argument%" to "admin/actions.log"
+		
+		argument 1 is "loc":
+			set {_loc} to player's location
+			set y-coordinate of {_loc} to arg-3
+			set x-coordinate of {_loc} to arg-2
+			set z-coordinate of {_loc} to arg-4
+			teleport player to {_loc}
+			send "&aYou have teleported to &e%{_loc}%&a."
+			stop
+		set {_player} to argument 1 parsed as player
+		teleport player to {_player}
+		send "&aYou have teleported to %{_player}%." to player
+		log "%player%^GO ACTION^%{_player}%^%location of {_player}%" to "admin/actions.log"
 		
 		
 command /grab <player>:

@@ -1,4 +1,13 @@
 on first join:
-	broadcast "&eEveryone Welcome &e&l%player%&e to WTFronts!"
-	message "&aWelcome to &eWTFronts&a! Please feel free to comment on this open beta!" to player
+	execute console command "/new %player%"
 	
+	
+command /new <text>:
+	permission: obam.admin
+	trigger:
+		broadcast " "
+		broadcast "&3-----------------------------------------------------"
+		broadcast "&fEveryone give an &6&lOBAM&fCraft welcome to, &6%argument%&f!"
+		broadcast "&3-----------------------------------------------------"
+		broadcast " "
+		forward command "new %argument%" to console

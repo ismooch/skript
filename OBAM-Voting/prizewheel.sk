@@ -359,16 +359,16 @@ command /prize [<text>] [<text>] [<text>] [<integer>]:
 					stop
 				
 				{_ran} is 4:
-					{db_winnings.chest.%player%.fronts::enchanted book of unbreaking 4} is not set:
-						set {db_winnings.chest.%player%.fronts::enchanted book of unbreaking 4} to 1
-						send "&aYou have won &e1 enchanted book of unbreaking 4&a for &eFronts!"
+					{db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 4} is not set:
+						set {db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 4} to 1
+						send "&aYou have won &e1 diamond pickaxe of unbreaking 4&a for &eFronts!"
 						send "&aUse &e/prize claim&a in Fronts to claim!"
-						log "%player%^ADD^1^enchanted book of unbreaking 4^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						log "%player%^ADD^1^diamond pickaxe of unbreaking 4^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 1 to {db_winnings.chest.%player%.fronts::enchanted book of unbreaking 4}
-					send "&aYou have won &e1 enchanted book of unbreaking 4&a for &eFronts!"
+					add 1 to {db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 4}
+					send "&aYou have won &e1 diamond pickaxe of unbreaking 4&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
-					log "%player%^ADD^1^enchanted book of unbreaking 4^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					log "%player%^ADD^1^diamond pickaxe of unbreaking 4^SEMIRARE PRIZE db_winnings" to "prizewheel/db_winnings.log"
 					stop
 					
 			chance of 25%:
@@ -547,16 +547,16 @@ command /prize [<text>] [<text>] [<text>] [<integer>]:
 					stop
 					
 				{_ran} is 14:
-					{db_winnings.chest.%player%.fronts::enchanted book of fortune 3} is not set:
-						set {db_winnings.chest.%player%.fronts::enchanted book of fortune 3} to 1
-						send "&aYou have won &e1 enchanted book of fortune 3&a for &eFronts!"
+					{db_winnings.chest.%player%.fronts::diamond pickaxe of fortune 3} is not set:
+						set {db_winnings.chest.%player%.fronts::diamond pickaxe of fortune 3} to 1
+						send "&aYou have won &e1 diamond pickaxe of fortune 3&a for &eFronts!"
 						send "&aUse &e/prize claim&a in Fronts to claim!"
-						log "%player%^ADD^1^enchanted book of fortune 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+						log "%player%^ADD^1^diamond pickaxe of fortune 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 						stop
-					add 1 to {db_winnings.chest.%player%.fronts::enchanted book of fortune 3}
-					send "&aYou have won &e1 enchanted book of fortune 3&a for &eFronts!"
+					add 1 to {db_winnings.chest.%player%.fronts::diamond pickaxe of fortune 3}
+					send "&aYou have won &e1 diamond pickaxe of fortune 3&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
-					log "%player%^ADD^1^enchanted book of fortune 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					log "%player%^ADD^1^diamond pickaxe of fortune 3^UNCOMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 					stop
 					
 				{_ran} is 15:
@@ -771,28 +771,28 @@ command /prize [<text>] [<text>] [<text>] [<integer>]:
 				stop
 			
 			{_ran} is 8:
-				{db_winnings.chest.%player%.fronts::enchanted book of unbreaking 3} is not set:
-					set {db_winnings.chest.%player%.fronts::enchanted book of unbreaking 3} to 1
-					send "&aYou have won &e1 enchanted book of unbreaking 3&a for &eFronts!"
+				{db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 3} is not set:
+					set {db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 3} to 1
+					send "&aYou have won &e1 diamond pickaxe of unbreaking 3&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
-					log "%player%^ADD^1^enchanted book of unbreaking 3^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					log "%player%^ADD^1^diamond pickaxe of unbreaking 3^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 					stop
-				add 1 to {db_winnings.chest.%player%.fronts::enchanted book of unbreaking 3}
-				send "&aYou have won &e1 enchanted book of unbreaking 3&a for &eFronts!"
+				add 1 to {db_winnings.chest.%player%.fronts::diamond pickaxe of unbreaking 3}
+				send "&aYou have won &e1 diamond pickaxe of unbreaking 3&a for &eFronts!"
 				send "&aUse &e/prize claim&a in Fronts to claim!"
-				log "%player%^ADD^1^enchanted book of unbreaking 3^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				log "%player%^ADD^1^diamond pickaxe of unbreaking 3^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 				
 			{_ran} is 9:
-				{db_winnings.chest.%player%.fronts::enchanted book of silk touch} is not set:
-					set {db_winnings.chest.%player%.fronts::enchanted book of silk touch} to 1
-					send "&aYou have won &e1 enchanted book of silk touch&a for &eFronts!"
+				{db_winnings.chest.%player%.fronts::diamond pickaxe of silk touch} is not set:
+					set {db_winnings.chest.%player%.fronts::diamond pickaxe of silk touch} to 1
+					send "&aYou have won &e1 diamond pickaxe of silk touch&a for &eFronts!"
 					send "&aUse &e/prize claim&a in Fronts to claim!"
-					log "%player%^ADD^1^enchanted book of silk touch^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+					log "%player%^ADD^1^diamond pickaxe of silk touch^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 					stop
-				add 1 to {db_winnings.chest.%player%.fronts::enchanted book of silk touch}
-				send "&aYou have won &e1 enchanted book of silk touch&a for &eFronts!"
+				add 1 to {db_winnings.chest.%player%.fronts::diamond pickaxe of silk touch}
+				send "&aYou have won &e1 diamond pickaxe of silk touch&a for &eFronts!"
 				send "&aUse &e/prize claim&a in Fronts to claim!"
-				log "%player%^ADD^1^enchanted book of silk touch^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
+				log "%player%^ADD^1^diamond pickaxe of silk touch^COMMON PRIZE db_winnings" to "prizewheel/db_winnings.log"
 				
 			{_ran} is 10:
 				{db_winnings.chest.%player%.fronts::diamond} is not set:
@@ -863,7 +863,7 @@ command /prizefix <text> <text>:
 command /fixbook:
 	permission: obamm.free
 	trigger:
-		player's tool is enchanted book:
+		player's tool is diamond pickaxe:
 			set {_hold} to "%player's tool%"
 			set {_hold} to {_hold} parsed as item
 			send "%{_hold}%"

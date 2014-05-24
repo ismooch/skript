@@ -1,9 +1,15 @@
 options:
-	p: &e[E]<reset>
+	p: &3[H]<reset>
 	
 
 
 on join:
+	{db_alerts.on.%player%} is not set:
+		set {db_alerts.on.%player%} to true
+	{db_alerts.on.%player%} is true:
+		send "&aYour chat alerts are &eOn&a. You can turn them off by using the command &e/chat alerts off"
+	{db_alerts.on.%player%} is false:
+		send "&aYour chat alerts are &eOff&a. You can turn them on by using the command &e/chat alert on"
 	{db_global.%player%} is not set:
 		set {db_global.%player%} to true
 	{db_global.%player%} is true:
@@ -12,7 +18,8 @@ on join:
 	player does not have permission "obam.supporter":
 		delete {db_channel.supporter::%player%}
 	player does not have permission "obam.mod":
-		delete {db_channel.supporter::%player%}
+		delete {db_channel.staff::%player%}
+		
 	player does not have permission "obam.mechanic":
 		delete {db_channel.mech::%player%}
 		
@@ -54,6 +61,22 @@ on chat:
 	{db_star.%player%} is set:
 		set {_pre} to "%{_pre}% <%{db_star.%player%}%>✦<reset>"
 		
+	{db_channel.%player%} is "private":
+		set {_player} to {private.%player%} parsed as a player
+		{_player} is online:
+			set {_found} to true
+				
+		{_found} is set:
+			set {_player} to {private.%player%} parsed as a player
+			send "&d%player% ➽ %{_player}%&d: %message%" to {_player}
+			send "&d%player% ➽ %{_player}%&d: %message%" to player
+			{db_alerts.on.%{_player}%} is true:
+				play level up at location of {_player} with pitch 2
+		{_found} is not set:
+			set {_message} to "&d%player% ➽ %{private.%player%}%&d: %message%"
+			send {_message} to player
+			execute console command "privatepush %{private.%player%}% %{_message}%"
+		
 	{db_channel.%player%} is "staff":
 		player does not have permission "obam.mod":
 			set {db_channel.%player%} to "global"
@@ -63,10 +86,18 @@ on chat:
 				clear {_player}
 				
 				set {_player} to loop-index parsed as player
+
 				set message to "&a%message%"
+				message contains "%{_player}%":
+					replace "%{_player}%" in message with "&c%{_player}%&a"
+					{db_alerts.on.%{_player}%} is true:
+						play level up at location of {_player} with pitch 2
 				set {_message} to "%{_pre}%&a: %message%"
 				
+
 				send "%{_message}%" to {_player}
+				set message to "%uncoloured message%"
+				
 			
 		execute console command "/modpush %{_pre}%&a: %message%"
 		
@@ -79,9 +110,16 @@ on chat:
 				clear {_player}
 				set {_player} to loop-index parsed as player
 				set message to "&e%message%"
+				message contains "%{_player}%":
+					replace "%{_player}%" in message with "&c%{_player}%&e"
+					{db_alerts.on.%{_player}%} is true:
+						play level up at location of {_player} with pitch 2
 				set {_message} to "%{_pre}%&e: %message%"
 				
-				send {_message} to {_player}
+
+				send "%{_message}%" to {_player}
+				set message to "%uncoloured message%"
+				
 				
 			execute console command "/mechpush %{_message}%"
 			
@@ -97,9 +135,16 @@ on chat:
 				clear {_player}
 				set {_player} to loop-index parsed as player
 				set message to "&b%message%"
+				message contains "%{_player}%":
+					replace "%{_player}%" in message with "&c%{_player}%&b"
+					{db_alerts.on.%{_player}%} is true:
+						play level up at location of {_player} with pitch 2
 				set {_message} to "%{_pre}%&b: %message%"
 				
+
 				send "%{_message}%" to {_player}
+				set message to "%uncoloured message%"
+				
 				
 			execute console command "/supporterpush %{_message}%"
 				
@@ -110,8 +155,18 @@ on chat:
 		loop {db_channel.global::*}:
 			clear {_player}
 			set {_player} to loop-index parsed as player
-		
-			send "%{_pre}%&f: %message%" to {_player}
+			set message to "&f%message%"
+			message contains "%{_player}%":
+				replace "%{_player}%" in message with "&c%{_player}%&f"
+				{db_alerts.on.%{_player}%} is true:
+					play level up at location of {_player} with pitch 2
+			set {_message} to "%{_pre}%&f: %message%"
+				
+
+			send "%{_message}%" to {_player}
+			set message to "%uncoloured message%"
+
+				
 
 			
 		execute console command "globalpush %{_pre}%&f: %message%"
@@ -233,6 +288,30 @@ command /chat [<text>] [<text>]:
 			argument 2 is not set:
 				loop {db_channel.%{db_channel.%player%}%::*}:
 					send "%loop-index%"
+			argument 2 is set:
+				{db_channel.%{db_channel.%player%}%::%argument 2%} is set:
+					send "%argument 2% is in this channel"
+					
+		argument 1 is "alerts" or "alert" or "a":
+			argument 2 is not set:
+				{db_alerts.on.%player%} is not set:
+					set {db_alerts.on.%player%} to true
+					send "&aYour chat alerts are now &eOn&a."
+					stop
+				{db_alerts.on.%player%} is true:
+					set {db_alerts.on.%player%} to false
+					send "&aYour chat alerts are now &eOff&a."
+					stop
+				{db_alerts.on.%player%} is false:
+					set {db_alerts.on.%player%} to true
+					send "&aYour chat alerts are now &eOn&a."
+					stop
+			argument 2 is "off":
+				set {db_alerts.on.%player%} to false
+				send "&aYour chat alerts are now &eOff&a."
+			argument 2 is "on":
+				set {db_alerts.on.%player%} to true
+				send "&aYour chat alerts are now &eOn&a."
 					
 
 command /star <text> [<text>]:
@@ -247,11 +326,71 @@ command /star <text> [<text>]:
 		set {db_star.%argument 1%} to argument 2
 		send "&aStar for %argument 1% set to <%argument 2%>%argument 2%<reset>&a."
 		
+command /tell [<offline player>] [<text>]:
+	permission: obam.free
+	trigger:
+		
+		argument 1 is not set:
+			{db_channel.%player%} is "private":
+				send "&aYou have left your private conversation with %{private.%player%}%"
+				make player execute command "/ch g"
+				stop
+			{db_channel.%player%} is not "private":
+				send "&cYou are not in a conversation!"
+				stop
+		argument 2 is not set:
+			send "&dYou are now in a private conversation with &e%argument 1%"
+			set {private.%player%} to "%argument 1%"
+			set {db_channel.%player%} to "private"
+			
+		argument 2 is set:
+			send "&d%player% ➽ %argument 1%: %argument 2%" to player
+			loop all players:
+				loop-player is argument 1
+				set {_found} to true
+				
+			{_found} is set:
+				send "&d%player% ➽ %argument 1%: %argument 2%" to argument 1
+				{db_alerts.on.%argument 1%} is true:
+					play level up at location of argument 1 with pitch 2
+				
+			{_found} is not set:
+				set {_message} to "&d%player% ➽ %argument 1%: %argument 2%"
+				execute console command "privatepush %argument 1% %{_message}%"
+				
+				
+command /fishslap <text>:
+	permission: obam.free
+	trigger:
+		{cool.fish.%player%} is not set:
+			set {cool.fish.%player%} to now
+			add 5 seconds to {cool.fish.%player%}
+		set {_wait} to difference between {cool.fish.%player%} and now
+		{_wait} is less than 4 seconds:
+			send "&cYou are slapping too much! Calm down D:" to player
+			stop
+		
+		send "&aYou just slapped &e%argument%&a!"
+		set {cool.fish.%player%} to now
+		loop all players:
+			"%loop-player%" is argument
+			set {_found} to true
+			{db_alerts.on.%loop-player%} is true
+			play slime attack at location of loop-player with pitch 1
+			send "&e%player% &ajust slapped you with a giant fish!" to loop-player
+			stop
+			
+		{_found} is not set:
+			forward command "fishcatch %argument% %player%" to console
+			
+		
+				
+		
 	
 	
 		
 				
-		
+
 		
 			
 	

@@ -1,0 +1,34 @@
+
+
+
+
+
+
+command /connect <text>:
+	permission: obam.admin
+	trigger:
+		broadcast "&7%argument% has connected"
+		
+command /disconnect <text>:
+	permission: obam.admin
+	trigger:
+		broadcast "&7%argument% has disconnected"
+		
+
+
+on join:
+	set join message to " "
+	set {db_online.%player%} to true
+
+	
+on quit:
+	set quit message to " "
+	set {db_online.%player%} to false
+	set {db_online.%player%.logoff} to now
+	wait 5 seconds
+	{db_online.%player%} is false
+	execute console command "/disconnect %player%"
+	forward command "disconnect %player%" to console
+
+		
+	

@@ -103,39 +103,32 @@ every 15 minutes:
 				send "&7Your chances of fortune have increased!" to loop-player 
 
 on mine:
-	{chunk.live.%chunk at location of event-block%} is not name of player:
-		{chunk.live.%chunk at location of event-block%.%player%} is not set:
-			cancel event
-			stop
-	{fortune.spam.%player%} is greater than 16:
-		set {fortune.spam.%player%} to 0
-	{for.ran.%player%} is not set:
-		set {for.ran.%player%} to random integer between 5 and 15
-	{current.aura.%player%} is "fortune":
-		{abstain.%player%} is true:
-			clear {current.aura.%player%}
-		{abstain.%player%} is "wait abstain":
-			clear {current.auar.%player%}
-		event-block is diamond ore or emerald ore or gold ore or iron ore or lapis ore or redstone ore or coal ore or nether quartz ore:
+	
+				
+on mine of diamond ore:
+	{current.aura.%player%} is "fortune"
+	chance of {fortune.chance.%player%}%:
+		{chunk.live.%chunk at location of event-block%} is set:
+			{chunk.live.%chunk at location of event-block%} is not "%name of player%"
+			{chunk.live.%chunk at location of event-block%.%player%} is not set:
+				cancel event
+				stop
+		{fortune.spam.%player%} is greater than 16:
+			set {fortune.spam.%player%} to 0
+		{for.ran.%player%} is not set:
+			set {for.ran.%player%} to random integer between 5 and 15
+		{current.aura.%player%} is "fortune":
+			{abstain.%player%} is true:
+				clear {current.aura.%player%}
+			{abstain.%player%} is "wait abstain":
+				clear {current.aura.%player%}
+
 			player's tool is a pickaxe of silk touch:
 				send "&cYour fortune aura has no effect with this enchantment!" to player
 				stop
 			{chunk.live.%chunk at location of event-block%} is set:
 				send "&cYour fortune aura has no effect in this area."
-				stop
-			{chunk.live.%chunk south of event-block%} is set:
-				send "&cYour fortune aura has no effect in this area, go further out!" to player
 				stop	
-			{chunk.live.%chunk west of event-block%} is set:
-				send "&cYour fortune aura has no effect in this area, go further out!" to player
-				stop	
-			{chunk.live.%chunk north of event-block%} is set:
-				send "&cYour fortune aura has no effect in this area, go further out!" to player
-				stop	
-			{chunk.live.%chunk east of event-block%} is set:
-				send "&cYour fortune aura has no effect in this area, go further out!" to player
-				stop	
-			
 			{fortune.spam.%player%} is greater than {for.ran.%player%}:
 				loop all players:
 
@@ -143,61 +136,274 @@ on mine:
 						send "&3&lIt seems %player% hit the %block% jackpot at %location of player%!" to loop-player
 				set {fortune.spam.%player%} to 0
 				set {for.ran.%player%} to random integer between 5 and 15
+		send "&aFortune Favours you!" to player
+		drop 1 diamond
+		add 1 to {fortune.spam.%player%}
+		
+on mine of emerald ore:
 	{current.aura.%player%} is "fortune"
-	event-block is diamond ore:
+	chance of {fortune.chance.%player%}%:
+		{chunk.live.%chunk at location of event-block%} is set:
+			{chunk.live.%chunk at location of event-block%} is not "%name of player%"
+			{chunk.live.%chunk at location of event-block%.%player%} is not set:
+				cancel event
+				stop
+		{fortune.spam.%player%} is greater than 16:
+			set {fortune.spam.%player%} to 0
+		{for.ran.%player%} is not set:
+			set {for.ran.%player%} to random integer between 5 and 15
+		{current.aura.%player%} is "fortune":
+			{abstain.%player%} is true:
+				clear {current.aura.%player%}
+			{abstain.%player%} is "wait abstain":
+				clear {current.aura.%player%}
+
+			player's tool is a pickaxe of silk touch:
+				send "&cYour fortune aura has no effect with this enchantment!" to player
+				stop
+			{chunk.live.%chunk at location of event-block%} is set:
+				send "&cYour fortune aura has no effect in this area."
+				stop
+			{fortune.spam.%player%} is greater than {for.ran.%player%}:
+				loop all players:
+
+					{aura.alert.%loop-player%} is true:
+						send "&3&lIt seems %player% hit the %block% jackpot at %location of player%!" to loop-player
+				set {fortune.spam.%player%} to 0
+				set {for.ran.%player%} to random integer between 5 and 15
+		send "&aFortune favours you!" to player
+		drop 1 emerald
 		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
-			cancel event
-			delete event-block
-			drop 1 diamond
-			send "&aFortune favours you!" to player
-			drop 1 diamond
-			add 1 to {fortune.spam.%player%} 
-	event-block is emerald ore:
+
+on mine of gold ore:
+	{current.aura.%player%} is "fortune"
+	chance of {fortune.chance.%player%}%:
+		{chunk.live.%chunk at location of event-block%} is set:
+			{chunk.live.%chunk at location of event-block%} is not "%name of player%"
+			{chunk.live.%chunk at location of event-block%.%player%} is not set:
+				cancel event
+				stop
+		{fortune.spam.%player%} is greater than 16:
+			set {fortune.spam.%player%} to 0
+		{for.ran.%player%} is not set:
+			set {for.ran.%player%} to random integer between 5 and 15
+		{current.aura.%player%} is "fortune":
+			{abstain.%player%} is true:
+				clear {current.aura.%player%}
+			{abstain.%player%} is "wait abstain":
+				clear {current.aura.%player%}
+
+			player's tool is a pickaxe of silk touch:
+				send "&cYour fortune aura has no effect with this enchantment!" to player
+				stop
+			{chunk.live.%chunk at location of event-block%} is set:
+				send "&cYour fortune aura has no effect in this area."
+				stop	
+			{fortune.spam.%player%} is greater than {for.ran.%player%}:
+				loop all players:
+
+					{aura.alert.%loop-player%} is true:
+						send "&3&lIt seems %player% hit the %block% jackpot at %location of player%!" to loop-player
+				set {fortune.spam.%player%} to 0
+				set {for.ran.%player%} to random integer between 5 and 15
+		cancel event
+		delete event-block
+		drop 1 gold ingot
+		send "&aFortune favours you!" to player
+		drop 1 gold ingot
 		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
-			send "&aFortune favours you!" to player
-			drop 1 emerald
-			add 1 to {fortune.spam.%player%}
-	event-block is gold ore:
+		
+on mine of iron ore:
+	{current.aura.%player%} is "fortune"
+	chance of {fortune.chance.%player%}%:
+		{chunk.live.%chunk at location of event-block%} is set:
+			{chunk.live.%chunk at location of event-block%} is not "%name of player%"
+			{chunk.live.%chunk at location of event-block%.%player%} is not set:
+				cancel event
+				stop
+		{fortune.spam.%player%} is greater than 16:
+			set {fortune.spam.%player%} to 0
+		{for.ran.%player%} is not set:
+			set {for.ran.%player%} to random integer between 5 and 15
+		{current.aura.%player%} is "fortune":
+			{abstain.%player%} is true:
+				clear {current.aura.%player%}
+			{abstain.%player%} is "wait abstain":
+				clear {current.aura.%player%}
+
+			player's tool is a pickaxe of silk touch:
+				send "&cYour fortune aura has no effect with this enchantment!" to player
+				stop
+			{chunk.live.%chunk at location of event-block%} is set:
+				send "&cYour fortune aura has no effect in this area."
+				stop
+			{fortune.spam.%player%} is greater than {for.ran.%player%}:
+				loop all players:
+
+					{aura.alert.%loop-player%} is true:
+						send "&3&lIt seems %player% hit the %block% jackpot at %location of player%!" to loop-player
+				set {fortune.spam.%player%} to 0
+				set {for.ran.%player%} to random integer between 5 and 15
+		cancel event
+		delete event-block
+		drop 1 iron ingot
+		send "&aFortune favours you!" to player
+		drop 1 iron ingot
 		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
-			cancel event
-			delete event-block
-			drop 1 gold ingot
-			send "&aFortune favours you!" to player
-			drop 1 gold ingot
-			add 1 to {fortune.spam.%player%}
-	event-block is iron ore:
+
+on mine of lapis ore:
+
+	{current.aura.%player%} is "fortune"
+	chance of {fortune.chance.%player%}%:
+		{chunk.live.%chunk at location of event-block%} is set:
+			{chunk.live.%chunk at location of event-block%} is not "%name of player%"
+			{chunk.live.%chunk at location of event-block%.%player%} is not set:
+				cancel event
+				stop
+		{fortune.spam.%player%} is greater than 16:
+			set {fortune.spam.%player%} to 0
+		{for.ran.%player%} is not set:
+			set {for.ran.%player%} to random integer between 5 and 15
+		{current.aura.%player%} is "fortune":
+			{abstain.%player%} is true:
+				clear {current.aura.%player%}
+			{abstain.%player%} is "wait abstain":
+				clear {current.aura.%player%}
+
+			player's tool is a pickaxe of silk touch:
+				send "&cYour fortune aura has no effect with this enchantment!" to player
+				stop
+			{chunk.live.%chunk at location of event-block%} is set:
+				send "&cYour fortune aura has no effect in this area."
+				stop
+			{fortune.spam.%player%} is greater than {for.ran.%player%}:
+				loop all players:
+
+					{aura.alert.%loop-player%} is true:
+						send "&3&lIt seems %player% hit the %block% jackpot at %location of player%!" to loop-player
+				set {fortune.spam.%player%} to 0
+				set {for.ran.%player%} to random integer between 5 and 15
+		send "&aFortune favours you!" to player
+		drop 1 lapis block
 		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
-			cancel event
-			delete event-block
-			drop 1 iron ingot
-			send "&aFortune favours you!" to player
-			drop 1 iron ingot
-			add 1 to {fortune.spam.%player%}
-	event-block is lapis ore:
+		
+
+on mine of redstone ore:
+	{current.aura.%player%} is "fortune"
+	chance of {fortune.chance.%player%}%:
+		{chunk.live.%chunk at location of event-block%} is set:
+			{chunk.live.%chunk at location of event-block%} is not "%name of player%"
+			{chunk.live.%chunk at location of event-block%.%player%} is not set:
+				cancel event
+				stop
+		{fortune.spam.%player%} is greater than 16:
+			set {fortune.spam.%player%} to 0
+		{for.ran.%player%} is not set:
+			set {for.ran.%player%} to random integer between 5 and 15
+		{current.aura.%player%} is "fortune":
+			{abstain.%player%} is true:
+				clear {current.aura.%player%}
+			{abstain.%player%} is "wait abstain":
+				clear {current.aura.%player%}
+
+			player's tool is a pickaxe of silk touch:
+				send "&cYour fortune aura has no effect with this enchantment!" to player
+				stop
+			{chunk.live.%chunk at location of event-block%} is set:
+				send "&cYour fortune aura has no effect in this area."
+				stop	
+			{fortune.spam.%player%} is greater than {for.ran.%player%}:
+				loop all players:
+
+					{aura.alert.%loop-player%} is true:
+						send "&3&lIt seems %player% hit the %block% jackpot at %location of player%!" to loop-player
+				set {fortune.spam.%player%} to 0
+				set {for.ran.%player%} to random integer between 5 and 15		
+		send "&aFortune favours you!" to player
+		drop 1 redstone block
 		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
-			send "&aFortune favours you!" to player
-			drop 1 lapis
-			add 1 to {fortune.spam.%player%}
-	event-block is redstone ore:
+	
+on mine of coal ore:
+	{current.aura.%player%} is "fortune"
+	chance of {fortune.chance.%player%}%:
+		{chunk.live.%chunk at location of event-block%} is set:
+			{chunk.live.%chunk at location of event-block%} is not "%name of player%"
+			{chunk.live.%chunk at location of event-block%.%player%} is not set:
+				cancel event
+				stop
+		{fortune.spam.%player%} is greater than 16:
+			set {fortune.spam.%player%} to 0
+		{for.ran.%player%} is not set:
+			set {for.ran.%player%} to random integer between 5 and 15
+		{current.aura.%player%} is "fortune":
+			{abstain.%player%} is true:
+				clear {current.aura.%player%}
+			{abstain.%player%} is "wait abstain":
+				clear {current.aura.%player%}
+
+			player's tool is a pickaxe of silk touch:
+				send "&cYour fortune aura has no effect with this enchantment!" to player
+				stop
+			{chunk.live.%chunk at location of event-block%} is set:
+				send "&cYour fortune aura has no effect in this area."
+				stop
+
+			{fortune.spam.%player%} is greater than {for.ran.%player%}:
+				loop all players:
+
+					{aura.alert.%loop-player%} is true:
+						send "&3&lIt seems %player% hit the %block% jackpot at %location of player%!" to loop-player
+				set {fortune.spam.%player%} to 0
+				set {for.ran.%player%} to random integer between 5 and 15
+		send "&aFortune favours you!" to player
+		drop 2 coal
 		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
-			send "&aFortune favours you!" to player
-			drop 1 redstone
-			add 1 to {fortune.spam.%player%}
-	event-block is coal ore:
+
+on mine of nether quartz ore:
+	{current.aura.%player%} is "fortune"
+	chance of {fortune.chance.%player%}%:
+		{chunk.live.%chunk at location of event-block%} is set:
+			{chunk.live.%chunk at location of event-block%} is not "%name of player%"
+			{chunk.live.%chunk at location of event-block%.%player%} is not set:
+				cancel event
+				stop
+		{fortune.spam.%player%} is greater than 16:
+			set {fortune.spam.%player%} to 0
+		{for.ran.%player%} is not set:
+			set {for.ran.%player%} to random integer between 5 and 15
+		{current.aura.%player%} is "fortune":
+			{abstain.%player%} is true:
+				clear {current.aura.%player%}
+			{abstain.%player%} is "wait abstain":
+				clear {current.aura.%player%}
+
+			player's tool is a pickaxe of silk touch:
+				send "&cYour fortune aura has no effect with this enchantment!" to player
+				stop
+			{chunk.live.%chunk at location of event-block%} is set:
+				send "&cYour fortune aura has no effect in this area."
+				stop
+
+			{fortune.spam.%player%} is greater than {for.ran.%player%}:
+				loop all players:
+
+					{aura.alert.%loop-player%} is true:
+						send "&3&lIt seems %player% hit the %block% jackpot at %location of player%!" to loop-player
+				set {fortune.spam.%player%} to 0
+				set {for.ran.%player%} to random integer between 5 and 15
+		send "&aFortune favours you!" to player
+		drop 2 nether quartz
 		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
-			send "&aFortune favours you!" to player
-			drop 1 coal
-			add 1 to {fortune.spam.%player%}
-	event-block is nether quartz ore:
-		add 1 to {fortune.spam.%player%}
-		chance of {fortune.chance.%player%}%:
-			send "&aFortune favours you!" to player
-			drop 1 nether quartz
-			add 1 to {fortune.spam.%player%}
+		
+command /boostshit:
+	permission: obam.admin
+	trigger:
+		{fortune.chance.%player%} is less than 100:
+			set {fortune.chance.%player%} to 100 
+			send "&a&lShit boosted"
+			stop
+		{fortune.chance.%player%} is greater than 15:
+			set {fortune.chance.%player%} to 15
+			send "&a&lShit Unboosted"
+			stop
+

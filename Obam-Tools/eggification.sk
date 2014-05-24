@@ -210,7 +210,7 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 
 
 
-on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep or horse:
+on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep or horse or donkey or mule or mooshroom:
 	attacker is a player:
 		{projeggtile.%projectile%} is set:
 			if {chunk.live.%chunk at location of victim%} is not attacker:
@@ -269,15 +269,17 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 			victim is wolf:
 				set {_egg} to wolf spawn egg
 				set {_mob.name} to "wolf"
-			name of victim is "mooshroom":
+			victim is mooshroom:
 				set {_egg} to mooshroom spawn egg
 				set {_mob.name} to "mooshroom"
 			victim is sheep:
 				set {_egg} to sheep spawn egg
 				set {_mob.name} to "sheep"
-			victim is horse:
+			victim is horse or mule or donkey:
 				set {_egg} to horse spawn egg
 				set {_mob.name} to "horse"
+
+				
 
 			display name of victim is not set:
 				cancel event
@@ -374,3 +376,5 @@ command /pegg [<text>] [<text>]:
 			set {_message} to {pegg.messages.capture::%argument 2%}
 			replace "MOB" in {_message} with "OBAM"
 			send {_message} to player
+			
+
