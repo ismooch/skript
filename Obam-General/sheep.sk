@@ -2,7 +2,7 @@ every 1 second:
 	loop all entities:
 		loop-entity is sheep or bat or powered creeper or pig:
 			name of loop-entity is "&aISMOOCH" or "&aBru Swain" or "&aSparky" or "&aBacon":
-				play 4 of effect "heart" with data 1 at location of loop-entity
+				spawn 4 of heart data 1 offset with 1, 1, 1 at location of loop-entity
 				{owner.%loop-entity%} is not set:
 					kill loop-entity
 				distance between location of loop-entity and location of {owner.%loop-entity%} is greater than 20:
@@ -23,7 +23,6 @@ on quit:
 	
 		
 command /pet <text>:
-	permission: obam.free
 	trigger:
 		world is "kitpvpkillingfields":
 			send "&cYou can not do that here" to player
@@ -47,18 +46,8 @@ command /pet <text>:
 				send "&cYou can only have one pet at a time!" to player
 				stop
 			size of {pets.%player%::*} is 5:
-				send "&cYou can only have 5 pets at a time! Do /pet clear to clear your pets!" to player
+				send "&cYou can only have 5 pets at a time!" to player
 				stop
-				
-		argument is "list":
-			send "&cHere is a list of all the pets:" to player
-			send "&c- ISMOOCH" to player
-			send "&c- Bru Swain" to player
-			send "&c- Sparky" to player
-			send "&c- Bacon" to player
-			send "&c- Dragon" to player
-			stop
-			
 		argument is "ISMOOCH":
 			spawn sheep at location of player
 			set name of spawned sheep to "&aISMOOCH"
@@ -118,7 +107,6 @@ on explosion prime:
 on death of a sheep or a bat or a powered creeper or a pig:
 	name of victim is "&aISMOOCH" or "&aBru Swain" or "&aSparky" or "&aBacon"
 	clear drops
-			
 			
 on right click with wheat on sheep:
 	name of event-entity is "&aISMOOCH"

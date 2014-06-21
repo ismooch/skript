@@ -1,65 +1,65 @@
 options:
-	egg: snowball;&3Projeggtile Capture Ball;&6Capture the essence of various creatures||&6by tossing your balls at them.
-	egg2: snowball;&3Projeggtile &2Creeper &3Ball;&6Heavily reinforced to prevent even the||&6most explosive creepers from escaping!
-	egg3: snowball;&3Projeggtile &7Skeleton &3Ball;&6An ironic prison of bones made to hold||&6a skeleton, made from its own kin!
-	egg4: snowball;&3Projeggtile &aZombie &dPigman &3Ball;&6A containment area with a nugget inside||&6to lure and keep the pigman content!
-	egg5: snowball;&3Projeggtile &aZombie &3Ball;&6Layered in flesh to make even the||&6loneliest zombie feel at home!
-	egg6: snowball;&3Projeggtile &4Spider &3Ball;&6Tangles an eight legged bugger||&6into a silky woven sack!
+	egg: snowball named "&3Projeggtile Capture Ball" with lore "&6Capture the essence of various creatures||&6by tossing your balls at them."
+	egg2: snowball named "&3Projeggtile &2Creeper &3Ball" with lore "&6Heavily reinforced to prevent even the||&6most explosive creepers from escaping!"
+	egg3: snowball named "&3Projeggtile &7Skeleton &3Ball" with lore "&6An ironic prison of bones made to hold||&6a skeleton, made from its own kin!"
+	egg4: snowball named "&3Projeggtile &aZombie &dPigman &3Ball" with lore "&6A containment area with a nugget inside||&6to lure and keep the pigman content!"
+	egg5: snowball named "&3Projeggtile &aZombie &3Ball" with lore "&6Layered in flesh to make even the||&6loneliest zombie feel at home!"
+	egg6: snowball named "&3Projeggtile &4Spider &3Ball" with lore "&6Tangles an eight legged bugger||&6into a silky woven sack!"
 
 on script load:
 	register new shaped recipe for mooshroom spawn egg using red mushroom, red mushroom, red mushroom, red mushroom, cow spawn egg, red mushroom, red mushroom, red mushroom, red mushroom
-	register new shaped recipe for named item stack from "{@egg2}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", gunpowder, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
-	register new shaped recipe for named item stack from "{@egg3}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", bone, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
-	register new shaped recipe for named item stack from "{@egg4}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", gold nugget, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
-	register new shaped recipe for named item stack from "{@egg5}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", rotten flesh, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
-	register new shaped recipe for named item stack from "{@egg6}" using named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", string, named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}", named item stack from "{@egg}"
+	register new shaped recipe for {@egg2} using {@egg}, {@egg}, {@egg}, {@egg}, gunpowder, {@egg}, {@egg}, {@egg}, {@egg}
+	register new shaped recipe for {@egg3} using {@egg}, {@egg}, {@egg}, {@egg}, bone, {@egg}, {@egg}, {@egg}, {@egg}
+	register new shaped recipe for {@egg4} using {@egg}, {@egg}, {@egg}, {@egg}, gold nugget, {@egg}, {@egg}, {@egg}, {@egg}
+	register new shaped recipe for {@egg5} using {@egg}, {@egg}, {@egg}, {@egg}, rotten flesh, {@egg}, {@egg}, {@egg}, {@egg}
+	register new shaped recipe for {@egg6} using {@egg}, {@egg}, {@egg}, {@egg}, string, {@egg}, {@egg}, {@egg}, {@egg}
 
 on join:
 	{db_egg.%player%.skeleton} is set:
 		send "&aYou have received %{db_egg.%player%.skeleton}% Projeggtiles"
 		loop {db_egg.%player%.skeleton} times:
-			drop named item stack from "{@egg3}"
+			drop {@egg3}
 		clear {db_egg.%player%.skeleton}
 	
 	{db_egg.%player%.creeper} is set:
 		send "&aYou have received %{db_egg.%player%.creeper}% Projeggtiles"
 		loop {db_egg.%player%.creeper} times:
 		
-			drop named item stack from "{@egg2}"
+			drop {@egg2}
 		clear {db_egg.%player%.creeper}
 	
 	{db_egg.%player%.zpig} is set:
 		send "&aYou have received %{db_egg.%player%.zpig}% Projeggtiles"
 		loop {db_egg.%player%.zpig} times:
-			drop named item stack from "{@egg4}"
+			drop {@egg4}
 		clear {db_egg.%player%.zpig}
 	
 	{db_egg.%player%.zombie} is set:
 		send "&aYou have received %{db_egg.%player%.zombie}% Projeggtiles"
 		loop {db_egg.%player%.zombie} times:
-			drop named item stack from "{@egg5}"
+			drop {@egg5}
 		clear {db_egg.%player%.zombie}
 	
 on shoot:
 	projectile is snowball
-	shooter's tool is named item stack from "{@egg}":
+	shooter's tool is {@egg}:
 		set {projeggtile.%projectile%} to true
 
 on shoot:
 	projectile is snowball
-	shooter's tool is named item stack from "{@egg2}":
+	shooter's tool is {@egg2}:
 		set {projeggtile.hostile.%projectile%} to true
 		set {creeper.%projectile%} to true
-	shooter's tool is named item stack from "{@egg3}":
+	shooter's tool is {@egg3}:
 		set {projeggtile.hostile.%projectile%} to true
 		set {skeleton.%projectile%} to true
-	shooter's tool is named item stack from "{@egg4}":
+	shooter's tool is {@egg4}:
 		set {projeggtile.hostile.%projectile%} to true
 		set {pigman.%projectile%} to true
-	shooter's tool is named item stack from "{@egg5}":
+	shooter's tool is {@egg5}:
 		set {projeggtile.hostile.%projectile%} to true
 		set {zombie.%projectile%} to true
-	shooter's tool is named item stack from "{@egg6}":
+	shooter's tool is {@egg6}:
 		set {projeggtile.hostile.%projectile%} to true
 		set {spider.%projectile%} to true
 
@@ -80,19 +80,19 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 				send "&cYou do not have enough tickets!" to attacker
 				cancel event
 				{creeper.%projectile%} is set:
-					give attacker named item stack from "{@egg2}"
+					give attacker {@egg2}
 					stop
 				{skeleton.%projectile%} is set:
-					give attacker named item stack from "{@egg3}"
+					give attacker {@egg3}
 					stop
 				{pigman.%projectile%} is set:
-					give attacker named item stack from "{@egg4}"
+					give attacker {@egg4}
 					stop
 				{zombie.%projectile%} is set:
-					give attacker named item stack from "{@egg5}"
+					give attacker {@egg5}
 					stop
 				{spider.%projectile%} is set:
-					give attacker named item stack from "{@egg6}"
+					give attacker {@egg6}
 					stop
 			subtract 150 from attacker's balance
 
@@ -210,7 +210,7 @@ on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
 
 
 
-on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep or horse:
+on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep or horse or donkey or mule or mooshroom:
 	attacker is a player:
 		{projeggtile.%projectile%} is set:
 			if {chunk.live.%chunk at location of victim%} is not attacker:
@@ -226,7 +226,7 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 				{_bal} is less than 10:
 					send "&cYou do not have enough tickets!" to attacker
 					cancel event
-					give attacker named item stack from "{@egg}"
+					give attacker {@egg}
 					stop
 				subtract 10 from attacker's balance
 				send "&aYou have spent &e10&a tickets on capturing a creature!" to attacker
@@ -239,7 +239,7 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 					{_bal} is less than 5:
 						send "&cYou do not have enought tickets!" to attacker
 						cancel event
-						give attacker named item stack from "{@egg}"
+						give attacker {@egg}
 						stop
 					remove 5 from attacker's balance
 					send "&aYou have spent &e5&a tickets on capturing a creature!" to attacker
@@ -269,15 +269,17 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 			victim is wolf:
 				set {_egg} to wolf spawn egg
 				set {_mob.name} to "wolf"
-			name of victim is "mooshroom":
+			victim is mooshroom:
 				set {_egg} to mooshroom spawn egg
 				set {_mob.name} to "mooshroom"
 			victim is sheep:
 				set {_egg} to sheep spawn egg
 				set {_mob.name} to "sheep"
-			victim is horse:
+			victim is horse or mule or donkey:
 				set {_egg} to horse spawn egg
 				set {_mob.name} to "horse"
+
+				
 
 			display name of victim is not set:
 				cancel event
@@ -322,7 +324,7 @@ on death of a creeper or a zombie or a silverfish or a witch or a spider or magm
 
 
 	chance of 20%:
-		add named item stack from "{@egg}" to drops
+		add {@egg} to drops
 	clear {player.hit.%event-entity%}
 
 on damage of a creeper or a zombie or a silverfish or a witch or a spider or magma cube or wither skeleton or skeleton or enderman or cave spider or slime or ghast or zombie pigman:
@@ -374,3 +376,5 @@ command /pegg [<text>] [<text>]:
 			set {_message} to {pegg.messages.capture::%argument 2%}
 			replace "MOB" in {_message} with "OBAM"
 			send {_message} to player
+			
+

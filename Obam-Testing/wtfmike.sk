@@ -1,0 +1,17 @@
+command /wtfmike [<text>]:
+	permission: obam.free
+	trigger:
+		player does not have permission "obam.admin":
+			set {_player} to "%player%"
+			{_player} is not "mikeambrose" or "mikeambrose2" or "mikeambrose3":
+				send "&cYou do not have permission to do this!"
+				stop
+		
+		argument is not set:
+			delete {db_channel.global::mikeambrose}
+			delete {db_channel.global::mikeambrose3}
+			delete {db_channel.global::mikeambrose2}
+			send "&cWTF Mike!?!?!"
+			send "&cPlease use &e/ch j g &Cto get back into chat."
+		argument is "list":
+			send "%{db_channel.global::*}%"

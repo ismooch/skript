@@ -1,0 +1,19 @@
+on teleport:
+	wait 3 ticks
+	player's world is "vacant"
+
+
+
+	{kit.%player%} is "melee":
+		{ingame.%player%} is not set
+		clear player's inventory
+		equip player with all leather armor of unbreaking 10 named "&fMelee Greaves"
+		dye player's helmet (172, 172, 172)
+		dye player's chestplate (172, 172, 172)
+		dye player's leggings (172, 172, 172)
+		dye player's boots (172, 172, 172)
+		give player iron sword named "&fBlade of Justice &b[Sharpness I]"
+		give 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]" to player
+		give 2 snowball named "&fPoison Pills" to player
+		set {ingame.%player%} to true
+		

@@ -1,0 +1,31 @@
+command /zombify:
+	permission: obam.supporter
+	trigger:
+		player is not riding:
+			send "&cYou must be riding a horse to do this!"
+			stop
+		player's vehicle is not a horse:
+			send "&cYou must be riding a horse to do this!"
+			stop
+		set {_y} to y-coordinate of player
+		set {_x} to x-coordinate of player
+		set {_z} to z-coordinate of player
+		execute console command "summon EntityHorse %{_x}% %{_y}% %{_z}% {Type:3,Tame:1}"
+		delete player's vehicle
+		
+command /skellify:
+	permission: obam.supporter
+	trigger:
+		player is not riding:
+			send "&cYou must be riding a horse to do this!"
+			stop
+		player's vehicle is not a horse:
+			send "&cYou must be riding a horse to do this!"
+			stop
+		set {_y} to y-coordinate of player
+		set {_x} to x-coordinate of player
+		set {_z} to z-coordinate of player
+		execute console command "summon EntityHorse %{_x}% %{_y}% %{_z}% {Type:4,Tame:1}"
+		delete player's vehicle
+		
+		

@@ -1,7 +1,10 @@
 every 10 seconds:
-	clear {db_fronts.who.2::*}
+	clear {db_wtf.who::*}
 	loop all players:
-		add loop-player to {db_fronts.who.2::*}
+		add loop-player to {db_wtf.who::*}
+	{db_wtf.who::1} is not set:
+		set {db_wtf.who::1} to "-Empty"
+
 		
 		
 command /who:
@@ -9,8 +12,14 @@ command /who:
 	
 		loop all players:
 			add loop-player to {_cur.list::*}
-			clear {db_fronts.who.2::*}
-			set {db_fronts.who.2::*} to {_cur.list::*}
-		send "&eHub:&a%{db_hub.who::*}%"
-		send "&eWTF:&a%{db_wtf.who::*}%"
-		send "&eFronts:&a%{_cur.list::*}%"
+			clear {db_wtf.who::*}
+			set {db_wtf.who::*} to {_cur.list::*}
+		send "&eTotal Online: %size of {_cur.list::*} + size of {db_fronts.who.2::*} + size of {db_hub.who.::*} + size of {db_events.who::*}%"
+		send " "
+		send "&eHub    (%size of {db_hub.who::*}%):&a%{db_hub.who::*}%"
+		send " "
+		send "&eWTF    (%size of {db_wtf.who::*}%):&a%{db_wtf.who::*}%"
+		send " "
+		send "&eFronts (%size of {db_fronts.who.2::*}%):&a%{db_fronts.who.2::*}%"
+		send " "
+		send "&eEvent (%size of {db_events.who::*}%):&a%{db_events.who::*}%"

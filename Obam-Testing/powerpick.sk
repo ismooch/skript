@@ -1,10 +1,10 @@
 options:
-	powerpick: diamond pickaxe;&cPower Pick;&7Reinforced by diamonds to speed up;&7the mining process
+	powerpick: diamond pickaxe named "&cPower Pick" with lore "&7Reinforced by diamonds to speed up||&7the mining process"
 
 
 
 on script load:
-	register new shapeless recipe for named item stack from "{@powerpick}" using diamond block, diamond block, diamond block, diamond block, diamond pick, diamond block, diamond block, diamond block, diamond block
+	register new shapeless recipe {@powerpick} using diamond block, diamond block, diamond block, diamond block, diamond pick, diamond block, diamond block, diamond block, diamond block
 	
 	
 	

@@ -1,4 +1,4 @@
-command /g <player>:
+command /g <text> [<number>] [<number>] [<number>]:
 	description: Teleports to a Player
 	permission: obam.mod
 	trigger:
@@ -8,10 +8,19 @@ command /g <player>:
 			{monitor.%player%} is false:
 				send "&cYou must be in monitor mode to do this!" to player
 				stop
-			
-		teleport player to player-argument
-		send "&aYou have teleported to %player-argument%." to player
-		log "%player%^GO ACTION^%player-argument%^%location of player-argument%" to "admin/actions.log"
+		
+		argument 1 is "loc":
+			set {_loc} to player's location
+			set y-coordinate of {_loc} to arg-3
+			set x-coordinate of {_loc} to arg-2
+			set z-coordinate of {_loc} to arg-4
+			teleport player to {_loc}
+			send "&aYou have teleported to &e%{_loc}%&a."
+			stop
+		set {_player} to argument 1 parsed as player
+		teleport player to {_player}
+		send "&aYou have teleported to %{_player}%." to player
+		log "%player%^GO ACTION^%{_player}%^%location of {_player}%" to "admin/actions.log"
 		
 		
 command /grab <player>:
@@ -34,7 +43,7 @@ command /monitor:
 		{monitor.%player%} is true:
 			set {monitor.%player%} to false
 			reveal player to all players
-			disallow player to fly
+			set flight state of player to false
 			teleport player to {loc.mon.%player%}
 			set {tim.mon.%player%} to difference between {tim.mon.%player%} and now
 			send "&aYou are no longer in monitor mode! You have been returned to your position!"
@@ -47,7 +56,7 @@ command /monitor:
 			set {monitor.%player%} to true
 			set {tim.mon.%player%} to now
 			hide player from all players
-			allow player to fly
+			set flight state of player to true
 			send "&aYou are now in monitor mode!" to player
 			log "%player%^MONITOR ENABLE ACTION^%{loc.mon.%player%}%" to "admin/actions.log"
 			
@@ -56,7 +65,7 @@ every 1 second:
 	loop all players:
 		{monitor.%loop-player%} is true:
 			hide loop-player from all players
-			allow loop-player to fly
+			set flight state of loop-player to true
 			
 on damage of a player:
 	{monitor.%victim%} is true:

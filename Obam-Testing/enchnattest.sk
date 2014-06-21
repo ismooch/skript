@@ -1,0 +1,2 @@
+on script load:
+	register new shapeless recipe for diamond tool of unbreaking 4 using enchanted book of unbreaking 4, diamond tool, air, air, air, air, air, air, air

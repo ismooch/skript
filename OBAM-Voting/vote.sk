@@ -20,6 +20,21 @@ command /vote [<text>] [<number>] [<text>]:
 			send "&3&l=========================================="
 			send "&eVote for &6&lOBAM&fCraft &eon the following server lists" 
 			send "&eto earn special prizes and win OBAM Tickets! "
+			{db_votetokens.%{_player}%} is not set:
+				set {_tmp.mes} to "&aYou can get a Prize Token now!"
+			set {_waited} to difference between {db_votetokens.%{_player}%.time} and now
+			{_waited} is more than a day:
+				set {_tmp.mes} to "&aYou can get a Prize Token now!"
+			{_waited} is less than a day:
+				set {_tmp.time} to {_waited}
+				set {_tmp.hold} to difference between now and now
+				add 24 hours to {_tmp.hold}
+				subtract {_tmp.time} from {_tmp.hold}
+				set {_tmp.time} to {_tmp.hold}
+				
+				set {_tmp.mes} to "&aYour next Prize Token is available in &e%{_tmp.time}%&a!"
+			send " "
+			send "%{_tmp.mes}%"
 			send " "
 			send "&2&l✔&f - Voted Today  &d|  &c&lX&f - Not Voted Today"
 			send " "
@@ -393,6 +408,44 @@ command /vote [<text>] [<number>] [<text>]:
 			send "&a10.  - %{_vote.check0}% - %{db_obam.vote.link.10}%" to player
 			clear {_message}
 			clear {_waited}
+			
+			set {_waited} to difference between now and {db_server.mineserverscom.%{_player}%}
+			clear {time.vote::*}
+			{_waited} is less than 1 day:
+				set {_vote.check0} to "&a[&2&l✔&a]"
+			{_waited} is more than 1 day:
+				set {_vote.check0} to "&a[&c&lX&a]"
+			{_waited} is not set:
+				set {_vote.check0} to "&a[&c&lX&a]"
+				set {_message0} to "Now Availible!"
+			{_waited} is less than 1 day:
+				set {_time} to {db_server.mineservers.%{_player}%}
+				add 1 day to {_time}
+				set {_time} to difference between {_time} and now
+				{_time} is greater than 1 hour:
+					set {_time} to "%{_time}%"
+					clear {time.vote::*}
+					set {time.vote::*} to {_time} parsed as "%number% hour[s] and %integer%.%integer% minute[s]"
+					
+					set {_hrs} to {time.vote::1}
+					set {_mins} to {time.vote::2}
+					set {_message0} to "&eVote in &a%{time.vote::1}%h &e& &a%{time.vote::2}%m"
+				{_time} is less than 1 hour:
+					set {_time} to "%{_time}%"
+					clear {time.vote::*}
+					set {time.vote::*} to {_time} parsed as "%number% minute[s] and %integer%.%integer% minute[s]"
+					set {_message0} to "&eVote in &a%{time.vote::1}%m &e& &a%{time.vote::2}%s"
+				{_time} is less than 1 minute:
+					set {_message0} to "&In a few seconds!"
+			{_waited} is more than 1 day:
+				set {_message0} to "Now available!"
+			
+			{db_server.mineserverscom.%{_player}%} is not set:
+				set {_vote.check0} to "&a[&c&lX&a]"
+			send "&a11.  - %{_vote.check0}% - %{db_obam.vote.link.11}%" to player
+			clear {_message}
+			clear {_waited}
+
 
 			
 		argument 1 is "set" or "s":

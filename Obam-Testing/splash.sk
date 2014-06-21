@@ -1,0 +1,139 @@
+#splash
+
+options:
+	heart: i;dirt;n;&7Hearts;l;&6Click to enable heart||&6effects for your splash;c;sudo %player% splashmenu hearts
+	flame: i;dirt;n;&7Flames;l;&6Click to enable flame||&6effects for your splash;c;sudo %player% splashmenu flames
+	reddust: i;dirt;n;&7Red Poof;l;&6Click to enable red poof||&6effects for your splash;c;sudo %player% splashmenu burst
+	smoke: i;dirt;n;&7Smoke;l;&6Click to enable smoke||&6effects for your splash;c;sudo %player% splashmenu smoke
+	waterdrip: i;dirt;n;&7Drip Water;l;&6Click to enable water drip||&6effects for your splash;c;sudo %player% splashmenu water
+	lavadrip: i;dirt;n;&7Drip Lava;l;&6Click to enable lava drip||&6effects for your splash;c;sudo %player% splashmenu lava
+	slime: i;dirt;n;&7Slime;l;&6Click to enable slime||&6effects for your splash;c;sudo %player% splashmenu slime
+	note: i;dirt;n;&7Notes;l;&6Click to enable music note||&6effects for your splash;c;sudo %player% splashmenu notes
+	happy: i;dirt;n;&7Happy;l;&6Click to enable Happy||&6effects for your splash;c;sudo %player% splashmenu happy
+	angry: i;dirt;n;&7Angry;l;&6Click to enable Angry||&6effects for your splash;c;sudo %player% splashmenu angry
+	explode: i;dirt;n;&7Explosion;l;&6Click to enable Explosion||&6effects for your splash;c;sudo %player% splashmenu explode
+	snow: i;dirt;n;&7Snow;l;&6Click to enable Snow Shovel||&6effects for your splash;c;sudo %player% splashmenu snow
+	portal: i;dirt;n;&7Portal;l;&6Click to enable Portal||&6effects for your splash;c;sudo %player% splashmenu portal
+	cloud: i;dirt;n;&7Cloud;l;&6Click to enable Cloud||&6effects for your splash;c;sudo %player% splashmenu cloud
+	clear: i;glass;n;&7Clear splash;l;&6Click to disable||&6effects for your splash;c;sudo %player% splashmenu clear
+	bubble: i;dirt;n;&7Bubble;l;&6Click to enable Bubble||&6effects for your splash;c;sudo %player% splashmenu bubble
+	
+command /splashmenu [<text>]:
+	permission: obam.supporter
+	trigger:
+	
+		argument is not set:
+			send "&aOpening menu..."
+			wait 0.3 seconds
+			show "s;1;{@heart};s;2;{@flame};s;3;{@reddust};s;4;{@smoke};s;5;{@slime};s;6;{@note};s;7;{@lavadrip};s;8;{@waterdrip};s;9;{@happy};s;10;{@angry};s;11;{@explode};s;12;{@snow};s;13;{@portal};s;14;{@cloud};s;15;{@clear}" with 2 rows named "&1splash Menu" to player
+			
+		argument is "hearts":
+			set {splash.%player%} to "hearts"
+			send "&asplash set to &eHearts&a!"
+			
+		argument is "flames":
+			set {splash.%player%} to "flames"
+			send "&asplash set to &eFlames&a!"
+		
+		argument is "burst":
+			set {splash.%player%} to "burst"
+			send "&asplash set to &eRed Poof&a!"
+			
+		argument is "smoke":
+			set {splash.%player%} to "smoke"
+			send "&asplash set to &eSmoke&a!"
+			
+		argument is "slime":
+			set {splash.%player%} to "slime"
+			send "&asplash set to &eSlime&a!"
+			
+		argument is "notes":
+			set {splash.%player%} to "notes"
+			send "&asplash set to &eNotes&a!"
+			
+		argument is "lava":
+			set {splash.%player%} to "lava"
+			send "&asplash set to &eLava Drip&a!"
+			
+		argument is "water":
+			set {splash.%player%} to "water"
+			send "&asplash set to &eWater Drip&a!"
+			
+		argument is "happy":
+			set {splash.%player%} to "happy"
+			send "&asplash set to &eHappy&A!"
+			
+		argument is "angry":
+			set {splash.%player%} to "angry"
+			send "&asplash set to &eAngry&A!"
+			
+		argument is "explode":
+			set {splash.%player%} to "explode"
+			send "&asplash set to &eExplosion&a!"
+			
+		argument is "snow":
+			set {splash.%player%} to "snow"
+			send "&asplash set to &eSnow Shovel&a!"
+			
+		argument is "bubble":
+			set {splash.%player%} to "bubble"
+			send "&asplash set to &eBubble&A!"
+			
+		argument is "portal":
+			set {splash.%player%} to "portal"
+			send "&asplash set to &ePortal&a!"
+			
+		argument is "cloud":
+			set {splash.%player%} to "cloud"
+			send "&asplash set to &eCloud&A!"
+			
+		argument is "bubble":
+			set {splash.%player%} to "bubble"
+			
+		argument is "clear":
+			clear {splash.%player%}
+			send "&asplash disabled!"
+			
+			
+every 5 seconds:
+	loop all players:
+		clear {_amt}
+		loop-player is not sneaking
+		loop-player is sprinting:
+			set {_amt} to 100
+		{_amt} is not set:
+			set {_amt} to 50
+		{splash.%loop-player%} is set:
+			{splash.%loop-player%} is "bubble":
+				spawn {_amt} of bubble data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "cloud":
+				spawn {_amt} of cloud data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "hearts":
+				spawn {_amt} of heart data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "flames":
+				spawn {_amt} of flame data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "burst":
+				spawn {_amt} of red dust data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "smoke":
+				spawn {_amt} of large smoke data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "notes":
+				spawn {_amt} of note data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "lava":
+				spawn {_amt} of drip lava data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "water":
+				spawn {_amt} of drip water data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "slime":
+				spawn {_amt} of slime data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "happy":
+				spawn {_amt} of happy villager data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "angry":
+				spawn {_amt} of angry villager data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "explode":
+				spawn {_amt} of large explode data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "snow":
+				spawn {_amt} of snow shovel data 1 offset with 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "portal":
+				spawn {_amt} of portal data 1 offset with 1, 1, 1 at location of loop-player
+
+			
+	

@@ -1,0 +1,82 @@
+on teleport:
+	wait 3 ticks
+	player's world is "vacant"
+
+
+	{kit.%player%} is "necromancer":
+		{ingame.%player%} is not set
+		equip player with all leather armor of unbreaking 10 named "&fNecromancer's Robes"
+		dye player's helmet (0, 159, 37)
+		dye player's chestplate (0, 159, 37)
+		dye player's leggings (0, 159, 37)
+		dye player's boots (0, 159, 37)
+		give player blaze rod of knockback 1 named "&fSummoning Rod"
+		give player stone sword of knockback 1 named "&fSummoner's Trust"
+		give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
+		apply speed 1 to player for 999 days
+		set player's level progress to 0.99
+		set {ingame.%player%} to true
+		
+on right click with blaze rod:
+	{kit.%player%} is "necromancer":
+		targeted block is glass:
+			stop
+		level progress of player is greater than or equal to 0.3:
+			{zombie.%player%.active} is greater than or equal to 5:
+				send "&cYou have too many zombies!" to player
+				stop
+			spawn a zombie at block above targeted block
+			set {_zombie.%player%} to spawned zombie
+			equip {_zombie.%player%} with leather helmet
+			set name of spawned zombie to "&cNecroSpawn"
+			make player damage player by 2
+			
+			apply speed 3 to spawned zombie for 999 days
+			send "&aYou Summon the dead!" to player
+			set {owner.zombie.%spawned zombie%} to player
+			{zombie.%player%.active} is not set:
+				set {zombie.%player%.active} to 0
+			add 1 to {zombie.%player%.active}
+			reduce player's level progress by 0.3
+			
+on left click with blaze rod:
+	{kit.%player%} is "necromancer":
+
+		{zombie.%player%.active} is not set:
+			send "&cYou have no zombies out!" to player
+			stop
+		{zombie.%player%.active} is 0:
+			send "&cYou have no zombies out!" to player
+			stop
+		level progress of player is greater than or equal to {zombie.%player%.active} / 10:
+			loop all zombies:
+				{owner.zombie.%loop-entity%} is player:
+					delete loop-entity
+			make player damage player by {zombie.%player%.active}
+			reduce player's level progress by {zombie.%player%.active} / 10
+			clear {zombie.%player%.active}
+			send "&aYou call back the dead!" to player
+			
+on damage of a player:
+	attacker is a zombie:
+		cancel event
+		set {_player} to {owner.zombie.%attacker%}
+		make {_player} damage victim by 2
+		
+on death of a zombie:
+	clear drops
+	
+on damage of a zombie:
+	{kit.%attacker%} is not set:
+		send "&cYou can not do that!" to attacker
+		cancel event
+		stop
+
+	damage is greater than victim's health
+	cancel event
+	set {_player} to {owner.zombie.%victim%}
+	make attacker damage {_player} by 2
+	send "&c%attacker% has slain your spawn!" to {_player}
+	send "&a%{_player}%'s spawn has died to your hand." to attacker
+	subtract 1 from {zombie.%{_player}%.active}
+	delete victim

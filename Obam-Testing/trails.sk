@@ -1,0 +1,127 @@
+options:
+	heart: i;dirt;n;&7Hearts;l;&6Click to enable heart||&6trails for your bows;c;sudo %player% trailmenu hearts
+	flame: i;dirt;n;&7Flames;l;&6Click to enable flame||&6trails for your bows;c;sudo %player% trailmenu flames
+	reddust: i;dirt;n;&7Red Poof;l;&6Click to enable red poof||&6trails for your bows;c;sudo %player% trailmenu burst
+	smoke: i;dirt;n;&7Smoke;l;&6Click to enable smoke||&6trails for your bows;c;sudo %player% trailmenu smoke
+	waterdrip: i;dirt;n;&7Drip Water;l;&6Click to enable water drip||&6trails for your bows;c;sudo %player% trailmenu water
+	lavadrip: i;dirt;n;&7Drip Lava;l;&6Click to enable lava drip||&6trail for your bows;c;sudo %player% trailmenu lava
+	slime: i;dirt;n;&7Slime;l;&6Click to enable slime||&6trails for your bows;c;sudo %player% trailmenu slime
+	note: i;dirt;n;&7Notes;l;&6Click to enable music note||&6trails for your bows;c;sudo %player% trailmenu notes
+	happy: i;dirt;n;&7Happy;l;&6Click to enable Happy||&6trails for your bows;c;sudo %player% trailmenu happy
+	angry: i;dirt;n;&7Angry;l;&6Click to enable Angry||&6trails for your bows;c;sudo %player% trailmenu angry
+	explode: i;dirt;n;&7Explosion;l;&6Click to enable Explosion||&6trails for your bows;c;sudo %player% trailmenu explode
+	snow: i;dirt;n;&7Snow;l;&6Click to enable Snow Shovel||&6trails for your bows;c;sudo %player% trailmenu snow
+	portal: i;dirt;n;&7Portal;l;&6Click to enable Portal||&6trails for your bows;c;sudo %player% trailmenu portal
+	cloud: i;dirt;n;&7Cloud;l;&6Click to enable Cloud||&6trails for your bows;c;sudo %player% trailmenu cloud
+	clear: i;glass;n;&7Clear Trail;l;&6Click to disable||&6trails for you bows;c;sudo %player% trailmenu clear
+	
+	
+command /trailmenu [<text>]:
+	permission: obam.supporter
+	trigger:
+	
+		argument is not set:
+			send "&aOpening menu..."
+			wait 0.3 seconds
+			show "s;1;{@heart};s;2;{@flame};s;3;{@reddust};s;4;{@smoke};s;5;{@slime};s;6;{@note};s;7;{@lavadrip};s;8;{@waterdrip};s;9;{@happy};s;10;{@angry};s;11;{@explode};s;12;{@snow};s;13;{@portal};s;14;{@cloud};s;15;{@clear}" with 2 rows named "&1Trail Menu" to player
+			
+		argument is "hearts":
+			set {trail.%player%} to "hearts"
+			send "&aTrail set to &eHearts&a!"
+			
+		argument is "flames":
+			set {trail.%player%} to "flames"
+			send "&aTrail set to &eFlames&a!"
+		
+		argument is "burst":
+			set {trail.%player%} to "burst"
+			send "&aTrail set to &eRed Poof&a!"
+			
+		argument is "smoke":
+			set {trail.%player%} to "smoke"
+			send "&aTrail set to &eSmoke&a!"
+			
+		argument is "slime":
+			set {trail.%player%} to "slime"
+			send "&aTrail set to &eSlime&a!"
+			
+		argument is "notes":
+			set {trail.%player%} to "notes"
+			send "&aTrail set to &eNotes&a!"
+			
+		argument is "lava":
+			set {trail.%player%} to "lava"
+			send "&aTrail set to &eLava Drip&a!"
+			
+		argument is "water":
+			set {trail.%player%} to "water"
+			send "&aTrail set to &eWater Drip&a!"
+			
+		argument is "happy":
+			set {trail.%player%} to "happy"
+			send "&aTrail set to &eHappy&A!"
+			
+		argument is "angry":
+			set {trail.%player%} to "angry"
+			send "&aTrail set to &eAngry&A!"
+			
+		argument is "explode":
+			set {trail.%player%} to "explode"
+			send "&aTrail set to &eExplosion&a!"
+			
+		argument is "snow":
+			set {trail.%player%} to "snow"
+			send "&aTrail set to &eSnow Shovel&a!"
+			
+		argument is "bubble":
+			set {trail.%player%} to "bubble"
+			send "&aTrail set to &eBubble&A!"
+			
+		argument is "portal":
+			set {trail.%player%} to "portal"
+			send "&aTrail set to &ePortal&a!"
+			
+		argument is "cloud":
+			set {trail.%player%} to "cloud"
+			send "&aTrail set to &eCloud&A!"
+			
+		argument is "clear":
+			clear {trail.%player%}
+			send "&aTrails disabled!"
+			
+			
+on shoot:
+	{trail.%shooter%} is set:
+		{trail.%shooter%} is "hearts":
+			trail projectile with heart
+		{trail.%shooter%} is "flames":
+			trail projectile with flame
+		{trail.%shooter%} is "burst":
+			trail projectile with red dust
+		{trail.%shooter%} is "smoke":
+			trail projectile with large smoke
+		{trail.%shooter%} is "bubble":
+			trail projectile with bubble
+		{trail.%shooter%} is "notes":
+			trail projectile with note
+		{trail.%shooter%} is "lava":
+			trail projectile with drip lava
+		{trail.%shooter%} is "water":
+			trail projectile with drip water
+		{trail.%shooter%} is "slime":
+			trail projectile with slime
+		{trail.%shooter%} is "happy":
+			trail projectile with happy villager
+		{trail.%shooter%} is "angry":
+			trail projectile with angry villager
+		{trail.%shooter%} is "explode":
+			trail projectile with large explode
+		{trail.%shooter%} is "snow":
+			trail projectile with snow shovel
+		{trail.%shooter%} is "portal":
+			trail projectile with portal
+		{trail.%shooter%} is "cloud":
+			trail projectile with cloud
+
+		
+		

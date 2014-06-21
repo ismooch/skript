@@ -1,0 +1,385 @@
+options:
+	#startfold @class-chest-stuff
+	ninjakit: i;leather cap;n;&9&lNinja;l;&7Click to pick the||&eNinja&7 Class|| ||&5Kit Info:||&7You are a ninja with||&7a stone sword. Turn||&7Invisible by holding shift||&7But watch your mana it||&7it is not unlimited!|| ||%{dis.%player%.1}%;c;sudo %player% kits ninja
+	archerkit: i;bow;n;&9&lArcher;l;&7Click to pick the||&eArcher&7 Class|| ||&5Kit Info:||&7You are an archer||&7with a Punch I bow||&7Keep your distance to||&7to get critical hits!;c;sudo %player% kits archer
+	meleekit: i;iron helmet;n;&9Melee;l;&7Click to pick the||&eMelee&7 Class|| ||&5Kit Info:||&7Ultimate in up close||&7combat. An iron sword||&7Unrivaled by any other||&7close combat kit;c;sudo %player% kits melee
+	firemagekit: i;fire charge;n;&9Fire Mage;n;&9&lFire Mage;l;&7Click to pick the||&eFire Mage&7 Class|| ||&5Kit Info:||&7The firemage tosses fireballs||&7at their opponents||&7wreaking havoc with||&7explosions and fire|| ||%{dis.%player%.1}%;c;sudo %player% kits firemage
+	lightningmagekit: i;nether star;n;&9&lLightning Mage;n;&9&lLightning Mage;l;&7Click to pick the||&eLightning Mage&7 class|| ||&5Kit Info:||&7Using the power of||&7Lightning, this kit||&7causes large group damage||&7and harnesses the power||&7to teleport;c;sudo %player% kits lightningmage
+	tankkit: i;gold chestplate;n;&9&lTank;l;&7Click to pick the||&eTank&7 class|| ||&5Kit Info:||&7The tank shows no||&7Weakness, its armor||&7pure, and its paddle||&7heavy, it guarantees||&7longer lives, but fewer||&7kills;c;sudo %player% kits tank
+	necrokit: i;bone;n;&9&lNecromancer;l;&7Click to pick the ||&eNecromancer&7 class|| ||&5Kit Info:||&7The Necro summons the||&7Dead from beyond to||&7assist in their domination||&7Summoning requires only||&7a little bit of mana||&7and a few drops of your||&7own blood|| ||%{dis.%player%.1}%;c;sudo %player% kits necromancer
+	fishermankit: i;fish;n;&9&lFisherman;l;&7Click to pick the||&eFisherman&7 class|| ||&5Kit Info:||&7The legendary fisherman||&7Relies on his trusty||&7Big Fish to deal the||&7Blows, and his Rod||&7Old Faithful, to bring||&7the enemy closer.;c;sudo %player% kits fisherman
+	something: i;wood hoe;n;&9&lSomething;c;sudo %player% kits something
+	skelemancerkit: i;wither skeleton head;n;&9&lSkele-Mancer;l;&7Click to pick the||&eSkele-Mancer&7 class|| ||&5Kit Info||&7Skelemancers take summoning||&7to a new level with||&7long range combat.||&7Fleshing the field with||&7Skeletons of fallen||&7Opponents, and trusty||&7Bow, with chances for||&7Critical hits at long||&7Range.;c;sudo %player% kits skelemancer
+	supporterstuff: i;diamond block;n;&9&lMore Kits for Supporters!;l;&7Purchase a Supporter membership||&7To get even more fun||&7kits from &9OBAM&7!
+	#endfold
+	#startfold @arena-chest-stuff
+	killingfieldarena: i;long grass;n;&9&lKilling Fields;l;&7Click to join the||&eKilling Fields&7 arena;c;spawnplayer %player% killingfields
+	vacantarena: i;glass bottle;n;&9&lVacant;l;&7Click to join||&eVacant&7 arena;c;spawnplayer %player% vacant
+	showdownarena: i;dead shrub;n;&9&lShowdown;l;&7Click to join||&eShowdown&7 arena;c;spawnplayer %player% showdown
+	#endfold
+#kits
+
+
+variables:
+	{safety.%player%} = 0
+	
+on join:
+	clear {kit.%player%}
+	clear {ingame.%player%}
+	clear {board.up.%player%.kp}
+	teleport player to {kit.spawn}
+	
+on connect:
+	teleport player to {kit.spawn}
+	
+on disconnect:
+	clear {kit.%player%}
+	clear {ingame.%player%}
+	
+command /arena:
+	trigger:
+		world is "kitspawnroom":
+			
+			{kit.%player%} is not set:
+				send "&cPlease choose a kit first!" to player
+				stop
+				
+			send "&aOpening menu..."
+			wait 0.3 seconds
+			show "s;3;{@vacantarena}" with 1 row named "&9&lOBAM&9 :: Arenas" to player
+command /kits [<text>]:
+
+	executable by: players and console
+	trigger:
+		world is "kitspawnroom"
+		argument is not set:
+			player has permission "obam.kits.supporter":
+				set {dis.%player%.1} to " "
+				show "s;11;{@ninjakit};s;12;{@archerkit};s;13;{@meleekit};s;14;{@firemagekit};s;15;{@lightningmagekit};s;16;{@tankkit};s;17;{@necrokit};s;23;{@fishermankit};s;24;{@skelemancerkit}" with 4 rows named "&9&lOBAM &9:: Kits" to player
+				stop
+				
+			set {dis.%player%.1} to "&eUse this kit for one time for &a25&eTickets"
+			show "s;11;{@ninjakit};s;12;{@archerkit};s;13;{@meleekit};s;14;{@firemagekit};s;15;{@lightningmagekit};s;16;{@tankkit};s;17;{@necrokit};s;23;{@fishermankit};s;24;{@skelemancerkit}" with 4 rows named "&9&lOBAM &9:: Kits" to player
+		{kit.%player%} is set:
+			send "&cYou already have a kit D:" to player
+			stop
+			
+		set {_arena.run} to true
+				
+		argument is "archer":
+			send "&aYou have picked the &eArcher&a Kit"
+			set {kit.%player%} to "archer"
+			
+
+		argument is "ninja":
+			player does not have permission "obam.supporter":
+				set {_bal} to player's balance
+				{_bal} is less than 25:
+					send "&cYou do not have enough tickets for this!"
+					stop
+				remove 25 from player's balance
+				send "&aYou have purchased the &eNinja&a kit for &e25 Tickets&a!"
+				send "&aYour current balance is &e%player's balance%"
+			send "&aYou have picked the &eNinja&a kit!"
+			set {kit.%player%} to "ninja"
+			set {ninja.poof.%player%} to true
+
+		argument is "melee":
+			send "&aYou have picked the &eMelee&a kit"
+			set {kit.%player%} to "melee"
+
+		argument is "firemage":
+			player does not have permission "obam.supporter":
+				set {_bal} to player's balance
+				{_bal} is less than 25:
+					send "&cYou do not have enough tickets for this!"
+					stop
+				remove 25 from player's balance
+				send "&aYou have purchased the &eFiremage&a kit for &e25 Tickets&a!"
+				send "&aYour current balance is &e%player's balance%"
+			send "&aYou have picked the &eFiremage&a kit!"
+			set {kit.%player%} to "firemage"
+
+		argument is "tank":
+			send "&aYou have picked the &eTank&a kit!"
+			set {kit.%player%} to "tank"
+		
+
+		argument is "lightningmage":
+			send "&aYou have picked the &eLightning Mage&a kit!"
+			set {kit.%player%} to "lightningmage"
+
+		argument is "necromancer":
+			player does not have permission "obam.supporter":
+				set {_bal} to player's balance
+				{_bal} is less than 25:
+					send "&cYou do not have enough tickets for this!"
+					stop
+				remove 25 from player's balance
+				send "&aYou have purchased the &eNecromancere&a kit for &e25 Tickets&a!"
+				send "&aYour current balance is &e%player's balance%"
+			send "&aYou have picked the &eNecromancer&a kit!"
+			set {kit.%player%} to "necromancer"
+		
+
+		argument is "fisherman":
+			send "&aYou have picked the &eFisherman&a kit!"
+			set {kit.%player%} to "fisherman"
+
+		argument is "skelemancer":
+			send "&aYou have picked the &eSkelemancer&a kit!"
+			set {kit.%player%} to "skelemancer"
+			
+		{_arena.run} is true:
+			send "&aOpening Arena Menu...." to player
+			wait 1 second
+			make player execute command "/arena"
+			
+on teleport:
+	world is "vacant"
+	{ingame.%player%} is not set
+	set {spawnsafety.%player%} to now
+	clear player's inventory
+	player is on fire:
+		extinguish player
+	player has poison:
+		remove poison from player
+	player has wither:
+		remove wither from player
+	player has health boost:
+		remove health boost from player
+	player has jump:
+		remove jump from player
+	player has speed:
+		remove speed from player
+	player has absorption:
+		remove absorption from player
+	player has blindness:
+		remove blindness from player
+	player has slowness:
+		remove slowness from player
+	player has nausea:
+		remove nausea from player
+
+on right click with mushroom soup:
+	cancel event
+	player's health is 10:
+		send "&aYou already have full health!" to player
+		clear {assits.%player%::*}
+		stop
+	remove mushroom soup from player
+	give player bowl
+	
+	add 5 to player's health
+
+on quit:
+	player has poison:
+		remove poison from player
+	player has wither:
+		remove wither from player
+	player has health boost:
+		remove health boost from player
+	player has jump:
+		remove jump from player
+	player has speed:
+		remove speed from player
+	player has absorption:
+		remove absorption from player
+	player has blindness:
+		remove blindness from player
+	player has slowness:
+		remove slowness from player
+	player has nausea:
+		remove nausea from player
+	clear {ingame.%player%}
+	clear {kit.%player%}
+	clear {killstreak.%player%}
+on explode:
+	cancel event
+		
+
+
+on xp spawn:
+	cancel event
+		
+
+on damage of a player:
+	damage cause is suffocation:
+		cancel event
+	
+every 2 seconds:
+
+	loop all players:
+		loop-player's world is not "kitspawnroom"
+		{kit.%loop-player%} is "firemage" or "lightningmage" or "necromancer" or "skelemancer" or "fisherman" or "ninja":
+			level progress of loop-player is less than 0.9:
+				increase loop-player's level progress by 0.05
+			else:
+				set loop-player's level progress to 0.99
+
+
+on respawn:
+	teleport player to {kit.spawn}
+				
+on death of a player:
+	victim is a player:
+		clear drops
+		teleport victim to {kit.spawn}
+		clear {last.attacker.%victim%}
+		clear {kit.%victim%}
+		clear {ninja.poof.%victim%}
+		victim has jump:
+			remove jump from victim
+		victim has blindness:
+			remove blindness from victim
+		victim has health boost:
+			remove health boost from victim
+		victim has speed:
+			remove speed from victim
+		victim has slowness:
+			remove slowness from victim
+		victim has wither:
+			remove wither from victim
+		victim has absorption:
+			remove absorption from victim
+		victim has poison:
+			remove poison from victim
+		clear {killstreak.%victim%}
+		{last.attacker.%victim%} is not set:
+			message "&cThe environment got the best of &e%victim%" to all players in victim's world
+		{last.attacker.%victim%} is set:
+			set {_size} to size of {deathmessages.kitpvp::*} 
+			set {_temp} to random integer between 1 and {_size}
+			message "&e%{last.attacker.%victim%}% &chas %{deathmessages.kitpvp::%{_temp}%}% &e%victim% &cwith &b%uncoloured name of {last.attacker.%victim%}'s tool%" to all players in {last.attacker.%victim%}'s world
+		{last.attacker.%victim%} is not victim:
+			send "&aYou claim a bounty of &e%{value.%victim%.kit.live}% tickets &afrom &e%victim%" to {last.attacker.%victim%}
+			add {value.%victim%.kit.live} to {last.attacker.%victim%}'s balance
+			set {_size2} to size of {assists.%victim%::*}
+			{_size2} is greater than 1:
+				loop {assists.%victim%::*}:
+					{assists.%victim%::%loop-index%} is not {last.attacker.%victim%}:
+						set {_player} to {assists.%victim%::%loop-index%}
+						send "&aYou assisted in the death of &e%victim%" to {_player}
+						send "&aYou split the bounty &e%{_size2}% &aways with others. Your cut is &e%rounded {value.%victim%.kit.live} / {_size2}% &etickets" to {_player}
+						{assist.%{_player}%.kp} is not set:
+							set {assist.%{_player}%.kp} to 0
+						add 1 to {assist.%{_player}%.kp}
+						set {_cut} to {value.%victim%.kit.live} / {_size2}
+						add rounded {_cut} to {_player}'s balance
+									
+									
+		
+
+	
+	clear drops
+	set {kitpvp.dead.%player%} to false
+	
+on target:
+	{kit.%target player%} is not set:
+		cancel event
+	{owner.skeleton.%event-entity%} is target player:
+		cancel event
+	{owner.zombie.%event-entity%} is target player:
+		cancel event
+	
+every 1 second:
+	loop all players:
+		set loop-player's hunger level to 10
+
+			
+			
+on drop:
+	cancel event
+
+	
+	
+		
+command /dm <text> [<number>]:
+	permission: obam.admin
+	trigger:
+		argument 1 is "list":
+			loop {deathmessages.kitpvp::*}:
+				{_count} is not set:
+					set {_count} to 0
+				add 1 to {_count}
+				send "%{_count}%..%loop-value%"
+			stop
+		argument 1 is "delete":
+			delete {deathmessages.kitpvp::%argument 2%}
+			send "&cDeleted.."
+			stop
+		send "&aYou have added &e%argument 1%&a to the death message list!"
+		add argument 1 to {deathmessages.kitpvp::*}
+
+		
+command /clearkit <player>:
+	executable by: console
+	trigger:
+		clear {kit.%player-argument%}
+		player-argument has poison:
+			remove poison from player-argument
+		player-argument has wither:
+			remove wither from player-argument
+		player-argument has speed:
+			remove speed from player-argument
+		player-argument has slowness:
+			remove slowness from player-argument
+		player-argument has health boost:
+			remove health boost from player-argument
+		player-argument has absorption:
+			remove absorption from player-argument
+		player-argument has jump:
+			remove jump from player-argument
+		clear {ninja.poof.%player-argument%}
+		clear player-argument's inventory
+		
+command /revive <player>:
+	executable by: console or players
+	permission: obam.admin.kp
+	trigger:
+		set {kitpvp.dead.%player-argument%} to false
+		
+command /mapset <text>:
+	permission: obam.smod
+	trigger:
+		send "&aYou have added a spawn point for '&e%argument%&a'" to player
+		add location of player to {map.%argument%.spawns::*}
+		
+		
+		
+command /spawnplayer <player> <text>:
+	executable by: console
+	trigger:
+		set {_size} to size of {map.%argument 2%.spawns::*}
+		set {_tmp} to random integer between 1 and {_size}
+		teleport player-argument to {map.%argument 2%.spawns::%{_tmp}%}
+		
+command /clearspawn <text>:
+	permission: obam.admin.kp
+	trigger:
+		clear {map.%argument%.spawns::*}
+
+
+
+every 1 second:
+	loop all players:
+		set {value.%loop-player%.kit} to {kills.%loop-player%.kit} * {killstreak.%loop-player%}
+		set {value.%loop-player%.kit} to {value.%loop-player%.kit} / {deaths.%loop-player%.kit}
+		set {value.%loop-player%.kit} to {value.%loop-player%.kit} + 10
+		{value.%loop-player%.kit} is greater than 100:
+			set {value.%loop-player%.kit} to 100
+		{value.%loop-player%.kit} is less than 1:
+			set {value.%loop-player%.kit} to 1
+		set {value.%loop-player%.kit.live} to rounded {value.%loop-player%.kit}
+		
+command /spawnset:
+	permission: obam.smod
+	trigger:
+		set {kit.spawn} to player's location
+		
+command /sudo <player> <text>:
+	permission: obam.admin
+	trigger:
+		make player-argument execute command argument 2
+
+		

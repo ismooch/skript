@@ -1,0 +1,98 @@
+options:
+	world: backpacks
+	backpack: ink sack named "&3BackPack"
+	enderpack: ender pearl named "&3EnderPack" with lore "&6Open your Ender Chest||&6anywhere!|| ||&5&oRight Click to open||&5&oYour portable Ender Chest"
+on script load:
+	register new shaped recipe for {@backpack} using emerald block, emerald block, emerald block, emerald block, ink sack, emerald block, emerald block, chest, emerald block
+	register new shaped recipe for {@enderpack} using air, air, air, emerald block, ender pearl, emerald block, air, ender chest, air
+	
+	{db_customitems::backpack} is not set:
+		set {db_customitems::backpack} to {@backpack}
+	{db_customitems::backpack} is not {@backpack}:
+		set {db_customitems::backpack} to {@backpack}
+	{count.backpacks} is not set:
+		set {count.backpacks} to 1
+
+		
+
+on craft of ink sack:
+	name of event-item is "&3Backpack"
+	send "&aPlease use &e/backpack&a, to activate this backpack!"
+	
+		
+command /backpack:
+	aliases: bp
+	permission: obam.free
+	trigger:
+		player's tool is ink sack
+		name of player's tool is "&3Backpack"
+		set {_lorecheck} to uncoloured lore of player's tool
+		set {_lorecheck::*} to {_lorecheck} split at "||"
+		{_lorecheck::2} is set:
+			send "&cThis backpack is already assigned" to player
+			stop
+		remove {@backpack} from player
+		player has space for a oak sapling:
+			give player {@backpack} with lore "&8%{count.backpacks}%||&6Carry lots of extra stuff!|| ||&5&oRight click to open"
+		player doesn't have space for a oak sapling:
+			drop {@backpack} with lore "&8%{count.backpacks}%||&6Carry lots of extra stuff!|| ||&5&oRight click to open" at location of player
+			
+		add 2 to z-coordinate of {backpack.coordinate}
+		add 2 to x-coordinate of {backpack.coordinate}
+		set {_loc} to {backpack.coordinate}
+		set block at location of {_loc} to chest named "&2Backpack"
+		set {_chest} to block at {_loc}
+		set {tie.backpack.%{count.backpacks}%} to {_chest}
+		{tie.backpack.%{count.backpacks}%} is set:
+			send "&aBackpack created..."
+		{tie.backpack.%{count.backpacks}%} is not set:
+			send "&cError..."
+		add 1 to {count.backpacks}
+		
+command /backpackname <text>:
+	permission: obam.free
+	aliases: bpn, bpname
+	trigger:
+		name of player's tool contains "&3BackPack":
+			set {_lorecheck} to uncoloured lore of player's tool
+			set {_lorecheck::*} to {_lorecheck} split at "||"
+			{_lorecheck::2} is not set:
+				send "&cThis backpack is not yet activated" to player
+				stop
+			lore of player's tool contains "&eName:":
+				send "&cThis backpack already has a name!"
+				stop
+			the length of argument is greater than 30:
+				send "&cThat name is too long!"
+				stop
+			set lore of player's tool to "%lore of player's tool%|| ||&eName:||&2%argument%"
+			send "&aName of backpack set to &2%argument%"
+			
+			
+on right click with ink sack:
+	name of player's tool is "&3Backpack" or "&a&b&k&a&3Backpack":
+		set {_chest} to uncoloured lore of player's tool
+		set {_chest::*} to {_chest} split at "||"
+		{_chest::1} is not set:
+			send "&cError Opening backpack"
+		{tie.backpack.%{_chest::1}%} is not set:
+			send "&cError opening backpack"
+		{tie.backpack.%{_chest::1}%} is set:
+			block at location of {tie.backpack.%{_chest::1}%} is not chest:
+				set block at location of {tie.backpack.%{_chest::1}%} to chest
+			open {tie.backpack.%{_chest::1}%} to player
+			
+on right click with ender pearl:
+	name of player's tool contains "&3EnderPack":
+		cancel event
+		open player's enderchest to player
+		
+on shoot:
+	shooter's tool is ender pearl
+	name of shooter's tool contains "&3EnderPack":
+		cancel event
+			
+command /backpackstart:
+	permission: obam.admin
+	trigger:
+		set {backpack.coordinate} to player's location

@@ -40,6 +40,8 @@ command /votetoken [<text>] [<text>]:
 				set {db_server.minecraftmpcom.%argument 1%} to now
 			argument 2 is "minecraftservers":
 				set {db_server.minecraftservers.%argument 1%} to now
+			argument 2 is "mineservers.com":
+				set {db_server.mineserverscom.%argument 1%} to now
 			set {db_votetokens.%argument 1%.time} to now
 			set {db_votetokens.%argument 1%.lserv} to argument 2
 			execute console command "/alert %argument 1% just received their first &ePrize Token!"
@@ -72,7 +74,8 @@ command /votetoken [<text>] [<text>]:
 					set {db_server.minecraftmpcom.%argument 1%} to now
 				argument 2 is "minecraftservers":
 					set {db_server.minecraftservers.%argument 1%} to now
-					set {db_server.mcserverlistcom.%argument 1%} to now
+				argument 2 is "mineservers.com":
+					set {db_server.mineserverscom.%argument 1%} to now
 				execute console command "/alert %argument 1% just received a &ePrize Token&5 by voting on %argument 2%!"
 				log "%argument 1%^VOTETOKEN^ADD^1^SERVICE^%argument 2%" to "vote/TOKENS.log"
 				stop
@@ -103,6 +106,8 @@ command /votetoken [<text>] [<text>]:
 					set {db_server.minecraftmpcom.%argument 1%} to now
 				argument 2 is "minecraftservers":
 					set {db_server.minecraftservers.%argument 1%} to now
+				argument 2 is "mineservers.com":
+					set {db_server.mineserverscom.%argument 1%} to now
 				{_bal} is not set:
 					{offline.%{_player}%.ticketadd} is not set:
 						set {offline.%{_player}%.ticketadd} to 0

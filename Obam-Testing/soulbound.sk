@@ -1,0 +1,52 @@
+on death of a player:
+	loop drops:
+		lore of loop-item contains "&2StickyItem ©"
+		name of loop-item contains "&a&b&k&a"
+		add loop-item to {soulbound.%player%::*}
+		remove loop-item from drops
+		
+on respawn:
+	wait 1 tick
+	{soulbound.%player%::*} is set
+	loop {soulbound.%player%::*}:
+		give player loop-value
+		
+	clear {soulbound.%player%::*}
+	
+command /stickyitem:
+	permission: obam.free
+	aliases: si
+	trigger:
+		set {_bal} to player's balance
+		{_bal} is less than 10000:
+			send "&cYou do not have enough tickets for this!"
+			stop
+		name of player's tool is "&3BackPack":
+			set {_lorecheck} to uncoloured lore of player's tool
+			set {_lorecheck::*} to {_lorecheck} split at "||"
+			{_lorecheck::2} is not set:
+				send "&cThis backpack is not yet activated" to player
+				stop
+		remove 10000 from player's balance
+		name of player's tool is set:
+			set name of player's tool to "&a&b&k&a%name of player's tool%"
+		name of player's tool is not set:
+			set name of player's tool to "&a&b&k&a%type of player's tool%"
+		lore of player's tool contains "&2StickyItem ©":
+			send "&cThis is already a &2StickyItem ©"
+			stop
+		set lore of player's tool to "%lore of player's tool%|| ||&2StickyItem ©"
+		send "&aThank you for using &2StickyItem ©&a. Your item is now Stickied for a price of &e10000 Tickets&a!"
+		send "&aYour balance is now &e%player's balance%&a."
+		
+on enchant:
+	lore of event-item contains "&2StickyItem ©":
+		send "&cYou can not enchant StickyItems!"
+		cancel event
+		stop
+		
+on craft:
+	lore of event-item contains "&2StickyItem ©":
+		send "&cYou can not do that with a StickyItem!"
+		cancel event
+		stop
