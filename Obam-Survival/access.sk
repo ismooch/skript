@@ -1,0 +1,122 @@
+on right click on a chest or a door or a anvil or a lever or a button or a wood button or a furnace  or a jukebox or a dropper or a hopper or a brewing stand or a dispenser or a beacon or a trapdoor or a fence gate or a trapped chest or a enchantment table or a repeater or a redstone comparator or a ender chest or a note block:
+	
+	{bypassland.%player%} is true:
+		stop
+	{chunk.live.%chunk at location of event-block%} is not event-player:
+		{chunk.live.%chunk at location of event-block%.%event-player%} is not set:
+			loop blocks in radius 2 of event-block:
+				loop-block is sign
+				chunk at location of event-block is chunk at location of loop-block
+				
+				line 1 of loop-block is "[ACCESS]":
+					line 2 of loop-block is "%event-player%" or "everyone":						
+						stop
+					line 4 of loop-block is "%event-player%" or "everyone":
+						stop
+					line 3 of loop-block is "%event-player%" or "everyone":
+						stop
+			event-block is a chest or a furnace or a dispenser or a hopper or a brewing stand or a dropper or a trapped chest or a beacon:
+				{flags.%chunk at location of event-block%::container::%player%} is not set:
+					set {flags.%chunk at location of event-block%::container::%player%} to false
+				{flags.%chunk at location of event-block%::container::everyone} is not set:
+					set {flags.%chunk at location of event-block%::container::everyone} to false
+				{flags.%chunk at location of event-block%::container::everyone} is false:
+					{flags.%chunk at location of event-block%::container::%player%} is true:
+						stop
+				{flags.%chunk at location of event-block%::container::everyone} is true:
+					stop
+					
+			event-block is a door or a anvil or a note block or a lever or a button or a wood button or a jukebox or a trapdoor or a fence gate or a enchantment table or a redstone comparator or a repeater:
+				{flags.%chunk at location of event-block%::use::everyone} is not set:
+					set {flags.%chunk at location of event-block%::use::everyone} to false
+				{flags.%chunk at location of event-block%::use::%player%} is not set:
+					set {flags.%chunk at location of event-block%::use::%player%} to false
+				{flags.%chunk at location of event-block%::use::everyone} is false:
+					{flags.%chunk at location of event-block%::use::%player%} is true:
+						stop
+				{flags.%chunk at location of event-block%::use::everyone} is true:
+					stop
+			cancel event
+			send "&cYou do not have permission to do this." to event-player
+			
+			
+
+
+			cancel event
+			
+on right click on a anvil:
+	delete event-block
+	set event-block to anvil
+	
+			
+			
+					
+on sign change:
+	line 1 of block is "access" or "[access]":
+		set line 1 of block to "[ACCESS]"
+		
+on bed enter:
+	{chunk.live.%chunk at location of event-block%} is not event-player:
+		{chunk.live.%chunk at location of event-player%.%event-player%} is not set:
+			{flags.%chunk at location of player%::use::everyone} is not set:
+				set {flags.%chunk at location of player%::use::everyone} to false
+			{flags.%chunk at location of player%::use::%player%} is not set:
+				set {flags.%chunk at location of player%::use::%player%} to false
+			{flags.%chunk at location of player%::use::everyone} is false:
+				{flags.%chunk at location of player%::use::%player%} is true:
+					stop
+			{flags.%chunk at location of player%::use::everyone} is true:
+				stop
+			cancel event
+			send "&cYou can not do that here!" to event-player
+		
+		
+on right click on painting:
+	if {bypassland.%player%} is true:
+		stop
+	if {chunk.live.%chunk at location of block%} is set:
+		if {chunk.live.%chunk at location of block%.%player%} is true:
+			stop
+		message "&cThis land is owned by %{chunk.live.%chunk at location of block%}%."
+		cancel event
+		
+on damage of a painting:
+	if {bypassland.%attacker%} is true:
+		stop
+	if {chunk.live.%chunk at location of attacker%} is not attacker:
+		if {chunk.live.%chunk at location of attacker%.%attacker%} is true:
+			stop
+		{flags.%chunk at location of attacker%::build::everyone} is not set:
+			set {flags.%chunk at location of attacker%::build::everyone} to false
+		{flags.%chunk at location of attacker%::build::%attacker%} is not set:
+			set {flags.%chunk at location of attacker%::build::%attacker%} to false
+		{flags.%chunk at location of attacker%::build::everyone} is false:
+			{flags.%chunk at location of attacker%::build::%attacker%} is true:
+				stop
+		{flags.%chunk at location of attacker%::build::everyone} is true:
+			stop
+		message "&cThis land is owned by %{chunk.live.%chunk at location of attacker%}%."
+		cancel event
+			
+on right click on hopper minecart:
+	if {bypassland.%player%} is true:
+		stop
+	if {chunk.live.%chunk at location of block%} is set:
+		if {chunk.live.%chunk at location of block%.%player%} is true:
+			stop
+		message "&cThis land is owned by %{chunk.live.%chunk at location of block%}%."
+		cancel event
+on right click on storage minecart:
+	if {bypassland.%player%} is true:
+		stop
+	if {chunk.live.%chunk at location of block%} is set:
+		if {chunk.live.%chunk at location of block%.%player%} is true:
+			stop
+		message "&cThis land is owned by %{chunk.live.%chunk at location of block%}%."
+		cancel event
+		
+
+	
+			
+			
+	

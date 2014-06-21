@@ -1,0 +1,25 @@
+on place:
+	former tool's name is set:
+		set {information.%block%.1} to type of former tool
+		{debug.%player%} is true:
+			send "DEBUG You placed %former tool's name%"
+		set {information.%block%.2} to lore of former tool
+		set {information.%block%.3} to name of former tool
+		{debug.%player%} is true:
+			send "DEBUG %block%"
+			send "DEBUG %{information.%block%.1}%"
+			send "DEBUG %lore of former tool%"
+			send "DEBUG %name of former tool%"
+			send "DEBUG %{information.%block%.2}%"
+			send "DEBUG %{information.%block%.3}%"
+
+		
+on break:
+	{information.%block%.1} is set:
+		cancel event
+		{debug.%player%} is true:
+			send "DEBUG I ama message"
+			set {_message} to "%{information.%block%.1}%;%{information.%block%.3}%;%{information.%block%.2}%"
+			send "DEBUG %{_message}%"
+		delete block
+		drop {information.%block%.1} named {information.%block%.3} with lore {information.%block%.2} at event-location

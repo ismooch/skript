@@ -1,0 +1,52 @@
+options:
+	timber: diamond axe named "&a&b&k&a&3Timber Axe" with lore "&6It's going down, I'm||&6yelling timber!|| ||&aUsing this powerful axe||&awill destroy &a&lALL&a logs||&aIn a 10 block radius!|| ||&2StickyItem ©"
+	
+command /timber:
+	permission: obam.admin
+	trigger:
+		give player 1 {@timber}
+		send "&aHere is your thing"
+		
+on break of oak wood or birch wood or spruce wood or jungle wood or acacia wood or dark oak wood:
+	name of player's tool is "&a&b&k&a&3Timber Axe"
+	add location of event-block to {_wood.blocks::*}
+	loop blocks in radius 10 of event-block:
+		loop-block is oak wood or birch wood or spruce wood or jungle wood or acacia wood or dark oak wood
+		{chunk.live.%chunk at location of loop-block%} is set:
+			{chunk.live.%chunk at location of loop-block%} is not player:
+				{chunk.live.%chunk at location of loop-block%.%player%} is not set:
+					cancel event
+					send "&cYou are too close to others' land!"
+					stop
+		add location of loop-block to {_wood.blocks::*}
+			
+	loop {_wood.blocks::*}:
+		set {_block} to block at loop-value
+		{_block} is oak wood:
+			set {_type} to oak log:0
+		{_block} is birch wood:
+			set {_type} to birch log:2
+		{_block} is spruce wood:
+			set {_type} to spruce log:1
+		{_block} is jungle wood:
+			set {_type} to jungle log:3
+		{_block} is acacia wood:
+			set {_type} to acacia log:0
+		{_block} is dark oak wood:
+			set {_type} to dark oak log:1
+		
+		
+		delete block at loop-value
+		drop 1 of {_type} at loop-value
+	
+	damage player's tool by 1
+
+		
+on enchant:
+	name of event-item is "&a&b&k&a&3Timber Axe"
+	cancel event
+	send "&cYou can't do that dawg"
+		
+	
+
+		

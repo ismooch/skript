@@ -6,6 +6,9 @@ command /fixit:
 		player's tool is not a sword or axe or pickaxe or shovel or bow or helmet or chestplate or leggings or boots:
 			message "&cYou may only repair Armour, Weapons or Tools!" to player
 			stop
+		lore of player's tool contains "&2StickyItem":
+			send "&cYou can not use FixIt on StickyItems!"
+			stop
 		set {_c.tool} to player's tool
 
 		set {_bal} to player's balance

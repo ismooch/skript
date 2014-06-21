@@ -1,49 +1,12 @@
 #boards
 #startfold @scoreboards	
 every 1 second:
-	#subfold @sbstats
-	loop all players in world "skyworld":
-		{off.sb.%loop-player%} is not set:
-			set {off.sb.%loop-player%} to true
-		{off.sb.%loop-player%} is true
-		{board.up.%loop-player%.sb} is not set:
-			set {board.up.%loop-player%.sb} to false
-		{board.up.%loop-player%.sb} is true:
-			make score "&cDeaths:" in board of loop-player to {deaths.%loop-player%.skyworld}
-			make score "&3Creepers:" in board of loop-player to {creeper.kills.%loop-player%}
-			make score "&3Skeletons:" in board of loop-player to {skeleton.kills.%loop-player%}
-			make score "&3Spiders:" in board of loop-player to {spider.kills.%loop-player%}
-			make score "&3Zombies:" in board of loop-player to {zombie.kills.%loop-player%}
-			make score "&3Endermen:" in board of loop-player to {enderman.kills.%loop-player%}
-			make score "&3Slimes:" in board of loop-player to {slime.kills.%loop-player%}
-			make score "&3Witches:" in board of loop-player to {witch.kills.%loop-player%}
-			make score "&aTickets:" in board of loop-player to loop-player's balance
-			make score "&6Total Kills:" in board of loop-player to {total.kills.%loop-player%}
-			set {board.up.%loop-player%.kp} to false
-			
 
-		{board.up.%loop-player%.sb} is false:	
-			display board named "&9&lSB &9Stats" to loop-player
-			make score "&cDeaths:" in board of loop-player to {deaths.%loop-player%.skyworld}
-			make score "&3Creepers:" in board of loop-player to {creeper.kills.%loop-player%}
-			make score "&3Skeletons:" in board of loop-player to {skeleton.kills.%loop-player%}
-			make score "&3Spiders:" in board of loop-player to {spider.kills.%loop-player%}
-			make score "&3Zombies:" in board of loop-player to {zombie.kills.%loop-player%}
-			make score "&3Endermen:" in board of loop-player to {enderman.kills.%loop-player%} 
-			make score "&3Slimes:" in board of loop-player to {slime.kills.%loop-player%}
-			make score "&3Witches:" in board of loop-player to {witch.kills.%loop-player%}
-			make score "&aTickets:" in board of loop-player to loop-player's balance
-			make score "&6Total Kills:" in board of loop-player to {total.kills.%loop-player%}
-			set {board.up.%loop-player%.sb} to true
-			move display of loop-player to "sidebar"
-			set {board.up.%loop-player%.kp} to false
-			
-	#subfold @KPstata
-	loop all players in world "kitpvpkillingfields":
+	loop all players:
 		{off.sb.%loop-player%} is not set:
 			set {off.sb.%loop-player%} to true
 		{off.sb.%loop-player%} is true
-		{board.up.%loop-player%} is not set:
+		{board.up.%loop-player%.kp} is not set:
 			set {board.up.%loop-player%.kp} to false
 		{board.up.%loop-player%.kp} is true:
 			make score of "&cDeaths:" in board of loop-player to {deaths.%loop-player%.kit}
@@ -52,6 +15,10 @@ every 1 second:
 			make score of "&aAssists:" in board of loop-player to {assist.%loop-player%.kp}
 			make score of "&eBounty:" in board of loop-player to {value.%loop-player%.kit.live}
 			make score "&aTickets:" in board of loop-player to loop-player's balance
+			{rampage.%loop-player%} is set:
+				make score of "&cRAMPAGE" in board of loop-player to 1
+			{kit.%loop-player%} is set:
+				make score of "&3%{kit.%loop-player%}%" in board of loop-player to 1
 			set {board.up.%loop-player%.sb} to false
 			
 		{board.up.%loop-player%.kp} is false:
@@ -62,9 +29,13 @@ every 1 second:
 			make score of "&aAssists:" in board of loop-player to {assist.%loop-player%.kp}
 			make score of "&eBounty:" in board of loop-player to {value.%loop-player%.kit.live}
 			make score "&aTickets:" in board of loop-player to loop-player's balance
+			{rampage.%loop-player%} is set:
+				make score of "&cRAMPAGE" in board of loop-player to 1
+			{kit.%loop-player%} is set:
+				make score of "&3%{kit.%loop-player%}%" in board of loop-player to 1
 			set {board.up.%loop-player%.sb} to false
 			set {board.up.%loop-player%.kp} to true
-			move display of loop-player to "sidebar"
+			move display of loop-player to sidebar
 			
 			
 			
@@ -86,31 +57,21 @@ command /togglestats:
 		{off.sb.%player%} is false:
 			set {off.sb.%player%} to true
 			send "&aYou have turned on OBAM Stats" to player
-			world is "skyworld":
-				display board named "&9&lSB &lStats" to player
-				make score "&cDeaths:" in board of player to {deaths.%player%.skyworld}
-				make score "&3Creepers:" in board of player to {creeper.kills.%player%}
-				make score "&3Skeletons:" in board of player to {skeleton.kills.%player%}
-				make score "&3Spiders:" in board of player to {spider.kills.%player%}
-				make score "&3Zombies:" in board of player to {zombie.kills.%player%}
-				make score "&3Endermen:" in board of player to {enderman.kills.%player%}
-				make score "&3Slimes:" in board of player to {slime.kills.%player%}			
-				make score "&3Witches:" in board of player to {witch.kills.%player%}
-				make score "&6Total Kills:" in board of player to {total.kills.%player%}
-				make score "&aTickets:" in board of player to player's balance
-				move display of player to "sidebar"
-				set {board.up.%player%.sb} to true
-				stop
-			world is "kitpvpkillingfields":
-				display board named "&9&lKP &9Stats" to player
-				make score of "&cDeaths:" in board of player to {deaths.%player%.kit}
-				make score of "&aKills:" in board of player to {kills.%player%.kit}
-				make score of "&aKillstreak:" in board of player to {killstreak.%player%}
-				make score of "&eBounty:" in board of player to {value.%player%.kit.live}
-				make score of "&aAssists:" in board of player to {assist.%player%.kp}
-				set {board.up.%player%.sb} to false
-				set {board.up.%player%.kp} to true
-				move display of player to "sidebar"
+
+
+			display board named "&9&lKP &9Stats" to player
+			make score of "&cDeaths:" in board of player to {deaths.%player%.kit}
+			make score of "&aKills:" in board of player to {kills.%player%.kit}
+			make score of "&aKillstreak:" in board of player to {killstreak.%player%}
+			make score of "&eBounty:" in board of player to {value.%player%.kit.live}
+			make score of "&aAssists:" in board of player to {assist.%player%.kp}
+			{rampage.%player%} is set:
+				make score of "&cRAMPAGE" in board of player to 1
+			{kit.%player%} is set:
+				make score of "&3%{kit.%player%}%" in board of player to 1
+			set {board.up.%player%.sb} to false
+			set {board.up.%player%.kp} to true
+			move display of player to sidebar
 	
 	
 #endfold	

@@ -1,0 +1,54 @@
+on teleport:
+	wait 3 ticks
+	player's world is "vacant"
+
+
+
+	{kit.%player%} is "firemage":
+		clear player's inventory
+		equip player with all leather armor of unbreaking 10 named "&fFireMage's Robes"
+		dye player's helmet (206, 3, 30)
+		dye player's chestplate (206, 3, 30)
+		dye player's leggings (206, 3, 30)
+		dye player's boots (206, 3, 30)
+		give player stick of knockback 1 named "&fFire Wand"
+		give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
+		give player 3 splash potions of harming named "&fPain Juice"
+		apply speed 1 to player for 999 days
+		set player's level progress to 0.99
+		
+on right click with stick:
+	cancel event
+	{kit.%player%} is "firemage":
+		player's tool is a stick named "&fFire Wand"
+		player's y coordinate is greater than {kitpvp.area}'s y coordinate:
+			send "&cYou can not do that here. Please select an arena!" to player
+			stop
+		level progress of player is greater than or equal to 0.1:
+			shoot a fireball from the player
+			create safe explosion with force 5 at targeted block
+			loop entities in radius 5 of targeted block:
+				loop-entity is not a player:
+					make player damage loop-entity by 5
+				{kit.%loop-entity%} is set:
+					loop-entity is not "%player%":
+						make player damage loop-entity by 2
+						loop-entity is ignited:
+							make player damage loop-entity by 1
+						ignite loop-entity
+					loop-entity is "%player%":
+						push loop-entity up with force 2
+						extinguish the player
+					chance of 15%:
+						make player damage loop-entity by 1
+						send "&aCritical hit!" to player
+						send "&cCritical hit!" to loop-entity
+			reduce the player's level progress by 0.1
+			
+on left click with a stick:
+	cancel event
+	{kit.%player%} is "firemage":
+		level progress of player is greater than or equal to 0.05:
+			shoot a egg from the player
+			reduce the player's level progress by 0.05
+			

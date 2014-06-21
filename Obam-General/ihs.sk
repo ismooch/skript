@@ -6,51 +6,52 @@ options:
 	redstone: i;redstone;n;&b&nRedstone;l;&7Click to claim your &epurchased redstone.;c;sudo %player% redeem redstone
 	lavabucket: i;lava bucket;n;&b&nLava Bucket;l;&7Click to claim your &epurchased lava buckets.;c;sudo %player% redeem lava bucket
 	dampener: i;fullblock spruce wood block;n;&b&nxPlosion Dampener;l;&7Click to claim your &epurchased xPlosion Dampeners.;c;sudo %player% redeem fullblock spruce wood block
-command /itemstore <player> <item> <integer>:
+	timber: i;diamond axe;n;&b&nTimber Axe;l;&7Click to claim your purchased||&eTimber Axe.;c;sudo %player% redeem timberaxe
+command /itemstore <player> <text> <integer>:
 	permission: obam.admin
 	trigger:
 		{db_ihs.%player-argument%.%argument 2%} is set:
 			add argument 3 to {db_ihs.%player-argument%.%argument 2%}
 			send "&aYou have made a purchase! Type &e/redeem&a to redeem your items!" to player-argument
-			play "level up" at location of offline player-argument with pitch 2
+			play level up at location of offline player-argument with pitch 2
 			wait 0.2 seconds
-			play "level up" at location of offline player-argument with pitch 2
+			play level up at location of offline player-argument with pitch 2
 			wait 0.2 seconds
-			play "level up" at location of offline player-argument with pitch 2
+			play level up at location of offline player-argument with pitch 2
 			wait 0.2 seconds
-			play "level up" at location of offline player-argument with pitch 2
+			play level up at location of offline player-argument with pitch 2
 			wait 0.2 seconds
-			play "level up" at location of offline player-argument with pitch 2
+			play level up at location of offline player-argument with pitch 2
 			stop
 		set {db_ihs.%player-argument%.%argument 2%} to argument 3
 		set {db_alert.redeem.%player-argument%} to true
 		send "&aYou have made a purchase! Type &e/redeem&a to redeem your items!" to player-argument
-		play "level up" at location of offline player-argument with pitch 2
+		play level up at location of offline player-argument with pitch 2
 		wait 0.2 seconds
-		play "level up" at location of offline player-argument with pitch 2
+		play level up at location of offline player-argument with pitch 2
 		wait 0.2 seconds
-		play "level up" at location of offline player-argument with pitch 2
+		play level up at location of offline player-argument with pitch 2
 		wait 0.2 seconds
-		play "level up" at location of offline player-argument with pitch 2
+		play level up at location of offline player-argument with pitch 2
 		wait 0.2 seconds
-		play "level up" at location of offline player-argument with pitch 2
+		play level up at location of offline player-argument with pitch 2
 		
 on join:
 	{db_alert.redeem.%player%} is true
 	send "&c&lYou have items waiting to be redeemed! Use &e/redeem &c&lto redeem your items!" to player
-	play "level up" at location of player with pitch 2
+	play level up at location of player with pitch 2
 	wait 0.2 seconds
-	play "level up" at location of player with pitch 2
+	play level up at location of player with pitch 2
 	wait 0.2 seconds
-	play "level up" at location of player with pitch 2
+	play level up at location of player with pitch 2
 	wait 0.2 seconds
-	play "level up" at location of player with pitch 2
+	play level up at location of player with pitch 2
 	wait 0.2 seconds
-	play "level up" at location of player with pitch 2
+	play level up at location of player with pitch 2
 
 
 	
-command /redeem [<item>]:
+command /redeem [<text>]:
 	permission: obam.free
 	executable by: players
 	trigger:
@@ -61,13 +62,14 @@ command /redeem [<item>]:
 				stop
 				
 			world is "world":
-				show "s;1;{@dampener}" with 1 row named "&9&lOBAM &9Redeem" to player
+				show "s;1;{@timber}" with 1 row named "&9&lOBAM &9Redeem" to player
 				stop
 			
 			send "&cMake sure you are in the right world!" to player
 				
 		
 		argument is set:
+			argument is not "timberaxe"
 			{db_ihs.%player%.%argument%} is 0:
 				send "&cYou do not have any of this item to redeem! If this is incorrect, please contact the Administrator" to player
 				stop
@@ -75,8 +77,9 @@ command /redeem [<item>]:
 			{db_ihs.%player%.%argument%} is not set:
 				send "&cYou do not have any of this item to redeem! If this is incorrect, please contact the Administrator" to player
 				stop
-			give player {db_ihs.%player%.%argument%} of item-argument
-			argument is fullblock spruce wood block:
+			set {_stuff} to argument parsed as item
+			give player {db_ihs.%player%.%argument%} of {_stuff}
+			argument is "fullblock spruce wood block":
 				{db_ihs.%player%.%argument%} is less than 2:
 					send "&aYou have received your &e%{db_ihs.%player%.%argument%}% xPlosion Dampener&a! Thank you for your purchase!"
 					set {db_ihs.%player%.%argument%} to 0
@@ -90,6 +93,24 @@ command /redeem [<item>]:
 			send "&aYou have received your &e%{db_ihs.%player%.%argument%}% %argument%&a! Thank you for your purchase!"
 			set {db_ihs.%player%.%argument%} to 0
 			set {db_alert.redeem.%player%} to false
+			
+		argument is "timberaxe":
+			{db_ihs.%player%.%argument%} is 0:
+				send "&cYou do not have any of this item to redeem! If this is incorrect, please contact the Administrator"
+				stop
+			{db_ihs.%player%.%argument%} is not set:
+				send "&cYou do not have any of this item to redeem! If this is incorrect, please contact the Administrator"
+				stop
+			give {db_ihs.%player%.%argument%} of diamond axe named "&a&b&k&a&3Timber Axe" with lore "&6It's going down, I'm||&6yelling timber!|| ||&aUsing this powerful axe||&awill destroy &a&lALL&a logs||&aIn a 10 block radius!|| ||&2StickyItem ©" to player
+			
+			{db_ihs.%player%.%argument%} is 1:
+				send "&aYou have received your &e%{db_ihs.%player%.%argument%}% Timber Axe&a! Thank you for your purchase!"
+				clear {db_ihs.%player%.%argument%}
+				stop
+			{db_ihs.%player%.%argument%} is greater than 1:
+				send "&aYou have received your &e%{db_ihs.%player%.%argument%}% Timber Axes&a! Thank you for your purchase!"
+				clear {db_ihs.%player%.%argument%}
+				stop
 			
 		send "&cIf you did not have a menu open, ensure you are in the correct world for redeeming! D:" to player
 		

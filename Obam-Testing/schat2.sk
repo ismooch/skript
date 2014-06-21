@@ -1,5 +1,5 @@
 options:
-	p: &3[H]<reset>
+	p: &2[F]<reset>
 	
 
 
@@ -44,6 +44,9 @@ on chat:
 	player is "IcecreamCow" or "Electric_Hamster" or "ISMOOCH":
 		
 		set {_pre} to "{@p} &d[A] %player%"
+	{_pre} is not set:
+		player is "OrigamiJoe" or "Deathtomb8953":
+			set {_pre} to "{@p} &a[╪] %player%"
 	{_pre} is not set:
 		player has permission "obam.mod":
 			set {_pre} to "{@p} &2[M] %player%"

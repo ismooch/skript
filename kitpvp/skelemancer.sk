@@ -1,0 +1,93 @@
+on teleport:
+	wait 3 ticks
+	player's world is "vacant"
+	
+	
+	{kit.%player%} is "skelemancer":
+		{ingame.%player%} is not set
+		equip player with all leather armor of unbreaking 10 named "&fSkelemancer's Robes"
+		dye player's helmet (124, 2, 205)
+		dye player's chestplate (124, 2, 205)
+		dye player's leggings (124, 2, 205)
+		dye player's boots (124, 2, 205)
+		give player bone of knockback 1 named "&fSummoning Bone" with lore "&aInstructions:|| ||&5Right Click:||&3Summon a mob at||&3targeted location|| ||&5Left Click:||&3Call back your summoned||&3Mobs."
+		give player bow of infinity 1 and punch 1 named "&fSummoner's Sidekick"
+		give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
+		give player 1 arrow
+		apply speed 1 to player for 999 days
+		set player's level progress to 0.99
+		set {ingame.%player%} to true
+		
+on right click with a bone:
+	{kit.%player%} is "skelemancer":
+		targeted block is glass:
+			cancel event
+		level progress of player is greater than or equal to 0.3:
+			{skeleton.%player%.active} is greater than or equal to 5:
+				send "&cYou have too many Skeletons!" to player
+				stop
+			spawn a wither skeleton at block above targeted block
+			set {_skeleton.%player%} to spawned wither skeleton
+			equip {_skeleton.%player%} with leather helmet
+			set {_skeleton.%player%}'s tool to stone sword
+			set name of spawned wither skeleton to "&cNecroSpawn"
+			set {_loc} to block 20 meters above player
+			spawn 1 of large explode data 1 offset with 0, 0, 0 at {_loc}
+			make player damage player by 2
+			
+			apply speed 3 to spawned wither skeleton for 999 days
+			send "&aYou Summon the dead!" to player
+			set {owner.skeleton.%spawned wither skeleton%} to player
+			{skeleton.%player%.active} is not set:
+				set {skeleton.%player%.active} to 0
+			add 1 to {skeleton.%player%.active}
+			reduce player's level progress by 0.3
+			
+on left click with bone:
+	
+	{kit.%player%} is "skelemancer":
+		{skeleton.%player%.active} is not set:
+			send "&cYou have no Skeletons out!" to player
+			stop
+		{skeleton.%player%.active} is 0:
+			send "&cYou have no Skeletons out!" to player
+			stop
+		level progress of player is greater than or equal to {skeleton.%player%.active} / 10:
+			loop all wither skeletons:
+				{owner.skeleton.%loop-entity%} is player:
+					delete loop-entity
+			make player damage player by {skeleton.%player%.active}
+			reduce player's level progress by {skeleton.%player%.active} / 10
+			clear {skeleton.%player%.active}
+			send "&aYou call back the dead!" to player
+		
+			
+			
+on damage of a player:
+	attacker is a wither skeleton:
+		cancel event
+		set {_player} to {owner.skeleton.%attacker%}
+
+		{kit.%victim%} is not set:
+			stop
+		{kit.%{_player}%} is not set:
+			stop
+		make {_player} damage victim by 2
+		
+on death of a wither skeleton:
+	clear drops
+	
+	
+on damage of a wither skeleton:
+	{kit.%attacker%} is not set:
+		send "&cYou can not do that!" to attacker
+		cancel event
+		stop
+	damage is greater than victim's health
+	cancel event
+	set {_player} to {owner.skeleton.%victim%}
+	make attacker damage {_player} by 2
+	send "&c%attacker% has slain your spawn!" to {_player}
+	subtract 1 from {skeleton.%{_player}%.active}
+	send "&a%{_player}%'s spawn has died to your hand." to attacker
+	delete victim

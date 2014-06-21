@@ -20,12 +20,7 @@ on chat:
 				broadcast "&6&l'LiV: &3Goodbye :("
 				set {livon.power} to false
 
-on chat:
-	{livon.power} is true
-	message contains "help" and "me":
-	
-		wait 1 second
-		broadcast "&6&l'LiV: &3What can I help you with, %player%?"
+
 	
 on chat:
 	{livon.power} is true
@@ -104,41 +99,7 @@ on chat:
 			send "&6&l'LiV: &3%player%, &3Ghost Wars is a minigame Elite is working on." to player
 			stop
 
-on chat:
-	{livon.power} is true
-	message contains "how do i get to" or "how do i get 2" or "where is" or "how do i play" :
-		message contains "parkour" or "parkor" or "parkoure":
-			wait 1 second
-			broadcast "&6&l'LiV: &3%player%, you can type &e/pk &3 or &e/parkour &3 to get there :)"
-			stop
-		message contains "skyblock" or "sky block":
-			wait 1 second
-			broadcast "&6&l'LiV: &3%player%, you can type &e/skyblock &3or &e/sb &3to get there :)"
-			stop
-		message contains "hotpotato" or "hot potato" or "hot potatoe" or "potato" or "potatoe":
-			wait 1 second
-			broadcast "&6&l'LiV: &3%player%, you can type &e/hp &3or &e/hotpotato &3to get there :)"
-			stop
-		message contains "kit" or "kitpvp" or "kit pvp":
-			wait 1 second
-			broadcast "&6&l'LiV: &3%player%, you can type &e/kp &3or &e/kitpvp &3to get there :)"
-			stop
-		message contains "survival" or "fronts" or "front":
-			wait 1 second
-			broadcast "&6&l'LiV: &3%player%, you can type &e/survival &3to get there :)"
-			stop
-		message contains "wtf" or "wtfronts":
-			wait 1 second
-			broadcast "&6&l'LiV: &3%player%, you can type &e/wtf &3to get there :)"
-			stop
-		message contains "hub" or "main":
-			wait 1 second
-			broadcast "&6&l'LiV: &3%player%, you can type &e/hub &3to get there :)"
-			stop
-		message contains "spawn" or "lobby":
-			wait 1 second
-			broadcast "&6&l'LiV: &3%player%, you can type &e/spawn &3to get there :)"
-			stop
+
 			
 on chat:
 	{livon.power} is true
@@ -147,25 +108,6 @@ on chat:
 		broadcast "&6&l'LiV: &3Hello, %player%! How are you? :)"
 		set {response.%player%} to true
 		set {response.%player%.time} to now
-		
-on chat:
-	{livon.power} is true
-	{response.%player%} is true
-	difference between {response.%player%.time} and now is greater than 1 minute:
-		set {response.%player%} to false
-		stop
-	message contains "good" or "well" or "great":
-		wait 1 second
-		broadcast "&6&l'LiV: &3That is good to hear. :D"
-		set {response.%player%} to false
-	message contains "bad" or "horrible" or "sucky":
-		wait 1 second
-		broadcast "&6&l'LiV: &3Oh, well I hope playing here cheers you up. :)"
-		set {response.%player%} to false
-	message contains "alright" or "ok" or "meh":
-		wait 1 second
-		broadcast "&6&l'LiV: &3Well at least it is not too bad. :)"
-		set {response.%player%} to false
 
 on chat:
 	{livon.power} is true
@@ -196,47 +138,13 @@ on chat:
 			set {random.liv.pick} to false
 			wait 1 second
 			broadcast "&6&l'LiV: &3A winner has been chosen! It is &e%{_winner}%&3! Congratulations!"
+
 		
 on chat:
 	{livon.power} is true
-	message contains "what games" or "how many games" or "kind of games" or "games you got" or "wht games" or "games here" or "can i do here" or "is there to do here":
+	message contains "canada" and "awesome":
 		wait 1 second
-		broadcast "&6&l'LiV: &3Hello, %player%! We offer &eKit Pvp&3,&eParkour&3, &eSkyblock&3, &eSurvival&3, and &eHot Potato&3 currently. :)"
-	
-on chat:
-	{livon.power} is true
-	message contains "do you have" and ("kitpvp" or "pvp"):
-		wait 1 second
-		broadcast "&6&l'LiV: &3No %player%, currently we do not. We have &eHot Potato&3 though. And we will add PVP games later. :)"
-		
-#on chat:
-	#{livon.power} is true
-	#message contains "has completed" or "is now level":
-		#wait 1 second
-		#broadcast "&6&l'LiV: &3Congrats on your achievement!"
-		
-on chat:
-	{livon.power} is true
-	message contains "iamkhatru":
-		wait 1 second
-		broadcast "&6&l'LiV: &3Her name is Kat >:("
-		
-on chat:
-	{livon.power} is true
-	message contains "many" and "have i killed" and ("skeleton" or "skeletons" or "zombie" or "zombies" or "endermen" or "enderman" or "creeper" or "spider" or "spiders" or "creepers"):
-		set {question.liv::*} to message parsed as "[liv] how many %text%[s] have i killed[?]"
-		{question.liv::1} is "endermen":
-			set {question.liv::1} to "enderman"
-			send "&6&l'LiV: &3%player%, you have slain &e%{%{question.liv::1}%.kills.%player%}% &3%{question.liv::1}%!" to player
-			stop
-		wait 1 second
-		send "&6&l'LiV: &3%player%, you have slain &e%{%{question.liv::1}%.kills.%player%}% &3%{question.liv::1}%s!" to player
-		
-#on chat:
-	#{livon.power} is true
-	#message contains "canada" and "awesome":
-		#wait 1 second
-		#broadcast "&6&l'LiV: &3I dont know what you are saying, but you used 'Canada' and 'awesome' in the same sentence. Who is holding you hostage? We can help you!"
+		broadcast "&6&l'LiV: &3I dont know what you are saying, but you used 'Canada' and 'awesome' in the same sentence. Who is holding you hostage? We can help you!"
 		
 on chat:
 	{livon.power} is true
@@ -252,58 +160,7 @@ on chat:
 	message contains ("thank you" or "ty" or "thx" or "thanks" or "thnx") and ("liv" or "'liv"):
 		wait 1 second
 		broadcast "&6&l'LiV: &3You're welcome, %player%!"
-		
-on chat:
-	{livon.power} is true
-	message contains "who has the best time" or "who got the best time":
-		wait 1 second
-		send "&6&l'LiV: &3Let me check that for you!" to player
-		set {check.liv.%player%::*} to message parsed as "[liv] who (has|got) the best time (on|for) %text%[?]"
-		wait 1 second
-		send "&6&l'LiV: &3&e%{besttime.spot1.%{check.liv.%player%::1}%.name}% &3has the best time on &e%{check.liv.%player%::1}% &3with a time of &e%{besttime.spot1.%{check.liv.%player%::1}%}%" to player
 
-on chat:
-	{livon.power} is true
-	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("kit" or "pvp" or "kitpvp"):
-		wait 1 second
-		send "&6&l'LiV: &3You can Type /kitpvp or /kp join the Kitpvp games!" to player
-		
-on chat:
-	{livon.power} is true
-	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("parkour" or "pk" or "jumping games"):
-		wait 1 second
-		send "&6&l'LiV: &3You can Type /parkour or /pk to join our parkour games!" to player
-		
-on chat:
-	{livon.power} is true
-	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("skyblock" or "skyworld"):
-		wait 1 second
-		send "&6&l'LiV: &3You can Type /skyblock or /sk to join our skyblock World!" to player
-		
-on chat:
-	{livon.power} is true
-	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("hot potato" or "hp" or "potato" or "potato game"):
-		wait 1 second
-		send "&6&l'LiV: &3You can Type /Hotpotato or /Hp to test your skill at our Hotpotato game" to player
-		
-on chat:
-	{livon.power} is true
-	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("hub" or "spawn" or "game"):
-		wait 1 second
-		send "&6&l'LiV: &3You can Type /hub to return to spawn and our other games portals!" to player
-		
-on chat:
-	{livon.power} is true
-	message contains (("how" or "where") and ("can" or "do") and ("i" or " we") and ("get" or " go") and "to") and ("front" or "fronts" or "survival"):
-		wait 1 second
-		send "&6&l'LiV: &3You can Type /survival to test your skills in the Fronts!" to player
-		
-#on chat:
-	#message contains "have i completed" or "did i complete":
-		#wait 1 second
-		#broadcast "&6&l'LiV: &3Let me check that for you!"
-		#set {check.liv.%player%::*} to message parsed as "[liv] (did|have) i complete[d] %text% [%text%][?]"
-		#execute console command "/complete %{check.liv.%player%::1}% %player%"
 		
 on chat:
 	{livon.power} is true
@@ -451,32 +308,7 @@ on chat:
 			send "&6&l'LiV: &3Froze-T." to player
 		wait 1 second
 		send "&6&l'LiV: &3Isn't that funny? :D" to player
-		
-		
-on chat:
-	{livon.power} is true
-	message contains "brb" or "afk":
-		wait 1 second
-		set {liv.away.%player%} to true
-		set {_number} to a random integer between 1 and 6
-		{_number} is 1:
-			broadcast "&6&l'LiV: &3Would not want the enderman to steal your dirt while you are away, %player%!"
-			stop
-		{_number} is 2:
-			broadcast "&6&l'LiV: &3Please dont be too long, %player%!"
-			stop
-		{_number} is 3:
-			broadcast "&6&l'LiV: &3Hope no creepers spawn close while your gone!"
-			stop
-		{_number} is 4:
-			broadcast "&6&l'LiV: &3Hurry Back, %player%!"
-			stop
-		{_number} is 5:
-			broadcast "&6&l'LiV: &3While you are away, %player%, you should remember to vote :D!"
-			stop
-		{_number} is 6:
-			broadcast "&6&l'LiV: &3Please do not forget us, %player%!"
-			stop
+
 			
 on first join:
 	{livon.power} is true
@@ -509,25 +341,7 @@ on chat:
 		wait 1 second
 		send "&6&l'LiV: &3You have &e%player's balance%&3!" to player
 		
-on chat:
-	{livon.power} is true
-	message contains "please ban":
-		player is op:
-			wait 1 second
-			set {liv.mod::*} to message parsed as "please ban %offline player% %text%"
-			kick {liv.mod::1} because of {liv.mod::2}
-			broadcast "&6&l'LiV: &e%{liv.mod::1}% &3has been banned by &e%player% &3because of &e%{liv.mod::2}%"
-			wait 2 seconds
-			ban "%{liv.mod::1}%"
 			
-on chat:
-	{livon.power} is true
-	message contains "please kick":
-		player is op:
-			wait 1 second
-			set {liv.mod::*} to message parsed as "please kick %offline player% %text%"
-			kick {liv.mod::1} because of {liv.mod::2}
-			broadcast "&6&l'LiV: &e%{liv.mod::1}% &3has been kicked by &e%player% &3for &e%{liv.mod::2}%"
 			
 on chat:
 	{livon.power} is true
@@ -546,12 +360,7 @@ on chat:
 			broadcast "&6&l'LiV: &3See if I help you again."
 		{_temp} is 6:
 			broadcast "&6&l'LiV: &3Ouch, my feels. D:!"
-			
-on chat:
-	{livon.power} is true
-	message is "shush":
-		wait 1 second
-		broadcast "&6&l'LiV: &3Oh my %player%, is it time for the quiet game again?"
+
 
 		
 			
@@ -629,24 +438,6 @@ on chat:
 			stop
 		send "&6&l'LiV: &3You have beaten me &e%{wins.%player%.liv.rps}% &3times at Rock, Paper, Scissors!" to player
 			
-on chat:
-	{livon.power} is true
-	message contains "back":
-		{liv.away.%player%} is true:
-			wait 1 second
-			broadcast "&6&l'LiV: &3Welcome back %player%!"
-			set {liv.away.%player%} to false
-			
-on chat:
-	{livon.power} is true
-	message contains "my best time" and ("on" or "for"):
-		wait 1 second
-		send "&6&l'LiV: &3Let me check that for you!" to player
-		set {liv.check.%player%::*} to message parsed as "[liv] what (is|was) my best time (on|for) %text%[?]"
-		set {liv.name.%player%} to {liv.check.%player%::1}
-		set {liv.result.%player%} to {besttime.%player%.%{liv.name.%player%}%}
-		wait 1 second
-		send "&6&l'LiV: &3Your best time for &e%{liv.name.%player%}% &3is &e%{liv.result.%player%}%&3!" to player
 		
 command /livgreet <text>:
 	executable by: players
@@ -677,27 +468,161 @@ command /livalert <text> [<integer>]:
 		send "&aYou have added &6&l'LiV: &3%argument 1% &ato the alert system"
 			
 every 10 minutes:
-	set {_size} to size of {db_liv.alerts::*}
-	set {_ran} to a random integer between 1 and {_size}
-	broadcast "&6&l'LiV: &3%{db_liv.alerts::%{_ran}%}%"
-		
-command /complete <text> <player>:
-	executable by: console
-	trigger:
-		argument 1 is "GettingStoned" or "Getting":
-			{chal.%player-argument%.stoned} is 1:
-				wait 1 second
-				broadcast "&6&l'LiV: &3Yes you have completed &eGettingStoned&3!"
-				stop
-			{chal.%player-argument%.stoned} is 0:
-				wait 1 second
-				broadcast "&6&l'LiV: &3Sorry, %player-argument% you have not completed &eGettingStoned&3!"
-				stop
+	set {_message} to random element of {db_liv.alerts::*}
+	broadcast "&6&l'LiV: &3%{_message}%"
+
 				
 command /liv <text>:
 	permission: obam.smod
 	trigger:
 		broadcast "&6&l'LiV: &3%uncoloured argument%"
 		
+		
+command /livevent [<text>] [<integer>] [<text>]:
+	permission: obam.smod
+	trigger:
+		
+		argument 1 is not set:
+			send "&e/livevent [EventType (ex.;CreatureCapture [nospaces])] [EventTime from now (eg; 2 hours|24 hours)] [Event Description]"
+		argument 1 is set:
+			argument 1 is not "clear":
+				argument 2 is not set:
+					send "&cPlease set an event time"
+					stop
+				{db_liv.event.set} is set:
+					send "&cThere is already an event set!"
+					stop
+					
+				set {db_liv.event.set} to true
+				set {db_liv.event::type} to argument 1
+				set {_time} to now
+				loop argument 2 times:
+					add 1 hour to {_time}
+				set {db_liv.event::time} to {_time}
+				set {db_liv.event::description} to argument 3
+				send "&aEvent set to &e%{db_liv.event::type}%&a at &e%{db_liv.event::time}%&a : &e%{db_liv.event::description}%"
+				
+			argument 1 is "clear":
+				clear {db_liv.event.set}
+				clear {db_liv.event::*}
+				
+on chat:
+	{livon.power} is true
+	message is "when is the next event" or "when is the next event?" or "when is the event" or "when is the event?"
+	{db_liv.event.set} is set
+	set {_time} to difference between now and {db_liv.event::time}
+	wait 1 second
+	broadcast "&6&l'LiV: &3%player%, our next event is &e%{db_liv.event::type}% &3in &e%{_time}%&3. The description for this event is: &e%{db_liv.event::description}%"
 			
+		
+on chat:
+	{livon.power} is true
+	message contains "!multiply"
+	message is "!multiply help":
+		send "&6&l'LiV: &3To use the multiply feature just type &E!multiply number number&3. I can only do two numbers at a time :("
+	message is not "!multiply help":
+		set {_numbers::*} to message split at " "
+		set {_num1} to {_numbers::2} parsed as number
+		set {_num2} to {_numbers::3} parsed as number
+		set {_sol} to {_num1} * {_num2}
+		send "&6&l'LiV: &3%{_num1}% * %{_num2}% is %{_sol}%!"
+		
+on chat:
+	{livon.power} is true
+	message contains "!divide"
+	message is "!divide help":
+		send "&6&l'LiV: &3To use the divide feature just type &E!divide number number&3. I can only do two numbers at a time :("
+	message is not "!divide help":
+		set {_numbers::*} to message split at " "
+		set {_num1} to {_numbers::2} parsed as number
+		set {_num2} to {_numbers::3} parsed as number
+		set {_sol} to {_num1} / {_num2}
+		send "&6&l'LiV: &3%{_num1}% / %{_num2}% is %{_sol}%!"
+		
+on chat:
+	{livon.power} is true
+	message contains "!add"
+	message is "!add help":
+		send "&6&l'LiV: &3To use the add feature just type &E!add number number&3. I can only do two numbers at a time :("
+	message is not "!add help":
+		set {_numbers::*} to message split at " "
+		set {_num1} to {_numbers::2} parsed as number
+		set {_num2} to {_numbers::3} parsed as number
+		set {_sol} to {_num1} + {_num2}
+		send "&6&l'LiV: &3%{_num1}% + %{_num2}% is %{_sol}%!"
+		
+on chat:
+	{livon.power} is true
+	message contains "!subtract"
+	message is "!subtract help":
+		send "&6&l'LiV: &3To use the subtract feature just type &E!subtract number number&3. I can only do two numbers at a time :("
+	message is not "!subtract help":
+		set {_numbers::*} to message split at " "
+		set {_num1} to {_numbers::2} parsed as number
+		set {_num2} to {_numbers::3} parsed as number
+		set {_sol} to {_num1} - {_num2}
+		send "&6&l'LiV: &3%{_num1}% - %{_num2}% is %{_sol}%!"
+		
+on chat:
+	{livon.power} is true
+	message contains "!exponent"
+	message is "!exponent help":
+		send "&6&l'LiV: &3To use the exponent feature just type &E!exponent number number&3. I can only do two numbers at a time :("
+	message is not "!exponent help":
+		set {_numbers::*} to message split at " "
+		set {_num1} to {_numbers::2} parsed as number
+		set {_num2} to {_numbers::3} parsed as number
+		set {_sol} to {_num1} ^ {_num2}
+		send "&6&l'LiV: &3%{_num1}% ^ %{_num2}% is %{_sol}%!"
+		
+on chat:
+	{livon.power} is true
+	message contains "!teamname"
+	set {_names::*} to message split at " "
+	set {_size} to size of {_names::*} - 1
+	loop {_names::*}:
+		loop-value is not "!teamname"
+		set {_ran} to random number between 1 and 8
+		{_newname} is set:
+			set {_hold} to first {_ran} characters of loop-value
+			set {_newname} to "%{_newname}%%{_hold}%"
+		{_newname} is not set:
+			set {_newname} to first {_ran} characters of loop-value
+		add 1 to {_count}
+		
+	broadcast "&6&l'LiV: &3Your random team name is %{_newname}%!"
+	
+on chat:
+	message contains "liv"
+	set {_words::*} to message split at " "
+	{_words::2} is set
+	set {db_liv.subjects::%{_words::2}%} to {_words::2}
+	set {db_liv.articles::%{_words::3}%} to {_words::3}
+	set {db_liv.adjectives::%{_words::4}%} to {_words::4}
+	set {db_liv.subjects::%{_words::5}%} to {_words::5}
+	message contains "?"
+	set {_subject} to random element of {db_liv.subjects::*}
+	set {_articles} to random element of {db_liv.articles::*}
+	set {_adjective} to random element of {db_liv.adjectives::*}
+	set {_article} to random element of {db_liv.articles::*}
+	set {_adjectives} to random element of {db_liv.adjectives::*}
+	broadcast "&6&l'LiV: &3%{_articles}% %{_adjective}% %{_article}% %{_adjectives}% %{_subject}%"
+	
+		
+on chat:
+	{livon.power} is true
+	message contains "!hashtag"
+	set {_names::*} to message split at " "
+	set {_size} to size of {_names::*} - 1
+	loop {_names::*}:
+		loop-value is not "!hashtag"
+		set {_ran} to random number between 1 and 8
+		{_newname} is set:
+			set {_hold} to first {_ran} characters of loop-value
+			set {_newname} to "%{_newname}%%{_hold}%"
+		{_newname} is not set:
+			set {_newname} to first {_ran} characters of loop-value
+		add 1 to {_count}
+		
+	broadcast "&6&l'LiV: &3This should make a good hashtag ##%{_newname}%!"
 			
