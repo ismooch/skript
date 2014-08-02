@@ -1,0 +1,151 @@
+config-version: 14
+
+# Enable database support. Disabling database support switches
+# zPermissions to its flat-file-based permissions store.
+database-support: true
+
+# Whether region-based permissions are enabled. Requires a region plugin such
+# as WorldGuard or Residence. Setting this to false will save some processing
+# if you use a region plugin but don't use region-based permissions. Has no
+# effect if a region plugin is not present.
+region-support: true
+
+# Groups may have a group permission node automatically assigned to their
+# members. This is the name of that permission node. It must be a string
+# suitable for Java's String.format() with one argument: the group name.
+# Omit or leave blank ('') to disable this feature.
+# This may also be a list of strings to automatically assign multiple
+# permissions.
+group-permission: group.%s
+
+# Similar to group-permission, but only applied to "assigned" groups (groups
+# that the player is explicitly a member of, including the default group, but
+# not any inherited groups).
+# Omit or leave blank ('') to disable this feature.
+# This may also be a list of strings to automatically assign multiple
+# permissions.
+assigned-group-permission: ''
+
+# Set to false if you want your assigned-group-permission (above) to never
+# include the default group.
+assigned-groups-can-include-default: true
+
+# The default group. Players that are not explicitly members of any group
+# are considered members of this group.
+default-group: default
+
+# The default track. When the track name is omitted while using the /promote,
+# /demote, /setrank, and /unsetrank commands, this is the track used.
+default-track: default
+
+# Directory where to load/store dumps. If this is not an absolute path, it
+# will be interpreted as relative to the server root.
+dump-directory: zPermissions-dumps
+
+# Default timeout for temporary permissions, in seconds
+default-temp-permission-timeout: 60
+
+# Track definitions. Each key should be the name of the track. The value
+# should be a list of group names in ascending order.
+tracks:
+  default:
+  - default
+  - mod
+  - supermod
+  - admin
+
+# Name of the track used to determine a player's "primary group," a
+# concept often used by other plugins via the native API or Vault. A
+# player that does not have a track explicitly set via the
+# /permissions .. player .. settrack command will use this track
+# instead. Leave blank ('') to disable and use the highest-weight group
+# as the primary group.
+default-primary-group-track: ''
+
+# If any problems occur while determining a player's permissions (e.g.
+# SQLExceptions, network errors, etc.), kick the player. This may be more
+# desirable to having the user have free reign with indeterminate permissions.
+kick-on-error: true
+
+# Only valid if kick-on-error is true. If a problem occurs while determining
+# an op's permissions, then the op will only be kicked if this is true.
+kick-ops-on-error: false
+
+# Interval, in minutes, in which to automatically refresh permissions from
+# the database. Set to a non-positive number to disable. Has no effect on
+# the flat-file storage method. DO NOT SET IT TOO LOW. Otherwise you run
+# the risk of refreshes overlapping or permissions changes inexplicably
+# being "forgotten."
+# Unless you have an external process modifying zPermissions tables, you
+# should have no need to enable this feature! (And even then, its use is
+# questionable...)
+auto-refresh-interval: 1
+
+# By default, the refreshes set by auto-refresh-interval are conditional.
+# That is, the refreshes do not actually occur unless the data version
+# number (found in the table named DATA_VERSION by default) is different.
+# Set this to true if you wish to perform an unconditional refresh instead.
+# (Prior to 1.1, the refreshes were always unconditional.)
+auto-refresh-force: false
+
+# Determines how inherited groups and assigned groups are resolved. When
+# true, each assigned group is fully resolved (itself + all ancestors)
+# before applying its permissions in assignment priority. (That is, groups
+# are flattened before being applied.) When false, all assigned groups and
+# their ancestor groups are treated as individual groups and are applied
+# in "topological order." <http://en.wikipedia.org/wiki/Topological_sorting>
+opaque-inheritance: true
+
+# Determines when to apply player permissions. If true, player permissions
+# are interleaved with group-resolved permissions at every "level"
+# (universal, world, region, region/world). If false, all player permissions
+# are applied once all group permissions have been applied.
+interleaved-player-permissions: false
+
+# If true, rank commands will broadcast changes to admins by default.
+# Otherwise, rank commands will broadcast to players with a custom
+# permission, e.g. zpermissions.notify.promote, etc.
+rank-admin-broadcast: false
+
+# If region-support is enabled, this is the order in which region manager
+# plugins will be detected. The first plugin detected will be used.
+region-managers:
+- WorldGuard
+- Residence
+- Factions
+
+# If true, the Vault bridges included with zPermissions are used. If false,
+# the bridges that come with Vault are used. Has no effect if Vault is not
+# installed. The included ("native") bridges will almost always certainly
+# be more advanced/featureful. However, the option to turn them off is
+# provided should there be any compatibility problems.
+native-vault-bridges: true
+
+# If true, the Vault Chat API methods getPlayerPrefix() and getPlayerSuffix()
+# will fall back to the player's primary group's prefix/suffix. Only matters
+# if native-vault-bridges is true. This should be enabled if you use a
+# chat formatting plugin that does not perform this fallback behavior
+# itself.
+vault-prefix-includes-group: true
+
+# If true, the Vault Chat API methods getPlayerInfo*() will fall back to the
+# player's primary group's metadata. Only matters if native-vault-bridges
+# is true. This should be enabled if you use a metadata-using plugin
+# that does not perform this fallback behavior itself. Note it will affect
+# all Vault-using plugins.
+vault-metadata-includes-group: true
+
+# Affects the behavior of the Vault Permission playerInGroup() method. If
+# true, playerInGroup() will only test against assigned groups. Otherwise,
+# it will test against assigned groups and their inherited ancestor groups.
+# Only matters if native-vault-bridges is true.
+vault-group-test-uses-assigned-only: false
+
+# Affects the behavior of the Vault Permission getPlayerGroups() method.
+# If true, getPlayerGroups() will only return assigned groups. Otherwise,
+# it will return assigned groups and their inherited ancestor groups.
+# Only matters if native-vault-bridges is true.
+vault-get-groups-uses-assigned-only: false
+
+# Enable debug logging.
+debug: false

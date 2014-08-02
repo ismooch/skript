@@ -4,7 +4,7 @@ options:
 	archerkit: i;bow;n;&9&lArcher;l;&7Click to pick the||&eArcher&7 Class|| ||&5Kit Info:||&7You are an archer||&7with a Punch I bow||&7Keep your distance to||&7to get critical hits!;c;sudo %player% kits archer
 	meleekit: i;iron helmet;n;&9Melee;l;&7Click to pick the||&eMelee&7 Class|| ||&5Kit Info:||&7Ultimate in up close||&7combat. An iron sword||&7Unrivaled by any other||&7close combat kit;c;sudo %player% kits melee
 	firemagekit: i;fire charge;n;&9Fire Mage;n;&9&lFire Mage;l;&7Click to pick the||&eFire Mage&7 Class|| ||&5Kit Info:||&7The firemage tosses fireballs||&7at their opponents||&7wreaking havoc with||&7explosions and fire|| ||%{dis.%player%.1}%;c;sudo %player% kits firemage
-	lightningmagekit: i;nether star;n;&9&lLightning Mage;n;&9&lLightning Mage;l;&7Click to pick the||&eLightning Mage&7 class|| ||&5Kit Info:||&7Using the power of||&7Lightning, this kit||&7causes large group damage||&7and harnesses the power||&7to teleport;c;sudo %player% kits lightningmage
+	lightningmagekit: i;nether star;n;&9Lightning Mage;l;&7Click to pick the||&eLightning Mage&7 class|| ||&5Kit Info:||&7Using the power of||&7Lightning, this kit||&7causes large group damage||&7and harnesses the power||&7to teleport;c;sudo %player% kits lightningmage
 	tankkit: i;gold chestplate;n;&9&lTank;l;&7Click to pick the||&eTank&7 class|| ||&5Kit Info:||&7The tank shows no||&7Weakness, its armor||&7pure, and its paddle||&7heavy, it guarantees||&7longer lives, but fewer||&7kills;c;sudo %player% kits tank
 	necrokit: i;bone;n;&9&lNecromancer;l;&7Click to pick the ||&eNecromancer&7 class|| ||&5Kit Info:||&7The Necro summons the||&7Dead from beyond to||&7assist in their domination||&7Summoning requires only||&7a little bit of mana||&7and a few drops of your||&7own blood|| ||%{dis.%player%.1}%;c;sudo %player% kits necromancer
 	fishermankit: i;fish;n;&9&lFisherman;l;&7Click to pick the||&eFisherman&7 class|| ||&5Kit Info:||&7The legendary fisherman||&7Relies on his trusty||&7Big Fish to deal the||&7Blows, and his Rod||&7Old Faithful, to bring||&7the enemy closer.;c;sudo %player% kits fisherman
@@ -22,6 +22,10 @@ options:
 
 variables:
 	{safety.%player%} = 0
+	
+on first join:
+	wait 1 second
+	teleport player to {kit.spawn}
 	
 on join:
 	clear {kit.%player%}
@@ -53,12 +57,8 @@ command /kits [<text>]:
 	trigger:
 		world is "kitspawnroom"
 		argument is not set:
-			player has permission "obam.kits.supporter":
-				set {dis.%player%.1} to " "
-				show "s;11;{@ninjakit};s;12;{@archerkit};s;13;{@meleekit};s;14;{@firemagekit};s;15;{@lightningmagekit};s;16;{@tankkit};s;17;{@necrokit};s;23;{@fishermankit};s;24;{@skelemancerkit}" with 4 rows named "&9&lOBAM &9:: Kits" to player
-				stop
 				
-			set {dis.%player%.1} to "&eUse this kit for one time for &a25&eTickets"
+			set {dis.%player%.1} to "&eUse this kit for &a25 &eTickets"
 			show "s;11;{@ninjakit};s;12;{@archerkit};s;13;{@meleekit};s;14;{@firemagekit};s;15;{@lightningmagekit};s;16;{@tankkit};s;17;{@necrokit};s;23;{@fishermankit};s;24;{@skelemancerkit}" with 4 rows named "&9&lOBAM &9:: Kits" to player
 		{kit.%player%} is set:
 			send "&cYou already have a kit D:" to player
@@ -72,14 +72,13 @@ command /kits [<text>]:
 			
 
 		argument is "ninja":
-			player does not have permission "obam.supporter":
-				set {_bal} to player's balance
-				{_bal} is less than 25:
-					send "&cYou do not have enough tickets for this!"
-					stop
-				remove 25 from player's balance
-				send "&aYou have purchased the &eNinja&a kit for &e25 Tickets&a!"
-				send "&aYour current balance is &e%player's balance%"
+			set {_bal} to player's balance
+			{_bal} is less than 25:
+				send "&cYou do not have enough tickets for this!"
+				stop
+			remove 25 from player's balance
+			send "&aYou have purchased the &eNinja&a kit for &e25 Tickets&a!"
+			send "&aYour current balance is &e%player's balance%"
 			send "&aYou have picked the &eNinja&a kit!"
 			set {kit.%player%} to "ninja"
 			set {ninja.poof.%player%} to true
@@ -89,14 +88,13 @@ command /kits [<text>]:
 			set {kit.%player%} to "melee"
 
 		argument is "firemage":
-			player does not have permission "obam.supporter":
-				set {_bal} to player's balance
-				{_bal} is less than 25:
-					send "&cYou do not have enough tickets for this!"
-					stop
-				remove 25 from player's balance
-				send "&aYou have purchased the &eFiremage&a kit for &e25 Tickets&a!"
-				send "&aYour current balance is &e%player's balance%"
+			set {_bal} to player's balance
+			{_bal} is less than 25:
+				send "&cYou do not have enough tickets for this!"
+				stop
+			remove 25 from player's balance
+			send "&aYou have purchased the &eFiremage&a kit for &e25 Tickets&a!"
+			send "&aYour current balance is &e%player's balance%"
 			send "&aYou have picked the &eFiremage&a kit!"
 			set {kit.%player%} to "firemage"
 
@@ -110,14 +108,14 @@ command /kits [<text>]:
 			set {kit.%player%} to "lightningmage"
 
 		argument is "necromancer":
-			player does not have permission "obam.supporter":
-				set {_bal} to player's balance
-				{_bal} is less than 25:
-					send "&cYou do not have enough tickets for this!"
-					stop
-				remove 25 from player's balance
-				send "&aYou have purchased the &eNecromancere&a kit for &e25 Tickets&a!"
-				send "&aYour current balance is &e%player's balance%"
+
+			set {_bal} to player's balance
+			{_bal} is less than 25:
+				send "&cYou do not have enough tickets for this!"
+				stop
+			remove 25 from player's balance
+			send "&aYou have purchased the &eNecromancere&a kit for &e25 Tickets&a!"
+			send "&aYour current balance is &e%player's balance%"
 			send "&aYou have picked the &eNecromancer&a kit!"
 			set {kit.%player%} to "necromancer"
 		

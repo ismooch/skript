@@ -57,6 +57,7 @@ every 1 tick:
 					set {alert.notify.owner.%loop-player%} to "Unclaimed"
 					set {land.unclaim.%loop-player%} to true
 			{chunk.live.%chunk at location of loop-player%}  is set:
+				{alert.fronts.%loop-player%} is true
 				send "&a&lFront Claimed by: &e%{chunk.live.%chunk at location of loop-player%} %" to loop-player
 				set {alert.notify.owner.%loop-player%} to {chunk.live.%chunk at location of loop-player%} 
 		{alert.notify.owner.%loop-player%} is not set:
@@ -458,8 +459,7 @@ on explode:
 	{_safe} is set:
 		create safe explosion of force 3 at event-location
 on damage of a entity:
-	victim is enderman or creeper or wither or zombie or wither skeleton or blaze or slime or ghast or witch or skeleton or silverfish or spider or cave spider or magma cube or zombie pigman:
-		stop
+	victim is a chicken or a cow or a mooshroom or a horse or a sheep or a pig or a wolf or a ocelot or a villager or a squid
 	attacker is a player
 	victim is a cow:
 		attacker's tool is a empty bucket

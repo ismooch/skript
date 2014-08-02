@@ -1,0 +1,22 @@
+command /dbtest <text>:
+	permission: obam.admin
+	trigger:
+		
+		add argument to {site_test::*}
+		send "%argument% added to Site db"
+		
+command /dbtest2 <number>:
+	permission: obam.admin
+	trigger:
+		
+		add argument to {site_test2::*}
+		send "%argument% added to site db"
+		
+		
+command /dbtest3:
+	permission: obam.admin
+	trigger:
+		
+		set {_time} to now
+		add {_time} to {site_test3::*}
+		send "%{_time}% added to site db"

@@ -25,7 +25,7 @@ options:
 	bakersdozen: i;bread;n;&b&lBakers Dozen!;l; ||&a&lFirst Completion:||&aTrade 256 Bread||&7&lThe Grind:||&7Trade &c2304&7 Bread|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.bread.display}%;c;sudo %player% chal 19
 	crushed: i;bonemeal;n;&b&lCrushed!;l; ||&a&lFirst Completion:||&aTrade 256 Bonemeal||&7&lThe Grind:||&7Trade &c2304&7 Bonemeal|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.bonemeal.display}%;c;sudo %player% chal 21
 		#subfold @supporter1
-	supporter1: i;diamond block;n;&b&lSkyblock Supporter Tier 1 Challenges!;l;&a&lClick to open||&eSupporter Tier 1&7 Challenges;c;sudo %player% challenge supporter1
+	supporter1: i;4 iron blocks;n;&b&lSkyblock Tier 4 Challenges!;l;&a&lClick to open||&eTier 4&7 Challenges;c;sudo %player% challenge supporter1
 	egged: i;egg;n;&b&lEgged!;l; ||&a&lFirst Completion:||&aTrade 288 Eggs||&7&lThe Grind:||&7Trade &c576 &7Eggs|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.egged.display}%;c;sudo %player% chal 13 
 	gotmilk: i;milk bucket;n;&b&lGot Milk?;l; ||&a&lFirst Completion:||&aTrade 10 Milk Buckets||&7&lThe Grind:||&7Trade &c30&7 Milk Buckets|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.milk.display}%;c;sudo %player% chal 15
 	gotbeef: i;steak;n;&b&lGot Beef?;l; ||&a&lFirst Completion:||&aTrade 256 Steaks||&7&lThe Grind:||&7Trade &c2304&7 Steaks|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.steak.display}%;c;sudo %player% chal 17
@@ -33,7 +33,7 @@ options:
 	birthdaycake: i;cake item;n;&b&lBirthday Cake!;l; ||&a&lFirst Completion:||&aTrade 10 Cakes||&7&lThe Grind:||&7Trade &c36&7 Cakes|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.cake.display}%;c;sudo %player% chal 23
 	secretrecipe: i;cooked chicken;n;&b&lSecret Recipe!;l; ||&a&lFirst Completion:||&aTrade 256 Cooked Chicken||&7&lThe Grind:||&7Trade &c2304&7 Cooked Chicken|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.chicken.display}%;c;sudo %player% chal 24
 		#subfold @level1
-	level1: i;gold block;n;&b&lSkyblock Level 10 Challenges!;l;&a&lClick to open||&eLevel 10&7 Challenges;c;sudo %player% challenge level1
+	level1: i;5 iron blocks;n;&b&lSkyblock Tier 5 Challenges!;l;&a&lClick to open||&eTier 5&7 Challenges;c;sudo %player% challenge level1
 	lumberjack: i;oak log;n;&b&lLumberjack!;l; ||&a&lFirst Completion:||&aTrade 256 Oak Log||&7&lThe Grind:||&7Trade &c2304&7 Oak Log|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.lumberjack.display}%;c;sudo %player% chal 25
 	theoven: i;furnace;n;&b&lThe Oven!;l; ||&a&lFirst Completion:||&aTrade 256 Furnaces||&7&lThe Grind:||&7Trade &c2304&7 Furnaces|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.theoven.display}%;c;sudo %player% chal 26
 	storagewars: i;chest;n;&b&lStorage Wars!;l; ||&a&lFirst Completion:||&aTrade 256 Chests||&7&lThe Grind:||&7Trade &c2304&7 Chests|| ||&a&lInitial Reward:||&a800 Tickets||&7&lGrind Reward:||&c15 &7Tickets|| ||%{chal.%player%.storage.display}%;c;sudo %player% chal 27
@@ -43,7 +43,9 @@ options:
 		#subfold @shop
 	sbtier2: i;2 iron blocks;n;&b&lSkyblock Tier 2 Challenges!;l;&7Click to purchase Skyblock||&eTier 2&7 Challenges!|| ||&7&lPrice: &e2000 tickets;c;sudo %player% purchase sbtier2
 	sbtier3: i;3 iron blocks;n;&b&lSkyblock Tier 3 Challenges!;l;&7Click to purchase Skyblock||&ETier 3&7 Challenges!|| ||&7&lPrice: &e5000 tickets;c;sudo %player% purchase sbtier3
-		
+	sbtier4: i;4 iron blocks;n;&b&lSkyblock Tier 4 Challenges!;l;&7Click to purchase Skyblock||&3Tier 4&7 Challenges!|| ||&7&lPrice: &e5000 tickets;c;sudo %player% purchase sbtier4
+	sbtier5: i;5 iron blocks;n;&b&lSkyblock Tier 5 Challenges!;l;&7Click to purchase Skyblock||&3Tier 5&7 Challenges!|| ||&7&lPrice: &e5000 tickets;c;sudo %player% purchase sbtier5
+	
 		#subfold @otherstuff
 	menu: i;tnt;n;&b&lReturn to Menu;l;&7Click to return to &eChallenge &7Menu;c;sudo %player% challenge
 	shop: i;gold ingot;n;&b&lShop;l;&7Click to open the &eChallenge &7Shop;c;sudo %player% challenge shop
@@ -54,6 +56,8 @@ options:
 variables:
 	{purchase.sb.tier2.%player%} = 0
 	{purchase.st.tier3.%player%} = 0
+	{purchase.sb.tier4.%player%} = 0
+	{purchase.sb.tier5.%player%} = 0
 	
 on script load:
 	loop all players:
@@ -71,7 +75,7 @@ command /challenge [<text>]:
 		argument is not set:
 			send "&aOpening Menu..." to player
 			wait 0.5 seconds
-			show "s;12;{@tier1};s;13;{@tier2};s;14;{@tier3};s;21;{@level1};s;30;{@supporter1};s;44;{@shop}" with 5 rows named "&9&lSkyblock&9 Challenges" to player
+			show "s;12;{@tier1};s;13;{@tier2};s;14;{@tier3};s;16;{@level1};s;15;{@supporter1};s;44;{@shop}" with 5 rows named "&9&lSkyblock&9 Challenges" to player
 	#subfold @tier1	
 		argument is "tier1":
 			send "&aOpening Menu..." to player
@@ -108,7 +112,14 @@ command /challenge [<text>]:
 				
 	#subfold @level1			
 		argument is "level1":
-			{level.%player%.actual} is greater than or equal to 10:
+			{purchase.sb.tier5.%player%} is 0:
+				send "&cYou must purchase the Tier 5 Package to do this!" to player
+				stop		
+			{purchase.sb.tier5.%player%} is not set:
+				send "&cYou must purchase the Tier 5 Package to do this!" to player
+				set {purchase.sb.tier5.%player%} to 0
+				stop
+			{purchase.sb.tier5.%player%} is 1:
 			
 			
 				send "&aOpening Menu..." to player
@@ -116,24 +127,30 @@ command /challenge [<text>]:
 				show "s;10;{@lumberjack};s;11;{@theoven};s;12;{@storagewars};s;13;{@withanapple};s;14;{@cookeeminastew};s;15;{@splititdownthemiddle};s;19;{@menu};s;27;{@shop}" with 4 rows named "&9&lSkyblock &9Challenges" to player
 				stop
 			
-			send "&cYou need to be at least level 10 to do that!" to player
+
 
 	#subfold @supporter1
 		argument is "supporter1":
-			player has permission "obam.supporter":
-			
+			{purchase.sb.tier4.%player%} is 0:
+				send "&cYou must purchase the Tier 4 Package to do this!" to player
+				stop		
+			{purchase.sb.tier4.%player%} is not set:
+				send "&cYou must purchase the Tier 4 Package to do this!" to player
+				set {purchase.sb.tier4.%player%} to 0
+				stop
+			{purchase.sb.tier4.%player%} is 1:
 			
 				send "&aOpening Menu..." to player
 				wait 0.5 seconds
 				show "s;10;{@egged};s;11;{@gotmilk};s;12;{@gotbeef};s;13;{@cookies};s;14;{@birthdaycake};s;15;{@secretrecipe};s;18;{@menu};s;27;{@shop}" with 3 rows named "&9&lSkyblock &9Challenges" to player
 				stop
 			
-			send "&cYou must be a supporter to do this!" to player
+			
 	#subfold @shop
 		argument is "shop":
 			send "&aOpening Menu..." to player
 			wait 0.5 seconds
-			show "s;10;{@sbtier2};s;11;{@sbtier3};s;13;{@menu}" with 3 rows named "&9&lSkyblock &9Challenges" to player
+			show "s;12;{@sbtier2};s;13;{@sbtier3};s;14;{@sbtier4};s;15;{@sbtier5};s;19;{@menu}" with 3 rows named "&9&lSkyblock &9Challenges" to player
 			
 
 
@@ -965,8 +982,8 @@ command /chal <number>:
 		
 		
 			#check for purchase
-			player does not have permission "obam.supporter":
-				send "&c You must be a Supporter to do this!" to player
+			{purchase.sb.tier4.%player%} is 0:
+				send "&c You must purchase Tier 4 Challenges from the shop to do this!" to player
 				stop
 				
 			#check for items
@@ -1043,8 +1060,8 @@ command /chal <number>:
 		argument 1 is 15:
 			
 			#check for purchase
-			player does not have permission "obam.supporter":
-				send "&c You must be a Supporter to do this!" to player
+			{purchase.sb.tier4.%player%} is 0:
+				send "&c You must purchase Tier 4 Challenges from the shop to do this!" to player
 				stop
 				
 			#check for items
@@ -1120,8 +1137,8 @@ command /chal <number>:
 		argument 1 is 17:
 			
 			#check for purchase
-			player does not have permission "obam.supporter":
-				send "&c You must be a Supporter to do this!" to player
+			{purchase.sb.tier4.%player%} is 0:
+				send "&c You must purchase Tier 4 Challenges from the shop to do this!" to player
 				stop
 				
 			#check for items
@@ -1312,8 +1329,8 @@ command /chal <number>:
 		argument 1 is 22:
 			
 			#check for purchase
-			player does not have permission "obam.supporter":
-				send "&c You must be a Supporter to do this!" to player
+			{purchase.sb.tier4.%player%} is 0:
+				send "&c You must purchase Tier 4 Challenges from the shop to do this!" to player
 				stop
 				
 			#check for items
@@ -1351,8 +1368,8 @@ command /chal <number>:
 		argument 1 is 23:
 			
 			#check for purchase
-			player does not have permission "obam.supporter":
-				send "&c You must be a Supporter to do this!" to player
+			{purchase.sb.tier4.%player%} is 0:
+				send "&c You must purchase Tier 4 Challenges from the shop to do this!" to player
 				stop
 				
 			#check for items
@@ -1390,8 +1407,8 @@ command /chal <number>:
 		argument 1 is 24:
 			
 			#check for purchase
-			player does not have permission "obam.supporter":
-				send "&c You must be a Supporter to do this!" to player
+			{purchase.sb.tier4.%player%} is 0:
+				send "&c You must purchase Tier 4 Challenges from the shop to do this!" to player
 				stop
 				
 			#check for items
@@ -1428,8 +1445,8 @@ command /chal <number>:
 		argument 1 is 25:
 			
 			#check for purchase
-			{level.%player%.actual} is less than 10:
-				send "&cYou must be at least level 10 to do this!" to player
+			{purchase.sb.tier5.%player%} is 0:
+				send "&c You must purchase Tier 5 Challenges from the shop to do this!" to player
 				stop
 				
 			#check for items
@@ -1466,8 +1483,8 @@ command /chal <number>:
 		argument 1 is 26:
 			
 			#check for purchase
-			{level.%player%.actual} is less than 10:
-				send "&cYou must be at least level 10 to do this!" to player
+			{purchase.sb.tier5.%player%} is 0:
+				send "&c You must purchase Tier 5 Challenges from the shop to do this!" to player
 				stop
 				
 			#check for items
@@ -1504,8 +1521,8 @@ command /chal <number>:
 		argument 1 is 27:
 			
 			#check for purchase
-			{level.%player%.actual} is less than 10:
-				send "&cYou must be at least level 10 to do this!" to player
+			{purchase.sb.tier5.%player%} is 0:
+				send "&c You must purchase Tier 5 Challenges from the shop to do this!" to player
 				stop
 				
 			#check for items
@@ -1543,8 +1560,8 @@ command /chal <number>:
 		argument 1 is 28:
 			
 			#check for purchase
-			{level.%player%.actual} is less than 10:
-				send "&cYou must be at least level 10 to do this!" to player
+			{purchase.sb.tier5.%player%} is 0:
+				send "&c You must purchase Tier 5 Challenges from the shop to do this!" to player
 				stop
 				
 			#check for items
@@ -1582,8 +1599,8 @@ command /chal <number>:
 		argument 1 is 29:
 			
 			#check for purchase
-			{level.%player%.actual} is less than 10:
-				send "&cYou must be at least level 10 to do this!" to player
+			{purchase.sb.tier5.%player%} is 0:
+				send "&c You must purchase Tier 5 Challenges from the shop to do this!" to player
 				stop
 				
 			#check for items
@@ -1621,8 +1638,8 @@ command /chal <number>:
 		argument 1 is 30:
 			
 			#check for purchase
-			{level.%player%.actual} is less than 10:
-				send "&cYou must be at least level 10 to do this!" to player
+			{purchase.sb.tier5.%player%} is 0:
+				send "&c You must purchase Tier 5 Challenges from the shop to do this!" to player
 				stop
 				
 			#check for items

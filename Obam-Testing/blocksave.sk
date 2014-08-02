@@ -23,3 +23,6 @@ on break:
 			send "DEBUG %{_message}%"
 		delete block
 		drop {information.%block%.1} named {information.%block%.3} with lore {information.%block%.2} at event-location
+		clear {information.%block%.1}
+		clear {information.%block%.2}
+		clear {information.%block%.3}

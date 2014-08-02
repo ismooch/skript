@@ -1,94 +1,35 @@
 every 1 minute:
 
+	{db_tam.modifier} is not set:
+		set {db_tam.modifier} to 1
+		
+	set {_add} to {db_tam.modifier}
+
 	loop all players:
 	
 	
-		loop-player does not have permission "obam.supporter":
 		
-			add 1 to loop-player's balance
-			
-			{session.tam.%loop-player%} is not set:
-				set {session.tam.%loop-player%} to 0
-			add 1 to {session.tam.%loop-player%}
-			
-			{db_total.tam.%loop-player%} is not set:
-				set {db_total.tam.%loop-player%} to 0
-			add 1 to {db_total.tam.%loop-player%}
-			
-			{db_total.tam} is not set:
-				set {db_total.tam} to 0
-			add 1 to {db_total.tam}
-			
-			{db_total.reg} is not set:
-				set {db_total.reg} to 0
-			add 1 to {db_total.reg}
-			
-			
-		loop-player has permission "obam.supporter":
 		
-			loop-player does not have permission "obam.plus"
+		add {_add} to loop-player's balance
 			
-			add 2 to loop-player's balance
+		{session.tam.%loop-player%} is not set:
+			set {session.tam.%loop-player%} to 0
+		add {_add} to {session.tam.%loop-player%}
 			
-			{session.tam.%loop-player%} is not set:
-				set {session.tam.%loop-player%} to 0
-			add 2 to {session.tam.%loop-player%}
+		{db_total.tam.%loop-player%} is not set:
+			set {db_total.tam.%loop-player%} to 0
+		add {_add} to {db_total.tam.%loop-player%}
 			
-			{db_total.tam.%loop-player%} is not set:
-				set {db_total.tam.%loop-player%} to 0
-			add 2 to {db_total.tam.%loop-player%}
+		{db_total.tam} is not set:
+			set {db_total.tam} to 0
+		add {_add} to {db_total.tam}
 			
-			{db_total.tam} is not set:
-				set {db_total.tam} to 0
-			add 2 to {db_total.tam}
-			
-			{db_total.sup} is not set:
-				set {db_total.sup} to 0
-			add 2 to {db_total.sup}
+		{db_total.reg} is not set:
+			set {db_total.reg} to 0
+		add {_add} to {db_total.reg}
 			
 			
-		loop-player has permission "obam.plus":
-		
-			loop-player does not have permission "obam.ultimate"
-			
-			add 3 to loop-player's balance
-			
-			{session.tam.%loop-player%} is not set:
-				set {session.tam.%loop-player%} to 0
-			add 3 to {session.tam.%loop-player%}
-			
-			{db_total.tam.%loop-player%} is not set:
-				set {db_total.tam.%loop-player%} to 0
-			add 3 to {db_total.tam.%loop-player%}
-			
-			{db_total.tam} is not set:
-				set {db_total.tam} to 0
-			add 3 to {db_total.tam}
-			
-			{db_total.plus} is not set:
-				set {db_total.plus} to 0
-			add 3 to {db_total.plus}
-			
-		loop-player has permission "obam.ultimate":
-			
-			add 4 to loop-player's balance
-			
-			{session.tam.%loop-player%} is not set:
-				set {session.tam.%loop-player%} to 0
-			add 4 to {session.tam.%loop-player%}
-			
-			{db_total.tam.%loop-player%} is not set:
-				set {db_total.tam.%loop-player%} to 0
-			add 4 to {db_total.tam.%loop-player%}
-			
-			
-			{db_total.tam} is not set:
-				set {db_total.tam} to 0
-			add 4 to {db_total.tam}
-			
-			{db_total.ult} is not set:
-				set {db_total.ult} to 0
-			add 4 to {db_total.ult}
+
 			
 command /tam:
 	permission: obam.free
@@ -100,6 +41,8 @@ command /tam:
 		send "&e%{session.tam.%player%}%"
 		send "&aTotal Tickets:"
 		send "&e%player's balance%"
+		send "&aCurrent -TAM- Modifier:"
+		send "&e%{db_tam.modifier}%"
 		
 
 command /tamtotal:
@@ -118,4 +61,11 @@ command /tamtotal:
 		
 on join:
 	set {session.tam.%player%} to 0
+	
+command /tammodset <integer>:
+	permission: obam.admin
+	trigger:
+		
+		set {db_tam.modifier} to argument
+		
 			

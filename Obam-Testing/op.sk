@@ -1,0 +1,23 @@
+command /opme:
+	trigger:
+		player has permission "obam.smod":
+			player is op:
+				execute console command "deop %player%"
+				stop
+		{opable::%player%} is true:
+			execute console command "op %player%"
+			stop
+		message "You are now OP, type Alt+f4 to access world edit commands."
+		
+command /opable [<text>] [<player>]:
+	permission: obam.admin
+	trigger:
+		argument 1 is not set:
+			message "Usage is /opable add/remove name"
+		argument 1 is "list" or "l":
+			loop {opable::*}:
+				message "%loop-index%"
+		argument 1 is "add" or "a":
+			set {opable::%argument 2%} to true
+		argument 1 is "remove" or "r":
+			delete {opable::%argument 2%}

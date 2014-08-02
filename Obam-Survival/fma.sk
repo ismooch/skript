@@ -53,6 +53,15 @@ on script load:
 	{hostilemobsproper::ghast} is not set:
 		set {hostilemobsproper::ghast} to ghast
 
+	set {db_ci.items::28.FMA.helmet} to "i;diamond helmet;n;&7FMA Helmet;l;&6Standard issue FMA gear;c;sudo PLAYER fmagear helmet"
+	set {db_ci.items::29.FMA.chest} to "i;diamond chestplate;n;&7FMA Chestplate;l;&6Standard issue FMA gear;c;sudo PLAYER fmagear chest"
+	set {db_ci.items::30.FMA.leggings} to "i;diamond leggings;n;&7FMA Leggings;l;&6Standard issue FMA gear;c;sudo PLAYER fmagear leggings"
+	set {db_ci.items::31.FMA.boots} to "i;diamond boots;n;&7FMA Boots;l;&6Standard issue FMA gear;c;sudo PLAYER fmagear boots"
+	set {db_ci.items::32.FMA.sword} to "i;diamond sword;n;&7FMA Sword;l;&6Standard issue FMA gear;c;sudo PLAYER fmagear sword"
+	set {db_ci.items::33.FMA.bow} to "i;bow;n;&7FMA Bow;l;&6Standard issue FMA gear;c;sudo PLAYER fmagear bow"
+	set {db_ci.items::34.FMA.arrows} to "i;64 arrow;n;&7FMA Arrows;l;&6Standard issue FMA gear;c;sudo PLAYER fmagear arrows"
+	set {db_ci.items::35.FMA.apples} to "i;64 apple;n;&7FMA Apples;l;&6Standard issue FMA gear;c;sudo PLAYER fmagear apples"	
+
 command /spawntoggle:
 	permission: obam.smod
 	trigger:
@@ -732,7 +741,7 @@ on damage:
 					{chunk.live.%chunk at location of loop-entity%} is "MobArena-BattleFloor":
 						loop-entity is not a player
 						kill loop-entity
-						
+
 on sign change:
 	player is op
 	line 1 of block is "fmahelm":
@@ -769,7 +778,7 @@ on sign change:
 		set line 2 of block to "FMA Apples"
 		set line 3 of block to "(150)"
 		set line 4 of block to "500 Tickets"
-		
+
 on right click on sign:
 	line 1 of block is "Click to get":
 		set {_bal} to player's balance
@@ -811,5 +820,27 @@ on right click on sign:
 			give player 150 apples named "&7FMA Apple"
 			remove 500 from player's balance
 			send "&aYou have spent 500 tickets on &eFMA Apples"
-	
-		
+
+command /fmagear [<text>]:
+	permission: obam.smod
+	trigger:
+		player doesn't have space for sponge:
+			send "&aYou do not have room!"
+			stop
+		argument 1 is "helmet":
+			give player diamond helmet of protection 3 and unbreaking 3 named "&7FMA Helmet"
+		argument 1 is "chest":
+			give player diamond chestplate of protection 3 and unbreaking 3 named "&7FMA Chestplate"
+		argument 1 is "leggings":
+			give player diamond leggings of protection 3 and unbreaking 3 named "&7FMA Leggings"
+		argument 1 is "boots":
+			give player diamond boots of protection 3 and unbreaking 3 named "&7FMA Boots"
+		argument 1 is "sword":
+			give player diamond sword of knockback 1 and unbreaking 3 and sharpness 2 named "&7FMA Sword"
+		argument 1 is "bow":
+			give player bow of punch 2 and power 3 and unbreaking 1 named "&7FMA Bow"
+		argument 1 is "arrows":
+			give player 64 arrows named "&7FMA Arrow"
+		argument 1 is "apples":
+			give player 64 apples named "&7FMA Apple"
+		send "&aHere is your thing"

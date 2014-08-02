@@ -1,0 +1,78 @@
+on script load:
+	set {roles.menu::Soldier} to "i;diamond sword;n;&1Soldier Role;l;&7Click to take on the||&7Soldier Role;c;sudo PLAYER rolesoldier"
+	
+command /rolesoldier:
+	permission: obam.free
+	trigger:
+		
+		player has permission "obam.admin":
+		
+			set {role.cooldown.%player%} to now
+			add 7 days to {role.cooldown.%player%}
+			
+		{role.cooldown.%player%} is not set:
+			set {role.cooldown.%player%} to now
+			add 7 days to {role.cooldown.%player%}
+			
+		set {_check} to now
+		
+		
+		set {_check} to difference between {role.cooldown.%player%} and {_check}
+		
+		{_check} is less than 7 days:
+		
+			send "&cYou must wait at least 7 days to switch a role!"
+			stop
+			
+		set {role.%player%} to "soldier"
+		send "&aYou have set your role to &eSoldier&a!"
+		stop
+		
+on damage:
+
+	attacker is a player
+	victim is a player
+	
+	{role.%attacker%} is "soldier":
+		
+		chance of 10%:
+			
+			add 1 to damage
+			
+			send "&cCritical Hit!" to attacker
+			
+		chance of 5%:
+			
+			{wf.%attacker%.points} is not set:
+				set {wf.%attacker%.points} to 0
+				
+			add 5 to {wf.%attacker%.points}
+			send "&aYou have received &e5 Points&a!"
+			
+		chance of 2%:
+		
+			add 5 to attacker's balance
+			
+			send "&aYou have received &e5 Tickets&a!"
+			
+	{role.%victim%} is "soldier":
+	
+		chance of 2%:
+		
+			set damage to 0
+			
+			send "&eBlocked!"
+			
+		chance of 5%:
+		
+			{wf.%victim%.points} is not set:
+				set {wf.%victim%.points} to 0
+				
+			add 5 to {wf.%victim%.points}
+			send "&aYou have received &e5 Points&a!"
+			
+		chance of 2%:
+			
+			add 5 to victim's balance
+			
+			send "&aYou have received &e5 Tickets&a!"

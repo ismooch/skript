@@ -1,0 +1,5 @@
+command /skill:
+	permission: obam.free
+	trigger:
+		
+		make player execute command "/skill%{role.%player%}%"

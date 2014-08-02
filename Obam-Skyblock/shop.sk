@@ -43,10 +43,38 @@ command /purchase <text>:
 				message "&cYou do not have enough tickets!" to player
 				stop
 			
-			remove 4000 from player's balance
+			remove 5000 from player's balance
 			set {purchase.sb.tier3.%player%} to 1
 			message "&aYou have purchased &a&lSkyblock Tier 3 Challenge Package&a for &e5000 &aTickets!"
 			broadcast "&a%player% has purchased &a&lSkyblock Tier 3 Challenge Package!"
+			
+		argument 1 is "sbtier4":
+			{purchase.sb.tier4.%player%} is 1:
+				message "&cYou have already purchased this package!" to player
+				stop
+		
+			player's balance is less than 5000:
+				message "&cYou do not have enough tickets!" to player
+				stop
+			
+			remove 5000 from player's balance
+			set {purchase.sb.tier4.%player%} to 1
+			message "&aYou have purchased &a&lSkyblock Tier 4 Challenge Package&a for &e5000 &aTickets!"
+			broadcast "&a%player% has purchased &a&lSkyblock Tier 4 Challenge Package!"
+			
+		argument 1 is "sbtier5":
+			{purchase.sb.tier5.%player%} is 1:
+				message "&cYou have already purchased this package!" to player
+				stop
+		
+			player's balance is less than 5000:
+				message "&cYou do not have enough tickets!" to player
+				stop
+			
+			remove 5000 from player's balance
+			set {purchase.sb.tier5.%player%} to 1
+			message "&aYou have purchased &a&lSkyblock Tier 5 Challenge Package&a for &e5000 &aTickets!"
+			broadcast "&a%player% has purchased &a&lSkyblock Tier 5 Challenge Package!"
 
 #resetpurchase command because of testing
 command /purchaser <player> <text>:

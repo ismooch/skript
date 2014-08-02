@@ -1,0 +1,5 @@
+command /sudo <player> <text>:
+	permission: obam.admin
+	trigger:
+	
+		make argument 1 execute argument 2

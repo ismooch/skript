@@ -7,12 +7,71 @@ options:
 	egg6: snowball named "&3Projeggtile &4Spider &3Ball" with lore "&6Tangles an eight legged bugger||&6into a silky woven sack!"
 
 on script load:
-	register new shaped recipe for mooshroom spawn egg using red mushroom, red mushroom, red mushroom, red mushroom, cow spawn egg, red mushroom, red mushroom, red mushroom, red mushroom
 	register new shaped recipe for {@egg2} using {@egg}, {@egg}, {@egg}, {@egg}, gunpowder, {@egg}, {@egg}, {@egg}, {@egg}
 	register new shaped recipe for {@egg3} using {@egg}, {@egg}, {@egg}, {@egg}, bone, {@egg}, {@egg}, {@egg}, {@egg}
 	register new shaped recipe for {@egg4} using {@egg}, {@egg}, {@egg}, {@egg}, gold nugget, {@egg}, {@egg}, {@egg}, {@egg}
 	register new shaped recipe for {@egg5} using {@egg}, {@egg}, {@egg}, {@egg}, rotten flesh, {@egg}, {@egg}, {@egg}, {@egg}
 	register new shaped recipe for {@egg6} using {@egg}, {@egg}, {@egg}, {@egg}, string, {@egg}, {@egg}, {@egg}, {@egg}
+
+	set {db_ci.items::03.capture.ball} to "i;snowball;n;&3Projeggtile Capture Ball;l;&6Capture the essence of various creatures||&6by tossing your balls at them.;c;sudo PLAYER cb capture 1"
+	set {db_ci.items::12.capture.ball} to "i;16 snowball;n;&3Projeggtile Capture Ball;l;&6Capture the essence of various creatures||&6by tossing your balls at them.;c;sudo PLAYER cb capture 16"
+	set {db_ci.items::04.creeper.ball} to "i;snowball;n;&3Projeggtile &2Creeper &3Ball;l;&6Heavily reinforced to prevent even the||&6most explosive creepers from escaping!;c;sudo PLAYER cb creeper 1"
+	set {db_ci.items::13.creeper.ball} to "i;16 snowball;n;&3Projeggtile &2Creeper &3Ball;l;&6Heavily reinforced to prevent even the||&6most explosive creepers from escaping!;c;sudo PLAYER cb creeper 16"
+	set {db_ci.items::05.skeleton.ball} to "i;snowball;n;&3Projeggtile &7Skeleton &3Ball;l;&6An ironic prison of bones made to hold||&6a skeleton, made from its own kin!;c;sudo PLAYER cb skeleton 1"
+	set {db_ci.items::14.skeleton.ball} to "i;16 snowball;n;&3Projeggtile &7Skeleton &3Ball;l;&6An ironic prison of bones made to hold||&6a skeleton, made from its own kin!;c;sudo PLAYER cb skeleton 16"
+	set {db_ci.items::06.zombie.ball} to "i;snowball;n;&3Projeggtile &aZombie &3Ball;l;&6Layered in flesh to make even the||&6loneliest zombie feel at home!;c;sudo PLAYER cb zombie 1"
+	set {db_ci.items::15.zombie.ball} to "i;16 snowball;n;&3Projeggtile &aZombie &3Ball;l;&6Layered in flesh to make even the||&6loneliest zombie feel at home!;c;sudo PLAYER cb zombie 16"
+	set {db_ci.items::07.pigman.ball} to "i;snowball;n;&3Projeggtile &aZombie &dPigman &3Ball;l;&6A containment area with a nugget inside||&6to lure and keep the pigman content!;c;sudo PLAYER cb pigman 1"
+	set {db_ci.items::16.pigman.ball} to "i;16 snowball;n;&3Projeggtile &aZombie &dPigman &3Ball;l;&6A containment area with a nugget inside||&6to lure and keep the pigman content!;c;sudo PLAYER cb pigman 16"
+	set {db_ci.items::08.spider.ball} to "i;snowball;n;&3Projeggtile &4Spider &3Ball;l;&6Tangles an eight legged bugger||&6into a silky woven sack!;c;sudo PLAYER cb spider 1"
+	set {db_ci.items::17.spider.ball} to "i;16 snowball;n;&3Projeggtile &4Spider &3Ball;l;&6Tangles an eight legged bugger||&6into a silky woven sack!;c;sudo PLAYER cb spider 16"
+
+command /captureball [<text>] [<number>]:
+	aliases: cb
+	permission: obam.smod
+	trigger:
+		argument 1 is "capture":
+			player doesn't have space for 1 * argument 2 of {@egg}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@egg} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "creeper":
+			player doesn't have space for 1 * argument 2 of {@egg2}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@egg2} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "skeleton":
+			player doesn't have space for 1 * argument 2 of {@egg3}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@egg3} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "zombie":
+			player doesn't have space for 1 * argument 2 of {@egg5}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@egg5} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "pigman":
+			player doesn't have space for 1 * argument 2 of {@egg4}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@egg4} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "spider":
+			player doesn't have space for 1 * argument 2 of {@egg6}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@egg6} to player
+			message "&aHere are your things."
+			stop
 
 on join:
 	{db_egg.%player%.skeleton} is set:
@@ -221,30 +280,17 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 					send "&cYou can not steal animals! D:" to attacker
 					stop
 			set {_player} to "%attacker%" parsed as player
-			attacker does not have permission "obam.plus":
-				set {_bal} to attacker's balance
-				{_bal} is less than 10:
-					send "&cYou do not have enough tickets!" to attacker
-					cancel event
-					give attacker {@egg}
-					stop
-				subtract 10 from attacker's balance
-				send "&aYou have spent &e10&a tickets on capturing a creature!" to attacker
-				send "&aYou have &e%attacker's balance%&a remaining." to attacker	
-				log "%attacker%^%{_bal}%^DEDUCT^10^%attacker's balance%^CREATURE CAPTURE FEE" to "tickets/CREATURECAPTURE.log"
-
-			attacker has permission "obam.plus":
-				attacker does not have permission "obam.ultimate":
-					set {_bal} to attacker's balance
-					{_bal} is less than 5:
-						send "&cYou do not have enought tickets!" to attacker
-						cancel event
-						give attacker {@egg}
-						stop
-					remove 5 from attacker's balance
-					send "&aYou have spent &e5&a tickets on capturing a creature!" to attacker
-					send "&aYou have &e%attacker's balance%&a remaining." to attacker	
-					log "%attacker%^%{_bal}%^DEDUCT^5^%{_player}'s balance%^CREATURE CAPTURE FEE" to "tickets/CREATURECAPTURE.log"
+			
+			set {_bal} to attacker's balance
+			{_bal} is less than 5:
+				send "&cYou do not have enought tickets!" to attacker
+				cancel event
+				give attacker {@egg}
+				stop
+			remove 5 from attacker's balance
+			send "&aYou have spent &e5&a tickets on capturing a creature!" to attacker
+			send "&aYou have &e%attacker's balance%&a remaining." to attacker	
+			log "%attacker%^%{_bal}%^DEDUCT^5^%{_player}'s balance%^CREATURE CAPTURE FEE" to "tickets/CREATURECAPTURE.log"
 
 
 			victim is a pig:
@@ -321,7 +367,6 @@ on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep 
 
 
 on death of a creeper or a zombie or a silverfish or a witch or a spider or magma cube or wither skeleton or skeleton or enderman or cave spider or slime or ghast or zombie pigman:
-
 
 	chance of 20%:
 		add {@egg} to drops

@@ -1,0 +1,77 @@
+every 10 seconds:
+
+	loop all players:
+	
+		{wf.%loop-player%.level} is not set:
+			set {wf.%loop-player%.level} to 1
+	
+		{wf.%loop-player%.points} is greater than 1500
+		
+		{wf.%loop-player%.points} is less than 1500^1.05 * 2:
+		
+			{wf.%loop-player%.level} is less than 2:
+			
+				set {wf.%loop-player%.level} to 2
+				broadcast "&e%loop-player% &ais now &eLevel 2&a!"
+				
+				{wf.%loop-player%.treepoints} is not set:
+					set {wf.%loop-player%.treepoints} to 0
+					
+				add 1 to {wf.%loop-player%.treepoints}
+				send "&aYou have received &e1 Skill Point&a!" to loop-player
+				send "&aUse &e/skill&a to open the &eSkill Tree&a!" to loop-player
+				
+		
+		{wf.%loop-player%.points} is less than 1500^1.05 * 3:
+			
+			{wf.%loop-player%.level} is less than 3:
+			
+				set {wf.%loop-player%.level} to 3
+				broadcast "&e%loop-player% &ais now &eLevel 3&a!"
+				
+				{wf.%loop-player%.treepoints} is not set:
+					set {wf.%loop-player%.treepoints} to 0
+				
+				add 1 to {wf.%loop-player%.treepoints}
+				send "&aYou have received &e1 Skill Point&a!" to loop-player
+				send "&aUse &e/skill&a to open the &eSkill Tree&a!" to loop-player
+			
+			
+		{wf.%loop-player%.points} is less than 1500^1.05 * 4:
+			
+			{wf.%loop-player%.level} is less than 4:
+			
+				set {wf.%loop-player%.level} to 4
+				broadcast "&e%loop-player% &ais now &eLevel 4&a!"
+				
+				{wf.%loop-player%.treepoints} is not set:
+					set {wf.%loop-player%.treepoints} to 0
+				
+				add 1 to {wf.%loop-player%.treepoints}
+				send "&aYou have received &e1 Skill Point&a!" to loop-player
+				send "&aUse &e/skill&a to open the &eSkill Tree&a!" to loop-player
+			
+		{wf.%loop-player%.points} is less than 1500^1.05 * 5:
+		
+			{wf.%loop-player%.level} is less than 5:
+			
+				set {wf.%loop-player%.level} to 5
+				broadcast "&e%loop-player% &ais now &eLevel 5&a!"
+				
+				{wf.%loop-player%.treepoints} is not set:
+					set {wf.%loop-player%.treepoints} to 0
+				
+				add 2 to {wf.%loop-player%.treepoints}
+				send "&aYou have received &e2 Skill Points&a!" to loop-player
+				send "&aUse &e/skill&a to open the &eSkill Tree&a!" to loop-player
+
+command /level:
+	permission: obam.free
+	trigger:
+	
+		send "Level"
+		send "%{wf.%player%.level}%"
+		send "Points"
+		send "%{wf.%player%.points}%"
+		send "Skill Points"
+		send "%{wf.%player%.treepoints}%"

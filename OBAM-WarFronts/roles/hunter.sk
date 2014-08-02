@@ -1,0 +1,57 @@
+on script load:
+	set {roles.menu::Hunter} to "i;bow;n;&1Hunter Role;l;&7Click to take on the||&7Hunter Role;c;sudo PLAYER rolehunter"
+	
+command /rolehunter:
+	permission: obam.free
+	trigger:
+		
+		player has permission "obam.admin":
+		
+			set {role.cooldown.%player%} to now
+			add 7 days to {role.cooldown.%player%}
+			
+		{role.cooldown.%player%} is not set:
+			set {role.cooldown.%player%} to now
+			add 7 days to {role.cooldown.%player%}
+			
+		set {_check} to now
+		
+		
+		set {_check} to difference between {role.cooldown.%player%} and {_check}
+		
+		{_check} is less than 7 days:
+		
+			send "&cYou must wait at least 7 days to switch a role!"
+			stop
+			
+		set {role.%player%} to "hunter"
+		send "&aYou have set your role to &eHunter&a!"
+		stop
+		
+on death:
+
+	victim is not a player
+	
+	victim is not a cow or a mooshroom or a chicken or a ocelot or a chicken or a wolf or a pig
+	
+	{role.%attacker%} is "hunter":
+	
+		chance of 5%:
+		
+			{wf.%player%.points} is not set:
+				set {wf.%player%.points} to 0
+				
+			add 5 to {wf.%player%.points}
+			send "&aYou have received &e5 Points&a!"
+			
+		chance of 2%:
+		
+			add 5 to player's balance
+			
+			send "&aYou have received &e5 Tickets&a!"
+			
+			
+			
+			
+	
+		

@@ -1,3 +1,12 @@
+options:
+	ismooch: i;sheep spawn egg;n;&6ISMOOCH;l;&7Grab a pink Sheep||&7named ISMOOCH|| ||&5&oThis pet is free!||&5&oClick to Summon!;c;sudo %player% pet ismooch
+	bruswain: i;bat spawn egg;n;&6Bru Swain;l;&7From the darkness comes||&7Bru Swain. A mysterious||&7bat|| ||&5&oThis pet is for our||&5&oBeta Supporters only.;c;sudo %player% pet bruswain
+	sparky: i;creeper spawn egg;n;&6Sparky;l;&7A trolly creeper||&7to scare your friends!|| ||&5&oThis pet is for||&5&oall supporters!;c;sudo %player% pet sparky
+	bacon: i;pig spawn egg;n;&6Bacon;l;&7A tasty pig ready||&7for slaughter but unable||&7to die|| ||&5&oThis pet can be||&5&opurchased through the||&5&oOBAMcraft shop;c;sudo %player% pet bacon
+	clear: i;fire;n;&6Clear;l;&7Click to clear all||&7summoned pets!;c;sudo %player% pet clear
+	lead: i;lead;n;&6Leash;l;&7Pets getting out of||&7control? Click this||&7to attach a lead||&7to all of your summoned||&7pets!;c;sudo %player% pet lead
+
+
 every 1 second:
 	loop all entities:
 		loop-entity is sheep or bat or powered creeper or pig:
@@ -22,10 +31,14 @@ on quit:
 	stop
 	
 		
-command /pet <text>:
+command /pet [<text>]:
 	trigger:
 		world is "kitpvpkillingfields":
 			send "&cYou can not do that here" to player
+			stop
+		
+		argument is not set:
+			show "s;1;{@ismooch};s;2;{@bruswain};s;3;{@sparky};s;4;{@bacon};s;10;{@lead};s;18;{@clear}" with 2 rows named "&1Pet Menu" to player
 			stop
 			
 		argument is "lead":
@@ -42,7 +55,7 @@ command /pet <text>:
 			clear {pets.%player%::*}
 			stop
 		{pets.%player%} is set:
-			player does not have permission "obam.supporter.tickets": 
+			player does not have permission "obam.supporter": 
 				send "&cYou can only have one pet at a time!" to player
 				stop
 			size of {pets.%player%::*} is 5:
@@ -58,8 +71,8 @@ command /pet <text>:
 			add {pets.%player%} to {pets.%player%::*}
 			stop
 			
-		argument is "Bru Swain":
-			player has permission "obam.supporter.tickets":
+		argument is "BruSwain":
+			player has permission "obam.beta.hat":
 				spawn bat at location of player
 				set name of spawned bat to "&aBru Swain"
 				make player leash spawned bat
@@ -67,25 +80,29 @@ command /pet <text>:
 				set {owner.%{pets.%player%}%} to player
 				add {pets.%player%} to {pets.%player%::*}
 				stop
-			send "&cYou must be Supporter Ultimate to do this!" to player
+			send "&cThis is for beta supporters only!" to player
 			
 		argument is "Sparky":
-			spawn powered creeper at location of player
-			set name of spawned powered creeper to "&aSparky"
-			make player leash spawned powered creeper
-			set {pets.%player%} to spawned powered creeper
-			set {owner.%{pets.%player%}%} to player
-			add {pets.%player%} to {pets.%player%::*}
-			stop
+			player has permission "obam.supporter":
+				spawn powered creeper at location of player
+				set name of spawned powered creeper to "&aSparky"
+				make player leash spawned powered creeper
+				set {pets.%player%} to spawned powered creeper
+				set {owner.%{pets.%player%}%} to player
+				add {pets.%player%} to {pets.%player%::*}
+				stop
+			send "&cYou must be a supporter to do this!" to player
 		
 		argument is "bacon":
-			spawn pig at location of player
-			set name of spawned pig to "&aBacon"
-			make player leash spawned pig
-			set {pets.%player%} to spawned pig
-			set {owner.%{pets.%player%}%} to player
-			add {pets.%player%} to {pets.%player%::*}
-			stop
+			{db_pet.purchase.bacon.%player%} is true:
+				spawn pig at location of player
+				set name of spawned pig to "&aBacon"
+				make player leash spawned pig
+				set {pets.%player%} to spawned pig
+				set {owner.%{pets.%player%}%} to player
+				add {pets.%player%} to {pets.%player%::*}
+				stop
+			send "&cYou must purchase this pet on the online store!"
 		
 		argument is "dragon":
 			send "&cI bet you wish you could...." to player
@@ -122,4 +139,12 @@ on right click with shears on sheep:
 	name of event-entity is "&aISMOOCH"
 	cancel event
 	send "&cYou can not shear pets!" to event-player
+	
+command /petpurchase <text> <text>:
+	permission: obam.admin
+	trigger:
+		
+		argument 1 is "bacon":
+			set {db_pet.purchase.bacon.%argument 2%} to true
+			send "%Argument 2% has purchased the pet BACON" to console
 			

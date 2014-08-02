@@ -15,18 +15,23 @@ command /abstain [<text>]:
 			send " "
 			set {abst.confirm.%player%} to now
 			stop
-		player has permission "obam.admin":
-			{abstain.%player%} is false:
-				set {abstain.%player%} to true
-			
-				send "&aYour Abstain status is now &e%{abstain.%player%}%"
-				stop
-				
-			{abstain.%player%} is true:
-				set {abstain.%player%} to false
-				send "&aYour Abstain status is now &e%{abstain.%player%}%"
-				stop
-			
+		argument is "mod":
+			player has permission "obam.admin":
+				{abstain.%player%} is false:
+					set {abstain.%player%} to true
+					execute console command "perms player %player% set nametags.color.red false"
+					execute console command "perms player %player% set nametags.color.blue"
+					send "&aYou are now abstaining from PvP!" to player
+					send "&aYour Abstain status is now &e%{abstain.%player%}%"
+					stop
+					
+				{abstain.%player%} is true:
+					set {abstain.%player%} to false
+					execute console command "perms player %player% set nametags.color.blue false"
+					execute console command "perms player %player% set nametags.color.red"
+					send "&aYou are now able to PvP!" to player
+					send "&aYour Abstain status is now &e%{abstain.%player%}%"
+					stop
 			stop
 			
 		argument is "confirm" or "c":

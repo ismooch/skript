@@ -1,14 +1,17 @@
 #hats
 options:
-	betahat: i;iron pressure plate;n;&3&lBeta Supporter Hat;l;&7This Special hat is for all members who supported||&7during our beta period. This hat is a thank you from the &eOBAM||&7Staff for those that helped us when we were starting. THANK YOU!;c;hatreward betahat %player%
-
+	betahat: i;iron pressure plate;n;&3&lBeta Supporter Hat;l;&7This Special hat is for all||&7members who supported||&7during our beta period||&7This hat is a thank you from||&7the &eOBAM &7Staff for those||&7that helped us when||&7we were starting. THANK YOU!;c;hatreward betahat %player%
+	free: i;dirt;n;&3&lDirt Hat;l;&7This classy dirt||&7Helm is free for||&7all who wish to show||&7off their frugal||&7style!;c;hatreward dirt %player%
+	sup1: i;iron block;n;&3&lIron Block;l;&7This Iron hat has||&7been crafted from the||&7finest Iron Golem remains!|| ||&5&oThis Hat is for||&5&oCurrent supporters;c;hatreward supporter1 %player%
+	sup2: i;gold block;n;&3&lGold Block;l;&7Show your wealth with||&7with the cap of beauty||&7with this shiny gold||&7block hat!|| ||&5&oThis hat is for||&5&oCurrent supporter;c;hatreward supporter2 %player%
+	sup3: i;diamond block;n;&3&lDiamond Block;l;&7Show off what others||&7craze with the powerfull||&7Diamond block hat|| ||&5&oThis hat is for||&5&oCurrent supporters;c;hatreward supporter3 %player%
 
 	
 command /hat:
 	permission: obam.free
 	executable by: players
 	trigger:
-		show "s;1;{@betahat}" with 3 rows named "&9&lOBAM &9Hats" to player
+		show "s;1;{@free};s;2;{@sup1};s;3;{@sup2};s;4;{@sup3};s;5;{@betahat}" with 3 rows named "&9&lOBAM &9Hats" to player
 		
 command /hatreward <text> <player>:
 	executable by: console
@@ -17,20 +20,33 @@ command /hatreward <text> <player>:
 			player-argument has permission "obam.beta.hat":
 				send "&aYou now have a hat :D" to player-argument
 				execute console command "hatgive iron pressure plate %player-argument%"
-
+		
+		argument 1 is "dirt":
+			send "&aYou now have a hat :D" to player-argument
+			execute console command "hatgive dirt %player-argument%"
+			
+		argument 1 is "supporter1":
+			player-argument has permission "obam.supporter":
+				send "&aYou now have a hat :D" to player-argument
+				execute console command "hatgive iron block %player-argument%"
+				
+		argument 1 is "supporter2":
+			player-argument has permission "obam.supporter":
+				send "&aYou now have a hat :D" to player-argument
+				execute console command "hatgive gold block %player-argument%"
+				
+		argument 1 is "supporter3":
+			player-argument has permission "obam.supporter":
+				send "&aYou now have a hat :D" to player-argument
+				execute console command "hatgive diamond block %player-argument%"
 				
 
 command /hatgive <item> [<player>]:
 	executable by: players and console
 	permission: obam.admin
 	trigger:
-		set {item.exist.true} to false
-		loop {hat.items.list::*}:
-			arg 1 is loop-value:
-				set {item.exist.true} to true
-		{item.exist.true} is false:
-			send "&cThat hat does not exist. Do &e/showitemhats&c to see a list of hats." to player
-			stop
+
+
 		if name of player-argument's helmet is "hat":
 			set player-argument's helmet to arg 1
 			set name of player-argument's helmet to "hat"
@@ -52,18 +68,23 @@ command /hatshow:
 	trigger:
 		loop {hat.items.list::*}:
 			send "%loop-value%" to player
-every 1 second:
-	loop {hat.items.list::*}:
-		set {current.item.check} to loop-value
-		loop all players:
-			loop-player has {current.item.check} named "hat":
-				remove {current.item.check} named "hat" from loop-player
-				send "&cWhy did you have a hat in your pocket?" to loop-player
+every 0.3 seconds:
+
+	loop all players:
+		loop-player has anything named "hat":
+			remove anything named "hat" from loop-player
+			send "&cWhy did you have a hat in your pocket?" to loop-player
 
 on drop:
-	loop {hat.items.list::*}:
-		item is loop-value named "hat":
-			cancel event
+	name of event-item is "hat":
+		cancel event
+		
+on place:
+	name of player's tool is "hat":
+		cancel event
+
+
+	
 	
 
 command /hattoggle:

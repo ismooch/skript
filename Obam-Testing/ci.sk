@@ -1,0 +1,24 @@
+command /ci:
+	permission: obam.smod
+	trigger:
+		
+		loop {db_ci.items::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+			{_chest} is set:
+				set {_chest} to "%{_chest}%;s;%{_count}%;%loop-value%"
+			{_chest} is not set:
+				set {_chest} to "s;%{_count}%;%loop-value%"
+			replace "PLAYER" in {_chest} with "%player%"
+			
+		{_count} is less than 9:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+			
+		show {_chest} with {_size} rows named "&1Custom Items" to player

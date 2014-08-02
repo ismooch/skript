@@ -1,0 +1,207 @@
+on script load:
+	set {roles.menu::Miner} to "i;diamond pickaxe;n;&1Miner Role;l;&7Click to take on the||&7Miner Role;c;sudo PLAYER roleminer"
+	
+command /roleminer:
+	permission: obam.free
+	trigger:
+		
+		player has permission "obam.admin":
+		
+			set {role.cooldown.%player%} to now
+			add 7 days to {role.cooldown.%player%}
+			
+		{role.cooldown.%player%} is not set:
+			set {role.cooldown.%player%} to now
+			add 7 days to {role.cooldown.%player%}
+			
+		set {_check} to now
+		
+		
+		set {_check} to difference between {role.cooldown.%player%} and {_check}
+		
+		{_check} is less than 7 days:
+		
+			send "&cYou must wait at least 7 days to switch a role!"
+			stop
+			
+		set {role.%player%} to "miner"
+		send "&aYou have set your role to &eMiner&a!"
+		stop
+		
+on pickup:
+		
+	item is iron ore or diamond or gold ore or redstone or lapis or coal
+
+	
+		
+		#chance of 80%:
+				
+	{wf.%player%.points} is not set:
+		set {wf.%player%.points} to 0
+					
+	add 100 to {wf.%player%.points}
+	send "&aYou have received &e100 Points&a!"
+	set lore of item to "%lore of item%||&7Mine'd"
+				
+	chance of 2%:
+				
+		add 5 to player's balance
+		send "&aYou have received &e5 Tickets&a!"
+				
+				
+			
+command /skillminer [<text>]:
+	permission: obam.free
+	trigger:
+		
+		argument is not set:
+			{wf.%player%.spent} is not set:
+				set {wf.%player%.spent} to 0
+				
+			{wf.%player%.treepoints} is not set:
+				set {wf.%player%.treepoints} to 0
+				
+			{wf.%player%.skills::unbreaking} is not set:
+				set {_unb.check} to "&e0&a/5"
+			{wf.%player%.skills::unbreaking} is set:
+				set {_unb.check} to "&e%{wf.%player%.skills::unbreaking}%&a/5"
+				
+			set {_unb.slot} to "i;iron bars;n;&1Unbreaking;l;&7The unbreaking trait||&7the percentage chance to negate||&7damage to your tool|| ||%{_unb.check}%;c;sudo %player% skillminer unbreaking"
+				
+			{wf.%player%.skills::gold} is not set:
+				set {_gold.check} to "&e0&a/1"
+			{wf.%player%.skills::gold} is set:
+				set {_gold.check} to "&e%{wf.%player%.skills::gold}%&a/1"
+				
+			set {_gold.slot} to "i;gold block;n;&1Gold!;l;&7The Gold trait adds a||&7chance to drop extra gold||&7while mining gold|| ||%{_gold.check}%;c;sudo %player% skillminer gold"
+			
+			{wf.%player%.skills::diamond} is not set:
+				{wf.%player%.skills::gold} is not set:
+					set {_dia.check} to "&cLocked||&cRequires &eGold&c unlocked"
+				{wf.%player%.skills::gold} is 0:
+					set {_dia.check} to "&cLocked||&cRequires &eGold&c unlocked"
+				{wf.%player%.skills::gold} is greater than 0:
+					set {_dia.check} to "&e0&a/1"
+			{wf.%player%.skills::diamond} is set:
+				{wf.%player%.skills::gold} is not set:
+					set {_dia.check} to "&cLocked||&cRequires &eGold&c unlocked"
+				{wf.%player%.skills::gold} is 0:
+					set {_dia.check} to "&cLocked||&cRequires &eGold&c unlocked"
+				{wf.%player%.skills::gold} is greater than 0:
+					set {_dia.check} to "&e%{wf.%player%.skills::diamond}%&a/1"
+			
+			{wf.%player%.skills::gold} is not set:
+				set {_dia.slot} to "i;diamond;n;&1Diamond!;l;%{_dia.check}%"
+			{wf.%player%.skills::gold} is 0:
+				set {_dia.slot} to "i;diamond;n;&1Diamond!;l;%{_dia.check}%"
+			{wf.%player%.skills::gold} is greater than 0:
+				set {_dia.slot} to "i;diamond;n;&1Diamond!;l;&7The diamond trait add||&7a percentage chance to drop||&7an extra diamond while mining||&7diamond|| ||%{_dia.check}%;c;sudo %player% skillminer diamond"
+				
+			set {_clear.slot} to "i;tnt;n;&1Reset Tree;l;&7This will reset your||&7skill tree and allow you to||&7redo it;c;sudo %player% skillminer clear"
+			set {_used.slot} to "i;chest;n;&1Points;l;&7Used Points:||&e%{wf.%player%.spent}%||&7Availible:||&e%{wf.%player%.treepoints}%"
+			
+			send "&aOpening menu..."
+			
+			wait 0.3 seconds
+			show "s;28;%{_used.slot}%;s;36;%{_clear.slot}%;s;20;%{_gold.slot}%;s;11;%{_dia.slot}%;s;21;%{_unb.slot}%" with 4 rows named "&1Skill Tree - Miner" to player
+		
+		argument is "clear":
+			
+			clear {wf.%player%.skills::*}
+			add {wf.%player%.spent} to {wf.%player%.treepoints}
+			clear {wf.%player%.spent}
+			
+			send "&aSkill Tree Cleared!"
+			make player execute command "/skillminer"
+			
+		argument is "unbreaking":
+			
+			{wf.%player%.skills::unbreaking} is not set:
+				set {wf.%player%.skills::unbreaking} to 0
+				
+			{wf.%player%.treepoints} is less than 1:
+				send "&cYou do not have enough points!"
+				make player execute command "/skillminer"
+				stop
+				
+			{wf.%player%.skills::unbreaking} is 5:
+				send "&cYou have maxxed out this skill!"
+				make player execute command "/skillminer"
+				stop
+			
+			subtract 1 from {wf.%player%.treepoints}
+			add 1 to {wf.%player%.spent}
+			add 1 to {wf.%player%.skills::unbreaking} 
+			send "&aAdded skill point to &eUnbreaking"
+			send "&aUnbreaking set to &e%{wf.%player%.skills::unbreaking}%&a!"
+			make player execute command "/skillminer"
+			stop
+			
+		argument is "diamond":
+		
+			{wf.%player%.skills::gold} is not set:
+				send "&cYou must unlock the &eGold&c skill first!"
+				stop
+				
+				
+			{wf.%player%.skills::gold} is less than 1:
+				send "&cYou must unlock the &eGold&c skill first!"
+				stop
+				
+			{wf.%player%.skills::gold} is 1:
+			
+				{wf.%player%.skills::diamond} is not set:
+					set {wf.%player%.skills::diamond} to 0
+					
+				{wf.%player%.treepoints} is less than 1:
+					send "&cYou do not have enough Skill points!"
+					make player execute command "/skillminer"
+					stop
+					
+				{wf.%player%.skills::diamond} is greater than 0:
+					send "&cYou have maxxed out this skill!"
+					make player execute command "/skillminer"
+					stop
+					
+				subtract 1 from {wf.%player%.treepoints} 
+				add 1 to {wf.%player%.spent}
+				add 1 to {wf.%player%.skills::diamond}
+				
+				send "&aAdded skill point to &eDiamond!"
+				send "&aUnbreaking set to &e%{wf.%player%.skills::diamond}%&a!"
+				make player execute command "/skillminer"
+				stop
+				
+		argument is "gold":
+		
+			{wf.%player%.skills::gold} is not set:
+				set {wf.%player%.skills::gold} to 0
+				
+			{wf.%player%.treepoints} is less than 1:
+				send "&cYou do not have enough points!"
+				make player execute command "/skillminer"
+				stop
+				
+			{wf.%player%.skills::gold} is 1:
+				send "&cYou have maxxed out this skill!"
+				make player execute command "/skillminer"
+				stop
+			
+			subtract 1 from {wf.%player%.treepoints}
+			add 1 to {wf.%player%.spent}
+			add 1 to {wf.%player%.skills::gold} 
+			send "&aAdded skill point to &eGold&a!"
+			send "&aUnbreaking set to &e%{wf.%player%.skills::gold}%&a!"
+			make player execute command "/skillminer"
+			stop
+		
+			
+				
+					
+				
+			
+		
+		
+		
+			
+			

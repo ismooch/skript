@@ -1,7 +1,7 @@
 on damage of a entity:
 	world is "skyworld"
 	attacker is a player
-	victim is not a zombie or skeleton or witch or spider or creeper or enderman
+	victim is a horse or a villager or a ocelot or a cow or a mooshroom or a pig or a sheep or a squid
 	attacker can't build at location of attacker:
 		send "&cThis area is protected!" to attacker
 		cancel event

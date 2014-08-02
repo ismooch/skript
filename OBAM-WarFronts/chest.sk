@@ -1,0 +1,4 @@
+command /testchest:
+	trigger:
+		
+		show "s;55;i;dirt;s;63;i;dirt;s;64;i;dirt;s;72;i;dirt" with 8 rows named "test" to player

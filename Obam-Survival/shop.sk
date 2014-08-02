@@ -1,28 +1,32 @@
 #shop for Fronts
 
-options:
-	land: i;grass;n;&9&lPurchase more land!;l;&7Click to purchase 1 more land!|| ||&e10,000 Tickets!;c;sudo %player% shop land
-	
-	
+on script load:
+	set {db_shop.items::Front Slot} to "i;grass;n;&a&b&k&a&3Front Slot;l;&6Purchase one Front Slot, which allows you the||&6ability to claim protected land.|| ||&5&oClick to purchase|| ||&3&lCost:||&e10,000 Tickets;c;sudo PLAYER shop land"
+	set {db_shop.items::Front Tlot} to "i;grass;n;&a&b&k&a&3Front Slot Bundle;l;&6Purchase five Front Slots, which allows you the||&6ability to claim protected land.|| ||&5&oClick to purchase|| ||&3&lCost:||&e45,000 Tickets;c;sudo PLAYER shop bundle"	
+
 command /shop [<text>]:
 	permission: obam.free
 	trigger:
 		argument is not set:
-		
-			show "s;1;{@land}" with 1 row named "&9&lFronts&9 Shop" to player
+			loop {db_shop.items::*}:
+				{_count} is not set:
+					set {_count} to 0
+				add 1 to {_count}
+				{_chest} is set:
+					set {_chest} to "%{_chest}%;s;%{_count}%;%loop-value%"
+				{_chest} is not set:
+					set {_chest} to "s;%{_count}%;%loop-value%"
+			replace "PLAYER" in {_chest} with "%player%"
+			{_count} is less than 9:
+				set {_size} to 1
+			{_count} is greater than 9:
+				set {_size} to 2
+			{_count} is greater than 18:
+				set {_size} to 3
+			{_count} is greater than 27:
+				set {_size} to 4
+			show "%{_chest}%" with {_size} row named "&9&lFronts&9 Shop" to player
 		argument is "land":
-			player does not have permission "obam.supporter":
-				{availableland.%player%} is greater than or equal to 5:
-					send "&cYou have your max amount of available land purchased! Please support to get more!" to player
-					stop
-			player does not have permission "obam.plus":
-				{availableland.%player%} is greater than or equal to 10:
-					send "&cYou have your max amount of available land purchased! Please upgrade to get more!" to player
-					stop
-			player does not have permission "obam.ultimate":
-				{availableland.%player%} is greater than or equal to 20:
-					send "&cYou have your max amount of available land purchased! Please support to get more!" to player
-					stop
 			set {_curbal} to player's balance
 			{_curbal} is less than 10000:
 				send "&cYou do not have enough tickets!" to player
@@ -30,8 +34,34 @@ command /shop [<text>]:
 			subtract 10000 from player's balance
 			add 1 to {availableland.%player%}
 			send "&aYou have purchased &e1 Land Slot&a for &e10,000 Tickets" to player
-			
-			
-					
-			
-				
+			send "&aYou have &e%player's balance%&a remaining" to player
+		argument is "bundle":
+			set {_curbal} to player's balance
+			{_curbal} is less than 45000:
+				send "&cYou do not have enough tickets!" to player
+				stop
+			subtract 45000 from player's balance
+			add 5 to {availableland.%player%}
+			send "&aYou have purchased &e5 Land Slots&a for &e45,000 Tickets" to player
+			send "&aYou have &e%player's balance%&a remaining" to player	
+
+command /shopfixerupper:
+	permission: obam.admin
+	trigger:
+		delete {db_shop.items::*}
+		message "Tis gone, my lord!"
+
+command /shoploop:
+	permission: obam.admin
+	trigger:
+		set {_num} to 0
+		loop {db_shop.items::*}:
+			add 1 to {_num}
+			set {_what} to loop-index
+			message "%{_num}% %{_what}%"
+command /shopdelete [<text>]:
+	permission: obam.admin
+	trigger:
+		set {_num} to argument 1
+		delete {db_shop.items::%{_num}%}
+		message "%{_num}% should be gone, do /shoploop to see"

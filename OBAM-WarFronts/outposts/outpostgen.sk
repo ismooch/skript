@@ -1,0 +1,66 @@
+
+
+
+on chunk load:
+	{chunk.loaded.%event-chunk%} is not set
+	set {chunk.loaded.%event-chunk%} to true
+	{outpost.active} is not set:
+		set {outpost.active} to false
+	{outpost.active} is false
+	chance of 80%:
+		set {outpost.active} to true
+		loop blocks within event-chunk:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+			set loop-block to {wf.op.1::%{_count}%}
+			
+				
+			
+		set {outpost.location} to event-chunk
+		
+		set {outpost.%event-chunk%} to true
+		set {outpost.%event-chunk%.kills} to random integer between 1 and 10
+		set {outpost.%event-chunk%.level} to random integer between 1 and 10
+		set {outpost.kill.claim} to 5	
+		broadcast "&aA Level &e%{outpost.%event-chunk%.level}% &aOutpost has been generated at &e%event-chunk%&a!"
+		
+		
+command /outpostgrab <number>:
+	permission: obam.admin
+	trigger:
+		
+		clear {wf.op.%argument%::*}
+		loop blocks within chunk at location of player:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+		
+			set {wf.op.%argument%::%{_count}%} to loop-block
+			
+		send "&aOutpost Added"
+		
+command /outpostpush <number>:
+	permission: obam.admin
+	trigger:
+		
+		loop blocks within chunk at location of player:
+			{_count} is not set:
+				set {_coutn} to 0
+			add 1 to {_count}
+			
+			set loop-block to {wf.op.%argument%::%{_count}%}
+			
+		send "&aOutpost Pushed to current chunk"
+		
+command /outpostreset:
+	permission: obam.admin
+	trigger:
+		
+		set {outpost.active} to false
+		
+command /outpoststate:
+	permission: obam.admin
+	trigger:
+		send "%{outpost.active}%"
+		

@@ -98,7 +98,7 @@ command /warp <offline player>:
 	description: Go to a player's island
 	usage: /warp [player name]
 	executable by: players
-	permisson: obam.free
+	permission: obam.free
 	trigger:
 		world is "parkourlobby" or "parkourmaps":
 			message "&cYou can not do that here!" to player
@@ -219,11 +219,6 @@ command /invite <text>:
 command /enchantment:
 	permission: obam.free
 	trigger:
-		{level.%player%.actual} is less than or equal to 15:
-			player does not have permission "obam.supporter":
-				send "&cYou must be a supporter or Level 15 or higher to do this!" to player
-				stop
-			teleport the player to the location (-29, 122, 21)
 		teleport the player to the location (-29, 122, 21)
 		
 

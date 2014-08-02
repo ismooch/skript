@@ -1,0 +1,57 @@
+on script load:
+	set {roles.menu::Enchanter} to "i;dirt;n;&1Enchanter Role;l;&7Click to take on the||&7Enchanter Role;c;sudo PLAYER roleenchanter"
+	
+command /roleenchanter:
+	permission: obam.free
+	trigger:
+		
+		player has permission "obam.admin":
+		
+			set {role.cooldown.%player%} to now
+			add 7 days to {role.cooldown.%player%}
+			
+		{role.cooldown.%player%} is not set:
+			set {role.cooldown.%player%} to now
+			add 7 days to {role.cooldown.%player%}
+			
+		set {_check} to now
+		
+		
+		set {_check} to difference between {role.cooldown.%player%} and {_check}
+		
+		{_check} is less than 7 days:
+		
+			send "&cYou must wait at least 7 days to switch a role!"
+			stop
+			
+		set {role.%player%} to "enchanter"
+		send "&aYou have set your role to &eEnchanter&a!"
+		stop
+		
+on enchant:
+	
+	{role.%player%} is "enchanter":
+	
+		chance of 5%:
+			
+			{wf.%player%.points} is not set:
+				set {wf.%player%.points} to 0
+				
+			add 5 to {wf.%player%.points}
+			send "&aYou have received &e5 Points&a!"
+			
+		chance of 2%:
+			
+			add 5 to player's balance
+			send "&aYou have received &e5 Tickets&a!"
+			
+			
+				
+				
+			
+		
+		
+		
+		
+			
+			

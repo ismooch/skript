@@ -1,52 +1,140 @@
 options:
-	bandages: paper named "&3Bandage" with lore "&6Use of this bandage is the only way to fix a long lasting||&6injury brought on by the hazards of the environment.|| ||&5&oRight click with bandage in hand to cure the effects||&5&obrought on by being badly injured. Multiple bandages||&5&omay be required depending on your injury level."
-	superbottle: water bottle named "&3Super Water Bottle" with lore "&6Besides saving you inventory space, this water ||&6is created extra wet to help quench your thirst.|| ||&a+50 Thirst|| ||&5&oUpon use, bottle turns to regular glass bottle."
-	unstele: magma cream named "&3Unstable Element" with lore "&6Highly energized plasma like element found||&6in unstable land and mobs.|| ||&5&oThis goo is really hot!"
-	unstmetal: gold nugget named "&3Unstable Metal Shard" with lore "&6Energized metal shards found in unstable land||&6and mobs.|| ||&5&oYou feel a light energetic charge coming from||&5&othe shard."
-	unstmetalbar: gold ingot named "&3Unstable Metal Bar" with lore "&6Crafted from broken &3Unstable Metal Shards&6 to||&6become whole again.|| ||&5&oHot to the touch, this bar gives a highly energetic||&5&ocharge."
-	stablemetal: iron ingot named "&3Stable Metal Bar" with lore "&6Finalized & stable metal bar with just enough||&6energy for crafting special items.|| ||&5&oWarm to the touch with a subtle energetic glow."
-	stableele: slimeball named "&3Stable Element" with lore "&6Stable plasma like element used to enhance other||&6items in special ways.|| ||&5&oThe goo feels nice and warm as it slides through||&5&oyour fingers."
-	envradar: compass named "&3Environmental Radar" with lore "&6A must have tool for always being in the know about||&6the dangerous environment around you.|| ||&c-1 Elemental Fuel per use|| ||&5&oRight click with radar in hand to get the environmental||&5&ostatistics of the land you’re standing on."
-	elefuel: coal item named "&3Elemental Fuel" with lore "&6The universal fuel used to power most of the tools||&6and machines created with &3Energized Metal Bars."
-	fairydust: sugar named "&3Fairy Dust" with lore "&6This mysterious dust is filled with special properties||&6that nobody quite understands. Rumor is the dust||&6when combined with the right items or situations can||&6yield interesting results."
-	stable: packed ice named "&3Stabilizer" with lore "&6The stabilizer contains the perfect elemental makeup||&6to bring unstable energies down to usable levels.|| ||&5&oSurround the Stabilizer in a crafting table with items||&5&othat contain unstable energy."
-	stablechst: diamond chestplate named "&3Stable Diamond Chestplate" with lore "&6This chestplate contains a slot for special||&6enchantments and a container for &3Elemental||&3Fuel&6."
-	hastechest: diamond chestplate named "&3Haste Chestplate" with lore "&6This chestplate grants the wearer haste 2||&6 while you have elemental fuel."
-	speedchest: diamond chestplate named "&3Speed Chestplate" with lore "&6This chestplate grants the wearer speed 2||&6 while you have elemental fuel."
-	strengthchest: diamond chestplate named "&3Strength Chestplate" with lore "&6This chestplate grants the wearer strength 2||&6 while you have elemental fuel."
-	qnhchest: diamond chestplate named "&3Chest of Quench" with lore "&6Utilizing the power of &3Elemental Fuel &6and||&6the &3Super Water Bottle&6, this chestplate makes||&6sure you never go thirsty!|| ||&c-1 Elemental Fuel Per Use|| ||&5&oWhile wearing this chestplate, your thirst will||&5&oautomatically go back up to 100 whenever it||&5&odips below 50, as long as you have Elemental||&5&oFuel in your inventory."
-	snkchest: diamond chestplate named "&3Chest of Snacks" with lore "&6Utilizing the power of &3Elemental Fuel &6and an||&6Enchanted Golden Apple, this chestplate makes||&6sure you never go hungry!|| ||&c-1 Elemental Fuel Per Use|| ||&5&oWhile wearing this chestplate, your hunger will||&5&oautomatically go back up to 10 whenever it||&5&odips below 5, as long as you have Elemental||&5&oFuel in your inventory."
-	coffee: water bottle named "&3Cup of Coffee" with lore "&4Will give 50 fatigue back to you||&5So you can keep mining"
-	grapplinghook: fishing rod named "&3Grappling hook" with lore "&4Will teleport you to where the hook lands||&5-1 Elemental Fuel per use"
-	safetytorch: redstone torch named "&3Safety Torch" with lore "&6When placed will preven mobs from spawning in the chunk"
-	soap1: nether brick item named "&3Soap" with lore "&6Used to clean yourself||&6by tossing in the water|| ||&a+100 Hygiene"
-	stblgun: bow named "&3Stablizer Gun" with lore "&bThis weapon is crafted||&6to annihilate the unstable||&6infestion.|| ||&c-1 Elemental Fuel|| ||&5&oOnly effective against unstable||&5&oMobs."
-	stblmine: diamond pickaxe named "&3Stable Miner" with lore "&bA pickaxe crafted||&6with stable metal to||&6to counteract the environment|| ||&c-1 Elemental Fuel||&c&oOn event elimination|| ||&5&oThis tool will eliminate the||&5&oeffects of the unstable||&5&oenvrionment with the use of||&5&oelemental fuel"
-	
-	
+	bandages: paper named "&3Bandage" with lore "&6Used to heal injuries obtained from large||&6falls. Multiple bandages may be needed||&6to completely heal the injury.|| ||&c- 1 Injury Point Per Use"
+	superbottle: water bottle named "&3Super Water Bottle" with lore "&6Quench your thirst with this large water||&6bottle. Saves space and gives you extra||&6water to drink!|| ||&a+50 Thirst Points"
+	unstele: magma cream named "&3Unstable Element" with lore "&6This highly energetic goo is really hot and||&6unusable in it’s current form."
+	unstmetal: gold nugget named "&3Unstable Metal Shard" with lore "&6You feel a light energetic charge coming||&6from the shard."
+	unstmetalbar: gold ingot named "&3Unstable Metal Bar" with lore "&6Crafted from broken &3Unstable Metal Shards||&6to become whole. This bar gives a highly||&6energetic charge."
+	stablemetal: iron ingot named "&3Stable Metal Bar" with lore "&6Created by cooling the highly energetic||&6energy from &3Unstable Metal Bars&6. It has||&6just enough energy for crafting special||&6items."
+	stableele: slimeball named "&3Stable Element" with lore "&6Created by cooling the highly energetic||&6energy from &3Unstable Elements&6. This goo||&6is warm to the touch and can be used to||&6enhance other items in special ways."
+	envradar: compass named "&3Environmental Radar" with lore "&6A must have tool for always being in the||&6know about the dangerous environment||&6around you.|| ||&c- 1 Elemental Fuel Per Use"
+	elefuel: charcoal item named "&3Elemental Fuel" with lore "&6The universal fuel used to power most||&6of the special items and tools created||&6using special metals and elements."
+	fairydust: sugar named "&3Fairy Dust" with lore "&6Magical dust filled with very mysterious||&6properties. Combined with the right items||&6or situations can yield interesting results."
+	stable: packed ice named "&3Stabilizer" with lore "&6Contains the perfect elemental make up to||&6bring unstable energy down to usable levels."
+	stablechest: diamond chestplate named "&3Stable Diamond Chestplate" with lore "&6Contains a special slot which can be used to||&6create chestplates with special abilities and||&6a container for &3Elemental Fuel."
+	hastechest: diamond chestplate named "&3Chest of Haste" with lore "&6Harness the power of a Haste II beacon||&6while wearing this chestplate!|| ||&c- 1 Elemental Fuel Every 3 Seconds"
+	speedchest: diamond chestplate named "&3Chest of Speed" with lore "&6Harness the power of a Speed II beacon||&6while wearing this chestplate!|| ||&c- 1 Elemental Fuel Every 3 Seconds"
+	strengthchest: diamond chestplate named "&3Chest of Strength" with lore "&6Harness the power of a Strength II beacon||&6while wearing this chestplate!|| ||&c- 1 Elemental Fuel Every 3 Seconds"
+	qnhchest: diamond chestplate named "&3Chest of Quench" with lore "&6This chestplate utilizes the power of the||&3Super Water Bottle &6to make sure you never ||&6go thirsty!|| ||&c- 1 Elemental Fuel Per Use"
+	snkchest: diamond chestplate named "&3Chest of Snacks" with lore "&6This chestplate utilizes the power of the||&6Enchanted Golden Apple to make sure you||&6never go hungry!|| ||&c- 1 Elemental Fuel Per Use"
+	coffee: water bottle named "&3Cup of Coffee" with lore "&6Replenish your energy with this refreshing||&6java drink!|| ||&a+ 50 Fatigue Points"
+	grapplinghook: fishing rod named "&3Grappling Hook" with lore "&6Use this tool to reach new heights or safely||&6reach the bottom of deep drops.|| ||&c- 1 Elemental Fuel Per Use"
+	safetytorch: redstone torch named "&3Safety Torch" with lore "&6When placed will prevent mobs from spawning in the chunk"
+	soap1: nether brick item named "&3Soap" with lore "&6Clean yourself and those around you by||&6creating a soothing bubble bath!|| ||&a+ 100 Hygiene Points"
+	stblgun: bow named "&3Stablizer Gun" with lore "&6By using &3Elemental Fuel &6as its ammo, this||&6special gun destroys Unstable Mobs and||&6delivers their Unstable Drops to you! This||&6gun only works on Unstable Mobs.|| ||&c- 1 Elemental Fuel Per Shot"
+	stblmine: diamond pickaxe named "&3Stable Miner Pickaxe" with lore "&6This pickaxe is designed to stop the harsh||&6environmental disasters while mining!|| ||&c- 1 Elemental Fuel Per Use"
+	advbench: workbench named "&3Advanced Workbench" with lore "&6Reinforced with iron, this crafting bench||&6is more suited to handle the harsh||&6elements of this world."
+	advanvil: anvil named "&3Advanced Anvil" with lore "&6An upgraded workbench that facilitates the||&6forging of very powerful items and armours."
 	
 on script load:
 	register new shapeless recipe for {@bandages} using paper, slimeball, air, air, air, air, air, air, air
 	register new shapeless recipe for {@superbottle} using bottle of water, bottle of water, bottle of water, bottle of water, air, air, air, air, air
-	register new shaped recipe for {@unstmetalbar} using air, air, air, {@unstmetal}, {@unstmetal}, {@unstmetal}, {@unstmetal}, {@unstmetal}, {@unstmetal}
-	register new shaped recipe for {@stablemetal} using {@unstmetalbar}, {@unstmetalbar}, {@unstmetalbar}, {@unstmetalbar}, {@stable}, {@unstmetalbar}, {@unstmetalbar}, {@unstmetalbar}, {@unstmetalbar}
-	register new shaped recipe for {@stableele} using {@unstele}, {@unstele}, {@unstele}, {@unstele}, {@stable}, {@unstele}, {@unstele}, {@unstele}, {@unstele}
-	register new shaped recipe for {@stable} using ice, ice, ice, ice, {@fairydust}, ice, ice, ice, ice
-	register new shaped recipe for {@elefuel} using {@stableele}, {@stableele}, {@stableele}, {@stableele}, coal item, {@stableele}, {@stableele}, {@stableele}, {@stableele}
-	register new shaped recipe for {@envradar} using {@stablemetal}, {@stablemetal}, {@stablemetal}, {@stablemetal}, compass, {@stablemetal}, {@stablemetal}, {@stablemetal}, {@stablemetal}
-	register new shaped recipe for {@stablechst} using {@stablemetal}, air, {@stablemetal}, {@stablemetal}, diamond block, {@stablemetal}, {@stablemetal}, {@elefuel}, {@stablemetal}
-	register new shapeless recipe for {@qnhchest} using {@superbottle}, {@stablechst}, air, air, air, air, air, air, air
-	register new shapeless recipe for {@snkchest} using {@stablechst}, enchanted golden apple, air, air, air, air, air, air, air
 	register new shapeless recipe for {@coffee} using air, cocoa beans, air, air, milk, air, air, air, air
-	register new shapeless recipe for {@hastechest} using air, air, air, air, {@stablechst}, beacon, air, air, diamond pickaxe
-	register new shapeless recipe for {@speedchest} using air, air, air, air, {@stablechst}, beacon, air, air, diamond boots
-	register new shapeless recipe for {@strengthchest} using air, air, air, air, {@stablechst}, beacon, air, air, diamond sword
-	register new shaped recipe for {@grapplinghook} using {@elefuel}, Fishing Rod, {@elefuel}, {@elefuel}, {@elefuel}, {@elefuel}, {@elefuel}, {@elefuel}, {@elefuel}
-	register new shaped recipe for {@soap1} using air, milk bucket, air, air, rose, air, air, water bottle, air
-	register new shaped recipe for {@stblgun} using air, {@stablemetal}, {@stablemetal}, {@stablemetal}, {@stable}, air, {@stablemetal}, air, air
-	register new shaped recipe for {@stblmine} using diamond, {@stable}, diamond, air, {@stablemetal}, air, air, {@stablemetal}, air
-	
-	
+	register new shapeless recipe for {@soap1} using air, milk bucket, air, air, rose, air, air, water bottle, air
+	register new shaped recipe for {@advbench} using iron ingot, iron ingot, iron ingot, iron ingot, workbench, iron ingot, iron ingot, iron ingot, iron ingot
+
+	set {db_wtf.bench.items::01.bandages} to "i;paper;n;&3Bandage;l;&6Used to heal injuries obtained from large||&6falls. Multiple bandages may be needed||&6to completely heal the injury.|| ||&c- 1 Injury Point Per Use|| ||&eRequires:||&61 - &fPaper||&61 - &fSlimeball;c;sudo PLAYER wtfitem bandages 1"
+	set {db_wtf.bench.items::07.soap1} to "i;nether brick item;n;&3Soap;l;&6Clean yourself and those around you by||&6creating a soothing bubble bath!|| ||&a+ 100 Hygiene Points|| ||&eRequires:||&61 - &fMilk Bucket||&61 - &fPoppy||&61 - &fWater Bottle;c;sudo PLAYER wtfitem soap1 1"
+	set {db_wtf.bench.items::02.stable} to "i;packed ice;n;&3Stabilizer;l;&6Contains the perfect elemental make up to||&6bring unstable energy down to usable levels.|| ||&eRequires:||&68 - &fIce||&61 - &3Fairy Dust;c;sudo PLAYER wtfitem stable 1"
+	set {db_wtf.bench.items::03.unstmetalbar} to "i;gold ingot;n;&3Unstable Metal Bar;l;&6Crafted from broken &3Unstable Metal Shards||&6to become whole. This bar gives a highly||&6energetic charge.|| ||&eRequires:||&66 - &3Unstable Metal Shard;c;sudo PLAYER wtfitem unstmetalbar 1"
+	set {db_wtf.bench.items::04.stablemetal} to "i;iron ingot;n;&3Stable Metal Bar;l;&6Created by cooling the highly energetic||&6energy from &3Unstable Metal Bars&6. It has||&6just enough energy for crafting special||&6items.|| ||&eRequires:||&68 - &3Unstable Metal Bar||&61 - &3Stabilizer;c;sudo PLAYER wtfitem stablemetal 1"
+	set {db_wtf.bench.items::05.stableele} to "i;slimeball;n;&3Stable Element;l;&6Created by cooling the highly energetic||&6energy from &3Unstable Elements&6. This goo||&6is warm to the touch and can be used to||&6enhance other items in special ways.|| ||&eRequires:||&68 - &3Unstable Element||&61 - &3Stabilizer;c;sudo PLAYER wtfitem stableele 1"
+	set {db_wtf.bench.items::06.elefuel} to "i;charcoal item;n;&3Elemental Fuel;l;&6The universal fuel used to power most||&6of the special items and tools created||&6using special metals and elements.|| ||&eRequires:||&68 - &3Stable Element||&61 - &fCoal;c;sudo PLAYER wtfitem elefuel 1"
+	set {db_wtf.bench.items::08.superbottle} to "i;water bottle;n;&3Super Water Bottle;l;&6Quench your thirst with this large water||&6bottle. Saves space and gives you extra||&6water to drink!|| ||&a+50 Thirst Points|| ||&eRequires:||&64 - &fWater Bottle;c;sudo PLAYER wtfitem superbottle 1"
+	set {db_wtf.bench.items::09.coffee} to "i;water bottle;n;&3Cup of Coffee;l;&6Replenish your energy with this refreshing||&6java drink!|| ||&a+ 50 Fatigue Points|| ||&eRequires:||&61 - &fCocoa Beans||&61 - &fMilk Bucket;c;sudo PLAYER wtfitem coffee 1"
+	set {db_wtf.bench.items::10.bandages} to "i;10 paper;n;&3Bandage;l;&6Used to heal injuries obtained from large||&6falls. Multiple bandages may be needed||&6to completely heal the injury.|| ||&c- 1 Injury Point Per Use|| ||&eRequires:||&610 - &fPaper||&610 - &fSlimeball;c;sudo PLAYER wtfitem bandages 10"
+	set {db_wtf.bench.items::16.soap1} to "i;10 nether brick item;n;&3Soap;l;&6Clean yourself and those around you by||&6creating a soothing bubble bath!|| ||&a+ 100 Hygiene Points|| ||&eRequires:||&610 - &fMilk Bucket||&610 - &fPoppy||&610 - &fWater Bottle;c;sudo PLAYER wtfitem soap1 10"
+	set {db_wtf.bench.items::11.stable} to "i;10 packed ice;n;&3Stabilizer;l;&6Contains the perfect elemental make up to||&6bring unstable energy down to usable levels.|| ||&eRequires:||&680 - &fIce||&610 - &3Fairy Dust;c;sudo PLAYER wtfitem stable 10"
+	set {db_wtf.bench.items::12.unstmetalbar} to "i;10 gold ingot;n;&3Unstable Metal Bar;l;&6Crafted from broken &3Unstable Metal Shards||&6to become whole. This bar gives a highly||&6energetic charge.|| ||&eRequires:||&660 - &3Unstable Metal Shard;c;sudo PLAYER wtfitem unstmetalbar 10"
+	set {db_wtf.bench.items::13.stablemetal} to "i;10 iron ingot;n;&3Stable Metal Bar;l;&6Created by cooling the highly energetic||&6energy from &3Unstable Metal Bars&6. It has||&6just enough energy for crafting special||&6items.|| ||&eRequires:||&680 - &3Unstable Metal Bar||&610 - &3Stabilizer;c;sudo PLAYER wtfitem stablemetal 10"
+	set {db_wtf.bench.items::14.stableele} to "i;10 slimeball;n;&3Stable Element;l;&6Created by cooling the highly energetic||&6energy from &3Unstable Elements&6. This goo||&6is warm to the touch and can be used to||&6enhance other items in special ways.|| ||&eRequires:||&680 - &3Unstable Element||&610 - &3Stabilizer;c;sudo PLAYER wtfitem stableele 10"
+	set {db_wtf.bench.items::15.elefuel} to "i;10 charcoal item;n;&3Elemental Fuel;l;&6The universal fuel used to power most||&6of the special items and tools created||&6using special metals and elements.|| ||&eRequires:||&680 - &3Stable Element||&610 - &fCoal;c;sudo PLAYER wtfitem elefuel 10"
+	set {db_wtf.bench.items::17.superbottle} to "i;5 water bottle;n;&3Super Water Bottle;l;&6Quench your thirst with this large water||&6bottle. Saves space and gives you extra||&6water to drink!|| ||&a+50 Thirst Points|| ||&eRequires:||&620 - &fWater Bottle;c;sudo PLAYER wtfitem superbottle 5"
+	set {db_wtf.bench.items::18.coffee} to "i;10 water bottle;n;&3Cup of Coffee;l;&6Replenish your energy with this refreshing||&6java drink!|| ||&a+ 50 Fatigue Points|| ||&eRequires:||&610 - &fCocoa Beans||&610 - &fMilk Bucket;c;sudo PLAYER wtfitem coffee 10"
+	set {db_wtf.bench.items::19.bandages} to "i;64 paper;n;&3Bandage;l;&6Used to heal injuries obtained from large||&6falls. Multiple bandages may be needed||&6to completely heal the injury.|| ||&c- 1 Injury Point Per Use|| ||&eRequires:||&664 - &fPaper||&664 - &fSlimeball;c;sudo PLAYER wtfitem bandages 64"
+	set {db_wtf.bench.items::25.blank} to "i;air"
+	set {db_wtf.bench.items::20.stable} to "i;64 packed ice;n;&3Stabilizer;l;&6Contains the perfect elemental make up to||&6bring unstable energy down to usable levels.|| ||&eRequires:||&6512 - &fIce||&664 - &3Fairy Dust;c;sudo PLAYER wtfitem stable 64"
+	set {db_wtf.bench.items::21.unstmetalbar} to "i;64 gold ingot;n;&3Unstable Metal Bar;l;&6Crafted from broken &3Unstable Metal Shards||&6to become whole. This bar gives a highly||&6energetic charge.|| ||&eRequires:||&6384 - &3Unstable Metal Shard;c;sudo PLAYER wtfitem unstmetalbar 64"
+	set {db_wtf.bench.items::22.stablemetal} to "i;64 iron ingot;n;&3Stable Metal Bar;l;&6Created by cooling the highly energetic||&6energy from &3Unstable Metal Bars&6. It has||&6just enough energy for crafting special||&6items.|| ||&eRequires:||&6512 - &3Unstable Metal Bar||&664 - &3Stabilizer;c;sudo PLAYER wtfitem stablemetal 64"
+	set {db_wtf.bench.items::23.stableele} to "i;64 slimeball;n;&3Stable Element;l;&6Created by cooling the highly energetic||&6energy from &3Unstable Elements&6. This goo||&6is warm to the touch and can be used to||&6enhance other items in special ways.|| ||&eRequires:||&6512 - &3Unstable Element||&664 - &3Stabilizer;c;sudo PLAYER wtfitem stableele 64"
+	set {db_wtf.bench.items::24.elefuel} to "i;64 charcoal item;n;&3Elemental Fuel;l;&6The universal fuel used to power most||&6of the special items and tools created||&6using special metals and elements.|| ||&eRequires:||&6512 - &3Stable Element||&664 - &fCoal;c;sudo PLAYER wtfitem elefuel 64"	
+	set {db_wtf.bench.items::26.envradar} to "i;compass;n;&3Environmental Radar;l;&6A must have tool for always being in the||&6know about the dangerous environment||&6around you.|| ||&c- 1 Elemental Fuel Per Use|| ||&eRequires:||&66 - &3Stable Metal Bar||&61 - &fCompass;c;sudo PLAYER wtfitem envradar 1"
+	set {db_wtf.bench.items::27.advanvil} to "i;anvil;n;&3Advanced Anvil;l;&6An upgraded workbench that facilitates the||&6forging of very powerful items and armours.|| ||&eRequires:||&63 - &fIron Block||&61 - &3Advanced Workbench||&61 - &fDiamond Block||&61 - &fRedstone Block||&61 - &fObsidian;c;sudo PLAYER wtfitem advanvil 1"
+
+	set {db_wtf.anvil.items::01.stablechest} to "i;diamond chestplate;n;&3Stable Diamond Chestplate;l;&6Contains a special slot which can be used to||&6create chestplates with special abilities and||&6a container for &3Elemental Fuel.|| ||&eRequires:||&66 - &3Stable Metal Bar||&61 - &3Elemental Fuel||&61 - &fDiamond Block;c;sudo PLAYER wtfitem stablechest 1"
+	set {db_wtf.anvil.items::02.qnhchest} to "i;diamond chestplate;n;&3Chest of Quench;l;&6This chestplate utilizes the power of the||&3Super Water Bottle &6to make sure you never ||&6go thirsty!|| ||&c- 1 Elemental Fuel Per Use|| ||&eRequires:||&61 - &3Stable Diamond Chestplate||&61 - &3Super Water Bottle;c;sudo PLAYER wtfitem qnhchest 1"
+	set {db_wtf.anvil.items::03.snkchest} to "i;diamond chestplate;n;&3Chest of Snacks;l;&6This chestplate utilizes the power of the||&6Enchanted Golden Apple to make sure you||&6never go hungry!|| ||&c- 1 Elemental Fuel Per Use|| ||&eRequires:||&61 - &3Stable Diamond Chestplate||&61 - &dEnchanted Golden Apple;c;sudo PLAYER wtfitem snkchest 1"
+	set {db_wtf.anvil.items::04.hastechest} to "i;diamond chestplate;n;&3Chest of Haste;l;&6Harness the power of a Haste II beacon||&6while wearing this chestplate!|| ||&c- 1 Elemental Fuel Every 3 Seconds|| ||&eRequires:||&61 - &3Stable Diamond Chestplate||&61 - &fBeacon||&61 - &fDiamond Pickaxe;c;sudo PLAYER wtfitem hastechest 1"
+	set {db_wtf.anvil.items::05.speedchest} to "i;diamond chestplate;n;&3Chest of Speed;l;&6Harness the power of a Speed II beacon||&6while wearing this chestplate!|| ||&c- 1 Elemental Fuel Every 3 Seconds|| ||&eRequires:||&61 - &3Stable Diamond Chestplate||&61 - &fBeacon||&61 - &fDiamond Boots;c;sudo PLAYER wtfitem speedchest 1"
+	set {db_wtf.anvil.items::06.strengthchest} to "i;diamond chestplate;n;&3Chest of Strength;l;&6Harness the power of a Strength II beacon||&6while wearing this chestplate!|| ||&c- 1 Elemental Fuel Every 3 Seconds|| ||&eRequires:||&61 - &3Stable Diamond Chestplate||&61 - &fBeacon||&61 - &fDiamond Sword;c;sudo PLAYER wtfitem strengthchest 1"
+	set {db_wtf.anvil.items::07.blank} to "i;air"
+	set {db_wtf.anvil.items::08.blank} to "i;air"
+	set {db_wtf.anvil.items::09.blank} to "i;air"	
+	set {db_wtf.anvil.items::10.stblmine} to "i;diamond pickaxe;n;&3Stable Miner Pickaxe;l;&6This pickaxe is designed to stop the harsh||&6environmental disasters while mining!|| ||&c- 1 Elemental Fuel Per Use|| ||&eRequires:||&62 - &3Stable Metal Bar||&61 - &fDiamond Pickaxe||&61 - &3Stabilizer;c;sudo PLAYER wtfitem stblmine 1"
+	set {db_wtf.anvil.items::11.grapplinghook} to "i;fishing rod;n;&3Grappling Hook;l;&6Use this tool to reach new heights or safely||&6reach the bottom of deep drops.|| ||&c- 1 Elemental Fuel Per Use|| ||&eRequires:||&68 - &3Elemental Fuel||&61 - &fFishing Rod;c;sudo PLAYER wtfitem grapplinghook 1"
+	set {db_wtf.anvil.items::12.stblgun} to "i;bow;n;&3Stablizer Gun;l;&6By using &3Elemental Fuel &6as its ammo, this||&6special gun destroys Unstable Mobs and||&6delivers their Unstable Drops to you! This||&6gun only works on Unstable Mobs.|| ||&c- 1 Elemental Fuel Per Shot|| ||&eRequires:||&64 - &3Stable Metal Bar||&61 - &3Stabilizer||&61 - &fBow;c;sudo PLAYER wtfitem stblgun 1"
+
+	set {db_wtf.ci::01.unstele} to "i;magma cream;n;&3Unstable Element;l;&6This highly energetic goo is really hot and||&6unusable in it’s current form.;c;sudo PLAYER ci unstele 1"
+	set {db_wtf.ci::02.unstele} to "i;16 magma cream;n;&3Unstable Element;l;&6This highly energetic goo is really hot and||&6unusable in it’s current form.;c;sudo PLAYER ci unstele 16"
+	set {db_wtf.ci::03.unstele} to "i;64 magma cream;n;&3Unstable Element;l;&6This highly energetic goo is really hot and||&6unusable in it’s current form.;c;sudo PLAYER ci unstele 64"
+	set {db_wtf.ci::04.unstmetal} to "i;gold nugget;n;&3Unstable Metal Shard;l;&6You feel a light energetic charge coming||&6from the shard.;c;sudo PLAYER ci unstmetal 1"
+	set {db_wtf.ci::05.unstmetal} to "i;16 gold nugget;n;&3Unstable Metal Shard;l;&6You feel a light energetic charge coming||&6from the shard.;c;sudo PLAYER ci unstmetal 16"
+	set {db_wtf.ci::06.unstmetal} to "i;64 gold nugget;n;&3Unstable Metal Shard;l;&6You feel a light energetic charge coming||&6from the shard.;c;sudo PLAYER ci unstmetal 64"
+	set {db_wtf.ci::07.fairydust} to "i;sugar;n;&3Fairy Dust;l;&6Magical dust filled with very mysterious||&6properties. Combined with the right items||&6or situations can yield interesting results.;c;sudo PLAYER ci fairydust 1"
+	set {db_wtf.ci::08.fairydust} to "i;16 sugar;n;&3Fairy Dust;l;&6Magical dust filled with very mysterious||&6properties. Combined with the right items||&6or situations can yield interesting results.;c;sudo PLAYER ci fairydust 16"
+	set {db_wtf.ci::09.fairydust} to "i;64 sugar;n;&3Fairy Dust;l;&6Magical dust filled with very mysterious||&6properties. Combined with the right items||&6or situations can yield interesting results.;c;sudo PLAYER ci fairydust 64"
+	set {db_wtf.ci::10.bandages} to "i;paper;n;&3Bandage;l;&6Used to heal injuries obtained from large||&6falls. Multiple bandages may be needed||&6to completely heal the injury.|| ||&c- 1 Injury Point Per Use;c;sudo PLAYER ci bandages 1"
+	set {db_wtf.ci::11.bandages} to "i;16 paper;n;&3Bandage;l;&6Used to heal injuries obtained from large||&6falls. Multiple bandages may be needed||&6to completely heal the injury.|| ||&c- 1 Injury Point Per Use;c;sudo PLAYER ci bandages 16"
+	set {db_wtf.ci::12.bandages} to "i;64 paper;n;&3Bandage;l;&6Used to heal injuries obtained from large||&6falls. Multiple bandages may be needed||&6to completely heal the injury.|| ||&c- 1 Injury Point Per Use;c;sudo PLAYER ci bandages 64"
+	set {db_wtf.ci::13.stable} to "i;packed ice;n;&3Stabilizer;l;&6Contains the perfect elemental make up to||&6bring unstable energy down to usable levels.;c;sudo PLAYER ci stable 1"
+	set {db_wtf.ci::14.stable} to "i;16 packed ice;n;&3Stabilizer;l;&6Contains the perfect elemental make up to||&6bring unstable energy down to usable levels.;c;sudo PLAYER ci stable 16"
+	set {db_wtf.ci::15.stable} to "i;64 packed ice;n;&3Stabilizer;l;&6Contains the perfect elemental make up to||&6bring unstable energy down to usable levels.;c;sudo PLAYER ci stable 64"
+	set {db_wtf.ci::16.unstmetalbar} to "i;gold ingot;n;&3Unstable Metal Bar;l;&6Crafted from broken &3Unstable Metal Shards||&6to become whole. This bar gives a highly||&6energetic charge.;c;sudo PLAYER ci unstmetalbar 1"
+	set {db_wtf.ci::17.unstmetalbar} to "i;16 gold ingot;n;&3Unstable Metal Bar;l;&6Crafted from broken &3Unstable Metal Shards||&6to become whole. This bar gives a highly||&6energetic charge.;c;sudo PLAYER ci unstmetalbar 16"
+	set {db_wtf.ci::18.unstmetalbar} to "i;64 gold ingot;n;&3Unstable Metal Bar;l;&6Crafted from broken &3Unstable Metal Shards||&6to become whole. This bar gives a highly||&6energetic charge.;c;sudo PLAYER ci unstmetalbar 64"
+	set {db_wtf.ci::19.stablemetal} to "i;iron ingot;n;&3Stable Metal Bar;l;&6Created by cooling the highly energetic||&6energy from &3Unstable Metal Bars&6. It has||&6just enough energy for crafting special||&6items.;c;sudo PLAYER ci stablemetal 1"
+	set {db_wtf.ci::20.stablemetal} to "i;16 iron ingot;n;&3Stable Metal Bar;l;&6Created by cooling the highly energetic||&6energy from &3Unstable Metal Bars&6. It has||&6just enough energy for crafting special||&6items.;c;sudo PLAYER ci stablemetal 16"
+	set {db_wtf.ci::21.stablemetal} to "i;64 iron ingot;n;&3Stable Metal Bar;l;&6Created by cooling the highly energetic||&6energy from &3Unstable Metal Bars&6. It has||&6just enough energy for crafting special||&6items.;c;sudo PLAYER ci stablemetal 64"
+	set {db_wtf.ci::22.stableele} to "i;slimeball;n;&3Stable Element;l;&6Created by cooling the highly energetic||&6energy from &3Unstable Elements&6. This goo||&6is warm to the touch and can be used to||&6enhance other items in special ways.;c;sudo PLAYER ci stableele 1"
+	set {db_wtf.ci::23.stableele} to "i;16 slimeball;n;&3Stable Element;l;&6Created by cooling the highly energetic||&6energy from &3Unstable Elements&6. This goo||&6is warm to the touch and can be used to||&6enhance other items in special ways.;c;sudo PLAYER ci stableele 16"
+	set {db_wtf.ci::24.stableele} to "i;64 slimeball;n;&3Stable Element;l;&6Created by cooling the highly energetic||&6energy from &3Unstable Elements&6. This goo||&6is warm to the touch and can be used to||&6enhance other items in special ways.;c;sudo PLAYER ci stableele 64"
+	set {db_wtf.ci::25.elefuel} to "i;charcoal item;n;&3Elemental Fuel;l;&6The universal fuel used to power most||&6of the special items and tools created||&6using special metals and elements.;c;sudo PLAYER ci elefuel 1"
+	set {db_wtf.ci::26.elefuel} to "i;16 charcoal item;n;&3Elemental Fuel;l;&6The universal fuel used to power most||&6of the special items and tools created||&6using special metals and elements.;c;sudo PLAYER ci elefuel 16"
+	set {db_wtf.ci::27.elefuel} to "i;64 charcoal item;n;&3Elemental Fuel;l;&6The universal fuel used to power most||&6of the special items and tools created||&6using special metals and elements.;c;sudo PLAYER ci elefuel 64"
+	set {db_wtf.ci::28.soap1} to "i;nether brick item;n;&3Soap;l;&6Clean yourself and those around you by||&6creating a soothing bubble bath!|| ||&a+ 100 Hygiene Points;c;sudo PLAYER ci soap1 1"
+	set {db_wtf.ci::29.soap1} to "i;16 nether brick item;n;&3Soap;l;&6Clean yourself and those around you by||&6creating a soothing bubble bath!|| ||&a+ 100 Hygiene Points;c;sudo PLAYER ci soap1 16"
+	set {db_wtf.ci::30.soap1} to "i;64 nether brick item;n;&3Soap;l;&6Clean yourself and those around you by||&6creating a soothing bubble bath!|| ||&a+ 100 Hygiene Points;c;sudo PLAYER ci soap1 64"
+	set {db_wtf.ci::31.superbottle} to "i;water bottle;n;&3Super Water Bottle;l;&6Quench your thirst with this large water||&6bottle. Saves space and gives you extra||&6water to drink!|| ||&a+50 Thirst Points;c;sudo PLAYER ci superbottle 1"
+	set {db_wtf.ci::32.superbottle} to "i;9 water bottle;n;&3Super Water Bottle;l;&6Quench your thirst with this large water||&6bottle. Saves space and gives you extra||&6water to drink!|| ||&a+50 Thirst Points;c;sudo PLAYER ci superbottle 9"
+	set {db_wtf.ci::33.superbottle} to "i;27 water bottle;n;&3Super Water Bottle;l;&6Quench your thirst with this large water||&6bottle. Saves space and gives you extra||&6water to drink!|| ||&a+50 Thirst Points;c;sudo PLAYER ci superbottle 27"
+	set {db_wtf.ci::34.coffee} to "i;water bottle;n;&3Cup of Coffee;l;&6Replenish your energy with this refreshing||&6java drink!|| ||&a+ 50 Fatigue Points;c;sudo PLAYER ci coffee 1"
+	set {db_wtf.ci::35.coffee} to "i;9 water bottle;n;&3Cup of Coffee;l;&6Replenish your energy with this refreshing||&6java drink!|| ||&a+ 50 Fatigue Points;c;sudo PLAYER ci coffee 9"
+	set {db_wtf.ci::36.coffee} to "i;27 water bottle;n;&3Cup of Coffee;l;&6Replenish your energy with this refreshing||&6java drink!|| ||&a+ 50 Fatigue Points;c;sudo PLAYER ci coffee 27"
+	set {db_wtf.ci::37.envradar} to "i;compass;n;&3Environmental Radar;l;&6A must have tool for always being in the||&6know about the dangerous environment||&6around you.|| ||&c- 1 Elemental Fuel Per Use;c;sudo PLAYER ci envradar 1"
+	set {db_wtf.ci::38.advbench} to "i;workbench;n;&3Advanced Workbench;l;&6Reinforced with iron, this crafting bench||&6is more suited to handle the harsh||&6elements of this world.;c;sudo PLAYER ci advbench 1"
+	set {db_wtf.ci::39.advanvil} to "i;anvil;n;&3Advanced Anvil;l;&6An upgraded workbench that facilitates the||&6forging of very powerful items and armours.;c;sudo PLAYER ci advanvil 1"
+	set {db_wtf.ci::40.blank} to "i;air"
+	set {db_wtf.ci::41.blank} to "i;air"
+	set {db_wtf.ci::42.blank} to "i;air"
+	set {db_wtf.ci::43.stblmine} to "i;diamond pickaxe;n;&3Stable Miner Pickaxe;l;&6This pickaxe is designed to stop the harsh||&6environmental disasters while mining!|| ||&c- 1 Elemental Fuel Per Use;c;sudo PLAYER ci stblmine 1"
+	set {db_wtf.ci::44.grapplinghook} to "i;fishing rod;n;&3Grappling Hook;l;&6Use this tool to reach new heights or safely||&6reach the bottom of deep drops.|| ||&c- 1 Elemental Fuel Per Use;c;sudo PLAYER ci grapplinghook 1"
+	set {db_wtf.ci::45.stblgun} to "i;bow;n;&3Stablizer Gun;l;&6By using &3Elemental Fuel &6as its ammo, this||&6special gun destroys Unstable Mobs and||&6delivers their Unstable Drops to you! This||&6gun only works on Unstable Mobs.|| ||&c- 1 Elemental Fuel Per Shot;c;sudo PLAYER ci stblgun 1"	
+	set {db_wtf.ci::46.stablechest} to "i;diamond chestplate;n;&3Stable Diamond Chestplate;l;&6Contains a special slot which can be used to||&6create chestplates with special abilities and||&6a container for &3Elemental Fuel.;c;sudo PLAYER ci stablechest 1"
+	set {db_wtf.ci::47.blank} to "i;air"	
+	set {db_wtf.ci::48.qnhchest} to "i;diamond chestplate;n;&3Chest of Quench;l;&6This chestplate utilizes the power of the||&3Super Water Bottle &6to make sure you never ||&6go thirsty!|| ||&c- 1 Elemental Fuel Per Use;c;sudo PLAYER ci qnhchest 1"
+	set {db_wtf.ci::49.snkchest} to "i;diamond chestplate;n;&3Chest of Snacks;l;&6This chestplate utilizes the power of the||&6Enchanted Golden Apple to make sure you||&6never go hungry!|| ||&c- 1 Elemental Fuel Per Use;c;sudo PLAYER ci snkchest 1"
+	set {db_wtf.ci::50.blank} to "i;air"
+	set {db_wtf.ci::51.hastechest} to "i;diamond chestplate;n;&3Chest of Haste;l;&6Harness the power of a Haste II beacon||&6while wearing this chestplate!|| ||&c- 1 Elemental Fuel Every 3 Seconds;c;sudo PLAYER ci hastechest 1"
+	set {db_wtf.ci::52.speedchest} to "i;diamond chestplate;n;&3Chest of Speed;l;&6Harness the power of a Speed II beacon||&6while wearing this chestplate!|| ||&c- 1 Elemental Fuel Every 3 Seconds;c;sudo PLAYER ci speedchest 1"
+	set {db_wtf.ci::53.strengthchest} to "i;diamond chestplate;n;&3Chest of Strength;l;&6Harness the power of a Strength II beacon||&6while wearing this chestplate!|| ||&c- 1 Elemental Fuel Every 3 Seconds;c;sudo PLAYER ci strengthchest 1"
+	set {db_wtf.ci::54.blank} to "i;air"
+
+command /cleardb:
+	permission: obam.admin
+	trigger:
+		delete {db_wtf.bench.items::*}
+		delete {db_wtf.anvil.items::*}
+		delete {db_wtf.ci::*}
+
 on join:
 	{fatigue.%player%} is not set:
 		set {fatigue.%player%} to 100
@@ -61,11 +149,10 @@ on join:
 	set {board.%player%} to true
 	{injured.%player%} is true:
 		make score "&cINJURED" in board of player to 1
-	{infected.%player%.flag} is true:
-		make score "&cINFECTED" in board of player to 1
+#	{infected.%player%.flag} is true:
+#		make score "&cINFECTED" in board of player to 1
 	move display of player to sidebar
 
-			
 on chunk load:
 	{unstable.%event-chunk%} is not set:
 		chance of 2%:
@@ -88,23 +175,21 @@ on chunk load:
 			set {methane.%event-chunk%.chance} to {_ran}
 		{methane.%event-chunk%.chance} is not set:
 			set {methane.%event-chunk%.chance} to false
-		
-		
+
 on mine:
 	block is ore:
 		chance of 10%:
 			set {fatigue.%player%} to {fatigue.%player%} - 1
-	    
 	player's tool is pickaxe
 	y-coordinate of player is less than 40
 	{cavein.%chunk at location of player%.chance} is false:
 		set {_run} to false
 	{_run} is not set:
 		chance of {cavein.%chunk at location of player%.chance}%:
-			name of player's tool is "&3Stable Miner":
+			name of player's tool is "&3Stable Miner Pickaxe":
 				player has {@elefuel}
 				remove 1 {@elefuel} from player
-				send "&aYour Miner prevents a cave in"
+				send "&aYour Stable Miner Pickaxe prevents a cave in"
 				drop {@unstmetal} at event-location
 				set {_stop} to true
 			{_stop} is not set
@@ -124,7 +209,6 @@ on mine:
 					loop players in radius 10 of player:
 						send "&cYour struts are failing!" to loop-player
 					send "&cYour struts are failing!" to player
-				
 			{_max-strut} is not set:
 				send "&3The floor rumbles beneath you.." to player
 				loop players in radius 10 of player:
@@ -153,10 +237,10 @@ on mine:
 		set {_run2} to false
 	{_run2} is not set:
 		chance of {methane.%chunk at location of player%.chance}%:
-			name of player's tool is "&3Stable Miner":
+			name of player's tool is "&3Stable Miner Pickaxe":
 				player has {@elefuel}
 				remove 1 {@elefuel} from player
-				send "&aYour Miner prevents a Methane Explosion!"
+				send "&aYour Stable Miner Pickaxe prevents a Methane Explosion!"
 				drop 1 {@unstele} at event-location
 				set {_stop} to true
 			{_stop} is not set
@@ -170,7 +254,6 @@ on mine:
 				drop {@unstele} at event-location
 				chance of {methane.%chunk at location of player%.chance} * 2%:
 					drop {@unstmetal} at event-location
-		
 	chance of {cavein.%chunk at location of player%.chance}%:
 		loop blocks in radius 3:
 			loop-block is water
@@ -180,7 +263,6 @@ on mine:
 			loop blocks in radius 3 of event-location:
 				loop-block is air:
 					set loop-block to water
-				
 
 on portal enter:
 	{unstable.%chunk at event-location%} is false
@@ -190,7 +272,7 @@ on portal enter:
 		set {_ran2} to random number between 18 and 20
 		set {cavein.%chunk at event-location%.chance} to {_ran}
 		set {methane.%chunk at event-location%.chance} to {_ran2}
-			
+
 command /chunkstats:
 	permission: obam.admin
 	trigger:
@@ -205,7 +287,7 @@ command /chunkstats:
 		if {methane.%chunk at location of player%.chance} is false:
 			send "&aMethane Rating: &3EMPTY" to player
 		else:
-			send "&aMethane Rating: &e%{methane.%chunk at location of player%.chance}%" to player		
+			send "&aMethane Rating: &e%{methane.%chunk at location of player%.chance}%" to player
 
 #Global Loop			
 every 3 seconds:
@@ -221,7 +303,6 @@ every 3 seconds:
 			make score "&3Thirst" in board of loop-player to {thirst.%loop-player%}
 			make score "&3Fatigue" in board of loop-player to {fatigue.%loop-player%}
 			make score "&3Hygiene" in board of loop-player to {hygiene.%loop-player%}
-		
 		block above loop-player is water:
 			{thirst.%loop-player%} is less than 100:
 				set {_ran} to random number between 1 and 2
@@ -246,7 +327,6 @@ every 3 seconds:
 					set {_ran} to random number between 1 and 3
 					set {thirst.%loop-player%} to {thirst.%loop-player%} - {_ran}
 		#BIOME SPECIFIC STUFF
-		
 		biome at loop-player is river:
 			block under loop-player is water block:
 				chance of 5%:
@@ -256,7 +336,6 @@ every 3 seconds:
 						wait 2 seconds
 						damage loop-player by .5 heart
 						send "&3A fish has nibbled at your toes!" to loop-player
-
 		biome at loop-player is desert:
 			time in loop-player's world is day
 			y-coordinate of loop-player is greater than 60
@@ -266,7 +345,6 @@ every 3 seconds:
 				chance of 45%:
 					damage loop-player by 2
 					send "&cThe sun beats down on you" to loop-player
-					
 		biome at loop-player is hell:
 			chance of 5%:
 				set {thirst.%loop-player%} to {thirst.%loop-player%} - 1
@@ -274,14 +352,11 @@ every 3 seconds:
 				damage loop-player by 1 heart
 				send "&3You are being cooked to a nice medium rare" to loop-player
 				set {thirst.%loop-player%} to {thirst.%loop-player%} - 4
-				
-				
 		biome at loop-player is swamp or swampland:
 			set {_ran} to a random integer between 1 and 5
 			{_ran} is 1:
 				apply hunger 2 to loop-player for 20 seconds
 				send "&cMalaria runs through your body" to loop-player
-
 		#TOO HIGH GETTING CHILLED	
 		y-coordinate of loop-player is greater than 110:
 			loop-player's helmet is air
@@ -309,11 +384,12 @@ every 3 seconds:
 					{injured.%loop-player%.length} is less than 10:
 						apply slowness 2 to loop-player for 999 days
 						apply mining fatigue to loop-player for 1 minute
+						make score "&cINJURED" in board of loop-player to 2
 				{injured.%loop-player%.length} is greater than 10:
 					apply slowness 3 to loop-player for 999 days
 					apply mining fatigue 2 to loop-player for 1 minute
 					apply weakness to loop-player for 30 seconds
-					
+					make score "&cINJURED" in board of loop-player to 3
 		#CHESTPLATES			
 		{thirst.%loop-player%} is less than or equal to 50:
 			name of loop-player's chestplate is "&3Chest of Quench"
@@ -325,39 +401,33 @@ every 3 seconds:
 			loop-player has {@elefuel}:
 				set loop-player's hunger level to 10
 				remove {@elefuel} from loop-player
-				
 		{fatigue.%loop-player%} is less than or equal to 30:
 			chance of 15%:
 				apply slowness to loop-player for 3 seconds 
 				send "&cYou are fatigued, You can drink coffee or rest to get your strength back" to loop-player
-
-		name of loop-player's chestplate is "&3Speed Chestplate":
+		name of loop-player's chestplate is "&3Chest of Speed":
 			loop-player has {@elefuel}:
 				apply speed 2 to loop-player for 4 seconds
 				remove {@elefuel} from loop-player
 				loop players in radius 75 of loop-player:
 					apply speed 2 to loop-player-2 for 4 seconds
-				
-		name of loop-player's chestplate is "&3Haste Chestplate":
+		name of loop-player's chestplate is "&3Chest of Haste":
 			loop-player has {@elefuel}:
 				apply haste 2 to loop-player for 4 seconds
 				remove {@elefuel} from loop-player
 				loop players in radius 75 of loop-player:
 					apply haste 2 to loop-player-2 for 4 seconds
-				
-		name of loop-player's chestplate is "&3Strength Chestplate":
+		name of loop-player's chestplate is "&3Chest of Strength":
 			loop-player has {@elefuel}:
 				apply strength 2 to loop-player for 4 seconds
 				remove {@elefuel} from loop-player
 				loop players in radius 75 of loop-player:
 					apply strength 2 to loop-player-2 for 4 seconds
-				
 		#wildsilverfish
-		block above block below loop-player is 175:2:
+		block above block below loop-player is any tall grass:
 			chance of 5%:
 				spawn silverfish at location of loop-player
 				send "&cA wild silverfish appears!" to loop-player
-				
 		#hygiene
 		block below loop-player is dirt or grass:
 			{hygiene.%loop-player%} is greater than 0
@@ -369,33 +439,526 @@ every 3 seconds:
 				set {hygiene.%loop-player%} to 0
 			{debug.%loop-player%} is true:
 				set {hygiene.%loop-player%} to 100
-				
 		{hygiene.%loop-player%} is less than 10:
 			chance of 5%:
 				apply nausea to loop-player for 5 seconds
 				send "&cYour stench affects you. Use soap in water to fix it!" to loop-player
-		
 	loop all entities:
 		loop-entity is not player:
 			{unstable.%loop-entity%} is set:
 				spawn 100 of red dust data 1 offset with 1, 1, 1 at location of loop-entity
-		
+
+every 5 seconds:
+	loop {wtf.loc.bench::*}:
+		set {_loc} to loop-value
+		set {_check} to false
+		block at {_loc} is workbench:
+			set {_check} to true
+			spawn 100 of red dust data 1 offset with 1, 1, 1 at {_loc}
+		{_check} is false:
+			delete {wtf.loc.bench::%loop-index%}
+
+every 5 seconds:		
+	loop {wtf.loc.anvil::*}:
+		set {_loc} to loop-value
+		set {_check} to false
+		block at {_loc} is anvil:
+			set {_check} to true
+			spawn 100 of red dust data 1 offset with 1, 1, 1 at {_loc}
+		{_check} is false:
+			delete {wtf.loc.anvil::%loop-index%}
+
+on place:
+	player's tool is {@advbench}:
+		set {_loc} to event-location
+		{wtf.loc.bench::%{_loc}%} exists:
+			stop
+		set {wtf.loc.bench::%{_loc}%} to {_loc}
+
+on place:
+	player's tool is {@advanvil}:
+		set {_loc} to event-location
+		set {_fall} to false
+		set {_drop} to 0
+		loop 254 times:
+			block below {_loc} is air or water or lava:
+				set {_fall} to true
+				add 1 to {_drop}
+				subtract 1 from y-coordinate of {_loc}
+			{_fall} is false:
+				exit loop
+		{wtf.loc.anvil::%{_loc}%} exists:
+			stop
+		set {wtf.loc.anvil::%{_loc}%} to {_loc}
+
+on block physics:
+	set {_loc} to event-location
+	{wtf.loc.anvil::%{_loc}%} exists:
+		cancel event
+	{wtf.loc.bench::%{_loc}%} exists:
+		cancel event
+
+on right click on workbench:
+	set {_loc} to location of event-block
+	{wtf.loc.bench::%{_loc}%} exists:
+		cancel event
+		loop {db_wtf.bench.items::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+			{_chest} is set:
+				set {_chest} to "%{_chest}%;s;%{_count}%;%loop-value%"
+			{_chest} is not set:
+				set {_chest} to "s;%{_count}%;%loop-value%"
+		replace "PLAYER" in {_chest} with "%player%"
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show "%{_chest}%" with {_size} row named "&9&lAdvanced Workbench" to player
+
+on right click on anvil:
+	set {_loc} to location of event-block
+	{wtf.loc.anvil::%{_loc}%} exists:
+		cancel event
+		loop {db_wtf.anvil.items::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+			{_chest} is set:
+				set {_chest} to "%{_chest}%;s;%{_count}%;%loop-value%"
+			{_chest} is not set:
+				set {_chest} to "s;%{_count}%;%loop-value%"
+		replace "PLAYER" in {_chest} with "%player%"
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show "%{_chest}%" with {_size} row named "&9&lAdvanced Anvil" to player
+
+command /wtfitem <text> <number>:
+	permission: obam.free
+	trigger:
+		argument 1 is "bandages":
+			player has 1 * argument 2 of paper:
+				player has 1 * argument 2 of slimeball:
+					player doesn't have space for 1 * argument 2 of {@bandages}:
+						message "&cYou do not have room for this."
+						stop
+					remove 1 * argument 2 of paper from player
+					remove 1 * argument 2 of slimeball from player
+					give 1 * argument 2 of {@bandages} to player
+					message "&aItem Created"
+					stop
+				message "&cYou are missing &fSlimeball"
+				stop
+			message "&cYou are missing &fPaper"
+			stop
+		argument 1 is "soap1":
+			player has 1 * argument 2 of milk:
+				player has 1 * argument 2 of rose:
+					player has 1 * argument 2 of water bottle:
+						player doesn't have space for 1 * argument 2 of {@soap1}:
+							message "&cYou do not have room for this."
+							stop
+						remove 1 * argument 2 of milk from player
+						remove 1 * argument 2 of rose from player
+						remove 1 * argument 2 of water bottle from player
+						give 1 * argument 2 of {@soap1} to player
+						message "&aItem Created"
+						stop
+					message "&cYou are missing &fWater Bottle"
+					stop
+				message "&cYou are missing &fPoppy"
+				stop
+			message "&cYou are missing &fMilk Bucket"
+			stop
+		argument 1 is "superbottle":
+			player has 4 * argument 2 of water bottle:
+				player doesn't have space for 1 * argument 2 of {@superbottle}:
+					message "&cYou do not have room for this."
+					stop
+				remove 4 * argument 2 of water bottle from player
+				give 1 * argument 2 of {@superbottle} to player
+				message "&aItem Created"
+				stop
+			message "&cYou are missing &fWater Bottle"
+			stop
+		argument 1 is "coffee":
+			player has 1 * argument 2 of cocoa beans:
+				player has 1 * argument 2 of milk:
+					player doesn't have space for 1 * argument 2 of {@coffee}:
+						message "&cYou do not have room for this."
+						stop
+					remove 1 * argument 2 of cocoa beans from player
+					remove 1 * argument 2 of milk from player
+					give 1 * argument 2 of {@coffee} to player
+					message "&aItem Created"
+					stop
+				message "&cYou are missing &fMilk Bucket"
+				stop
+			message "&cYou are missing &fCocoa Beans"
+			stop
+		argument 1 is "unstmetalbar":
+			player has 6 * argument 2 of {@unstmetal}:
+				player doesn't have space for 1 * argument 2 of {@unstmetalbar}:
+					message "&cYou do not have room for this."
+					stop
+				remove 6 * argument 2 of {@unstmetal} from player
+				give 1 * argument 2 of {@unstmetalbar} to player
+				message "&aItem Created"
+				stop
+			message "&cYou are missing &3Unstable Metal Shard"
+			stop
+		argument 1 is "stablemetal":
+			player has 8 * argument 2 of {@unstmetalbar}:
+				player has 1 * argument 2 of {@stable}:
+					player doesn't have space for 1 * argument 2 of {@stablemetal}:
+						message "&cYou do not have room for this."
+						stop
+					remove 8 * argument 2 of {@unstmetalbar} from player
+					remove 1 * argument 2 of {@stable} from player
+					give 1 * argument 2 of {@stablemetal} to player
+					message "&aItem Created"
+					stop
+				message "&cYou are missing &3Stabilizer"
+				stop
+			message "&cYou are missing &3Unstable Metal Bar"
+			stop
+		argument 1 is "stableele":
+			player has 8 * argument 2 of {@unstele}:
+				player has 1 * argument 2 of {@stable}:
+					player doesn't have space for 1 * argument 2 of {@stableele}:
+						message "&cYou do not have room for this."
+						stop
+					remove 8 * argument 2 of {@unstele} from player
+					remove 1 * argument 2 of {@stable} from player
+					give 1 * argument 2 of {@stableele} to player
+					message "&aItem Created"
+					stop
+				message "&cYou are missing &3Stabilizer"
+				stop
+			message "&cYou are missing &3Unstable Element"
+			stop
+		argument 1 is "stable":
+			player has 8 * argument 2 of ice:
+				player has 1 * argument 2 of {@fairydust}:
+					player doesn't have space for 1 * argument 2 of {@stable}:
+						message "&cYou do not have room for this."
+						stop
+					remove 8 * argument 2 of ice from player
+					remove 1 * argument 2 of {@fairydust} from player
+					give 1 * argument 2 of {@stable} to player
+					message "&aItem Created"
+					stop
+				message "&cYou are missing &3Fairy Dust"
+				stop
+			message "&cYou are missing &fIce"
+			stop
+		argument 1 is "elefuel":
+			player has 8 * argument 2 of {@stableele}:
+				player has 1 * argument 2 of coal:
+					player doesn't have space for 1 * argument 2 of {@elefuel}:
+						message "&cYou do not have room for this."
+						stop
+					remove 8 * argument 2 of {@stableele} from player
+					remove 1 * argument 2 of coal from player
+					give 1 * argument 2 of {@elefuel} to player
+					message "&aItem Created"
+					stop
+				message "&cYou are missing &fCoal"
+				stop
+			message "&cYou are missing &3Stable Element"
+			stop
+		argument 1 is "envradar":
+			player has 6 * argument 2 of {@stablemetal}:
+				set {_count} to 0
+				loop items in player's inventory:
+					loop-item is compass:
+						set {_lorecheck} to uncoloured lore of loop-item
+						set {_lorecheck::*} to {_lorecheck} split at "||"
+						{_lorecheck::2} is not set:
+							add 1 to {_count}
+						{_count} is greater than or equal to 1:
+							player doesn't have space for 1 * argument 2 of {@envradar}:
+								message "&cYou do not have room for this."
+								stop
+							remove 1 * argument 2 of loop-item from inventory of player
+							remove 6 * argument 2 of {@stablemetal} from player
+							give 1 * argument 2 of {@envradar} to player
+							message "&aItem Created"
+							stop
+				message "&cYou are missing &fCompass"
+				stop
+			message "&cYou are missing &3Stable Metal Bar"
+			stop
+		argument 1 is "advanvil":
+			player has 3 * argument 2 of iron blocks:
+				player has 1 * argument 2 of {@advbench}:
+					player has 1 * argument 2 of diamond block:
+						player has 1 * argument 2 of redstone block:
+							player has 1 * argument 2 of obsidian:
+								player doesn't have space for 1 * argument 2 of {@advanvil}:
+									message "&cYou do not have room for this."
+									stop
+								remove 3 * argument 2 of iron blocks from player
+								remove 1 * argument 2 of {@advbench} from player
+								remove 1 * argument 2 of diamond block from player
+								remove 1 * argument 2 of redstone block from player
+								remove 1 * argument 2 of obsidian from player
+								give 1 * argument 2 of {@advanvil} to player
+								message "&aItem Created"
+								stop
+							message "&cYou are missing &fObsidian"
+							stop
+						message "&cYou are missing &fRedstone Block"
+						stop
+					message "&cYou are missing &fDiamond Block"
+					stop
+				message "&cYou are missing &3Advanced Bench"
+				stop
+			message "&cYou are missing &fIron Block"
+			stop
+		argument 1 is "stablechest":
+			player has 6 * argument 2 of {@stablemetal}:
+				player has 1 * argument 2 of {@elefuel}:
+					player has 1 * argument 2 of diamond block:
+						player doesn't have space for 1 * argument 2 of {@stablechest}:
+							message "&cYou do not have room for this."
+							stop
+						remove 6 * argument 2 of {@stablemetal} from player
+						remove 1 * argument 2 of {@elefuel} from player
+						remove 1 * argument 2 of diamond block from player
+						give 1 * argument 2 of {@stablechest} to player
+						message "&aItem Created"
+						stop
+					message "&cYou are missing &fDiamond Block"
+					stop
+				message "&cYou are missing &3Elemental Fuel"
+				stop
+			message "&cYou are missing &3Stable Metal Bar"
+			stop
+		argument 1 is "qnhchest":
+			player has 1 * argument 2 of {@stablechest}:
+				player has 1 * argument 2 of {@superbottle}:
+					player doesn't have space for 1 * argument 2 of {@qnhchest}:
+						message "&cYou do not have room for this."
+						stop
+					remove 1 * argument 2 of {@stablechest} from player
+					remove 1 * argument 2 of {@superbottle} from player
+					give 1 * argument 2 of {@qnhchest} to player
+					message "&aItem Created"
+					stop
+				message "&cYou are missing &3Super Water Bottle"
+				stop
+			message "&cYou are missing &3Stable Diamond Chestplate"
+			stop
+		argument 1 is "snkchest":
+			player has 1  * argument 2 of {@stablechest}:
+				player has 1 * argument 2 of enchanted golden apple:
+					player doesn't have space for 1 * argument 2 of {@snkchest}:
+						message "&cYou do not have room for this."
+						stop
+					remove 1 * argument 2 of {@stablechest} from player
+					remove 1 * argument 2 of enchanted golden apple from player
+					give 1 * argument 2 of {@snkchest} to player
+					message "&aItem Created"
+					stop
+				message "&cYou are missing &dEnchanted Golden Apple"
+				stop
+			message "&cYou are missing &3Stable Diamond Chestplate"
+			stop
+		argument 1 is "hastechest":
+			player has 1 * argument 2 of {@stablechest}:
+				player has 1 * argument 2 of beacon:
+					set {_count} to 0
+					loop items in player's inventory:
+						loop-item is diamond pickaxe:
+							loop-item is not enchanted:
+								set {_lorecheck} to uncoloured lore of loop-item
+								set {_lorecheck::*} to {_lorecheck} split at "||"
+								{_lorecheck::2} is not set:
+									add 1 to {_count}
+								{_count} is greater than or equal to 1:
+									player doesn't have space for 1 * argument 2 of {@hastechest}:
+										message "&cYou do not have room for this."
+										stop
+									remove 1 * argument 2 of loop-item from inventory of player
+									remove 1 * argument 2 of {@stablechest} from player
+									remove 1 * argument 2 of beacon from player
+									give 1 * argument 2 of {@hastechest} to player
+									message "&aItem Created"
+									stop
+					message "&cYou are missing &fDiamond Pickaxe"
+					stop
+				message "&cYou are missing &fBeacon"
+				stop
+			message "&cYou are missing &3Stable Diamond Chestplate"
+			stop
+		argument 1 is "speedchest":
+			player has 1 * argument 2 of {@stablechest}:
+				player has 1 beacon:
+					set {_count} to 0
+					loop items in player's inventory:
+						loop-item is diamond boots:
+							loop-item is not enchanted:
+								set {_lorecheck} to uncoloured lore of loop-item
+								set {_lorecheck::*} to {_lorecheck} split at "||"
+								{_lorecheck::2} is not set:
+									add 1 to {_count}
+								{_count} is greater than or equal to 1:
+									player doesn't have space for 1 * argument 2 of {@speedchest}:
+										message "&cYou do not have room for this."
+										stop
+									remove 1 * argument 2 of loop-item from inventory of player
+									remove 1 * argument 2 of {@stablechest} from player
+									remove 1 * argument 2 of beacon from player
+									give 1 * argument 2 of {@speedchest} to player
+									message "&aItem Created"
+									stop
+					message "&cYou are missing &fDiamond Boots"
+					stop
+				message "&cYou are missing &fBeacon"
+				stop
+			message "&cYou are missing &3Stable Diamond Chestplate"
+			stop
+		argument 1 is "strengthchest":
+			player has 1 * argument 2 of {@stablechest}:
+				player has 1 beacon:
+					set {_count} to 0
+					loop items in player's inventory:
+						loop-item is diamond sword:
+							loop-item is not enchanted:
+								set {_lorecheck} to uncoloured lore of loop-item
+								set {_lorecheck::*} to {_lorecheck} split at "||"
+								{_lorecheck::2} is not set:
+									add 1 to {_count}
+								{_count} is greater than or equal to 1:
+									player doesn't have space for 1 * argument 2 of {@strengthchest}:
+										message "&cYou do not have room for this."
+										stop
+									remove 1 * argument 2 of loop-item from inventory of player
+									remove 1 * argument 2 of {@stablechest} from player
+									remove 1 * argument 2 of beacon from player
+									give 1 * argument 2 of {@strengthchest} to player
+									message "&aItem Created"
+									stop
+					message "&cYou are missing &fDiamond Sword"
+					stop
+				message "&cYou are missing &fBeacon"
+				stop
+			message "&cYou are missing &3Stable Diamond Chestplate"
+			stop
+		argument 1 is "grapplinghook":
+			player has 8 * argument 2 of {@elefuel}:
+				set {_count} to 0
+				loop items in player's inventory:
+					loop-item is fishing rod:
+						loop-item is not enchanted:
+							set {_lorecheck} to uncoloured lore of loop-item
+							set {_lorecheck::*} to {_lorecheck} split at "||"
+							{_lorecheck::2} is not set:
+								add 1 to {_count}
+							{_count} is greater than or equal to 1:
+								player doesn't have space for 1 * argument 2 of {@grapplinghook}:
+									message "&cYou do not have room for this."
+									stop
+								remove 1 * argument 2 of loop-item from inventory of player
+								remove 8 * argument 2 of {@elefuel} from player
+								give 1 * argument 2 of {@grapplinghook} to player
+								message "&aItem Created"
+								stop
+				message "&cYou are missing &fFishing Rod"
+				stop
+			message "&cYou are missing &3Elemental Fuel"
+			stop
+		argument 1 is "stblgun":
+			player has 4 * argument 2 of {@stablemetal}:
+				player has 1 * argument 2 of {@stable}:
+					set {_count} to 0
+					loop items in player's inventory:
+						loop-item is bow:
+							loop-item is not enchanted:
+								set {_lorecheck} to uncoloured lore of loop-item
+								set {_lorecheck::*} to {_lorecheck} split at "||"
+								{_lorecheck::2} is not set:
+									add 1 to {_count}
+								{_count} is greater than or equal to 1:
+									player doesn't have space for 1 * argument 2 of {@stblgun}:
+										message "&cYou do not have room for this."
+										stop
+									remove 1 * argument 2 of loop-item from inventory of player
+									remove 4 * argument 2 of {@stablemetal} from player
+									remove 1 * argument 2 of {@stable} from player
+									give 1 * argument 2 of {@stblgun} to player
+									message "&aItem Created"
+									stop
+					message "&cYou are missing &fBow"
+					stop
+				message "&cYou are missing &3Stabilizer"
+				stop
+			message "&cYou are missing &3Stable Metal Bar"
+			stop
+		argument 1 is "stblmine":
+			player has 2 * argument 2 of {@stablemetal}:
+				player has 1 * argument 2 of {@stable}:
+					set {_count} to 0
+					loop items in player's inventory:
+						loop-item is diamond pickaxe:
+							loop-item is not enchanted:
+								set {_lorecheck} to uncoloured lore of loop-item
+								set {_lorecheck::*} to {_lorecheck} split at "||"
+								{_lorecheck::2} is not set:
+									add 1 to {_count}
+								{_count} is greater than or equal to 1:
+									player doesn't have space for 1 * argument 2 of {@stblmine}:
+										message "&cYou do not have room for this."
+										stop
+									remove 1 * argument 2 of loop-item from inventory of player
+									remove 2 * argument 2 of {@stablemetal} from player
+									remove 1 * argument 2 of {@stable} from player
+									give 1 * argument 2 of {@stblmine} to player
+									message "&aItem Created"
+									stop
+					message "&cYou are missing &fDiamond Pickaxe"
+					stop
+				message "&cYou are missing &3Stabilizer"
+				stop
+			message "&cYou are missing &3Stable Metal Bar"
+			stop
+
+on break:
+	block is workbench:
+		set {_loc} to location of event-block
+		{wtf.loc.bench::%{_loc}%} exists:
+			clear {wtf.loc.bench::%{_loc}%}
+			drop {@advbench}
+
+on break:
+	block is anvil:
+		set {_loc} to location of event-block
+		{wtf.loc.anvil::%{_loc}%} exists:
+			clear {wtf.loc.anvil::%{_loc}%}
+			drop {@advanvil}
+
 on spawn of a creeper or a skeleton or a spider or zombie or a cow:
 	{unstable.%chunk at event-location%} is true:
-
-
 		set {_loc} to event-location
 		event-entity is a creeper:
 			wait 5 ticks
 			set name of event-entity to "&cUnstable Creeper"
 			apply resistance 2 to event-entity for 999 days
 			apply speed to event-entity for 999 days
-
-			
 			set {unstable.%event-entity%} to true
-
 		event-entity is a zombie:
-				
 			wait 5 ticks
 			set name of event-entity to "&cUnstable Zombie"
 			apply resistance 2 to event-entity for 999 days
@@ -403,10 +966,7 @@ on spawn of a creeper or a skeleton or a spider or zombie or a cow:
 			equip event-entity with iron sword of sharpness
 			set event-entity's helmet to iron helmet
 			set {unstable.%event-entity%} to true
-
 		event-entity is skeleton:
-			
-			
 			wait 5 ticks
 			set name of event-entity to "&cUnstable Skeleton"
 			apply resistance 2 to event-entity for 999 days
@@ -414,18 +974,14 @@ on spawn of a creeper or a skeleton or a spider or zombie or a cow:
 			equip event-entity with bow
 			set event-entity's helmet to gold helmet
 			set {unstable.%event-entity%} to true
-
 		event-entity is a spider:
-		
 			wait 5 ticks
 			set name of event-entity to "&cUnstable Spider"
 			apply resistance 2 to event-entity for 999 days
 			apply speed 2 to event-entity for 999 days
 			apply jump 5 to event-entity for 999 days
 			set {unstable.%event-entity%} to true
-			
 		event-entity is a cow:
-			
 			wait 5 ticks
 			set name of event-entity to "&cUnstable Cow"
 			apply speed 2 to event-entity for 999 days
@@ -440,7 +996,7 @@ on explosion prime:
 			spawn 100 of red dust data 1 offset with 1, 1, 1 at {_loc}
 			loop players in radius 5 of event-location:
 				make event-entity damage loop-player by 4
-			
+
 on damage:
 	victim is not a player
 	{unstable.%victim%} is set:
@@ -459,6 +1015,7 @@ on death of cow:
 			add {@unstmetal} to drops
 			chance of 15%:
 				add {@unstele} to drops
+
 on death of a creeper or a skeleton or a zombie or a spider:
 	chance of 15%:
 		add {@bandages} to drops
@@ -471,23 +1028,25 @@ on death of a creeper or a skeleton or a zombie or a spider:
 			chance of 2%:
 				add {@unstele} to drops
 			add {@unstmetal} to drops
-			
+
 on damage:
 	victim is player:
-		attacker is a zombie:
-			{infected.%victim%.flag} is not set:
-				set {infected.%victim%.flag} to true
-				make score "&cINFECTED" in board of victim to 1
-				send "&cThe zombie has infected you!" to victim
-				stop
-			{infected.%victim%.flag} is false:
-				set {infected.%victim%.flag} to true
-				make score "&cINFECTED" in board of victim to 1
-				send "&cThe zombie has infected you!" to victim
-				stop
+#		attacker is a zombie:
+#			{infected.%victim%.flag} is not set:
+#				set {infected.%victim%.flag} to true
+#				make score "&cINFECTED" in board of victim to 1
+#				send "&cThe zombie has infected you!" to victim
+#				stop
+#			{infected.%victim%.flag} is false:
+#				set {infected.%victim%.flag} to true
+#				make score "&cINFECTED" in board of victim to 1
+#				send "&cThe zombie has infected you!" to victim
+#				stop
 		damage cause is fall:
 			chance of 15%:
 				victim's boots are boots of feather falling:
+					stop
+				{injured.%victim%} is true:
 					stop
 				set {_location} to location of victim
 				spawn 1 of angry villager data 1 offset with 1, 1, 1 at {_location}
@@ -514,6 +1073,7 @@ on right click with paper:
 					remove slowness from player
 					apply slowness to player for 999 days
 					send "&aYour injuries are healing" to player
+					make score "&cINJURED" in board of player to 1
 					set {injured.%player%.length} to 1
 					remove {@bandages} from player
 					stop
@@ -525,6 +1085,7 @@ on right click with paper:
 				remove weakness from player
 				set {injured.%player%.length} to 6
 				send "&aYour injuries are healing" to player
+				make score "&cINJURED" in board of player to 2
 				remove {@bandages} from player
 				stop
 			send "&aYou mend your injuries" to player
@@ -535,7 +1096,7 @@ on right click with paper:
 			nullify score "&cINJURED" in board of player
 			set {injured.%player%} to false
 			set {injured.%player%.length} to 0
-			
+
 on right click with compass:
 	player's tool is {@envradar}:
 		player does not have {@elefuel}:
@@ -564,7 +1125,6 @@ on right click with compass:
 					set {methane.%chunk at location of player%.chance} to {_ran}
 				{methane.%chunk at location of player%.chance} is not set:
 					set {methane.%chunk at location of player%.chance} to false
-			
 		if {unstable.%chunk at location of player%} is true:
 			send "&aGround Structure: &cUnstable"
 			send "&aMethane Rating: &cUnstable"
@@ -577,7 +1137,7 @@ on right click with compass:
 			send "&aMethane Rating: &3EMPTY" to player
 		else:
 			send "&aMethane Rating: &e%{methane.%chunk at location of player%.chance}%" to player
-			
+
 on right click with nether brick item:
 	player's tool is {@soap1}:
 		block above block below player is water:
@@ -596,11 +1156,11 @@ on right click with nether brick item:
 					set {hygiene.%loop-player%} to 100
 					loop-player has nausea:
 						remove nausea from loop-player
-			
-					
+
 on shoot:
 	shooter's tool is {@grapplinghook}:
 		set {teleport.%projectile%} to shooter
+
 on projectile hit:
 	shooter does not have {@elefuel}:
 		shooter's tool is {@grapplinghook}:
@@ -613,11 +1173,12 @@ on projectile hit:
 			remove {@elefuel} from shooter
 			delete projectile
 			stop
+
 on rightclick:
 	if player is holding {@grapplinghook}:
 		repair tool of player
 		stop
-	
+
 on bed enter:
 	{injured.%player%} is true:
 		set {injured.%player%} to false
@@ -628,7 +1189,7 @@ on bed enter:
 		nullify score "&cINJURED" in board of player
 		send "&aYou have been healed of your injuries!" to player
 	set {fatigue.%player%} to 100
-	
+
 #GLOBAL CONSUME LOOP
 on consume: 
 	item is water bottle:
@@ -641,7 +1202,6 @@ on consume:
 			{fatigue.%player%} is greater than 100:
 				set {fatigue.%player%} to 100
 				stop
-				
 		player is holding {@superbottle}:
 			add 50 to {thirst.%player%}
 			{thirst.%player%} is greater than 100:
@@ -650,7 +1210,6 @@ on consume:
 		add 10 to {thirst.%player%}
 		{thirst.%player%} is greater than 100:
 			set {thirst.%player%} to 100
-		
 	item is apple:
 		add 5 to {thirst.%player%}
 		{thirst.%player%} is greater than 100:
@@ -671,214 +1230,220 @@ on consume:
 		{thirst.%player%} is greater than 100:
 			set {thirst.%player%} to 100
 		stop
-	item is golden apple:
-		{infected.%player%.flag} is true:
-			set {infected.%player%.flag} to false
-			nullify score "&cINFECTED" in board of player
-			send "&3You have been revitalized!"
+#	item is golden apple:
+#		{infected.%player%.flag} is true:
+#			set {infected.%player%.flag} to false
+#			nullify score "&cINFECTED" in board of player
+#			send "&3You have been revitalized!"
 
 on death of a player:
   {thirst.%player%} is less than 25:
     set {thirst.%player%} to 25
-  {infected.%player%.flag} is true:
-    set {_location5} to player's location
-    wait 1 second
-    spawn 1 zombie at {_location5}
-    set name of spawned entity to "%player%"
-    apply resistance 2 to entity for 999 days
-    apply speed to entity for 999 days
-	
-command /ci [<number>] [<number>]:
+#  {infected.%player%.flag} is true:
+#    set {_location5} to player's location
+#    wait 1 second
+#    spawn 1 zombie at {_location5}
+#    set name of spawned entity to "%player%"
+#    apply resistance 2 to entity for 999 days
+#    apply speed to entity for 999 days
+
+command /ci [<text>] [<number>]:
 	permission: obam.free
 	trigger:
 		argument 1 is not set:
-			send "list"
-			send "1 ... Super Water Bottle"
-			send "2 ... Bandages"
-			send "3 ... Unstable Metal Shard"
-			send "4 ... Unstable Metal Bar"
-			send "5 ... Stable Metal Bar"
-			send "6 ... Unstable Element"
-			send "7 ... Stable Element"
-			send "8 ... Environmental Radar"
-			send "9 ... Elemental Fuel"
-			send "10 ... Fairy Dust"
-			send "11 ... Stabilizer"
-			send "12 ... Stable Chest"
-			send "13 ... Chest of Quench"
-			send "14 ... Chest of Snacks"
-			send "15 ... Grappling Hook"
-			send "16 ... Coffee"
-			send "18 ... Speed Chestplate"
-			send "19 ... Haste Chestplate"
-			send "20 ... Strength Chestplate"
-			send "21 ... Soap (1)"
-			send "22 ... Stabilizer Gun"
-			send "23 ... Stable Miner"
+			loop {db_wtf.ci::*}:
+				{_count} is not set:
+					set {_count} to 0
+				add 1 to {_count}
+				{_chest} is set:
+					set {_chest} to "%{_chest}%;s;%{_count}%;%loop-value%"
+				{_chest} is not set:
+					set {_chest} to "s;%{_count}%;%loop-value%"
+			replace "PLAYER" in {_chest} with "%player%"
+			{_count} is less than 10:
+				set {_size} to 1
+			{_count} is greater than 9:
+				set {_size} to 2
+			{_count} is greater than 18:
+				set {_size} to 3
+			{_count} is greater than 27:
+				set {_size} to 4
+			{_count} is greater than 36:
+				set {_size} to 5
+			{_count} is greater than 45:
+				set {_size} to 6
+			show "%{_chest}%" with {_size} row named "&9&lCI Menu" to player
+		argument 1 is "unstele":
+			player doesn't have space for 1 * argument 2 of {@unstele}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@unstele} to player
+			message "&aHere are your things."
 			stop
-		argument 2 is not set:
-			argument 1 is 1:
-				give {@superbottle} to player
-				
-			argument 1 is 2:
-				give {@bandages} to player
-				
-			argument 1 is 3:
-				give {@unstmetal} to player
-				
-			argument 1 is 4:
-				give {@unstmetalbar} to player
-				
-			argument 1 is 5:
-				give {@stablemetal} to player
-				
-			argument 1 is 6:
-				give {@unstele} to player
-				
-			argument 1 is 7:
-				give {@stableele} to player
-				
-			argument 1 is 8:
-				give {@envradar} to player
-				
-			argument 1 is 9:
-				give {@elefuel} to player
-				
-			argument 1 is 10:
-				give {@fairydust} to player
-				
-			argument 1 is 11:
-				give {@stable} to player
-				
-			argument 1 is 12:
-				give {@stablechst} to player
-				
-			argument 1 is 13:
-				give {@qnhchest} to player
-				
-			argument 1 is 14:
-				give {@snkchest} to player
-				
-			argument 1 is 15:
-				give {@grapplinghook} to player
-				
-			argument 1 is 16:
-				give {@coffee} to player
-				
-				
-			argument 1 is 18:
-				give {@speedchest} to player
-			
-			argument 1 is 19:
-				give {@hastechest} to player
-				
-			argument 1 is 20:
-				give {@strengthchest} to player
-				
-			argument 1 is 21:
-				give {@soap1} to player
-				
-			argument 1 is 22:
-				give {@stblgun} to player
-				
-			argument 1 is 23:
-				give {@stblmine} to player
-				
-		argument 2 is set:
-			argument 1 is 1:
-				loop argument 2 times:
-					give {@superbottle} to player
-				
-			argument 1 is 2:
-				loop argument 2 times:
-					give {@bandages} to player
-				
-			argument 1 is 3:
-				loop argument 2 times:
-					give {@unstmetal} to player
-				
-			argument 1 is 4:
-				loop argument 2 times:
-					give {@unstmetalbar} to player
-				
-			argument 1 is 5:
-				loop argument 2 times:
-					give {@stablemetal} to player
-				
-			argument 1 is 6:
-				loop argument 2 times:
-					give {@unstele} to player
-				
-			argument 1 is 7:
-				loop argument 2 times:
-					give {@stableele} to player
-				
-			argument 1 is 8:
-				loop argument 2 times:
-					give {@envradar} to player
-				
-			argument 1 is 9:
-				loop argument 2 times:
-					give {@elefuel} to player
-				
-			argument 1 is 10:
-				loop argument 2 times:
-					give {@fairydust} to player
-				
-			argument 1 is 11:
-				loop argument 2 times:
-					give {@stable} to player
-				
-			argument 1 is 12:
-				loop argument 2 times:
-					give {@stablechst} to player
-				
-			argument 1 is 13:
-				loop argument 2 times:
-					give {@qnhchest} to player
-				
-			argument 1 is 14:
-				loop argument 2 times:
-					give {@snkchest} to player
-				
-			argument 1 is 15:
-				loop argument 2 times:
-					give {@grapplinghook} to player
-				
-			argument 1 is 16:
-				loop argument 2 times:
-					give {@coffee} to player
-				
-				
-			argument 1 is 18:
-				loop argument 2 times:
-					give {@speedchest} to player
-			
-			argument 1 is 19:
-				loop argument 2 times:
-					give {@hastechest} to player
-				
-			argument 1 is 20:
-				loop argument 2 times:
-					give {@strengthchest} to player
-				
-			argument 1 is 21:
-				loop argument 2 times:
-					give {@soap1} to player
-					
-			argument 1 is 22:
-				loop argument 2 times:
-					give {@stblgun} to player
-					
-			argument 1 is 23:
-				loop argument 2 times:
-					give {@stblmine} to player
-				
-		send "Here is your item. :)"
-			
+		argument 1 is "unstmetal":
+			player doesn't have space for 1 * argument 2 of {@unstmetal}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@unstmetal} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "fairydust":
+			player doesn't have space for 1 * argument 2 of {@fairydust}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@fairydust} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "bandages":
+			player doesn't have space for 1 * argument 2 of {@bandages}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@bandages} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "soap1":
+			player doesn't have space for 1 * argument 2 of {@soap1}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@soap1} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "superbottle":
+			player doesn't have space for 1 * argument 2 of {@superbottle}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@superbottle} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "coffee":
+			player doesn't have space for 1 * argument 2 of {@coffee}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@coffee} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "unstmetalbar":
+			player doesn't have space for 1 * argument 2 of {@unstmetalbar}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@unstmetalbar} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "stablemetal":
+			player doesn't have space for 1 * argument 2 of {@stablemetal}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@stablemetal} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "stableele":
+			player doesn't have space for 1 * argument 2 of {@stableele}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@stableele} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "stable":
+			player doesn't have space for 1 * argument 2 of {@stable}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@stable} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "elefuel":
+			player doesn't have space for 1 * argument 2 of {@elefuel}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@elefuel} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "envradar":
+			player doesn't have space for 1 * argument 2 of {@envradar}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@envradar} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "advbench":
+			player doesn't have space for 1 * argument 2 of {@advbench}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@advbench} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "advanvil":
+			player doesn't have space for 1 * argument 2 of {@advanvil}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@advanvil} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "stablechest":
+			player doesn't have space for 1 * argument 2 of {@stablechest}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@stablechest} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "qnhchest":
+			player doesn't have space for 1 * argument 2 of {@qnhchest}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@qnhchest} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "snkchest":
+			player doesn't have space for 1 * argument 2 of {@snkchest}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@snkchest} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "hastechest":
+			player doesn't have space for 1 * argument 2 of {@hastechest}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@hastechest} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "speedchest":
+			player doesn't have space for 1 * argument 2 of {@speedchest}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@speedchest} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "strengthchest":
+			player doesn't have space for 1 * argument 2 of {@strengthchest}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@strengthchest} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "grapplinghook":
+			player doesn't have space for 1 * argument 2 of {@grapplinghook}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@grapplinghook} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "stblgun":
+			player doesn't have space for 1 * argument 2 of {@stblgun}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@stblgun} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "stblmine":
+			player doesn't have space for 1 * argument 2 of {@stblmine}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@stblmine} to player
+			message "&aHere are your things."
+			stop
+
 command /togglestats:
 	trigger:
-
 		{board.%player%} is false:
 			set {board.%player%} to true
 			display board named "&9&lWTF&9fronts" to player
@@ -899,24 +1464,48 @@ command /togglestats:
 			set {board.%player%} to true
 			move display of player to sidebar
 			stop
-			
+
 on place of torch:
   player's tool is {@safetytorch}
   set {safety.active.%chunk at event-location%} to true	
-	
+
 on spawn:
 	entity is skeleton or creeper or zombie or witch or spider or cave spider or enderman:
 		{safety.active.%chunk at event-location%} is true:
 			cancel event
 
+on place:
+	former tool's name is set:
+		set {information.%block%.1} to former tool
+		{debug.%player%} is true:
+			send "DEBUG You placed %former tool's name%"
+		set {information.%block%.2} to lore of former tool
+		set {information.%block%.3} to name of former tool
+		{debug.%player%} is true:
+			send "DEBUG %block%"
+			send "DEBUG %{information.%block%.1}%"
+			send "DEBUG %lore of former tool%"
+			send "DEBUG %name of former tool%"
+			send "DEBUG %{information.%block%.2}%"
+			send "DEBUG %{information.%block%.3}%"
+		set {information.%block%.1} to "%{information.%block%.1}%"
 
+on break:
+	{information.%block%.1} is set:
+		cancel event
+		{debug.%player%} is true:
+			send "DEBUG I ama message"
+			set {_message} to "%{information.%block%.1}%;%{information.%block%.3}%;%{information.%block%.2}%"
+			send "DEBUG %{_message}%"
+		delete block
+		drop {information.%block%.1} named {information.%block%.3} with lore {information.%block%.2} at location of block
 
 on break of glowstone:
 	chance of 10%:
 		player's tool is pickaxe of silk touch:
 			stop
 		drop {@fairydust} at location of event-block
-	
+
 on right click with sugar:
 	player's tool is {@fairydust}:
 		player is flying:
@@ -926,7 +1515,7 @@ on right click with sugar:
 		set fly state of player to true
 		wait 5 seconds
 		set fly state of player to false
-		
+
 command /debug:
 	permission: obam.admin
 	trigger:
@@ -940,11 +1529,11 @@ command /debug:
 			set {debug.%player%} to false
 			send "&aDebug off"
 			stop
-			
+
 command /particlelist:
     trigger:
         message "%all enum values of particle%"
-		
+
 command /unstclear:
 	permission: obam.admin
 	trigger:
@@ -954,9 +1543,8 @@ command /unstclear:
 			{_count} is not set:
 				set {_count} to 0
 			add 1 to {_count}
-			
 		send "&e%{_count}%&a Unstable Entities eliminated" 
-		
+
 command /unstlist:
 	permission: obam.admin
 	trigger:
@@ -969,7 +1557,6 @@ command /unstlist:
 			{_count} is not set:
 				set {_count} to 0
 			add 1 to {_count}
-			
 		send "&aThere are &e%{_count}% &cUnstable&a entities."
 		send "&aList:"
 		loop {_list::*}:
@@ -986,23 +1573,17 @@ every 30 seconds:
 		{blood.moon} is true:
 			clear {blood.moon}
 			broadcast "&aThe blood moon sets!"
-			
+
 on spawn of a creeper or a skeleton or a spider or zombie or a cow:
 	{blood.moon} is true:
-
-
 		set {_loc} to event-location
 		event-entity is a creeper:
 			wait 5 ticks
 			set name of event-entity to "&cUnstable Creeper"
 			apply resistance 2 to event-entity for 999 days
 			apply speed to event-entity for 999 days
-
-			
 			set {unstable.%event-entity%} to true
-
 		event-entity is a zombie:
-				
 			wait 5 ticks
 			set name of event-entity to "&cUnstable Zombie"
 			apply resistance 2 to event-entity for 999 days
@@ -1010,10 +1591,7 @@ on spawn of a creeper or a skeleton or a spider or zombie or a cow:
 			equip event-entity with iron sword of sharpness
 			set event-entity's helmet to iron helmet
 			set {unstable.%event-entity%} to true
-
 		event-entity is skeleton:
-			
-			
 			wait 5 ticks
 			set name of event-entity to "&cUnstable Skeleton"
 			apply resistance 2 to event-entity for 999 days
@@ -1021,39 +1599,35 @@ on spawn of a creeper or a skeleton or a spider or zombie or a cow:
 			equip event-entity with bow
 			set event-entity's helmet to gold helmet
 			set {unstable.%event-entity%} to true
-
 		event-entity is a spider:
-		
 			wait 5 ticks
 			set name of event-entity to "&cUnstable Spider"
 			apply resistance 2 to event-entity for 999 days
 			apply speed 2 to event-entity for 999 days
 			apply jump 5 to event-entity for 999 days
 			set {unstable.%event-entity%} to true
-			
 		event-entity is a cow:
-			
 			wait 5 ticks
 			set name of event-entity to "&cUnstable Cow"
 			apply speed 2 to event-entity for 999 days
 			set {unstable.%event-entity%} to true
-			
+
 command /bloodmoon:
 	permission: obam.admin
 	trigger:
 		set time of "world" to 18:00
 		set {blood.moon} to true
 		broadcast "&cA blood moon rises..."
-		
+
 command /dawn:
 	permission: obam.admin
 	trigger:
 		set time of "world" to 5:30
-		
+
 on right click with bow:
 	player's tool is a bow:
-		name of player's tool is "&3Stablizer Gun"
-		cancel event
+		name of player's tool is "&3Stablizer Gun":
+			cancel event
 		{cool.gun.%player%} is not set:
 			set {cool.gun.%player%} to now
 			add 3 seconds to {cool.gun.%player%}
@@ -1075,9 +1649,7 @@ on right click with bow:
 			wait 0.2 seconds
 			strike lightning effect at location of {_target}
 			kill {_target}
-			send "&aYou capture the stable soul of the creature"
+			send "&aYou have captured the Unstable Soul of this creature!"
 			add {@unstele} to player's inventory
 			add {@unstmetal} to player's inventory
 			add {@stable} to player's inventory
-			
-		

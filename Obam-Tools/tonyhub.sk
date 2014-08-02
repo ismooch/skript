@@ -1,0 +1,81 @@
+#tutorialtony
+
+command /spawntony:
+	permission: obam.admin
+	trigger:
+		{tony.hub} is alive:
+			send "&cTony is there..."
+			
+		{tony.hub} is not alive:
+			spawn villager at {tony.hub.home}
+			wait 2 ticks
+			set name of spawned entity to "&1Tutorial Tony &a- &cRight Click me to LEARN!"
+			wait 1 tick
+			set {tony.hub} to spawned entity
+			
+every 10 seconds:
+	{tony.hub} is alive:
+		teleport {tony.hub} to {tony.hub.home}
+	{tony.hub} is not alive:
+		spawn villager at {tony.hub.home}
+		wait 2 ticks
+		set display name of spawned entity to "&1Tutorial Tony &a- &cRight Click me to LEARN!"
+		wait 1 tick
+		set {tony.hub} to spawned entity
+		
+	{tony.hub} is not set:
+		spawn villager at {tony.hub.home}
+		wait 2 ticks
+		set display name of spawned entity to "&1Tutorial Tony &a- &cRight Click me to LEARN!"
+		set {tony.hub} to spawned entity
+on any movement:
+	{tony.hub} is event-entity:
+		cancel event
+		teleport event-entity to {tony.hub.home}
+on right click:
+	name of target entity is "&1Tutorial Tony &a- &cRight Click me to LEARN!"
+	send "&bTony: &fHey %player%! Would you like to learn about the &eHub&f?" to player
+	set {tutorial.%player%.q1} to true
+	
+on chat:
+	{tutorial.%player%.q1} is true:
+		cancel event
+		message is not "yes" or "no":
+			send "&bTony: &fSorry %player%, but please answer yes or no"
+		message is "no":
+			send "&bTony: &fWell alright, please come back any time!"
+			clear {tutorial.%player%.q1}
+		message is "yes":
+			send "&bTony: &fAlright %player%! Let's begin!"
+			clear {tutorial.%player%.q1}
+			
+			
+command /tutorial [<text>]:
+	permission: obam.free
+	trigger:
+		
+		argument is not set:
+			teleport player to {tony.hub.spawn}
+			send "&aVisiting Tony...."
+			
+		argument is "tonyset":
+			player does not have permission "obam.admin":
+				send "&cYou do not have permission to do this!"
+				stop
+			set {tony.hub.home} to location of player
+			send "&aTony's Home set to &e%location of player%&a."
+			
+		argument is "playerset":
+			player does not have permission "obam.admin":
+				send "&cYou do not have permission to do this!"
+				stop
+			set {tony.hub.player} to location of player
+			send "&aTony's Player Spawn Point set to &e%location of player%&a."
+			
+		argument is "test":
+			player does not have permission "obam.admin":
+				send "&cYou do not have permission to do this!"
+				stop
+			send "{"text":"","extra":[{"text":"Hello","color":"gold","hoverEvent":{"action":"show_text","value":"You can choose yes or no."}}]}" to player
+			
+			

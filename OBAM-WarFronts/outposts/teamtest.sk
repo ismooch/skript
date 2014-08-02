@@ -1,0 +1,51 @@
+command /outpost:
+	permission: obam.free
+	trigger:
+		
+		{outpost.kills.red} is not set:
+			set {outpost.kills.red} to 0
+		{outpost.kills.blue} is not set:
+			set {outpost.kills.blue} to 0
+		{outpost.kills.green} is not set:
+			set {outpost.kills.green} to 0
+			
+		send "&aThe current active outpost is located at:"
+		send "&e%{outpost.location}%"
+		send "&aRequired Score to claim:"
+		send "&e%{outpost.kill.claim}%"
+		
+		send "&aArmy Scores for current outpost:"
+		send "&cRed:"
+		send "&e%{outpost.kills.red}%"
+		send "&2Green:"
+		send "&e%{outpost.kills.green}%"
+		send "&3Blue:"
+		send "&e%{outpost.kills.blue}%"
+		
+command /team <text>:
+	permission: obam.admin
+	trigger:
+		argument is not "blue" or "green" or "red":
+			send "&cYou can only choose blue, green or red"
+			stop
+			
+		set {team.%player%} to argument
+		send "&ayou are now on the <%argument%>%argument% &ateam!"
+		
+on death of a player:
+	{outpost.%chunk at location of attacker%} is true:
+		{outpost.kills.%{team.%attacker%}%} is not set:
+			set {outpost.kills.%{team.%attacker%}%} to 0
+		add 1 to {outpost.kills.%{team.%attacker%}%}
+		broadcast "%{team.%attacker%}%:"
+		broadcast "%{outpost.kills.%{team.%attacker%}%}%"
+		{outpost.kills.%{team.%attacker%}%} is greater than or equal to {outpost.kill.claim}:
+			broadcast "&aThe outpost has been claimed by the <%{team.%attacker%}%>%{team.%attacker%}% &aTeam!"
+			clear {outpost.%chunk at location of attacker%}
+			clear {outpost.kills.red}
+			clear {outpost.kills.blue}
+			clear {outpost.kills.green}
+			clear {outpost.active}
+			clear {outpost.kill.claim}
+			clear {outpost.location}
+			

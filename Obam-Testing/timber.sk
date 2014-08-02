@@ -1,12 +1,28 @@
 options:
-	timber: diamond axe named "&a&b&k&a&3Timber Axe" with lore "&6It's going down, I'm||&6yelling timber!|| ||&aUsing this powerful axe||&awill destroy &a&lALL&a logs||&aIn a 10 block radius!|| ||&2StickyItem ©"
-	
+	timber: diamond axe named "&a&b&k&a&3Timber Axe" with lore "&6This axe makes all logs within a 10 block radius||&6go timber!|| ||&2StickyItem ©"
+
+on script load:
+	set {db_shop.items::Timber Axe} to "i;diamond axe;n;&a&b&k&a&3Timber Axe;l;&6This axe makes all logs within a 10 block radius||&6go timber!|| ||&2StickyItem ©|| ||&5&oClick to purchase|| ||&3&lCost:||&e5,000 Tickets;c;sudo PLAYER timberpurchase"
+	set {db_ci.items::21.TA} to "i;diamond axe;n;&a&b&k&a&3Timber Axe;l;&6This axe makes all logs within a 10 block radius||&6go timber!;c;sudo PLAYER timber"
+
+command /timberpurchase:
+	permission: obam.free
+	trigger:
+		set {_bal} to player's balance
+		{_bal} is less than 5000:
+			send "&cYou do not have enough tickets for this!"
+			stop
+		give player 1 {@timber} 
+		remove 5000 from player's balance
+		send "&aYou have purchased a &eTimber Axe&a for &e5000 Tickets"
+		send "&aYour balance is now &e%player's balance%"
+
 command /timber:
-	permission: obam.admin
+	permission: obam.smod
 	trigger:
 		give player 1 {@timber}
 		send "&aHere is your thing"
-		
+
 on break of oak wood or birch wood or spruce wood or jungle wood or acacia wood or dark oak wood:
 	name of player's tool is "&a&b&k&a&3Timber Axe"
 	add location of event-block to {_wood.blocks::*}
@@ -19,7 +35,6 @@ on break of oak wood or birch wood or spruce wood or jungle wood or acacia wood 
 					send "&cYou are too close to others' land!"
 					stop
 		add location of loop-block to {_wood.blocks::*}
-			
 	loop {_wood.blocks::*}:
 		set {_block} to block at loop-value
 		{_block} is oak wood:
@@ -34,19 +49,11 @@ on break of oak wood or birch wood or spruce wood or jungle wood or acacia wood 
 			set {_type} to acacia log:0
 		{_block} is dark oak wood:
 			set {_type} to dark oak log:1
-		
-		
 		delete block at loop-value
 		drop 1 of {_type} at loop-value
-	
 	damage player's tool by 1
 
-		
 on enchant:
 	name of event-item is "&a&b&k&a&3Timber Axe"
 	cancel event
 	send "&cYou can't do that dawg"
-		
-	
-
-		

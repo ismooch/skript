@@ -1,0 +1,16 @@
+# Sends private message to the voting player.
+private-message: '&eThanks for voting!'
+
+
+# Commands to be performed only if the player is offline, without the slash.
+offline-commands:
+  - 'votetoken %name% %service%'
+
+# Commands to be performed if the player voted offline and joins the server.
+login-commands:
+  - 'msg %name% Thank You for Voting!'
+  
+# Commands to be performed only if the player is online.
+online-commands:
+  - 'votetoken %name% %service%'
+
