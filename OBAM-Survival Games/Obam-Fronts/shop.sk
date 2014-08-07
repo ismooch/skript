@@ -2,7 +2,7 @@
 
 on script load:
 	set {db_shop.items::Front Slot} to "i;grass;n;&a&b&k&a&3Front Slot;l;&6Purchase one Front Slot, which allows you the||&6ability to claim protected land.|| ||&5&oClick to purchase|| ||&3&lCost:||&e10,000 Tickets;c;sudo PLAYER shop land"
-	set {db_shop.items::Front Tlot} to "i;grass;n;&a&b&k&a&3Front Slot Bundle;l;&6Purchase five Front Slots, which allows you the||&6ability to claim protected land.|| ||&5&oClick to purchase|| ||&3&lCost:||&e45,000 Tickets;c;sudo PLAYER shop bundle"	
+	set {db_shop.items::Front Tlot} to "i;5 grass;n;&a&b&k&a&3Front Slot Bundle;l;&6Purchase five Front Slots, which allows you the||&6ability to claim protected land.|| ||&5&oClick to purchase|| ||&3&lCost:||&e45,000 Tickets;c;sudo PLAYER shop bundle"	
 
 command /shop [<text>]:
 	permission: obam.free

@@ -1,14 +1,14 @@
 
 
 on join:
-	set {db_current.server.%player%} to "&eFronts"
+	set {db_current.server.%player%} to "&eCreative"
 		
 		
 
 		
 on disconnect:
 	clear {db_current.server.%player%}
-	set {db_lastseen.%player%} to "%now% on &eFronts"
+	set {db_lastseen.%player%} to "%now% on &eCreative"
 	clear {db_color.%player%}
 	player has permission "obam.admin":
 		set {db_color.%player%} to "&d%player%"
@@ -16,11 +16,8 @@ on disconnect:
 		player has permission "obam.mod":
 			set {db_color.%player%} to "&2%player%"
 	{db_color.%player%} is not set:
-		player has permission "obam.ultimate":
-			set {db_color.%player%} to "&6%player%"
-	{db_color.%player%} is not set:
 		player has permission "obam.supporter":
-			set {db_color.%player%} to "&b%player%"
+			set {db_color.%player%} to "&6%player%"
 	{db_color.%player%} is not set:
 		set {db_color.%player%} to "&f%player%"
 	
@@ -39,11 +36,8 @@ command /playerinfo [<offline player>]:
 				player has permission "obam.mod":
 					set {_name} to "&2%player%"
 			{_name} is not set:
-				player has permission "obam.ultimate":
-					set {_name} to "&6%player%"
-			{_name} is not set:
 				player has permission "obam.supporter":
-					set {_name} to "&b%player%"
+					set {_name} to "&6%player%"
 			{_name} is not set:
 				set {_name} to "&f%player%"
 			message "&aPlayer:<reset> %{_name}%"
@@ -67,11 +61,8 @@ command /playerinfo [<offline player>]:
 				argument has permission "obam.mod":
 					set {_name} to "&2%argument%"
 			{_name} is not set:
-				argument has permission "obam.ultimate":
-					set {_name} to "&6%argument%"
-			{_name} is not set:
 				argument has permission "obam.supporter":
-					set {_name} to "&&b%argument%"
+					set {_name} to "&6%argument%"
 			{_name} is not set:
 				set {_name} to "&f%argument%"
 			argument is not online:

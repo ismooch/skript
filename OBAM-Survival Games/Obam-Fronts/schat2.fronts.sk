@@ -1,7 +1,5 @@
 options:
-	p: &3[H]<reset>
-	
-
+	p: &2[F]<reset>
 
 on join:
 	{db_alerts.on.%player%} is not set:
@@ -19,30 +17,27 @@ on join:
 		delete {db_channel.supporter::%player%}
 	player does not have permission "obam.mod":
 		delete {db_channel.staff::%player%}
-		
 	player does not have permission "obam.mechanic":
 		delete {db_channel.mech::%player%}
-		
 	{db_channel.mech.%player%} is not set:
-		player has permission "obam.mechanic"
-		set {db_channel.mech.%player%} to true
+		player has permission "obam.mechanic":
+			set {db_channel.mech.%player%} to true
 	{db_channel.mech.%player%} is true:
 		set {db_channel.mech::%player%} to player
 	{db_channel.sup.%player%} is not set:
-		player has permission "obam.supporter"
-		set {db_channel.sup.%player%} to true
+		player has permission "obam.supporter":
+			set {db_channel.sup.%player%} to true
 	{db_channel.sup.%player%} is true:
 		set {db_channel.supporter::%player%} to player
 	{db_channel.staff.%player%} is not set:
-		player has permission "obam.mod"
-		set {db_channel.staff::%player%} to player
+		player has permission "obam.mod":
+			set {db_channel.staff::%player%} to player
 	{db_channel.staff.%player%} is true:
 		set {db_channel.supporter::%player%} to player
 		
 on chat:
 	cancel event
 	player is "IcecreamCow" or "Electric_Hamster" or "ISMOOCH":
-		
 		set {_pre} to "{@p} &d[A] %player%"
 	{_pre} is not set:
 		player is "OrigamiJoe" or "Deathtomb8953":
@@ -51,24 +46,18 @@ on chat:
 		player has permission "obam.mod":
 			set {_pre} to "{@p} &2[M] %player%"
 	{_pre} is not set:
-		player has permission "obam.ultimate":
+		player has permission "obam.supporter":
 			set {_pre} to "{@p} &6[^] %player%"
-	{_pre} is not set:
-		player has permission "obam.plus":
-			set {_pre} to "{@p} &b[+] %player%"
 	{_pre} is not set:
 		set {_pre} to "{@p} %player%"
 	player is "BruSwain":
 		set {_pre} to "{@p} &6[^] %player%"
-		
 	{db_star.%player%} is set:
 		set {_pre} to "%{_pre}% <%{db_star.%player%}%>✦<reset>"
-		
 	{db_channel.%player%} is "private":
 		set {_player} to {private.%player%} parsed as a player
 		{_player} is online:
 			set {_found} to true
-				
 		{_found} is set:
 			set {_player} to {private.%player%} parsed as a player
 			send "&d%player% ➽ %{_player}%&d: %message%" to {_player}
@@ -79,7 +68,6 @@ on chat:
 			set {_message} to "&d%player% ➽ %{private.%player%}%&d: %message%"
 			send {_message} to player
 			execute console command "privatepush %{private.%player%}% %{_message}%"
-		
 	{db_channel.%player%} is "staff":
 		player does not have permission "obam.mod":
 			set {db_channel.%player%} to "global"
@@ -87,23 +75,16 @@ on chat:
 		{db_channel.%player%} is "staff":
 			loop {db_channel.staff::*}:
 				clear {_player}
-				
 				set {_player} to loop-index parsed as player
-
 				set message to "&a%message%"
 				message contains "%{_player}%":
 					replace "%{_player}%" in message with "&c%{_player}%&a"
 					{db_alerts.on.%{_player}%} is true:
 						play level up at location of {_player} with pitch 2
 				set {_message} to "%{_pre}%&a: %message%"
-				
-
 				send "%{_message}%" to {_player}
 				set message to "%uncoloured message%"
-				
-			
 		execute console command "/modpush %{_pre}%&a: %message%"
-		
 	{db_channel.%player%} is "mechanic":
 		player does not have permission "obam.mechanic":
 			set {db_channel.%player%} to "global"
@@ -118,17 +99,10 @@ on chat:
 					{db_alerts.on.%{_player}%} is true:
 						play level up at location of {_player} with pitch 2
 				set {_message} to "%{_pre}%&e: %message%"
-				
-
 				send "%{_message}%" to {_player}
 				set message to "%uncoloured message%"
-				
-				
 			execute console command "/mechpush %{_message}%"
-			
 		stop
-		
-		
 	{db_channel.%player%} is "supporter":
 		player does not have permission "obam.supporter":
 			set {db_channel.%player%} to "global"
@@ -143,17 +117,10 @@ on chat:
 					{db_alerts.on.%{_player}%} is true:
 						play level up at location of {_player} with pitch 2
 				set {_message} to "%{_pre}%&b: %message%"
-				
-
 				send "%{_message}%" to {_player}
 				set message to "%uncoloured message%"
-				
-				
 			execute console command "/supporterpush %{_message}%"
-				
-			
 			stop
-				
 	{db_channel.%player%} is "global":
 		loop {db_channel.global::*}:
 			clear {_player}
@@ -164,26 +131,15 @@ on chat:
 				{db_alerts.on.%{_player}%} is true:
 					play level up at location of {_player} with pitch 2
 			set {_message} to "%{_pre}%&f: %message%"
-				
-
 			send "%{_message}%" to {_player}
 			set message to "%uncoloured message%"
-
-				
-
-			
 		execute console command "globalpush %{_pre}%&f: %message%"
-		
 		stop
-			
-			
 
-		
 command /chat [<text>] [<text>]:
 	permission: obam.free
 	aliases: c, ch
 	trigger:
-		
 		argument 1 is "m" or "mod":
 			player does not have permission "obam.mod":
 				send "&cYou dont have permission to do this!"
@@ -201,7 +157,6 @@ command /chat [<text>] [<text>]:
 			{db_channel.supporter::%player%} is not set:
 				set {db_channel.supporter.%player%} to player
 			send "&aYou are now chatting in the &bSupporter&a channel!"
-			
 		argument 1 is "mech" or "mechanic":
 			player does not have permission "obam.mechanic":
 				send "&cYou dont have permission to do this!"
@@ -210,12 +165,9 @@ command /chat [<text>] [<text>]:
 			{db_channel.mech::%player%} is not set:
 				set {db_channel.mech::%player%} to player
 			send "&aYou are now chatting in the &eMechanic&a Channel!"
-				
-		
 		argument 1 is "g" or "global":
 			set {db_channel.%player%} to "global"
 			send "&aYou are now chatting in the &fGlobal&a channel!"
-			
 		argument 1 is "l" or "leave":
 			argument 2 is not set:
 				send "&cPlease specify a channel: &e/chat leave <channel>"
@@ -251,7 +203,6 @@ command /chat [<text>] [<text>]:
 				set {db_channel.%player%} to "staff"
 				send "&aYou are now in the &2Mod&a channel!"
 				stop
-			
 			argument 2 is "mechanic" or "mech":
 				player does not have permission "obam.mechanic":
 					send "&cYou do not have permission to do this!"
@@ -264,7 +215,6 @@ command /chat [<text>] [<text>]:
 				set {db_channel.%player%} to "mechanic"
 				send "&aYou are now in the &eMechanic&a Channel!"
 				stop
-			
 			argument 2 is "s" or "supporter":
 				player does not have permission "obam.supporter":
 					send "&cYou do not have permission to do this!"
@@ -277,7 +227,6 @@ command /chat [<text>] [<text>]:
 				set {db_channel.%player%} to "supporter"
 				send "&aYou are now in the &bSupporter&a channel!"
 				stop
-				
 			argument 2 is "g" or "global":
 				{db_channel.global::%player%} is set:
 					send "&cYou are already in this channel!"
@@ -286,7 +235,6 @@ command /chat [<text>] [<text>]:
 				set {db_channel.global::%player%} to player
 				set {db_channel.%player%} to "global"
 				send "&aYou are now in the &fGlobal&a channel!"
-				
 		argument 1 is "who":
 			argument 2 is not set:
 				loop {db_channel.%{db_channel.%player%}%::*}:
@@ -294,7 +242,6 @@ command /chat [<text>] [<text>]:
 			argument 2 is set:
 				{db_channel.%{db_channel.%player%}%::%argument 2%} is set:
 					send "%argument 2% is in this channel"
-					
 		argument 1 is "alerts" or "alert" or "a":
 			argument 2 is not set:
 				{db_alerts.on.%player%} is not set:
@@ -315,24 +262,20 @@ command /chat [<text>] [<text>]:
 			argument 2 is "on":
 				set {db_alerts.on.%player%} to true
 				send "&aYour chat alerts are now &eOn&a."
-					
 
 command /star <text> [<text>]:
 	permission: obam.admin
 	trigger:
-		
 		argument 2 is "clear":
 			clear {db_star.%argument 1%}
 			send "&aCleared Star setting for %argument 1%"
 			stop
-			
 		set {db_star.%argument 1%} to argument 2
 		send "&aStar for %argument 1% set to <%argument 2%>%argument 2%<reset>&a."
-		
+
 command /tell [<offline player>] [<text>]:
 	permission: obam.free
 	trigger:
-		
 		argument 1 is not set:
 			{db_channel.%player%} is "private":
 				send "&aYou have left your private conversation with %{private.%player%}%"
@@ -345,23 +288,19 @@ command /tell [<offline player>] [<text>]:
 			send "&dYou are now in a private conversation with &e%argument 1%"
 			set {private.%player%} to "%argument 1%"
 			set {db_channel.%player%} to "private"
-			
 		argument 2 is set:
 			send "&d%player% ➽ %argument 1%: %argument 2%" to player
 			loop all players:
 				loop-player is argument 1
 				set {_found} to true
-				
 			{_found} is set:
 				send "&d%player% ➽ %argument 1%: %argument 2%" to argument 1
 				{db_alerts.on.%argument 1%} is true:
 					play level up at location of argument 1 with pitch 2
-				
 			{_found} is not set:
 				set {_message} to "&d%player% ➽ %argument 1%: %argument 2%"
 				execute console command "privatepush %argument 1% %{_message}%"
-				
-				
+
 command /fishslap <text>:
 	permission: obam.free
 	trigger:
@@ -372,7 +311,6 @@ command /fishslap <text>:
 		{_wait} is less than 4 seconds:
 			send "&cYou are slapping too much! Calm down D:" to player
 			stop
-		
 		send "&aYou just slapped &e%argument%&a!"
 		set {cool.fish.%player%} to now
 		loop all players:
@@ -382,18 +320,5 @@ command /fishslap <text>:
 			play slime attack at location of loop-player with pitch 1
 			send "&e%player% &ajust slapped you with a giant fish!" to loop-player
 			stop
-			
 		{_found} is not set:
 			forward command "fishcatch %argument% %player%" to console
-			
-		
-				
-		
-	
-	
-		
-				
-
-		
-			
-	
