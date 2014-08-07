@@ -37,7 +37,7 @@ on join:
 		
 on chat:
 	cancel event
-	player is "IcecreamCow" or "Electric_Hamster" or "ISMOOCH":
+	player is "IcecreamCow" or "Electric_Hamster" or "ISMOOCH" or "GloriousKoch":
 		set {_pre} to "{@p} &d[A] %player%"
 	{_pre} is not set:
 		player is "OrigamiJoe" or "Deathtomb8953":
