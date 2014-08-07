@@ -1,0 +1,23 @@
+on explosion:
+	world is "mailman":
+		cancel event
+		create safe explosion with force 5
+		loop all blocks in radius 3:
+			loop-block is stone brick:
+				set loop-block to air
+			loop-block is redstone repeater:
+				set loop-block to air
+		loop all blocks in radius 5:
+			loop-block is redstone torch:
+				set loop-block to air
+			loop-block is dirt:
+				set loop-block to grass
+
+on click on button:
+	world is "mailman":
+		make player execute command "/time set 16000"
+		
+on click on sign:
+	world is "mailman":
+		player is "WCG_Elite":
+			make player execute command "/flyspeed -10"

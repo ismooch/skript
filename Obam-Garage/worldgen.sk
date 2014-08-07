@@ -1,0 +1,21 @@
+command /worldgen [<text>]:
+	trigger:
+		argument 1 is not set:
+			message "Pick a world foo"
+			stop
+		execute console command "mv clone tacocart tacocart%argument 1%"
+		execute console command "mv confirm"
+#		execute console command "mv monsters false"
+#		execute console command "mv weather false"
+#		execute console command "mv animals false"
+
+command /worlddel [<text>]:
+	trigger:
+		argument 1 is not set:
+			message "Pick a world foo"
+			stop
+		execute console command "mv delete tacocart%argument 1%"
+		execute console command "mv confirm"
+#		execute console command "mv monsters false"
+#		execute console command "mv weather false"
+#		execute console command "mv animals false"

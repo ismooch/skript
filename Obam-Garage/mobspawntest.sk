@@ -1,0 +1,69 @@
+command /plop [<text>]:
+	trigger:
+		{hostilemobs::creeper} is not set:
+			set {hostilemobs::creeper} to creeper
+		{hostilemobs::wither} is not set:
+			set {hostilemobs::wither} to wither
+		{hostilemobs::witch} is not set:
+			set {hostilemobs::witch} to witch
+		set {_type} to "%argument 1%"
+		set {_spawn} to {hostilemobs::%{_type}%}
+		spawn {_spawn} at location of player
+		message "Spawning %{_spawn}%"
+
+command /plop2 [<text>]:
+	trigger:
+		spawn creeper at location of player
+		message "Spawning stuffs"
+
+command /plop3 [<text>]:
+	trigger:
+		set {_ranmob} to random element of {hostilemobs::*}
+		spawn {_ranmob} at location of player
+		message "Spawning %{_ranmob}%"
+		
+command /ploploop [<text>]:
+	trigger:
+		loop {hostilemobs::*}:
+			set {_mob} to loop-value
+			spawn {_mob} at location of player
+			message "Spawning %{_mob}%"	
+
+command /ploplist:
+	trigger:
+		message "%{hostilemobs::*}%"	
+
+command /plopload:
+	trigger:
+		{hostilemobs::creeper} is not set:
+			set {hostilemobs::creeper} to creeper
+		{hostilemobs::spider} is not set:
+			set {hostilemobs::spider} to spider
+		{hostilemobs::zombie} is not set:
+			set {hostilemobs::zombie} to zombie
+		{hostilemobs::skeleton} is not set:
+			set {hostilemobs::skeleton} to skeleton
+		{hostilemobs::slime} is not set:
+			set {hostilemobs::slime} to slime
+		{hostilemobs::zombiepigman} is not set:
+			set {hostilemobs::zombiepigman} to zombie pigman
+		{hostilemobs::cavespider} is not set:
+			set {hostilemobs::cavespider} to cave spider
+		{hostilemobs::silverfish} is not set:
+			set {hostilemobs::silverfish} to silverfish
+		{hostilemobs::blaze} is not set:
+			set {hostilemobs::blaze} to blaze
+		{hostilemobs::magmacube} is not set:
+			set {hostilemobs::magmacube} to magma cube
+		{hostilemobs::witch} is not set:
+			set {hostilemobs::witch} to witch
+		{hostilemobs::witherskeleton} is not set:
+			set {hostilemobs::witherskeleton} to wither skeleton
+		{hostilemobsproper::wither} is not set:
+			set {hostilemobsproper::wither} to wither
+		{hostilemobsproper::ghast} is not set:
+			set {hostilemobsproper::ghast} to ghast
+			
+command /entitycheck:
+	trigger:
+		send "%type of target entity%"

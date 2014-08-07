@@ -1,0 +1,38 @@
+{alert.fronts.%loop-player%}							If you want to here alerts
+{alert.notify.owner.%loop-player%}						Current qued owner message
+{availableland.%player%}								Total slots owned
+{bed.%player%.wild}										Location of your bed
+{bed.owner.%event-block%}								who ownes the bed
+{bypassland.%player%}									lets you bypass protections
+{chunk.%{_chunk}%}										No point, missing .live
+{chunk.%{_chunk}%.%{_player}%}							No point, missing .live
+{chunks.claim.count.%player%}							Running total of slots claimed ever, used to help name
+{chunk.live.%chunk at location of player%}				Owner of the chunk
+{chunk.live.%chunk at location of player%.%player%}		Allowed players to bypass protection
+{chunk.name.%chunk at location of player%}				The name of the chunk
+{claimedland.%player%}									Total slots used
+{first.claim.%player%}									Toggle for free Slot
+{home.%player%.wild}									location for /home
+{land.%{_chunk}%::*}									No point, missing .live
+{land.live.%chunk at location of player%::*}			list of all people that have been added (add is now gone)
+{land.unclaim.%loop-player%}							Line 58 & 68 is unneeded?
+{loc.chunks.%player%::*}								Stores spawn location in each chunk
+{name.list.%player%::*}									Only used line 18 (clear) and 255 (set)
+{owned.chunks.%player%::*}								list of currently owned chunks
+{played.%player%}										Have they ever played
+{reset.%player%.betamove}								initial flag setup 1
+{reset.%player%.betamove2}								initial flag setup 2
+{reset.%player%.betamove3}								initial flag setup 3
+{reset.%player%.betamove4}								initial flag setup 4
+{town.spawn}											location of town spawn
+
+
+lines 264 - 270 review - unneeded
+
+
+
+
+
+
+
+	

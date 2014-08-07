@@ -1,0 +1,350 @@
+#FBS = Fronts Barter System
+#	
+#	
+#
+
+command /itemalias [<text>] [<text>] [<text>] [<text>]:
+	permission: obam.admin
+	usage: &c/itemalias [add/remove] (sign name) (alias) (item)
+	aliases: /ia
+	trigger:
+		argument 1 is not set:
+			send "&7Correct usage is /itemalias [add/remove] [alias] (item)" to player
+		argument 1 is "help" or "h":
+			message "&3--[&6&lAlias Help&3]--"
+			message "&cRequired = [] Optional = ()"
+			message "&a * /itemalias [list/l] (alias)"
+			message "&7 Shows you what item is assigned to the specified alias."
+			message "&7 If (alias) is left blank, gives you list of all aliases."
+			message "&a * /itemalias [list/l] [check/c] [item]"
+			message "&7 Retrieves all know aliases for an item."
+			message "&a * /itemalias [add/remove] [alias] (item)"
+			message "&7 Adds or removes an alias."
+			stop
+		argument 1 is "list" or "l":
+			argument 2 is not set:
+				send "&4List alias (a) or real (r)?" to player
+				stop
+			argument 2 is "check" or "c":
+				set {_check} to argument 4
+				send "&3--[&6&lKnown Aliases for &7%{_check}%&3]--"
+				loop {item.alias::*}:
+					loop-value is {_check}:
+						message "&7%loop-index%"
+				loop {item.real::*}:
+					loop-value is {_check}:
+						message "&7%loop-index%"
+				stop
+			argument 2 is "alias" or "a":
+				argument 3 is not set:
+					send "&3--[&6&lKnown Aliases&3]--"
+					loop {item.alias::*}:
+						send "&7%loop-index% - %loop-value%" to player
+					stop
+				set {_item} to argument 3
+				send "&3--[&6&lAssigned item for &7%{_item}%&3]--"
+				loop {item.alias::*}:
+					loop-value is {_item}:
+						set {_alias} to loop-index
+						send "&7%{_alias}%" to player
+				stop	
+			argument 2 is "real" or "r":
+				argument 3 is not set:
+					send "&3--[&6&lKnown Real Items&3]--"
+					loop {item.real::*}:
+						send "&7%loop-index% - %loop-value%" to player
+					stop
+				set {_item} to argument 3
+				send "&3--[&6&lAssigned Aliases for &7%{_item}%&3]--"
+				loop {item.real::*}:
+					loop-value is {_item}:
+						set {_alias} to loop-index
+						send "&7%{_alias}%" to player
+				stop
+		argument 1 is "add" or "a":
+			argument 2 is not set:
+				send "&4Add alias (a) or real (r)?" to player
+				stop
+			argument 2 is "alias" or "a":
+				argument 3 is not set:
+					send "&4What will they type on the sign?" to player
+					stop
+				argument 4 is not set:
+					send "&4What will show on the sign for &7%argument 3%&4?" to player
+					stop
+				set {_char.test} to the length of argument 3
+				{_char.test} is greater than 15:
+					message "&4You must limit your aliases to 15 characters!"
+					stop
+				set {_char.test} to the length of argument 4
+				{_char.test} is greater than 15:
+					message "&4You must limit your aliases to 15 characters!"
+					stop
+				set {_char.test} to argument 4
+				{_char.test} contains " ":
+					message "&cDo Not Use Spaces for Argument 4, use underscores."
+					stop
+				{item.alias::%argument 3%} exists:
+					set {_alias} to {item.alias::%argument 3%}
+					message "&4The alias of &7%argument 3%&4 already exists for &7%{_alias}%&4, you must remove the current alias first!"
+					stop
+				set {item.alias::%argument 3%} to argument 4
+				message "&4The alias of &7%argument 3%&4 has been set for &7%argument 4%"
+			argument 2 is "real" or "r":
+				argument 3 is not set:
+					send "&4What will the sign say?" to player
+					stop
+				argument 4 is not set:
+					send "&4What is the real item for &7%argument 3%&4?" to player
+					stop
+				set {_char.test} to the length of argument 3
+				{_char.test} is greater than 15:
+					message "&4You must limit your aliases to 15 characters!"
+					stop
+				set {_char.test} to argument 3
+				{_char.test} contains " ":
+					message "&cDo Not Use Spaces for Argument 3, use underscores."
+					stop					
+				{item.real::%argument 3%} exists:
+					set {_alias} to {item.real::%argument 3%}
+					message "&4The alias of &7%argument 3%&4 already exists for &7%{_alias}%&4, you must remove the current alias first!"
+					stop
+				set {item.real::%argument 3%} to argument 4
+				message "&4The real item of &7%argument 3%&4 has been set for &7%argument 4%"
+		argument 1 is "remove" or "r":
+			argument 2 is not set:
+				send "&4Remove alias (a) or real (r)?" to player
+				stop
+			argument 2 is "alias" or "a":
+				argument 3 is not set:
+					message "&4Remove what?"
+					stop
+				{item.alias::%argument 3%} exists:
+					delete {item.alias::%argument 3%}
+					message "&4The alias of &7%argument 3%&4 has been removed!"
+					stop
+				message "&4The alias of &7%argument 3%&4 does not exist, please use &7/itemalias list&4!"
+				stop
+			argument 2 is "real" or "r":
+				argument 3 is not set:
+					message "&4Remove what?"
+					stop
+				{item.real::%argument 3%} exists:
+					delete {item.real::%argument 3%}
+					message "&4The real listing of &7%argument 3%&4 has been removed!"
+					stop
+				message "&4The real listing of &7%argument 3%&4 does not exist, please use &7/itemalias list&4!"
+				stop
+
+on sign change:
+	set {_line1} to line 1
+	{_line1} contains "b" and ":":
+#		message "Could be a shop.."
+		set {_line3} to line 3
+		{_line3} contains "p" and ":":
+#			message "Yeah, it's a shop"
+			replace all "b","u","y",":" and " " with "" in {_line1}
+#			message "%{_line1}%"
+			set {_buyline} to {_line1} parsed as an integer
+#			message "%{_buyline}%"
+			{_buyline} is not set:
+				message "&cYou must enter a number on the &aFirst&c line of the sign!"
+				set line 1 to "No Number"
+				set line 2 to ""
+				set line 3 to ""
+				set line 4 to ""
+				stop
+			{_buyline} is less than 1:
+				message "&cYou must enter a positive number on the &aFirst&c line of the sign!"
+				set line 1 to "Less than 1"
+				set line 2 to ""
+				set line 3 to ""
+				set line 4 to ""
+				stop
+			set line 1 to "&1Buy : %{_buyline}%"
+			set {_buy.backup} to line 2
+			set {_buyitem} to line 2 parsed as an item
+#			message "%{_buyitem}%"
+			{_buyitem} is not set:
+				{item.real::%{_buy.backup}%} does not exist:
+					{item.alias::%{_buy.backup}%} does not exist:
+						message "&a%{_buy.backup}%&c is not a recognised item, try using an item ID"
+						set line 1 to ""
+						set line 2 to "Use /shopwhat"
+						set line 3 to ""
+						set line 4 to ""
+						stop
+					set {_buyitem} to {item.alias::%{_buyitem}%}
+				set {_buyitem} to {_buy.backup}
+			set line 2 to "%{_buyitem}%"
+			replace all "p","a","y",":" and " " with "" in {_line3}
+#			message "%{_line3}%"
+			set {_payline} to {_line3} parsed as an integer
+#			message "%{_payline}%"
+			{_payline} is not set:
+				message "&cYou must enter a number on the &aThird&c line of the sign!"
+				set line 1 to ""
+				set line 2 to ""
+				set line 3 to "No Number"
+				set line 4 to ""
+				stop
+			{_payline} is less than 1:
+				message "&cYou may not enter a negative number on the &aThird&c line of the sign!"
+				set line 1 to ""
+				set line 2 to ""
+				set line 3 to "Less than 1"
+				set line 4 to ""
+				stop
+			set line 3 to "&4Pay : %{_payline}%"
+			set {_pay.backup} to line 4
+			set {_payitem} to line 4 parsed as an item
+#			message "%{_payitem}%"
+			{_payitem} is not set:
+				{item.real::%{_pay.backup}%} does not exist:
+					{item.alias::%{_pay.backup}%} does not exist:
+						message "&a%{_pay.backup}%&c is not a recognised item, try using an item ID"
+						set line 1 to ""
+						set line 2 to ""
+						set line 3 to ""
+						set line 4 to "Use /shopwhat"
+						stop
+					set {_payitem} to {item.alias::%{_pay.backup}%}
+				set {_payitem} to {_pay.backup}
+			set line 4 to "%{_payitem}%"
+			set {shop.list::%location of block%} to player
+			message "&7Shop of %{shop.list::%location of block%}% set at %location of block%"
+			stop
+		message "line 3 fails shop check"
+		stop
+	message "line 1 fails shop check"
+	stop
+
+on break of a sign:
+	set {_loc} to location of event-block
+	{shop.list::%{_loc}%} exists:
+		message "&cShop of %{shop.list::%location of event-block%}% set at %{_loc}% has been destroyed"
+		delete {shop.list::%{_loc}%}
+		
+on break:
+	block is sign:
+		stop
+	loop blocks in radius 1:
+		set {_loc} to location of loop-block
+		{shop.list::%{_loc}%} exists:
+			cancel event
+			message "&cThere is a Player Shop near by. Remove it before destroying this block."
+			stop
+
+command /loopshop:
+	trigger:
+		loop {shop.list::*}:
+			message "%loop-index% - %loop-value%"
+		
+command /shopsbegone:
+	trigger:
+		delete {shop.list::*}
+
+on right click on a sign:
+	set {_shop.check} to location of block
+	{shop.list::%{_shop.check}%} exists:
+		cancel event
+		block above event-block is not chest or trapped chest:
+			message "&cMissing Buy chest above sign!"
+			stop
+		block below event-block is not chest or trapped chest:
+			message "&cMissing Sell chest below sign!"
+			stop
+		{fronts.fbs.confirm.%player%.%{_shop.check}%} is true:
+			set {_line1} to line 1
+			replace all "b","u","y",":","[","]","&0","&1" and " " with "" in {_line1}
+			set {_buyline} to {_line1} parsed as an integer
+			set {_buyitem} to line 2 parsed as an item
+			{_buyitem} is not set:
+				set {_buyitem} to {item.real::%{_buyitem}%} parsed as an item
+			set {_line3} to line 3
+			replace all "p","a","y",":","[","]","&0","&4" and " " with "" in {_line3}
+			set {_payline} to {_line3} parsed as an integer
+			set {_payitem} to line 4 parsed as an item
+			{_payitem} is not set:
+				set {_payitem} to {item.real::%{_payitem}%} parsed as an item
+			block above event-block has {_buyline} of {_buyitem}:
+				player doesn't have space for {_buyline} of {_buyitem}:
+					message "&cYou do not have enough room for this purchase."
+					stop
+				block below event-block doesn't have space for {_payline} of {_payitem}:
+					message "&cSeller is out of space for your items."
+					stop
+				player has {_payline} of {_payitem}:
+					remove {_payline} of {_payitem} from player
+					give {_payline} of {_payitem} to block below event-block
+					remove {_buyline} of {_buyitem} from block above event-block
+					give {_buyline} of {_buyitem} to player
+					message "&aYou have purchased &f%{_buyline}% &7%{_buyitem}% &afor &f%{_payline}% &7%{_payitem}%&a."
+					delete {fronts.fbs.confirm.%player%.%{_shop.check}%}
+					stop
+				message "&cYou do not have enough items to pay."
+				stop
+			message "&cSeller does not have enough to trade."
+			stop
+		set {_line1} to line 1
+		replace all "b","u","y",":","[","]","&0","&1" and " " with "" in {_line1}
+		set {_buyline} to {_line1} parsed as an integer
+		set {_buyitem} to line 2 parsed as an item
+		{_buyitem} is not set:
+			set {_buyitem} to {item.real::%{_buyitem}%} parsed as an item
+		set {_line3} to line 3
+		replace all "p","a","y",":","[","]","&0","&4" and " " with "" in {_line3}
+		set {_payline} to {_line3} parsed as an integer
+		set {_payitem} to line 4 parsed as an item
+		{_payitem} is not set:
+			set {_payitem} to {item.real::%{_payitem}%} parsed as an item
+#		message "%{_buyline}%"
+#		message "%{_buyitem}%"
+#		message "%{_payline}%"
+#		message "%{_payitem}%"
+		block above event-block has {_buyline} of {_buyitem}:
+			player doesn't have space for {_buyline} of {_buyitem}:
+				message "&cYou do not have enough room for this purchase."
+				stop
+			block below event-block doesn't have space for {_payline} of {_payitem}:
+				message "&cSeller is out of space for your items."
+				stop
+			player has {_payline} of {_payitem}:
+				set {fronts.fbs.confirm.%player%.%{_shop.check}%} to true
+				message " "
+				message "&4&lNOTE: &c&lEnchanted Items are broken! Please click"
+				message " &c&land read the following link BEFORE making this purchase!"
+				message " "
+				message "&3&l http://obam.co/barterwarning"
+				message " "
+				message "&aPlease click sign again to confirm purchase."
+				wait 5 seconds
+				delete {fronts.fbs.confirm.%player%.%{_shop.check}%}
+				stop
+			message "&cYou do not have enough items to pay."
+			stop
+		message "&cSeller does not have enough to trade."
+		stop
+		
+# current progress stops here		
+		# next - work on right click of a sign
+		# then on sign break, cancel if shop sign
+		# possible character lookup for aliases (check first letter for symbol)
+		
+#	{item.alias::%{_lookup}%} is set:
+#		set line 2 of block to {item.alias::%{_lookup}%}
+#		stop
+#	loop {item.alias::*}:
+#		{item.alias::%loop-index%::%{_lookup}%} is set:
+#			set line 2 of block to {item.alias::%loop-index%}
+#			stop
+			
+#	cancel event
+#	send "&e%{_lookup}% &c is not a recognized item!" to player
+#	set line 1 to "&9Buy : %{_buyline}%"
+#	set line 3 to "&cPay : %{_payline}%"
+	
+#	set {_number} to 0
+#	while block at location of {_chestshop.location} can hold {_number} of wooden sword:
+#		add 1 to {_number}
+#	message "Block has %{_number}% of spaces left!"
