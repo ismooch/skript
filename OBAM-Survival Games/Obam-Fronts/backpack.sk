@@ -13,12 +13,6 @@ on script load:
 		set {db_customitems::backpack} to {@crudepack}
 	{count.backpacks} is not set:
 		set {count.backpacks} to 1
-	set {db_ci.items::01.Crude Pack} to "i;ink sack;n;&a&b&k&a&3Crude Pack;l;&6The crude version of||&6the backpack;c;sudo PLAYER bp g crudepack 1"
-	set {db_ci.items::10.Crude Pack} to "i;16 ink sack;n;&a&b&k&a&3Crude Pack;l;&6The crude version of||&6the backpack;c;sudo PLAYER bp g crudepack 16"
-	set {db_ci.items::19.Crude Pack} to "i;64 ink sack;n;&a&b&k&a&3Crude Pack;l;&6The crude version of||&6the backpack;c;sudo PLAYER bp g crudepack 64"
-	set {db_ci.items::02.Ender Pack} to "i;ender pearl;n;&a&b&k&a&3EnderPack;l;&6Open your Ender Chest||&6anywhere!|| ||&5&oRight Click to open||&5&oYour portable Ender Chest;c;sudo PLAYER bp g enderpack 1"
-	set {db_ci.items::11.Ender Pack} to "i;16 ender pearl;n;&a&b&k&a&3EnderPack;l;&6Open your Ender Chest||&6anywhere!|| ||&5&oRight Click to open||&5&oYour portable Ender Chest;c;sudo PLAYER bp g enderpack 16"
-	set {db_ci.items::20.Ender Pack} to "i;64 ender pearl;n;&a&b&k&a&3EnderPack;l;&6Open your Ender Chest||&6anywhere!|| ||&5&oRight Click to open||&5&oYour portable Ender Chest;c;sudo PLAYER bp g enderpack 64"
 
 on craft of ink sack:
 	name of event-item is "&3Crude Pack"

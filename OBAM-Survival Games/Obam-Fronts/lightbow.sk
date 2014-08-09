@@ -4,9 +4,6 @@ options:
 on script load:
 	register new shaped recipe for {@lightbow} using glowstone dust, glowstone dust, glowstone dust, glowstone dust, bow, glowstone dust, glowstone dust, glowstone dust, glowstone dust
 
-	set {db_ci.items::22.LB} to "i;bow;n;&3Bow of Light;l;&6Light your way from afar||&6with this magical bow.|| ||&c-1 Torch Per Use;c;sudo PLAYER lightbow"
-	
-	
 command /lightbow:
 	permission: obam.smod
 	trigger:

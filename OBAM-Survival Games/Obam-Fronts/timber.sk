@@ -3,7 +3,6 @@ options:
 
 on script load:
 	set {db_shop.items::Timber Axe} to "i;diamond axe;n;&a&b&k&a&3Timber Axe;l;&6This axe makes all logs within a 10 block radius||&6go timber!|| ||&2StickyItem ©|| ||&5&oClick to purchase|| ||&3&lCost:||&e5,000 Tickets;c;sudo PLAYER timberpurchase"
-	set {db_ci.items::21.TA} to "i;diamond axe;n;&a&b&k&a&3Timber Axe;l;&6This axe makes all logs within a 10 block radius||&6go timber!;c;sudo PLAYER timber"
 
 command /timberpurchase:
 	permission: obam.free

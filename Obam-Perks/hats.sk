@@ -1,63 +1,95 @@
 #hats
-options:
-	betahat: i;iron pressure plate;n;&3&lBeta Supporter Hat;l;&7This Special hat is for all||&7members who supported||&7during our beta period||&7This hat is a thank you from||&7the &eOBAM &7Staff for those||&7that helped us when||&7we were starting. THANK YOU!;c;hatreward betahat %player%
-	free: i;dirt;n;&3&lDirt Hat;l;&7This classy dirt||&7Helm is free for||&7all who wish to show||&7off their frugal||&7style!;c;hatreward dirt %player%
-	sup1: i;iron block;n;&3&lIron Block;l;&7This Iron hat has||&7been crafted from the||&7finest Iron Golem remains!|| ||&5&oThis Hat is for||&5&oCurrent supporters;c;hatreward supporter1 %player%
-	sup2: i;gold block;n;&3&lGold Block;l;&7Show your wealth with||&7with the cap of beauty||&7with this shiny gold||&7block hat!|| ||&5&oThis hat is for||&5&oCurrent supporter;c;hatreward supporter2 %player%
-	sup3: i;diamond block;n;&3&lDiamond Block;l;&7Show off what others||&7craze with the powerfull||&7Diamond block hat|| ||&5&oThis hat is for||&5&oCurrent supporters;c;hatreward supporter3 %player%
+#	sup1: i;iron block;n;&3&lIron Block;l;&7This Iron hat has||&7been crafted from the||&7finest Iron Golem remains!|| ||&5&oThis Hat is for||&5&oCurrent supporters;c;hatreward supporter1 %player%
+#	sup2: i;gold block;n;&3&lGold Block;l;&7Show your wealth with||&7with the cap of beauty||&7with this shiny gold||&7block hat!|| ||&5&oThis hat is for||&5&oCurrent supporter;c;hatreward supporter2 %player%
+#	sup3: i;diamond block;n;&3&lDiamond Block;l;&7Show off what others||&7craze with the powerfull||&7Diamond block hat|| ||&5&oThis hat is for||&5&oCurrent supporters;c;hatreward supporter3 %player%
 
-	
-command /hat:
-	permission: obam.free
-	executable by: players
-	trigger:
-		show "s;1;{@free};s;2;{@sup1};s;3;{@sup2};s;4;{@sup3};s;5;{@betahat}" with 3 rows named "&9&lOBAM &9Hats" to player
-		
-command /hatreward <text> <player>:
-	executable by: console
-	trigger:
-		argument 1 is "betahat":
-			player-argument has permission "obam.beta.hat":
-				send "&aYou now have a hat :D" to player-argument
-				execute console command "hatgive iron pressure plate %player-argument%"
-		
-		argument 1 is "dirt":
-			send "&aYou now have a hat :D" to player-argument
-			execute console command "hatgive dirt %player-argument%"
-			
-		argument 1 is "supporter1":
-			player-argument has permission "obam.supporter":
-				send "&aYou now have a hat :D" to player-argument
-				execute console command "hatgive iron block %player-argument%"
-				
-		argument 1 is "supporter2":
-			player-argument has permission "obam.supporter":
-				send "&aYou now have a hat :D" to player-argument
-				execute console command "hatgive gold block %player-argument%"
-				
-		argument 1 is "supporter3":
-			player-argument has permission "obam.supporter":
-				send "&aYou now have a hat :D" to player-argument
-				execute console command "hatgive diamond block %player-argument%"
-				
+on script load:
+	set {db_perk.hats::01.dirt} to "i;dirt;n;&3&lDirt Hat;l;&6This classy dirt helm is free for all who||&6wish to show off their frugal style!;c;sudo PLAYER hat dirt"
+	set {db_perk.hats::02.beta} to "check"
+	set {db_perk.hats::02.beta::beta} to "i;iron pressure plate;n;&3&lBeta Supporter Hat;l;&6This Special hat is for all members who supported||&6during our beta period and is a thank you from the||&eOBAM &6Staff for those that helped us when we were starting.||&6THANK YOU!;c;sudo PLAYER hat beta"
+	set {db_perk.hats::02.beta::error} to "i;iron pressure plate;n;&3&lBeta Supporter Hat;l;&6This Special hat is for all members who supported||&6during our beta period and is a thank you from the||&eOBAM &6Staff for those that helped us when we were starting.||&6THANK YOU!|| ||&cThis hat is only available to our Beta Supporters.;c;sudo PLAYER hat error"
+	set {db_perk.hats::03.quartz} to "check"
+	set {db_perk.hats::03.quartz::quartz} to "i;quartz block;n;&3&lQuartz Hat;l;&6Description;c;sudo PLAYER hat quartz"
+	set {db_perk.hats::03.quartz::error} to "i;quartz block;n;&3&lQuartz Hat;l;&6Description|| ||&cThis hat is only available to our Supporters.;c;sudo PLAYER hat error"
+	set {db_perk.hats::04.cactus} to "check"
+	set {db_perk.hats::04.cactus::cactus} to "i;cactus;n;&3&lPrickly Hat;l;&6Where this hat when you're feeling a bit....Prickly!;c;sudo PLAYER hat cactus"
+	set {db_perk.hats::04.cactus::error} to "i;cactus;n;&3&lPrickly Hat;l;&6Where this hat when you're feeling a bit....Prickly!|| ||&cThis hat must be purchased from the OBAMCraft shop.|| ||&6Use &f/buy &6to purchase the &3Prickly Hat|| ||&6Price: &a$2.00;c;sudo PLAYER hat cactus"
 
-command /hatgive <item> [<player>]:
-	executable by: players and console
+command /cleardbhats:
 	permission: obam.admin
 	trigger:
-
-
-		if name of player-argument's helmet is "hat":
-			set player-argument's helmet to arg 1
-			set name of player-argument's helmet to "hat"
-			stop
-		player-argument doesn't have space for player-argument's helmet:
-			send "&cYour inventory is full :(" to player-argument
-			stop
-		give player-argument's helmet to player-argument
-		set player-argument's helmet to arg 1
-		set name of player-argument's helmet to "hat"
+		delete {db_perk.hats::*}
+		message "You just cleared all the hat variables, please reload the script hats.sk"
 		
+command /hatmenu [<text>]:
+	trigger:
+		loop {db_perk.hats::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+			set {_what} to loop-value
+			loop-index is "02.beta":
+				set {_what} to {db_perk.hats::02.beta::error}
+				player has permission "obam.beta.hat":
+					set {_what} to {db_perk.hats::02.beta::beta}
+			loop-index is "03.quartz":
+				set {_what} to {db_perk.hats::03.quartz::error}
+				player has permission "obam.supporter":
+					set {_what} to {db_perk.hats::03.quartz::quartz}
+			loop-index is "04.cactus":
+				set {_what} to {db_perk.hats::04.cactus::error}
+				{db_hat.purchase.cactus.%player%} is true:
+					set {_what} to {db_perk.hats::04.cactus::cactus}
+				player has permission "obam.smod":
+					set {_what} to {db_perk.hats::04.cactus::cactus}
+			{_chest} is set:
+				set {_chest} to "%{_chest}%;s;%{_count}%;%{_what}%"
+			{_chest} is not set:
+				set {_chest} to "s;%{_count}%;%{_what}%"
+		replace "PLAYER" in {_chest} with "%player%"
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show "%{_chest}%" with {_size} row named "&9&lHat Rack" to player
+
+command /hat [<text>]:
+	trigger:
+		argument 1 is not set:
+			message "&cPlease use &7/OBAM &cto access your Hat Rack."
+			stop
+		argument 1 is "error":
+			message "&cThis hat is not available to you."
+			stop
+		argument 1 is "dirt":
+			set {_hat} to dirt
+		argument 1 is "beta":
+			player has permission "obam.beta.hat":
+				set {_hat} to iron pressure plate
+		argument 1 is "quartz":
+			player has permission "obam.supporter":
+				set {_hat} to quartz block
+		argument 1 is "cactus":
+			{db_hat.purchase.cactus.%player%} is true:
+				set {_hat} to cactus
+			player has permission "obam.smod":
+				set {_hat} to cactus
+		send "&aYou now have a hat :D" to player
+		name of player's helmet is "hat":
+			set player's helmet to {_hat}
+			set name of player's helmet to "hat"
+			stop
+		player doesn't have space for player's helmet:
+			send "&cYour inventory is full :(" to player
+			stop
+		give player's helmet to player
+		set player's helmet to {_hat}
+		set name of player's helmet to "hat"
+
 command /hatadd <item>:
 	permission: obam.admin
 	trigger:
@@ -68,8 +100,8 @@ command /hatshow:
 	trigger:
 		loop {hat.items.list::*}:
 			send "%loop-value%" to player
-every 0.3 seconds:
 
+every 0.3 seconds:
 	loop all players:
 		loop-player has anything named "hat":
 			remove anything named "hat" from loop-player
@@ -78,14 +110,10 @@ every 0.3 seconds:
 on drop:
 	name of event-item is "hat":
 		cancel event
-		
+
 on place:
 	name of player's tool is "hat":
 		cancel event
-
-
-	
-	
 
 command /hattoggle:
 	permission: obam.mod
@@ -106,10 +134,18 @@ command /hattoggle:
 #staff hats constant
 every 1 second:
 	loop all players:
+		set {_bypass} to false
 		{hat.off.%loop-player%} is true:
-			stop
-		loop-player is "ISMOOCH":
-			set loop-player's helmet to command block named "&d&lSmooch's Sassy Hat"
-		loop-player is "Electric_Hamster":
-			set loop-player's helmet to sponge named "&b&lThe Hamster Hat"
-		
+			set {_bypass} to true
+		{_bypass} is false:
+			loop-player is "ISMOOCH":
+				set loop-player's helmet to command block named "&d&lSmooch's Sassy Hat"
+			loop-player is "Electric_Hamster":
+				set loop-player's helmet to sponge named "&b&lThe Hamster Hat"
+
+command /hatpurchase <text> <text>:
+	permission: obam.admin
+	trigger:
+		argument 1 is "cactus":
+			set {db_hat.purchase.cactus.%argument 2%} to true
+			send "%Argument 2% has purchased the hat Prickly Hat" to console

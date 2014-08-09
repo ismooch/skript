@@ -1,0 +1,57 @@
+on script load:
+	set {db_ci.items::01.Crude Pack} to "i;ink sack;n;&a&b&k&a&3Crude Pack;l;&6The crude version of||&6the backpack;c;sudo PLAYER bp g crudepack 1"
+	set {db_ci.items::02.Ender Pack} to "i;ender pearl;n;&a&b&k&a&3EnderPack;l;&6Open your Ender Chest||&6anywhere!|| ||&5&oRight Click to open||&5&oYour portable Ender Chest;c;sudo PLAYER bp g enderpack 1"
+	set {db_ci.items::03.capture.ball} to "i;snowball;n;&3Projeggtile Capture Ball;l;&6Capture the essence of various creatures||&6by tossing your balls at them.;c;sudo PLAYER cb capture 1"
+	set {db_ci.items::04.creeper.ball} to "i;snowball;n;&3Projeggtile &2Creeper &3Ball;l;&6Heavily reinforced to prevent even the||&6most explosive creepers from escaping!;c;sudo PLAYER cb creeper 1"
+	set {db_ci.items::05.skeleton.ball} to "i;snowball;n;&3Projeggtile &7Skeleton &3Ball;l;&6An ironic prison of bones made to hold||&6a skeleton, made from its own kin!;c;sudo PLAYER cb skeleton 1"
+	set {db_ci.items::06.zombie.ball} to "i;snowball;n;&3Projeggtile &aZombie &3Ball;l;&6Layered in flesh to make even the||&6loneliest zombie feel at home!;c;sudo PLAYER cb zombie 1"
+	set {db_ci.items::07.pigman.ball} to "i;snowball;n;&3Projeggtile &aZombie &dPigman &3Ball;l;&6A containment area with a nugget inside||&6to lure and keep the pigman content!;c;sudo PLAYER cb pigman 1"
+	set {db_ci.items::08.spider.ball} to "i;snowball;n;&3Projeggtile &4Spider &3Ball;l;&6Tangles an eight legged bugger||&6into a silky woven sack!;c;sudo PLAYER cb spider 1"
+	set {db_ci.items::09.blank} to "i;air"
+	set {db_ci.items::10.Crude Pack} to "i;16 ink sack;n;&a&b&k&a&3Crude Pack;l;&6The crude version of||&6the backpack;c;sudo PLAYER bp g crudepack 16"
+	set {db_ci.items::11.Ender Pack} to "i;16 ender pearl;n;&a&b&k&a&3EnderPack;l;&6Open your Ender Chest||&6anywhere!|| ||&5&oRight Click to open||&5&oYour portable Ender Chest;c;sudo PLAYER bp g enderpack 16"
+	set {db_ci.items::12.capture.ball} to "i;16 snowball;n;&3Projeggtile Capture Ball;l;&6Capture the essence of various creatures||&6by tossing your balls at them.;c;sudo PLAYER cb capture 16"
+	set {db_ci.items::13.creeper.ball} to "i;16 snowball;n;&3Projeggtile &2Creeper &3Ball;l;&6Heavily reinforced to prevent even the||&6most explosive creepers from escaping!;c;sudo PLAYER cb creeper 16"
+	set {db_ci.items::14.skeleton.ball} to "i;16 snowball;n;&3Projeggtile &7Skeleton &3Ball;l;&6An ironic prison of bones made to hold||&6a skeleton, made from its own kin!;c;sudo PLAYER cb skeleton 16"
+	set {db_ci.items::15.zombie.ball} to "i;16 snowball;n;&3Projeggtile &aZombie &3Ball;l;&6Layered in flesh to make even the||&6loneliest zombie feel at home!;c;sudo PLAYER cb zombie 16"
+	set {db_ci.items::16.pigman.ball} to "i;16 snowball;n;&3Projeggtile &aZombie &dPigman &3Ball;l;&6A containment area with a nugget inside||&6to lure and keep the pigman content!;c;sudo PLAYER cb pigman 16"
+	set {db_ci.items::17.spider.ball} to "i;16 snowball;n;&3Projeggtile &4Spider &3Ball;l;&6Tangles an eight legged bugger||&6into a silky woven sack!;c;sudo PLAYER cb spider 16"
+	set {db_ci.items::18.blank} to "i;air"
+	set {db_ci.items::19.Crude Pack} to "i;64 ink sack;n;&a&b&k&a&3Crude Pack;l;&6The crude version of||&6the backpack;c;sudo PLAYER bp g crudepack 64"
+	set {db_ci.items::20.Ender Pack} to "i;64 ender pearl;n;&a&b&k&a&3EnderPack;l;&6Open your Ender Chest||&6anywhere!|| ||&5&oRight Click to open||&5&oYour portable Ender Chest;c;sudo PLAYER bp g enderpack 64"
+	set {db_ci.items::21.TA} to "i;diamond axe;n;&a&b&k&a&3Timber Axe;l;&6This axe makes all logs within a 10 block radius||&6go timber!;c;sudo PLAYER timber"
+	set {db_ci.items::22.LB} to "i;bow;n;&3Bow of Light;l;&6Light your way from afar||&6with this magical bow.|| ||&c-1 Torch Per Use;c;sudo PLAYER lightbow"
+	set {db_ci.items::23.HTP} to "i;diamond pickaxe;n;&a&b&k&a&3HotTouch Pickaxe;l;&6A pickaxe forged from the heart of the Nether||&6with an intense heat to smelt ores while mining.;c;sudo PLAYER ht pick"
+	set {db_ci.items::24.HTA} to "i;diamond axe;n;&a&b&k&a&3HotTouch Axe;l;&6An axe forged from the heart of the Nether||&6with an intense heat to cook logs into charcoal||&6while chopping.;c;sudo PLAYER ht axe"
+	set {db_ci.items::25.HTS} to "i;diamond shovel;n;&a&b&k&a&3HotTouch Shovel;l;&6A shovel forged from the heart of the Nether||&6with an intense heat to cook sand clay and||&6cactus while digging.;c;sudo PLAYER ht shovel"
+	set {db_ci.items::26.blank} to "i;air"
+	set {db_ci.items::27.blank} to "i;air"
+
+command /cleardbci:
+	permission: obam.admin
+	trigger:
+		delete {db_ci.items::*}
+		message "You have cleared all /ci flags, please reload ci.sk to fix them."
+
+command /ci:
+	permission: obam.smod
+	trigger:
+		loop {db_ci.items::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+			{_chest} is set:
+				set {_chest} to "%{_chest}%;s;%{_count}%;%loop-value%"
+			{_chest} is not set:
+				set {_chest} to "s;%{_count}%;%loop-value%"
+			replace "PLAYER" in {_chest} with "%player%"
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show {_chest} with {_size} rows named "&1Custom Items" to player
+		

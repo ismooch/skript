@@ -13,19 +13,6 @@ on script load:
 	register new shaped recipe for {@egg5} using {@egg}, {@egg}, {@egg}, {@egg}, rotten flesh, {@egg}, {@egg}, {@egg}, {@egg}
 	register new shaped recipe for {@egg6} using {@egg}, {@egg}, {@egg}, {@egg}, string, {@egg}, {@egg}, {@egg}, {@egg}
 
-	set {db_ci.items::03.capture.ball} to "i;snowball;n;&3Projeggtile Capture Ball;l;&6Capture the essence of various creatures||&6by tossing your balls at them.;c;sudo PLAYER cb capture 1"
-	set {db_ci.items::12.capture.ball} to "i;16 snowball;n;&3Projeggtile Capture Ball;l;&6Capture the essence of various creatures||&6by tossing your balls at them.;c;sudo PLAYER cb capture 16"
-	set {db_ci.items::04.creeper.ball} to "i;snowball;n;&3Projeggtile &2Creeper &3Ball;l;&6Heavily reinforced to prevent even the||&6most explosive creepers from escaping!;c;sudo PLAYER cb creeper 1"
-	set {db_ci.items::13.creeper.ball} to "i;16 snowball;n;&3Projeggtile &2Creeper &3Ball;l;&6Heavily reinforced to prevent even the||&6most explosive creepers from escaping!;c;sudo PLAYER cb creeper 16"
-	set {db_ci.items::05.skeleton.ball} to "i;snowball;n;&3Projeggtile &7Skeleton &3Ball;l;&6An ironic prison of bones made to hold||&6a skeleton, made from its own kin!;c;sudo PLAYER cb skeleton 1"
-	set {db_ci.items::14.skeleton.ball} to "i;16 snowball;n;&3Projeggtile &7Skeleton &3Ball;l;&6An ironic prison of bones made to hold||&6a skeleton, made from its own kin!;c;sudo PLAYER cb skeleton 16"
-	set {db_ci.items::06.zombie.ball} to "i;snowball;n;&3Projeggtile &aZombie &3Ball;l;&6Layered in flesh to make even the||&6loneliest zombie feel at home!;c;sudo PLAYER cb zombie 1"
-	set {db_ci.items::15.zombie.ball} to "i;16 snowball;n;&3Projeggtile &aZombie &3Ball;l;&6Layered in flesh to make even the||&6loneliest zombie feel at home!;c;sudo PLAYER cb zombie 16"
-	set {db_ci.items::07.pigman.ball} to "i;snowball;n;&3Projeggtile &aZombie &dPigman &3Ball;l;&6A containment area with a nugget inside||&6to lure and keep the pigman content!;c;sudo PLAYER cb pigman 1"
-	set {db_ci.items::16.pigman.ball} to "i;16 snowball;n;&3Projeggtile &aZombie &dPigman &3Ball;l;&6A containment area with a nugget inside||&6to lure and keep the pigman content!;c;sudo PLAYER cb pigman 16"
-	set {db_ci.items::08.spider.ball} to "i;snowball;n;&3Projeggtile &4Spider &3Ball;l;&6Tangles an eight legged bugger||&6into a silky woven sack!;c;sudo PLAYER cb spider 1"
-	set {db_ci.items::17.spider.ball} to "i;16 snowball;n;&3Projeggtile &4Spider &3Ball;l;&6Tangles an eight legged bugger||&6into a silky woven sack!;c;sudo PLAYER cb spider 16"
-
 command /captureball [<text>] [<number>]:
 	aliases: cb
 	permission: obam.smod

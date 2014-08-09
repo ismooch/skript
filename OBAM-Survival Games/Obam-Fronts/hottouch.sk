@@ -8,9 +8,6 @@ on script load:
 	set {db_shop.items::HotTouch Pick} to "i;diamond pickaxe;n;&a&b&k&a&3HotTouch Pickaxe;l;&6A pickaxe forged from the heart of the Nether||&6with an intense heat to smelt ores while mining.|| ||&2StickyItem ©|| ||&5&oClick to purchase|| ||&3&lCost:||&e7,500 Tickets;c;sudo PLAYER hottouchpurchase pick"
 	set {db_shop.items::HotTouch Axe} to "i;diamond axe;n;&a&b&k&a&3HotTouch Axe;l;&6An axe forged from the heart of the Nether||&6with an intense heat to cook logs into charcoal||&6while chopping.|| ||&2StickyItem ©|| ||&5&oClick to purchase|| ||&3&lCost:||&e5,000 Tickets;c;sudo PLAYER hottouchpurchase axe"
 	set {db_shop.items::HotTouch Shovel} to "i;diamond shovel;n;&a&b&k&a&3HotTouch Shovel;l;&6A shovel forged from the heart of the Nether||&6with an intense heat to cook sand clay and||&6cactus while digging.|| ||&2StickyItem ©|| ||&5&oClick to purchase|| ||&3&lCost:||&e10,000 Tickets;c;sudo PLAYER hottouchpurchase shovel"
-	set {db_ci.items::23.HTP} to "i;diamond pickaxe;n;&a&b&k&a&3HotTouch Pickaxe;l;&6A pickaxe forged from the heart of the Nether||&6with an intense heat to smelt ores while mining.;c;sudo PLAYER ht pick"
-	set {db_ci.items::24.HTA} to "i;diamond axe;n;&a&b&k&a&3HotTouch Axe;l;&6An axe forged from the heart of the Nether||&6with an intense heat to cook logs into charcoal||&6while chopping.;c;sudo PLAYER ht axe"
-	set {db_ci.items::25.HTS} to "i;diamond shovel;n;&a&b&k&a&3HotTouch Shovel;l;&6A shovel forged from the heart of the Nether||&6with an intense heat to cook sand clay and||&6cactus while digging.;c;sudo PLAYER ht shovel"
 
 command /hottouchpurchase <text>:
 	permission: obam.free
