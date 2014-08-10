@@ -1,0 +1,5 @@
+command /buycraftpurchase <text> <text>:
+	permission: obam.admin
+	trigger:
+		set {db_purchase.%argument 1%.%argument 2%} to true
+		send "%Argument 2% has purchased %Argument 1%" to console

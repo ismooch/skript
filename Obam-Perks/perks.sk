@@ -3,9 +3,11 @@ on script load:
 	set {db_perk.main::02.pets} to "i;lead;n;&3Pet Stable;l;&6Opens up your Pet Stable to summon your pets.;c;sudo PLAYER obam petmenu"
 	set {db_perk.main::03.trails} to "i;dirt;n;&3Trails Menu;l;&6;c;sudo PLAYER obam petmenu"
 	set {db_perk.main::04.splash} to "i;dirt;n;&3Splash Menu;l;&6;c;sudo PLAYER obam petmenu"
-	set {db_perk.main::05.hit} to "i;dirt;n;&3Hit Sound Menu;l;&6;c;sudo PLAYER obam petmenu"
+	set {db_perk.main::05.hit} to "i;jukebox;n;&3Hit Sound Menu;l;&6;c;sudo PLAYER obam hitclassmenu"
 	set {db_perk.main::06.shop} to "i;dirt;n;&3Shop;l;&6;c;sudo PLAYER obam petmenu"
-	set {db_perk.main::07.ci} to "i;command block;n;&3Custom Items Menu;l;&6Opens the Custom Item menu to access items.;c;sudo PLAYER obam ci"
+	set {db_perk.main::07.horse} to "i;horse spawn egg;n;&3Horse Changer Upper;l;&6Want to Skellify of Zombify your ride?;c;sudo PLAYER obam horsemenu"
+	set {db_perk.main::08.blank} to "i;air"
+	set {db_perk.main::09.ci} to "i;command block;n;&3Custom Items Menu;l;&6Opens the Custom Item menu to access items.;c;sudo PLAYER obam ci"
 
 command /cleardbmain:
 	permission: obam.admin

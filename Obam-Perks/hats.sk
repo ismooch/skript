@@ -4,16 +4,16 @@
 #	sup3: i;diamond block;n;&3&lDiamond Block;l;&7Show off what others||&7craze with the powerfull||&7Diamond block hat|| ||&5&oThis hat is for||&5&oCurrent supporters;c;hatreward supporter3 %player%
 
 on script load:
-	set {db_perk.hats::01.dirt} to "i;dirt;n;&3&lDirt Hat;l;&6This classy dirt helm is free for all who||&6wish to show off their frugal style!;c;sudo PLAYER hat dirt"
+	set {db_perk.hats::01.dirt} to "i;dirt;n;&3&lDirt Hat;l;&6Carefully woven together from the finest dirt||&6in all of &3OBAM!;c;sudo PLAYER hat dirt"
 	set {db_perk.hats::02.beta} to "check"
-	set {db_perk.hats::02.beta::beta} to "i;iron pressure plate;n;&3&lBeta Supporter Hat;l;&6This Special hat is for all members who supported||&6during our beta period and is a thank you from the||&eOBAM &6Staff for those that helped us when we were starting.||&6THANK YOU!;c;sudo PLAYER hat beta"
-	set {db_perk.hats::02.beta::error} to "i;iron pressure plate;n;&3&lBeta Supporter Hat;l;&6This Special hat is for all members who supported||&6during our beta period and is a thank you from the||&eOBAM &6Staff for those that helped us when we were starting.||&6THANK YOU!|| ||&cThis hat is only available to our Beta Supporters.;c;sudo PLAYER hat error"
+	set {db_perk.hats::02.beta::beta} to "i;iron pressure plate;n;&3&lBeta Supporter Hat;l;&6This Special hat is for all members who supported||&6during our beta period and is a thank you from the||&3OBAM &6Staff for those that helped us when we were||&6starting. THANK YOU!;c;sudo PLAYER hat beta"
+	set {db_perk.hats::02.beta::error} to "i;iron pressure plate;n;&3&lBeta Supporter Hat;l;&6This Special hat is for all members who supported||&6during our beta period and is a thank you from the||&3OBAM &6Staff for those that helped us when we were||&6starting. THANK YOU!|| ||&cThis hat is only available to our Beta Supporters.;c;sudo PLAYER hat error"
 	set {db_perk.hats::03.quartz} to "check"
-	set {db_perk.hats::03.quartz::quartz} to "i;quartz block;n;&3&lQuartz Hat;l;&6Description;c;sudo PLAYER hat quartz"
-	set {db_perk.hats::03.quartz::error} to "i;quartz block;n;&3&lQuartz Hat;l;&6Description|| ||&cThis hat is only available to our Supporters.;c;sudo PLAYER hat error"
+	set {db_perk.hats::03.quartz::quartz} to "i;quartz block;n;&3&lQuartz Hat;l;&6This hat is crafted from the smoothest quartz||&6found in the hottest part of the Nether!;c;sudo PLAYER hat quartz"
+	set {db_perk.hats::03.quartz::error} to "i;quartz block;n;&3&lQuartz Hat;l;&6This hat is crafted from the smoothest quartz||&6found in the hottest part of the Nether!|| ||&cThis hat is only available to our Supporters.;c;sudo PLAYER hat error"
 	set {db_perk.hats::04.cactus} to "check"
-	set {db_perk.hats::04.cactus::cactus} to "i;cactus;n;&3&lPrickly Hat;l;&6Where this hat when you're feeling a bit....Prickly!;c;sudo PLAYER hat cactus"
-	set {db_perk.hats::04.cactus::error} to "i;cactus;n;&3&lPrickly Hat;l;&6Where this hat when you're feeling a bit....Prickly!|| ||&cThis hat must be purchased from the OBAMCraft shop.|| ||&6Use &f/buy &6to purchase the &3Prickly Hat|| ||&6Price: &a$2.00;c;sudo PLAYER hat cactus"
+	set {db_perk.hats::04.cactus::cactus} to "i;cactus;n;&3&lPrickly Hat;l;&6Wear this hat when you're feeling a bit....Prickly!;c;sudo PLAYER hat cactus"
+	set {db_perk.hats::04.cactus::error} to "i;cactus;n;&3&lPrickly Hat;l;&6Wear this hat when you're feeling a bit....Prickly!|| ||&cThis hat must be purchased from the OBAMCraft shop.|| ||&eUse &f/buy &ein the hub to purchase the &3Prickly Hat|| ||&ePrice: &a$2.00;c;sudo PLAYER hat error"
 
 command /cleardbhats:
 	permission: obam.admin
@@ -38,7 +38,7 @@ command /hatmenu [<text>]:
 					set {_what} to {db_perk.hats::03.quartz::quartz}
 			loop-index is "04.cactus":
 				set {_what} to {db_perk.hats::04.cactus::error}
-				{db_hat.purchase.cactus.%player%} is true:
+				{db_purchase.cactus.%player%} is true:
 					set {_what} to {db_perk.hats::04.cactus::cactus}
 				player has permission "obam.smod":
 					set {_what} to {db_perk.hats::04.cactus::cactus}
@@ -74,7 +74,7 @@ command /hat [<text>]:
 			player has permission "obam.supporter":
 				set {_hat} to quartz block
 		argument 1 is "cactus":
-			{db_hat.purchase.cactus.%player%} is true:
+			{db_purchase.cactus.%player%} is true:
 				set {_hat} to cactus
 			player has permission "obam.smod":
 				set {_hat} to cactus
@@ -142,10 +142,3 @@ every 1 second:
 				set loop-player's helmet to command block named "&d&lSmooch's Sassy Hat"
 			loop-player is "Electric_Hamster":
 				set loop-player's helmet to sponge named "&b&lThe Hamster Hat"
-
-command /hatpurchase <text> <text>:
-	permission: obam.admin
-	trigger:
-		argument 1 is "cactus":
-			set {db_hat.purchase.cactus.%argument 2%} to true
-			send "%Argument 2% has purchased the hat Prickly Hat" to console

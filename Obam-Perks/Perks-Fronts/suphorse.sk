@@ -1,0 +1,70 @@
+on script load:
+	set {db_perk.suphorse::01.zombify} to "check"
+	set {db_perk.suphorse::01.zombify::zombify} to "i;zombie spawn egg;n;&3Zombify your ride!;l;&6Feel like roaming the plains on your Zombified Horse?;c;sudo PLAYER suphorse zombify"
+	set {db_perk.suphorse::01.zombify::error} to "i;zombie spawn egg;n;&3Zombify your ride!;l;&6Feel like roaming the plains on your Zombified Horse?|| ||&cThis ability is only available to our Supporters.;c;sudo PLAYER suphorse error"
+	set {db_perk.suphorse::02.skellify} to "check"
+	set {db_perk.suphorse::02.skellify::skellify} to "i;skeleton spawn egg;n;&3Skellify your ride!;l;&6Feel like roaming the deserts on your Skellified Horse?;c;sudo PLAYER suphorse skellify"
+	set {db_perk.suphorse::02.skellify::error} to "i;skeleton spawn egg;n;&3Skellify your ride!;l;&6Feel like roaming the deserts on your Skellified Horse?|| ||&cThis ability is only available to our Supporters.;c;sudo PLAYER suphorse error"
+
+command /cleardbsuphorse:
+	permission: obam.admin
+	trigger:
+		delete {db_perk.suphorse::*}
+		message "You just cleared all the suphorse variables, please reload the script suphorse.sk"
+
+command /horsemenu:
+	trigger:
+		loop {db_perk.suphorse::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+			set {_what} to loop-value
+			loop-index is "01.zombify":
+				set {_what} to {db_perk.suphorse::01.zombify::error}
+				player has permission "obam.supporter":
+					set {_what} to {db_perk.suphorse::01.zombify::zombify}
+				player has permission "obam.smod":
+					set {_what} to {db_perk.suphorse::01.zombify::zombify}
+			loop-index is "02.skellify":
+				set {_what} to {db_perk.suphorse::02.skellify::error}
+				player has permission "obam.supporter":
+					set {_what} to {db_perk.suphorse::02.skellify::skellify}
+				player has permission "obam.smod":
+					set {_what} to {db_perk.suphorse::02.skellify::skellify}
+			{_chest} is set:
+				set {_chest} to "%{_chest}%;s;%{_count}%;%{_what}%"
+			{_chest} is not set:
+				set {_chest} to "s;%{_count}%;%{_what}%"
+		replace "PLAYER" in {_chest} with "%player%"
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show "%{_chest}%" with {_size} row named "&9&lPet Stable" to player
+		
+command /suphorse [<text>]:
+	trigger:
+		player is not riding:
+			send "&cYou must be riding a horse to do this!"
+			stop
+		player's vehicle is not a horse:
+			send "&cYou must be riding a horse to do this!"
+			stop
+		argument is not set:
+			message "&cPlease use &7/OBAM &cto access your modify your horse."
+			stop
+		argument is "error":
+			message "&cThis ability is not available to you."
+			stop
+		set {_y} to y-coordinate of player
+		set {_x} to x-coordinate of player
+		set {_z} to z-coordinate of player
+		argument is "zombify":
+			execute console command "summon EntityHorse %{_x}% %{_y}% %{_z}% {Type:3,Tame:1}"
+		argument is "skellify":
+			execute console command "summon EntityHorse %{_x}% %{_y}% %{_z}% {Type:4,Tame:1}"
+		delete player's vehicle

@@ -1,11 +1,3 @@
-options:
-	ismooch: i;sheep spawn egg;n;&6ISMOOCH;l;&7Grab a pink Sheep||&7named ISMOOCH|| ||&5&oThis pet is free!||&5&oClick to Summon!;c;sudo %player% pet ismooch
-	bruswain: i;bat spawn egg;n;&6Bru Swain;l;&7From the darkness comes||&7Bru Swain. A mysterious||&7bat|| ||&5&oThis pet is for our||&5&oBeta Supporters only.;c;sudo %player% pet bruswain
-	sparky: i;creeper spawn egg;n;&6Sparky;l;&7A trolly creeper||&7to scare your friends!|| ||&5&oThis pet is for||&5&oall supporters!;c;sudo %player% pet sparky
-	bacon: i;pig spawn egg;n;&6Bacon;l;&7A tasty pig ready||&7for slaughter but unable||&7to die|| ||&5&oThis pet can be||&5&opurchased through the||&5&oOBAMcraft shop;c;sudo %player% pet bacon
-	clear: i;fire;n;&6Clear;l;&7Click to clear all||&7summoned pets!;c;sudo %player% pet clear
-	lead: i;lead;n;&6Leash;l;&7Pets getting out of||&7control? Click this||&7to attach a lead||&7to all of your summoned||&7pets!;c;sudo %player% pet lead
-
 on script load:
 	set {db_perk.pets::01.ismooch} to "i;sheep spawn egg;n;&3iSmooch;l;&6The sassiest sheep in all the lands!;c;sudo PLAYER pet ismooch"
 	set {db_perk.pets::02.bruswain} to "check"
@@ -16,7 +8,7 @@ on script load:
 	set {db_perk.pets::03.sparky::error} to "i;creeper spawn egg;n;&3Sparky;l;&6While this creeper appears to have a||&6dangerously electrifying personality, we||&6promise he’s completely safe!|| ||&cThis pet is only available to our Supporters.;c;sudo PLAYER pet error"
 	set {db_perk.pets::04.bacon} to "check"
 	set {db_perk.pets::04.bacon::bacon} to "i;pig spawn egg;n;&3Bacon;l;&6Rescued from the final stages of the||&6slaughter house, this pig is extremely||&6grateful for your love and kindness!;c;sudo PLAYER pet bacon"
-	set {db_perk.pets::04.bacon::error} to "i;pig spawn egg;n;&3Bacon;l;&6Rescued from the final stages of the||&6slaughter house, this pig is extremely||&6grateful for your love and kindness!|| ||&cThis pet must be purchased from the OBAMCraft shop.|| ||&6Use &f/buy &6to purchase &3Bacon|| ||&6Price: &a$5.00;c;sudo PLAYER pet error"
+	set {db_perk.pets::04.bacon::error} to "i;pig spawn egg;n;&3Bacon;l;&6Rescued from the final stages of the||&6slaughter house, this pig is extremely||&6grateful for your love and kindness!|| ||&cThis pet must be purchased from the OBAMCraft shop.|| ||&eUse &f/buy &ein the hub purchase &3Bacon|| ||&ePrice: &a$5.00;c;sudo PLAYER pet error"
 	set {db_perk.pets::05.blank} to "i;air"
 	set {db_perk.pets::06.blank} to "i;air"
 	set {db_perk.pets::07.lead} to "i;lead;n;&3Leash;l;&6Pets getting out of control? Click this||&6to attach a lead to all of your||&6summoned pets!;c;sudo PLAYER pet lead"
@@ -46,7 +38,7 @@ command /petmenu:
 					set {_what} to {db_perk.pets::03.sparky::sparky}
 			loop-index is "04.bacon":
 				set {_what} to {db_perk.pets::04.bacon::error}
-				{db_pet.purchase.bacon.%player%} is true:
+				{db_purchase.bacon.%player%} is true:
 					set {_what} to {db_perk.pets::04.bacon::bacon}
 				player has permission "obam.smod":
 					set {_what} to {db_perk.pets::04.bacon::bacon}
@@ -149,7 +141,7 @@ command /pet [<text>]:
 				stop
 			send "&cYou must be a supporter to do this!" to player
 		argument is "bacon":
-			{db_pet.purchase.bacon.%player%} is true:
+			{db_purchase.bacon.%player%} is true:
 				spawn pig at location of player
 				set name of spawned pig to "&aBacon"
 				make player leash spawned pig
@@ -166,6 +158,7 @@ command /pet [<text>]:
 				add {pets.%player%} to {pets.%player%::*}
 				stop
 			send "&cYou must purchase this pet on the online store!"
+			stop
 		argument is "dragon":
 			send "&cI bet you wish you could...." to player
 			stop
@@ -198,10 +191,3 @@ on right click with shears on sheep:
 	name of event-entity is "&aISMOOCH"
 	cancel event
 	send "&cYou can not shear pets!" to event-player
-
-command /petpurchase <text> <text>:
-	permission: obam.admin
-	trigger:
-		argument 1 is "bacon":
-			set {db_pet.purchase.bacon.%argument 2%} to true
-			send "%Argument 2% has purchased the pet BACON" to console
