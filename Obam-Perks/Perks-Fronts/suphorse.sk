@@ -44,7 +44,7 @@ command /horsemenu:
 			set {_size} to 3
 		{_count} is greater than 27:
 			set {_size} to 4
-		show "%{_chest}%" with {_size} row named "&9&lPet Stable" to player
+		show "%{_chest}%" with {_size} row named "&9&lHorse O' Matic" to player
 		
 command /suphorse [<text>]:
 	trigger:
@@ -60,11 +60,14 @@ command /suphorse [<text>]:
 		argument is "error":
 			message "&cThis ability is not available to you."
 			stop
-		set {_y} to y-coordinate of player
-		set {_x} to x-coordinate of player
-		set {_z} to z-coordinate of player
-		argument is "zombify":
-			execute console command "summon EntityHorse %{_x}% %{_y}% %{_z}% {Type:3,Tame:1}"
-		argument is "skellify":
-			execute console command "summon EntityHorse %{_x}% %{_y}% %{_z}% {Type:4,Tame:1}"
-		delete player's vehicle
+		"%player's world%" is "world":
+			set {_y} to y-coordinate of player
+			set {_x} to x-coordinate of player
+			set {_z} to z-coordinate of player
+			argument is "zombify":
+				execute console command "summon EntityHorse %{_x}% %{_y}% %{_z}% {Type:3,Tame:1}"
+			argument is "skellify":
+				execute console command "summon EntityHorse %{_x}% %{_y}% %{_z}% {Type:4,Tame:1}"
+			delete player's vehicle
+			stop
+		message "&cThis can only be used in the Regular World."

@@ -236,7 +236,7 @@ command /hitclassmenu:
 			set {_size} to 3
 		{_count} is greater than 27:
 			set {_size} to 4
-		show "%{_chest}%" with {_size} row named "&9&1Hit Sound Classes" to player
+		show "%{_chest}%" with {_size} row named "&9&lHit Sound Classes" to player
 
 command /hitmenuchange [<text>]:
 	trigger:
