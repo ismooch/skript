@@ -1,0 +1,16 @@
+on first join:
+	execute console command "/new %player%"
+	
+	
+command /new <text>:
+	permission: obam.admin
+	trigger:
+	
+
+			broadcast " "
+			broadcast "&3-----------------------------------------------------"
+			broadcast "&fEveryone give an &6&lOBAM&fCraft welcome to, &6%argument%&f!"
+			broadcast "&3-----------------------------------------------------"
+			broadcast " "
+			forward command "new %argument%" to console
+

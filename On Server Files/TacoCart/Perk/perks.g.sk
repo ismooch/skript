@@ -1,0 +1,101 @@
+on script load:
+	delete {db_perk.main::*}
+	set {db_perk.main::01.hats} to "iron pressure plate;&3Hat Rack;&6Gives you access to your virtual Hat Rack.;sudo PLAYER obam hatmenu"
+	set {db_perk.main::02.pets} to "lead;&3Pet Stable;&6Opens up your Pet Stable to summon your pets.;sudo PLAYER obam petmenu"
+	set {db_perk.main::03.trails} to "arrow;&3Trails Menu;&6Opens up your Projectile Trails Menu.;sudo PLAYER obam trailmenu"
+	set {db_perk.main::04.splash} to "cobweb;&3Splash Menu;&6Opens up your Splash Menu.;sudo PLAYER obam splashmenu"
+	set {db_perk.main::05.hit} to "jukebox;&3Hit Sound Menu;&6Opens up your Hit Sound Menu.;sudo PLAYER obam hitclassmenu"
+	set {db_perk.main::06.horse} to "horse spawn egg;&3Horse Changer Upper;&6Want to Skellify of Zombify your ride?;sudo PLAYER obam horsemenu"
+	set {db_perk.main::07.blank} to "air"
+	set {db_perk.main::08.shop} to "emerald;&3Shop;&6Opens up the Shop Menu.;sudo PLAYER obam shop"
+	set {db_perk.main::09.ci} to "command block;&3Custom Items Menu;&6Opens the Custom Item menu to access items.;sudo PLAYER obam ci"
+
+command /obam [<text>]:
+	permission: obam.free
+	trigger:
+		argument 1 is not set:
+			loop {db_perk.main::*}:
+				{_count} is not set:
+					set {_count} to 0
+				add 1 to {_count}
+			{_count} is less than 10:
+				set {_size} to 1
+			{_count} is greater than 9:
+				set {_size} to 2
+			{_count} is greater than 18:
+				set {_size} to 3
+			{_count} is greater than 27:
+				set {_size} to 4
+			show chest with {_size} row named "&9&lOBAM Perks and Shop Menu" to player
+			wait 1 tick
+			set {_count} to 0
+			loop {db_perk.main::*}:
+				set {_what::*} to loop-value split at ";"
+				set {_item} to {_what::1} parsed as item
+				set {_name} to {_what::2}
+				set {_lore} to {_what::3}
+				set {_command} to {_what::4}
+				loop-index is "07.ci":
+					player does not have permission "obam.smod":
+						clear {_what}
+				replace "PLAYER" in {_command} with "%player%"
+				set {_what} to {_item} named {_name} with lore {_lore}
+				loop-index is "07.ci":
+					player does not have permission "obam.smod":
+						clear {_what}
+				format slot {_count} of player with {_what} to be unstealable 
+				format slot {_count} of player with {_what} to close then run {_command}
+				add 1 to {_count}
+		argument 1 is set:
+#			argument 1 is "hatmenu":
+#				"%player's world%" contains "taco":
+#					message "&cYou can not use that here."
+#					stop
+			argument 1 is "petmenu":
+				"%player's world%" is "kitspawnroom" or "vacant":
+					message "&cYou can not use that here."
+					stop
+				"%player's world%" contains "cart":
+					message "&cYou can not use that here."
+					stop
+#			argument 1 is "trailmenu":
+#				"%player's world%" contains "taco":
+#					message "&cYou can not use that here."
+#					stop
+#			argument 1 is "splashmenu":
+#				"%player's world%" contains "taco":
+#					message "&cYou can not use that here."
+#					stop
+#			argument 1 is "hitclassmenu":
+#				"%player's world%" contains "taco":
+#					message "&cYou can not use that here."
+#					stop
+			argument 1 is "horsemenu":
+				"%player's world%" is "Death-hub", "skyworld", "kitspawnroom" or "vacant":
+					message "&cYou can not use that here."
+					stop
+				"%player's world%" contains "taco":
+					message "&cYou can not use that here."
+					stop
+			argument 1 is "shop":
+				"%player's world%" is "Death-hub", "skyworld", "kitspawnroom" or "vacant":
+					message "&cYou can not use that here."
+					stop
+				"%player's world%" contains "taco":
+					message "&cYou can not use that here."
+					stop
+			argument 1 is "ci":
+				"%player's world%" is "Death-hub", "skyworld", "kitspawnroom" or "vacant":
+					message "&cYou can not use that here."
+					stop
+				"%player's world%" contains "taco":
+					message "&cYou can not use that here."
+					stop
+			send "&aBringing up menu..."
+			wait 0.5 seconds
+			make player execute command "/%argument 1%"
+
+command /sudo <player> <text>:
+	permission: obam.admin
+	trigger:
+		make argument 1 execute argument 2

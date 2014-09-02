@@ -1,0 +1,22 @@
+#itemid check
+command /itemid [<item>]:
+	executable by: players
+	permission: obam.free
+	trigger:
+		argument is set:
+			set {_this.block} to argument
+			message "&e%{_this.block}%" to player
+		argument is not set:
+			set {_this.block} to player's tool
+			{_this.block} is not set:
+				message "&cYou Must be holding a block!" to player
+				stop
+			message "&e%{_this.block}% : %id of {_this.block}% : %data value of {_this.block}%" to player
+		
+		
+command /itemcheck:
+	executable by: players
+	permission: obam.free
+	trigger:
+		set {_this.block} to targeted block
+		message "&e%{_this.block}% : %id of {_this.block}% : %data value of {_this.block}%" to player

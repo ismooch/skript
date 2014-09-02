@@ -1,0 +1,101 @@
+options:
+	smeltpick: diamond pickaxe named "&a&b&k&a&3HotTouch Pickaxe" with lore "&6A pickaxe forged from the heart of the Nether||&6with an intense heat to smelt ores while mining.|| ||&2StickyItem ©"
+	smeltaxe: diamond axe named "&a&b&k&a&3HotTouch Axe" with lore "&6An axe forged from the heart of the Nether||&6with an intense heat to cook logs into charcoal||&6while chopping.|| ||&2StickyItem ©"
+	smeltshovel: diamond shovel named "&a&b&k&a&3HotTouch Shovel" with lore "&6A shovel forged from the heart of the Nether||&6with an intense heat to cook sand clay and||&6cactus while digging.|| ||&2StickyItem ©"
+
+command /hottouchpurchase <text>:
+	permission: obam.free
+	trigger:
+		argument is "pick":
+			set {_bal} to player's balance
+			{_bal} is less than 7500:
+				send "&cYou do not have enough tickets!"
+				stop
+			give player 1 {@smeltpick}
+			remove 7500 from player's balance
+			send "&aYou have purchased a &eHotTouch Pick&a for &e7500 Tickets"
+			send "&aYour balance is now &e%player's balance%"
+		argument is "shovel":
+			set {_bal} to player's balance
+			{_bal} is less than 10000:
+				send "&cYou do not have enough tickets!"
+				stop
+			give player 1 {@smeltshovel}
+			remove 10000 from player's balance
+			send "&aYou have purchased a &eHotTouch Shovel&a for &e10000 Tickets"
+			send "&aYour balance is now &e%player's balance%"
+		argument is "axe":
+			set {_bal} to player's balance
+			{_bal} is less than 5000:
+				send "&cYou do not have enough tickets!"
+				stop
+			give player 1 {@smeltaxe}
+			remove 5000 from player's balance
+			send "&aYou have purchased a &eHotTouch Axe&a for &e5000 Tickets"
+			send "&aYour balance is now &e%player's balance%"
+
+on break of iron ore or gold ore or netherrack or cobblestone:
+	name of player's tool is "&a&b&k&a&3HotTouch Pick" or "&a&b&k&a&3HotTouch Pickaxe":
+		event-block is iron ore:
+			cancel event
+			delete event-block
+			drop 1 iron ingot at location of event-block
+			damage player's tool by 1
+		event-block is gold ore:
+			cancel event
+			delete event-block
+			drop 1 gold ingot at location of event-block
+			damage player's tool by 1
+		event-block is netherrack:
+			cancel event
+			delete event-block
+			drop 1 nether brick item at location of event-block
+			damage player's tool by 1
+		event-block is cobblestone:
+			cancel event
+			delete event-block
+			drop 1 stone at location of event-block
+			damage player's tool by 1
+
+on break of sand or clay block or cactus or red sand:
+	name of player's tool is "&a&b&k&a&3HotTouch Shovel":
+		event-block is sand or red sand:
+			cancel event
+			delete event-block
+			drop 1 glass at location of event-block
+			damage player's tool by 1
+		event-block is clay block:
+			cancel event
+			delete event-block
+			drop 1 hardened clay at location of event-block
+			damage player's tool by 1
+		event-block is cactus:
+			cancel event
+			delete event-block
+			drop 1 cactus green at location of event-block
+			damage player's tool by 1
+
+on break of cactus or oak wood or birch wood or spruce wood or jungle wood or acacia wood or dark oak wood:
+	name of player's tool is "&a&b&k&a&3HotTouch Axe":
+		event-block is cactus:
+			cancel event
+			delete event-block
+			drop 1 cactus green at location of event-block
+			damage player's tool by 1
+		event-block is oak wood or birch wood or spruce wood or jungle wood or acacia wood or dark oak wood:
+			cancel event
+			set {_ran} to random integer between 1 and 6
+			delete event-block
+			drop {_ran} of charcoal at location of event-block
+			damage player's tool by 1
+
+command /ht <text>:
+	permission: obam.smod
+	trigger:
+		argument is "pick":
+			give player {@smeltpick}
+		argument is "axe":
+			give player {@smeltaxe}
+		argument is "shovel":
+			give player {@smeltshovel}
+		send "&aHere is your thing"

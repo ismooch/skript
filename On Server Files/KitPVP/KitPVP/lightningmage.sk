@@ -1,0 +1,50 @@
+on teleport:
+	wait 3 ticks
+	player's world is "vacant"
+
+
+
+	{kit.%player%} is "lightningmage":
+		{ingame.%player%} is not set
+		equip player with all leather armor of unbreaking 10 named "&fLightning Mage's Robes"
+		dye player's helmet (7, 247, 239)
+		dye player's chestplate (7, 247, 239)
+		dye player's leggings (7, 247, 239)
+		dye player's boots (7, 247, 239)
+		give player stick of knockback 1 named "&fLightning Wand"
+		give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
+		give player 3 splash potions of harming named "&fPain Juice"
+		apply jump 1 to player for 999 days
+		set player's level progress to 0.99
+		set {ingame.%player%} to true
+		
+on right click with stick:
+	cancel event
+	{kit.%player%} is "lightningmage":
+		player's tool is a stick named "&fLightning Wand"
+		level progress of player is greater than or equal to 0.1:
+			strike lightning effect at targeted block
+			reduce the player's level progress by 0.1
+			loop entities in radius 5 of targeted block:
+				loop-entity is not a player:
+					make player damage loop-entity by 6
+				{kit.%loop-entity%} is set:
+					create safe explosion of force 2 at location of loop-entity
+					push loop-entity up with force 1
+					make player damage loop-entity by 6
+					apply wither to loop-entity for 3 seconds
+					strike lightning effect at location of loop-entity
+					
+on left click with stick:
+	cancel event
+	{kit.%player%} is "lightningmage":
+		level progress of player is greater than or equal to 0.5:
+			targeted block is air or glass:
+				send "&cYou can not go there!" to player
+				stop
+			the distance between targeted block and player is less than or equal to 30:
+				teleport player to block above targeted block
+			
+				reduce the player's level progress by 0.5
+				stop
+			send "&cThat is too far!" to player

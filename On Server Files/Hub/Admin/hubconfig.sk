@@ -1,0 +1,131 @@
+options:
+	help: book named "&6&lOBAM&fCraft &3Guide" with lore "&7Right click with this book to learn the ins||&7and out of OBAM"
+	worlds: ender pearl named "&3Game Worlds" with lore "&7Right click with this to check the current Game Worlds!"
+	fly: feather named "&3Fly!" with lore "&7Right click with this feather to fly in the hub!"
+
+on script load:
+	delete {db_hub::*}
+	set {db_hub::01.skyblock} to "grass;&3Skyblock;&6Try our Skyblock world with custom ||&6challenges and villager trading!;sudo PLAYER worlds skyblock"
+	set {db_hub::02.fronts} to "cobblestone;&3Fronts;&6French vanilla Survival with land claiming!||PVP and PVE choices available.;sudo PLAYER fronts"
+	set {db_hub::03.wtfronts} to "magma cream;&3WTFronts;&6Extreme Survival with extreme payoffs!||&6PVE 2.0 with land claiming.;sudo PLAYER wtf"
+	set {db_hub::04.kitpvp} to "blaze rod;&3Kit PVP;&7Play OBAM's KitPvP with new original kits!;sudo PLAYER kit"
+	set {db_hub::05.tacocart} to "glistening melon;&3Taco Cart;&7A fast pace crafting game for 1 or 2 players!;sudo PLAYER tacocart;&7A fast pace crafting game for 1 or 2 players!||&cBETA TESTING supporters only.;sudo PLAYER worlds tacocart"
+	set {db_hub::06.event} to "nether star;&3Event Server;&7Special place for Staff ran events!;sudo PLAYER event;&7Special place for Staff ran events!||&cThe event server is currently closed.;sudo PLAYER worlds event"
+
+on join:
+	execute console command "/mv tp %player% Death-hub"
+	clear player's inventory
+	format slot 0 of player with {@help} to be unstealable 
+	format slot 1 of player with {@worlds}to be unstealable 
+	format slot 2 of player with {@fly} to be unstealable 
+
+on shoot:
+	world is "Death-hub"
+	shooter's tool is ender pearl
+	cancel event
+
+on right click:
+	player's tool is {@help}:
+		make player execute command "/help"
+	player's tool is {@worlds}:
+		cancel event
+		make player execute command "/worlds"
+	player's tool is {@fly}:
+		{fly.hub.%player%} is not set:
+			set {fly.hub.%player%} to true
+			set fly state of player to true
+			send "&aYou can fly!"
+			stop
+		{fly.hub.%player%} is true:
+			set {fly.hub.%player%} to false
+			set fly state of player to false
+			send "&cYou can no longer fly!"
+			stop
+		{fly.hub.%player%} is false:
+			set {fly.hub.%player%} to true
+			set fly state of player to true
+			send "&aYou can fly!"
+			stop
+
+on drop:
+	world is "Death-hub":
+		cancel event
+
+command /worlds [<text>]:
+	permission: obam.free
+	trigger:
+		world is "Death-hub":
+			argument is not set:
+				send "&aBringing up menu..."
+				loop {db_hub::*}:
+					{_count} is not set:
+						set {_count} to 0
+					add 1 to {_count}
+				{_count} is less than 10:
+					set {_size} to 1
+				{_count} is greater than 9:
+					set {_size} to 2
+				{_count} is greater than 18:
+					set {_size} to 3
+				{_count} is greater than 27:
+					set {_size} to 4
+				show chest with {_size} row named "&9&lCurrent Worlds" to player
+				wait 1 tick
+				set {_count} to 0
+				loop {db_hub::*}:
+					set {_what::*} to loop-value split at ";"
+					set {_item} to {_what::1} parsed as item
+					set {_name} to {_what::2}
+					set {_lore} to {_what::3}
+					set {_command} to {_what::4}
+					loop-index is "05.tacocart":
+						player does not have permission "obam.supporter":
+							set {_lore} to {_what::5}
+							set {_command} to {_what::6}
+						player has permission "obam.mod":
+							set {_lore} to {_what::3}
+							set {_command} to {_what::4}
+					loop-index is "06.event":
+						{db_event.status} is "closed":
+							set {_lore} to {_what::5}
+							set {_command} to {_what::6}
+					replace "PLAYER" in {_command} with "%player%"
+					set {_what} to {_item} named {_name} with lore {_lore}
+					format slot {_count} of player with {_what} to be unstealable 
+					format slot {_count} of player with {_what} to close then run {_command}
+					add 1 to {_count}
+			argument is "skyblock":
+				message "&cSkyblock is being remodelled. Please be patient."
+				stop
+			argument is "tacocart":
+				message "&cI'm sorry but Taco Cart is currently in Beta Testing and only available to supporters."
+			argument is "event":
+				message "&cI'm sorry but the Event Server is currently closed."
+
+				
+command /eventstatus [<text>]:
+	permission: obam.smod
+	trigger:
+		argument 1 is "open" or "o":
+			set {db_event.status} to "open"
+			message "&2You have set the Event Server to Open."
+			stop
+		argument 1 is "closed" or "c":
+			set {db_event.status} to "closed"
+			message "&2You have set the Event Server to Closed."
+			stop
+		message "&cPlease type Open of Closed."
+
+every second:
+	loop all players:
+		{fly.hub.%loop-player%} is true:
+			loop-player's world is not "Death-hub":
+				set fly state of loop-player to false
+				set {fly.hub.%loop-player%} to false
+			loop-player's world is "Death-hub":
+				set fly state of loop-player to true
+
+command /transfer [<text>]:
+	trigger:
+		world is "Death-hub"
+		connect player to "%argument%"

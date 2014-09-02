@@ -1,0 +1,20 @@
+on flow:
+	{flags.%chunk at event-location%::frontflow} is set:
+		{flags.%chunk at event-location%::frontflow} is false:
+			cancel event
+		{flags.%chunk at event-location%::frontflow} is true:
+			stop
+
+on ignition:
+	{flags.%chunk at event-location%::frontfirespread} is set:
+		{flags.%chunk at event-location%::frontfirespread} is false:
+			cancel event
+		{flags.%chunk at event-location%::frontfirespread} is true:
+			stop
+
+on burn:
+	{flags.%chunk at event-location%::frontfirespread} is set:
+		{flags.%chunk at event-location%::frontfirespread} is false:
+			cancel event
+		{flags.%chunk at event-location%::frontfirespread} is true:
+			stop

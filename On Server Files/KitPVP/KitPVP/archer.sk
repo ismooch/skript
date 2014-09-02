@@ -1,0 +1,25 @@
+#archer
+
+on teleport:
+	wait 3 ticks
+	player's world is "vacant"
+	{kit.%player%} is "archer":
+		{ingame.%player%} is not set
+		apply speed 1 to player for 999 days
+		equip player with all leather armor of unbreaking 10 named "&fArcher's Garments"
+		dye player's helmet (72, 11, 5)
+		dye player's chestplate (72, 11, 5)
+		dye player's leggings (72, 11, 5)
+		dye player's boots (72, 11, 5)
+		give player bow of infinity 1 and punch 1 named "&fBow of Truth"
+		give 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]" to player
+		give player 2 egg named "&fStun Bomb"
+		apply absorption 3 to player for 999 days
+		give player arrow
+		set {ingame.%player%} to true
+
+		
+		
+
+		
+		

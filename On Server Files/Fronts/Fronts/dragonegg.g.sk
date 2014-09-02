@@ -1,0 +1,7 @@
+on flow:
+	block is a dragon egg:
+		cancel event
+
+on block physics:
+	block is a dragon egg:
+		cancel event

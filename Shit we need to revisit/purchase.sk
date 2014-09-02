@@ -1,0 +1,12 @@
+command /buycraftpurchase <text> <text>:
+	permission: obam.admin
+	trigger:
+		set {_who} to argument 2 parsed as a player
+		set {db_purchase.%argument 1%.%argument 2%} to true
+		send "%Argument 2% has purchased %Argument 1%" to console
+#1.7.9
+#1.7.9on login:
+	#1.7.9{db_purchase.bacon.%player%} is set:
+		#1.7.9set {db_purchase.bacon.%uuid of player%} to {db_purchase.bacon.%player%}
+	#1.7.9{db_purchase.cactus.%player%} is set:
+		#1.7.9set {db_purchase.cactus.%uuid of player%} to {db_purchase.cactus.%player%}

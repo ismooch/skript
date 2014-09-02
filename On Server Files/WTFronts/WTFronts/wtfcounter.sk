@@ -1,0 +1,11 @@
+on chat:
+    message contains "wtf"
+    {db_wtf.counter} is not set:
+        set {db_wtf.counter} to 0
+    add 1 to {db_wtf.counter}
+
+command /wtfcounter:
+    permission: obam.admin
+    trigger:
+        send "&aThe current &cWTF&a Count is: &e%{db_wtf.counter}% WTF's&a!"
+        send "&eCounting since Apr 22, 2014"

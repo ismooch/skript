@@ -1,8 +1,0 @@
-command /frontlandadd <text> <number>:
-	permission: obam.admin
-	trigger:
-		{availibleland.%argument 1%} is not set:
-			set {availibleland.%argument 1%} to 1
-		add argument 2 to {availibleland.%argument 1%}
-		
-		log "%date%%argument 2% plots added to %argument 1%'s availible land. their number is now %{availibleland.%argument 1%}" to "logs/fronts/LAND-ADDITIONS.log"

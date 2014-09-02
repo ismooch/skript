@@ -1,0 +1,54 @@
+#shop for Fronts
+
+on script load:
+	delete {db_shop.items::*}
+	set {db_shop.items::Front Slot} to "i;grass;n;&a&b&k&a&3Front Slot;l;&6Purchase one Front Slot, which allows you the||&6ability to claim protected land.|| ||&5&oClick to purchase|| ||&3&lCost:||&e10,000 Tickets;c;sudo PLAYER shop land"
+	set {db_shop.items::Front Bundle} to "i;5 grass;n;&a&b&k&a&3Front Slot Bundle;l;&6Purchase five Front Slots, which allows you the||&6ability to claim protected land.|| ||&5&oClick to purchase|| ||&3&lCost:||&e45,000 Tickets;c;sudo PLAYER shop bundle"	
+	set {db_shop.items::Timber Axe} to "i;diamond axe;n;&a&b&k&a&3Timber Axe;l;&6This axe makes all logs within a 10 block radius||&6go timber!|| ||&2StickyItem ©|| ||&5&oClick to purchase|| ||&3&lCost:||&e5,000 Tickets;c;sudo PLAYER timberpurchase"
+	set {db_shop.items::HotTouch Pick} to "i;diamond pickaxe;n;&a&b&k&a&3HotTouch Pickaxe;l;&6A pickaxe forged from the heart of the Nether||&6with an intense heat to smelt ores while mining.|| ||&2StickyItem ©|| ||&5&oClick to purchase|| ||&3&lCost:||&e7,500 Tickets;c;sudo PLAYER hottouchpurchase pick"
+	set {db_shop.items::HotTouch Axe} to "i;diamond axe;n;&a&b&k&a&3HotTouch Axe;l;&6An axe forged from the heart of the Nether||&6with an intense heat to cook logs into charcoal||&6while chopping.|| ||&2StickyItem ©|| ||&5&oClick to purchase|| ||&3&lCost:||&e5,000 Tickets;c;sudo PLAYER hottouchpurchase axe"
+	set {db_shop.items::HotTouch Shovel} to "i;diamond shovel;n;&a&b&k&a&3HotTouch Shovel;l;&6A shovel forged from the heart of the Nether||&6with an intense heat to cook sand clay and||&6cactus while digging.|| ||&2StickyItem ©|| ||&5&oClick to purchase|| ||&3&lCost:||&e10,000 Tickets;c;sudo PLAYER hottouchpurchase shovel"
+
+	
+	
+	
+command /shop [<text>]:
+	permission: obam.free
+	trigger:
+		argument is not set:
+			loop {db_shop.items::*}:
+				{_count} is not set:
+					set {_count} to 0
+				add 1 to {_count}
+				{_chest} is set:
+					set {_chest} to "%{_chest}%;s;%{_count}%;%loop-value%"
+				{_chest} is not set:
+					set {_chest} to "s;%{_count}%;%loop-value%"
+			replace "PLAYER" in {_chest} with "%player%"
+			{_count} is less than 9:
+				set {_size} to 1
+			{_count} is greater than 9:
+				set {_size} to 2
+			{_count} is greater than 18:
+				set {_size} to 3
+			{_count} is greater than 27:
+				set {_size} to 4
+			show "%{_chest}%" with {_size} row named "&9&lFronts&9 Shop" to player
+		argument is "land":
+			set {_curbal} to player's balance
+			{_curbal} is less than 10000:
+				send "&cYou do not have enough tickets!" to player
+				stop
+			subtract 10000 from player's balance
+			add 1 to {db_availableland.%uuid of player%}
+			send "&aYou have purchased &e1 Land Slot&a for &e10,000 Tickets" to player
+			send "&aYou have &e%player's balance%&a remaining" to player
+		argument is "bundle":
+			set {_curbal} to player's balance
+			{_curbal} is less than 45000:
+				send "&cYou do not have enough tickets!" to player
+				stop
+			subtract 45000 from player's balance
+			add 5 to {db_availableland.%uuid of player%}
+			send "&aYou have purchased &e5 Land Slots&a for &e45,000 Tickets" to player
+			send "&aYou have &e%player's balance%&a remaining" to player	

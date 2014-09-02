@@ -1,0 +1,370 @@
+on damage of a player:
+	world is "kitspawnroom":
+		cancel event
+	{spawnsafety.%victim%} is not set:
+		set {spawnsafety.%victim%} to now
+		add 6 seconds to {spawnsafety.%victim%}
+	set {_check} to difference between {spawnsafety.%victim%} and now
+	{_check} is less than 5 seconds:
+		cancel event
+	damage cause is fall:
+		cancel event
+	damage cause is drowning:
+		cancel event
+	damage cause is suffocation:
+		cancel event
+	damage cause is block explosion:
+		cancel event
+	damage cause is entity explosion:
+		cancel event
+		
+	
+	
+	damage cause is fire or poison or wither or lava or burning:
+		damage is greater than victim's health:
+			cancel event
+			nullify score of "&3%{kit.%victim%}%" in board of victim
+			clear {kit.%victim%}
+			victim has health boost:
+				remove health boost from victim
+			victim has nausea:
+				remove nausea from victim
+			victim has poison:
+				remove poison from victim
+			victim has jump:
+				remove jump from victim
+			victim has slowness:
+				remove slowness from victim
+			victim has speed:
+				remove speed from victim
+			victim has absorption:
+				remove absorption from victim
+			victim has wither:
+				remove wither from victim
+			victim has blindness:
+				remove blindness from victim
+			heal victim by 10 hearts
+			{deaths.%victim%.kit} is not set:
+				set {deaths.%victim%.kit} to 0
+			add 1 to {deaths.%victim%.kit}
+			{lasthit.%victim%} is not set:
+				clear {killstreak.%victim%}
+				clear {kit.%victim%}
+				clear {ingame.%victim%}
+				broadcast "&e%victim%&c met their end to the environment"
+				teleport victim to {kit.spawn}
+			{lasthit.%victim%} is set:
+				set {_attacker} to {lasthit.%victim%}
+			{kills.%{_attacker}%.kit} is not set:
+				set {kills.%{_attacker}%.kit} to 0
+			add 1 to {kills.%{_attacker}%.kit}
+			{killstreak.%{_attacker}%} is not set:
+				set {killstreak.%{_attacker}%} to 0
+			add 1 to {killstreak.%{_attacker}%}
+			{killstreak.%{_attacker}%} is 5:
+				broadcast "&e%{_attacker}%&c is on a Rampage!"
+				set {rampage.%{_attacker}%} to true
+			{killstreak.%{_attacker}%} is 10:
+				broadcast "&e%{_attacker}%&c is Unstoppable!"
+			{killstreak.%{_attacker}%} is 15:
+				broadcast "&e%{_attacker}%&c is Annihilating!"
+			{killstreak.%{_attacker}%} is 20:
+				broadcast "&e%{_attacker}%&c is Dominating!"
+			{killstreak.%{_attacker}%} is 25:
+				broadcast "&e%{_attacker}%&c is Destroying!"
+			{killstreak.%{_attacker}%} is 30:
+				broadcast "&e%{_attacker}%&c is Scary"
+			{rampage.%victim%} is true:
+				broadcast "&e%{_attacker}%&a has ended &e%victim%'s&a rampage!"
+				clear {rampage.%victim%}
+				nullify score of "&3RAMPAGE" in board of victim
+			loop all entities:
+				{owner.zombie.%loop-entity%} is victim:
+					delete loop-entity
+				{owner.skeleton.%loop-entity%} is victim:
+					delete loop-entity
+			{assists.%victim%::*} is set:
+				loop {assists.%victim%::*}:
+					clear {_player}
+					{_player} is not victim
+					{_player} is not {_attacker}
+					set {_player} to loop-value parsed as player
+					add 1 to {assist.%{_player}%.kp}
+					send "&aYou assisted in the kill of &e%victim%"
+						
+			clear {ingame.%victim%}
+			clear {killstreak.%victim%}
+			clear {lashit.%victim%}
+			clear {assists.%victim%::*}
+					
+			teleport victim to {kit.spawn}
+			set {_size} to size of {deathmessages.kitpvp::*}
+			set {_ran} to a random integer between 1 and {_size}
+			set {_message} to {deathmessages.kitpvp::%{_ran}%}
+			replace "ATTACKER" in {_message} with "&e%{_attacker}%&c"
+			replace "VICTIM" in {_message} with "&e%victim%&c"
+			replace "WEAPON" in {_message} with "&e%name of attacker's tool%&c"
+			broadcast "&c%{_message}%"
+				
+				
+			
+			
+	attacker is a player:
+		victim is a player:
+			{hiding.%attacker%} is set:
+				cancel event
+			{kit.%attacker%} is not set:
+				cancel event
+			{kit.%victim%} is not set:
+				cancel event
+			projectile is a arrow:
+				{kit.%attacker%} is "archer" or "skelemancer":
+					distance between attacker and victim is greater than 20:
+						chance of 20%:
+							send "&aCritical Hit!" to attacker
+							play anvil land at victim's location with pitch 2
+							play level up at attacker's location with pitch 1
+							send "&cCritical Hit!" to victim
+							add 3 to damage
+			projectile is a snowball:
+				{kit.%attacker%} is "ninja":
+					apply blindness to victim for 4 seconds
+					send "&cYou have been blinded by &e%attacker%&c!" to victim
+					send "&aYou have blinded &e%victim%&a!" to attacker
+				{kit.%attacker%} is "melee":
+					apply poison to victim for 6 seconds
+					send "&cYou have been poisoned by &e%attacker%&c!" to victim
+					send "&aYou have poisoned &e%victim%&a!" to attacker
+				{kit.%attacker%} is "tank":
+					apply slowness 8 to victim for 3 seconds
+					apply blindness to victim for 3 seconds
+					teleport victim to attacker
+					send "&cYou have been disabled by &e%attacker%&c!" to victim
+					send "&aYou have disabled &e%victim%&a!" to attacker
+			projectile is a egg:
+				{kit.%attacker%} is "firemage":
+					apply nausea to victim for 2 seconds
+					apply slowness 2 to victim for 2 seconds
+					{kit.%victim%} is "tank":
+						send "&cYou can not slow the tank!" to attacker
+						remove slowness from victim
+						apply slowness 2 to victim for 999 days
+						stop
+					send "&cYou have been confused by &e%attacker%&c!" to victim
+					send "&aYou have confused &e%victim%&a!" to attacker
+				{kit.%attacker%} is "archer":
+					apply slowness 8 to victim for 3 seconds
+					{kit.%victim%} is "tank":
+						send "&cYou can not slow the tank!" to attacker
+						remove slowness from victim
+						apply slowness 2 to victim for 999 days
+						stop
+					send "&aYou have stunned &e%victim%&A!" to attacker
+					send "&cYou have been stunned by &e%attacker%&c!" to victim
+						
+						
+			attacker's tool is a fish:
+				name of attacker's tool is "&fBig Fish":
+					add 1 to damage
+					apply nausea to victim for 2 seconds
+					play slime attack at location of victim with pitch 1
+					send "&cYou have fish slapped!" to victim
+					
+			
+			
+			{kit.%victim%} is "tank":
+				{kit.%attacker%} is not "tank":
+					set damage to damage / 4
+				{kit.%attacker%} is "tank":
+					set damage to damage * 3
+			{kit.%attacker%} is "tank":
+				{kit.%victim%} is not "tank":
+					set damage to damage / 2
+			{kit.%attacker%} is "ninja":
+				victim's target is attacker:
+					victim does not have blindness
+					set damage to damage / 2
+				victim has blindness:
+					set damage to damage * 1.5
+				{kit.%victim%} is "fisherman":
+					set damage to damage / 1.5
+				{kit.%victim%} is "archer":
+					set damage to damage * 1.5
+			{kit.%attacker%} is "fisherman":
+				{kit.%victim%} is "ninja":
+					set damage to damage * 1.5
+				{kit.%victim%} is "lightningmage":
+					set damage to damage / 1.5
+			{kit.%attacker%} is "archer":
+				{kit.%victim%} is "ninja":
+					set damage to damage / 1.5
+				{kit.%victim%} is "melee":
+					set damage to damage * 1.5
+			{kit.%attacker%} is "melee":
+				{kit.%victim%} is "necromancer":
+					set damage to damage * 1.5
+				{kit.%victim%} is "archer":
+					set damage to damage / 1.5
+			{kit.%attacker%} is "necromancer":
+				{kit.%victim%} is "skelemancer":
+					set damage to damage * 1.5
+				{kit.%victim%} is "melee":
+					set damage to damage / 1.5
+			{kit.%attacker%} is "skelemancer":
+				{kit.%victim%} is "necromancer":
+					set damage to damage / 1.5
+				{kit.%victim%} is "lightningmage":
+					set damage to damage * 1.5
+			{kit.%attacker%} is "lightningmage":
+				{kit.%victim%} is "skelemancer":
+					set damage to damage / 1.5
+				{kit.%victim%} is "fisherman":
+					set damage to damage * 1.5
+				{kit.%victim%} is "firemage":
+					set damage to damage * 1.5
+			{kit.%attacker%} is "firemage":
+				{kit.%victim%} is "necromancer":
+					set damage to damage * 1.5
+				{kit.%victim%} is "lightningmage":
+					set damage to damage / 1.5
+			{kit.%attacker%} is "tank":
+				
+				{combo.%attacker%} is set:
+					set {_dif} to difference between {combo.%attacker%} and now
+					{combo.%attacker%.track} is victim:
+						{_dif} is less than 1 second:
+							{modifier.%attacker%} is not set:
+								set {modifier.%attacker%} to 0
+							{modifier.%attacker%} is less than 2:
+								add 0.25 to {modifier.%attacker%}
+							add {modifier.%attacker%} to damage
+						{_dif} is greater than or equal to 1 second:
+							clear {modifier.%attacker%}
+							set {combo.%attacker%.track} to victim
+							set {combo.%attacker%} to now
+					{combo.%attacker%.track} is not victim:
+						set {combo.%attacker%.track} to victim
+						clear {modifier.%attacker%}
+						set {combo.%attacker%} to now
+				{combo.%attacker%} is not set:
+					set {combo.%attacker%} to now
+					set {combo.%attacker%.track} to victim
+			
+			{assists.%victim%::%attacker%} is not set:
+				attacker is not victim
+				set {assist.%victim%::%attacker%} to attacker
+			
+			set {lasthit.%victim%} to attacker
+				
+					
+				
+				
+					
+			
+					
+			damage is greater than victim's health:
+				cancel event
+				{kit.%attacker%} is "melee":
+					apply speed 3 to attacker for 15 seconds
+				victim is ignited:
+					extinguish victim
+				extinguish victim
+				nullify score of "&3%{kit.%victim%}%" in board of victim
+				clear {kit.%victim%}
+				victim has health boost:
+					remove health boost from victim
+				victim has nausea:
+					remove nausea from victim
+				victim has poison:
+					remove poison from victim
+				victim has jump:
+					remove jump from victim
+				victim has slowness:
+					remove slowness from victim
+				victim has speed:
+					remove speed from victim
+				victim has absorption:
+					remove absorption from victim
+				victim has wither:
+					remove wither from victim
+				victim has blindness:
+					remove blindness from victim
+				extinguish victim
+				heal victim by 10 hearts
+				{deaths.%victim%.kit} is not set:
+					set {deaths.%victim%.kit} to 0
+				add 1 to {deaths.%victim%.kit}
+				{kills.%attacker%.kit} is not set:
+					set {kills.%attacker%.kit} to 0
+				add 1 to {kills.%attacker%.kit}
+				{killstreak.%attacker%} is not set:
+					set {killstreak.%attacker%} to 0
+				add 1 to {killstreak.%attacker%}
+				{killstreak.%attacker%} is 5:
+					broadcast "&e%attacker%&c is on a Rampage!"
+					set {rampage.%attacker%} to true
+				{killstreak.%attacker%} is 10:
+					broadcast "&e%attacker%&c is Unstoppable!"
+				{killstreak.%attacker%} is 15:
+					broadcast "&e%attacker%&c is Annihilating!"
+				{killstreak.%attacker%} is 20:
+					broadcast "&e%attacker%&c is Dominating!"
+				{killstreak.%attacker%} is 25:
+					broadcast "&e%attacker%&c is Destroying!"
+				{killstreak.%attacker%} is 30:
+					broadcast "&e%attacker%&c is Scary"
+				{rampage.%victim%} is true:
+					broadcast "&e%attacker%&a has ended &e%victim%'s&a rampage!"
+					clear {rampage.%victim%}
+					nullify score of "&3RAMPAGE" in board of victim
+				loop all entities:
+					{owner.zombie.%loop-entity%} is victim:
+						delete loop-entity
+					{owner.skeleton.%loop-entity%} is victim:
+						delete loop-entity
+				{assists.%victim%::*} is set:
+					loop {assists.%victim%::*}:
+						clear {_player}
+						set {_player} to loop-value parsed as a player
+						send "&aYou assisted on the kill of &e%victim%" to {_player}
+						{assist.%{_player}%.kp} is not set:
+							set {assist.%{_player}%.kp} to 0
+						add 1 to {assist.%{_player}%.kp}
+				
+				clear {ingame.%victim%}
+				clear {killstreak.%victim%}
+				clear {assists.%victim%::*}
+				
+				teleport victim to {kit.spawn}
+				set {_size} to size of {deathmessages.kitpvp::*}
+				set {_ran} to a random integer between 1 and {_size}
+				set {_message} to {deathmessages.kitpvp::%{_ran}%}
+				replace "ATTACKER" in {_message} with "&e%attacker%&c"
+				replace "VICTIM" in {_message} with "&e%victim%&c"
+				replace "WEAPON" in {_message} with "&e%name of attacker's tool%&c"
+				broadcast "&c%{_message}%"
+				
+every 1 second:
+	loop all players:
+		loop-player is sneaking:
+			level progress of loop-player is greater than 0.1:
+				{kit.%loop-player%} is "ninja"
+				hide loop-player from all players
+				set {hiding.%loop-player%} to true
+				spawn 50 of large smoke data 1 offset with 0, 0, 0 at location of loop-player
+				spawn 50 of angry villager data 1 offset with 0, 0, 0 at location of loop-player
+				reduce the loop-player's level progress by 0.1
+			level progress of loop-player is less than 0.1:
+				reveal loop-player to all players
+				clear {hiding.%loop-player%}
+				
+		loop-player is not sneaking:
+			{hiding.%loop-player%} is set
+			reveal loop-player to all players
+			clear {hiding.%loop-player%}
+					
+on death of a player:
+	clear {kit.%player%}
+	
+on respawn:
+	teleport player to {kit.spawn}

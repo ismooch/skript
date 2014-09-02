@@ -1,0 +1,132 @@
+variables:
+	{abstain.%uuid of player%} = false
+
+command /abstain [<text>]:
+	permission: obam.free
+	trigger:
+		argument is not set:
+			send " "
+			send " &aYour Abstain status is currently &e%{abstain.%uuid of player%}%&a, you can change this by doing &e/abstain confirm&a. "
+			send " "
+			send "&aThis change will cost &e2500 Tickets&a."
+			send " "
+			set {abst.confirm.%player%} to now
+			stop
+		argument is "mod":
+			player has permission "obam.admin":
+				{abstain.%uuid of player%} is false:
+					set {abstain.%uuid of player%} to true
+					execute console command "perms player %player% set nametags.color.red false"
+					execute console command "perms player %player% set nametags.color.blue"
+					send "&aYou are now abstaining from PvP!" to player
+					send "&aYour Abstain status is now &e%{abstain.%uuid of player%}%"
+					stop
+				{abstain.%uuid of player%} is true:
+					set {abstain.%uuid of player%} to false
+					execute console command "perms player %player% set nametags.color.blue false"
+					execute console command "perms player %player% set nametags.color.red"
+					send "&aYou are now able to PvP!" to player
+					send "&aYour Abstain status is now &e%{abstain.%uuid of player%}%"
+					stop
+		argument is "confirm" or "c":
+			set {_hold} to difference between now and {abst.confirm.%player%}
+			{_hold} is greater than 30 seconds:
+				send "&cYou must do &e/abstain&a before doing the confirm command"
+				stop
+			{abstain.%uuid of player%} is not set:
+				set {abstain.%uuid of player%} to false
+			{abstain.%uuid of player%} is false:
+				set {_bal} to player's balance
+				{_bal} is less than 2500:
+					send "&cYou do not have enough tickets to perform this operation"
+					stop
+				remove 2500 from player's balance
+				set {abstain.%uuid of player%} to "wait abstain"
+				set {abstain.%uuid of player%.time} to now
+				send "&aYou have abstained from PvP. You will lose access to some features. You have paid a toll of &e2500 Tickets&a."
+				send "&aIt can take up to &e2 hours&a for your abstain feature to take affect."
+				send "&aYou know have &e%player's balance%&a."
+				stop
+			{abstain.%uuid of player%} is true:
+				set {_bal} to player's balance
+				{_bal} is less than 2500:
+					send "&cYou do not have enough tickets to perform this operation"
+					stop
+				remove 2500 from player's balance
+				set {abstain.%uuid of player%} to "wait pvp"
+				set {abstain.%uuid of player%.time} to now
+				send "&aYou are engaging in PvP. You will be susceptible to PvP fights. You have paid a toll of &e2500 Tickets&a."
+				send "&aIt can take up to &e2 Hours&a for your PvP entering process to take affect."
+				send "&aYou now have &e%player's balance%&a."
+				stop
+				
+			{abstain.%uuid of player%} is "wait pvp":
+				send "&cYou already have an Abstain process waiting. It can take up to 2 hours for this change to take an effect"
+				stop
+			{abstain.%uuid of player%} is "wait abstain":
+				send "&cYou already have an Abstain process waiting. It can take up to 2 hours for this change to take an effect"
+				stop
+			
+on damage:
+	victim is a player
+	attacker is a player
+	{abstain.%uuid of victim%} is true:
+		cancel event
+	{abstain.%uuid of attacker%} is true:
+		send "&cYou can not engage in PvP while abstaining!"
+		cancel event
+		
+every 1 hour:
+	loop all players:
+		{abstain.%uuid of loop-player%} is "wait pvp":
+			set {_hold} to difference between {abstain.%uuid of loop-player%.time} and now
+			{_hold} is more than 1 hour
+			set {abstain.%uuid of loop-player%} to false
+			execute console command "perms player %loop-player% set nametags.color.blue false"
+			execute console command "perms player %loop-player% set nametags.color.red"
+			send "&aYou are now able to PvP!" to loop-player
+		{abstain.%uuid of loop-player%} is "wait abstain":
+			set {_hold} to difference between {abstain.%uuid of loop-player%.time} and now
+			{_hold} is more than 1 hour
+			set {abstain.%uuid of loop-player%} to true
+			execute console command "perms player %loop-player% set nametags.color.red false"
+			execute console command "perms player %loop-player% set nametags.color.blue"
+			send "&aYou are now abstaining from PvP!" to loop-player
+			
+on connect:
+	{abstain.%player%} is set:
+		set {abstain.%uuid of player%} to {abstain.%player%}
+		delete {abstain.%player%}
+	{abstain.%player%.time} is set:
+		set {abstain.%uuid of player%.time} to {abstain.%player%.time}
+		delete {abstain.%player%.time}
+	{abstain.%uuid of player%} is not set:
+		set{abstain.%uuid of player%} to false
+	player is "ISMOOCH":
+		stop
+	{abstain.%uuid of player%} is true:
+		player does not have permission "nametags.color.blue":
+			execute console command "perms player %player% set nametags.color.blue"
+		player has permission "nametags.color.red":
+			execute console command "perms player %player% set nametags.color.red false"
+	{abstain.%uuid of player%} is false:
+		player does not have permission "nametags.color.red":
+			execute console command "perms player %player% set nametags.color.red"
+		player has permission "nametags.color.blue":
+			execute console command "perms player %player% set nametags.color.blue false"
+	{abstain.%uuid of player%} is "wait pvp":
+		set {_hold} to difference between {abstain.%uuid of player%.time} and now
+		{_hold} is more than 1 hour:
+			set {abstain.%uuid of player%} to false
+			send "&aYou can now PvP!"
+			execute console command "perms player %player% set nametags.color.blue false"
+			execute console command "perms player %player% set nametags.color.red"
+			stop
+	{abstain.%uuid of player%} is "wait abstain":
+		set {_hold} to difference between {abstain.%uuid of player%.time} and now
+		{_hold} is more than 1 hour:
+			set {abstain.%uuid of player%} to true
+			send "&aYou are now abstaining from PvP!"
+			execute console command "perms player %player% set nametags.color.red false"
+			execute console command "perms player %player% set nametags.color.blue"
+			stop

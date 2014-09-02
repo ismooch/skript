@@ -1,0 +1,36 @@
+on death of a player:
+	{chunk.live.%chunk at location of player%} is set:
+		{chunk.live.%chunk at location of player%} is not player:
+			stop
+	{db_death.chest} is set:
+		set block at location of player to a chest
+		
+		set {_chest} to block at location of player
+		set block above {_chest} to cobblestone
+		set block above block east of {_chest} to cobblestone
+		set block above block above {_chest} to a sign
+		set {_sign} to block above block above {_chest}
+		set block at block east of {_chest} to chest
+		
+		loop drops:
+			lore of loop-item does not contain "StickyItem":
+				add loop-item to {_chest}
+				
+		
+		clear drops
+
+		set line 1 of {_sign} to "%player%"
+		set line 2 of {_sign} to "Died here"
+				
+		wait 0.5 seconds
+		send "&aDeath Chests are currently active! Your items have been saved at &e%location of {_chest}%&a!" to player
+		log "CHEST DEATH at %location of {_chest}% -- %time% -- %player%" to "chestdeath.log"
+		
+command /tombstone:
+	permission: obam.free
+	trigger:
+		
+		
+		send "Current TombStone Status:"
+		send "%{db_death.chest}%"
+		

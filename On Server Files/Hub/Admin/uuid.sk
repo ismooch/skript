@@ -1,0 +1,16 @@
+on join:
+	set {_name} to player
+	set {_uuid} to UUID of player
+	{db_master.uuid::%{_uuid}%} exists:
+		{db_master.uuid::%{_uuid}%} is {_name}:
+			stop
+		set {_old.name} to {db_master.uuid::%{_uuid}%}
+		set {db_master.uuid::%{_uuid}%} to {_name}
+		set {db_name.%{_name}%} to {_uuid}
+		delete {db_name.%{_old.name}%}
+		log "%date%,%{_uuid}%,%{_old.name}%,%{_name}%" to "logs/Name-Changes.log"
+		broadcast "&cAttention: &7{_old.name} &chas changed their name to &7{_name}&c."
+		stop
+	set {db_master.uuid::%{_uuid}%} to {_name}
+	set {db_name.%{_name}%} to {_uuid}
+

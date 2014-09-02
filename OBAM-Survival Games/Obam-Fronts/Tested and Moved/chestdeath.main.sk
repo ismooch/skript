@@ -1,0 +1,122 @@
+every 1 second:
+
+	set {_hold} to now
+	
+	{db_time.extend.death} is less than now:
+	
+
+
+
+
+		broadcast "&3&l۝TombStone: &dTombStone has Ended!"
+		execute console command "crossmessage &3&l۝TombStone: &dTombStone has Ended!"
+		clear {db_death.chest}
+		clear {db_time.extend.death}
+		
+	set {_diff} to difference between {db_time.extend.death} and now
+		
+	{_diff} is less than 15 minutes:
+			
+		{alert.death.lastminute} is not set:
+			set {alert.death.lastminute} to true
+		
+			broadcast "&3&l۝TombStone: &dLess than 15 minutes remaining of TombStone!"
+			execute console command "crossmessage &3&l۝TombStone: &dLess than 15 minutes remaining of TombStone!"
+
+
+
+on death of a player:
+	{db_death.chest} is set:
+		set block at location of player to a chest
+		
+		set {_chest} to block at location of player
+		set block above {_chest} to cobblestone
+		set block above block east of {_chest} to cobblestone
+		set block above block above {_chest} to a sign
+		set {_sign} to block above block above {_chest}
+		set block at block east of {_chest} to chest
+		
+		loop items in player's inventory:
+			lore of loop-item does not contain "StickyItem":
+				add loop-item to {_chest}
+				
+		
+		clear drops
+
+		set line 1 of {_sign} to "%player%"
+		set line 2 of {_sign} to "Died here"
+				
+		wait 0.5 seconds
+		send "&aTombStone currently active! Your items have been saved at &e%location of {_chest}%&a!" to player
+		log "CHEST DEATH at %location of {_chest}% -- %time% -- %player%" to "chestdeath.log"
+		
+		
+command /chestextended <integer> <text>:
+	permission: obam.admin
+	trigger:
+		
+		{db_time.extend.death} is not set:
+			set {db_time.extend.death} to now
+			{db_deathstats.time.%argument 2%} is not set:
+				set {db_deathstats.time.%argument 2%} to 0
+		
+			#Not meant to be a real option.. just for debugging
+		arg 1 is 5:
+			
+			add 5 minutes to {db_time.extend.death}
+			add 5 to {db_deathstats.time.%argument 2%}
+			
+		arg 1 is 30:
+			
+			add 30 minutes to {db_time.extend.death}
+			add 30 to {db_deathstats.time.%argument 2%}
+			
+		arg 1 is 60:
+			
+			add 1 hour to {db_time.extend.death}
+			add 60 to {db_deathstats.time.%argument 2%}
+			
+		arg 1 is 90:
+			
+			add 90 minutes to {db_time.extend.death}
+			add 90 to {db_deathstats.time.%argument 2%}
+		
+		arg 1 is 120:
+			
+			add 2 hours to {db_time.extend.death}
+			add 120 to {db_deathstats.time.%argument 2%}
+			
+		broadcast "&3&l۝TombStone &e%argument 2%&d has extended the TombStone Timer by &e%argument 1% Minutes&d!"
+		execute console command "crossmessage &3&l۝TombStone: &e%argument 2%&d has extended the TombStoneTimer by &e%argument 1% Minutes&d!"
+		
+		set {_diff} to difference between {db_time.extend.death} and now
+		
+		{db_death.chest} is not set:
+			set {db_death.chest} to true
+		
+		broadcast "&3&l۝TombStone: &e%{_diff}% &dremaining!"
+		execute console command "crossmessage &3&l۝TombStone: &e%{_diff}% &dremaining!"
+		clear {alert.death.lastminute}
+		
+		
+		
+			
+command /deathchestclear:
+	permission: obam.admin
+	trigger:
+		
+
+		clear {db_death.chest}
+		clear {db_time.extend.death}
+		clear {alert.death.lastminute}
+		
+		send "&3&l۝tombStone: &dTombStone Bonus Cleared" to console
+		send "&3&l۝TombStone: &dTombStone Bonus Cleared"
+		
+command /tombstone:
+	permission: obam.free
+	trigger:
+		
+		
+		send "Current TombStone Status:"
+		send "%{db_death.chest}%"

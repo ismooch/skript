@@ -1,0 +1,142 @@
+every 1 second:
+
+	set {_hold} to now
+	
+	{db_time.extend.tam} is less than now:
+	
+		clear {db_tam.bonus}
+		set {db_current.bonus} to false
+		clear {db_time.extend.tam}
+		clear {alert.tam.lastminute}
+		broadcast "&3&l۝TAM: &dTAM Bonus has Ended!"
+		execute console command "crossmessage &3&l۝TAM: &dTAM Bonus has Ended!"
+		
+	set {_diff} to difference between {db_time.extend.tam} and now
+		
+	{_diff} is less than 15 minutes:
+			
+		{alert.tam.lastminute} is not set:
+			set {alert.tam.lastminute} to true
+		
+			broadcast "&3&l۝TAM: &dLess than 15 minutes remaining of TAM Bonus at &e%{db_tam.bonus}%&d!"
+			execute console command "crossmessage &3&l۝TAM: &dLess than 15 minutes remaining of TAM Bonus at &e%{db_tam.bonus}%&d!"
+		
+	
+command /tamextended <integer> <text>:
+	permission: obam.admin
+	trigger:
+		
+		{db_time.extend.tam} is not set:
+			set {db_time.extend.tam} to now
+			{db_tamstats.time.%argument 2%} is not set:
+				set {db_tamstats.time.%argument 2%} to 0
+		
+			#Not meant to be a real option.. just for debugging
+		arg 1 is 5:
+			
+			add 5 minutes to {db_time.extend.tam}
+			add 5 to {db_tamstats.time.%argument 2%}
+			
+		arg 1 is 30:
+			
+			add 30 minutes to {db_time.extend.tam}
+			add 30 to {db_tamstats.time.%argument 2%}
+			
+		arg 1 is 60:
+			
+			add 1 hour to {db_time.extend.tam}
+			add 60 to {db_tamstats.time.%argument 2%}
+			
+		arg 1 is 90:
+			
+			add 90 minutes to {db_time.extend.tam}
+			add 90 to {db_tamstats.time.%argument 2%}
+		
+		arg 1 is 120:
+			
+			add 2 hours to {db_time.extend.tam}
+			add 120 to {db_tamstats.time.%argument 2%}
+			
+		broadcast "&3&l۝TAM: &e%argument 2%&d has extended the TAM timer by &e%argument 1% Minutes&d!"
+		execute console command "crossmessage &3&l۝TAM: &e%argument 2%&d has extended the TAM timer by &e%argument 1% Minutes&d!"
+		
+		set {_diff} to difference between {db_time.extend.tam} and now
+		
+		broadcast "&3&l۝TAM: &e%{_diff}% &dremaining!"
+		execute console command "crossmessage &3&l۝TAM: &e%{_diff}% &dremaining!"
+		broadcast "&3&l۝TAM: &dUse &e/tam &dfor more details!"
+		execute console command "crossmessage &3&l۝TAM: &dUse &e/tam &dfor more details!"
+		clear {alert.tam.lastminute}
+			
+		set {db_current.bonus} to true
+		{db_tam.bonus} is not set:
+		
+			set {db_tam.bonus} to 0.1
+			
+			{db_tamstats.bonus.%argument 2%} is not set:
+				set {db_tamstats.bonus.%argument 2%} to 0
+				
+			add 0.1 to {db_tamstats.bonus.%argument 2%}
+			
+			broadcast "&3&l۝TAM: &e%argument 2%&d has increased the TAM Bonus by &e0.1&d!"
+			broadcast "&3&l۝TAM: &dThe TAM Bonus is now at &e%{db_tam.bonus}%&d! "
+			execute console command "crossmessage &3&l۝TAM: &e%argument 2%&d has increased the TAM Bonus by 0.1! The TAM Bonus is now at &e%{db_tam.bonus}%&d! "
+			execute console command "crossmessage &3&l۝TAM: &dThe TAM Bonus is now at &e%{db_tam.bonus}%&d! "
+			
+command /tambonus <number> <text>:
+	permission: obam.admin
+	trigger:
+		
+		{db_tamstats.bonus.%argument 2%} is not set:
+			set {db_tamstats.bonus.%argument 2%} to 0
+			
+		{db_tam.bonus} is not set:
+			set {db_tam.bonus} to 0
+			
+		add argument 1 to {db_tam.bonus}
+		add argument 1 to {db_tamstats.bonus.%argument 2%}
+		
+		broadcast "&3&l۝TAM: &e%argument 2%&d has increased the TAM Bonus by &e%argument 1%&d!"
+		broadcast "&3&l۝TAM: &dThe TAM Bonus is now at &e%{db_tam.bonus}%&d!"
+		execute console command "crossmessage &3&l۝TAM: &e%argument 2%&d has increased the TAM Bonus by &e%argument 1%&d! The TAM Bonus is now at &e%{db_tam.bonus}%&d!"
+		execute console command "crossmessage &3&l۝TAM: &dThe TAM Bonus is now at &e%{db_tam.bonus}%&d!"
+		
+		
+		{db_time.extend.tam} is not set:
+			set {db_time.extend.tam} to now
+			
+			{db_tamstats.time.%argument 2%} is not set:
+				set {db_tamstats.time.%argument 2%} to 0
+				
+			add 60 to {db_tamstats.time.%argument 2%}
+			
+			add 1 hour to {db_time.extend.tam}
+			clear {alert.tam.lastminute}
+			broadcast "&3&l۝TAM: &e%argument 2%&d has extended the TAM timer by &e60 Minutes&d!"
+			execute console command "crossmessage &3&l۝TAM: &e%argument 2%&d has extended the TAM timer by &e60 Minutes&d!"
+			
+		set {_diff} to difference between {db_time.extend.tam} and now
+		
+		broadcast "&3&l۝TAM: &e%{_diff}% &dremaining!"
+		execute console command "crossmessage &3&l۝TAM: &e%{_diff}% &dremaining!"
+		broadcast "&3&l۝TAM: &dUse &e/tam &dfor more details!"
+		execute console command "crossmessage &3&l۝TAM: &dUse &e/tam &dfor more details!"
+		
+		
+		
+			
+# Debugging Clear command	
+command /tambonusclear:
+	permission: obam.admin
+	trigger:
+		
+		clear {db_tam.bonus}
+		set {db_current.bonus} to false
+		clear {db_time.extend.tam}
+		clear {alert.tam.lastminute}
+		
+		send "&3&l۝TAM: &dTAM Bonus Cleared" to console
+		send "&3&l۝TAM: &dTAM Bonus Cleared"
+		
+		
+			

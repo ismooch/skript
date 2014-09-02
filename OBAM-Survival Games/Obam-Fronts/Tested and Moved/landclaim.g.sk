@@ -1,0 +1,908 @@
+variables:
+	{db_claimedland.%uuid of player%} = 0
+	{availableland.live.%uuid of player%} = 1
+	{alert.fronts.%uuid of player%} = true
+
+on join:
+	{db_prizecheck.%uuid of player%} is set:
+		add {db_prizecheck.%uuid of player%} to {db_availableland.%uuid of player%}
+		send "&aYou have had &e%{db_prizecheck.%uuid of player%}%&a added to your Fronts balance!" to player
+		clear {db_prizecheck.%uuid of player%}
+	{played.%player%} is set:
+		set {played.%uuid of player%} to {played.%player%}
+		delete {played.%player%}
+	{played.%uuid of player%} is not set:
+		set {played.%uuid of player%} to true
+	{db_claimedland.%player%} is set:
+		set {db_claimedland.%uuid of player%} to {db_claimedland.%player%}
+		delete {db_claimedland.%player%}
+	{db_availableland.%player%} is set:
+		set {db_availableland.%uuid of player%} to {db_availableland.%player%}
+		delete {db_availableland.%player%}
+	{db_chunks.claim.count.%player%} is set:
+		set {db_chunks.claim.count.%uuid of player%} to {db_chunks.claim.count.%player%}
+		delete {db_chunks.claim.count.%player%}
+	{owned.chunks.%player%::*} is set:
+		loop {owned.chunks.%player%::*}:
+			set {chunk.live.%loop-index%} to uuid of player
+			add loop-index to {owned.chunks.%uuid of player%::*}
+			delete {land.live.%loop-index%::*}
+		delete {owned.chunks.%player%::*}
+	{loc.chunks.%player%::*} is set:
+		loop {loc.chunks.%player%::*}:
+			set {loc.chunks.%uuid of player%::%loop-index%} to loop-value
+		delete {loc.chunks.%player%::*}
+	{home.%player%.wild} is set:
+		set {home.%uuid of player%.wild} to {home.%player%.wild}
+		delete {home.%player%.wild}
+	{first.claim.%player%} is set:
+		set {first.claim.%uuid of player%} to {first.claim.%player%}
+		delete {first.claim.%player%}
+
+command /movedata:
+	permission: obam.admin
+	trigger: 
+		loop {db_channel.global::*}:
+			set {db_claimedland.%loop-value%} to {claimedland.%loop-value%}
+			set {db_availableland.%loop-value%} to {availableland.%loop-value%}
+
+every 1 tick:
+	loop all players:
+		{chunk.live.%chunk at location of loop-player%} is not set:
+			{alert.notify.owner.%loop-player%} is not "Unclaimed":
+				{alert.fronts.%uuid of loop-player%} is true:
+					send "&a&lUnclaimed Front" to loop-player
+					set {alert.notify.owner.%loop-player%} to "Unclaimed"
+		{alert.notify.owner.%loop-player%} is not {chunk.live.%chunk at location of loop-player%}:
+			{chunk.live.%chunk at location of loop-player%} is not set:
+				{alert.notify.owner.%loop-player%} is not "Unclaimed":
+					{alert.fronts.%uuid of loop-player%} is true:
+						send "&a&lUnclaimed Front" to loop-player
+						set {alert.notify.owner.%loop-player%} to "Unclaimed"
+			{chunk.live.%chunk at location of loop-player%} is set:
+				{alert.fronts.%uuid of loop-player%} is true:
+					send "&a&lFront Claimed by: &e%{db_master.uuid::%{chunk.live.%chunk at location of loop-player%}%}%" to loop-player
+					set {alert.notify.owner.%loop-player%} to {chunk.live.%chunk at location of loop-player%} 
+		{alert.notify.owner.%loop-player%} is not set:
+			{chunk.live.%chunk at location of loop-player%} is not set:
+				{alert.fronts.%uuid of loop-player%} is true:
+					send "&a&lUnclaimed Front" to loop-player
+					set {alert.notify.owner.%loop-player%} to "Unclaimed"
+
+#startfold
+command /front [<text>] [<text>] [<text>]:
+	permission: obam.free
+	description: For all land related commands
+	usage: &c/front (claim, unclaim, add, remove, name)
+	aliases: /f
+	trigger:
+		argument 1 is not set:
+			message "&3-[&a&lFronts Claimed&3]-"
+			message "&6 %{db_claimedland.%uuid of player%}%"
+			send "&3-[&a&lPurchased Slots&3]-" to player
+			send "&6 %{db_availableland.%uuid of player%}%"
+			send "&3-[&a&lAvailible Slots&3]-" to player
+			send "&6 %{db_availableland.%uuid of player%} - {db_claimedland.%uuid of player%}%" to player
+			stop
+		#subfold @help
+		argument 1 is "help" or "h":
+			message "&3--[&6&lFronts Help&3]--"
+			message "&cRequired = [] Optional = ()"
+			message "&a * /front or f"
+			message "&7 Shows your land claiming statistics"
+			message "&a * /front:f [Info:i/Stats:s]"
+			message "&7 Shows information about the land you are standing in"
+			message "&a * /front:f [Claim:c/Unclaim:u]"
+			message "&7 Claim/Unclaim the land you are standing at"
+			player has permission "land.bypass":
+				message "&a * /land bypass"
+				message "&7 Bypass all claimed land"
+			stop
+		#subfold @stats
+		argument 1 is "stats" or "info" or "s" or "i":
+			{chunk.live.%chunk at location of player%} is set:
+				{chunk.live.%chunk at location of player%} is not "Town":
+					message "&3--[&lFront Owner&3]--"
+					message "&a * %{db_master.uuid::%{chunk.live.%chunk at location of loop-player%}%}%"
+					send "&3---[&lFront Name&3]--"
+					{chunk.name.%chunk at location of player%} is not set:
+						send "&a * Name not set"
+						stop
+					send "&a * %{chunk.name.%chunk at location of player%}%"
+					stop
+			message "&6This area is not currently owned by a player."
+			stop
+		#subfold @error
+		argument 1 is "error":
+			player has permission "land.bypass":
+				message "&cIncorrect usage. Try '/front [claim, unclaim, name, bypass] (player)'"
+			player does not have permission "land.bypass":
+				message "&cIncorrect usage. Try '/front [claim, unclaim, name] (player)'"
+			message "&7 ()'s = Optional, []'s = Required."
+			stop
+		#subfold @claim
+		argument 1 is "claim" or "c":
+			{chunk.live.%chunk at location of player%} is set:
+				message "&cThis land has already been claimed."
+				stop	
+			loop blocks in radius 50 of player:
+				player cannot build at the loop-block:
+					message "&cYou can not claim land in this area."
+					stop
+			{db_claimedland.%uuid of player%} is greater than or equal to {db_availableland.%uuid of player%}:
+				send "&cYou do not have enough Availiable land for this action! Please purchase more from &7Fronts Ferdinand &cat Town Spawn!" to player
+				stop
+			{first.claim.%uuid of player%} is true:
+				set {_bal} to player's balance
+				{_bal} is less than 2000:
+					send "&cYou do not have enough tickets to do this!" to player
+					stop
+			{db_chunks.claim.count.%uuid of player%} is not set:
+				set {db_chunks.claim.count.%uuid of player%} to 0
+			add 1 to {db_chunks.claim.count.%uuid of player%}
+			set {chunk.live.%chunk at location of player%} to uuid of player
+			add chunk at location of player to {owned.chunks.%uuid of player%::*}
+			set {chunk.name.%chunk at location of player%} to "%{db_chunks.claim.count.%uuid of player%}%"
+			set {loc.chunks.%uuid of player%::%chunk at location of player%} to location of player
+			message "&6You now own this Front."
+			{db_claimedland.%uuid of player%} is 0:
+				set {home.%uuid of player%.wild} to location of player
+			add 1 to {db_claimedland.%uuid of player%}
+			{first.claim.%uuid of player%} is true:
+				remove 2000 from player's balance
+				send "&aYou have used &e2000 Tickets&a to claim this Front" to player
+				send "&aYou have &e%player's balance%&a remaining" to player
+				stop
+			send "&aThis was your first land claim. It was free. The next one will cost &e2000 Tickets!" to player
+			set {first.claim.%uuid of player%} to true
+			stop
+		#subfold @unclaim
+		argument 1 is "unclaim" or "u":
+			{chunk.live.%chunk at location of player%} is not set:
+				message "&cThis land has not been claimed."
+				stop
+			{chunk.live.%chunk at location of player%} is not uuid of player:
+				message "&cYou do not own this land."
+				stop
+			remove 1 from {db_claimedland.%uuid of player%}
+			set {_chunk} to chunk at location of player
+			chunk at location of {home.%uuid of player%.wild} is chunk at location of player:
+				clear {home.%uuid of player%.wild}
+				send "&cYour home location has been cleared!" to player
+			clear {chunk.live.%chunk at location of player%} 
+			clear {chunk.name.%chunk at location of player%}
+			delete {loc.chunks.%uuid of player%::%chunk at location of player%}
+			loop {flags.%chunk at location of player%::*}:
+				loop {flags.%chunk at location of player%::%loop-index%::*}:
+					delete {flags.%chunk at location of player%::%loop-index-1%::%loop-index-2%}
+				delete {flags.%chunk at location of player%::%loop-index%}
+			loop {owned.chunks.%uuid of player%::*}:
+				chunk at location of player is {owned.chunks.%uuid of player%::%loop-index%}
+				delete {owned.chunks.%uuid of player%::%loop-index%}
+			message "&6You have unclaimed this Front."
+			stop
+		#subfold @bypass
+		argument 1 is "bypass":
+			player has permission "land.bypass":
+				{bypassland.%uuid of player%} is true:
+					clear {bypassland.%uuid of player%}
+					message "&6You have finished bypassing claimed land."
+					stop
+				set {bypassland.%uuid of player%} to true
+				message "&6You can now bypass claimed land."
+				stop
+			message "&cYou do not have permission to use this command."
+			stop	
+		#subfold @name
+		argument 1 is "name" or "n":
+			{chunk.live.%chunk at location of player%} is not set:
+				message "&cThis land has not been claimed."
+				stop
+			{chunk.live.%chunk at location of player%} is not uuid of player:
+				{flags.%chunk at location of player%::admin::everyone} is not set:
+					set {flags.%chunk at location of player%::admin::everyone} to false
+				{flags.%chunk at location of player%::admin::%uuid of player%} is not set:
+					set {flags.%chunk at location of player%::admin::%uuid of player%} to false
+				{flags.%chunk at location of player%::admin::everyone} is false:
+					{flags.%chunk at location of player%::admin::%uuid of player%} is false:
+						send "&cYou do not have permission to do this!"
+						stop
+			argument 2 is "set":
+				send "&cThat is an invalid name!" to player
+				stop
+			argument 2 is not set:
+				send "&cPlease choose a name!" to player
+				stop
+			message "&aYou have named this Front to &e%argument 2%"
+			set {chunk.name.%chunk at location of player%} to "%argument 2%"
+			set {loc.chunks.%uuid of player%::%chunk at location of player%} to location of player
+			stop
+		#subfold @list
+		argument 1 is "list" or "l":
+			argument 2 is not set:
+				loop {loc.chunks.%uuid of player%::*}:
+					set {_loc} to {loc.chunks.%uuid of player%::%loop-index%}
+					set {_chunk} to chunk at location of {_loc}
+					set {_chunk.name} to {chunk.name.%{_chunk}%}
+					{_count} is not set:
+						set {_count} to 0
+					add 1 to {_count}
+					{chunk.name.%{_chunk}%} is not set:
+						set {chunk.name.%{_chunk}%} to "%{_count}%"
+					set {_chunk.name} to {chunk.name.%{_chunk}%}
+					{_chunk.name} is not set:
+						set {_chunk.name} to "&cNot Named"
+					send "&a%{_count}%.......%{_chunk}%....%{_chunk.name}%" to player
+				stop
+			argument 2 is set:
+				message "You can only list your own fronts at the moment."
+				stop
+		#subfold @travel
+		argument 1 is "travel" or "t":
+			argument 3 is not set:
+				argument 2 is "set":
+					{chunk.live.%chunk at location of player%} is not set:
+						message "&cThis land has not been claimed."
+						stop
+					{chunk.live.%chunk at location of player%} is not uuid of player:
+						message "&cThis is not your land!"
+						stop
+					set {loc.chunks.%uuid of player%::%chunk at location of player%} to location of player
+					send "&aYour travel location for this area, has been moved" to player
+					stop
+				{chunk.live.%chunk at location of player%} is not set:
+					message "&cYou can only do this in &eTown&c, or on your land!"
+					stop
+				{chunk.live.%chunk at location of player%} is not uuid of player:
+					{chunk.live.%chunk at location of player%} is not "Town":
+						{flags.%chunk at location of player%::teleport::everyone} is not set:
+							set {flags.%chunk at location of player%::teleport::everyone} to false
+						{flags.%chunk at location of player%::teleport::everyone} is false:
+							{flags.%chunk at location of player%::teleport::%uuid of player%} is not set:
+								set {flags.%chunk at location of player%::teleport::%uuid of player%} to false
+							{flags.%chunk at location of player%::teleport::%uuid of player%} is false:
+								message "&cYou can only do this in &eTown&c, or on your land!"
+								stop
+				loop {loc.chunks.%uuid of player%::*}:
+					set {_loc} to loop-value
+					set {_chunk} to chunk at location of {_loc}
+					set {_chunk.name} to {chunk.name.%{_chunk}%}
+					{_chunk.name} is argument 2:
+						send "&aTeleporting to &e%argument 2%" to player
+						teleport player to {_loc}
+						stop
+				send "&cYou do not have a Front named &e%argument 2% &cin this world!"
+				stop
+			argument 3 is set:
+				{chunk.live.%chunk at location of player%} is not set:
+					message "&cYou can only do this in &eTown&c, or on your land!"
+					stop
+				{chunk.live.%chunk at location of player%} is not uuid of player:
+					{chunk.live.%chunk at location of player%} is not "Town":
+						{flags.%chunk at location of player%::teleport::everyone} is not set:
+							set {flags.%chunk at location of player%::teleport::everyone} to false
+						{flags.%chunk at location of player%::teleport::everyone} is false:
+							{flags.%chunk at location of player%::teleport::%player%} is not set:
+								set {flags.%chunk at location of player%::teleport::%player%} to false
+							{flags.%chunk at location of player%::teleport::%player%} is false:
+								message "&cYou can only do this in &eTown&c, or on your land!"
+								stop
+				loop {loc.chunks.%{db_name.%argument 3%}%::*}:
+					set {_loc} to loop-value
+					set {_chunk} to chunk at location of {_loc}
+					set {_chunk.name} to {chunk.name.%{_chunk}%}
+					{_chunk.name} is argument 2:
+						{flags.%{_chunk}%::teleport::everyone} is not set:
+							set {flags.%{_chunk}%::teleport::everyone} to false
+						{flags.%{_chunk}%::teleport::%uuid of player%} is not set:	
+							set {flags.%{_chunk}%::teleport::%uuid of player%} to false
+						{flags.%{_chunk}%::teleport::everyone} is false:
+							{flags.%{_chunk}%::teleport::%uuid of player%} is false
+							send "&cYou do not have permission to go here!" to player
+							stop
+						send "&aTeleporting to &e%argument 2%" to player
+						teleport player to {_loc}
+						stop
+				send "&c%argument 3% does not have a Front named &e%argument 2% &cin this world!"
+				stop
+		argument 1 is "alert":
+			{alert.fronts.%uuid of player%} is not set:
+				send "&aFront alerts are now &eoff"
+				set {alert.fronts.%uuid of player%} to false
+				stop
+			{alert.fronts.%uuid of player%} is false:
+				send "&aFront alerts are now &eon"
+				set {alert.fronts.%uuid of player%} to true
+				stop
+			{alert.fronts.%uuid of player%} is true:
+				send "&aFront alerts are now &eoff"
+				set {alert.fronts.%uuid of player%} to false
+				stop
+		else:
+			make player execute command "f error"
+			stop	
+#endfold
+on quit:
+	{bypassland.%uuid of player%} is true:
+		clear {bypassland.%uuid of player%}
+
+on place:
+	{bypassland.%uuid of player%} is true:
+		stop
+	{chunk.live.%chunk at location of block%} is set:
+		block is not tnt or water or lava:
+			{flags.%chunk at location of block%::build::everyone} is true:
+				stop
+			{flags.%chunk at location of block%::build::%uuid of player%} is true:
+				stop
+		message "&cThis land is owned by %{db_master.uuid::%{chunk.live.%chunk at location of block%}%}%."
+		cancel event
+
+on break:
+	event-block is not water or lava or milk:
+		{bypassland.%uuid of player%} is true:
+			stop
+		{chunk.live.%chunk at location of event-block%} is set:
+			{flags.%chunk at location of event-block%::build::everyone} is true:
+				set {_perm} to true
+			{flags.%chunk at location of event-block%::build::%uuid of player%} is true:
+				set {_perm} to true
+			{_perm} is true:
+				event-block is a chest or a furnace or a dispenser or a hopper or a brewing stand or a dropper or a trapped chest or a beacon:
+					set {_type} to checked
+					{flags.%chunk at location of event-block%::container::everyone} is true:
+						stop
+					{flags.%chunk at location of event-block%::container::%uuid of player%} is true:
+						stop
+					event-block is a chest:
+						{flags.%chunk at location of event-block%::conchest::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::conchest::%uuid of player%} is true:
+							stop
+					event-block is a furnace:
+						{flags.%chunk at location of event-block%::confurnace::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::confurnace::%uuid of player%} is true:
+							stop
+					event-block is a dispenser:
+						{flags.%chunk at location of event-block%::condispenser::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::condispenser::%uuid of player%} is true:
+							stop
+					event-block is a hopper:
+						{flags.%chunk at location of event-block%::conhopper::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::conhopper::%uuid of player%} is true:
+							stop
+					event-block is a brewing stand:
+						{flags.%chunk at location of event-block%::conbrewing::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::conbrewing::%uuid of player%} is true:
+							stop
+					event-block is a dropper:
+						{flags.%chunk at location of event-block%::condropper::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::condropper::%uuid of player%} is true:
+							stop
+					event-block is a trapped chest:
+						{flags.%chunk at location of event-block%::contrapped::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::contrapped::%uuid of player%} is true:
+							stop
+					event-block is a beacon:
+						{flags.%chunk at location of event-block%::conbeacon::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::conbeacon::%uuid of player%} is true:
+							stop
+				event-block is a door or a anvil or a note block or a lever or a stone button or a wood button or a jukebox or a trapdoor or a fence gate or a enchantment table or a redstone comparator or a repeater:
+					set {_type} to checked
+					{flags.%chunk at location of event-block%::use::everyone} is true:
+						stop
+					{flags.%chunk at location of event-block%::use::%uuid of player%} is true:
+						stop
+					event-block is a door:
+						{flags.%chunk at location of event-block%::usedoor::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::usedoor::%uuid of player%} is true:
+							stop
+					event-block is a anvil:
+						{flags.%chunk at location of event-block%::useanvil::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::useanvil::%uuid of player%} is true:
+							stop
+					event-block is a note block:
+						{flags.%chunk at location of event-block%::usenote::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::usenote::%uuid of player%} is true:
+							stop
+					event-block is a jukebox:
+						{flags.%chunk at location of event-block%::usejuke::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::usejuke::%uuid of player%} is true:
+							stop
+					event-block is a lever:
+						{flags.%chunk at location of event-block%::uselever::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::uselever::%uuid of player%} is true:
+							stop
+					event-block is a stone button:
+						{flags.%chunk at location of event-block%::usestonebutton::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::usestonebutton::%uuid of player%} is true:
+							stop
+					event-block is a wood button:
+						{flags.%chunk at location of event-block%::usewoodbutton::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::usewoodbutton::%uuid of player%} is true:
+							stop
+					event-block is a trapdoor:
+						{flags.%chunk at location of event-block%::usetrap::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::usetrap::%uuid of player%} is true:
+							stop
+					event-block is a fence gate:
+						{flags.%chunk at location of event-block%::usefence::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::usefence::%uuid of player%} is true:
+							stop
+					event-block is a enchantment table:
+						{flags.%chunk at location of event-block%::useenchant::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::useenchant::%uuid of player%} is true:
+							stop
+					event-block is a redstone comparator:
+						{flags.%chunk at location of event-block%::usecomparator::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::usecomparator::%uuid of player%} is true:
+							stop
+					event-block is a repeater:
+						{flags.%chunk at location of event-block%::userepeater::everyone} is true:
+							stop
+						{flags.%chunk at location of event-block%::userepeater::%uuid of player%} is true:
+							stop
+				{_type} is not set:
+					stop
+			message "&cThis land is owned by %{db_master.uuid::%{chunk.live.%chunk at location of event-block%}%}%."
+			cancel event
+
+on place of tnt:
+	{bypassland.%uuid of player%} is true:
+		stop
+	loop blocks in radius 10 of block:
+		{chunk.live.%chunk at location of loop-block%} is set:
+			{flags.%chunk at location of loop-block%::fronttnt} is false:
+				cancel event
+				message "&cYou can not use explosives here."
+				stop
+
+on explode:
+	entity is creeper
+	loop blocks in radius 10 of entity:
+		{chunk.live.%chunk at location of loop-block%} is set:
+			cancel event
+			set {_safe} to true
+	{_safe} is set:
+		create safe explosion of force 3 at event-location
+
+on damage of a entity:
+	victim is a chicken or a cow or a mooshroom or a horse or a sheep or a pig or a wolf or a ocelot or a villager or a squid:
+		attacker is a player:
+			victim is a cow:
+				attacker's tool is a empty bucket:
+					stop
+			loop blocks in radius 3 of victim:
+				{bypassland.%uuid of attacker%} is true:
+					stop
+				{chunk.live.%chunk at location of loop-block%} is not attacker:
+					{flags.%chunk at location of loop-block%::entity::everyone} is not set:
+						set {flags.%chunk at location of loop-block%::entity::everyone} to false
+					{flags.%chunk at location of loop-block%::entity::%uuid of attacker%} is not set:
+						set {flags.%chunk at location of loop-block%::entity::%uuid of attacker%} to false
+					{flags.%chunk at location of loop-block%::entity::everyone} is false:
+						{flags.%chunk at location of loop-block%::entity::%uuid of attacker%} is true:
+							stop
+					{flags.%chunk at location of loop-block%::entity::everyone} is true:
+						stop
+					send "&cThis area is protected!" to attacker
+					cancel event
+
+on right click on lead:
+	{bypassland.%uuid of player%} is true:
+		stop
+	{chunk.live.%chunk at location of event-player%} is set:
+		{chunk.live.%chunk at location of event-player%} is not event-player:
+			send "&cThis area is protected!" to event-player
+			cancel event
+			stop trigger
+
+on right click on a door or a anvil or a note block or a lever or a stone button or a wood button or a jukebox or a trapdoor or a fence gate or a enchantment table or a redstone comparator or a repeater or a chest or a furnace or a dispenser or a hopper or a brewing stand or a dropper or a trapped chest or a beacon:
+	{bypassland.%uuid of player%} is true:
+		stop
+	{chunk.live.%chunk at location of event-block%} is set:
+		event-block is a chest or a furnace or a dispenser or a hopper or a brewing stand or a dropper or a trapped chest or a beacon:
+			{flags.%chunk at location of event-block%::container::everyone} is true:
+				stop
+			{flags.%chunk at location of event-block%::container::%uuid of player%} is true:
+				stop
+			event-block is a chest:
+				{flags.%chunk at location of event-block%::conchest::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::conchest::%uuid of player%} is true:
+					stop
+			event-block is a furnace:
+				{flags.%chunk at location of event-block%::confurnace::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::confurnace::%uuid of player%} is true:
+					stop
+			event-block is a dispenser:
+				{flags.%chunk at location of event-block%::condispenser::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::condispenser::%uuid of player%} is true:
+					stop
+			event-block is a hopper:
+				{flags.%chunk at location of event-block%::conhopper::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::conhopper::%uuid of player%} is true:
+					stop
+			event-block is a brewing stand:
+				{flags.%chunk at location of event-block%::conbrewing::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::conbrewing::%uuid of player%} is true:
+					stop
+			event-block is a dropper:
+				{flags.%chunk at location of event-block%::condropper::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::condropper::%uuid of player%} is true:
+					stop
+			event-block is a trapped chest:
+				{flags.%chunk at location of event-block%::contrapped::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::contrapped::%uuid of player%} is true:
+					stop
+			event-block is a beacon:
+				{flags.%chunk at location of event-block%::conbeacon::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::conbeacon::%uuid of player%} is true:
+					stop
+		event-block is a door or a anvil or a note block or a lever or a stone button or a wood button or a jukebox or a trapdoor or a fence gate or a enchantment table or a redstone comparator or a repeater:
+			{flags.%chunk at location of event-block%::use::everyone} is true:
+				stop
+			{flags.%chunk at location of event-block%::use::%uuid of player%} is true:
+				stop
+			event-block is a door:
+				{flags.%chunk at location of event-block%::usedoor::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::usedoor::%uuid of player%} is true:
+					stop
+			event-block is a anvil:
+				{flags.%chunk at location of event-block%::useanvil::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::useanvil::%uuid of player%} is true:
+					stop
+			event-block is a note block:
+				{flags.%chunk at location of event-block%::usenote::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::usenote::%uuid of player%} is true:
+					stop
+			event-block is a jukebox:
+				{flags.%chunk at location of event-block%::usejuke::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::usejuke::%uuid of player%} is true:
+					stop
+			event-block is a lever:
+				{flags.%chunk at location of event-block%::uselever::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::uselever::%uuid of player%} is true:
+					stop
+			event-block is a stone button:
+				{flags.%chunk at location of event-block%::usestonebutton::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::usestonebutton::%uuid of player%} is true:
+					stop
+			event-block is a wood button:
+				{flags.%chunk at location of event-block%::usewoodbutton::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::usewoodbutton::%uuid of player%} is true:
+					stop
+			event-block is a trapdoor:
+				{flags.%chunk at location of event-block%::usetrap::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::usetrap::%uuid of player%} is true:
+					stop
+			event-block is a fence gate:
+				{flags.%chunk at location of event-block%::usefence::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::usefence::%uuid of player%} is true:
+					stop
+			event-block is a enchantment table:
+				{flags.%chunk at location of event-block%::useenchant::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::useenchant::%uuid of player%} is true:
+					stop
+			event-block is a redstone comparator:
+				{flags.%chunk at location of event-block%::usecomparator::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::usecomparator::%uuid of player%} is true:
+					stop
+			event-block is a repeater:
+				{flags.%chunk at location of event-block%::userepeater::everyone} is true:
+					stop
+				{flags.%chunk at location of event-block%::userepeater::%uuid of player%} is true:
+					stop
+		message "&cThis land is owned by %{db_master.uuid::%{chunk.live.%chunk at location of event-block%}%}%."
+		cancel event
+
+on right click on horse:
+	{bypassland.%uuid of player%} is true:
+		stop
+	{chunk.live.%chunk at location of event-player%} is set:
+		{chunk.live.%chunk at location of event-player%} is not event-player:
+			send "&cThis area is protected!" to event-player
+			cancel event
+			stop trigger
+
+on damage of a player:
+	attacker is a player:
+		loop blocks in radius 10 of victim:
+			{chunk.live.%chunk at location of loop-block%} is set:
+				send "&cThis area is protected!" to attacker
+				cancel event
+				stop trigger
+
+command /townset:
+	permission: obam.admin
+	trigger:
+		set {town.spawn} to location of player
+
+command /town:
+	permission: obam.free
+	trigger:
+		{chunk.live.%chunk at location of player%} is not player:
+			{chunk.live.%chunk at location of player%} is not "Town":
+				send "&cYou can only do this in Town, or on your own land!" to player
+		{chunk.live.%chunk at location of player%} is not set:
+			message "&cYou must do this on your land!"
+			stop
+		teleport player to {town.spawn}
+
+on sign change:
+	line 1 of block is "warp" or "[warp]":
+		{chunk.live.%chunk at location of player%} is uuid of player:
+			line 2 of block is "town":
+				set line 1 of block to "[WARP]"
+				set line 2 of block to "TOWN"
+				stop
+		send "&cYou can not do that here!" to player
+		cancel event
+
+on right click on sign:
+	line 1 of block is "[WARP]":
+		line 2 of block is "TOWN":
+			{chunk.live.%chunk at location of player%} is not player:
+				{chunk.live.%chunk at location of player%} is not "Town":
+					send "&cYou can only do this on your own land!" to player
+			{chunk.live.%chunk at location of player%} is not set:
+				message "&cYou must do this on your land!"
+				stop
+			teleport player to {town.spawn}
+
+command /clearland [<text>]:
+	permission: obam.admin
+	trigger:
+		argument is not set:
+			message "Please enter a name."
+			stop
+		argument is not "confirm":
+			{db_name.%argument%} does not exist:
+				message "&cThat player does not exist or has not converted to UUID."
+				stop
+			message "&cYou have five seconds to use &7/clearland confirm &cto finish."
+			set {clearland.confirm} to argument
+			wait 5 seconds
+			delete {clearland.confirm}
+		argument is "confirm":
+			{clearland.confirm} is set:
+				set {_who} to {clearland.confirm}
+				send "&cPreparing to delete &e%size of {owned.chunks.%{db_name.%{_who}%}%::*}% &cchunks...." to player
+				wait 0.5 seconds
+				loop {owned.chunks.%{db_name.%{_who}%}%::*}:
+					set {_chunk} to {owned.chunks.%{db_name.%{_who}%}%::%loop-index-1%}
+					send "&cClearing chunk &e%loop-index-1%" to player
+					wait 0.5 seconds
+					clear {chunk.live.%{_chunk}%}
+					clear {chunk.name.%{_chunk}%}
+					loop {flags.%{_chunk}%::*}:
+						delete {flags.%{_chunk}%::loop-index-2::*}
+					delete {flags.%{_chunk}%::*}
+					send "&aChunk &e%loop-index-1% &acleared" to player
+				send "&cClearing Home spawn" to player
+				clear {home.%{db_name.%{_who}%}%.wild}
+				send "&cManginling variables" to player
+				set {claimedland.%{db_name.%{_who}%}%} to 0
+				clear {owned.chunks.%{db_name.%{_who}%}%::*}
+				send "&aLand clear complete!" to player
+				stop
+			message "&cTo slow. Try again."
+
+command /travelmove:
+	permission: obam.free
+	trigger:
+		{chunk.live.%chunk at location of player%} is not set:
+			message "&cThis land has not been claimed."
+			stop
+		{chunk.live.%chunk at location of player%} is not uuid of player:
+			message "&cThis is not your land!"
+			stop
+		set {loc.chunks.%uuid of player%::%chunk at location of player%} to location of player
+		send "&aYour travel location for this area, has been moved" to player
+
+command /sethome:
+	permission: obam.free
+	trigger:
+		{chunk.live.%chunk at location of player%} is not set:
+			message "&cYou must do this on your land!"
+			stop
+		{chunk.live.%chunk at location of player%} is not uuid of player:
+			message "&cYou must do this on your land!"
+			stop
+		set {home.%uuid of player%.wild} to location of player
+		send "&aYour home has been set!" to player
+
+on command "/home":
+	cancel event
+	{chunk.live.%chunk at location of player%} is not player:
+		{chunk.live.%chunk at location of player%} is not "Town":
+			{flags.%chunk at location of player%::teleport::everyone} is not set:
+				set {flags.%chunk at location of player%::teleport::everyone} to false
+			{flags.%chunk at location of player%::teleport::%uuid of player%} is not set:
+				set {flags.%chunk at location of player%::teleport::%uuid of player%} to false
+			{flags.%chunk at location of player%::teleport::everyone} is false:
+				{flags.%chunk at location of player%::teleport::%uuid of player%} is false:
+					send "&cYou can only do this in Town, or on your own land!" to player
+					stop
+	{chunk.live.%chunk at location of player%} is not set:
+		message "&cYou must do this on your land!"
+		stop
+	teleport player to {home.%uuid of player%.wild}
+
+on command "/mv spawn":
+	cancel event
+	{chunk.live.%chunk at location of player%} is not player:
+		{chunk.live.%chunk at location of player%} is not "Town":
+			send "&cYou can only do this in Town, or on your own land!" to player
+			stop
+	{chunk.live.%chunk at location of player%} is not set:
+		message "&cYou must do this on your land!"
+		stop
+	teleport player to {home.%uuid of player%.wild}
+
+on command "/mvspawn":
+	cancel event
+	{chunk.live.%chunk at location of player%} is not player:
+		{chunk.live.%chunk at location of player%} is not "Town":
+			send "&cYou can only do this in Town, or on your own land!" to player
+			stop
+	{chunk.live.%chunk at location of player%} is not set:
+		message "&cYou must do this on your land!"
+		stop
+	teleport player to {home.%uuid of player%.wild}
+
+on bed enter:
+	set {bed.%uuid of event-player%.wild} to true
+	set {bed.owner.%event-block%} to uuid of event-player
+
+on break of a bed:
+	{bed.owner.%event-block%} is set:
+		clear {bed.%{bed.owner.%event-block%}%.wild}
+		clear {bed.owner.%event-block%}
+
+on respawn:
+	wait 1 second
+	execute console command "effect %event-player% clear"
+	{home.%uuid of player%.wild} is set:
+		{bed.%uuid of event-player%.wild} is set:
+			wait 1 second
+			stop
+		wait 0.3 seconds
+		teleport player to {home.%uuid of player%.wild}
+
+command /townclaim:
+	permission: obam.admin
+	trigger:
+		set {chunk.live.%chunk at location of player%} to "Town"
+
+command /owner <text>:
+	permission: obam.admin
+	trigger:
+		{db_chunks.claim.count.%{db_name.%argument%}%} is not set:
+			set {db_chunks.claim.count.%{db_name.%argument%}%} to 0
+		add 1 to {db_chunks.claim.count.%{db_name.%argument%}%}
+		set {chunk.live.%chunk at location of player%} to {db_name.%argument%}
+		add chunk at location of player to {owned.chunks.%{db_name.%argument%}%::*}
+		set {chunk.name.%chunk at location of player%} to "%{db_chunks.claim.count.%{db_name.%argument%}%}%"
+		set {loc.chunks.%{db_name.%argument%}%::%chunk at location of player%} to location of player
+		message "&6%argument% now owns this Front."
+		send "&cPlease remember to adjust for tickets!"
+
+on command "/spawn":
+	{chunk.live.%chunk at location of player%} is not player:
+		{chunk.live.%chunk at location of player%} is not "Town":
+			send "&cYou can only do this in Town, or on your own land!" to player
+			cancel event
+			stop
+	{chunk.live.%chunk at location of player%} is not set:
+		message "&cYou must do this on your land!"
+		cancel event
+		stop
+
+on bucket fill:
+	{chunk.live.%chunk at location of player%} is set:
+		{chunk.live.%chunk at location of player%} is not player:
+			{flags.%chunk at location of player%::bucket::everyone} is not set:
+				set {flags.%chunk at location of player%::bucket::everyone} to false
+			{flags.%chunk at location of player%::bucket::%uuid of player%} is not set:
+				set {flags.%chunk at location of player%::bucket::%uuid of player%} to false
+			{flags.%chunk at location of player%::bucket::everyone} is false:
+				{flags.%chunk at location of player%::bucket::%uuid of player%} is true:
+					stop
+			{flags.%chunk at location of player%::bucket::everyone} is true:
+				stop
+			targeted block is water:
+				{flags.%chunk at location of player%::bucketwater::everyone} is true:
+					stop
+				{flags.%chunk at location of player%::bucketwater::%uuid of player%} is true:
+					stop
+			targeted block is lava:
+				{flags.%chunk at location of player%::bucketlava::everyone} is true:
+					stop
+				{flags.%chunk at location of player%::bucketlava::%uuid of player%} is true:
+					stop
+			send "&cYou do not have permission to do this!"
+			cancel event
+
+on bucket empty:
+	{chunk.live.%chunk at location of player%} is set:
+		{chunk.live.%chunk at location of player%} is not player:
+			{chunk.live.%chunk at location of player%.%uuid of player%} is not set:
+				{flags.%chunk at location of player%::bucket::everyone} is not set:
+					set {flags.%chunk at location of player%::bucket::everyone} to false
+				{flags.%chunk at location of player%::bucket::%uuid of player%} is not set:
+					set {flags.%chunk at location of player%::bucket::%uuid of player%} to false
+				{flags.%chunk at location of player%::bucket::everyone} is false:
+					{flags.%chunk at location of player%::bucket::%uuid of player%} is true:
+						stop
+				{flags.%chunk at location of player%::bucket::everyone} is true:
+					stop
+				player's tool is water bucket:
+					{flags.%chunk at location of player%::bucketwater::everyone} is true:
+						stop
+					{flags.%chunk at location of player%::bucketwater::%uuid of player%} is true:
+						stop
+				player's tool is lava bucket:
+					{flags.%chunk at location of player%::bucketlava::everyone} is true:
+						stop
+					{flags.%chunk at location of player%::bucketlava::%uuid of player%} is true:
+						stop
+				send "&cYou do not have permission to do this!"
+				cancel event
+
+command /claimedset <player> <number>:
+	permission: obam.admin
+	trigger:
+		set {claimedland.%{db_name.%player-arg%}%} to argument 2
+		send "&e%player-arg%&a claimed balance set to &e%argument 2%"
+
+command /frontlandadd <text> <number>:
+	permission: obam.admin
+	trigger:
+		{availibleland.%{db_name.%argument 1%}%} is not set:
+			set {availibleland.%{db_name.%argument 1%}%} to 1
+		add argument 2 to {availibleland.%{db_name.%argument 1%}%}
+		log "%date%%argument 2% plots added to %argument 1%'s availible land. Their number is now %{availibleland.%{db_name.%argument 1%}%}" to "logs/fronts/LAND-ADDITIONS.log"
+
+on first join:
+	teleport player to {town.spawn}
+
+on spawn:
+	{chunk.live.%chunk at event-location%} is "Town":
+		cancel event

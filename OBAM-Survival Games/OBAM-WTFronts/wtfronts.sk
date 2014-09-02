@@ -20,18 +20,20 @@ options:
 	grapplinghook: fishing rod named "&3Grappling Hook" with lore "&6Use this tool to reach new heights or safely||&6reach the bottom of deep drops.|| ||&c- 1 Elemental Fuel Per Use"
 	safetytorch: redstone torch named "&3Safety Torch" with lore "&6When placed will prevent mobs from spawning in the chunk"
 	soap1: nether brick item named "&3Soap" with lore "&6Clean yourself and those around you by||&6creating a soothing bubble bath!|| ||&a+ 100 Hygiene Points"
-	stblgun: bow named "&3Stablizer Gun" with lore "&6By using &3Elemental Fuel &6as its ammo, this||&6special gun destroys Unstable Mobs and||&6delivers their Unstable Drops to you! This||&6gun only works on Unstable Mobs.|| ||&c- 1 Elemental Fuel Per Shot"
+	stblgun: bow named "&3Stabilizer Gun" with lore "&6By using &3Elemental Fuel &6as its ammo, this||&6special gun destroys Unstable Mobs and||&6delivers their Unstable Drops to you! This||&6gun only works on Unstable Mobs.|| ||&c- 1 Elemental Fuel Per Shot"
 	stblmine: diamond pickaxe named "&3Stable Miner Pickaxe" with lore "&6This pickaxe is designed to stop the harsh||&6environmental disasters while mining!|| ||&c- 1 Elemental Fuel Per Use"
 	advbench: workbench named "&3Advanced Workbench" with lore "&6Reinforced with iron, this crafting bench||&6is more suited to handle the harsh||&6elements of this world."
 	advanvil: anvil named "&3Advanced Anvil" with lore "&6An upgraded workbench that facilitates the||&6forging of very powerful items and armours."
-	
+
 on script load:
 	register new shapeless recipe for {@bandages} using paper, slimeball, air, air, air, air, air, air, air
 	register new shapeless recipe for {@superbottle} using bottle of water, bottle of water, bottle of water, bottle of water, air, air, air, air, air
 	register new shapeless recipe for {@coffee} using air, cocoa beans, air, air, milk, air, air, air, air
 	register new shapeless recipe for {@soap1} using air, milk bucket, air, air, rose, air, air, water bottle, air
 	register new shaped recipe for {@advbench} using iron ingot, iron ingot, iron ingot, iron ingot, workbench, iron ingot, iron ingot, iron ingot, iron ingot
-
+	delete {db_wtf.bench.items::*}
+	delete {db_wtf.anvil.items::*}
+	delete {db_wtf.ci::*}
 	set {db_wtf.bench.items::01.bandages} to "i;paper;n;&3Bandage;l;&6Used to heal injuries obtained from large||&6falls. Multiple bandages may be needed||&6to completely heal the injury.|| ||&c- 1 Injury Point Per Use|| ||&eRequires:||&61 - &fPaper||&61 - &fSlimeball;c;sudo PLAYER wtfitem bandages 1"
 	set {db_wtf.bench.items::07.soap1} to "i;nether brick item;n;&3Soap;l;&6Clean yourself and those around you by||&6creating a soothing bubble bath!|| ||&a+ 100 Hygiene Points|| ||&eRequires:||&61 - &fMilk Bucket||&61 - &fPoppy||&61 - &fWater Bottle;c;sudo PLAYER wtfitem soap1 1"
 	set {db_wtf.bench.items::02.stable} to "i;packed ice;n;&3Stabilizer;l;&6Contains the perfect elemental make up to||&6bring unstable energy down to usable levels.|| ||&eRequires:||&68 - &fIce||&61 - &3Fairy Dust;c;sudo PLAYER wtfitem stable 1"
@@ -71,7 +73,7 @@ on script load:
 	set {db_wtf.anvil.items::09.blank} to "i;air"	
 	set {db_wtf.anvil.items::10.stblmine} to "i;diamond pickaxe;n;&3Stable Miner Pickaxe;l;&6This pickaxe is designed to stop the harsh||&6environmental disasters while mining!|| ||&c- 1 Elemental Fuel Per Use|| ||&eRequires:||&62 - &3Stable Metal Bar||&61 - &fDiamond Pickaxe||&61 - &3Stabilizer;c;sudo PLAYER wtfitem stblmine 1"
 	set {db_wtf.anvil.items::11.grapplinghook} to "i;fishing rod;n;&3Grappling Hook;l;&6Use this tool to reach new heights or safely||&6reach the bottom of deep drops.|| ||&c- 1 Elemental Fuel Per Use|| ||&eRequires:||&68 - &3Elemental Fuel||&61 - &fFishing Rod;c;sudo PLAYER wtfitem grapplinghook 1"
-	set {db_wtf.anvil.items::12.stblgun} to "i;bow;n;&3Stablizer Gun;l;&6By using &3Elemental Fuel &6as its ammo, this||&6special gun destroys Unstable Mobs and||&6delivers their Unstable Drops to you! This||&6gun only works on Unstable Mobs.|| ||&c- 1 Elemental Fuel Per Shot|| ||&eRequires:||&64 - &3Stable Metal Bar||&61 - &3Stabilizer||&61 - &fBow;c;sudo PLAYER wtfitem stblgun 1"
+	set {db_wtf.anvil.items::12.stblgun} to "i;bow;n;&3Stabilizer Gun;l;&6By using &3Elemental Fuel &6as its ammo, this||&6special gun destroys Unstable Mobs and||&6delivers their Unstable Drops to you! This||&6gun only works on Unstable Mobs.|| ||&c- 1 Elemental Fuel Per Shot|| ||&eRequires:||&64 - &3Stable Metal Bar||&61 - &3Stabilizer||&61 - &fBow;c;sudo PLAYER wtfitem stblgun 1"
 
 	set {db_wtf.ci::01.unstele} to "i;magma cream;n;&3Unstable Element;l;&6This highly energetic goo is really hot and||&6unusable in it’s current form.;c;sudo PLAYER ci unstele 1"
 	set {db_wtf.ci::02.unstele} to "i;16 magma cream;n;&3Unstable Element;l;&6This highly energetic goo is really hot and||&6unusable in it’s current form.;c;sudo PLAYER ci unstele 16"
@@ -117,7 +119,7 @@ on script load:
 	set {db_wtf.ci::42.blank} to "i;air"
 	set {db_wtf.ci::43.stblmine} to "i;diamond pickaxe;n;&3Stable Miner Pickaxe;l;&6This pickaxe is designed to stop the harsh||&6environmental disasters while mining!|| ||&c- 1 Elemental Fuel Per Use;c;sudo PLAYER ci stblmine 1"
 	set {db_wtf.ci::44.grapplinghook} to "i;fishing rod;n;&3Grappling Hook;l;&6Use this tool to reach new heights or safely||&6reach the bottom of deep drops.|| ||&c- 1 Elemental Fuel Per Use;c;sudo PLAYER ci grapplinghook 1"
-	set {db_wtf.ci::45.stblgun} to "i;bow;n;&3Stablizer Gun;l;&6By using &3Elemental Fuel &6as its ammo, this||&6special gun destroys Unstable Mobs and||&6delivers their Unstable Drops to you! This||&6gun only works on Unstable Mobs.|| ||&c- 1 Elemental Fuel Per Shot;c;sudo PLAYER ci stblgun 1"	
+	set {db_wtf.ci::45.stblgun} to "i;bow;n;&3Stabilizer Gun;l;&6By using &3Elemental Fuel &6as its ammo, this||&6special gun destroys Unstable Mobs and||&6delivers their Unstable Drops to you! This||&6gun only works on Unstable Mobs.|| ||&c- 1 Elemental Fuel Per Shot;c;sudo PLAYER ci stblgun 1"	
 	set {db_wtf.ci::46.stablechest} to "i;diamond chestplate;n;&3Stable Diamond Chestplate;l;&6Contains a special slot which can be used to||&6create chestplates with special abilities and||&6a container for &3Elemental Fuel.;c;sudo PLAYER ci stablechest 1"
 	set {db_wtf.ci::47.blank} to "i;air"	
 	set {db_wtf.ci::48.qnhchest} to "i;diamond chestplate;n;&3Chest of Quench;l;&6This chestplate utilizes the power of the||&3Super Water Bottle &6to make sure you never ||&6go thirsty!|| ||&c- 1 Elemental Fuel Per Use;c;sudo PLAYER ci qnhchest 1"
@@ -128,14 +130,11 @@ on script load:
 	set {db_wtf.ci::53.strengthchest} to "i;diamond chestplate;n;&3Chest of Strength;l;&6Harness the power of a Strength II beacon||&6while wearing this chestplate!|| ||&c- 1 Elemental Fuel Every 3 Seconds;c;sudo PLAYER ci strengthchest 1"
 	set {db_wtf.ci::54.blank} to "i;air"
 
-command /cleardb:
-	permission: obam.admin
-	trigger:
-		delete {db_wtf.bench.items::*}
-		delete {db_wtf.anvil.items::*}
-		delete {db_wtf.ci::*}
-
 on join:
+	{fatigue.%player%} 
+	{hygiene.%player%}
+	{thirst.%player%}
+	{injured.%player%}
 	{fatigue.%player%} is not set:
 		set {fatigue.%player%} to 100
 	{hygiene.%player%} is not set:
@@ -263,15 +262,6 @@ on mine:
 			loop blocks in radius 3 of event-location:
 				loop-block is air:
 					set loop-block to water
-
-on portal enter:
-	{unstable.%chunk at event-location%} is false
-	chance of 25%:
-		set {unstable.%chunk at event-location%} to true
-		set {_ran} to random number between 15 and 20
-		set {_ran2} to random number between 18 and 20
-		set {cavein.%chunk at event-location%.chance} to {_ran}
-		set {methane.%chunk at event-location%.chance} to {_ran2}
 
 command /chunkstats:
 	permission: obam.admin
@@ -566,13 +556,14 @@ command /wtfitem <text> <number>:
 			player has 1 * argument 2 of milk:
 				player has 1 * argument 2 of rose:
 					player has 1 * argument 2 of water bottle:
-						player doesn't have space for 1 * argument 2 of {@soap1}:
+						player doesn't have space for 2 * argument 2 of {@soap1}:
 							message "&cYou do not have room for this."
 							stop
 						remove 1 * argument 2 of milk from player
 						remove 1 * argument 2 of rose from player
 						remove 1 * argument 2 of water bottle from player
 						give 1 * argument 2 of {@soap1} to player
+						give 1 * argument 2 of bucket to player
 						message "&aItem Created"
 						stop
 					message "&cYou are missing &fWater Bottle"
@@ -595,12 +586,13 @@ command /wtfitem <text> <number>:
 		argument 1 is "coffee":
 			player has 1 * argument 2 of cocoa beans:
 				player has 1 * argument 2 of milk:
-					player doesn't have space for 1 * argument 2 of {@coffee}:
+					player doesn't have space for 2 * argument 2 of {@coffee}:
 						message "&cYou do not have room for this."
 						stop
 					remove 1 * argument 2 of cocoa beans from player
 					remove 1 * argument 2 of milk from player
 					give 1 * argument 2 of {@coffee} to player
+					give 1 * argument 2 of bucket to player
 					message "&aItem Created"
 					stop
 				message "&cYou are missing &fMilk Bucket"
@@ -991,6 +983,17 @@ on explosion prime:
 	event-entity is creeper:
 		{unstable.%event-entity%} is true:
 			cancel event
+			loop blocks in radius 10 of event-entity:
+				{chunk.live.%chunk at location of loop-block%} is set:
+					set {_safe} to true
+			{_safe} is set:
+				create safe explosion of force 5 at event-location
+				set {_loc} to event-location
+				spawn 100 of red dust data 1 offset with 1, 1, 1 at {_loc}
+				loop players in radius 5 of event-location:
+					make event-entity damage loop-player by 4
+				stop
+			wait 2 seconds
 			create an explosion of force 5 at event-location
 			set {_loc} to event-location
 			spawn 100 of red dust data 1 offset with 1, 1, 1 at {_loc}
@@ -1010,11 +1013,30 @@ on death of cow:
 		clear drops
 		stop
 	{unstable.%victim%} is set:
-		create an explosion of force 5 at victim
-		chance of 20%:
-			add {@unstmetal} to drops
-			chance of 15%:
-				add {@unstele} to drops
+		loop blocks in radius 10 of victim:
+			{chunk.live.%chunk at location of loop-block%} is set:
+				set {_safe} to true
+				exit loop
+		{_safe} is set:
+			create safe explosion with force 5 at victim
+			chance of 20%:
+				add {@unstmetal} to drops
+				chance of 15%:
+					add {@unstele} to drops
+			spawn 100 of red dust data 1 offset with 1, 1, 1 at victim
+			loop players in radius 5 of victim:
+				make victim damage loop-player by 4
+			stop
+		create an explosion with force 5 at victim
+		chance of 100%:
+			set {_amount} to random integer between 0.5 and 5
+			add {_amount} of {@unstmetal} to drops
+		chance of 40%:
+			set {_amount} to random integer between 0.5 and 5
+			add {_amount} of {@unstele} to drops
+		chance of 10%:
+			set {_amount} to random integer between 0.5 and 2
+			add {_amount} of {@elefuel} to drops
 
 on death of a creeper or a skeleton or a zombie or a spider:
 	chance of 15%:
@@ -1023,14 +1045,24 @@ on death of a creeper or a skeleton or a zombie or a spider:
 		loop drops:
 			add loop-item to attacker's inventory
 		clear drops
-	entity's name is "&cUnstable Spawn":
+		stop
+	{unstable.%victim%} is set:
+		chance of 100%:
+			set {_amount} to random integer between 0.5 and 5
+			add {_amount} of {@unstmetal} to drops
+		chance of 40%:
+			set {_amount} to random integer between 0.5 and 5
+			add {_amount} of {@unstele} to drops
 		chance of 10%:
-			chance of 2%:
-				add {@unstele} to drops
-			add {@unstmetal} to drops
+			set {_amount} to random integer between 0.5 and 2
+			add {_amount} of {@elefuel} to drops
 
 on damage:
 	victim is player:
+		{boner.%attacker%} is set:
+			apply slowness 10 to victim for 5 seconds
+			send "&cYou have been boned." to victim
+			delete {boner.%attacker%}
 #		attacker is a zombie:
 #			{infected.%victim%.flag} is not set:
 #				set {infected.%victim%.flag} to true
@@ -1160,6 +1192,13 @@ on right click with nether brick item:
 on shoot:
 	shooter's tool is {@grapplinghook}:
 		set {teleport.%projectile%} to shooter
+	{unstable.%shooter%} is set:
+		chance of 30%:
+			{boner.%shooter%} is set:
+				stop
+			cancel event
+			set {boner.%shooter%} to true
+			make shooter shoot item projectile bone at speed 5
 
 on projectile hit:
 	shooter does not have {@elefuel}:
@@ -1175,7 +1214,7 @@ on projectile hit:
 			stop
 
 on rightclick:
-	if player is holding {@grapplinghook}:
+	player is holding {@grapplinghook}:
 		repair tool of player
 		stop
 
@@ -1248,7 +1287,7 @@ on death of a player:
 #    apply speed to entity for 999 days
 
 command /ci [<text>] [<number>]:
-	permission: obam.free
+	permission: obam.admin
 	trigger:
 		argument 1 is not set:
 			loop {db_wtf.ci::*}:
@@ -1564,12 +1603,12 @@ command /unstlist:
 
 #bloodmoon			
 every 30 seconds:
-	time in "world" is between 18:00 and 19:00:
+	time in "WTFlive2" is between 18:00 and 19:00:
 		chance of 5%:
 			{blood.moon} is not set
 			set {blood.moon} to true
 			broadcast "&cA blood moon rises..."
-	time in "world" is between 6:00 and 18:00:
+	time in "WTFlive2" is between 6:00 and 18:00:
 		{blood.moon} is true:
 			clear {blood.moon}
 			broadcast "&aThe blood moon sets!"
@@ -1615,41 +1654,61 @@ on spawn of a creeper or a skeleton or a spider or zombie or a cow:
 command /bloodmoon:
 	permission: obam.admin
 	trigger:
-		set time of "world" to 18:00
+		set time of "WTFlive2" to 18:00
 		set {blood.moon} to true
 		broadcast "&cA blood moon rises..."
 
 command /dawn:
 	permission: obam.admin
 	trigger:
-		set time of "world" to 5:30
+		set time of "WTFlive2" to 5:30
 
 on right click with bow:
 	player's tool is a bow:
-		name of player's tool is "&3Stablizer Gun":
+		name of player's tool is "&3Stabilizer Gun":
 			cancel event
-		{cool.gun.%player%} is not set:
-			set {cool.gun.%player%} to now
-			add 3 seconds to {cool.gun.%player%}
-		set {_cool} to difference between {cool.gun.%player%} and now
-		{_cool} is less than 2 seconds:
-			send "&cYou are reloading!"
-			stop
-		{unstable.%target entity%} is set:
-			name of target entity contains "&cUnstable"
-			player does not have {@elefuel}:
-				send "&cYou are out of &eElemental Fuel!"
+			{cool.gun.%player%} is not set:
+				set {cool.gun.%player%} to now
+				add 3 seconds to {cool.gun.%player%}
+			set {_cool} to difference between {cool.gun.%player%} and now
+			{_cool} is less than 2 seconds:
+				send "&cYou are reloading!"
 				stop
-			{hit.%target entity%} is not set
-			remove 1 {@elefuel} from player
-			set {hit.%target entity%} to true
-			make player shoot item projectile packed ice at speed 5
-			set {cool.gun.%player%} to now
-			set {_target} to target entity
-			wait 0.2 seconds
-			strike lightning effect at location of {_target}
-			kill {_target}
-			send "&aYou have captured the Unstable Soul of this creature!"
-			add {@unstele} to player's inventory
-			add {@unstmetal} to player's inventory
-			add {@stable} to player's inventory
+			{unstable.%target entity%} is set:
+				name of target entity contains "&cUnstable"
+				player does not have {@elefuel}:
+					send "&cYou are out of &eElemental Fuel!"
+					stop
+				{hit.%target entity%} is not set
+				remove 1 {@elefuel} from player
+				set {hit.%target entity%} to true
+				make player shoot item projectile packed ice at speed 5
+				set {cool.gun.%player%} to now
+				set {_target} to target entity
+				wait 0.2 seconds
+				strike lightning effect at location of {_target}
+				kill {_target}
+				send "&aYou have captured the Unstable Soul of this creature!"
+				chance of 100%:
+					set {_amount} to random integer between 0.5 and 2
+					add {_amount} of {@unstmetal} to player's inventory
+				chance of 40%:
+					set {_amount} to random integer between 0.5 and 2
+					add {_amount} of {@unstele} to player's inventory
+				add {@stable} to player's inventory
+
+				
+command /stablize:
+	permission: obam.admin
+	trigger:
+		set {unstable.%chunk at location of player%} to false
+		chance of 90%:
+			set {_ran} to random integer between 1 and 5
+			set {cavein.%chunk at location of player%.chance} to {_ran}
+		{cavein.%chunk at location of player%.chance} is not set:
+			set {cavein.%chunk at location of player%.chance} to false
+		chance of 95%:
+			set {_ran} to random integer between 3 and 6
+			set {methane.%chunk at location of player%.chance} to {_ran}
+			{methane.%chunk at location of player%.chance} is not set:
+				set {methane.%chunk at location of player%.chance} to false

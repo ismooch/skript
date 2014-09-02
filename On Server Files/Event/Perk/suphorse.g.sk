@@ -1,0 +1,70 @@
+on script load:
+	delete {db_perk.suphorse::*}
+	set {db_perk.suphorse::01.zombify} to "zombie spawn egg;&3Zombify your ride!;&6Feel like roaming the plains on your Zombified Horse?;sudo PLAYER suphorse zombify;zombie spawn egg;&3Zombify your ride!;&6Feel like roaming the plains on your Zombified Horse?|| ||&cThis ability is only available to our Supporters.;sudo PLAYER suphorse error"
+	set {db_perk.suphorse::02.skellify} to "skeleton spawn egg;&3Skellify your ride!;&6Feel like roaming the deserts on your Skellified Horse?;sudo PLAYER suphorse skellify;skeleton spawn egg;&3Skellify your ride!;&6Feel like roaming the deserts on your Skellified Horse?|| ||&cThis ability is only available to our Supporters.;sudo PLAYER suphorse error"
+
+command /horsemenu:
+	trigger:
+		loop {db_perk.suphorse::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show chest with {_size} row named "&9&lHorse O' Matic" to player
+		wait 1 tick
+		set {_count} to 0
+		loop {db_perk.suphorse::*}:
+			set {_what::*} to loop-value split at ";"
+			set {_item} to {_what::1} parsed as item
+			set {_name} to {_what::2}
+			set {_lore} to {_what::3}
+			set {_command} to {_what::4}
+			loop-index is "01.zombify":
+				player does not have permission "obam.beta.hat":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "02.skellify":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			player has permission "obam.smod":
+				set {_lore} to {_what::3}
+				set {_command} to {_what::4}
+			replace "PLAYER" in {_command} with "%player%"
+			set {_what} to {_item} named {_name} with lore {_lore}
+			format slot {_count} of player with {_what} to be unstealable 
+			format slot {_count} of player with {_what} to close then run {_command}
+			add 1 to {_count}
+
+command /suphorse [<text>]:
+	trigger:
+		player is not riding:
+			send "&cYou must be riding a horse to do this!"
+			stop
+		player's vehicle is not a horse:
+			send "&cYou must be riding a horse to do this!"
+			stop
+		argument is not set:
+			message "&cPlease use &7/OBAM &cto access your modify your horse."
+			stop
+		argument is "error":
+			message "&cThis ability is not available to you."
+			stop
+		"%player's world%" is "world":
+			set {_y} to y-coordinate of player
+			set {_x} to x-coordinate of player
+			set {_z} to z-coordinate of player
+			argument is "zombify":
+				execute console command "summon EntityHorse %{_x}% %{_y}% %{_z}% {Type:3,Tame:1}"
+			argument is "skellify":
+				execute console command "summon EntityHorse %{_x}% %{_y}% %{_z}% {Type:4,Tame:1}"
+			delete player's vehicle
+			stop
+		message "&cThis can only be used in the Regular World."

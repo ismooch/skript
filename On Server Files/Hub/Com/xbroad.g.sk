@@ -1,0 +1,18 @@
+command /crossmessage <text>:
+	permission: obam.admin
+	trigger:
+		
+		forward command "crossbroad %argument%" to console
+		
+command /xb <text>:
+	permission: obam.admin
+	trigger:
+		
+		broadcast "&3[&6STAFF&3] &f%colored argument%"
+		forward command "crossbroad  &3[&6STAFF&3]  &f%argument%" to console
+		
+command /crossbroad <text>:
+	permission: obam.admin
+	trigger:
+		
+		broadcast "%colored argument%"

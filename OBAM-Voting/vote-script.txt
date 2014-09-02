@@ -1,5 +1,0 @@
-broadcast("Thanks for voting on %service%, %target%!")
-command("perm player %target% set vote.check")
-command("tokenadmin %target% execute")
-clearScripts(target)
-runLaterTarget("rmperm.txt", "5m", target)

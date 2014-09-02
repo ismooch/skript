@@ -1,0 +1,136 @@
+on script load:
+	delete {db_perk.hats::*}
+	set {db_perk.hats::01.dirt} to "dirt;&3&lDirt Hat;&6Carefully woven together from the finest dirt||&6in all of &3OBAM!;sudo PLAYER hat dirt"
+	set {db_perk.hats::02.beta} to "iron pressure plate;&3&lBeta Supporter Hat;&6This Special hat is for all members who supported||&6during our beta period and is a thank you from the||&3OBAM &6Staff for those that helped us when we were||&6starting. THANK YOU!;sudo PLAYER hat beta;&6This Special hat is for all members who supported||&6during our beta period and is a thank you from the||&3OBAM &6Staff for those that helped us when we were||&6starting. THANK YOU!|| ||&cThis hat is only available to our Beta Supporters.;sudo PLAYER hat error"
+	set {db_perk.hats::03.quartz} to "quartz block;&3&lQuartz Hat;&6This hat is crafted from the smoothest quartz||&6found in the hottest part of the Nether!;sudo PLAYER hat quartz;&6This hat is crafted from the smoothest quartz||&6found in the hottest part of the Nether!|| ||&cThis hat is only available to our Supporters.;sudo PLAYER hat error"
+	set {db_perk.hats::04.cactus} to "cactus;&3&lPrickly Hat;&6Wear this hat when you're feeling a bit....Prickly!;sudo PLAYER hat cactus;&6Wear this hat when you're feeling a bit....Prickly!|| ||&cThis hat must be purchased from the OBAMCraft shop.|| ||&eUse &f/buy &ein the hub to purchase the &3Prickly Hat|| ||&ePrice: &a$2.00;sudo PLAYER hat error"
+
+command /hatmenu [<text>]:
+	trigger:
+		loop {db_perk.hats::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show chest with {_size} row named "&9&lHat Rack" to player
+		wait 1 tick
+		set {_count} to 0
+		loop {db_perk.hats::*}:
+			set {_what::*} to loop-value split at ";"
+			set {_item} to {_what::1} parsed as item
+			set {_name} to {_what::2}
+			set {_lore} to {_what::3}
+			set {_command} to {_what::4}
+			loop-index is "02.beta":
+				player does not have permission "obam.beta.hat":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "03.quartz":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "04.cactus":
+				{db_purchase.cactus.%uuid of player%} is not set:
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			player has permission "obam.smod":
+				set {_lore} to {_what::3}
+				set {_command} to {_what::4}
+			replace "PLAYER" in {_command} with "%player%"
+			set {_what} to {_item} named {_name} with lore {_lore}
+			format slot {_count} of player with {_what} to be unstealable 
+			format slot {_count} of player with {_what} to close then run {_command}
+			add 1 to {_count}
+
+command /hat [<text>]:
+	trigger:
+		argument 1 is not set:
+			message "&cPlease use &7/OBAM &cto access your Hat Rack."
+			stop
+		argument 1 is "error":
+			message "&cThis hat is not available to you."
+			stop
+		argument 1 is "dirt":
+			set {_hat} to dirt
+		argument 1 is "beta":
+			player has permission "obam.beta.hat":
+				set {_hat} to iron pressure plate
+		argument 1 is "quartz":
+			player has permission "obam.supporter":
+				set {_hat} to quartz block
+		argument 1 is "cactus":
+			{db_purchase.cactus.%uuid of player%} is true:
+				set {_hat} to cactus
+			player has permission "obam.smod":
+				set {_hat} to cactus
+		send "&aYou now have a hat :D" to player
+		name of player's helmet is "hat":
+			set player's helmet to {_hat}
+			set name of player's helmet to "hat"
+			stop
+		player doesn't have space for player's helmet:
+			send "&cYour inventory is full :(" to player
+			stop
+		give player's helmet to player
+		set player's helmet to {_hat}
+		set name of player's helmet to "hat"
+
+command /hatadd <item>:
+	permission: obam.admin
+	trigger:
+		add arg 1 to {hat.items.list::*}
+
+command /hatshow:
+	permission: obam.admin
+	trigger:
+		loop {hat.items.list::*}:
+			send "%loop-value%" to player
+
+every 0.3 seconds:
+	loop all players:
+		loop-player has anything named "hat":
+			remove anything named "hat" from loop-player
+			send "&cWhy did you have a hat in your pocket?" to loop-player
+
+on drop:
+	name of event-item is "hat":
+		cancel event
+
+on place:
+	name of player's tool is "hat":
+		cancel event
+
+command /hattoggle:
+	permission: obam.mod
+	trigger:
+		{hat.off.%player%} is not set:
+			set {hat.off.%player%} to true
+			send "&aYou have turned off your hat" to player
+			stop
+		{hat.off.%player%} is false:
+			set {hat.off.%player%} to true
+			send "&aYou have turned off your hat" to player
+			stop
+		{hat.off.%player%} is true:
+			set {hat.off.%player%} to false
+			send "&aYou have turned on your hat" to player
+			stop
+
+#staff hats constant
+every 1 second:
+	loop all players:
+		set {_bypass} to false
+		{hat.off.%loop-player%} is true:
+			set {_bypass} to true
+		{_bypass} is false:
+			loop-player is "ISMOOCH":
+				set loop-player's helmet to command block named "&d&lSmooch's Sassy Hat"
+			loop-player is "Electric_Hamster":
+				set loop-player's helmet to sponge named "&b&lThe Hamster Hat"

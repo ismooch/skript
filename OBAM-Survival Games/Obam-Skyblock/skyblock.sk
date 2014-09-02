@@ -1,0 +1,130 @@
+
+		
+		
+command /home:
+	description: Go to island's home
+	permission: obam.free
+	usage: /home or /start
+	executable by: players
+	aliases: /start
+	trigger:
+		make player execute command "/is"
+
+	
+command /restartisland:
+	description: Restart your island
+	usage: /restart
+	executable by: players or console
+	permission: obam.free
+	aliases: /ri
+	trigger:
+		{island.reset.use.%player%} is greater than or equal to 2:
+			message "&cYou have used up your two resets! You will need to purchase the next one for &e2000 Tickets!&c Type &e/restartconfirm&c to continue!" to player
+			set {skyblock.%player%.restart} to 1
+			stop
+		{island.reset.use.%player%} is 1:
+			message "&cAre you sure you want to do this? This will reset your island, You can only do this for free &e1 &ctime! Type &e/restartconfirm to do this." to player
+			set {skyblock.%player%.restart} to 1
+			stop
+		message "&cAre you sure you want to do this? This will reset your island, You can only do this for free &e2 &ctimes! Type &e/restartconfirm to do this." to player
+		set {skyblock.%player%.restart} to 1
+		
+command /risrestart <player>:
+	permission: obam.admin
+	trigger:
+		set {island.reset.use.%player-argument%} to 0
+
+command /restartconfirm:
+	permission: obam.free
+	trigger:
+		world is "skyworld":
+		
+			{skyblock.%player%.restart} is 1:
+				{island.reset.use.%player%} is greater than or equal to 2:
+					set {balance.%player%} to player's balance
+					{balance.%player%} is less than 2000:
+						send "&cYou Do not have enough tickets for this!" to player
+						stop
+					remove 2000 from player's balance
+					send "&cYou have paid &e2000 Tickets&c for resetting your island. You now have &e%player's balance% &cremaining." to player
+			
+				message "&cYou are restarting your island!" to player
+				make player execute command "/is restart"
+				set {skyblock.%player%.restart} to 0
+				{island.reset.use.%player%} is not set:
+					set {island.reset.use.%player%} to 0
+				add 1 to {island.reset.use.%player%}
+				stop
+			else:
+				message "&cPlease type /restart first"
+			
+		else:
+			message "&cYou can not do that here!" to player
+			
+			
+
+command /setspawn:
+	description: Sets island's spawnpoint
+	usage: /spawnpoint while standing in location
+	permission: obam.free
+	executable by: players
+	aliases: /sethome
+	trigger:
+		make player execute command "/is sethome"
+		
+		
+command /warp <offline player>:
+	description: Go to a player's island
+	usage: /warp [player name]
+	executable by: players
+	permission: obam.free
+	trigger:
+		make player execute command "/is warp %arg 1%"
+	
+command /setwarp:
+	description: Set warp location for island
+	permission: obam.free
+	usage: /setwarp
+	trigger:
+		make player execute command "/is setwarp"
+		
+
+command /togglewarp:
+	description: Toggle if other players can warp to your island
+	permission: obam.free
+	usage: /togglewarp
+	trigger:
+		make player execute command "/is togglewarp"
+		
+		
+command /invite <text>:
+	description: Invite someone to your island
+	permission: obam.free
+	usage: /invite [name]
+	trigger:
+		make player execute command "/is invite %arg 1%"
+		
+
+		
+
+command /accept:
+	description: Accept party invite
+	usage: /accept
+	trigger:
+		make player execute command "/is accept"
+		
+		
+command /reject:
+	description: Reject party invite
+	permission: obam.free
+	usage: /reject
+	trigger:
+		make player execute command "/is reject"
+		
+		
+command /remove <text>:
+	description: Remove a player from your island
+	permission: obam.free
+	usage: /remove [name]
+	trigger:
+		make player execute command "/is kick %arg 1%"

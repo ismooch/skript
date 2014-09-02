@@ -1,0 +1,24 @@
+command /unenchant:
+	executable by: players
+	permission: obam.free
+	aliases: /disenchant
+	trigger:
+		player's tool is enchanted:
+			player's tool is not a sword or axe or pickaxe or shovel or bow or helmet or chestplate or leggings or boots:
+				message "&cYou may only disenchant Armour, Weapons or Tools!" to player
+				stop
+			set {_bal} to player's balance
+			{_bal} is less than 200:
+				send "&cYou do not have enough tickets to do this!" to player
+				stop
+			player's level is less than 15:
+				send "&cYou must have at least 15 levels to do this!" to player
+				stop
+			disenchant player's tool
+			reduce the player's level by 15
+			remove 200 from player's balance
+			send "&6&lThe Gods have taken their gifts back!" to player
+			send "&aYou have used &e200 Tickets&a to disenchant this tool" to player
+			send "&aYou have &e%player's balance%&a remaining" to player
+			log "%player%^%{_bal}%^DEDUCT^200^%player's balance%^DISENCHANT FEE" to "tickets/disenchant.log"
+			stop

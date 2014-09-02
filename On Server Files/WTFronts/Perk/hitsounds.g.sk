@@ -1,0 +1,336 @@
+on script load:
+	delete {db_perk.hit.class::*}
+	delete {db_perk.hit.hand::*}
+	delete {db_perk.hit.sword::*}
+	delete {db_perk.hit.axe::*}
+	delete {db_perk.hit.pickaxe::*}
+	delete {db_perk.hit.bow::*}
+	delete {db_perk.hit.rod::*}
+
+	set {db_perk.hit.class::01.hand} to "stone button;&3Punch Sounds;&6Click to modify the sound you make when you||&6attack with your fists.;sudo PLAYER hitmenuchange hand;&6Click to modify the sound you make when you||&6attack with your fists.|| ||&cThis class is only available to our Supporters.;sudo PLAYER hitmenuchange error"
+	set {db_perk.hit.class::02.sword} to "iron sword;&3Sword Sounds;&6Click to modify the sound you make when you||&6attack with a sword.;sudo PLAYER hitmenuchange sword;&6Click to modify the sound you make when you||&6attack with a sword.|| ||&cThis class is only available to our Supporters.;sudo PLAYER hitmenuchange error"
+	set {db_perk.hit.class::03.axe} to "iron axe;&3Axe Sounds;&6Click to modify the sound you make when you||&6attack with an axe.;sudo PLAYER hitmenuchange axe;&6Click to modify the sound you make when you||&6attack with an axe.|| ||&cThis class is only available to our Supporters.;sudo PLAYER hitmenuchange error"
+	set {db_perk.hit.class::04.pickaxe} to "iron pickaxe;&3Pickaxe Sounds;&6Click to modify the sound you make when you||&6attack with a pickaxe.;sudo PLAYER hitmenuchange pickaxe;&6Click to modify the sound you make when you||&6attack with a pickaxe.|| ||&cThis class is only available to our Supporters.;sudo PLAYER hitmenuchange error"
+	set {db_perk.hit.class::05.bow} to "bow;&3Bow Sounds;&6Click to modify the sound you make when you||&6attack with a bow.;sudo PLAYER hitmenuchange bow;&6Click to modify the sound you make when you||&6attack with a bow.|| ||&cThis class is only available to our Supporters.;sudo PLAYER hitmenuchange error"
+	set {db_perk.hit.class::06.rod} to "fishing rod;&3Fishing Rod Sounds;&6Click to modify the sound you make when you||&6attack with a fishing rod.;sudo PLAYER hitmenuchange rod;&6Click to modify the sound you make when you||&6attack with a fishing rod.|| ||&cThis class is only available to our Supporters.;sudo PLAYER hitmenuchange error"
+	set {db_perk.hit.class::07.air} to "air"
+	set {db_perk.hit.class::08.air} to "air"
+	set {db_perk.hit.class::09.clear} to "glass;&3Clear;&6Click to clear all sounds for your player.;sudo PLAYER hitsoundclear PLAYER"
+
+	set {db_perk.hit.hand::01.note} to "jukebox;&3Note;&6Click to enable &3Note &6sounds for your attacks.;sudo PLAYER hitsound hand note;jukebox;&3Note;&6Click to enable &3Note &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound hand error"
+	set {db_perk.hit.hand::02.arrow} to "arrow;&3Arrow;&6Click to enable &3Arrow &6sounds for your attacks.;sudo PLAYER hitsound hand arrow;arrow;&3Arrow;&6Click to enable &3Arrow &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound hand error"
+	set {db_perk.hit.hand::03.anvil} to "anvil;&3Anvil;&6Click to enable &3Anvil &6sounds for your attacks.;sudo PLAYER hitsound hand anvil;anvil;&3Anvil;&6Click to enable &3Anvil &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound hand error"
+	set {db_perk.hit.hand::04.chest} to "chest;&3Chest;&6Click to enable &3Chest &6sounds for your attacks.;sudo PLAYER hitsound hand chest;chest;&3Chest;&6Click to enable &3Chest &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound hand error"	
+	set {db_perk.hit.hand::05.click} to "wooden button;&3Click;&6Click to enable &3Click &6sounds for your attacks.;sudo PLAYER hitsound hand click;wooden button;&3Click;&6Click to enable &3Click &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound hand error"
+	set {db_perk.hit.hand::06.level} to "xp bottle;&3Level;&6Click to enable &3Level &6sounds for your attacks.;sudo PLAYER hitsound hand level;xp bottle;&3Level;&6Click to enable &3Level &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound hand error"	
+	set {db_perk.hit.hand::07.villager} to "villager spawn egg;&3Villager;&6Click to enable &3Villager &6sounds for your attacks.;sudo PLAYER hitsound hand villager;villager spawn egg;&3Villager;&6Click to enable &3Villager &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound hand error"
+	set {db_perk.hit.hand::08.air} to "air"
+	set {db_perk.hit.hand::09.clear} to "glass;&3Clear;&6Click to clear all sounds for your attacks.;sudo PLAYER hitsound hand clear;glass;&3Clear;&6Click to clear all sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound hand error"
+
+	set {db_perk.hit.sword::01.note} to "jukebox;&3Note;&6Click to enable &3Note &6sounds for your attacks.;sudo PLAYER hitsound sword note;jukebox;&3Note;&6Click to enable &3Note &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound sword error"
+	set {db_perk.hit.sword::02.arrow} to "arrow;&3Arrow;&6Click to enable &3Arrow &6sounds for your attacks.;sudo PLAYER hitsound sword arrow;arrow;&3Arrow;&6Click to enable &3Arrow &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound sword error"
+	set {db_perk.hit.sword::03.anvil} to "anvil;&3Anvil;&6Click to enable &3Anvil &6sounds for your attacks.;sudo PLAYER hitsound sword anvil;anvil;&3Anvil;&6Click to enable &3Anvil &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound sword error"
+	set {db_perk.hit.sword::04.chest} to "chest;&3Chest;&6Click to enable &3Chest &6sounds for your attacks.;sudo PLAYER hitsound sword chest;chest;&3Chest;&6Click to enable &3Chest &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound sword error"	
+	set {db_perk.hit.sword::05.click} to "wooden button;&3Click;&6Click to enable &3Click &6sounds for your attacks.;sudo PLAYER hitsound sword click;wooden button;&3Click;&6Click to enable &3Click &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound sword error"
+	set {db_perk.hit.sword::06.level} to "xp bottle;&3Level;&6Click to enable &3Level &6sounds for your attacks.;sudo PLAYER hitsound sword level;xp bottle;&3Level;&6Click to enable &3Level &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound sword error"	
+	set {db_perk.hit.sword::07.villager} to "villager spawn egg;&3Villager;&6Click to enable &3Villager &6sounds for your attacks.;sudo PLAYER hitsound sword villager;villager spawn egg;&3Villager;&6Click to enable &3Villager &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound sword error"
+	set {db_perk.hit.sword::08.air} to "air"
+	set {db_perk.hit.sword::09.clear} to "glass;&3Clear;&6Click to clear all sounds for your attacks.;sudo PLAYER hitsound sword clear;glass;&3Clear;&6Click to clear all sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound sword error"
+
+	set {db_perk.hit.axe::01.note} to "jukebox;&3Note;&6Click to enable &3Note &6sounds for your attacks.;sudo PLAYER hitsound axe note;jukebox;&3Note;&6Click to enable &3Note &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound axe error"
+	set {db_perk.hit.axe::02.arrow} to "arrow;&3Arrow;&6Click to enable &3Arrow &6sounds for your attacks.;sudo PLAYER hitsound axe arrow;arrow;&3Arrow;&6Click to enable &3Arrow &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound axe error"
+	set {db_perk.hit.axe::03.anvil} to "anvil;&3Anvil;&6Click to enable &3Anvil &6sounds for your attacks.;sudo PLAYER hitsound axe anvil;anvil;&3Anvil;&6Click to enable &3Anvil &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound axe error"
+	set {db_perk.hit.axe::04.chest} to "chest;&3Chest;&6Click to enable &3Chest &6sounds for your attacks.;sudo PLAYER hitsound axe chest;chest;&3Chest;&6Click to enable &3Chest &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound axe error"	
+	set {db_perk.hit.axe::05.click} to "wooden button;&3Click;&6Click to enable &3Click &6sounds for your attacks.;sudo PLAYER hitsound axe click;wooden button;&3Click;&6Click to enable &3Click &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound axe error"
+	set {db_perk.hit.axe::06.level} to "xp bottle;&3Level;&6Click to enable &3Level &6sounds for your attacks.;sudo PLAYER hitsound axe level;xp bottle;&3Level;&6Click to enable &3Level &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound axe error"	
+	set {db_perk.hit.axe::07.villager} to "villager spawn egg;&3Villager;&6Click to enable &3Villager &6sounds for your attacks.;sudo PLAYER hitsound axe villager;villager spawn egg;&3Villager;&6Click to enable &3Villager &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound axe error"
+	set {db_perk.hit.axe::08.air} to "air"
+	set {db_perk.hit.axe::09.clear} to "glass;&3Clear;&6Click to clear all sounds for your attacks.;sudo PLAYER hitsound axe clear;glass;&3Clear;&6Click to clear all sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound axe error"
+
+	set {db_perk.hit.pickaxe::01.note} to "jukebox;&3Note;&6Click to enable &3Note &6sounds for your attacks.;sudo PLAYER hitsound pickaxe note;jukebox;&3Note;&6Click to enable &3Note &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound pickaxe error"
+	set {db_perk.hit.pickaxe::02.arrow} to "arrow;&3Arrow;&6Click to enable &3Arrow &6sounds for your attacks.;sudo PLAYER hitsound pickaxe arrow;arrow;&3Arrow;&6Click to enable &3Arrow &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound pickaxe error"
+	set {db_perk.hit.pickaxe::03.anvil} to "anvil;&3Anvil;&6Click to enable &3Anvil &6sounds for your attacks.;sudo PLAYER hitsound pickaxe anvil;anvil;&3Anvil;&6Click to enable &3Anvil &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound pickaxe error"
+	set {db_perk.hit.pickaxe::04.chest} to "chest;&3Chest;&6Click to enable &3Chest &6sounds for your attacks.;sudo PLAYER hitsound pickaxe chest;chest;&3Chest;&6Click to enable &3Chest &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound pickaxe error"	
+	set {db_perk.hit.pickaxe::05.click} to "wooden button;&3Click;&6Click to enable &3Click &6sounds for your attacks.;sudo PLAYER hitsound pickaxe click;wooden button;&3Click;&6Click to enable &3Click &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound pickaxe error"
+	set {db_perk.hit.pickaxe::06.level} to "xp bottle;&3Level;&6Click to enable &3Level &6sounds for your attacks.;sudo PLAYER hitsound pickaxe level;xp bottle;&3Level;&6Click to enable &3Level &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound pickaxe error"	
+	set {db_perk.hit.pickaxe::07.villager} to "villager spawn egg;&3Villager;&6Click to enable &3Villager &6sounds for your attacks.;sudo PLAYER hitsound pickaxe villager;villager spawn egg;&3Villager;&6Click to enable &3Villager &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound pickaxe error"
+	set {db_perk.hit.pickaxe::08.air} to "air"
+	set {db_perk.hit.pickaxe::09.clear} to "glass;&3Clear;&6Click to clear all sounds for your attacks.;sudo PLAYER hitsound pickaxe clear;glass;&3Clear;&6Click to clear all sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound pickaxe error"
+
+	set {db_perk.hit.bow::01.note} to "jukebox;&3Note;&6Click to enable &3Note &6sounds for your attacks.;sudo PLAYER hitsound bow note;jukebox;&3Note;&6Click to enable &3Note &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound bow error"
+	set {db_perk.hit.bow::02.arrow} to "arrow;&3Arrow;&6Click to enable &3Arrow &6sounds for your attacks.;sudo PLAYER hitsound bow arrow;arrow;&3Arrow;&6Click to enable &3Arrow &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound bow error"
+	set {db_perk.hit.bow::03.anvil} to "anvil;&3Anvil;&6Click to enable &3Anvil &6sounds for your attacks.;sudo PLAYER hitsound bow anvil;anvil;&3Anvil;&6Click to enable &3Anvil &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound bow error"
+	set {db_perk.hit.bow::04.chest} to "chest;&3Chest;&6Click to enable &3Chest &6sounds for your attacks.;sudo PLAYER hitsound bow chest;chest;&3Chest;&6Click to enable &3Chest &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound bow error"	
+	set {db_perk.hit.bow::05.click} to "wooden button;&3Click;&6Click to enable &3Click &6sounds for your attacks.;sudo PLAYER hitsound bow click;wooden button;&3Click;&6Click to enable &3Click &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound bow error"
+	set {db_perk.hit.bow::06.level} to "xp bottle;&3Level;&6Click to enable &3Level &6sounds for your attacks.;sudo PLAYER hitsound bow level;xp bottle;&3Level;&6Click to enable &3Level &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound bow error"	
+	set {db_perk.hit.bow::07.villager} to "villager spawn egg;&3Villager;&6Click to enable &3Villager &6sounds for your attacks.;sudo PLAYER hitsound bow villager;villager spawn egg;&3Villager;&6Click to enable &3Villager &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound bow error"
+	set {db_perk.hit.bow::08.air} to "air"
+	set {db_perk.hit.bow::09.clear} to "glass;&3Clear;&6Click to clear all sounds for your attacks.;sudo PLAYER hitsound bow clear;glass;&3Clear;&6Click to clear all sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound bow error"
+
+	set {db_perk.hit.rod::01.note} to "jukebox;&3Note;&6Click to enable &3Note &6sounds for your attacks.;sudo PLAYER hitsound rod note;jukebox;&3Note;&6Click to enable &3Note &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound rod error"
+	set {db_perk.hit.rod::02.arrow} to "arrow;&3Arrow;&6Click to enable &3Arrow &6sounds for your attacks.;sudo PLAYER hitsound rod arrow;arrow;&3Arrow;&6Click to enable &3Arrow &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound rod error"
+	set {db_perk.hit.rod::03.anvil} to "anvil;&3Anvil;&6Click to enable &3Anvil &6sounds for your attacks.;sudo PLAYER hitsound rod anvil;anvil;&3Anvil;&6Click to enable &3Anvil &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound rod error"
+	set {db_perk.hit.rod::04.chest} to "chest;&3Chest;&6Click to enable &3Chest &6sounds for your attacks.;sudo PLAYER hitsound rod chest;chest;&3Chest;&6Click to enable &3Chest &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound rod error"	
+	set {db_perk.hit.rod::05.click} to "wooden button;&3Click;&6Click to enable &3Click &6sounds for your attacks.;sudo PLAYER hitsound rod click;wooden button;&3Click;&6Click to enable &3Click &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound rod error"
+	set {db_perk.hit.rod::06.level} to "xp bottle;&3Level;&6Click to enable &3Level &6sounds for your attacks.;sudo PLAYER hitsound rod level;xp bottle;&3Level;&6Click to enable &3Level &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound rod error"	
+	set {db_perk.hit.rod::07.villager} to "villager spawn egg;&3Villager;&6Click to enable &3Villager &6sounds for your attacks.;sudo PLAYER hitsound rod villager;villager spawn egg;&3Villager;&6Click to enable &3Villager &6sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound rod error"
+	set {db_perk.hit.rod::08.air} to "air"
+	set {db_perk.hit.rod::09.clear} to "glass;&3Clear;&6Click to clear all sounds for your attacks.;sudo PLAYER hitsound rod clear;glass;&3Clear;&6Click to clear all sounds for your attacks.|| ||&cThis sound is only available to our Supporters.;sudo PLAYER hitsound rod error"
+
+command /hitclassmenu:
+	trigger:
+		loop {db_perk.hit.class::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show chest with {_size} row named "&9&lHit Sound Classes" to player
+		wait 1 tick
+		set {_count} to 0
+		loop {db_perk.hit.class::*}:
+			set {_what::*} to loop-value split at ";"
+			set {_item} to {_what::1} parsed as item
+			set {_name} to {_what::2}
+			set {_lore} to {_what::3}
+			set {_command} to {_what::4}
+			loop-index is "01.hand":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "02.sword":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "03.axe":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "04.pickaxe":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "05.bow":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "06.rod":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			player has permission "obam.smod":
+				set {_lore} to {_what::3}
+				set {_command} to {_what::4}
+			replace "PLAYER" in {_command} with "%player%"
+			set {_what} to {_item} named {_name} with lore {_lore}
+			format slot {_count} of player with {_what} to be unstealable 
+			format slot {_count} of player with {_what} to close then run {_command}
+			add 1 to {_count}
+
+command /hitmenuchange [<text>]:
+	trigger:
+		argument 1 is set:
+			send "&aBringing up menu..."
+			wait 0.5 seconds
+			make player execute command "/hitmenu %argument 1%"
+
+command /hitmenu [<text>]:
+	trigger:		
+		argument 1 is not set:
+			message "&cPlease use &7/OBAM &cto access your Hit Menu."
+			stop
+		argument 1 is "error":
+			message "&cThis hit class is not available to you."
+			stop
+		set {_type} to argument 1
+		loop {db_perk.hit.%{_type}%::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show chest with {_size} row named "&9&lHit Sound Classes" to player
+		wait 1 tick
+		set {_count} to 0
+		loop {db_perk.hit.%{_type}%::*}:
+			set {_what::*} to loop-value split at ";"
+			set {_item} to {_what::1} parsed as item
+			set {_name} to {_what::2}
+			set {_lore} to {_what::3}
+			set {_command} to {_what::4}
+			loop-index is "01.note":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "02.arrow":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "03.anvil":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "04.chest":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "05.click":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "06.level":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "07.villager":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "08.clear":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			player has permission "obam.smod":
+				set {_lore} to {_what::3}
+				set {_command} to {_what::4}
+			replace "PLAYER" in {_command} with "%player%"
+			set {_what} to {_item} named {_name} with lore {_lore}
+			set {_thing1} to loop-index parsed as text
+			set {_thing2::*} to {_thing1} split at "."
+			set {_slot} to {_thing2::1} parsed as an integer
+			set {_slot} to {_slot} - 1
+			format slot {_slot} of player with {_what} to be unstealable 
+			format slot {_slot} of player with {_what} to close then run {_command}
+
+command /hitsound [<text>] [<text>]:
+	trigger:
+		argument 1 is not set:
+			message "&cPlease use &7/OBAM &cto access your Hit Menu."
+			stop
+		argument 2 is "error":
+			message "&cThis hit sound is not available to you."
+			stop
+		set {_what} to argument 1
+		set {_sound} to argument 2
+		argument 2 is "clear":
+			clear {hit.%{_what}%.%player%}
+			send "&aAttack sounds cleared!"
+			stop
+		set {hit.%{_what}%.%player%} to "%{_sound}%"
+		send "&aAttack sound set to &e%{_sound}%!"
+
+on damage:
+	{hit.%attacker%} is set:
+		delete {hit.%attacker%}
+	attacker's tool is air:
+		set {_what} to "hand"
+	attacker's tool is a sword:
+		set {_what} to "sword"
+	attacker's tool is an axe:
+		set {_what} to "axe"
+	attacker's tool is a pickaxe:
+		set {_what} to "pickaxe"
+	attacker's tool is a bow:
+		set {_what} to "bow"
+	attacker's tool is a fishing rod:
+		set {_what} to "rod"
+	{hit.%{_what}%.%attacker%} is set:
+		{hit.%{_what}%.%attacker%} is "note":
+			chance of 14%:
+				play note bass at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			chance of 16%:
+				play note piano at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			chance of 20%:
+				play note bass drum at location of attacker with pitch 1
+				set {_play} to true
+			chance of 25%:
+				play note sticks at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			chance of 33%:
+				play note bass guitar at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			chance of 50%:
+				play note snare drum at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			play note pling at location of attacker with pitch 1
+		{hit.%{_what}%.%attacker%} is "arrow":
+			chance of 50%:
+				play shoot arrow at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			play arrow hit at location of attacker with pitch 1
+		{hit.%{_what}%.%attacker%} is "chest":
+			chance of 50%:
+				play chest close at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			play chest close at location of attacker with pitch 1
+		{hit.%{_what}%.%attacker%} is "anvil":
+			chance of 33%:
+				play anvil break at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			chance of 50%:
+				play anvil land at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			play anvil use at location of attacker with pitch 1
+		{hit.%{_what}%.%attacker%} is "click":
+			play click at location of attacker with pitch 1
+		{hit.%{_what}%.%attacker%} is "level":
+			chance of 50%:
+				play level up at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			play orb pickup at location of attacker with pitch 1
+		{hit.%{_what}%.%attacker%} is "villager":
+			chance of 16%:
+				play villager yes at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			chance of 20%:
+				play villager no at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			chance of 25%:
+				play villager death at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			chance of 33%:
+				play villager haggle at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			chance of 50%:
+				play villager idle at location of attacker with pitch 1
+				set {_play} to true
+			{_play} is not set
+			play villager hit at location of attacker with pitch 1
+
+command /hitsoundclear <text>:
+	trigger:
+		delete {hit.hand.%argument 1%}
+		delete {hit.sword.%argument 1%}
+		delete {hit.axe.%argument 1%}
+		delete {hit.pickaxe.%argument 1%}
+		delete {hit.bow.%argument 1%}
+		delete {hit.rod.%argument 1%}
+		message "&2All of your hit sounds have been cleared."

@@ -1,0 +1,380 @@
+options:
+	egg: snowball named "&3Projeggtile Capture Ball" with lore "&6Capture the essence of various creatures||&6by tossing your balls at them."
+	egg2: snowball named "&3Projeggtile &2Creeper &3Ball" with lore "&6Heavily reinforced to prevent even the||&6most explosive creepers from escaping!"
+	egg3: snowball named "&3Projeggtile &7Skeleton &3Ball" with lore "&6An ironic prison of bones made to hold||&6a skeleton, made from its own kin!"
+	egg4: snowball named "&3Projeggtile &aZombie &dPigman &3Ball" with lore "&6A containment area with a nugget inside||&6to lure and keep the pigman content!"
+	egg5: snowball named "&3Projeggtile &aZombie &3Ball" with lore "&6Layered in flesh to make even the||&6loneliest zombie feel at home!"
+	egg6: snowball named "&3Projeggtile &4Spider &3Ball" with lore "&6Tangles an eight legged bugger||&6into a silky woven sack!"
+
+on script load:
+	register new shaped recipe for {@egg2} using {@egg}, {@egg}, {@egg}, {@egg}, gunpowder, {@egg}, {@egg}, {@egg}, {@egg}
+	register new shaped recipe for {@egg3} using {@egg}, {@egg}, {@egg}, {@egg}, bone, {@egg}, {@egg}, {@egg}, {@egg}
+	register new shaped recipe for {@egg4} using {@egg}, {@egg}, {@egg}, {@egg}, gold nugget, {@egg}, {@egg}, {@egg}, {@egg}
+	register new shaped recipe for {@egg5} using {@egg}, {@egg}, {@egg}, {@egg}, rotten flesh, {@egg}, {@egg}, {@egg}, {@egg}
+	register new shaped recipe for {@egg6} using {@egg}, {@egg}, {@egg}, {@egg}, string, {@egg}, {@egg}, {@egg}, {@egg}
+
+command /captureball [<text>] [<number>]:
+	aliases: cb
+	permission: obam.smod
+	trigger:
+		argument 1 is "capture":
+			player doesn't have space for 1 * argument 2 of {@egg}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@egg} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "creeper":
+			player doesn't have space for 1 * argument 2 of {@egg2}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@egg2} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "skeleton":
+			player doesn't have space for 1 * argument 2 of {@egg3}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@egg3} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "zombie":
+			player doesn't have space for 1 * argument 2 of {@egg5}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@egg5} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "pigman":
+			player doesn't have space for 1 * argument 2 of {@egg4}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@egg4} to player
+			message "&aHere are your things."
+			stop
+		argument 1 is "spider":
+			player doesn't have space for 1 * argument 2 of {@egg6}:
+				message "&cYou do not have room for this."
+				stop
+			give 1 * argument 2 of {@egg6} to player
+			message "&aHere are your things."
+			stop
+
+on join:
+	{db_egg.%player%.skeleton} is set:
+		send "&aYou have received %{db_egg.%player%.skeleton}% Projeggtiles"
+		loop {db_egg.%player%.skeleton} times:
+			drop {@egg3}
+		clear {db_egg.%player%.skeleton}
+	
+	{db_egg.%player%.creeper} is set:
+		send "&aYou have received %{db_egg.%player%.creeper}% Projeggtiles"
+		loop {db_egg.%player%.creeper} times:
+		
+			drop {@egg2}
+		clear {db_egg.%player%.creeper}
+	
+	{db_egg.%player%.zpig} is set:
+		send "&aYou have received %{db_egg.%player%.zpig}% Projeggtiles"
+		loop {db_egg.%player%.zpig} times:
+			drop {@egg4}
+		clear {db_egg.%player%.zpig}
+	
+	{db_egg.%player%.zombie} is set:
+		send "&aYou have received %{db_egg.%player%.zombie}% Projeggtiles"
+		loop {db_egg.%player%.zombie} times:
+			drop {@egg5}
+		clear {db_egg.%player%.zombie}
+	
+on shoot:
+	projectile is snowball:
+		shooter's tool is {@egg}:
+			set {projeggtile.%projectile%} to true
+		shooter's tool is {@egg2}:
+			set {projeggtile.hostile.%projectile%} to true
+			set {creeper.%projectile%} to true
+		shooter's tool is {@egg3}:
+			set {projeggtile.hostile.%projectile%} to true
+			set {skeleton.%projectile%} to true
+		shooter's tool is {@egg4}:
+			set {projeggtile.hostile.%projectile%} to true
+			set {pigman.%projectile%} to true
+		shooter's tool is {@egg5}:
+			set {projeggtile.hostile.%projectile%} to true
+			set {zombie.%projectile%} to true
+		shooter's tool is {@egg6}:
+			set {projeggtile.hostile.%projectile%} to true
+			set {spider.%projectile%} to true
+
+
+on damage of a creeper or a skeleton or a zombie or a zombie pigman or a spider:
+	attacker is a player:
+		{projeggtile.hostile.%projectile%} is set:
+			{chunk.live.%chunk at location of victim%} is not attacker:
+				send "&cYou can not steal animals! D:" to attacker
+				stop
+			set {_player} to "%attacker%" parsed as player
+			set {_bal} to attacker's balance
+			{_bal} is less than 150:
+				send "&cYou do not have enough tickets!" to attacker
+				cancel event
+				{creeper.%projectile%} is set:
+					give attacker {@egg2}
+					stop
+				{skeleton.%projectile%} is set:
+					give attacker {@egg3}
+					stop
+				{pigman.%projectile%} is set:
+					give attacker {@egg4}
+					stop
+				{zombie.%projectile%} is set:
+					give attacker {@egg5}
+					stop
+				{spider.%projectile%} is set:
+					give attacker {@egg6}
+					stop
+			subtract 150 from attacker's balance
+			victim is a zombie:
+				{zombie.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn zombie at {_loc}
+					send "&cThe strength of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
+				set {_egg} to zombie spawn egg
+				set {_mob.name} to "zombie"
+			victim is a creeper:
+				{creeper.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn creeper at {_loc}
+					send "&cThe strength of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
+				set {_egg} to creeper spawn egg
+				set {_mob.name} to "creeper"
+			victim is skeleton:
+				{skeleton.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn skeleton at {_loc}
+					send "&cThe strength of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
+				set {_egg} to skeleton spawn egg
+				set {_mob.name} to "skeleton"
+			victim is zombie pigman:
+				{pigman.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn zombie pigman at {_loc}
+					make attacker damage victim by 1
+					send "&cThe strength of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
+				set {_egg} to zombie pigman spawn egg
+				set {_mob.name} to "zombie pigman"
+			victim is spider:
+				{spider.%projectile%} is not set:
+					set {_loc} to location of victim
+					delete victim
+					wait 1 second
+					create safe explosion with force 1 at {_loc}
+					spawn spider at {_loc}
+					send "&cThe strength of that Projeggtile was not rated for this Mob!" to attacker
+					add 150 to attacker's balance
+					stop
+				set {_egg} to spider spawn egg
+				set {_mob.name} to "spider"
+			display name of victim is not set:
+				cancel event
+				attacker doesn't have space for {_egg}:
+					drop {_egg} at location of attacker
+				attacker has space for {_egg}:
+					give attacker {_egg}
+				delete victim
+				set {_top} to size of {pegg.messages.capture::*}
+				set {_ran} to random integer between 0.5 and {_top}
+				send "&aYou have spent &e150&a tickets on capturing a creature!" to attacker
+				log "%attacker%^%{_bal}%^DEDUCT^150^%attacker's balance%^CREATURE CAPTURE FEE - HOSTILE" to "tickets/CREATURECAPTURE.log"
+				loop {pegg.messages.capture::*}:
+					{_loop.count} is not set:
+						set {_loop.count} to 0
+					add 1 to {_loop.count}
+					{_loop.count} is {_ran}:
+						set {_message} to "%loop-value%"
+						replace "MOB" in {_message} with "%{_mob.name}%"
+						send "&e%{_message}%" to attacker
+				stop
+
+			cancel event
+			set {_top} to size of {pegg.messages.capture::*}
+			set {_ran} to random integer between 0.5 and {_top}
+			send "&aYou have spent &e150&a tickets on capturing a creature!" to attacker
+			send "&aYou have &e%attacker's balance%&a remaining." to attacker		
+			log "%attacker%^%{_bal}%^DEDUCT^150^%attacker's balance%^CREATURE CAPTURE FEE - HOSTILE" to "tickets/CREATURECAPTURE.log"
+			loop {pegg.messages.capture::*}:
+				{_loop.count} is not set:
+					set {_loop.count} to 0
+				add 1 to {_loop.count}
+				{_loop.count} is {_ran}:
+					set {_message} to "%loop-value%"
+					replace "MOB" in {_message} with "%display name of victim%"
+					send "&e%{_message}%" to attacker
+			attacker doesn't have space for {_egg}:
+				set {_egg} to {_egg} named "%display name of victim%"
+				drop {_egg} at location of attacker
+			attacker has space for {_egg}:
+				give attacker {_egg} named "%display name of victim%"
+			delete victim
+			stop
+
+on damage of a pig or chicken or ocelot or squid or cow or bat or wolf or sheep or horse or donkey or mule or mooshroom:
+	attacker is a player:
+		{projeggtile.%projectile%} is set:
+			{chunk.live.%chunk at location of victim%} is not attacker:
+				stop
+			set {_player} to "%attacker%" parsed as player
+			set {_bal} to attacker's balance
+			{_bal} is less than 5:
+				send "&cYou do not have enought tickets!" to attacker
+				cancel event
+				give attacker {@egg}
+				stop
+			remove 5 from attacker's balance
+			send "&aYou have spent &e5&a tickets on capturing a creature!" to attacker
+			send "&aYou have &e%attacker's balance%&a remaining." to attacker	
+			log "%attacker%^%{_bal}%^DEDUCT^5^%{_player}'s balance%^CREATURE CAPTURE FEE" to "tickets/CREATURECAPTURE.log"
+			victim is a pig:
+				set {_egg} to pig spawn egg
+				set {_mob.name} to "pig"
+			victim is a chicken:
+				set {_egg} to chicken spawn egg
+				set {_mob.name} to "chicken"
+			victim is ocelot:
+				set {_egg} to ocelot spawn egg
+				set {_mob.name} to "ocelot"
+			victim is squid:
+				set {_egg} to squid spawn egg
+				set {_mob.name} to "squid"
+			victim is cow:
+				victim is not mooshroom:
+					set {_egg} to cow spawn egg
+					set {_mob.name} to "cow"
+			victim is bat:
+				set {_egg} to bat spawn egg
+				set {_mob.name} to "bat"
+			victim is wolf:
+				set {_egg} to wolf spawn egg
+				set {_mob.name} to "wolf"
+			victim is mooshroom:
+				set {_egg} to mooshroom spawn egg
+				set {_mob.name} to "mooshroom"
+			victim is sheep:
+				set {_egg} to sheep spawn egg
+				set {_mob.name} to "sheep"
+			victim is horse or mule or donkey:
+				set {_egg} to horse spawn egg
+				set {_mob.name} to "horse"
+			display name of victim is not set:
+				cancel event
+				attacker doesn't have space for {_egg}:
+					drop {_egg} at location of attacker
+				attacker has space for {_egg}:
+					give attacker {_egg}
+				delete victim
+				set {_top} to size of {pegg.messages.capture::*}
+				set {_ran} to random integer between 0.5 and {_top}
+				loop {pegg.messages.capture::*}:
+					{_loop.count} is not set:
+						set {_loop.count} to 0
+					add 1 to {_loop.count}
+					{_loop.count} is {_ran}:
+						set {_message} to "%loop-value%"
+						replace "MOB" in {_message} with "%{_mob.name}%"
+						send "&e%{_message}%" to attacker
+				stop
+			cancel event
+			set {_top} to size of {pegg.messages.capture::*}
+			set {_ran} to random integer between 0.5 and {_top}
+			loop {pegg.messages.capture::*}:
+				{_loop.count} is not set:
+					set {_loop.count} to 0
+				add 1 to {_loop.count}
+				{_loop.count} is {_ran}:
+					set {_message} to "%loop-value%"
+					replace "MOB" in {_message} with "%display name of victim%"
+					send "&e%{_message}%" to attacker
+			attacker doesn't have space for {_egg}:
+				set {_egg} to {_egg} named "%display name of victim%"
+				drop {_egg} at location of attacker
+			attacker has space for {_egg}:
+				give attacker {_egg} named "%display name of victim%"
+			delete victim
+			stop
+
+on death of a creeper or a zombie or a silverfish or a witch or a spider or magma cube or wither skeleton or skeleton or enderman or cave spider or slime or ghast or zombie pigman:
+	chance of 20%:
+		add {@egg} to drops
+	clear {player.hit.%event-entity%}
+
+on damage of a creeper or a zombie or a silverfish or a witch or a spider or magma cube or wither skeleton or skeleton or enderman or cave spider or slime or ghast or zombie pigman:
+	attacker is player:
+		set {player.hit.%victim%} to true
+
+
+command /pegg [<text>] [<text>]:
+	permission: obam.admin
+	trigger:
+		argument 1 is not set:
+			send "&a-------&eProjeggtile System&a--------" to player
+			send " " to player
+			send " " to player
+			send "&e/pegg &a--------------------- &eOpen this menu" to player
+			send "&e/pegg list &a---------------- &eList active messages" to player
+			send "&e/pegg add [message] &a------- &eAdd message to list" to player
+			send "&e/pegg delete [number] &a----- &eDelete Specified message from list"
+			send "&e/pegg test [number] &a------- &eTest specific message with 'OBAM' "
+			send " "
+			send " "
+			send "&cV 1.2 &eCoded by: &aISMOOCH"
+			send "&eDeveloped for: OBAM CRAFT" to player
+		argument 1 is "list":
+			loop {pegg.messages.capture::*}:
+				{_loop.count} is not set:
+					set {_loop.count} to 0
+				add 1 to {_loop.count}
+				send "&e%loop-index%&a.... &e%loop-value%" to player
+
+		argument 1 is "add":
+			argument 2 is not set:
+				send "&cCorrect usage: &e/pegg [list|add|delete|test] [message|number]" to player
+				stop
+			add argument 2 to {pegg.messages.capture::*}
+			send "&aMessage &e%argument 2%&a added!" to player
+		argument 1 is "delete":
+			argument 2 is not set:
+				send "&cCorrect usage: &e/pegg [list|add|delete|test] [message|number]" to player
+				stop
+			send "&cDeleteing message &e%{pegg.messages.capture::%argument 2%}%&c..."
+			delete {pegg.messages.capture::%argument 2%}
+			send "&aMessage deleted!" to player
+
+		argument 1 is "test":
+			argument 2 is not set:
+				send "&cCorrect usage: &e/pegg [list|add|delete|test] [message|number]" to player
+				stop
+			set {_message} to {pegg.messages.capture::%argument 2%}
+			replace "MOB" in {_message} with "OBAM"
+			send {_message} to player
+			
+

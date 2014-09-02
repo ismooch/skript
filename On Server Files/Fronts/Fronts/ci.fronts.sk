@@ -1,0 +1,67 @@
+on script load:
+	delete {db_ci.items::*}
+	set {db_ci.items::01.Crude Pack} to "ink sack;&a&b&k&a&3Crude Pack;&6The crude version of||&6the backpack;sudo PLAYER bp g crudepack 1"
+	set {db_ci.items::02.Ender Pack} to "ender pearl;&a&b&k&a&3EnderPack;&6Open your Ender Chest||&6anywhere!|| ||&5&oRight Click to open||&5&oYour portable Ender Chest;sudo PLAYER bp g enderpack 1"
+	set {db_ci.items::03.capture.ball} to "snowball;&3Projeggtile Capture Ball;&6Capture the essence of various creatures||&6by tossing your balls at them.;sudo PLAYER cb capture 1"
+	set {db_ci.items::04.creeper.ball} to "snowball;&3Projeggtile &2Creeper &3Ball;&6Heavily reinforced to prevent even the||&6most explosive creepers from escaping!;sudo PLAYER cb creeper 1"
+	set {db_ci.items::05.skeleton.ball} to "snowball;&3Projeggtile &7Skeleton &3Ball;&6An ironic prison of bones made to hold||&6a skeleton, made from its own kin!;sudo PLAYER cb skeleton 1"
+	set {db_ci.items::06.zombie.ball} to "snowball;&3Projeggtile &aZombie &3Ball;&6Layered in flesh to make even the||&6loneliest zombie feel at home!;sudo PLAYER cb zombie 1"
+	set {db_ci.items::07.pigman.ball} to "snowball;&3Projeggtile &aZombie &dPigman &3Ball;&6A containment area with a nugget inside||&6to lure and keep the pigman content!;sudo PLAYER cb pigman 1"
+	set {db_ci.items::08.spider.ball} to "snowball;&3Projeggtile &4Spider &3Ball;&6Tangles an eight legged bugger||&6into a silky woven sack!;sudo PLAYER cb spider 1"
+	set {db_ci.items::09.blank} to "air"
+	set {db_ci.items::10.Crude Pack} to "16 ink sack;&a&b&k&a&3Crude Pack;&6The crude version of||&6the backpack;sudo PLAYER bp g crudepack 16"
+	set {db_ci.items::11.Ender Pack} to "16 ender pearl;&a&b&k&a&3EnderPack;&6Open your Ender Chest||&6anywhere!|| ||&5&oRight Click to open||&5&oYour portable Ender Chest;sudo PLAYER bp g enderpack 16"
+	set {db_ci.items::12.capture.ball} to "16 snowball;&3Projeggtile Capture Ball;&6Capture the essence of various creatures||&6by tossing your balls at them.;sudo PLAYER cb capture 16"
+	set {db_ci.items::13.creeper.ball} to "16 snowball;&3Projeggtile &2Creeper &3Ball;&6Heavily reinforced to prevent even the||&6most explosive creepers from escaping!;sudo PLAYER cb creeper 16"
+	set {db_ci.items::14.skeleton.ball} to "16 snowball;&3Projeggtile &7Skeleton &3Ball;&6An ironic prison of bones made to hold||&6a skeleton, made from its own kin!;sudo PLAYER cb skeleton 16"
+	set {db_ci.items::15.zombie.ball} to "16 snowball;&3Projeggtile &aZombie &3Ball;&6Layered in flesh to make even the||&6loneliest zombie feel at home!;sudo PLAYER cb zombie 16"
+	set {db_ci.items::16.pigman.ball} to "16 snowball;&3Projeggtile &aZombie &dPigman &3Ball;&6A containment area with a nugget inside||&6to lure and keep the pigman content!;sudo PLAYER cb pigman 16"
+	set {db_ci.items::17.spider.ball} to "16 snowball;&3Projeggtile &4Spider &3Ball;&6Tangles an eight legged bugger||&6into a silky woven sack!;sudo PLAYER cb spider 16"
+	set {db_ci.items::18.blank} to "air"
+	set {db_ci.items::19.Crude Pack} to "64 ink sack;&a&b&k&a&3Crude Pack;&6The crude version of||&6the backpack;sudo PLAYER bp g crudepack 64"
+	set {db_ci.items::20.Ender Pack} to "64 ender pearl;&a&b&k&a&3EnderPack;&6Open your Ender Chest||&6anywhere!|| ||&5&oRight Click to open||&5&oYour portable Ender Chest;sudo PLAYER bp g enderpack 64"
+	set {db_ci.items::21.TA} to "diamond axe;&a&b&k&a&3Timber Axe;&6This axe makes all logs within a 10 block radius||&6go timber!;sudo PLAYER timber"
+	set {db_ci.items::22.LB} to "bow;&3Bow of Light;&6Light your way from afar||&6with this magical bow.|| ||&c-1 Torch Per Use;sudo PLAYER lightbow"
+	set {db_ci.items::23.HTP} to "diamond pickaxe;&a&b&k&a&3HotTouch Pickaxe;&6A pickaxe forged from the heart of the Nether||&6with an intense heat to smelt ores while mining.;sudo PLAYER ht pick"
+	set {db_ci.items::24.HTA} to "diamond axe;&a&b&k&a&3HotTouch Axe;&6An axe forged from the heart of the Nether||&6with an intense heat to cook logs into charcoal||&6while chopping.;sudo PLAYER ht axe"
+	set {db_ci.items::25.HTS} to "diamond shovel;&a&b&k&a&3HotTouch Shovel;&6A shovel forged from the heart of the Nether||&6with an intense heat to cook sand clay and||&6cactus while digging.;sudo PLAYER ht shovel"
+	set {db_ci.items::26.blank} to "air"
+	set {db_ci.items::27.blank} to "air"
+	set {db_ci.items::28.FMA.helmet} to "diamond helmet;&7FMA Helmet;&6Standard issue FMA gear;sudo PLAYER fmagear helmet"
+	set {db_ci.items::29.FMA.chest} to "diamond chestplate;&7FMA Chestplate;&6Standard issue FMA gear;sudo PLAYER fmagear chest"
+	set {db_ci.items::30.FMA.leggings} to "diamond leggings;&7FMA Leggings;&6Standard issue FMA gear;sudo PLAYER fmagear leggings"
+	set {db_ci.items::31.FMA.boots} to "diamond boots;&7FMA Boots;&6Standard issue FMA gear;sudo PLAYER fmagear boots"
+	set {db_ci.items::32.FMA.sword} to "diamond sword;&7FMA Sword;&6Standard issue FMA gear;sudo PLAYER fmagear sword"
+	set {db_ci.items::33.FMA.bow} to "bow;&7FMA Bow;&6Standard issue FMA gear;sudo PLAYER fmagear bow"
+	set {db_ci.items::34.FMA.arrows} to "64 arrow;&7FMA Arrows;&6Standard issue FMA gear;sudo PLAYER fmagear arrows"
+	set {db_ci.items::35.FMA.apples} to "64 apple;&7FMA Apples;&6Standard issue FMA gear;sudo PLAYER fmagear apples"	
+
+command /ci:
+	permission: obam.smod
+	trigger:
+		loop {db_ci.items::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show chest with {_size} row named "&9&lOBAM Custom Items Menu" to player
+		wait 1 tick
+		set {_count} to 0
+		loop {db_ci.items::*}:
+			set {_what::*} to loop-value split at ";"
+			set {_item} to {_what::1} parsed as item
+			set {_name} to {_what::2}
+			set {_lore} to {_what::3}
+			set {_command} to {_what::4}
+			replace "PLAYER" in {_command} with "%player%"
+			set {_what} to {_item} named {_name} with lore {_lore}
+			format slot {_count} of player with {_what} to be unstealable 
+			format slot {_count} of player with {_what} to close then run {_command}
+			add 1 to {_count}

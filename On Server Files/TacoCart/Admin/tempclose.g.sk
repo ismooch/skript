@@ -1,0 +1,13 @@
+command /parkour:
+	aliases: pk
+	trigger:
+		message "&cParkour has been temporarily removed while"
+		message "&cwe make improvements. Please try one of our"
+		message "&cother games like Skyblock, Fronts, WTF & Kit PVP."
+
+command /hotpotato:
+	aliases: hp
+	trigger:
+		message "&cHot Potato has been temporarily removed while"
+		message "&cwe make improvements. Please try one of our"
+		message "&cother games like Skyblock, Fronts, WTF & Kit PVP."

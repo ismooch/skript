@@ -1,0 +1,190 @@
+on script load:
+	delete {db_perk.pets::*}
+	set {db_perk.pets::01.ismooch} to "sheep spawn egg;&3iSmooch;&6The sassiest sheep in all the lands!;sudo PLAYER pet ismooch"
+	set {db_perk.pets::02.bruswain} to "bat spawn egg;&3BruSwain;&6This lovable bat lost his parents at a||&6young age. Thank you for taking care||&6of him!;sudo PLAYER pet bruswain;bat spawn egg;&3BruSwai&6This lovable bat lost his parents at a||&6young age. Thank you for taking care||&6of him!|| ||&cThis pet is only available to our Beta Supporters.;sudo PLAYER pet error"
+	set {db_perk.pets::03.sparky} to "creeper spawn egg;&3Sparky;&6While this creeper appears to have a||&6dangerously electrifying personality, we||&6promise he’s completely safe!;sudo PLAYER pet sparky;creeper spawn egg;&3Sparky;&6While this creeper appears to have a||&6dangerously electrifying personality, we||&6promise he’s completely safe!|| ||&cThis pet is only available to our Supporters.;sudo PLAYER pet error"
+	set {db_perk.pets::04.bacon} to "pig spawn egg;&3Bacon;&6Rescued from the final stages of the||&6slaughter house, this pig is extremely||&6grateful for your love and kindness!;sudo PLAYER pet bacon;pig spawn egg;&3Baco&6Rescued from the final stages of the||&6slaughter house, this pig is extremely||&6grateful for your love and kindness!|| ||&cThis pet must be purchased from the OBAMCraft shop.|| ||&eUse &f/buy &ein the hub purchase &3Bacon|| ||&ePrice: &a$5.00;sudo PLAYER pet error"
+	set {db_perk.pets::05.blank} to "air"
+	set {db_perk.pets::06.blank} to "air"
+	set {db_perk.pets::07.lead} to "lead;&3Leash;&6Pets getting out of control? Click this||&6to attach a lead to all of your||&6summoned pets!;sudo PLAYER pet lead"
+	set {db_perk.pets::08.blank} to "air"
+	set {db_perk.pets::09.clear} to "fire;&3Clear;&6Click to clear all summoned pets!;sudo PLAYER pet clear"
+
+command /petmenu:
+	trigger:
+		loop {db_perk.pets::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show chest with {_size} row named "&9&lPet Stable" to player
+		wait 1 tick
+		set {_count} to 0
+		loop {db_perk.pets::*}:
+			set {_what::*} to loop-value split at ";"
+			set {_item} to {_what::1} parsed as item
+			set {_name} to {_what::2}
+			set {_lore} to {_what::3}
+			set {_command} to {_what::4}
+			loop-index is "02.bruswain":
+				player does not have permission "obam.beta.hat":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "03.sparky":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "04.bacon":
+				{db_purchase.bacon.%uuid of player%} is not set:
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			player has permission "obam.smod":
+				set {_lore} to {_what::3}
+				set {_command} to {_what::4}
+			replace "PLAYER" in {_command} with "%player%"
+			set {_what} to {_item} named {_name} with lore {_lore}
+			format slot {_count} of player with {_what} to be unstealable 
+			format slot {_count} of player with {_what} to close then run {_command}
+			add 1 to {_count}
+
+every 1 second:
+	loop all entities:
+		loop-entity is sheep or bat or powered creeper or pig:
+			name of loop-entity is "&aISMOOCH" or "&aBru Swain" or "&aSparky" or "&aBacon":
+				spawn 4 particle heart offset by 1, 1, 1 at location of loop-entity
+				{owner.%loop-entity%} is not set:
+					kill loop-entity
+				distance between location of loop-entity and location of {owner.%loop-entity%} is greater than 20:
+					teleport loop-entity to location of {owner.%loop-entity%}
+	
+on damage of sheep or bat or powered creeper or pig:
+	name of victim is "&aISMOOCH" or "&aBru Swain" or "&aSparky" or "&aBacon":
+		cancel event
+
+on quit:
+	kill {pets.%player%}
+	clear {pets.%player%}
+	loop {pets.%player%::*}:
+		clear {owner.%loop-value%}
+		kill loop-value
+	clear {pets.%player%::*}
+	stop
+
+command /pet [<text>]:
+	trigger:
+		world is "kitpvpkillingfields":
+			send "&cYou can not do that here" to player
+			stop
+		argument is not set:
+			message "&cPlease use &7/OBAM &cto access your Pet Stable."
+			stop
+		argument is "error":
+			message "&cThis pet is not available to you."
+			stop
+		argument is "lead":
+			loop {pets.%player%::*}:
+				teleport loop-value to location of player
+				make player leash loop-value
+			stop
+		argument is "clear":
+			kill {pets.%player%}
+			clear {pets.%player%}
+			loop {pets.%player%::*}:
+				kill loop-value
+				clear {owner.%loop-value%}
+			clear {pets.%player%::*}
+			stop
+		{pets.%player%} is set:
+			player does not have permission "obam.supporter": 
+				send "&cYou can only have one pet at a time!" to player
+				stop
+			size of {pets.%player%::*} is 5:
+				send "&cYou can only have 5 pets at a time!" to player
+				stop
+		argument is "ISMOOCH":
+			spawn sheep at location of player
+			set name of spawned sheep to "&aISMOOCH"
+			set color of spawned sheep to pink
+			make player leash spawned sheep
+			set {pets.%player%} to spawned sheep
+			set {owner.%{pets.%player%}%} to player
+			add {pets.%player%} to {pets.%player%::*}
+			stop
+		argument is "BruSwain":
+			player has permission "obam.beta.hat":
+				spawn bat at location of player
+				set name of spawned bat to "&aBru Swain"
+				make player leash spawned bat
+				set {pets.%player%} to spawned bat
+				set {owner.%{pets.%player%}%} to player
+				add {pets.%player%} to {pets.%player%::*}
+				stop
+			send "&cThis is for beta supporters only!" to player
+		argument is "Sparky":
+			player has permission "obam.supporter":
+				spawn powered creeper at location of player
+				set name of spawned powered creeper to "&aSparky"
+				make player leash spawned powered creeper
+				set {pets.%player%} to spawned powered creeper
+				set {owner.%{pets.%player%}%} to player
+				add {pets.%player%} to {pets.%player%::*}
+				stop
+			send "&cYou must be a supporter to do this!" to player
+		argument is "bacon":
+			{db_purchase.bacon.%uuid of player%} is true:
+				spawn pig at location of player
+				set name of spawned pig to "&aBacon"
+				make player leash spawned pig
+				set {pets.%player%} to spawned pig
+				set {owner.%{pets.%player%}%} to player
+				add {pets.%player%} to {pets.%player%::*}
+				stop
+			player has permission "obam.smod":
+				spawn pig at location of player
+				set name of spawned pig to "&aBacon"
+				make player leash spawned pig
+				set {pets.%player%} to spawned pig
+				set {owner.%{pets.%player%}%} to player
+				add {pets.%player%} to {pets.%player%::*}
+				stop
+			send "&cYou must purchase this pet on the online store!"
+			stop
+		argument is "dragon":
+			send "&cI bet you wish you could...." to player
+			stop
+		send "&cThat is not an option!" to player
+
+on explosion prime:
+	entity is powered creeper:
+		name of entity is "&aSparky":
+			cancel event
+
+on death of a sheep or a bat or a powered creeper or a pig:
+	name of victim is "&aISMOOCH" or "&aBru Swain" or "&aSparky" or "&aBacon"
+	clear drops
+
+on right click on a sheep or a bat or a powered creeper or a pig:
+	name of target is "&aISMOOCH" or "&aBru Swain" or "&aSparky" or "&aBacon":
+		cancel event
+
+on right click with wheat on sheep:
+	name of event-entity is "&aISMOOCH"
+	cancel event
+	send "&cYou can not mate pets D:" to event-player
+
+on right click with carrot on sheep:
+	name of event-entity is "&aBacon"
+	cancel event
+	send "&cYou can not mate pets D:" to event-player
+
+on right click with shears on sheep:
+	name of event-entity is "&aISMOOCH"
+	cancel event
+	send "&cYou can not shear pets!" to event-player

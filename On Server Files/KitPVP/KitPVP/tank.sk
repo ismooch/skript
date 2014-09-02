@@ -1,0 +1,22 @@
+on teleport:
+	wait 3 ticks
+	player's world is "vacant"
+
+
+
+	{kit.%player%} is "tank":
+		{ingame.%player%} is not set
+		clear player's inventory
+		equip player with all leather armor of unbreaking 10 named "&fArmor of Density"
+		dye player's helmet (255, 255, 0)
+		dye player's chestplate (255, 255, 0)
+		dye player's leggings (255, 255, 0)
+		dye player's boots (255, 255, 0)
+		give player wood shovel of knockback 1 and unbreaking 10 named "&fTank's Paddle"
+		give player 5 mushroom soup named "&fMushroom Soup &c[+5 ❤]"
+		apply slowness 1 to player for 999 days
+		apply health boost 3 to player for 999 days
+		give player 5 snowballs named "&fDisabling Bombs"
+		heal player by 10 hearts
+		set {ingame.%player%} to true
+		

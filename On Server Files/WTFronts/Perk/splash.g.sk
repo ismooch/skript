@@ -1,0 +1,214 @@
+on script load:
+	delete {db_perk.splash::*}
+	set {db_perk.splash::01.heart} to "red dye;&3Heart Particles;&6Click to enable a heart splash!;sudo PLAYER splash heart;red dye;&3Heart Particles;&6Click to enable a heart splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::02.flame} to "fire;&3Flame Particles;&6Click to enable a flame splash!;sudo PLAYER splash flame;fire;&3Flame Particles;&6Click to enable a flame splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::03.reddust} to "magma cream;&3Unstable Gas Particles;&6Click to enable an unstable gas splash!;sudo PLAYER splash reddust;magma cream;&3Unstable Gas Particles;&6Click to enable an unstable gas splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::04.smoke} to "charcoal;&3Dark Smoke Particles;&6Click to enable a dark smoke splash!;sudo PLAYER splash smoke;charcoal;&3Dark Smoke Particles;&6Click to enable a dark smoke splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::05.waterdrip} to "water;&3Water Drip Particles;&6Click to enable a water drip splash!;sudo PLAYER splash waterdrip;water;&3Water Drip Particles;&6Click to enable a water drip splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::06.lavadrip} to "lava;&3Lava Drip Particles;&6Click to enable a lava drip splash!;sudo PLAYER splash lavadrip;lava;&3Lava Drip Particles;&6Click to enable a lava drip splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::07.slime} to "slimeball;&3Slime Particles;&6Click to enable a slime splash!;sudo PLAYER splash slime;slimeball;&3Slime Particles;&6Click to enable a slime splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::08.note} to "jukebox;&3Music Notes Particles;&6Click to enable a music note splash!;sudo PLAYER splash note;jukebox;&3Music Notes Particles;&6Click to enable a music note splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::09.happy} to "villager spawn egg;&3Villager Particles “Happy”;&6Click to enable a happy villager splash!;sudo PLAYER splash happy;villager spawn egg;&3Villager Particles “Happy”;&6Click to enable a happy villager splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::10.angry} to "villager spawn egg;&3Villager Particles “Angry”;&6Click to enable a angry villager splash!;sudo PLAYER splash angry;villager spawn egg;&3Villager Particles “Angry”;&6Click to enable a angry villager splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::11.explode} to "tnt;&3Explosion Smoke Particles;&6Click to enable a explosion smoke splash!;sudo PLAYER splash explode;tnt;&3Explosion Smoke Particles;&6Click to enable a explosion smoke splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::12.snow} to "snow block;&3Snowflake Particles;&6Click to enable a snowflake splash!;sudo PLAYER splash snow;snow block;&3Snowflake Particles;&6Click to enable a snowflake splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::13.portal} to "nether portal;&3Nether Portal Particles;&6Click to enable a nether portal splash!;sudo PLAYER splash portal;nether portal;&3Nether Portal Particles;&6Click to enable a nether portal splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::14.cloud} to "bonemeal;&3Cloud Particles;&6Click to enable a cloud splash!;sudo PLAYER splash cloud;bonemeal;&3Cloud Particles;&6Click to enable a cloud splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::15.bubble} to "water bottle;&3Bubble Particles;&6Click to enable a bubble splash!;sudo PLAYER splash bubble;water bottle;&3Bubble Particles;&6Click to enable a bubble splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+	set {db_perk.splash::16.blank} to "air"
+	set {db_perk.splash::17.blank} to "air"
+	set {db_perk.splash::18.clear} to "glass;&3Clear Particles;&6Click to clear your splash!;sudo PLAYER splash clear;glass;&3Clear Particles;&6Click to clear your splash!|| ||&cThis splash is only available to our Supporters.;sudo PLAYER splash error"
+
+command /splashmenu:
+	trigger:
+		loop {db_perk.splash::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show chest with {_size} row named "&9&lSplash Menu" to player
+		wait 1 tick
+		set {_count} to 0
+		loop {db_perk.splash::*}:
+			set {_what::*} to loop-value split at ";"
+			set {_item} to {_what::1} parsed as item
+			set {_name} to {_what::2}
+			set {_lore} to {_what::3}
+			set {_command} to {_what::4}
+			loop-index is "01.heart":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "02.flame":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "03.reddust":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "04.smoke":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "05.waterdrip":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "06.lavadrip":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "07.slime":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "08.note":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "09.happy":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "10.angry":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "11.explode":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "12.snow":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "13.portal":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "14.cloud":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "15.bubble":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "16.clear":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			player has permission "obam.smod":
+				set {_lore} to {_what::3}
+				set {_command} to {_what::4}
+			replace "PLAYER" in {_command} with "%player%"
+			set {_what} to {_item} named {_name} with lore {_lore}
+			format slot {_count} of player with {_what} to be unstealable 
+			format slot {_count} of player with {_what} to close then run {_command}
+			add 1 to {_count}
+
+command /splash [<text>]:
+	trigger:
+		argument is not set:
+			message "&cPlease use &7/OBAM &cto access the Splash Menu."
+			stop
+		argument is "error":
+			message "&cThis splash is not available to you."
+			stop
+		player has permission "obam.supporter":
+			argument is "heart":
+				set {splash.%player%} to "heart"
+				send "&aYou have enabled a &eHeart Splash&a!"
+			argument is "flame":
+				set {splash.%player%} to "flame"
+				send "&aYou have enabled a &eFlame Splash&a!"
+			argument is "reddust":
+				set {splash.%player%} to "reddust"
+				send "&aYou have enabled an &eUnstable Gas Splash&a!"
+			argument is "smoke":
+				set {splash.%player%} to "smoke"
+				send "&aYou have enabled a &eDark Smoke Splash&a!"
+			argument is "waterdrip":
+				set {splash.%player%} to "waterdrip"
+				send "&aYou have enabled a &eWater Drip Splash&a!"
+			argument is "lavadrip":
+				set {splash.%player%} to "lavadrip"
+				send "&aYou have enabled a &eLava Drip Splash&a!"
+			argument is "slime":
+				set {splash.%player%} to "slime"
+				send "&aYou have enabled a &eSlime Splash&a!"
+			argument is "note":
+				set {splash.%player%} to "note"
+				send "&aYou have enabled a &eMusic Note Splash&a!"
+			argument is "happy":
+				set {splash.%player%} to "happy"
+				send "&aYou have enabled a &eHappy Villager Splash&a!"
+			argument is "angry":
+				set {splash.%player%} to "angry"
+				send "&aYou have enabled an &eAngry Villager Splash&a!"
+			argument is "explode":
+				set {splash.%player%} to "explode"
+				send "&aYou have enabled an &eExplosion Smoke Splash&a!"
+			argument is "snow":
+				set {splash.%player%} to "snow"
+				send "&aYou have enabled a &eSnowflake Splash&a!"
+			argument is "bubble":
+				set {splash.%player%} to "bubble"
+				send "&aYou have enabled a &eBubble Splash&a!"
+			argument is "portal":
+				set {splash.%player%} to "portal"
+				send "&aYou have enabled a &eNether Portal Splash&a!"
+			argument is "cloud":
+				set {splash.%player%} to "cloud"
+				send "&aYou have enabled a &eCloud Splash&a!"
+			argument is "clear":
+				clear {splash.%player%}
+				send "&aYou have disabled your splash!"
+
+every 5 seconds:
+	loop all players:
+		clear {_amt}
+		loop-player is not sneaking
+		loop-player is sprinting:
+			set {_amt} to 100
+		{_amt} is not set:
+			set {_amt} to 50
+		{splash.%loop-player%} is set:
+			{splash.%loop-player%} is "bubble":
+				spawn 500 particle bubble offset by 2, 2, 2 at location of loop-player
+			{splash.%loop-player%} is "cloud":
+				spawn {_amt} particle cloud offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "heart":
+				spawn {_amt} particle heart offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "flame":
+				spawn {_amt} particle flame offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "reddust":
+				spawn {_amt} particle red dust offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "smoke":
+				spawn {_amt} particle large smoke offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "note":
+				spawn {_amt} particle note offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "lavadrip":
+				spawn {_amt} particle drip lava offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "waterdrip":
+				spawn {_amt} particle drip water offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "slime":
+				spawn {_amt} particle slime offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "happy":
+				spawn {_amt} particle happy villager offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "angry":
+				spawn {_amt} particle angry villager offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "explode":
+				spawn {_amt} particle large explode offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "snow":
+				spawn {_amt} particle snow shovel offset by 1, 1, 1 at location of loop-player
+			{splash.%loop-player%} is "portal":
+				spawn {_amt} particle portal offset by 1, 1, 1 at location of loop-player

@@ -1,0 +1,205 @@
+on script load:
+	delete {db_perk.trails::*}
+	set {db_perk.trails::01.heart} to "red dye;&3Heart Particles;&6Click to enable heart trails!;sudo PLAYER trails heart;red dye;&3Heart Particles;&6Click to enable heart trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::02.flame} to "fire;&3Flame Particles;&6Click to enable flame trails!;sudo PLAYER trails flame;fire;&3Flame Particles;&6Click to enable flame trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::03.reddust} to "magma cream;&3Unstable Gas Particles;&6Click to enablen unstable gas trails!;sudo PLAYER trails reddust;magma cream;&3Unstable Gas Particles;&6Click to enablen unstable gas trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::04.smoke} to "charcoal;&3Dark Smoke Particles;&6Click to enable dark smoke trails!;sudo PLAYER trails smoke;charcoal;&3Dark Smoke Particles;&6Click to enable dark smoke trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::05.waterdrip} to "water;&3Water Drip Particles;&6Click to enable water drip trails!;sudo PLAYER trails waterdrip;water;&3Water Drip Particles;&6Click to enable water drip trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::06.lavadrip} to "lava;&3Lava Drip Particles;&6Click to enable lava drip trails!;sudo PLAYER trails lavadrip;lava;&3Lava Drip Particles;&6Click to enable lava drip trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::07.slime} to "slimeball;&3Slime Particles;&6Click to enable slime trails!;sudo PLAYER trails slime;slimeball;&3Slime Particles;&6Click to enable slime trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::08.note} to "jukebox;&3Music Notes Particles;&6Click to enable music note trails!;sudo PLAYER trails note;jukebox;&3Music Notes Particles;&6Click to enable music note trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::09.happy} to "villager spawn egg;&3Villager Particles “Happy”;&6Click to enable happy villager trails!;sudo PLAYER trails happy;villager spawn egg;&3Villager Particles “Happy”;&6Click to enable happy villager trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::10.angry} to "villager spawn egg;&3Villager Particles “Angry”;&6Click to enable angry villager trails!;sudo PLAYER trails angry;villager spawn egg;&3Villager Particles “Angry”;&6Click to enable angry villager trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::11.explode} to "tnt;&3Explosion Smoke Particles;&6Click to enable explosion smoke trails!;sudo PLAYER trails explode;tnt;&3Explosion Smoke Particles;&6Click to enable explosion smoke trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::12.snow} to "snow block;&3Snowflake Particles;&6Click to enable snowflake trails!;sudo PLAYER trails snow;snow block;&3Snowflake Particles;&6Click to enable snowflake trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::13.portal} to "nether portal;&3Nether Portal Particles;&6Click to enable nether portal trails!;sudo PLAYER trails portal;nether portal;&3Nether Portal Particles;&6Click to enable nether portal trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::14.cloud} to "bonemeal;&3Cloud Particles;&6Click to enable cloud trails!;sudo PLAYER trails cloud;bonemeal;&3Cloud Particles;&6Click to enable cloud trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+	set {db_perk.trails::15.blank} to "air"
+	set {db_perk.trails::16.blank} to "air"
+	set {db_perk.trails::17.blank} to "air"
+	set {db_perk.trails::18.clear} to "glass;&3Clear Particles;&6Click to clear your trails!;sudo PLAYER trails clear;glass;&3Clear Particles;&6Click to clear your trails!|| ||&cThis trails is only available to our Supporters.;sudo PLAYER trails error"
+
+command /trailmenu:
+	trigger:
+		loop {db_perk.trails::*}:
+			{_count} is not set:
+				set {_count} to 0
+			add 1 to {_count}
+		{_count} is less than 10:
+			set {_size} to 1
+		{_count} is greater than 9:
+			set {_size} to 2
+		{_count} is greater than 18:
+			set {_size} to 3
+		{_count} is greater than 27:
+			set {_size} to 4
+		show chest with {_size} row named "&9&lTrails Menu" to player
+		wait 1 tick
+		set {_count} to 0
+		loop {db_perk.trails::*}:
+			set {_what::*} to loop-value split at ";"
+			set {_item} to {_what::1} parsed as item
+			set {_name} to {_what::2}
+			set {_lore} to {_what::3}
+			set {_command} to {_what::4}
+			loop-index is "01.heart":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "02.flame":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "03.reddust":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "04.smoke":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "05.waterdrip":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "06.lavadrip":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "07.slime":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "08.note":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "09.happy":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "10.angry":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "11.explode":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "12.snow":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "13.portal":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "14.cloud":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "15.bubble":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			loop-index is "16.clear":
+				player does not have permission "obam.supporter":
+					set {_lore} to {_what::5}
+					set {_command} to {_what::6}
+			player has permission "obam.smod":
+				set {_lore} to {_what::3}
+				set {_command} to {_what::4}
+			replace "PLAYER" in {_command} with "%player%"
+			set {_what} to {_item} named {_name} with lore {_lore}
+			format slot {_count} of player with {_what} to be unstealable 
+			format slot {_count} of player with {_what} to close then run {_command}
+			add 1 to {_count}
+
+command /trails [<text>]:
+	trigger:
+		argument is not set:
+			message "&cPlease use &7/OBAM &cto access the Trails Menu."
+			stop
+		argument is "error":
+			message "&cThis trail is not available to you."
+			stop
+		player has permission "obam.supporter":
+			delete {trail.%player%}
+			argument is "heart":
+				set {trails.%player%} to "heart"
+				send "&aYou have enabled &eHeart trails&a!"
+			argument is "flame":
+				set {trails.%player%} to "flame"
+				send "&aYou have enabled &eFlame trails&a!"
+			argument is "reddust":
+				set {trails.%player%} to "reddust"
+				send "&aYou have enabled &eUnstable Gas trails&a!"
+			argument is "smoke":
+				set {trails.%player%} to "smoke"
+				send "&aYou have enabled &eDark Smoke trails&a!"
+			argument is "waterdrip":
+				set {trails.%player%} to "waterdrip"
+				send "&aYou have enabled &eWater Drip trails&a!"
+			argument is "lavadrip":
+				set {trails.%player%} to "lavadrip"
+				send "&aYou have enabled &eLava Drip trails&a!"
+			argument is "slime":
+				set {trails.%player%} to "slime"
+				send "&aYou have enabled &eSlime trails&a!"
+			argument is "note":
+				set {trails.%player%} to "note"
+				send "&aYou have enabled &eMusic Note trails&a!"
+			argument is "happy":
+				set {trails.%player%} to "happy"
+				send "&aYou have enabled &eHappy Villager trails&a!"
+			argument is "angry":
+				set {trails.%player%} to "angry"
+				send "&aYou have enabled &eAngry Villager trails&a!"
+			argument is "explode":
+				set {trails.%player%} to "explode"
+				send "&aYou have enabled &eExplosion Smoke trails&a!"
+			argument is "snow":
+				set {trails.%player%} to "snow"
+				send "&aYou have enabled &eSnowflake trails&a!"
+			argument is "portal":
+				set {trails.%player%} to "portal"
+				send "&aYou have enabled &eNether Portal trails&a!"
+			argument is "cloud":
+				set {trails.%player%} to "cloud"
+				send "&aYou have enabled &eCloud trails&a!"
+			argument is "clear":
+				clear {trails.%player%}
+				send "&aYou have disabled your trails!"
+
+on shoot:
+	{trails.%shooter%} is set:
+		{trails.%shooter%} is "heart":
+			trail projectile with particle heart
+		{trails.%shooter%} is "flame":
+			trail projectile with particle flame
+		{trails.%shooter%} is "reddust":
+			trail projectile with particle red dust
+		{trails.%shooter%} is "smoke":
+			trail projectile with particle large smoke
+		{trails.%shooter%} is "bubble":
+			trail projectile with particle bubble
+		{trails.%shooter%} is "note":
+			trail projectile with particle note
+		{trails.%shooter%} is "lavadrip":
+			trail projectile with particle drip lava
+		{trails.%shooter%} is "waterdrip":
+			trail projectile with particle drip water
+		{trails.%shooter%} is "slime":
+			trail projectile with particle slime
+		{trails.%shooter%} is "happy":
+			trail projectile with particle happy villager
+		{trails.%shooter%} is "angry":
+			trail projectile with particle angry villager
+		{trails.%shooter%} is "explode":
+			trail projectile with particle large explode
+		{trails.%shooter%} is "snow":
+			trail projectile with particle snow shovel
+		{trails.%shooter%} is "portal":
+			trail projectile with particle portal
+		{trails.%shooter%} is "cloud":
+			trail projectile with particle cloud

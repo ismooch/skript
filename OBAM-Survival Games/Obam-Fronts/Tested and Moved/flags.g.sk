@@ -1,0 +1,222 @@
+on script load:
+	delete {db_flags::*}
+	set {db_flags::01.header.admin} to "nether star;&3Admin Flag;&6Click this icon to open the &eAdmin &6flags menu.||&6Or enable/disable all flags with the button below.;sudo PLAYER flags menu admin WHO"
+	set {db_flags::02.header.build} to "diamond pickaxe;&3Build Flag;&6Click this icon to open the &eBuild &6flags menu.||&6Or enable/disable all flags with the button below;sudo PLAYER flags menu build WHO"
+	set {db_flags::03.header.use} to "stone button;&3Use Flag;&6Click this icon to open the &eUse &6flags menu.||&6Or enable/disable all flags with the button below;sudo PLAYER flags menu use WHO"
+	set {db_flags::04.header.container} to "chest;&Container Flag;&6Click this icon to open the &eContainer &6flags menu.||&6Or enable/disable all flags with the button below.;sudo PLAYER flags menu container WHO"
+	set {db_flags::05.header.bucket} to "bucket;&3Bucket Flag;&6Click this icon to open the &eBucket &6flags menu.||&6Or enable/disable all flags with the button below.;sudo PLAYER flags menu bucket WHO"
+	set {db_flags::06.header.teleport} to "portal;&3Teleport Flag;&6Click this icon to open the &eTeleport &6flags menu.||&6Or enable/disable all flags with the button below.;sudo PLAYER flags menu teleport WHO"
+	set {db_flags::07.header.entity} to "sheep spawn egg;&3Entity Flag;&6Click this icon to open the &eEntity &6flags menu.||&6Or enable/disable all flags with the button below.;sudo PLAYER flags menu entity WHO"
+	set {db_flags::08.header.all} to "lever;&3All Flags;&6Click the button below to disable/enable all flags.||&6If any flag is enabled, it will disable all flags."
+	set {db_flags::09.header.front} to "grass;&3Front Settings;&6Click this icon to open the &Front Settings &6menu.||&6Or enable/disable all flags with the button below.;sudo PLAYER flags menu front WHO"
+	set {db_flags::01.admin.null} to "air"
+	set {db_flags::01.build.null} to "air"
+	set {db_flags::01.use.usedoor} to "wooden door;&3Use - Door;&6Click the button below to disable/enable||&6the &eDoor Use&6 flag for this front."
+	set {db_flags::02.use.useanvil} to "anvil;&3Use - Anvil;&6Click the button below to disable/enable||&6the &eAnvil Use&6 flag for this front."
+	set {db_flags::03.use.usenote} to "note block;&3Use - Noteblock;&6Click the button below to disable/enable||&6the &eNoteblock Use&6 flag for this front."
+	set {db_flags::04.use.usejuke} to "jukebox;&3Use - Jukebox;&6Click the button below to disable/enable||&6the &eJukebox Use&6 flag for this front."
+	set {db_flags::05.use.uselever} to "lever;&3Use - Lever;&6Click the button below to disable/enable||&6the &eLever Use&6 flag for this front."
+	set {db_flags::06.use.usestonebutton} to "stone button;&3Use - Stone Button;&6Click the button below to disable/enable||&6the &eStone Button Use&6 flag for this front."
+	set {db_flags::07.use.usewoodbutton} to "wood button;&3Use - Wood Button;&6Click the button below to disable/enable||&6the &eWood Button Use&6 flag for this front."
+	set {db_flags::08.use.usetrap} to "trapdoor;&3Use - Trap Door;&6Click the button below to disable/enable||&6the &eTrap Door Use&6 flag for this front."
+	set {db_flags::09.use.usefence} to "fence gate;&3Use - Fence Gate;&6Click the button below to disable/enable||&6the &eFence Gate Use&6 flag for this front."
+	set {db_flags::10.use.useenchant} to "enchantment table;&3Use - Enchantment Table;&6Click the button below to disable/enable||&6the &eEnchantment Table Use&6 flag for this front."
+	set {db_flags::11.use.usecomparator} to "redstone comparator;&3Use - Comparator;&6Click the button below to disable/enable||&6the &eComparator Use&6 flag for this front."
+	set {db_flags::12.use.userepeater} to "repeater;&3Use - Repeater;&6Click the button below to disable/enable||&6the &eRepeater Use&6 flag for this front."
+	set {db_flags::01.container.conchest} to "chest;&3Container - Chest;&6Click the button below to disable/enable||&6the &eChest Container&6 flag for this front."
+	set {db_flags::02.container.confurnace} to "furnace;&3Container - Furnace;&6Click the button below to disable/enable||&6the &eFurnace Container&6 flag for this front."
+	set {db_flags::03.container.condispenser} to "dispenser;&3Container - Dispenser;&6Click the button below to disable/enable||&6the &eDispenser Container&6 flag for this front."
+	set {db_flags::04.container.conhopper} to "hopper;&3Container - Hopper;&6Click the button below to disable/enable||&6the &eHopper Container&6 flag for this front."
+	set {db_flags::05.container.conbrewing} to "brewing stand;&3Container - Brewing Stand;&6Click the button below to disable/enable||&6the &eBrewing Stand Container&6 flag for this front."
+	set {db_flags::06.container.condropper} to "dropper;&3Container - Dropper;&6Click the button below to disable/enable||&6the &eDropper Container&6 flag for this front."
+	set {db_flags::07.container.contrapped} to "trapped chest;&3Container - Trapped Chest;&6Click the button below to disable/enable||&6the &eTrapped Chest Container&6 flag for this front."
+	set {db_flags::08.container.conbeacon} to "beacon;&3Container - Beacon;&6Click the button below to disable/enable||&6the &eBeacon Container&6 flag for this front."
+	set {db_flags::01.bucket.bucketwater} to "water bucket;&3Bucket Flag - Water;&6Click the button below to disable/enable||&6the &eWater Bucket&6 flag for this front."
+	set {db_flags::02.bucket.bucketlava} to "lava bucket;&3Bucket Flag - Lava;&6Click the button below to disable/enable||&6the &eLava Bucket&6 flag for this front."
+	set {db_flags::01.teleport.null} to "air"
+	set {db_flags::01.entity.null} to "air"
+	set {db_flags::01.front.frontflow} to "water;&3Flow;&6Click the button below to disable/enable||&6the &eFlow&6 flag for this front."
+	set {db_flags::02.front.frontfirespread} to "fire;&3Firespread;&6Click the button below to disable/enable||&6the &eFirespread&6 flag for this front."
+	set {db_flags::03.front.fronttnt} to "tnt;&3TNT;&6Click the button below to disable/enable||&6the &eTNT&6 flag for this front."
+
+on join:
+	{flag.reset.%uuid of player%} is not set:
+		wait 10 seconds
+		{owned.chunks.%uuid of player%::*} is set:
+			loop {owned.chunks.%uuid of player%::*}:
+				set {_chunk} to loop-index-1
+				loop {flags.%{_chunk}%::*}:
+					delete {flags.%{_chunk}%::loop-index-2::*}
+				delete {flags.%{_chunk}%::*}
+			set {flag.reset.%uuid of player%} to false
+			message "&cAttention: &6All flags have been deleted."
+
+command /flags [<text>] [<text>] [<text>]:
+	permission: obam.free
+	trigger:
+		{chunk.live.%chunk at location of player%} is not set:
+			send "&cThis land has not been claimed yet!"
+			stop
+		argument 1 is not set:
+			set {_task} to menu
+			set {_what} to header
+			set {_who} to Everyone
+		argument 1 is not "menu" or "set" or "list":
+			{db_name.%argument 1%} does not exist:
+				message "&cThat player does not exist."
+				stop
+			set {_task} to menu
+			set {_what} to header
+			set {_who} to argument 1
+		set {_task} to argument 1
+		set {_what} to argument 2
+		set {_who} to argument 3
+		set {_who.uuid} to {db_name.%{_who}%}
+		{_task} is "menu":
+			loop {db_flags::*}:
+				set {_decode1::*} to loop-index split at "."
+				set {_sub} to {_decode1::3}
+				{_sub} is "null":
+					send "&c&lThis feature is being worked on and will be here soon!"
+					stop
+				set {_prim} to {_decode1::2}
+				{_count} is not set:
+					set {_count} to 0
+				{_prim} contains "{_what}":
+					add 1 to {_count}
+			{_count} is less than 10:
+				set {_size} to 2
+			{_count} is greater than 9:
+				set {_size} to 4
+			{_count} is greater than 18:
+				set {_size} to 6
+			{_count} is greater than 27:
+				set {_size} to 8
+			show chest with {_size} row named "&9&lOBAM %{_what}% Flags Menu" to player
+			wait 1 tick
+			loop {db_flags::*}:
+				set {_decode2::*} to loop-index-1 split at "."
+				set {_prim} to {_decode2::2}
+				{_prim} is {_what}:
+					set {_slot} to {_decode2::1} parsed as integer
+					subtract 1 from {_slot1}
+					set {_slot2} to 9 + {_slot1}
+					set {_sub} to {_decode2::3}
+					set {_what::*} to loop-value split at ";"
+					set {_item} to {_what::1} parsed as item
+					set {_name} to {_what::2}
+					set {_lore} to {_what::3}
+					set {_command} to {_what::4}
+					replace "PLAYER" in {_command} with "%player%"
+					replace "WHO" in {_command} with "%{_who}%"
+					set {_what} to {_item} named {_name} with lore {_lore}
+					format slot {_slot1} of player with {_what} to be unstealable
+					{_command} is set:
+						format slot {_slot1} of player with {_what} to close then run {_command}
+					{_sub} is "all":
+						loop {db_flags::*}:
+							set {_decode3::*} to loop-index-2 split at "."
+							set {_sub1} to {_decode3::3}
+							{flags.%chunk at location of player%::%{_sub1}%::%{_who.uuid}%} is true:
+								set {_any.check} to true
+						{_any.check} is set:
+							set {_state1} to light green wool parsed as an item
+							set {_state2} to "&aEnabled"
+							set {_state3} to "&6Click to &cDisable &6all flags for &e%{_who}%."
+							set {_state4} sudo %player% flags set all %{_who}%
+						{_any.check} is not set:
+							set {_state1} to red wool parsed as an item
+							set {_state2} to "&cDisabled"
+							set {_state3} to "&6Click to &aEnable &6all flags for &e%{_who}%."
+							set {_state4} sudo %player% flags set all %{_who}%
+					{_sub} is "front" or "flow" or "firespread" or "tnt":
+						{flags.%chunk at location of player%::%{_sub}%} is not set:
+							set {flags.%chunk at location of player%::%{_sub}%} to false
+						{flags.%chunk at location of player%::%{_sub}%} is true:
+							set {_state1} to light green wool parsed as an item
+							set {_state2} to "&aEnabled"
+							set {_state3} to "&6Click to &cDisable &6the &e%{_sub}% &6flag for &e%{_who}%."
+							set {_state4} sudo %player% flags set %{_sub}% %{_who}%
+						{flags.%chunk at location of player%::%{_sub}%} is false:
+							set {_state1} to red wool parsed as an item
+							set {_state2} to "&cDisabled"
+							set {_state3} to "&6Click to &aEnable &6the &e%{_sub}% &6flag for &e%{_who}%."
+							set {_state4} sudo %player% flags set %{_sub}% %{_who}%
+					{_sub} is not "front" or "flow" or "firespread" or "tnt":
+						{flags.%chunk at location of player%::%{_sub}%::%{_who.uuid}%} is not set:
+							set {flags.%chunk at location of player%::%{_sub}%::%{_who.uuid}%} to false
+						{flags.%chunk at location of player%::%{_sub}%::%{_who.uuid}%} is true:
+							set {_state1} to light green wool parsed as an item
+							set {_state2} to "&aEnabled"
+							set {_state3} to "&6Click to &cDisable &6the &e%{_sub}% &6flag for &e%{_who}%."
+							set {_state4} sudo %player% flags set %{_sub}% %{_who}%
+						{flags.%chunk at location of player%::%{_sub}%::%{_who.uuid}%} is false:
+							set {_state1} to red wool parsed as an item
+							set {_state2} to "&cDisabled"
+							set {_state3} to "&6Click to &aEnable &6the &e%{_sub}% &6flag for &e%{_who}%."
+							set {_state4} sudo %player% flags set %{_sub}% %{_who}%
+					set {_what2} to {_state1} named {_state2} with lore {_state3}
+					format slot {_slot2} of player with {_what2} to be unstealable 
+					format slot {_slot2} of player with {_what2} to close then run {_state4}			
+		{_task} is "set":
+			{chunk.live.%chunk at location of player%} is not player:
+				{flags.%chunk at location of player%::admin::%uuid of player%} is not set:
+					set {flags.%chunk at location of player%::admin::%uuid of player%} to false
+				{flags.%chunk at location of player%::admin::%uuid of player%} is false:
+					send "&cYou do not have permission to do this!"
+					stop
+				{flags.%chunk at location of player%::admin::everyone} is not set:
+					set {flags.%chunk at location of player%::admin::everyone} to false
+				{flags.%chunk at location of player%::admin::everyone} is false:
+					send "&cYou do not have permission to do this!"
+					stop
+			{_what} is "front" or "flow" or "firespread" or "tnt":
+				{flags.%chunk at location of player%::%{_what}%} is true:
+					set {flags.%chunk at location of player%::%{_what}%} to false
+					send "&cYou have disabled the &e%{_what}%&c flag on this &eFront"
+					stop
+				{flags.%chunk at location of player%::%{_what}%} is false:
+					set {flags.%chunk at location of player%::%{_what}%} to true
+					send "&aYou have enabled the &e%{_what}%&a flag on this &eFront"
+					stop
+			{_what} is "all":
+				set {_clear} to false
+				loop {db_flags::*}:
+					set {_decode4::*} to loop-index split at "."
+					set {_sub2} to {_decode4::3}
+					{flags.%chunk at location of player%::%{_sub2}%::%{_who.uuid}%} is true:
+						set {_clear} to true
+				loop {db_flags::*}:
+					set {_decode5::*} to loop-index split at "."
+					set {_sub3} to {_decode5::3}
+					set {flags.%chunk at location of player%::%{_sub3}%::%{_who.uuid}%} to {_clear}
+				{_clear} is true:
+					send "&cYou have disabled &eAll&c flags for &e%{_who}%" 
+					stop
+				send "&aYou have enabled &eAll&a flags for &e%{_who}%"
+				stop
+			{flags.%chunk at location of player%::%{_what}%::%{_who.uuid}%} is false:
+				set {flags.%chunk at location of player%::%{_what}%::%{_who.uuid}%} to true
+				send "&aEnabled &e%{_what}%&a flag for &e%{_who}%"
+				stop
+			{flags.%chunk at location of player%::%{_what}%::%{_who.uuid}%} is true:
+				set {flags.%chunk at location of player%::%{_what}%::%{_who.uuid}%} to false
+				send "&cDisabled &e%{_what}%&c flag for &e%{_who}%"
+				stop
+		{_task} is "list":
+			{_what} is not set:
+				send "&cPlease specify a flag."
+				stop
+			send "&aActive users for &e%{_what}% &aflag:"
+			loop {flags.%chunk at location of player%::%{_what}%::*}:
+				loop-value is true
+				send "&a%{db_master.uuid::%loop-index%}%"
+			stop
+		send "&cPlease check your command and try again."
+		stop
+
+command /forceadmin:
+	permission: obam.smod
+	trigger:
+		set {flags.%chunk at location of player%::admin::%uuid of player%} to true
+		send "&aYou now have the admin flag for this chunk owned by &e%{db_master.uuid::%{chunk.live.%chunk at location of block%}%}%&a."

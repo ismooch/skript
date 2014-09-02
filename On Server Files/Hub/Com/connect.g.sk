@@ -1,0 +1,38 @@
+
+
+command /fronts:
+	permission: obam.free
+	trigger:
+		connect player to "fronts"
+	
+command /kit:
+	permission: obam.free
+	trigger:
+		connect player to "kit"
+
+command /tacocart:
+	permission: obam.free
+	trigger:
+		connect player to "tacocart"
+		
+command /event:
+	permission: obam.free
+	trigger:
+		{db_event.status} is "open":
+			connect player to "event"
+		{db_event.status} is "closed":
+			message "&cThe event server is currently closed."
+			stop
+
+command /wtf:
+	permission: obam.free
+	trigger:
+		connect player to "wtf"
+		
+command /hub:
+	permission: obam.free
+	trigger:
+		player's world is "skyworld":
+			make player execute command "mvtp Death-hub"
+			stop
+		connect player to "hub"

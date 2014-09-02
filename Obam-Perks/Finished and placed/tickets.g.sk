@@ -1,0 +1,68 @@
+#money stuff
+#give player money
+command /tixg <player> <number>:
+	description: Give a Player some money
+	usage: /tixg <player> <amount>
+	executable by: console and players
+	permission: obam.admin
+	trigger:
+		
+		set {_player.balance} to player-argument's balance
+		set {_player} to player-argument
+		execute console command "/tls STAFF %arg 2% %{_player.balance}% INCREASE %{_player}% Ticket Adjustment by %player%"
+		add arg 2 to player-argument's balance
+		message "&aYou have been given &e%arg 2% Tickets&a. Your balance is now &e%player-argument's money%&a." to player-argument
+		message "You have granted %player-argument% %arg 2% Tickets" to player
+		
+		
+command /tixr <player> <number>:
+	description: Subtract money from a Player
+	usage: /tixr <player> <amount>
+	executable by: console and players
+	permission: obam.admin
+	trigger:
+		
+		
+		set {_valid} to argument 2
+		set {_player.balance} to player-argument's balance
+		set {_player} to player-argument
+		
+		{_valid} is greater than {_player.balance}:
+			send "%player-argument% does not have that many tickets!" to player
+			stop
+			
+		execute console command "/tls STAFF %arg 2% %{_player.balance}% DEDUCT %{_player}% Ticket Adjustment by %player%"
+		
+
+#pay command
+command /tixp <player> <number>:
+	description: Pay a Player
+	usage: /tixp <player> <amount>
+	permission: obam.admin
+	trigger:
+		set {_curbalance} to player's money
+		set {_valid} to difference between {_curbalance} and argument 2
+		
+		{_valid} is less than 0:
+			message "You do not have enough money!" to player
+			stop
+		
+		add arg 2 to player-argument's balance
+		remove arg 2 from player's balance
+		message "You have received %arg 2% Tickets from %player%. Your balance is now %player-argument's money%." to player-argument
+		message "You have paid %player-argument% %arg 2% Tickets. Your balance is now %player's money%." to player
+		
+command /tix:
+	executable by: players
+	permission: obam.free
+	trigger:
+		send "&aYour current balance is &e%player's balance%&a!" to player
+		
+command /tixpeek <text>:
+	permission: obam.admin
+	trigger:	
+		set {_player} to argument parsed as offline player
+		send "&e%argument%'s&a ticket balance is &e%{_player}'s balance%" to player
+		
+		
+			
