@@ -1,0 +1,6 @@
+# Arrows need to despawn from skellies.
+on projectile hit:
+	shooter is not a player:
+		projectile is an arrow:
+			wait 3 seconds
+			delete projectile
