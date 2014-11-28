@@ -1,0 +1,29 @@
+#------------------------------------
+#		Staff Online Command
+#------------------------------------
+	
+command /staff:
+	description: Tells you the current Staff Online
+	usage: /staff
+	executable by: player
+	trigger:
+		loop all players:
+			loop-player has permission "obam.mod"
+			add loop-player to {_staffonline::mod}
+		
+		loop all players:
+			loop-player has permission "obam.admin"
+			add loop-player to {_staffonline::admin}
+			
+		size of {_staffonline::*} is 0:
+			send "&f----&6Current Staff Online&F----"
+			send " "
+			send "&4There is currently no Staff online."
+			
+		size of {_staffonline::*} is greater than 0:
+			
+			send "&f----&6Current Staff Online&F----"
+			send " "
+			send "&aModerators: %{_staffonline::mod}%"
+			send " "
+			send "&5Administrators: %{_staffonline::admin}%"
